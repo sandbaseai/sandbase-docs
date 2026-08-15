@@ -1,0 +1,21 @@
+---
+title: "AionLabs: Aion-1.0 API Reference"
+description: "AionLabs: Aion-1.0 API reference for SandBase. Use model aion-labs/aion-1.0 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+aside: false
+outline: false
+apiReferenceKey: "llm/aion-labs/aion-1.0"
+apiReferenceJson: "{\"title\":\"AionLabs: Aion-1.0\",\"operation\":\"Chat Completions\",\"method\":\"POST\",\"path\":\"/v1/chat/completions\",\"description\":\"Aion-1.0 is a multi-model system designed for high performance across various tasks, including reasoning and coding. It is built on DeepSeek-R1, augmented with additional models and techniques such as Tree of Thoughts (ToT) and Mixture of Experts (MoE). It is Aion Lab's most powerful reasoning model.\",\"groups\":[{\"title\":\"Request body\",\"description\":\"Parameters supported by this model. Values, defaults, and limits are read from the model registry.\",\"fields\":[{\"name\":\"model\",\"type\":\"string\",\"required\":true,\"description\":\"Model identifier. Set to aion-labs/aion-1.0.\",\"default\":\"aion-labs/aion-1.0\"},{\"name\":\"messages\",\"type\":\"array<object>\",\"required\":true,\"description\":\"Conversation messages in system, user, or assistant order.\"},{\"name\":\"max_tokens\",\"type\":\"integer\",\"required\":false,\"description\":\"Maximum number of tokens the model may generate in the response.\",\"constraints\":\"Range: −∞ to 32768\"},{\"name\":\"temperature\",\"type\":\"number\",\"required\":false,\"description\":\"Sampling temperature. Lower values are more deterministic; higher values are more creative.\",\"default\":\"1\",\"constraints\":\"Range: 0 to 2\"},{\"name\":\"top_p\",\"type\":\"number\",\"required\":false,\"description\":\"Nucleus sampling threshold. Use this or temperature, but usually not both.\",\"constraints\":\"Range: 0 to 1\"},{\"name\":\"stream\",\"type\":\"boolean\",\"required\":false,\"description\":\"When true, returns incremental Server-Sent Events instead of one completed response.\",\"default\":\"false\"}]},{\"title\":\"Response Schema\",\"description\":\"Fields returned by this model API response.\",\"fields\":[{\"name\":\"choices\",\"type\":\"array<object>\",\"required\":true,\"description\":\"Generated completion choices.\"},{\"name\":\"id\",\"type\":\"string\",\"required\":true,\"description\":\"Unique chat completion identifier.\"},{\"name\":\"model\",\"type\":\"string\",\"required\":true,\"description\":\"Model that generated the response.\"},{\"name\":\"usage\",\"type\":\"object\",\"required\":false,\"description\":\"Token usage when available.\"}]},{\"title\":\"Model capabilities\",\"fields\":[{\"name\":\"capability_tags\",\"type\":\"array<string>\",\"required\":true,\"description\":\"Capabilities declared by the model registry.\",\"default\":\"chat, reasoning\"},{\"name\":\"context_length\",\"type\":\"integer\",\"required\":true,\"description\":\"Maximum context window accepted by this model.\",\"default\":\"131072 tokens\"},{\"name\":\"execution_mode\",\"type\":\"string\",\"required\":true,\"description\":\"Execution mode declared by the model registry.\",\"default\":\"sync\"}]}],\"examples\":[{\"label\":\"cURL\",\"language\":\"bash\",\"code\":\"curl -X POST https://api.sandbase.ai/v1/chat/completions \\\\\\n  -H \\\"Authorization: Bearer $SANDBASE_API_KEY\\\" \\\\\\n  -H \\\"Content-Type: application/json\\\" \\\\\\n  -d '{\\n  \\\"model\\\": \\\"aion-labs/aion-1.0\\\",\\n  \\\"messages\\\": [\\n    {\\n      \\\"role\\\": \\\"user\\\",\\n      \\\"content\\\": \\\"Describe this product in one sentence.\\\"\\n    }\\n  ]\\n}'\"}],\"response\":{\"status\":\"200 OK\",\"code\":\"{\\n  \\\"id\\\": \\\"chatcmpl_abc123\\\",\\n  \\\"model\\\": \\\"aion-labs/aion-1.0\\\",\\n  \\\"choices\\\": [\\n    {\\n      \\\"message\\\": {\\n        \\\"role\\\": \\\"assistant\\\",\\n        \\\"content\\\": \\\"A concise product description.\\\"\\n      }\\n    }\\n  ]\\n}\"}}"
+seo:
+  modelName: "AionLabs: Aion-1.0"
+  modelId: "aion-labs/aion-1.0"
+  vendor: "Aion-Labs"
+  vendorSlug: "aion-labs"
+  modelSlug: "aion-1.0"
+  protocol: "Chat Completions API"
+  endpoint: "/v1/chat/completions"
+  publishedAt: "2025-02-04T19:32:37Z"
+  capabilities: ["chat","reasoning"]
+  category: "LLM Models"
+---
+
+<ApiReferencePage />

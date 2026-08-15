@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /docs/
+
+Sitemap: https://www.sandbase.ai/docs/sitemap.xml

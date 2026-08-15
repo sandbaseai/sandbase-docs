@@ -1,0 +1,459 @@
+# SandBase - Complete API Reference for AI Agents
+
+> One API key, 400+ models, agent workflows. Base URL: https://api.sandbase.ai/v1
+
+## Authentication
+
+All requests require: Authorization: Bearer sk-sb-YOUR_KEY
+
+## Terminology
+
+- Task: Any billable unit of work. Every API call produces a task with a cost.
+- Run: A media generation request via POST /v1/run. May be sync or async.
+- Session: An agent execution via POST /v1/sessions. Stateful multi-turn workflow.
+
+The x-task-id response header on every request gives the task ID for cost lookup.
+
+---
+
+## POST /v1/chat/completions
+
+OpenAI-compatible chat. Supports streaming, function calling, vision, JSON mode.
+
+Request:
+```
+curl https://api.sandbase.ai/v1/chat/completions \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai/gpt-4o",
+    "messages": [{"role": "user", "content": "Hello"}],
+    "max_tokens": 500
+  }'
+```
+
+Response:
+```
+{
+  "id": "chatcmpl-abc123",
+  "object": "chat.completion",
+  "model": "openai/gpt-4o",
+  "choices": [{
+    "index": 0,
+    "message": {"role": "assistant", "content": "..."},
+    "finish_reason": "stop"
+  }],
+  "usage": {"prompt_tokens": 24, "completion_tokens": 89, "total_tokens": 113}
+}
+```
+
+---
+
+## POST /v1/messages
+
+Anthropic-compatible messages API with caching support.
+
+Request:
+```
+curl https://api.sandbase.ai/v1/messages \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "anthropic/claude-sonnet-4-20250514",
+    "max_tokens": 1024,
+    "messages": [{"role": "user", "content": "What is SandBase?"}]
+  }'
+```
+
+Response:
+```
+{
+  "id": "msg_abc123",
+  "type": "message",
+  "role": "assistant",
+  "content": [{"type": "text", "text": "SandBase is..."}],
+  "model": "anthropic/claude-sonnet-4-20250514",
+  "stop_reason": "end_turn",
+  "usage": {"input_tokens": 12, "output_tokens": 64}
+}
+```
+
+---
+
+## POST /v1/embeddings
+
+OpenAI-compatible text embeddings.
+
+Request:
+```
+curl https://api.sandbase.ai/v1/embeddings \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai/text-embedding-3-small",
+    "input": "SandBase is an AI agent platform."
+  }'
+```
+
+Response:
+```
+{
+  "object": "list",
+  "data": [{"object": "embedding", "index": 0, "embedding": [0.0023, -0.0091, ...]}],
+  "model": "openai/text-embedding-3-small",
+  "usage": {"prompt_tokens": 7, "total_tokens": 7}
+}
+```
+
+---
+
+## POST /v1/run
+
+Unified generation endpoint. The model field determines output type (image, video, audio).
+Check response status: "completed" = done, "processing" = poll GET /v1/run/{id}.
+
+Image example:
+```
+curl https://api.sandbase.ai/v1/run \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "flux/schnell",
+    "input": {"prompt": "A futuristic city at sunset", "width": 1024, "height": 1024}
+  }'
+```
+
+Response (sync):
+```
+{
+  "id": "run_abc123",
+  "status": "completed",
+  "model": "flux/schnell",
+  "output": {"url": "https://cdn.sandbase.ai/outputs/run_abc123.png", "content_type": "image/png"}
+}
+```
+
+Video example (async):
+```
+curl https://api.sandbase.ai/v1/run \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "kling/v1-5", "input": {"prompt": "A drone over mountains", "duration": 5}}'
+```
+
+Response: {"id": "run_xyz789", "status": "processing"}
+Poll: GET /v1/run/run_xyz789 until status = "completed"
+
+Audio example:
+```
+curl https://api.sandbase.ai/v1/run \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "elevenlabs/multilingual-v2", "input": {"text": "Hello world", "voice": "rachel"}}'
+```
+
+Response:
+```
+{
+  "id": "run_audio456",
+  "status": "completed",
+  "output": {"url": "https://cdn.sandbase.ai/outputs/run_audio456.mp3", "content_type": "audio/mpeg"}
+}
+```
+
+---
+
+## GET /v1/models
+
+List all available models with pricing and capabilities.
+
+Response:
+```
+{
+  "data": [
+    {
+      "id": "openai/gpt-4o",
+      "type": "llm",
+      "vendor": "OpenAI",
+      "context_window": 128000,
+      "pricing": {"input_per_million": 2.50, "output_per_million": 10.00},
+      "capabilities": ["chat", "vision", "tools", "json_mode", "streaming"],
+      "status": "active"
+    }
+  ]
+}
+```
+
+---
+
+## GET /v1/models/{name}
+
+Get full details for a specific model.
+
+Example: GET /v1/models/openai/gpt-4o
+
+Response:
+```
+{
+  "id": "openai/gpt-4o",
+  "type": "llm",
+  "vendor": "OpenAI",
+  "context_window": 128000,
+  "max_output_tokens": 16384,
+  "pricing": {"input_per_million": 2.50, "output_per_million": 10.00, "cached_input_per_million": 1.25},
+  "capabilities": ["chat", "vision", "tools", "json_mode", "streaming"],
+  "status": "active",
+  "deprecation_date": null
+}
+```
+
+---
+
+## GET /v1/tasks/{id}/cost
+
+Check cost of any completed generation. Task ID from x-task-id response header.
+
+Example: GET /v1/tasks/task_abc123/cost
+
+Response:
+```
+{
+  "task_id": "task_abc123",
+  "model": "openai/gpt-4o",
+  "cost_usd": 0.000325,
+  "usage": {"prompt_tokens": 24, "completion_tokens": 89, "cache_read_input_tokens": 0}
+}
+```
+
+---
+
+## POST /v1/agents
+
+Create an agent.
+
+Request:
+```
+curl -X POST https://api.sandbase.ai/v1/agents \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Research Assistant",
+    "model": "openai/gpt-4o",
+    "system": "You are a research assistant.",
+    "tools": [{"type": "agent_toolset_20260401"}]
+  }'
+```
+
+Response:
+```
+{"id": "agent_abc123", "type": "agent", "name": "Research Assistant", "version": 1}
+```
+
+## GET /v1/agents - List agents
+## GET /v1/agents/{id} - Get agent
+## POST /v1/agents/{id} - Update agent
+## POST /v1/agents/{id}/archive - Archive agent
+## GET /v1/agents/{id}/versions - List versions
+
+---
+
+## POST /v1/endpoints/{id}/run
+
+Invoke a Service by creating or continuing a Session and sending one message.
+
+Endpoint invocation accepts an optional session_id. When omitted, SandBase creates a new persistent Session. It does not create a separate public Run identity.
+
+Request:
+```
+curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"input": "Summarize the latest AI news"}'
+```
+
+Default response (`202 Accepted`):
+```
+{"session_id":"sess_abc123","events":[{"id":"sevt_abc123","type":"user.message","processed_at":"2026-08-03T10:00:00Z"}]}
+```
+
+---
+
+## POST /v1/sessions
+
+Create an Agent Session. `agent` is required; `environment_id` is an optional authorized override and otherwise resolves from the Agent. Use `initial_events` to send the first message during creation.
+
+POST /v1/sessions creates the persistent public Session and returns session_id. Events, SSE, archive, and delete all address that same Session. Archived history remains readable but rejects new events; deleted Sessions return 404.
+
+Request:
+```
+curl -X POST https://api.sandbase.ai/v1/sessions \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"agent": "agent_abc123", "title": "GitHub research", "initial_events":[{"type":"user.message","content":[{"type":"text","text":"Research AI coding tools"}]}]}'
+```
+
+Response:
+```
+{"id":"sess_xyz789","type":"session","agent_id":"agent_abc123","environment_id":"env_abc123","status":"idle"}
+```
+
+## POST /v1/sessions/{id}/events
+
+Send a message to start or continue an idle Session, or send `user.interrupt` to interrupt a running turn.
+
+Request: {"events":[{"type":"user.message","content":[{"type":"text","text":"Focus on AI coding tools"}]}]}
+Response: {"data":[{"id":"sevt_001","type":"user.message","processed_at":"2026-08-03T10:00:00Z"}]}
+
+## GET /v1/sessions - List sessions
+## GET /v1/sessions/{id} - Get session details
+## GET /v1/sessions/{id}/events - List all events
+
+## GET /v1/sessions/{id}/events/stream
+
+Replay persisted events and then stream newly persisted events. While idle, the server may send `: heartbeat` comments. The connection remains open until the client disconnects, the request context is cancelled, or a write fails; terminal Session state does not emit a separate close event.
+
+Event format:
+```
+data: {"id":"sevt_001","type":"agent.message","content":[{"type":"text","text":"I'll search GitHub..."}],"processed_at":"2026-08-03T10:00:01Z"}
+: heartbeat
+data: {"id":"sevt_002","type":"session.status_idle","stop_reason":{"type":"end_turn"},"processed_at":"2026-08-03T10:00:02Z"}
+```
+
+---
+
+## POST /v1/deployments
+
+Create a Schedule through the Deployments API. Each trigger creates a distinct drun_* DeploymentRun and attempts to create exactly one new sess_* Session.
+
+Request:
+```
+{"name":"Daily summary","agent_id":"agent_abc123","environment_id":"env_abc123","initial_events":[{"type":"user.message","content":[{"type":"text","text":"Generate the daily summary"}]}],"schedule":{"type":"cron","expression":"0 9 * * *","timezone":"America/New_York"}}
+```
+
+Response:
+```
+{"id": "depl_abc123", "status": "active", "next_run_at": "2026-08-03T09:00:00-04:00"}
+```
+
+## POST /v1/deployments/{id}/runs - Create a manual DeploymentRun
+## GET /v1/deployments/{id}/runs - List DeploymentRuns for one Deployment
+## GET /v1/deployment_runs - List DeploymentRuns; supports trigger_type=manual|schedule and status=pending|succeeded|failed filters
+
+The public DeploymentRun object contains id, type, deployment_id, agent, trigger_context, nullable session_id, nullable error, and created_at. Its current response shape does not include a status field.
+
+---
+
+## POST /events/webhooks
+
+Create webhook for session events.
+
+Request: {"url": "https://your-app.com/webhook", "events": ["session.completed", "session.failed"]}
+Response: {"id": "wh_abc123", "secret": "whsec_...", "status": "active"}
+
+## GET /events/webhooks - List webhook registrations
+## PATCH /events/webhooks/{id} - Update a webhook registration
+## DELETE /events/webhooks/{id} - Delete a webhook registration
+
+## GET /v1/skills - List available skills
+
+---
+
+## Model Categories & Pricing
+
+All LLM models support chat + streaming. Pricing is per million tokens.
+
+### LLM Models
+| Model | Vendor | Context | Input $/M | Output $/M | Extra |
+| openai/gpt-4o | OpenAI | 128K | $2.50 | $10.00 | vision, tools, json_mode |
+| openai/gpt-4o-mini | OpenAI | 128K | $0.15 | $0.60 | vision, tools, json_mode |
+| openai/o3 | OpenAI | 200K | $2.00 | $8.00 | reasoning |
+| anthropic/claude-sonnet-4-20250514 | Anthropic | 200K | $3.00 | $15.00 | vision, tools, cache |
+| anthropic/claude-haiku-3-5 | Anthropic | 200K | $0.80 | $4.00 | vision, tools, cache |
+| google/gemini-2.5-pro | Google | 1M | $1.25 | $10.00 | vision, tools |
+| google/gemini-2.5-flash | Google | 1M | $0.15 | $0.60 | vision, tools |
+| deepseek/deepseek-chat | DeepSeek | 128K | $0.14 | $0.28 | tools |
+| deepseek/deepseek-reasoner | DeepSeek | 128K | $0.55 | $2.19 | reasoning |
+| meta/llama-4-maverick | Meta | 1M | $0.20 | $0.60 | tools |
+| mistral/mistral-large | Mistral | 128K | $2.00 | $6.00 | tools |
+| qwen/qwen3-235b | Alibaba | 128K | $0.80 | $2.40 | tools |
+| minimax/minimax-01 | MiniMax | 1M | $0.20 | $1.10 | tools |
+
+### Image Models (flat per generation)
+| flux/schnell | $0.003 | 1024x1024 | ~2s |
+| flux/pro | $0.05 | 2048x2048 | ~10s |
+| ideogram/v3 | $0.04 | 2048x2048 | ~8s |
+| openai/dall-e-3 | $0.04 | 1792x1024 | ~15s |
+| google/imagen-4 | $0.04 | 2048x2048 | ~6s |
+
+### Video Models (flat per generation)
+| kling/v1-5 | $0.28 | 10s, 1080p |
+| kling/v2 | $0.35 | 10s, 1080p |
+| minimax/video-01 | $0.30 | 6s, 1080p |
+| runway/gen4 | $0.50 | 10s, 1080p |
+| luma/ray-2 | $0.30 | 5s, 1080p |
+
+### Audio Models
+| elevenlabs/multilingual-v2 | $0.30/1K chars | TTS, multilingual |
+| openai/tts-1-hd | $0.030/1K chars | TTS, 6 voices |
+| openai/whisper-1 | $0.006/min | STT, multilingual |
+
+### Embedding Models
+| openai/text-embedding-3-large | $0.13/M tokens | 3072 dims |
+| openai/text-embedding-3-small | $0.02/M tokens | 1536 dims |
+| voyage/voyage-3 | $0.06/M tokens | 1024 dims |
+
+Use GET /v1/models for real-time authoritative pricing.
+
+### Caching Discounts
+| Anthropic | Cache read: 90% off input price |
+| OpenAI | Cache read: 50% off input price |
+| Google | Cache read: 75% off input price |
+
+---
+
+## Error Codes
+
+All errors return: {"error": {"code": "...", "message": "...", "type": "...", "param": null, "request_id": "req_..."}}
+
+| Code | HTTP | Description |
+| invalid_api_key | 401 | Key invalid or revoked |
+| missing_api_key | 401 | No Authorization header |
+| rate_limited | 429 | Too many requests - use Retry-After header |
+| concurrent_limit | 429 | Too many concurrent requests |
+| insufficient_balance | 402 | Balance too low - top up |
+| model_not_found | 404 | Check model name via GET /v1/models |
+| model_overloaded | 503 | Retry after 5-10s or use fallback |
+| context_length_exceeded | 400 | Input too long for model |
+| output_length_exceeded | 400 | Hit max_tokens limit |
+| invalid_request | 400 | Check message field for details |
+| invalid_json | 400 | Malformed JSON body |
+| content_policy_violation | 400 | Input violated safety policy |
+| run_failed | 500 | Check GET /v1/sessions/{id}/events |
+| run_timeout | 408 | Simplify task or increase timeout |
+| internal_error | 500 | Retry 1-2 times |
+| service_unavailable | 503 | Retry with backoff |
+| gateway_timeout | 504 | Retry or switch model |
+
+Retry strategy: wait = min(1s * 2^attempt, 60s) + random jitter
+Retryable: 429, 503, 504, 500 (1-2 times only)
+Not retryable: 400, 401, 402, 403
+
+---
+
+## Billing
+
+- LLM: input_tokens * prompt_price + output_tokens * completion_price
+- Cached: up to 90% discount on repeated context
+- Image/Video/Audio: flat base_price per generation
+- Check cost: GET /v1/tasks/{task_id}/cost
+- Budget alerts: https://www.sandbase.ai/console/billing
+
+---
+
+## Links
+
+- Docs: https://www.sandbase.ai/docs/
+- Agent-Friendly overview: https://www.sandbase.ai/docs/for-agents/
+- OpenAPI spec: https://www.sandbase.ai/docs/openapi.yaml
+- Console: https://www.sandbase.ai/console
+- API Keys: https://www.sandbase.ai/console/keys

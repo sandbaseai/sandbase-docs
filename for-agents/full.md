@@ -1,0 +1,769 @@
+---
+title: Complete AI-Readable API Reference
+description: Full SandBase API reference for AI agents — all endpoints, schemas, and examples in one page.
+# TODO Phase 2: Auto-generate this file from /api-reference/ source pages.
+# This is currently hand-written. When API reference pages update, this file
+# must be manually synced. Target: build-time script aggregates all endpoint
+# pages into this single-page reference + llms-full.txt output.
+---
+
+# Complete API Reference
+
+::: info Session contract
+`session_id` is the persistent public identity for Agent interaction. Service (Endpoint) invocation creates or continues a Session. Every Schedule (Deployment) trigger creates a public `drun_*` DeploymentRun and attempts to create one new Session. Internal Runtime Session IDs are not exposed.
+:::
+
+> One page, all endpoints, no navigation needed. Plain-text version: [`llms-full.txt`](https://www.sandbase.ai/docs/llms-full.txt).
+
+## Authentication
+
+All requests require:
+
+```
+Authorization: Bearer sk-sb-YOUR_KEY
+```
+
+Base URL: `https://api.sandbase.ai/v1`
+
+---
+
+## Terminology
+
+| Term | Meaning |
+|------|---------|
+| **Task** | Any billable unit of work (LLM call, image generation, etc.). Every API call produces a task with a cost. |
+| **Run** | A media generation request via `POST /v1/run`. May be sync or async. Poll with `GET /v1/run/{id}`. |
+| **Session** | An agent execution via `POST /v1/sessions`. A sequence of steps (tool calls, LLM reasoning). Query with `GET /v1/sessions/{id}`. |
+
+> **run vs session**: "Run" (`/v1/run`) is for model generation tasks. "Session" (`/v1/sessions`) is for persistent Agent interactions. They use different endpoints and ID prefixes (`run_*` vs `sess_*`). A Schedule trigger additionally creates a `drun_*` DeploymentRun.
+>
+> **task vs run**: A "run" or "session" is the request you make; a "task" is the billable record created. Use `GET /v1/tasks/{id}/cost` to check cost. The task ID is returned in the `x-task-id` response header of every API call.
+
+---
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- GENERATION APIs                                          -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+
+## Chat Completions
+
+### POST /v1/chat/completions
+
+OpenAI-compatible. Supports streaming, function calling, vision, JSON mode.
+
+```bash
+curl https://api.sandbase.ai/v1/chat/completions \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai/gpt-4o",
+    "messages": [
+      {"role": "system", "content": "You are a helpful assistant."},
+      {"role": "user", "content": "Explain quantum computing in one paragraph."}
+    ],
+    "temperature": 0.7,
+    "max_tokens": 500,
+    "stream": false
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "id": "chatcmpl-abc123",
+  "object": "chat.completion",
+  "model": "openai/gpt-4o",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Quantum computing leverages quantum mechanical phenomena..."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 24,
+    "completion_tokens": 89,
+    "total_tokens": 113
+  }
+}
+```
+
+> **Response headers** (not shown in body): `x-task-id: task_abc123` — use this to query cost via `GET /v1/tasks/task_abc123/cost`.
+
+---
+
+## Anthropic Messages
+
+### POST /v1/messages
+
+Anthropic-compatible messages API with caching support.
+
+```bash
+curl https://api.sandbase.ai/v1/messages \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "anthropic/claude-sonnet-4-20250514",
+    "max_tokens": 1024,
+    "messages": [{"role": "user", "content": "What is SandBase?"}]
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "id": "msg_abc123",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    { "type": "text", "text": "SandBase is an AI agent infrastructure platform..." }
+  ],
+  "model": "anthropic/claude-sonnet-4-20250514",
+  "stop_reason": "end_turn",
+  "usage": { "input_tokens": 12, "output_tokens": 64 }
+}
+```
+
+---
+
+## Embeddings
+
+### POST /v1/embeddings
+
+Generate text embeddings. OpenAI-compatible interface.
+
+```bash
+curl https://api.sandbase.ai/v1/embeddings \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai/text-embedding-3-small",
+    "input": "SandBase is an AI agent platform."
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "object": "embedding",
+      "index": 0,
+      "embedding": [0.0023, -0.0091, 0.0152, 0.0087, -0.0034]
+    }
+  ],
+  "model": "openai/text-embedding-3-small",
+  "usage": { "prompt_tokens": 7, "total_tokens": 7 }
+}
+```
+
+> The `embedding` array is truncated. Actual length depends on the model (e.g., 1536 dimensions for `text-embedding-3-small`).
+
+---
+
+## Image Generation
+
+### POST /v1/run
+
+The `/v1/run` endpoint is a **unified generation endpoint** — the `model` field determines the output type (image, video, or audio).
+
+> **How to handle the response:** Check the `status` field.
+> - `"completed"` → result is in `output`, done.
+> - `"processing"` → poll `GET /v1/run/{id}` every 2–5s until `status` becomes `"completed"` or `"failed"`.
+
+```bash
+curl https://api.sandbase.ai/v1/run \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "flux/schnell",
+    "input": {
+      "prompt": "A futuristic city at sunset, cyberpunk style",
+      "width": 1024,
+      "height": 1024
+    }
+  }'
+```
+
+**Response (sync):**
+
+```json
+{
+  "id": "run_abc123",
+  "status": "completed",
+  "model": "flux/schnell",
+  "created_at": "2026-08-02T12:00:00Z",
+  "output": {
+    "url": "https://cdn.sandbase.ai/outputs/run_abc123.png",
+    "content_type": "image/png",
+    "width": 1024,
+    "height": 1024
+  }
+}
+```
+
+---
+
+## Video Generation
+
+### POST /v1/run
+
+Video models are typically async — poll with `GET /v1/run/{id}` until complete.
+
+```bash
+curl https://api.sandbase.ai/v1/run \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "kling/v1-5",
+    "input": {
+      "prompt": "A drone flying over mountains at golden hour",
+      "duration": 5
+    }
+  }'
+```
+
+**Response (async — initial):**
+
+```json
+{
+  "id": "run_xyz789",
+  "status": "processing",
+  "model": "kling/v1-5",
+  "created_at": "2026-08-02T12:00:00Z"
+}
+```
+
+**Poll status: `GET /v1/run/{id}`**
+
+```json
+{
+  "id": "run_xyz789",
+  "status": "completed",
+  "output": {
+    "url": "https://cdn.sandbase.ai/outputs/run_xyz789.mp4",
+    "content_type": "video/mp4",
+    "duration": 5
+  }
+}
+```
+
+---
+
+## Audio (Text-to-Speech)
+
+### POST /v1/run
+
+```bash
+curl https://api.sandbase.ai/v1/run \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "elevenlabs/multilingual-v2",
+    "input": {
+      "text": "Hello world, this is a test of text to speech.",
+      "voice": "rachel"
+    }
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "id": "run_audio456",
+  "status": "completed",
+  "model": "elevenlabs/multilingual-v2",
+  "created_at": "2026-08-02T12:00:00Z",
+  "output": {
+    "url": "https://cdn.sandbase.ai/outputs/run_audio456.mp3",
+    "content_type": "audio/mpeg",
+    "duration_seconds": 3.2
+  }
+}
+```
+
+---
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- DISCOVERY APIs                                           -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+
+## List Models
+
+### GET /v1/models
+
+Returns all available models with pricing, capabilities, and status.
+
+```bash
+curl https://api.sandbase.ai/v1/models \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+**Response (excerpt — use `GET /v1/models/{name}` for full details including `max_output_tokens`):**
+
+```json
+{
+  "data": [
+    {
+      "id": "openai/gpt-4o",
+      "type": "llm",
+      "vendor": "OpenAI",
+      "context_window": 128000,
+      "pricing": { "input_per_million": 2.50, "output_per_million": 10.00 },
+      "capabilities": ["chat", "vision", "tools", "json_mode", "streaming"],
+      "status": "active"
+    },
+    {
+      "id": "flux/schnell",
+      "type": "image",
+      "vendor": "Black Forest Labs",
+      "pricing": { "base_price": 0.003 },
+      "capabilities": ["text_to_image"],
+      "status": "active"
+    }
+  ]
+}
+```
+
+---
+
+## Get Model
+
+### GET /v1/models/{name}
+
+```bash
+curl https://api.sandbase.ai/v1/models/openai/gpt-4o \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+**Response:**
+
+```json
+{
+  "id": "openai/gpt-4o",
+  "type": "llm",
+  "vendor": "OpenAI",
+  "context_window": 128000,
+  "max_output_tokens": 16384,
+  "pricing": {
+    "input_per_million": 2.50,
+    "output_per_million": 10.00,
+    "cached_input_per_million": 1.25
+  },
+  "capabilities": ["chat", "vision", "tools", "json_mode", "streaming"],
+  "status": "active",
+  "deprecation_date": null
+}
+```
+
+---
+
+## Get Task Cost
+
+### GET /v1/tasks/{id}/cost
+
+Check the cost of any completed generation. The task ID is in the `x-task-id` response header of every API call.
+
+```bash
+curl https://api.sandbase.ai/v1/tasks/task_abc123/cost \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+**Response:**
+
+```json
+{
+  "task_id": "task_abc123",
+  "model": "openai/gpt-4o",
+  "cost_usd": 0.000325,
+  "usage": {
+    "prompt_tokens": 24,
+    "completion_tokens": 89,
+    "cache_read_input_tokens": 0
+  },
+  "created_at": "2026-08-02T12:00:00Z"
+}
+```
+
+---
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- PLATFORM APIs                                            -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+
+## Agents
+
+### POST /v1/agents — Create Agent
+
+```bash
+curl -X POST https://api.sandbase.ai/v1/agents \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Research Assistant",
+    "model": "openai/gpt-4o",
+    "system": "You are a research assistant. Use tools to find and summarize information.",
+    "tools": [{"type": "agent_toolset_20260401"}]
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "id": "agent_abc123",
+  "name": "Research Assistant",
+  "model": "openai/gpt-4o",
+  "system": "You are a research assistant...",
+  "tools": [
+    { "type": "agent_toolset_20260401" }
+  ],
+  "created_at": "2026-08-02T12:00:00Z",
+  "version": 1
+}
+```
+
+### GET /v1/agents — List Agents
+
+```bash
+curl https://api.sandbase.ai/v1/agents \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+### GET /v1/agents/{id} — Get Agent
+
+```bash
+curl https://api.sandbase.ai/v1/agents/agent_abc123 \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+### POST /v1/agents/{id} — Update Agent
+
+```bash
+curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123 \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "anthropic/claude-sonnet-4-20250514"}'
+```
+
+### POST /v1/agents/{id}/archive — Archive Agent
+
+```bash
+curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123/archive \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+### GET /v1/agents/{id}/versions — List Versions
+
+```bash
+curl https://api.sandbase.ai/v1/agents/agent_abc123/versions \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+---
+
+## Services (Endpoints)
+
+### POST /v1/endpoints/{id}/run — Invoke Service
+
+Creates or continues a Session and sends one message. Omit `session_id` to create a Session, or provide it to continue an existing Session.
+
+```bash
+curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"input": "Summarize the latest news about AI agents"}'
+```
+
+**Response:**
+
+```json
+{
+  "session_id": "sess_abc123",
+  "events": [{
+    "id": "sevt_abc123",
+    "type": "user.message",
+    "processed_at": "2026-08-03T12:00:01Z"
+  }]
+}
+```
+
+---
+
+## Sessions
+
+### POST /v1/sessions — Create Session
+
+Create a version-pinned Agent Session. SandBase resolves the Agent-owned Environment by default; an authorized `environment_id` is an optional one-Session override. Use singular `initial_events` to submit the first message with creation.
+
+```bash
+curl -X POST https://api.sandbase.ai/v1/sessions \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "agent": "agent_abc123",
+    "title": "GitHub research",
+    "initial_events": [{
+      "type": "user.message",
+      "content": [{"type": "text", "text": "Research AI coding assistants"}]
+    }]
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "id": "sess_xyz789",
+  "type": "session",
+  "agent": {
+    "id": "agent_abc123",
+    "type": "agent",
+    "version": 3
+  },
+  "environment_id": "env_abc123",
+  "status": "idle",
+  "created_at": "2026-08-03T12:00:00Z"
+}
+```
+
+If native runtime delivery returns `502` with a top-level `session_id`, its outcome is unknown. Retrieve that Session and inspect or stream its Events before continuing. Do not blindly create another Session and resend the message.
+
+### POST /v1/sessions/{id}/events — Send Events
+
+Send `user.message` to start or continue an idle Session, or `user.interrupt` to interrupt a running turn.
+
+```bash
+curl -X POST https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"events":[{"type":"user.message","content":[{"type":"text","text":"Focus on AI coding assistants specifically"}]}]}'
+```
+
+**Response:**
+
+```json
+{
+  "data": [{
+    "id": "sevt_001",
+    "type": "user.message",
+    "processed_at": "2026-08-03T12:00:01Z"
+  }]
+}
+```
+
+### GET /v1/sessions — List Sessions
+
+```bash
+curl https://api.sandbase.ai/v1/sessions \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+**Response:**
+
+```json
+{
+  "data": [
+    {
+      "id": "sess_xyz789",
+      "agent_id": "agent_abc123",
+      "status": "idle",
+      "environment_id": "env_abc123",
+      "created_at": "2026-08-03T12:00:00Z"
+    }
+  ]
+}
+```
+
+### GET /v1/sessions/{id} — Get Session
+
+```bash
+curl https://api.sandbase.ai/v1/sessions/sess_xyz789 \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+### GET /v1/sessions/{id}/events — List Events
+
+```bash
+curl https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+**Response:**
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_001",
+      "type": "agent.message",
+      "content": [{"type":"text","text":"I'll search GitHub for trending repositories..."}],
+      "processed_at": "2026-08-02T12:00:05Z"
+    },
+    {
+      "id": "sevt_002",
+      "type": "agent.tool_use",
+      "content": {"name":"github.search_repositories","input":{"query":"trending today"}},
+      "processed_at": "2026-08-02T12:00:06Z"
+    }
+  ]
+}
+```
+
+### GET /v1/sessions/{id}/events/stream — Stream Events (SSE)
+
+Replays persisted events, then continues streaming newly persisted events. While idle, the server may send `: heartbeat` comment frames. The connection remains open until the client disconnects, the request context is cancelled, or a write fails; Session terminal state does not produce a separate close event.
+
+```bash
+curl -N https://api.sandbase.ai/v1/sessions/sess_xyz789/events/stream \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+**Event format:**
+
+```
+data: {"id":"sevt_001","type":"agent.message","content":[{"type":"text","text":"I'll search GitHub for trending repositories..."}],"processed_at":"2026-08-03T12:00:02Z"}
+: heartbeat
+data: {"id":"sevt_002","type":"session.status_idle","stop_reason":{"type":"end_turn"},"processed_at":"2026-08-03T12:00:03Z"}
+```
+
+---
+
+## Schedules
+
+### POST /v1/deployments — Create Schedule
+
+Create a Schedule through the Deployments API. Every manual or cron trigger creates a distinct `drun_*` DeploymentRun and attempts to create one new Session.
+
+```bash
+curl -X POST https://api.sandbase.ai/v1/deployments \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Daily team summary",
+    "agent_id": "agent_abc123",
+    "environment_id": "env_abc123",
+    "initial_events": [{
+      "type": "user.message",
+      "content": [{"type":"text","text":"Generate daily summary of team activity"}]
+    }],
+    "schedule": {
+      "type": "cron",
+      "expression": "0 9 * * *",
+      "timezone": "America/New_York"
+    }
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "id": "depl_abc123",
+  "agent_id": "agent_abc123",
+  "schedule": {"type":"cron","expression":"0 9 * * *","timezone":"America/New_York"},
+  "status": "active",
+  "next_run_at": "2026-08-03T09:00:00-04:00"
+}
+```
+
+### GET /v1/deployments/{id}/runs — List DeploymentRuns
+
+```bash
+curl https://api.sandbase.ai/v1/deployments/depl_abc123/runs \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+Each returned object has `id` (`drun_*`), `type`, `deployment_id`, `agent`, `trigger_context`, nullable `session_id`, nullable `error`, and `created_at`. Use the linked Session for subsequent Agent events. A pending nested record returns `409 deployment_trigger_in_progress` from the get endpoint.
+
+---
+
+## Skills & Webhooks
+
+### GET /v1/skills — List Skills
+
+```bash
+curl https://api.sandbase.ai/v1/skills \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+**Response:**
+
+```json
+{
+  "data": [
+    {
+      "id": "skill_web_scrape",
+      "name": "Web Scraper",
+      "description": "Extract content from URLs",
+      "input_schema": {
+        "type": "object",
+        "properties": { "url": { "type": "string" } }
+      }
+    }
+  ]
+}
+```
+
+### POST /events/webhooks — Create Webhook
+
+```bash
+curl -X POST https://api.sandbase.ai/events/webhooks \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://your-app.com/webhook",
+    "events": ["session.completed", "session.failed"]
+  }'
+```
+
+Webhook management uses the same base path:
+
+- `GET /events/webhooks` — list registrations
+- `PATCH /events/webhooks/{id}` — update a registration
+- `DELETE /events/webhooks/{id}` — delete a registration
+
+**Response:**
+
+```json
+{
+  "id": "wh_abc123",
+  "url": "https://your-app.com/webhook",
+  "events": ["session.completed", "session.failed"],
+  "secret": "whsec_...",
+  "status": "active"
+}
+```
+
+---
+
+## Billing & Cost
+
+### How costs are calculated
+
+- **LLM**: `input_tokens × prompt_price + output_tokens × completion_price`
+- **Cached tokens**: significantly discounted — Anthropic 90% off input price, OpenAI 50% off, Google 75% off
+- **Image/Video/Audio**: flat `base_price` per generation
+- Check cost after generation: `GET /v1/tasks/{id}/cost`
+- The `x-task-id` response header on every request gives you the task ID for cost lookup
+
+### Budget control
+
+- Set spend alerts in [Console → Billing](https://www.sandbase.ai/console/billing)
+- Monitor usage in [Console → Usage](https://www.sandbase.ai/console/usage)
+
+---
+
+## See Also
+
+- [Models & Pricing](./models) — complete model table with capabilities
+- [Error Codes](./errors) — all error codes with retry guidance
+- [OpenAPI Spec](https://www.sandbase.ai/docs/openapi.yaml) — machine-readable schema

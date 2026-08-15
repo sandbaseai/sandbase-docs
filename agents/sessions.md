@@ -1,0 +1,55 @@
+---
+title: Sessions
+description: Understand persistent Agent interactions, events, and the Sessions API.
+---
+
+# Sessions
+
+A **Session** is one persistent interaction with an Agent. Its public ID begins with `sess_` and remains stable while messages, tool results, status events, and Agent responses are appended to its event history.
+
+## How Sessions start
+
+- Create one directly with `POST /v1/sessions`.
+- Invoke a [Service](/agents/services) without `session_id`.
+- Trigger a [Schedule](/agents/schedules); every successful trigger creates a new Session.
+
+A Service can continue an existing Session when its invocation includes `session_id`. A Schedule never reuses a Session.
+
+## Sessions and DeploymentRuns
+
+A Schedule is backed by a Deployment API resource. Each manual or cron trigger first creates a separate `drun_*` **DeploymentRun** record. A successful DeploymentRun has status `succeeded` and links to the newly created `session_id`; a failed record has no Session. DeploymentRun status describes Session creation only, not the later Agent execution lifecycle.
+
+## Work with a Session
+
+```bash
+# Inspect a Session
+curl https://api.sandbase.ai/v1/sessions/sess_01... \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+
+# Send another event
+curl -X POST https://api.sandbase.ai/v1/sessions/sess_01.../events \
+  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"events":[{"type":"user.message","content":[{"type":"text","text":"Continue the analysis."}]}]}'
+
+# Replay persisted events over SSE
+curl -N https://api.sandbase.ai/v1/sessions/sess_01.../events/stream \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+```
+
+## Identity summary
+
+| Resource | ID | Meaning |
+|---|---|---|
+| Agent | `agent_*` | Versioned workflow definition |
+| Service (Endpoint API) | `ep_*` | Stable callable surface |
+| Schedule (Deployment API) | `depl_*` | Repeatable trigger configuration |
+| DeploymentRun | `drun_*` | One Schedule trigger and its Session-creation result |
+| Session | `sess_*` | Persistent Agent interaction and event history |
+
+## Next steps
+
+- [Services](/agents/services)
+- [Schedules](/agents/schedules)
+- [Sessions API](/api-reference/sessions/)
+- [DeploymentRuns API](/api-reference/deployments/list-runs)

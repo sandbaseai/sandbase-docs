@@ -1,0 +1,105 @@
+---
+title: AI-Readable Documentation
+description: Everything an AI agent needs to discover and use SandBase API — one-page summary.
+---
+
+# Agent-Friendly API Overview
+
+::: info Session contract
+`session_id` is the public identity for persistent Agent interaction. Direct Session creation and Service (Endpoint) invocation create or continue that Session. Every Schedule (Deployment) trigger creates a separate public `drun_*` DeploymentRun and attempts to create one new Session. Runtime instances remain internal and are never returned.
+:::
+
+> A concise reference for both humans and AI agents. For plain-text versions optimized for LLM ingestion, see [`llms.txt`](https://www.sandbase.ai/docs/llms.txt).
+
+## What is SandBase?
+
+SandBase is an AI agent infrastructure platform. One API key gives you access to **400+ models** (LLM, image, video, audio, embedding), sandboxed environments, and agent workflows.
+
+## API Base URL
+
+```
+https://api.sandbase.ai/v1
+```
+
+## Authentication
+
+All requests require a Bearer token:
+
+```
+Authorization: Bearer sk-sb-YOUR_KEY
+```
+
+Get your key at [Console → API Keys](https://www.sandbase.ai/console/keys).
+
+## Quick Example
+
+```bash
+curl https://api.sandbase.ai/v1/chat/completions \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai/gpt-4o",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'
+```
+
+## Core Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/v1/chat/completions` | OpenAI-compatible chat (LLM, vision, tools, streaming) |
+| `POST` | `/v1/messages` | Anthropic-compatible messages API |
+| `POST` | `/v1/embeddings` | Generate text embeddings |
+| `POST` | `/v1/run` | Unified generation (image, video, audio, any async task) |
+| `GET` | `/v1/run/{id}` | Poll async generation status and retrieve results |
+| `GET` | `/v1/models` | List all available models |
+| `GET` | `/v1/models/{name}` | Get model details + pricing |
+| `GET` | `/v1/tasks/{id}/cost` | Get task cost and usage |
+
+## Additional Endpoint Groups
+
+Beyond the core generation endpoints, SandBase provides full APIs for agent lifecycle management. See the [Complete API Reference](./full) for full request/response details.
+
+| Group | Key Endpoints | Purpose |
+|-------|---------------|---------|
+| **Agents** | `POST /v1/agents`, `GET /v1/agents`, `POST /v1/agents/{id}` | Create and manage agent definitions |
+| **Services (Endpoints)** | `POST /v1/endpoints/{id}/run` | Invoke a Service and create or continue a Session |
+| **Sessions** | `POST /v1/sessions`, `POST /v1/sessions/{id}/events` | Create persistent Agent Sessions and send messages |
+| **Schedules (Deployments)** | `POST /v1/deployments` | Define manual or cron triggers; each creates a DeploymentRun |
+| **Skills & Webhooks** | `GET /v1/skills`, `POST /events/webhooks` | Extend agent capabilities and register callbacks |
+
+## Pricing Model
+
+Pay-per-use. Each model has a `price_formula` field:
+
+- **LLM**: `input_tokens × prompt_price + output_tokens × completion_price`
+- **Image/Video/Audio**: flat `base_price` per generation
+- **Cached tokens**: significantly discounted (Anthropic 90% off, OpenAI 50% off, Google 75% off)
+
+Check cost after any generation:
+
+```bash
+curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
+  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+```
+
+## Rate Limits
+
+Default: 60 requests/min, 5 concurrent. Upgrade plans have higher limits. See [Error Codes](./errors) for handling 429 responses.
+
+---
+
+## Further Reading
+
+- [Complete API Reference](./full) — all endpoints, request/response schemas, curl examples
+- [Models & Pricing](./models) — full model list with pricing and capabilities
+- [Error Codes](./errors) — every error code with HTTP status and fix
+- [OpenAPI Spec](https://www.sandbase.ai/docs/openapi.yaml) — machine-readable OpenAPI 3.1
+
+## Plain-Text Versions (for AI agents)
+
+| File | URL | Content |
+|------|-----|---------|
+| `llms.txt` | [/docs/llms.txt](https://www.sandbase.ai/docs/llms.txt) | Compact summary (~60 lines) |
+| `llms-full.txt` | [/docs/llms-full.txt](https://www.sandbase.ai/docs/llms-full.txt) | Complete reference (all endpoints + models + pricing) |
+| `openapi.yaml` | [/docs/openapi.yaml](https://www.sandbase.ai/docs/openapi.yaml) | OpenAPI 3.1 machine-readable spec |

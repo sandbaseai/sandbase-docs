@@ -1,0 +1,77 @@
+# SandBase
+
+> AI agent infrastructure platform. One API key to call 400+ models (LLM, image, video, audio, embedding) and agent workflows.
+
+## API Base URL
+
+https://api.sandbase.ai/v1
+
+## Authentication
+
+Bearer token: `Authorization: Bearer sk-sb-YOUR_KEY`
+
+## Core Endpoints
+
+- POST /v1/chat/completions - OpenAI-compatible chat (LLM, vision, tools, streaming)
+- POST /v1/messages - Anthropic-compatible messages API
+- POST /v1/embeddings - Generate text embeddings
+- POST /v1/run - Unified generation (image, video, audio, any async task)
+- GET /v1/run/{id} - Poll async generation status
+- GET /v1/models - List all available models
+- GET /v1/models/{name} - Get model details + pricing
+- GET /v1/tasks/{id}/cost - Get task cost and usage
+
+## Agent Lifecycle
+
+- POST /v1/agents - Create an agent
+- POST /v1/agents/{id} - Update an agent and create a version
+- POST /v1/agents/{id}/archive - Archive an agent
+- POST /v1/endpoints/{id}/run - Invoke a Service (Endpoint) and create or continue a Session
+- POST /v1/sessions - Create agent session directly
+- POST /v1/sessions/{id}/events - Send messages to running session
+- GET /v1/sessions/{id}/events/stream - Replay persisted session events (SSE)
+- POST /v1/deployments - Create a Schedule (Deployment)
+- POST /v1/deployments/{id}/runs - Create a manual DeploymentRun
+- GET /v1/deployment_runs - List DeploymentRuns across Schedules
+
+## Session Contract
+
+- session_id is the only public identity for persistent Agent interaction.
+- Endpoint invocation accepts an optional session_id. Omit it to create a Session; provide it to continue that Session.
+- Every manual or scheduled Deployment trigger creates a distinct drun_* DeploymentRun and attempts to create exactly one new Session.
+- A DeploymentRun links to session_id when Session creation succeeds; failed trigger records have no Session.
+- Endpoint acceptance returns session_id and an events array. It does not create a DeploymentRun or expose an internal Runtime Session identity.
+
+## Webhooks
+
+- POST /events/webhooks - Register a callback
+- GET /events/webhooks - List callback registrations
+- PATCH /events/webhooks/{id} - Update a callback registration
+- DELETE /events/webhooks/{id} - Delete a callback registration
+
+## Pricing
+
+Pay-per-use. No monthly minimums.
+- LLM: input_tokens * prompt_price + output_tokens * completion_price
+- Image/Video/Audio: flat base_price per generation
+- Cached tokens: up to 90% off (Anthropic 90%, OpenAI 50%, Google 75%)
+
+## Models (representative)
+
+- openai/gpt-4o - $2.50/$10.00 per M tokens, 128K context
+- openai/gpt-4o-mini - $0.15/$0.60 per M tokens, 128K context
+- anthropic/claude-sonnet-4-20250514 - $3.00/$15.00 per M tokens, 200K context
+- google/gemini-2.5-flash - $0.15/$0.60 per M tokens, 1M context
+- deepseek/deepseek-chat - $0.14/$0.28 per M tokens, 128K context
+- flux/schnell - $0.003 per image, ~2s
+- kling/v1-5 - $0.28 per video (10s, 1080p)
+
+Use GET /v1/models for the full real-time list.
+
+## Docs
+
+- Full API reference: https://www.sandbase.ai/docs/for-agents/full
+- Models & Pricing: https://www.sandbase.ai/docs/for-agents/models
+- Error Codes: https://www.sandbase.ai/docs/for-agents/errors
+- OpenAPI spec: https://www.sandbase.ai/docs/openapi.yaml
+- Complete LLM reference: https://www.sandbase.ai/docs/llms-full.txt

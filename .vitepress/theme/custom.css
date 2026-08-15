@@ -1,0 +1,1174 @@
+/* SandBase docs palette — documentation-first neutrals. Brand green is a
+   semantic accent, never the default text or surface color. */
+:root {
+  --vp-c-brand-1: #303238;
+  --vp-c-brand-2: #1f2126;
+  --vp-c-brand-3: #15171b;
+  --vp-c-brand-soft: rgba(31, 33, 38, 0.065);
+  --sb-accent-green: #16815b;
+
+  --sb-code-text: #344054;
+  --sb-code-bg: #f1f3f5;
+  --sb-code-border: #e4e7ec;
+  --sb-code-block-bg: #f8f9fa;
+
+  /* Fonts — unified Inter stack (matches platform.claude.com) */
+  --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Roboto, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', Consolas, monospace;
+}
+
+.dark {
+  --vp-c-brand-1: #e3e5e8;
+  --vp-c-brand-2: #f1f2f4;
+  --vp-c-brand-3: #ffffff;
+  --vp-c-brand-soft: rgba(255, 255, 255, 0.08);
+  --sb-accent-green: #68d6a8;
+
+  --sb-code-text: #d6dce5;
+  --sb-code-bg: #232832;
+  --sb-code-border: #343b48;
+  --sb-code-block-bg: #171b22;
+
+  /* Dark background matching main site */
+  --vp-c-bg: #0f1117;
+  --vp-c-bg-alt: #161922;
+  --vp-c-bg-elv: #1c1f2b;
+  --vp-c-bg-soft: #1c1f2b;
+}
+
+/* ─── Developer-doc sidebar: compact, structured, keyboard friendly ─── */
+:root {
+  --vp-sidebar-width: 272px;
+  --sb-sidebar-active-bg: rgba(31, 33, 38, 0.06);
+  --sb-sidebar-active-text: #24262b;
+  --sb-sidebar-hover-bg: rgba(15, 23, 42, 0.045);
+  --sb-sidebar-focus: rgba(31, 33, 38, 0.28);
+}
+
+.dark {
+  --sb-sidebar-active-bg: rgba(255, 255, 255, 0.09);
+  --sb-sidebar-active-text: #f1f2f4;
+  --sb-sidebar-hover-bg: rgba(255, 255, 255, 0.055);
+  --sb-sidebar-focus: rgba(255, 255, 255, 0.36);
+}
+
+.VPSidebar {
+  padding-right: 14px !important;
+  scrollbar-color: color-mix(in srgb, var(--vp-c-text-3) 42%, transparent) transparent;
+  scrollbar-width: thin;
+}
+
+.VPSidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.VPSidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.VPSidebar::-webkit-scrollbar-thumb {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--vp-c-text-3) 38%, transparent);
+  background-clip: padding-box;
+}
+
+.VPSidebar::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--vp-c-text-2) 50%, transparent);
+  background-clip: padding-box;
+}
+
+.VPSidebar .nav {
+  padding: 0 4px 40px 0;
+}
+
+.VPSidebarItem.level-0 {
+  padding-bottom: 7px;
+}
+
+.VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+  margin-top: 7px;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--vp-c-divider) 58%, transparent);
+}
+
+.VPSidebarItem.level-0 > .item {
+  min-height: 30px;
+  padding: 0 8px;
+}
+
+.VPSidebarItem.level-0 > .item .text {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.012em;
+  color: var(--vp-c-text-1);
+}
+
+.VPSidebarItem.level-0 > .item .link[href*="status.sandbase.ai"],
+.VPSidebarItem.level-0 > .item .link[href*="/community"],
+.VPSidebarItem.level-0 > .item .link[href*="/blog"] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 34px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  color: var(--vp-c-text-2);
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.VPSidebarItem.level-0 > .item .link[href*="status.sandbase.ai"]:hover,
+.VPSidebarItem.level-0 > .item .link[href*="/community"]:hover,
+.VPSidebarItem.level-0 > .item .link[href*="/blog"]:hover {
+  background: var(--sb-sidebar-hover-bg);
+  color: var(--vp-c-text-1);
+}
+
+.VPSidebarItem.level-0 > .item .link[href*="status.sandbase.ai"] > .text,
+.VPSidebarItem.level-0 > .item .link[href*="/community"] > .text,
+.VPSidebarItem.level-0 > .item .link[href*="/blog"] > .text {
+  color: inherit;
+  font-size: 14px;
+  font-weight: 450;
+  letter-spacing: 0;
+}
+
+.VPSidebarItem.level-0 > .item .link[href*="status.sandbase.ai"]::before,
+.VPSidebarItem.level-0 > .item .link[href*="/community"]::before,
+.VPSidebarItem.level-0 > .item .link[href*="/blog"]::before {
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--vp-c-text-3);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 16px 16px;
+}
+
+.VPSidebarItem.level-0 > .item .link[href*="status.sandbase.ai"]::before {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 10h2v4H2v-4Zm4-4h2v8H6V6Zm4-3h2v11h-2V3Zm4 6h2v5h-2V9Z'/%3E%3C/svg%3E");
+}
+
+.VPSidebarItem.level-0 > .item .link[href*="/community"]::before {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.2 7.6a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8Zm5.6 0a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8ZM1.5 13.8c.4-2.5 1.8-4 3.7-4s3.3 1.5 3.7 4H1.5Zm5.9 0c.5-2.2 1.7-3.5 3.4-3.5 1.9 0 3.3 1.4 3.7 3.5H7.4Z'/%3E%3C/svg%3E");
+}
+
+.VPSidebarItem.level-0 > .item .link[href*="/blog"]::before {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Zm1 3h8V4H4v1Zm0 3h8V7H4v1Zm0 3h5v-1H4v1Z'/%3E%3C/svg%3E");
+}
+
+.VPSidebarItem .items {
+  padding-left: 0;
+}
+
+.VPSidebarItem.level-1 > .item,
+.VPSidebarItem.level-2 > .item,
+.VPSidebarItem.level-3 > .item {
+  min-height: 34px;
+  padding: 1px 0;
+}
+
+/* Nested section labels (for example Endpoints > Sessions) align with
+   their sibling links instead of jumping back to the parent gutter. */
+.VPSidebarItem.level-1.collapsible > .item {
+  padding-right: 8px;
+  padding-left: 14px;
+}
+
+.VPSidebarItem.level-1 > .item .link,
+.VPSidebarItem.level-2 > .item .link,
+.VPSidebarItem.level-3 > .item .link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  margin: 0;
+  padding: 5px 10px 5px 14px;
+  border-radius: 7px;
+  color: var(--vp-c-text-2);
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.VPSidebarItem.level-2 > .item .link {
+  padding-left: 26px;
+}
+
+.VPSidebarItem.level-3 > .item .link {
+  padding-left: 12px;
+}
+
+.VPSidebarItem.level-1 > .item .link > .text,
+.VPSidebarItem.level-2 > .item .link > .text,
+.VPSidebarItem.level-3 > .item .link > .text {
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.42;
+  color: inherit;
+}
+
+.VPSidebarItem > .item .link:hover {
+  background: var(--sb-sidebar-hover-bg);
+  color: var(--vp-c-text-1);
+}
+
+.VPSidebarItem > .item .link:focus-visible {
+  outline: 2px solid var(--sb-sidebar-focus);
+  outline-offset: -2px;
+  background: var(--sb-sidebar-hover-bg);
+  color: var(--vp-c-text-1);
+}
+
+.VPSidebarItem.is-active > .item .link {
+  background: var(--sb-sidebar-active-bg);
+  color: var(--sb-sidebar-active-text) !important;
+  font-weight: 600;
+}
+
+.VPSidebarItem.is-active > .item .link::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 4px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--sb-accent-green);
+}
+
+.VPSidebarItem.is-active > .item .link > .text {
+  color: inherit !important;
+}
+
+.VPSidebarItem .caret {
+  opacity: 0.62;
+  transition: opacity 120ms ease, transform 160ms ease;
+}
+
+.VPSidebarItem > .item:hover .caret,
+.VPSidebarItem > .item:focus-within .caret {
+  opacity: 1;
+}
+
+/* ─── Unified docs footer ──────────────────────────────────── */
+.sb-contact-footer {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.95fr) minmax(0, 2.2fr);
+  gap: 56px;
+  margin-top: 48px;
+  padding: 44px 0 24px;
+  border-top: 1px solid color-mix(in srgb, var(--vp-c-divider) 74%, transparent);
+}
+
+.sb-contact-brand {
+  min-width: 0;
+}
+
+.sb-contact-logo {
+  display: inline-flex;
+  width: 168px;
+  max-width: 100%;
+}
+
+.sb-contact-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sb-logo-dark,
+.dark .sb-logo-light {
+  display: none;
+}
+
+.dark .sb-logo-dark {
+  display: block;
+}
+
+.sb-contact-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.sb-contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: color-mix(in srgb, var(--vp-c-text-3) 86%, transparent);
+  transition: color 140ms ease, transform 140ms ease;
+}
+
+.sb-contact-link:hover {
+  color: var(--vp-c-text-1);
+  transform: translateY(-1px);
+}
+
+.sb-contact-link:focus-visible {
+  outline: 2px solid var(--sb-sidebar-focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.sb-contact-link svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.sb-contact-link:first-child svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sb-footer-columns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(116px, 1fr));
+  gap: 34px;
+  min-width: 0;
+}
+
+.sb-footer-column h2 {
+  margin: 0 0 12px;
+  border: 0;
+  color: var(--vp-c-text-3);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.sb-footer-column a {
+  display: block;
+  width: fit-content;
+  margin: 0;
+  color: var(--vp-c-text-2);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.55;
+  text-decoration: none;
+}
+
+.sb-footer-column a + a {
+  margin-top: 8px;
+}
+
+.sb-footer-column a:hover {
+  color: var(--vp-c-text-1);
+}
+
+@media (max-width: 959px) {
+  .sb-contact-footer {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 40px;
+    padding-top: 34px;
+  }
+
+  .sb-footer-columns {
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+    gap: 26px;
+  }
+
+  .VPSidebar {
+    width: 100% !important;
+    padding-right: 18px !important;
+    padding-left: 18px !important;
+  }
+
+  .VPSidebar .nav {
+    padding-right: 0;
+  }
+
+  .VPSidebarItem.level-1 > .item,
+  .VPSidebarItem.level-2 > .item,
+  .VPSidebarItem.level-3 > .item,
+  .VPSidebarItem.level-1 > .item .link,
+  .VPSidebarItem.level-2 > .item .link,
+  .VPSidebarItem.level-3 > .item .link {
+    min-height: 38px;
+  }
+}
+
+@media (max-width: 520px) {
+  .sb-footer-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Nav brand link — match main site (logo is green, wordmark uses text color) */
+.VPNavBarTitle .title {
+  color: var(--vp-c-text-1) !important;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Logo image sizing */
+.VPNavBar .VPImage.logo {
+  height: 32px;
+  width: auto;
+}
+
+/* ─── Nav link styling — align with Dashboard (15px / 500, active 600) ─── */
+.VPNavBarMenuLink .VPLink,
+.VPNavBarMenuGroup .text {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+}
+.VPNavBarMenuLink.active .VPLink,
+.VPNavBarMenuGroup.active .text {
+  font-weight: 600 !important;
+}
+
+/* Custom container (tip, warning, danger) colors */
+:root {
+  --vp-custom-block-tip-border: #cfd3d8;
+  --vp-custom-block-tip-bg: rgba(31, 33, 38, 0.035);
+  --vp-custom-block-tip-text: #303238;
+
+  --vp-custom-block-warning-border: #e5a50a;
+  --vp-custom-block-warning-bg: rgba(229, 165, 10, 0.08);
+  --vp-custom-block-warning-text: #e5a50a;
+
+  --vp-custom-block-danger-border: #f43f5e;
+  --vp-custom-block-danger-bg: rgba(244, 63, 94, 0.06);
+  --vp-custom-block-danger-text: #f43f5e;
+}
+
+.dark {
+  --vp-custom-block-tip-bg: rgba(255, 255, 255, 0.045);
+  --vp-custom-block-warning-bg: rgba(229, 165, 10, 0.06);
+  --vp-custom-block-danger-bg: rgba(244, 63, 94, 0.04);
+}
+
+/* ─── Table inline code readability fix ─── */
+/* Make inline code in tables more readable (darker text, subtle bg) */
+.vp-doc table code {
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.dark .vp-doc table code {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+}
+
+/* ─── Claude-style typography refinement ─── */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'cv11', 'ss01';
+}
+.vp-doc p,
+.vp-doc li {
+  letter-spacing: -0.011em;
+}
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4 {
+  letter-spacing: -0.022em;
+}
+.vp-doc code,
+.vp-doc pre {
+  font-feature-settings: normal;
+}
+
+/* Inline code is supporting information, not a call to action. Keeping it
+   neutral prevents dense API prose from turning into a field of green chips. */
+.vp-doc p > code,
+.vp-doc li > code,
+.vp-doc td > code,
+.vp-doc dd > code {
+  padding: 2px 5px;
+  border: 1px solid var(--sb-code-border);
+  border-radius: 5px;
+  background: var(--sb-code-bg) !important;
+  color: var(--sb-code-text) !important;
+  font-size: 0.88em;
+  font-weight: 520;
+}
+
+/* ─── API method badges ─── */
+/* Style for the colored method badges in API reference pages */
+.vp-doc div[style*="display:flex"] code {
+  background: transparent;
+  color: var(--vp-c-text-1);
+  font-size: 0.95em;
+  font-weight: 600;
+  padding: 0;
+}
+
+/* ─── Better table styling ─── */
+.vp-doc table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.vp-doc table th {
+  font-weight: 600;
+  text-align: left;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc table td {
+  vertical-align: top;
+}
+
+/* ─── Wider content area for API reference ─── */
+.vp-doc.has-aside .content-container {
+  max-width: 100%;
+}
+
+/* ─── Hide unnecessary scrollbar on code blocks ─── */
+.vp-doc div[class*="language-"] pre {
+  overflow-x: hidden;
+}
+.vp-doc div[class*="language-"] pre:hover {
+  overflow-x: auto;
+}
+
+/* ─── Home (layout: page) — let HomePage control its own width ─── */
+.VPContent.is-home,
+.VPPage {
+  width: 100%;
+}
+
+/* ─── Reference-document layout: dense, quiet, and scan-first ─── */
+:root {
+  --vp-nav-height: 64px;
+  --vp-sidebar-width: 244px;
+  --vp-layout-max-width: 1680px;
+  --sb-doc-rule: color-mix(in srgb, var(--vp-c-divider) 72%, transparent);
+}
+
+/* Light-only surface tints. These MUST stay scoped to `:not(.dark)`: a bare
+   `:root` here sits after the `.dark` block above with equal specificity, so
+   it would clobber the dark surfaces and tint the sidebar, table rows, and
+   inline code light while in dark mode. */
+:root:not(.dark) {
+  --vp-c-bg-alt: #f8f9f8;
+  --vp-c-bg-soft: #f4f6f5;
+}
+
+.VPNav {
+  border-bottom: 1px solid var(--sb-doc-rule);
+}
+
+.VPNavBar {
+  background: color-mix(in srgb, var(--vp-c-bg) 96%, transparent) !important;
+  backdrop-filter: blur(12px);
+}
+
+.VPSidebar {
+  background: var(--vp-c-bg-alt) !important;
+  border-right: 1px solid var(--sb-doc-rule);
+}
+
+.VPSidebar .curtain {
+  background: var(--vp-c-bg-alt) !important;
+}
+
+.VPSidebarItem.level-0 > .item .text {
+  font-size: 13px;
+  font-weight: 680;
+  letter-spacing: -0.006em;
+}
+
+.VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+  margin-top: 12px;
+  padding-top: 14px;
+}
+
+.VPSidebarItem.level-1 > .item .link,
+.VPSidebarItem.level-2 > .item .link,
+.VPSidebarItem.level-3 > .item .link {
+  border-radius: 8px;
+}
+
+.VPSidebarItem.level-1 > .item .link > .text,
+.VPSidebarItem.level-2 > .item .link > .text,
+.VPSidebarItem.level-3 > .item .link > .text {
+  font-size: 13.5px;
+  line-height: 1.38;
+}
+
+.VPDoc .container {
+  max-width: 1440px !important;
+}
+
+.VPDoc > .container > .content {
+  min-width: 0;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.VPDoc .content-container {
+  max-width: 840px !important;
+}
+
+/* Endpoint references use their own two-column reading layout. */
+.VPDoc .content-container:has(.api-reference-page),
+.VPDoc .content-container:has(.platform-api-landing) {
+  width: 100%;
+  max-width: 1320px !important;
+  min-width: 0;
+}
+
+.VPDocAside {
+  width: 300px !important;
+  padding-left: 28px;
+  border-left: 1px solid var(--sb-doc-rule);
+}
+
+.VPDoc .aside {
+  flex: 0 0 300px !important;
+  width: 300px !important;
+  min-width: 300px !important;
+  max-width: 300px !important;
+}
+
+.VPDoc .aside-container {
+  width: 270px !important;
+}
+
+.VPDocAsideOutline {
+  max-height: calc(100vh - var(--vp-nav-height) - 48px);
+  padding-right: 10px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--vp-c-text-3) 35%, transparent) transparent;
+}
+
+.VPDocAsideOutline .outline-title {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.VPDocAsideOutline .outline-link {
+  display: block;
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  font-size: 12.5px;
+  line-height: 1.38;
+}
+
+.VPDocAsideOutline .nested {
+  padding-left: 10px;
+}
+
+.vp-doc > h1:first-child {
+  margin-top: 0;
+  font-size: clamp(34px, 3.3vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -0.038em;
+}
+
+.vp-doc > h1:first-child + p {
+  max-width: 760px;
+  margin-top: 18px;
+  color: var(--vp-c-text-2);
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+.vp-doc h2 {
+  margin-top: 54px;
+  padding-top: 28px;
+  border-top: 1px solid var(--sb-doc-rule);
+  font-size: 27px;
+  line-height: 1.22;
+}
+
+.vp-doc h3 {
+  margin-top: 34px;
+  font-size: 20px;
+}
+
+.vp-doc p,
+.vp-doc li {
+  font-size: 15.5px;
+  line-height: 1.72;
+}
+
+.vp-doc .custom-block {
+  margin: 24px 0;
+  padding: 16px 18px;
+  border-width: 1px;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.vp-doc div[class*='language-'] {
+  margin: 24px 0;
+  border: 1px solid var(--sb-doc-rule);
+  border-radius: 10px;
+  background: var(--sb-code-block-bg);
+  box-shadow: none;
+}
+
+.vp-doc div[class*='language-'] pre,
+.vp-doc div[class*='language-'] code {
+  background: transparent;
+}
+
+.vp-doc table {
+  display: table;
+  margin: 24px 0;
+  border: 1px solid var(--sb-doc-rule);
+  border-radius: 0;
+  font-size: 14px;
+}
+
+.vp-doc tr:nth-child(2n) {
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 58%, transparent);
+}
+
+.vp-doc th,
+.vp-doc td {
+  padding: 12px 14px;
+  border-color: var(--sb-doc-rule);
+}
+
+@media (max-width: 1279px) {
+  .VPDoc > .container > .content {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .VPDoc .aside {
+    flex-basis: 250px !important;
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+  }
+
+  .VPDocAside {
+    width: 250px !important;
+    padding-left: 20px;
+  }
+
+  .VPDoc .aside-container {
+    width: 220px !important;
+  }
+
+  .VPDoc > .container > .content {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+}
+
+@media (max-width: 959px) {
+  .VPDoc > .container > .content {
+    width: 100%;
+    min-width: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .VPDoc .content-container,
+  .VPDoc .vp-doc {
+    width: 100%;
+    max-width: 100% !important;
+    min-width: 0;
+  }
+
+  /* Legacy overview/reference documents contain wide Markdown tables and
+     unbroken endpoint examples. Keep their overflow local to the element so
+     the entire page never acquires a horizontal scrollbar. */
+  .vp-doc table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .vp-doc div[class*='language-'],
+  .vp-doc div[class*='language-'] pre {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .vp-doc p,
+  .vp-doc li,
+  .vp-doc td,
+  .vp-doc code {
+    overflow-wrap: anywhere;
+  }
+
+  .vp-doc > h1:first-child {
+    font-size: 34px;
+  }
+
+  .vp-doc > h1:first-child + p {
+    font-size: 17px;
+  }
+}
+
+/* ─── Editorial reading layout for product Docs ───────────────────────────
+   API endpoint pages already provide their own dense two-column surface.
+   Regular guides should instead read like a calm technical publication:
+   short lines, restrained headings, and a sidebar that stays secondary. */
+@media (min-width: 960px) {
+  :root {
+    --vp-sidebar-width: 264px;
+  }
+
+  .VPDoc .content-container:not(:has(.api-reference-page)):not(:has(.platform-api-landing)) {
+    width: 100%;
+    max-width: 760px !important;
+  }
+
+  .VPDoc .aside {
+    flex: 0 0 232px !important;
+    width: 232px !important;
+    min-width: 232px !important;
+    max-width: 232px !important;
+  }
+
+  .VPDocAside {
+    width: 232px !important;
+    padding-left: 22px;
+  }
+
+  .VPDoc .aside-container {
+    width: 204px !important;
+  }
+}
+
+/* A quieter navigation rail. The active page remains obvious without
+   turning every selection into a large green card. */
+.VPSidebar {
+  padding-right: 10px !important;
+  background: color-mix(in srgb, var(--vp-c-bg-alt) 74%, var(--vp-c-bg)) !important;
+  scrollbar-color: transparent transparent;
+}
+
+.VPSidebar:hover {
+  scrollbar-color: color-mix(in srgb, var(--vp-c-text-3) 32%, transparent) transparent;
+}
+
+.VPSidebar::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.VPSidebar:hover::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--vp-c-text-3) 30%, transparent);
+  background-clip: padding-box;
+}
+
+.VPSidebarItem.level-0 > .item {
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+.VPSidebarItem.level-0 > .item .text {
+  font-size: 12.5px;
+  font-weight: 650;
+  color: color-mix(in srgb, var(--vp-c-text-1) 92%, transparent);
+}
+
+.VPSidebarItem.level-1 > .item .link,
+.VPSidebarItem.level-2 > .item .link,
+.VPSidebarItem.level-3 > .item .link {
+  min-height: 30px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-radius: 6px;
+}
+
+.VPSidebarItem.level-1 > .item .link > .text,
+.VPSidebarItem.level-2 > .item .link > .text,
+.VPSidebarItem.level-3 > .item .link > .text {
+  font-size: 13px;
+  line-height: 1.36;
+}
+
+.VPSidebarItem.is-active > .item .link {
+  background: color-mix(in srgb, var(--vp-c-text-1) 5%, transparent);
+  color: var(--vp-c-text-1) !important;
+}
+
+.VPSidebarItem.is-active > .item .link::before {
+  top: 6px;
+  bottom: 6px;
+  left: 3px;
+  width: 2px;
+  background: var(--sb-accent-green);
+}
+
+/* Model API Reference: the LLM category overview is a sibling of provider
+   groups (OpenAI, Anthropic, Google...). VitePress renders it as a nested
+   link, so pull only this one row back to the provider gutter instead of
+   making it look like a model entry. */
+.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/llm-models"],
+.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/llm-models/"],
+.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/image-generation"],
+.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/image-generation/"],
+.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/video-generation"],
+.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/video-generation/"],
+.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/audio-generation"],
+.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/audio-generation/"] {
+  margin-left: -18px;
+  width: calc(100% + 18px);
+  padding-left: 14px;
+}
+
+/* Reading rhythm. Limit prose rather than shrinking the entire content
+   column, so tables and code samples still have useful working width. */
+.vp-doc:not(:has(.api-reference-page)) {
+  color: color-mix(in srgb, var(--vp-c-text-1) 94%, transparent);
+}
+
+/* Product documentation is editorial, not promotional. Use typography and
+   underlines for hierarchy; reserve brand green for navigation state and
+   genuine actions instead of painting every reference in the accent color. */
+.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor) {
+  color: color-mix(in srgb, var(--vp-c-text-1) 88%, transparent);
+  font-weight: 520;
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, var(--vp-c-text-3) 52%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):hover {
+  color: var(--vp-c-text-1);
+  text-decoration-color: var(--vp-c-text-1);
+}
+
+.vp-doc:not(:has(.api-reference-page)) .header-anchor {
+  color: var(--vp-c-text-3);
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block.tip {
+  border-color: color-mix(in srgb, var(--vp-c-divider) 92%, transparent);
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 78%, var(--vp-c-bg));
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block.tip .custom-block-title {
+  color: var(--vp-c-text-1);
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block.tip a {
+  color: var(--vp-c-text-1);
+}
+
+.vp-doc:not(:has(.api-reference-page)) > p,
+.vp-doc:not(:has(.api-reference-page)) > ul,
+.vp-doc:not(:has(.api-reference-page)) > ol,
+.vp-doc:not(:has(.api-reference-page)) > blockquote {
+  max-width: 72ch;
+}
+
+.vp-doc:not(:has(.api-reference-page)) > h1:first-child {
+  max-width: 18ch;
+  margin-bottom: 18px;
+  font-size: clamp(30px, 2.5vw, 36px);
+  font-weight: 660;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.vp-doc:not(:has(.api-reference-page)) > h1:first-child + p {
+  max-width: 64ch;
+  margin-top: 0;
+  color: var(--vp-c-text-2);
+  font-size: 17px;
+  line-height: 1.62;
+  letter-spacing: -0.014em;
+}
+
+.vp-doc:not(:has(.api-reference-page)) h2 {
+  margin-top: 46px;
+  padding-top: 25px;
+  font-size: 24px;
+  font-weight: 660;
+  line-height: 1.26;
+  letter-spacing: -0.028em;
+}
+
+.vp-doc:not(:has(.api-reference-page)) h3 {
+  margin-top: 30px;
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: -0.022em;
+}
+
+.vp-doc:not(:has(.api-reference-page)) p,
+.vp-doc:not(:has(.api-reference-page)) li {
+  font-size: 15px;
+  line-height: 1.72;
+  letter-spacing: -0.008em;
+}
+
+.vp-doc:not(:has(.api-reference-page)) p {
+  margin: 14px 0;
+}
+
+.vp-doc:not(:has(.api-reference-page)) li + li {
+  margin-top: 6px;
+}
+
+.vp-doc:not(:has(.api-reference-page)) hr {
+  margin: 44px 0;
+  border-color: var(--sb-doc-rule);
+}
+
+/* Supporting UI should look archival rather than promotional. */
+.vp-doc:not(:has(.api-reference-page)) .custom-block {
+  max-width: 72ch;
+  margin: 22px 0;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 72%, var(--vp-c-bg));
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block-title {
+  margin-bottom: 5px;
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.vp-doc:not(:has(.api-reference-page)) div[class*='language-'] {
+  margin: 22px 0;
+  border-color: color-mix(in srgb, var(--vp-c-divider) 82%, transparent);
+  border-radius: 8px;
+}
+
+.vp-doc:not(:has(.api-reference-page)) div[class*='language-'] code {
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.VPDocAsideOutline .outline-title {
+  color: var(--vp-c-text-1);
+  font-size: 12px;
+  font-weight: 650;
+  margin-bottom: 12px;
+}
+
+.VPDocAsideOutline .outline-link {
+  padding: 3px 0;
+  color: var(--vp-c-text-3);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.VPDocAsideOutline .outline-link:hover,
+.VPDocAsideOutline .outline-link.active {
+  color: var(--vp-c-text-1);
+}
+
+.VPDocAsideOutline li + li {
+  margin-top: 3px;
+}
+
+.VPDocAsideOutline .nested {
+  margin-top: 3px;
+  padding-left: 14px;
+}
+
+.VPDocAsideOutline .nested .outline-link {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: color-mix(in srgb, var(--vp-c-text-3) 86%, transparent);
+  font-size: 11.5px;
+  line-height: 1.52;
+}
+
+.VPDocAsideOutline .nested li + li {
+  margin-top: 2px;
+}
+
+.VPDocAsideOutline > nav > ul > li + li {
+  margin-top: 7px;
+}
+
+@media (max-width: 959px) {
+  .vp-doc:not(:has(.api-reference-page)) > h1:first-child {
+    max-width: none;
+    font-size: 29px;
+  }
+
+  .vp-doc:not(:has(.api-reference-page)) > h1:first-child + p {
+    font-size: 16px;
+  }
+
+  .vp-doc:not(:has(.api-reference-page)) h2 {
+    margin-top: 40px;
+    padding-top: 22px;
+    font-size: 22px;
+  }
+}
+
+/* ─── Wide-screen layout correction ───────────────────────────────────────
+   VitePress centres the whole shell inside `--vp-layout-max-width`, but its
+   sidebar/content gutter math is hard-wired to the 1440px breakpoint. This
+   theme widens the shell to 1680px, which opened a dead zone between 1440px
+   and 1680px: the stock formula `(100% - (max-width - 64)) / 2` turns
+   negative there, so the sidebar width collapses to a sliver and the content
+   plus "On this page" rail sit flush against the right window edge.
+
+   Re-derive both gutters from a guarded value that never goes negative, so
+   the navigation rail keeps a stable width and the page always retains a
+   right margin across every viewport wider than the mobile breakpoint. */
+:root {
+  --sb-layout-gutter: max(0px, calc((100vw - var(--vp-layout-max-width)) / 2));
+}
+
+@media (min-width: 960px) {
+  /* Rail box = intended width + centring gutter, keeping a fixed 32px inner
+     indent. Usable rail width therefore stays constant instead of shrinking
+     to nothing in the 1440–1680px range. */
+  .VPSidebar {
+    padding-left: calc(32px + var(--sb-layout-gutter)) !important;
+    width: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
+  }
+
+  /* Content is inset by the rail on the left and always keeps a right gutter
+     (at least 48px), so the outline rail never touches the window edge. */
+  .VPContent.has-sidebar {
+    padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
+    padding-right: max(48px, var(--sb-layout-gutter)) !important;
+  }
+
+  /* The nav bar reuses the same collapsing formula for its logo slot, action
+     area, and divider. Re-align all three with the guarded gutter so the logo
+     tracks the rail and the right-hand icons keep the same margin as the
+     content/outline below (otherwise the GitHub icon sits flush to the edge). */
+  .VPNavBar.has-sidebar .title {
+    padding-left: calc(32px + var(--sb-layout-gutter)) !important;
+    width: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
+  }
+
+  .VPNavBar.has-sidebar .content {
+    padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
+    padding-right: max(48px, var(--sb-layout-gutter)) !important;
+  }
+
+  .VPNavBar.has-sidebar .divider {
+    padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
+  }
+}

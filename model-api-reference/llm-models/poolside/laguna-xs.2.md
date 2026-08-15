@@ -1,0 +1,21 @@
+---
+title: "Laguna XS.2 API Reference"
+description: "Laguna XS.2 API reference for SandBase. Use model poolside/laguna-xs.2 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+aside: false
+outline: false
+apiReferenceKey: "llm/poolside/laguna-xs.2"
+apiReferenceJson: "{\"title\":\"Laguna XS.2\",\"operation\":\"Chat Completions\",\"method\":\"POST\",\"path\":\"/v1/chat/completions\",\"description\":\"Laguna XS.2 is the second-generation model in the XS size class from Poolside, their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering...\",\"groups\":[{\"title\":\"Request body\",\"description\":\"Parameters supported by this model. Values, defaults, and limits are read from the model registry.\",\"fields\":[{\"name\":\"model\",\"type\":\"string\",\"required\":true,\"description\":\"Model identifier. Set to poolside/laguna-xs.2.\",\"default\":\"poolside/laguna-xs.2\"},{\"name\":\"messages\",\"type\":\"array<object>\",\"required\":true,\"description\":\"Conversation messages in system, user, or assistant order.\"},{\"name\":\"max_tokens\",\"type\":\"integer\",\"required\":false,\"description\":\"Maximum number of tokens the model may generate in the response.\",\"constraints\":\"Range: −∞ to 32768\"},{\"name\":\"temperature\",\"type\":\"number\",\"required\":false,\"description\":\"Sampling temperature. Lower values are more deterministic; higher values are more creative.\",\"default\":\"1\",\"constraints\":\"Range: 0 to 2\"},{\"name\":\"stream\",\"type\":\"boolean\",\"required\":false,\"description\":\"When true, returns incremental Server-Sent Events instead of one completed response.\",\"default\":\"false\"},{\"name\":\"tools\",\"type\":\"array\",\"required\":false,\"description\":\"Tool definitions that the model may call during the response.\"},{\"name\":\"tool_choice\",\"type\":\"string\",\"required\":false,\"description\":\"Controls whether the model may call a tool and, when supported, which tool it must call.\"}]},{\"title\":\"Response Schema\",\"description\":\"Fields returned by this model API response.\",\"fields\":[{\"name\":\"choices\",\"type\":\"array<object>\",\"required\":true,\"description\":\"Generated completion choices.\"},{\"name\":\"id\",\"type\":\"string\",\"required\":true,\"description\":\"Unique chat completion identifier.\"},{\"name\":\"model\",\"type\":\"string\",\"required\":true,\"description\":\"Model that generated the response.\"},{\"name\":\"usage\",\"type\":\"object\",\"required\":false,\"description\":\"Token usage when available.\"}]},{\"title\":\"Model capabilities\",\"fields\":[{\"name\":\"capability_tags\",\"type\":\"array<string>\",\"required\":true,\"description\":\"Capabilities declared by the model registry.\",\"default\":\"chat, reasoning, function_calling\"},{\"name\":\"context_length\",\"type\":\"integer\",\"required\":true,\"description\":\"Maximum context window accepted by this model.\",\"default\":\"262144 tokens\"},{\"name\":\"execution_mode\",\"type\":\"string\",\"required\":true,\"description\":\"Execution mode declared by the model registry.\",\"default\":\"sync\"}]}],\"examples\":[{\"label\":\"cURL\",\"language\":\"bash\",\"code\":\"curl -X POST https://api.sandbase.ai/v1/chat/completions \\\\\\n  -H \\\"Authorization: Bearer $SANDBASE_API_KEY\\\" \\\\\\n  -H \\\"Content-Type: application/json\\\" \\\\\\n  -d '{\\n  \\\"model\\\": \\\"poolside/laguna-xs.2\\\",\\n  \\\"messages\\\": [\\n    {\\n      \\\"role\\\": \\\"user\\\",\\n      \\\"content\\\": \\\"Describe this product in one sentence.\\\"\\n    }\\n  ]\\n}'\"}],\"response\":{\"status\":\"200 OK\",\"code\":\"{\\n  \\\"id\\\": \\\"chatcmpl_abc123\\\",\\n  \\\"model\\\": \\\"poolside/laguna-xs.2\\\",\\n  \\\"choices\\\": [\\n    {\\n      \\\"message\\\": {\\n        \\\"role\\\": \\\"assistant\\\",\\n        \\\"content\\\": \\\"A concise product description.\\\"\\n      }\\n    }\\n  ]\\n}\"}}"
+seo:
+  modelName: "Laguna XS.2"
+  modelId: "poolside/laguna-xs.2"
+  vendor: "Poolside"
+  vendorSlug: "poolside"
+  modelSlug: "laguna-xs.2"
+  protocol: "Chat Completions API"
+  endpoint: "/v1/chat/completions"
+  publishedAt: ""
+  capabilities: ["chat","reasoning","function_calling"]
+  category: "LLM Models"
+---
+
+<ApiReferencePage />
