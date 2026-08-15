@@ -1,95 +1,204 @@
 <p align="center">
-  <h1 align="center">SandBase Documentation</h1>
+  <h1 align="center">SandBase</h1>
   <p align="center">
-    <strong>The complete guide to building with 2,000+ AI models, APIs, and managed agents.</strong>
+    <strong>One API. 200+ Models. 2,000+ Tools. Zero integration headaches.</strong>
   </p>
   <p align="center">
-    <a href="https://docs.sandbase.ai">Live Docs</a> ·
+    <a href="https://docs.sandbase.ai">Docs</a> ·
     <a href="https://sandbase.ai">Platform</a> ·
-    <a href="https://sandbase.ai/console">Dashboard</a>
+    <a href="https://sandbase.ai/console">Dashboard</a> ·
+    <a href="https://github.com/sandbaseai/cli">CLI</a>
   </p>
 </p>
 
 ---
 
-## What is SandBase?
+## The Problem
 
-SandBase is a unified AI platform that gives developers access to:
+Building AI applications means juggling dozens of API keys, learning different SDKs, handling auth flows, managing rate limits, and paying for 10+ subscriptions just to get basic capabilities.
 
-- **200+ AI Models** — GPT-4o, Claude, Gemini, DeepSeek, Qwen, Llama, Flux, Kling, and more
-- **2,000+ APIs** — Web search, social media, scraping, e-commerce, finance, image/video/audio generation
-- **Managed Agents** — Define reusable AI agents with tools, run them on schedules or via API
-- **One API Key** — Access everything through a single credential
+Need Twitter data? One API. Web scraping? Another. Image generation? A third. LLM inference? Yet another. Each with its own pricing, auth, error handling, and documentation.
 
-## Documentation Structure
+## The Solution
 
-```
-├── getting-started/     # Quickstart, API keys, first call
-├── models/              # Model capabilities, supported models, vision
-├── model-api-reference/ # Per-model API docs (LLM, image, video, audio)
-├── api-reference/       # Full REST API reference
-├── agents/              # Agent definition, MCP tools, sessions, deployments
-├── guides/              # Streaming, error handling, rate limiting, billing
-├── store/               # Browse models, APIs, skills, agents
-├── for-agents/          # Integration guides for AI coding tools
-├── admin/               # Organizations, API keys, billing management
-├── setup/               # Client setup (Cursor, Claude Code, etc.)
-└── use-cases/           # Real-world integration examples
-```
-
-## Quick Links
-
-| Topic | Description |
-|-------|-------------|
-| [Getting Started](https://docs.sandbase.ai/getting-started/) | Create an account and make your first API call |
-| [Models & APIs](https://docs.sandbase.ai/models/) | Browse 200+ models with capabilities and pricing |
-| [API Reference](https://docs.sandbase.ai/api-reference/) | Complete REST API documentation |
-| [Build an Agent](https://docs.sandbase.ai/agents/) | Create reusable AI agents with tools |
-| [For AI Tools](https://docs.sandbase.ai/for-agents/) | Connect SandBase to Cursor, Claude Code, Codex, etc. |
-| [Store](https://docs.sandbase.ai/store/) | Discover available models, APIs, and skills |
-
-## Local Development
+SandBase gives you **one API key** that unlocks everything:
 
 ```sh
-# Install dependencies
-npm ci
+# Search Twitter
+curl https://sandbase.ai/v1/run -d '{"model": "twitter/search", "query": "AI agents"}'
 
-# Start dev server with hot reload
-npm run dev
+# Generate an image
+curl https://sandbase.ai/v1/run -d '{"model": "flux/schnell", "prompt": "A startup logo"}'
 
-# Build for production
-npm run build
+# Call GPT-4o
+curl https://sandbase.ai/v1/run -d '{"model": "openai/gpt-4o", "messages": [...]}'
 
-# Preview production build
-npm run preview
+# Scrape a webpage
+curl https://sandbase.ai/v1/run -d '{"model": "firecrawl/scrape", "url": "https://..."}'
 ```
 
-The site is built with [VitePress](https://vitepress.dev). Pages are written in Markdown with Vue components for interactive elements.
+All through one endpoint. One auth. One billing dashboard.
 
-## Deployment
+---
 
-The docs are deployed as a static site via Docker:
+## What You Get
+
+### Models (200+)
+
+| Type | Providers |
+|------|-----------|
+| LLM | OpenAI, Anthropic, Google, DeepSeek, Qwen, Meta, Mistral |
+| Image Generation | Flux, DALL-E, Ideogram, Recraft |
+| Video Generation | Kling, MiniMax, Runway, Luma |
+| Audio | ElevenLabs TTS, Whisper STT |
+| Embeddings | OpenAI, Voyage, Cohere |
+
+### APIs (2,000+)
+
+| Category | Examples |
+|----------|----------|
+| Web Search | Google, Exa, Tavily, Scholar |
+| Social Media | Twitter/X, YouTube, Reddit, Instagram, TikTok, Xiaohongshu, Weibo, Bilibili |
+| Scraping | Firecrawl, URL content extraction |
+| E-commerce | Taobao, Amazon product data |
+| Finance | Stock quotes, company data |
+| And more | Weather, maps, translation, news... |
+
+### Managed Agents
+
+Define AI agents with instructions + tools, then run them:
+- **On-demand** via API (Endpoints)
+- **On a schedule** (Deployments)
+- **In conversations** (Sessions)
+
+---
+
+## Three Ways to Use SandBase
+
+### 1. Direct API Calls
+
+For when you need precise control:
+
+```python
+import requests
+
+response = requests.post("https://sandbase.ai/v1/run", 
+    headers={"Authorization": "Bearer YOUR_KEY"},
+    json={
+        "model": "openai/gpt-4o",
+        "messages": [{"role": "user", "content": "Explain quantum computing"}]
+    }
+)
+print(response.json())
+```
+
+### 2. Connect Your AI Coding Agent
+
+One command and your Cursor / Claude Code / Codex / Kiro gets access to all tools:
+
+```sh
+npx -y @sandbaseai/cli connect
+```
+
+Your agent can now search the web, pull social media data, generate images, and more — just by asking.
+
+### 3. Build Managed Agents
+
+Define reusable agents that combine models + tools + instructions:
+
+```json
+{
+  "name": "market-researcher",
+  "model": "openai/gpt-4o",
+  "instructions": "Research market trends and competitors...",
+  "tools": ["twitter/search", "exa/search", "firecrawl/scrape"]
+}
+```
+
+Then trigger via API, schedule, or webhook.
+
+---
+
+## Getting Started
+
+### Quick start (under 2 minutes)
+
+1. **Sign up** at [sandbase.ai](https://sandbase.ai) — free tier included
+2. **Get your API key** from the [Dashboard](https://sandbase.ai/console/keys)
+3. **Make a call:**
+
+```sh
+curl https://sandbase.ai/v1/chat/completions \
+  -H "Authorization: Bearer $SANDBASE_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai/gpt-4o",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'
+```
+
+### Connect to your AI tool
+
+```sh
+npx -y @sandbaseai/cli connect --client cursor
+```
+
+Works with Cursor, Claude Code, Codex, Kiro, Windsurf, Gemini CLI, Amp, Warp, and 10+ more.
+
+---
+
+## Documentation
+
+This repository contains the full SandBase documentation site, built with [VitePress](https://vitepress.dev).
+
+| Section | What's Inside |
+|---------|---------------|
+| [Getting Started](https://docs.sandbase.ai/getting-started/) | Account setup, API keys, first call |
+| [Models](https://docs.sandbase.ai/models/) | Capabilities, supported models, pricing |
+| [API Reference](https://docs.sandbase.ai/api-reference/) | Complete REST API docs |
+| [Agents](https://docs.sandbase.ai/agents/) | Build and deploy managed agents |
+| [Guides](https://docs.sandbase.ai/guides/) | Streaming, errors, rate limits, billing |
+| [For AI Tools](https://docs.sandbase.ai/for-agents/) | MCP integration for coding agents |
+| [Store](https://docs.sandbase.ai/store/) | Browse all available models & APIs |
+
+### Run locally
+
+```sh
+npm ci
+npm run dev      # Dev server at localhost:5173
+npm run build    # Production build
+npm run preview  # Preview build locally
+```
+
+### Deploy
 
 ```sh
 docker build -t sandbase-docs .
 docker run -p 80:80 sandbase-docs
 ```
 
-The `nginx.conf` handles routing, caching headers, and SPA fallback.
+---
 
-## Contributing
+## Why SandBase?
 
-Documentation improvements are welcome. To add or update content:
+| Without SandBase | With SandBase |
+|------------------|---------------|
+| 10+ API keys to manage | 1 API key for everything |
+| Different SDKs per service | One unified REST API |
+| $200+/mo in subscriptions | Pay only for what you use |
+| Weeks of integration work | Working in minutes |
+| Each service has different errors | Consistent error handling |
+| Separate billing per provider | One dashboard, one invoice |
 
-1. Find the relevant `.md` file in the directory structure above
-2. Edit using standard Markdown + [VitePress extensions](https://vitepress.dev/guide/markdown)
-3. Run `npm run dev` to preview locally
-4. Submit a pull request
+---
 
-## Related Repositories
+## Links
 
-- [@sandbaseai/cli](https://github.com/sandbaseai/cli) — CLI tool to connect AI coding agents to SandBase
-- [SandBase Platform](https://sandbase.ai) — The main platform
+- **Platform:** [sandbase.ai](https://sandbase.ai)
+- **Docs:** [docs.sandbase.ai](https://docs.sandbase.ai)
+- **CLI:** [@sandbaseai/cli](https://github.com/sandbaseai/cli)
+- **npm:** [npmjs.com/package/@sandbaseai/cli](https://www.npmjs.com/package/@sandbaseai/cli)
+- **Dashboard:** [sandbase.ai/console](https://sandbase.ai/console)
 
 ## License
 
