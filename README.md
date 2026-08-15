@@ -9,6 +9,14 @@
     <a href="https://sandbase.ai/console">Dashboard</a> ·
     <a href="https://github.com/sandbaseai/cli">CLI</a>
   </p>
+  <p align="center">
+    <a href="https://github.com/sandbaseai/sandbase-docs/stargazers"><img src="https://img.shields.io/github/stars/sandbaseai/sandbase-docs?style=social" alt="GitHub stars"></a>
+    <a href="https://github.com/sandbaseai/sandbase-docs/blob/main/LICENSE"><img src="https://img.shields.io/github/license/sandbaseai/sandbase-docs" alt="Apache-2.0 license"></a>
+    <a href="https://docs.sandbase.ai"><img src="https://img.shields.io/badge/docs-live-16a34a" alt="Documentation"></a>
+  </p>
+  <p align="center">
+    If SandBase saves you integration time, please <a href="https://github.com/sandbaseai/sandbase-docs">star the repository</a> — it helps more builders discover the project.
+  </p>
 </p>
 
 ---
@@ -203,3 +211,9 @@ docker run -p 80:80 sandbase-docs
 ## License
 
 Apache-2.0
+
+## Contributing
+
+Found a missing model, unclear example, or documentation bug? Open an
+[issue](https://github.com/sandbaseai/sandbase-docs/issues) or send a pull
+request. Small fixes are welcome.
