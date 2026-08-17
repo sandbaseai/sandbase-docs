@@ -1,0 +1,67 @@
+name: Rollback Docs
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Previously published docs image tag (docs-v*)'
+        required: true
+        type: string
+
+concurrency:
+  group: deploy-docs-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  rollback:
+    runs-on: self-hosted
+    environment: production
+    env:
+      REGISTRY: sgccr.ccs.tencentyun.com/sandbase
+      REGISTRY_HOST: sgccr.ccs.tencentyun.com
+      NAMESPACE: sandbase
+      DEPLOYMENT: sandbase-docs
+      CONTAINER: docs
+      IMAGE_TAG: ${{ inputs.image_tag }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate requested image
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$IMAGE_TAG" =~ ^docs-v[0-9A-Za-z._-]+$ ]]
+          printf '%s' '${{ secrets.CCR_PASSWORD }}' \
+            | docker login "$REGISTRY_HOST" \
+                --username '${{ secrets.CCR_USERNAME }}' --password-stdin
+          docker manifest inspect "${REGISTRY}/docs:${IMAGE_TAG}" >/dev/null
+
+      - uses: ./.github/actions/setup-kubectl
+        with:
+          kubeconfig: ${{ secrets.KUBECONFIG_PROD }}
+          k8s-server: ${{ secrets.K8S_SERVER }}
+
+      - name: Roll back docs image
+        shell: bash
+        run: |
+          set -euo pipefail
+          image="${REGISTRY}/docs:${IMAGE_TAG}"
+          kubectl set image "deployment/${DEPLOYMENT}" "${CONTAINER}=${image}" -n "$NAMESPACE"
+          kubectl rollout status "deployment/${DEPLOYMENT}" -n "$NAMESPACE" --timeout=300s
+          live_image="$(
+            kubectl get deployment "$DEPLOYMENT" -n "$NAMESPACE" \
+              -o jsonpath='{.spec.template.spec.containers[?(@.name=="docs")].image}'
+          )"
+          test "$live_image" = "$image"
+
+      - name: Verify production URL
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location \
+            --retry 6 --retry-delay 10 --retry-all-errors \
+            --max-time 30 \
+            https://www.sandbase.ai/docs/health >/dev/null
