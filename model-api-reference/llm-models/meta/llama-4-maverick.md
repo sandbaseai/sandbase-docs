@@ -13,7 +13,7 @@ seo:
   modelSlug: "llama-4-maverick"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-04-05T19:37:02Z"
   capabilities: ["chat","vision","structured_output"]
   category: "LLM Models"
 ---

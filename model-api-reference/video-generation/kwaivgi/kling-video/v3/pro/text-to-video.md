@@ -13,7 +13,7 @@ seo:
   modelSlug: "kling-video/v3/pro/text-to-video"
   protocol: "Video Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-02-04T15:48:44.935Z"
   capabilities: ["text-to-video"]
   category: "Video Generation"
 ---

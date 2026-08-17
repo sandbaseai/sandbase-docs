@@ -13,7 +13,7 @@ seo:
   modelSlug: "kling-video/v2/master/image-to-video"
   protocol: "Video Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2025-04-14T21:50:19.724Z"
   capabilities: ["image-to-video"]
   category: "Video Generation"
 ---

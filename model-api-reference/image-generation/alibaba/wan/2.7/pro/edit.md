@@ -13,7 +13,7 @@ seo:
   modelSlug: "wan/2.7/pro/edit"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-04-01T12:24:21.597Z"
   capabilities: ["image-editing"]
   category: "Image Generation"
 ---

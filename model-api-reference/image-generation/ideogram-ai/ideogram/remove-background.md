@@ -13,7 +13,7 @@ seo:
   modelSlug: "ideogram/remove-background"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-05-07T13:51:32.81Z"
   capabilities: ["image-to-image"]
   category: "Image Generation"
 ---

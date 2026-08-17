@@ -13,7 +13,7 @@ seo:
   modelSlug: "qwen2.5-vl-72b-instruct"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-02-01T11:45:11Z"
   capabilities: ["chat","vision","structured_output"]
   category: "LLM Models"
 ---

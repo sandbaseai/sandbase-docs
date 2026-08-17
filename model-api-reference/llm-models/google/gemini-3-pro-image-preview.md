@@ -13,7 +13,7 @@ seo:
   modelSlug: "gemini-3-pro-image-preview"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-11-20T15:49:57Z"
   capabilities: ["chat","vision","reasoning","structured_output"]
   category: "LLM Models"
 ---

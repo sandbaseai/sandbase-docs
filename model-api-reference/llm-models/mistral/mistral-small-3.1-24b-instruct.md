@@ -13,7 +13,7 @@ seo:
   modelSlug: "mistral-small-3.1-24b-instruct"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-03-17T19:15:37Z"
   capabilities: ["chat","vision"]
   category: "LLM Models"
 ---

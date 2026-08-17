@@ -5,7 +5,7 @@ description: Browse SandBase Video Generation APIs by provider and open a model 
 
 # Video Generation
 
-SandBase currently publishes API reference pages for 377 enabled video generation models across 22 providers. Choose a provider in the left navigation, then open a model page for its exact API identifier, supported capabilities, and a working request.
+SandBase currently publishes API reference pages for 403 enabled video generation models across 27 providers. Choose a provider in the left navigation, then open a model page for its exact API identifier, supported capabilities, and a working request.
 
 Video Generation models use the async SandBase generation protocol declared in each model registry file. Submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out.
 
@@ -25,16 +25,16 @@ Video Generation models use the async SandBase generation protocol declared in e
 - [Seedance 2.5 Image to Video](/model-api-reference/video-generation/bytedance/seedance/2.5/image-to-video) — ByteDance's next-generation image-to-video model, animating a single still into a native clip up to 30 seconds at 720p with continuous, coherent motion, native audio, and director-level camera control.
 - [Seedance 2.5 Reference to Video](/model-api-reference/video-generation/bytedance/seedance/2.5/reference-to-video) — ByteDance's next-generation reference-to-video model, generating video from multimodal references (images, videos, audio) and locking a character, set, and palette across a full take up to 30 seconds for production-grade consistency.
 - [Seedance 2.5 Text to Video](/model-api-reference/video-generation/bytedance/seedance/2.5/text-to-video) — ByteDance's next-generation text-to-video model, generating native single-shot clips up to 30 seconds at 720p with coherent motion, native audio, and director-level camera control for professional-grade video creation.
+- [Seedance 2.0 Mini](/model-api-reference/video-generation/bytedance/seedance/2.0/mini/reference-to-video) — Seedance 2.0 Mini by Bytedance - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
+- [Seedance 2.0 Mini Image to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/mini/image-to-video) — Seedance 2.0 Mini by Bytedance - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
+- [Seedance 2.0 Mini Text to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/mini/text-to-video) — Seedance 2.0 Mini is Bytedance's text-to-video AI model. Turn written scripts and prompts into professional-quality video clips with realistic motion, lighting, and scene composition.
 - [Seedance 2.0 Text to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/text-to-video) — ByteDance's most advanced text-to-video model delivering cinematic output, native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
 - [Seedance 2.0 Reference to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/reference-to-video) — ByteDance's most advanced reference-to-video model generating cinematic video guided by reference content, with native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
 - [Seedance 2.0 Fast Text to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/fast/text-to-video) — ByteDance's most advanced text-to-video model in its fast tier delivering lower latency and cost without compromising on cinematic output, native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
 - [Seedance 2.0 Image to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/image-to-video) — ByteDance's most advanced image-to-video model transforming still images into cinematic video with native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
 - [Seedance 2.0 Fast Reference to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/fast/reference-to-video) — ByteDance's most advanced reference-to-video model in its fast tier delivering lower latency and cost without compromising on cinematic output, native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
 - [Seedance 2.0 Fast Image to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/fast/image-to-video) — ByteDance's most advanced image-to-video model in its fast tier delivering lower latency and cost without compromising on cinematic output, native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
-- [DreamActor 2.0](/model-api-reference/video-generation/bytedance/dreamactor/2.0) — DreamActor M2.0 by ByteDance generates videos by animating a reference image using motion from a driving video. It replicates motion, facial expressions, and lip movements from the template video while preserving the subject and background features of the input image.
-- [Seedance v1.5 Pro Text to Video](/model-api-reference/video-generation/bytedance/seedance/1.5/pro/text-to-video) — ByteDance Seedance v1.5 Pro text-to-video model generating cinematic video from text prompts with native audio generation, camera control, and professional-grade output quality.
-- [Seedance v1.5 Pro Image to Video](/model-api-reference/video-generation/bytedance/seedance/1.5/pro/image-to-video) — ByteDance Seedance v1.5 Pro image-to-video model transforming still images into cinematic video with native audio generation, camera control, and professional-grade output quality.
-- …and 9 more models in the sidebar.
+- …and 12 more models in the sidebar.
 
 ### Google
 
@@ -54,6 +54,10 @@ Video Generation models use the async SandBase generation protocol declared in e
 
 ### Luma
 
+- [Luma Ray 3.2 Video to Video](/model-api-reference/video-generation/luma/agent/ray/3.2/video-to-video) — Agent Ray 3.2 by Luma - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
+- [Luma Ray 3.2 Reframe](/model-api-reference/video-generation/luma/agent/ray/3.2/reframe) — Agent Ray 3.2 is Luma's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
+- [Luma Ray 3.2 Text to Video](/model-api-reference/video-generation/luma/agent/ray/3.2/text-to-video) — Agent Ray 3.2 is Luma's text-to-video AI model. Turn written scripts and prompts into professional-quality video clips with realistic motion, lighting, and scene composition.
+- [Luma Ray 3.2 Image to Video](/model-api-reference/video-generation/luma/agent/ray/3.2/image-to-video) — Agent Ray 3.2 by Luma - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
 - [Luma Ray Flash 2 Modify](/model-api-reference/video-generation/luma/ray-flash-2/modify) — Ray Flash 2 Modify by Luma - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [Luma Ray 2 Modify](/model-api-reference/video-generation/luma/ray-2/modify) — Ray 2 Modify by Luma - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [Luma Ray Flash 2 Reframe](/model-api-reference/video-generation/luma/ray-flash-2/reframe) — Ray Flash 2 Reframe is Luma's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
@@ -65,6 +69,7 @@ Video Generation models use the async SandBase generation protocol declared in e
 
 ### MiniMax
 
+- [MiniMax H3 Video Regeneration](/model-api-reference/video-generation/minimax/h3/video-regeneration) — Regenerate a single base video from a text prompt as a 2K MiniMax H3 video.
 - [MiniMax H3 (Text to Video)](/model-api-reference/video-generation/minimax/h3/text-to-video) — Generate native-stereo 2K video from text with MiniMax H3.
 - [MiniMax H3 (Image to Video)](/model-api-reference/video-generation/minimax/h3/image-to-video) — Generate native-stereo 2K video from a first frame and optional last frame with MiniMax H3.
 - [MiniMax H3 (Reference to Video)](/model-api-reference/video-generation/minimax/h3/reference-to-video) — Generate native-stereo 2K video guided by image, video, and audio references with MiniMax H3.
@@ -76,8 +81,7 @@ Video Generation models use the async SandBase generation protocol declared in e
 - [MiniMax Hailuo 2.3 [Pro] (Text to Video)](/model-api-reference/video-generation/minimax/hailuo/2.3/pro/text-to-video) — Hailuo 2.3 Pro by MiniMax - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
 - [MiniMax Hailuo 02 Fast (Image to Video)](/model-api-reference/video-generation/minimax/hailuo/02-fast/image-to-video) — Hailuo 02 Fast is MiniMax's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
 - [MiniMax Hailuo 02 [Standard] (Image to Video)](/model-api-reference/video-generation/minimax/hailuo/02/standard/image-to-video) — Hailuo 02 Standard is MiniMax's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
-- [MiniMax Hailuo 02 [Pro] (Image to Video)](/model-api-reference/video-generation/minimax/hailuo/02/pro/image-to-video) — Hailuo 02 Pro by MiniMax - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
-- …and 9 more models in the sidebar.
+- …and 10 more models in the sidebar.
 
 ### Pika
 
@@ -94,6 +98,7 @@ Video Generation models use the async SandBase generation protocol declared in e
 
 ### VEED
 
+- [VEED Lipsync](/model-api-reference/video-generation/veed/lipsync/2.0) — Lipsync 2.0 is VEED's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [VEED Fabric 1.0 Text to Video](/model-api-reference/video-generation/veed/fabric-1.0/text-to-video) — Fabric 1.0 by VEED - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
 - [VEED Video Background Removal Fast](/model-api-reference/video-generation/veed/video-bg-removal/fast) — Video Bg Removal Fast is VEED's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [VEED Video Background Removal](/model-api-reference/video-generation/veed/video-bg-removal) — Video Bg Removal by VEED - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
@@ -106,6 +111,9 @@ Video Generation models use the async SandBase generation protocol declared in e
 
 ### Alibaba
 
+- [Happy Horse 1.1 Image to Video](/model-api-reference/video-generation/alibaba/happy-horse/1.1/image-to-video) — Happy Horse 1.1 by Alibaba - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
+- [Happy Horse 1.1 Reference to Video](/model-api-reference/video-generation/alibaba/happy-horse/1.1/reference-to-video) — Happy Horse 1.1 by Alibaba - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
+- [Happy Horse 1.1 Text to Video](/model-api-reference/video-generation/alibaba/happy-horse/1.1/text-to-video) — Happy Horse 1.1 is Alibaba's text-to-video AI model. Turn written scripts and prompts into professional-quality video clips with realistic motion, lighting, and scene composition.
 - [Happy Horse Video Edit](/model-api-reference/video-generation/alibaba/happy-horse/video-edit) — Happy Horse Video Edit by Alibaba - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [Happy Horse Reference to Video](/model-api-reference/video-generation/alibaba/happy-horse/reference-to-video) — Alibaba's #1-ranked Happy Horse 1.0 generates stunning 1080p videos with synchronized native audio and multilingual lip-sync, transforming text prompts or images into cinematic, true-to-life motion content for next-generation AIGC creation.
 - [Happy Horse Image to Video](/model-api-reference/video-generation/alibaba/happy-horse/image-to-video) — Alibaba's #1-ranked Happy Horse 1.0 generates stunning 1080p videos with synchronized native audio and multilingual lip-sync, transforming text prompts or images into cinematic, true-to-life motion content for next-generation AIGC creation.
@@ -113,12 +121,14 @@ Video Generation models use the async SandBase generation protocol declared in e
 - [Wan 2.7 Text to Video](/model-api-reference/video-generation/alibaba/wan/2.7/text-to-video) — Alibaba Wan 2.7 text-to-video model with cinematic visuals, native audio generation, and configurable duration and resolution.
 - [Wan 2.7 Reference to Video](/model-api-reference/video-generation/alibaba/wan/2.7/reference-to-video) — Alibaba Wan 2.7 reference-to-video model generating video guided by reference content.
 - [Wan 2.7 Edit Video](/model-api-reference/video-generation/alibaba/wan/2.7/edit-video) — Alibaba Wan 2.7 video editing model.
+- [Wan 2.7 Image to Video](/model-api-reference/video-generation/alibaba/wan/2.7/image-to-video) — Alibaba Wan 2.7 image-to-video model transforming still images into video with native audio generation.
 - [Wan Motion](/model-api-reference/video-generation/alibaba/wan/motion) — Wan Motion by Alibaba - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [Wan 2.6 Reference to Video Flash](/model-api-reference/video-generation/alibaba/wan/2.6/reference-to-video/flash) — Wan 2.6 Flash by Alibaba - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [Wan 2.6 Image to Video Flash](/model-api-reference/video-generation/alibaba/wan/2.6/image-to-video/flash) — Wan 2.6 Flash by Alibaba - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
-- [Wan Move](/model-api-reference/video-generation/alibaba/wan/move) — Wan Move by Alibaba - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
-- [Wan 2.6 Text to Video](/model-api-reference/video-generation/alibaba/wan/2.6/text-to-video) — Alibaba Wan 2.6 text-to-video model with cinematic visuals, configurable duration (5 or 10 seconds) and resolution.
-- …and 45 more models in the sidebar.
+- …and 50 more models in the sidebar.
+
+### Bria
+
+- [Bria's VRMBG 3.0](/model-api-reference/video-generation/bria/video/background-removal/3.0) — Video Background Removal 3.0 by Bria - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
+- [Bria's VRMBG 3.0 Realtime](/model-api-reference/video-generation/bria/video/background-removal/realtime) — Video Background Removal Realtime is Bria's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 
 ### Creatify
 
@@ -156,14 +166,19 @@ Video Generation models use the async SandBase generation protocol declared in e
 - [Kling Video O3 4k](/model-api-reference/video-generation/kwaivgi/kling-video/o3/4k/image-to-video) — Kling Video O3 4k by KwaiVGI - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
 - [Kling Video O3 4k](/model-api-reference/video-generation/kwaivgi/kling-video/o3/4k/text-to-video) — Kling Video O3 4k is KwaiVGI's text-to-video AI model. Turn written scripts and prompts into professional-quality video clips with realistic motion, lighting, and scene composition.
 - [Kling Video V3 4k](/model-api-reference/video-generation/kwaivgi/kling-video/v3/4k/image-to-video) — Kling Video V3 4k by KwaiVGI - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
+- [Kling Video V3 4k](/model-api-reference/video-generation/kwaivgi/kling-video/v3/4k/text-to-video) — Kling Video V3 4k is KwaiVGI's text-to-video AI model. Turn written scripts and prompts into professional-quality video clips with realistic motion, lighting, and scene composition.
 - [Kling Video V3 Pro](/model-api-reference/video-generation/kwaivgi/kling-video/v3/pro/image-to-video) — Kling Video V3 Pro is KwaiVGI's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
 - [Kling Video V3 Standard](/model-api-reference/video-generation/kwaivgi/kling-video/v3/standard/image-to-video) — Kling Video V3 Standard by KwaiVGI - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
-- [Kling Video O3 Pro](/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/image-to-video) — Kling Video O3 Pro is KwaiVGI's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
-- [Kling Video O3 Standard](/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/image-to-video) — Kling Video O3 Standard by KwaiVGI - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
+- [Kling Video V3 Pro](/model-api-reference/video-generation/kwaivgi/kling-video/v3/pro/text-to-video) — Kling Video V3 Pro by KwaiVGI - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
 - …and 48 more models in the sidebar.
 
 ### Lightricks
 
+- [Ltx 2.3 ](/model-api-reference/video-generation/lightricks/ltx-2.3/reframe) — Ltx 2.3 Reframe is Lightricks's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
+- [Ltx 2.3 Quality](/model-api-reference/video-generation/lightricks/ltx-2.3-quality/extend-video) — Ltx 2.3 Quality Extend Video by Lightricks - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
+- [Ltx 2.3 Quality](/model-api-reference/video-generation/lightricks/ltx-2.3-quality/hdr) — Ltx 2.3 Quality Hdr is Lightricks's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
+- [Ltx 2.3 Quality](/model-api-reference/video-generation/lightricks/ltx-2.3-quality/image-to-video) — Ltx 2.3 Quality by Lightricks - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
+- [Ltx 2.3 Quality](/model-api-reference/video-generation/lightricks/ltx-2.3-quality/text-to-video) — Ltx 2.3 Quality is Lightricks's text-to-video AI model. Turn written scripts and prompts into professional-quality video clips with realistic motion, lighting, and scene composition.
 - [LTX-2.3 22B Distilled](/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/reference-video-to-video/lora) — Ltx 2.3 22b Distilled Reference Video To Video is Lightricks's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [LTX 2.3 22B Distilled Reference to Video](/model-api-reference/video-generation/lightricks/ltx-2.3-22b-distilled/reference-to-video) — Ltx 2.3 22b Distilled by Lightricks - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [LTX 2.3 22B](/model-api-reference/video-generation/lightricks/ltx-2.3-22b/reference-video-to-video/lora) — Ltx 2.3 22b Reference Video To Video Lora is Lightricks's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
@@ -171,12 +186,7 @@ Video Generation models use the async SandBase generation protocol declared in e
 - [LTX-2.3 22B](/model-api-reference/video-generation/lightricks/ltx-2.3-22b/extend-video/lora) — Ltx 2.3 22b Extend Video Lora is Lightricks's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [LTX 2.3 22B Extend](/model-api-reference/video-generation/lightricks/ltx-2.3-22b/extend) — Ltx 2.3 22b Extend by Lightricks - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [LTX-2.3 22B Distilled](/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/video-to-video/lora) — Ltx 2.3 22b Distilled Video To Video is Lightricks's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
-- [LTX-2.3 22B Distilled](/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/audio-to-video/lora) — Ltx 2.3 22b Distilled Audio To Video by Lightricks - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [LTX-2.3 22B Distilled](/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/image-to-video/lora) — Ltx 2.3 22b Distilled Lora is Lightricks's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
-- [LTX-2.3 22B Distilled](/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/text-to-video/lora) — Ltx 2.3 22b Distilled Lora by Lightricks - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
-- [LTX 2.3 22B Distilled Video to Video](/model-api-reference/video-generation/lightricks/ltx-2.3-22b-distilled/video-to-video) — Ltx 2.3 22b Distilled Video To Video by Lightricks - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [LTX 2.3 22B Distilled Audio to Video](/model-api-reference/video-generation/lightricks/ltx-2.3-22b-distilled/audio-to-video) — Ltx 2.3 22b Distilled Audio To Video by Lightricks - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- …and 50 more models in the sidebar.
+- …and 55 more models in the sidebar.
 
 ### meituan
 
@@ -195,6 +205,14 @@ Video Generation models use the async SandBase generation protocol declared in e
 - [SAM 3.1 Video](/model-api-reference/video-generation/meta/sam-3-1/video-rle) — Sam 3 1 Video Rle is Meta's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [Sam 3](/model-api-reference/video-generation/meta/sam-3/video) — Sam 3 Video is Meta's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 
+### NVIDIA
+
+- [Cosmos 3 Super Image to Video](/model-api-reference/video-generation/nvidia/cosmos-3-super/image-to-video) — Cosmos 3 Super is NVIDIA's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
+
+### Pixelcut
+
+- [Pixelcut Video Background Removal](/model-api-reference/video-generation/pixelcut/video-background-removal) — Video Background Removal by Pixelcut - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
+
 ### PixVerse
 
 - [PixVerse C1 Reference to Video](/model-api-reference/video-generation/pixverse/c1/reference-to-video) — C1 is PixVerse's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
@@ -211,10 +229,19 @@ Video Generation models use the async SandBase generation protocol declared in e
 - [PixVerse V5.5 Transition](/model-api-reference/video-generation/pixverse/v5.5/transition) — V5.5 Transition is PixVerse's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
 - …and 28 more models in the sidebar.
 
+### Sonilo
+
+- [V1.1 Video to Video Music](/model-api-reference/video-generation/sonilo/1.1/video-to-video-music) — 1.1 Video To Video Music by Sonilo - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
+- [V1.1 Video to Video Sound Effects](/model-api-reference/video-generation/sonilo/1.1/video-to-video-sound-effects) — 1.1 Video To Video Sound Effects by Sonilo - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
+
 ### Stability AI
 
 - [Stable Avatar](/model-api-reference/video-generation/stability-ai/stable-avatar) — Stable Avatar by stability-ai - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [High Quality Stable Video Diffusion](/model-api-reference/video-generation/stability-ai/stable-video) — Stable Video by Stability AI - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
+
+### Sync Labs
+
+- [sync-3 Avatar Image to Video](/model-api-reference/video-generation/sync/sync-lipsync/3.0/image-to-video) — Sync Lipsync 3.0 is Sync Labs's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
 
 ### Tencent
 
@@ -258,4 +285,4 @@ Video Generation models use the async SandBase generation protocol declared in e
 
 ## Capability coverage
 
-`audio-to-video`, `edit-video`, `first-last-frame-to-video`, `image-to-video`, `reference-to-video`, `text-to-video`, `video-to-video`
+`audio-to-video`, `edit-video`, `first-last-frame-to-video`, `image-to-video`, `reference-to-video`, `text-to-video`, `video-regeneration`, `video-to-video`

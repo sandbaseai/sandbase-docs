@@ -13,7 +13,7 @@ seo:
   modelSlug: "voice-changer"
   protocol: "Audio Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-01-14T14:50:03.869Z"
   capabilities: ["audio-to-audio"]
   category: "Audio Generation"
 ---

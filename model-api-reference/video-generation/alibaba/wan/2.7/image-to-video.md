@@ -13,7 +13,7 @@ seo:
   modelSlug: "wan/2.7/image-to-video"
   protocol: "Video Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-03-28T19:58:40.182Z"
   capabilities: ["image-to-video"]
   category: "Video Generation"
 ---

@@ -13,7 +13,7 @@ seo:
   modelSlug: "codestral-2508"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-08-01T20:20:30Z"
   capabilities: ["chat","structured_output","function_calling"]
   category: "LLM Models"
 ---

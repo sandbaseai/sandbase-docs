@@ -5,7 +5,7 @@ description: Browse SandBase Audio Generation APIs by provider and open a model 
 
 # Audio Generation
 
-SandBase currently publishes API reference pages for 46 enabled audio generation models across 10 providers. Choose a provider in the left navigation, then open a model page for its exact API identifier, supported capabilities, and a working request.
+SandBase currently publishes API reference pages for 49 enabled audio generation models across 12 providers. Choose a provider in the left navigation, then open a model page for its exact API identifier, supported capabilities, and a working request.
 
 Audio Generation models use the async SandBase generation protocol declared in each model registry file. Submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out.
 
@@ -17,6 +17,7 @@ Audio Generation models use the async SandBase generation protocol declared in e
 
 ### ElevenLabs
 
+- [Voice Changer](/model-api-reference/audio-generation/elevenlabs/voice-changer) — Voice Changer by ElevenLabs - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Scribe V2](/model-api-reference/audio-generation/elevenlabs/scribe-v2) — Scribe V2 is ElevenLabs's speech recognition model. Transcribe audio content with industry-leading accuracy across multiple languages and accents.
 - [Music](/model-api-reference/audio-generation/elevenlabs/music) — Music is ElevenLabs's AI audio generation model. Produce high-quality music tracks, sound effects, and audio landscapes from natural language prompts.
 - [Text To Dialogue](/model-api-reference/audio-generation/elevenlabs/text-to-dialogue) — Text To Dialogue by ElevenLabs - generate music, sound effects, and audio from text descriptions with AI. Create original compositions, ambient sounds, and audio content for any creative project.
@@ -25,7 +26,6 @@ Audio Generation models use the async SandBase generation protocol declared in e
 - [Turbo V2.5](/model-api-reference/audio-generation/elevenlabs/turbo-v2.5) — Turbo V2.5 by ElevenLabs - convert text to natural-sounding speech with AI. Supports multiple voices, languages, emotions, and speaking styles for content creation and accessibility.
 - [Multilingual V2](/model-api-reference/audio-generation/elevenlabs/multilingual-v2) — Multilingual V2 is ElevenLabs's AI audio generation model. Produce high-quality music tracks, sound effects, and audio landscapes from natural language prompts.
 - [ElevenLabs Audio Isolation](/model-api-reference/audio-generation/elevenlabs/audio-isolation) — Audio Isolation by ElevenLabs - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [Voice Changer](/model-api-reference/audio-generation/elevenlabs/voice-changer) — Voice Changer by ElevenLabs - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 
 ### Google
 
@@ -37,6 +37,7 @@ Audio Generation models use the async SandBase generation protocol declared in e
 
 - [MiniMax Music 2.5](/model-api-reference/audio-generation/minimax/music/2.5) — MiniMax Music 2.5 text-to-music model with lyrics support, instrumental generation, and configurable audio output.
 - [MiniMax Music 2.6](/model-api-reference/audio-generation/minimax/music/2.6) — MiniMax Music 2.6 text-to-music model with enhanced quality, lyrics support, instrumental generation, and configurable audio output.
+- [MiniMax Speech 2.8 HD](/model-api-reference/audio-generation/minimax/speech/2.8/hd) — MiniMax Speech 2.8 HD text-to-speech model with high-definition voice synthesis, enhanced expressiveness, 40+ language support, and voice cloning.
 - [MiniMax Speech 2.8 Turbo](/model-api-reference/audio-generation/minimax/speech/2.8/turbo) — MiniMax Speech 2.8 Turbo text-to-speech model with fast voice synthesis, enhanced expressiveness, 40+ language support, and voice cloning.
 - [Minimax Music](/model-api-reference/audio-generation/minimax/music/v2) — Music V2 by MiniMax - generate music, sound effects, and audio from text descriptions with AI. Create original compositions, ambient sounds, and audio content for any creative project.
 - [MiniMax Speech 2.6 Turbo](/model-api-reference/audio-generation/minimax/speech/2.6/turbo) — MiniMax Speech 2.6 Turbo text-to-speech model with fast voice synthesis, 40+ language support, voice cloning, and expressive emotion control.
@@ -46,7 +47,6 @@ Audio Generation models use the async SandBase generation protocol declared in e
 - [MiniMax Speech 2.5 Turbo](/model-api-reference/audio-generation/minimax/preview/speech-2.5-turbo) — Preview Speech 2.5 Turbo by MiniMax - convert text to natural-sounding speech with AI. Supports multiple voices, languages, emotions, and speaking styles for content creation and accessibility.
 - [MiniMax Voice Design](/model-api-reference/audio-generation/minimax/voice-design) — Voice Design by MiniMax - convert text to natural-sounding speech with AI. Supports multiple voices, languages, emotions, and speaking styles for content creation and accessibility.
 - [MiniMax Voice Cloning](/model-api-reference/audio-generation/minimax/voice-clone) — Voice Clone is MiniMax's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
-- [MiniMax Speech-02 Turbo](/model-api-reference/audio-generation/minimax/speech/02-turbo) — Speech 02 Turbo is MiniMax's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
 - …and 3 more models in the sidebar.
 
 ### Mirelo
@@ -76,10 +76,19 @@ Audio Generation models use the async SandBase generation protocol declared in e
 - [ACE-Step](/model-api-reference/audio-generation/ace/ace-step/prompt-to-audio) — Ace Step Prompt To Audio by ace - generate music, sound effects, and audio from text descriptions with AI. Create original compositions, ambient sounds, and audio content for any creative project.
 - [ACE-Step](/model-api-reference/audio-generation/ace/ace-step) — Ace Step by ace - generate music, sound effects, and audio from text descriptions with AI. Create original compositions, ambient sounds, and audio content for any creative project.
 
+### Bytedance
+
+- [Bytedance Seed Speech Text to Speech](/model-api-reference/audio-generation/bytedance/seed-speech/tts/2.0) — Seed Speech Tts 2.0 is Bytedance's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
+
 ### KwaiVGI
 
 - [Kling Video](/model-api-reference/audio-generation/kwaivgi/kling-video/video-to-audio) — Kling Video Video To Audio by KwaiVGI - advanced AI model for video-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Kling TTS](/model-api-reference/audio-generation/kwaivgi/kling-tts) — Kling Tts is KwaiVGI's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
+
+### Sonilo
+
+- [V1.1 Text to Sound Effects](/model-api-reference/audio-generation/sonilo/1.1/text-to-sound-effects) — 1.1 Text To Sound Effects is Sonilo's AI audio generation model. Produce high-quality music tracks, sound effects, and audio landscapes from natural language prompts.
+- [Sonilo V1.1 Text to Music](/model-api-reference/audio-generation/sonilo/1.1/text-to-music) — 1.1 Text To Music is Sonilo's AI audio generation model. Produce high-quality music tracks, sound effects, and audio landscapes from natural language prompts.
 
 ### xAI
 

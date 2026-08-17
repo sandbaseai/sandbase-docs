@@ -13,7 +13,7 @@ seo:
   modelSlug: "hidream-i1/fast"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2025-04-11T00:43:21.382Z"
   capabilities: ["text-to-image"]
   category: "Image Generation"
 ---

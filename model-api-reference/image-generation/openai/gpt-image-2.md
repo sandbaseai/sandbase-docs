@@ -13,7 +13,7 @@ seo:
   modelSlug: "gpt-image-2"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-04-21T19:15:20.183Z"
   capabilities: ["text-to-image","commercial"]
   category: "Image Generation"
 ---

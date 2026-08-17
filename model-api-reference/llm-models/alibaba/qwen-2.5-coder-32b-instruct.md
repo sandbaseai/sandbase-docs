@@ -13,7 +13,7 @@ seo:
   modelSlug: "qwen-2.5-coder-32b-instruct"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2024-11-11T23:40:00Z"
   capabilities: ["chat"]
   category: "LLM Models"
 ---

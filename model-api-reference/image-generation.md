@@ -5,7 +5,7 @@ description: Browse SandBase Image Generation APIs by provider and open a model 
 
 # Image Generation
 
-SandBase currently publishes API reference pages for 416 enabled image generation models across 40 providers. Choose a provider in the left navigation, then open a model page for its exact API identifier, supported capabilities, and a working request.
+SandBase currently publishes API reference pages for 438 enabled image generation models across 43 providers. Choose a provider in the left navigation, then open a model page for its exact API identifier, supported capabilities, and a working request.
 
 Image Generation models use the async SandBase generation protocol declared in each model registry file. Submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out.
 
@@ -13,6 +13,7 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ### OpenAI
 
+- [GPT Image 2](/model-api-reference/image-generation/openai/gpt-image-2) — GPT Image 2, OpenAI's latest image model, is capable of making fine-grained, detailed edits to images.
 - [GPT Image 2 Editing](/model-api-reference/image-generation/openai/gpt-image-2/edit) — GPT Image 2 Editing supports image editing and multi-image synthesis with high-quality results.
 - [GPT-Image 1.5](/model-api-reference/image-generation/openai/gpt-image-1.5/edit) — Gpt Image 1.5 Edit by OpenAI - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [GPT Image 1.5](/model-api-reference/image-generation/openai/gpt-image-1.5) — Gpt Image 1.5 is OpenAI's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
@@ -20,7 +21,6 @@ Image Generation models use the async SandBase generation protocol declared in e
 - [GPT Image 1 Mini](/model-api-reference/image-generation/openai/gpt-image-1-mini) — Gpt Image 1 Mini by OpenAI - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [GPT Image 1](/model-api-reference/image-generation/openai/gpt-image-1) — Gpt Image 1 is OpenAI's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
 - [GPT Image 1 Edit](/model-api-reference/image-generation/openai/gpt-image-1/edit) — Gpt Image 1 Edit by OpenAI - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
-- [GPT Image 2](/model-api-reference/image-generation/openai/gpt-image-2) — GPT Image 2, OpenAI's latest image model, is capable of making fine-grained, detailed edits to images.
 
 ### Google
 
@@ -30,16 +30,21 @@ Image Generation models use the async SandBase generation protocol declared in e
 - [Nano Banana 2 Image Editing](/model-api-reference/image-generation/google/nano-banana-2/edit) — Nano Banana 2 is Google's new state-of-the-art image generation and editing model
 - [Nano Banana 2](/model-api-reference/image-generation/google/nano-banana-2) — Nano Banana 2 is Google's new state-of-the-art fast image generation and editing model
 - [Gemini 3.1 Flash Image Preview](/model-api-reference/image-generation/google/gemini-3.1-flash-image-preview/edit) — Gemini 3.1 Flash Image Preview Edit is Google's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
+- [Nano Banana Pro Image Editing](/model-api-reference/image-generation/google/nano-banana-pro/edit) — Nano Banana Pro is Google's new state-of-the-art image generation and editing model
+- [Nano Banana Pro](/model-api-reference/image-generation/google/nano-banana-pro) — Nano Banana Pro is Google's new state-of-the-art image generation and editing model
+- [Gemini 2.5 Flash Image Edit](/model-api-reference/image-generation/google/gemini-2.5-flash-image/edit) — Gemini 2.5 Flash Image Edit is Google's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Nano Banana Image Editing](/model-api-reference/image-generation/google/nano-banana/edit) — Nano Banana Pro is Google's new state-of-the-art image generation and editing model
+- [Nano Banana](/model-api-reference/image-generation/google/nano-banana) — Google's famous original image generation and editing model.
 - [Imagen 4](/model-api-reference/image-generation/google/imagen-4/preview/fast) — Imagen 4 Preview Fast is Google's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
-- [Imagen 4 Ultra](/model-api-reference/image-generation/google/imagen-4/preview/ultra) — Imagen 4 Preview Ultra by Google - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [Imagen 4](/model-api-reference/image-generation/google/imagen-4/preview) — Imagen 4 Preview by Google - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [Imagen3](/model-api-reference/image-generation/google/imagen-3) — Imagen 3 by Google - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [Imagen3 Fast](/model-api-reference/image-generation/google/imagen-3/fast) — Imagen 3 Fast is Google's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
 - …and 4 more models in the sidebar.
 
 ### Ideogram
 
+- [Ideogram Object Removal](/model-api-reference/image-generation/ideogram/object-removal) — Object Removal by Ideogram - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [V4.0q [instant]](/model-api-reference/image-generation/ideogram/4.0/instant) — 4.0 Instant is Ideogram's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
+- [V4.0q [fast]](/model-api-reference/image-generation/ideogram/4.0/fast) — 4.0 Fast by Ideogram - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
+- [Ideogram V4.0q Tiling](/model-api-reference/image-generation/ideogram/4.0/tiling) — 4.0 Tiling by Ideogram - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Ideogram V4.0q Image to Image](/model-api-reference/image-generation/ideogram/4.0/image-to-image) — 4.0 by Ideogram - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Ideogram](/model-api-reference/image-generation/ideogram/custom-models) — Custom Models by Ideogram - advanced AI model for training. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 
 ### Bytedance
@@ -49,13 +54,13 @@ Image Generation models use the async SandBase generation protocol declared in e
 - [SeedVR2](/model-api-reference/image-generation/bytedance/seedvr/upscale/image/seamless) — Seedvr Upscale Image is Bytedance's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Bytedance Seed 2.0 Mini](/model-api-reference/image-generation/bytedance/seed/v2/mini) — Seed V2 Mini by Bytedance - advanced AI model for llm. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Seedream v5.0 Lite](/model-api-reference/image-generation/bytedance/seedream/5.0/lite) — Seedream 5.0 Lite — Fast Text-to-Image API The lightweight version of Seedream 5.0, delivering high-quality, low-latency AI image generation from text prompts. Ideal for real-time creative tools, e-commerce visuals, and high-volume AIGC pipelines.
+- [Seedream v4.5](/model-api-reference/image-generation/bytedance/seedream/4.5) — A new-generation image creation model from ByteDance, Seedream 4.5 integrates text-to-image generation and image editing into a single unified architecture, delivering high-fidelity visuals, precise prompt control, and seamless creative workflows for professional AIGC applications.
+- [Seedream v4.5 Image Editing](/model-api-reference/image-generation/bytedance/seedream/4.5/edit) — A new-generation image creation model from ByteDance, Seedream 4.5 integrates text-to-image generation and image editing into a single unified architecture, delivering high-fidelity visuals, precise prompt control, and seamless creative workflows for professional AIGC applications.
 - [SeedVR2](/model-api-reference/image-generation/bytedance/seedvr/upscale/video) — Seedvr Upscale Video by Bytedance - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [SeedVR2](/model-api-reference/image-generation/bytedance/seedvr/upscale/image) — Seedvr Upscale Image by Bytedance - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Bytedance Seedream v4 Edit](/model-api-reference/image-generation/bytedance/seedream/4.0/edit) — Seedream 4.0 Edit is Bytedance's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Bytedance Seedream v4](/model-api-reference/image-generation/bytedance/seedream/4.0) — Seedream 4.0 by Bytedance - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Dreamina 3.1](/model-api-reference/image-generation/bytedance/dreamina/3.1) — Dreamina 3.1 by Bytedance - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [Seedream v4.5 Image Editing](/model-api-reference/image-generation/bytedance/seedream/4.5/edit) — A new-generation image creation model from ByteDance, Seedream 4.5 integrates text-to-image generation and image editing into a single unified architecture, delivering high-fidelity visuals, precise prompt control, and seamless creative workflows for professional AIGC applications.
-- [Seedream v5.0 Lite Editing](/model-api-reference/image-generation/bytedance/seedream/5.0/lite/edit) — Seedream 5.0 Lite — Fast Text-to-Image API The lightweight version of Seedream 5.0, delivering high-quality, low-latency AI image generation from text prompts. Ideal for real-time creative tools, e-commerce visuals, and high-volume AIGC pipelines.
 - …and 1 more models in the sidebar.
 
 ### Recraft
@@ -76,6 +81,10 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ### Luma
 
+- [Luma Uni-1 Edit](/model-api-reference/image-generation/luma/agent/uni-1/1.0/edit) — Agent Uni 1 1.0 by Luma - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Luma Uni-1 Text to Image Max](/model-api-reference/image-generation/luma/agent/uni-1/1.0/max) — Agent Uni 1 1.0 is Luma's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
+- [Luma Uni-1 Edit Max](/model-api-reference/image-generation/luma/agent/uni-1/1.0/max/edit) — Agent Uni 1 1.0 by Luma - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Luma Uni-1 Text to Image](/model-api-reference/image-generation/luma/agent/uni-1/1.0/text-to-image) — Agent Uni 1 1.0 is Luma's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
 - [Luma Photon Flash Edit](/model-api-reference/image-generation/luma/photon-flash-1/edit) — Photon Flash 1 Edit is Luma's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Luma Photon Edit](/model-api-reference/image-generation/luma/photon-1/edit) — Photon 1 Edit is Luma's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Luma Photon Flash Reframe](/model-api-reference/image-generation/luma/photon-flash-1/reframe) — Photon Flash 1 Reframe by Luma - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
@@ -91,17 +100,17 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 - [Qwen Image 3](/model-api-reference/image-generation/alibaba/qwen-image-3) — Qwen Image 3 by Alibaba - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Qwen Image 3 Edit](/model-api-reference/image-generation/alibaba/qwen-image-3/edit) — Alibaba Qwen Image 3 image editing model with support for up to three reference images.
+- [Qwen Image 3 Text to Image](/model-api-reference/image-generation/alibaba/qwen-image-3/text-to-image) — Qwen Image 3 by Alibaba - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
+- [Wan 2.7 Pro Edit](/model-api-reference/image-generation/alibaba/wan/2.7/pro/edit) — Alibaba Wan 2.7 Pro image editing model with multi-reference support and configurable output format.
 - [Wan 2.7 Edit](/model-api-reference/image-generation/alibaba/wan/2.7/edit) — Alibaba Wan 2.7 image editing model with multi-reference support and configurable output format.
 - [Wan 2.7](/model-api-reference/image-generation/alibaba/wan/2.7) — Alibaba Wan 2.7 text-to-image model with high-quality generation and configurable output format.
+- [Wan 2.7 Pro](/model-api-reference/image-generation/alibaba/wan/2.7/pro) — Alibaba Wan 2.7 Pro text-to-image model with enhanced quality and configurable output format.
 - [Z-Image Turbo Seamless Tiling](/model-api-reference/image-generation/alibaba/z-image/turbo/tiling/lora) — Z Image Turbo Tiling is Alibaba's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
 - [Z-Image Turbo Seamless Tiling](/model-api-reference/image-generation/alibaba/z-image/turbo/tiling) — Z Image Turbo Tiling by Alibaba - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Qwen Image 2](/model-api-reference/image-generation/alibaba/qwen-image-2/pro/text-to-image) — Qwen Image 2 Pro by Alibaba - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [Qwen Image 2](/model-api-reference/image-generation/alibaba/qwen-image-2/text-to-image) — Qwen Image 2 by Alibaba - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [Qwen Image Max](/model-api-reference/image-generation/alibaba/qwen-image/max) — Qwen Image Max by Alibaba - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [Qwen Image Max Edit](/model-api-reference/image-generation/alibaba/qwen-image/max/edit) — Qwen Image Max Edit is Alibaba's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
-- [Z Image Base (LoRA)](/model-api-reference/image-generation/alibaba/z-image/base/lora) — Z Image Base Lora is Alibaba's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
-- [Z Image Base](/model-api-reference/image-generation/alibaba/z-image/base) — Z Image Base by Alibaba - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- …and 56 more models in the sidebar.
+- [Qwen Image 2 Pro](/model-api-reference/image-generation/alibaba/qwen-image-2/pro) — Alibaba Qwen Image 2 Pro text-to-image model with enhanced quality and configurable output format.
+- [Qwen Image 2](/model-api-reference/image-generation/alibaba/qwen-image-2) — Alibaba Qwen Image 2 text-to-image model with high-quality generation and configurable output format.
+- …and 57 more models in the sidebar.
 
 ### Baidu
 
@@ -127,6 +136,7 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ### Bria
 
+- [Extract Object](/model-api-reference/image-generation/bria/extract-object) — Extract Object by Bria - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Bria Embed Product](/model-api-reference/image-generation/bria/embed-product) — Embed Product is Bria's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Bria Upscale Creative](/model-api-reference/image-generation/bria/upscale/creative) — Upscale Creative by Bria - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Bria Replace Background](/model-api-reference/image-generation/bria/replace-background) — Replace Background by Bria - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
@@ -138,8 +148,7 @@ Image Generation models use the async SandBase generation protocol declared in e
 - [BRIA RMBG 2.0](/model-api-reference/image-generation/bria/background/remove) — Background Remove is Bria's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Bria Expand Image](/model-api-reference/image-generation/bria/expand) — Expand by Bria - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Bria Eraser](/model-api-reference/image-generation/bria/eraser) — Eraser by Bria - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
-- [Bria Product Shot](/model-api-reference/image-generation/bria/product-shot) — Product Shot by Bria - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
-- …and 5 more models in the sidebar.
+- …and 6 more models in the sidebar.
 
 ### ClarityAI
 
@@ -174,18 +183,18 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ### Ideogram
 
+- [Ideogram Remove Background](/model-api-reference/image-generation/ideogram-ai/ideogram/remove-background) — Ideogram Remove Background by ideogram-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Ideogram](/model-api-reference/image-generation/ideogram-ai/ideogram/custom-models/generate) — Ideogram Custom Models Generate is ideogram-ai's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
 - [Ideogram V3 Layerize Text](/model-api-reference/image-generation/ideogram-ai/ideogram-v3/layerize-text) — Ideogram V3 Layerize Text is ideogram-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Ideogram V3 Transparent](/model-api-reference/image-generation/ideogram-ai/ideogram-v3/transparent) — Ideogram V3 Transparent is ideogram-ai's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
+- [Ideogram V3 Character Edit](/model-api-reference/image-generation/ideogram-ai/ideogram-v3/character/edit) — Ideogram V3 Character Edit by ideogram-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Ideogram V3 Character](/model-api-reference/image-generation/ideogram-ai/ideogram-v3/character) — Ideogram V3 Character is ideogram-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Ideogram V3 Character Remix](/model-api-reference/image-generation/ideogram-ai/ideogram-v3/character/remix) — Ideogram V3 Character Remix is ideogram-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Ideogram V3 Reframe](/model-api-reference/image-generation/ideogram-ai/ideogram-v3/reframe) — Ideogram V3 Reframe is ideogram-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Ideogram 3.0](/model-api-reference/image-generation/ideogram-ai/ideogram-v3) — 3.0 is Ideogram's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
 - [Ideogram V3 Replace Background](/model-api-reference/image-generation/ideogram-ai/ideogram-v3/replace-background) — Ideogram V3 Replace Background by ideogram-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Ideogram V3 Remix](/model-api-reference/image-generation/ideogram-ai/ideogram-v3/remix) — Ideogram V3 Remix is ideogram-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Ideogram V3 Edit](/model-api-reference/image-generation/ideogram-ai/ideogram-v3/edit) — Ideogram V3 Edit by ideogram-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
-- [Ideogram V2A Turbo](/model-api-reference/image-generation/ideogram-ai/ideogram-v2a/turbo) — Ideogram V2a Turbo by ideogram-ai - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [Ideogram V2A Remix](/model-api-reference/image-generation/ideogram-ai/ideogram-v2a/remix) — Ideogram V2a Remix by ideogram-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
-- [Ideogram V2A Turbo Remix](/model-api-reference/image-generation/ideogram-ai/ideogram-v2a/turbo/remix) — Ideogram V2a Turbo Remix by ideogram-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - …and 11 more models in the sidebar.
 
 ### ImagineArt
@@ -198,19 +207,20 @@ Image Generation models use the async SandBase generation protocol declared in e
 - [Kling Video V3 Standard](/model-api-reference/image-generation/kwaivgi/kling-video/v3/standard/motion-control) — Kling Video V3 Standard by KwaiVGI - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [Kling Video V3 Pro](/model-api-reference/image-generation/kwaivgi/kling-video/v3/pro/motion-control) — Kling Video V3 Pro is KwaiVGI's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [Kling Video O3 Pro](/model-api-reference/image-generation/kwaivgi/kling-video/o3/pro/edit) — Kling Video O3 Pro is KwaiVGI's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
+- [Kling Video O3 Pro](/model-api-reference/image-generation/kwaivgi/kling-video/o3/pro/video-to-video) — Kling Video O3 Pro by KwaiVGI - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [Kling Video O3 Standard](/model-api-reference/image-generation/kwaivgi/kling-video/o3/standard/edit) — Kling Video O3 Standard by KwaiVGI - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [Kling Video O3 Standard](/model-api-reference/image-generation/kwaivgi/kling-video/o3/standard/video-to-video) — Kling Video O3 Standard is KwaiVGI's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [Kling Image V3](/model-api-reference/image-generation/kwaivgi/kling-image/v3) — Kling Image V3 by KwaiVGI - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
+- [Kling Image V3 Edit](/model-api-reference/image-generation/kwaivgi/kling-image/v3/edit) — Kling Image V3 Edit is KwaiVGI's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Kling Image](/model-api-reference/image-generation/kwaivgi/kling-image/o3/edit) — Kling Image O3 Edit is KwaiVGI's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Kling Image](/model-api-reference/image-generation/kwaivgi/kling-image/o3) — Kling Image O3 by KwaiVGI - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Kling Video V2.6 Standard](/model-api-reference/image-generation/kwaivgi/kling-video/v2.6/standard/motion-control) — Kling Video V2.6 Standard by KwaiVGI - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [Kling Video V2.6 Pro](/model-api-reference/image-generation/kwaivgi/kling-video/v2.6/pro/motion-control) — Kling Video V2.6 Pro is KwaiVGI's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
-- [Kling Video Create Voice](/model-api-reference/image-generation/kwaivgi/kling-video/create-voice) — Kling Video Create Voice by KwaiVGI - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [Kling Video O1 Standard](/model-api-reference/image-generation/kwaivgi/kling-video/o1/standard/edit) — Kling Video O1 Standard by KwaiVGI - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - …and 9 more models in the sidebar.
 
 ### Lightricks
 
+- [Ltx 2.3 Quality](/model-api-reference/image-generation/lightricks/ltx-2.3-quality/audio-to-video) — Ltx 2.3 Quality Audio To Video by Lightricks - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [LTX-2.3 22B Video to Video Trainer](/model-api-reference/image-generation/lightricks/ltx23-v2v-trainer) — Ltx23 V2v Trainer by Lightricks - advanced AI model for training. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [LTX-2.3 22B Video Trainer](/model-api-reference/image-generation/lightricks/ltx23-video-trainer) — Ltx23 Video Trainer by Lightricks - advanced AI model for training. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [LTX-2 19B Distilled](/model-api-reference/image-generation/lightricks/ltx-2-19b/distilled/audio-to-video) — Ltx 2 19b Distilled Audio To Video by Lightricks - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
@@ -227,6 +237,7 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ### Meshy
 
+- [Meshy Rigging Multi Animation](/model-api-reference/image-generation/meshy/rigging/multi-animation) — Rigging Multi Animation by Meshy - advanced AI model for 3d-to-3d. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Meshy Rigging](/model-api-reference/image-generation/meshy/rigging) — Rigging by Meshy - advanced AI model for 3d-to-3d. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Meshy 6 - Multi Image To 3D](/model-api-reference/image-generation/meshy/meshy-v6/multi-image-to-3d) — Meshy V6 Multi Image To 3d by Meshy - convert 2D images into 3D models with AI. Generate textured 3D assets from single photos for games, AR/VR, e-commerce, and digital content creation.
 - [Meshy 6](/model-api-reference/image-generation/meshy/meshy-v6) — Meshy V6 by Meshy - convert 2D images into 3D models with AI. Generate textured 3D assets from single photos for games, AR/VR, e-commerce, and digital content creation.
@@ -251,6 +262,11 @@ Image Generation models use the async SandBase generation protocol declared in e
 - [SAM 3 Image](/model-api-reference/image-generation/meta/sam-3/image) — Sam 3 Image is Meta's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Demucs](/model-api-reference/image-generation/meta/demucs) — Demucs by Meta - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 
+### Microsoft
+
+- [MAI Image 2.5 Pro (Edit)](/model-api-reference/image-generation/microsoft/mai-image-2.5-pro/edit) — Mai Image 2.5 Pro Edit by Microsoft - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Mai Image 2.5](/model-api-reference/image-generation/microsoft/mai-image-2.5/edit) — Mai Image 2.5 Edit by Microsoft - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+
 ### MiniMax
 
 - [Minimax Image Subject Reference](/model-api-reference/image-generation/minimax/image-01/subject-reference) — Image 01 Subject Reference by MiniMax - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
@@ -264,6 +280,7 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ### NVIDIA
 
+- [Cosmos 3 Super](/model-api-reference/image-generation/nvidia/cosmos-3-super/text-to-image) — Cosmos 3 Super by NVIDIA - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Nemotron 3 Nano Omni](/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/vision) — Nemotron 3 Nano Omni Vision by NVIDIA - advanced AI model for image-to-text. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Nemotron 3 Nano Omni](/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/video) — Nemotron 3 Nano Omni Video by NVIDIA - advanced AI model for video-to-text. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Nemotron 3 Nano Omni](/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/audio) — Nemotron 3 Nano Omni Audio by NVIDIA - advanced AI model for audio-to-text. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
@@ -281,6 +298,12 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 - [PixVerse V6 Extend](/model-api-reference/image-generation/pixverse/v6/extend) — V6 Extend is PixVerse's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 
+### Reve
+
+- [Reve 2.1](/model-api-reference/image-generation/reve/2.1/remix) — 2.1 Remix is Reve's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
+- [Reve 2.1](/model-api-reference/image-generation/reve/2.1/edit) — 2.1 Edit by Reve - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Reve 2.1](/model-api-reference/image-generation/reve/2.1/text-to-image) — 2.1 is Reve's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
+
 ### sandbase-ai
 
 - [Phota Text to Image](/model-api-reference/image-generation/sandbase-ai/phota) — Phota is sandbase-ai's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
@@ -289,6 +312,11 @@ Image Generation models use the async SandBase generation protocol declared in e
 - [try-on](/model-api-reference/image-generation/sandbase-ai/cat-vton) — Cat Vton by sandbase-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Sana](/model-api-reference/image-generation/sandbase-ai/sana) — Sana by sandbase-ai - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Creative Upscaler](/model-api-reference/image-generation/sandbase-ai/creative-upscaler) — Creative Upscaler is sandbase-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
+
+### Sonilo
+
+- [V1.1 Video to Sound Effects](/model-api-reference/image-generation/sonilo/1.1/video-to-sound-effects) — 1.1 Video To Sound Effects by Sonilo - advanced AI model for video-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
+- [V1.1](/model-api-reference/image-generation/sonilo/1.1/video-to-music) — 1.1 Video To Music by Sonilo - advanced AI model for video-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 
 ### Stability AI
 
@@ -343,6 +371,7 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ### Tripo3D
 
+- [Triposplat](/model-api-reference/image-generation/tripo3d/triposplat) — Triposplat by Tripo3D - convert 2D images into 3D models with AI. Generate textured 3D assets from single photos for games, AR/VR, e-commerce, and digital content creation.
 - [Tripo H3.1 Multiview to 3D](/model-api-reference/image-generation/tripo3d/tripo-h3.1/multiview-to-3d) — Tripo H3.1 Multiview To 3d by Tripo3D - convert 2D images into 3D models with AI. Generate textured 3D assets from single photos for games, AR/VR, e-commerce, and digital content creation.
 - [Tripo H3.1 Text to 3D](/model-api-reference/image-generation/tripo3d/tripo-h3.1/text-to-3d) — Tripo H3.1 is Tripo3D's text-to-3D AI model. Turn written descriptions into textured 3D objects with realistic geometry and materials.
 - [Tripo H3.1 Image to 3D](/model-api-reference/image-generation/tripo3d/tripo-h3.1/image-to-3d) — Tripo H3.1 by Tripo3D - convert 2D images into 3D models with AI. Generate textured 3D assets from single photos for games, AR/VR, e-commerce, and digital content creation.
@@ -374,4 +403,4 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ## Capability coverage
 
-`3d-to-3d`, `audio-to-audio`, `audio-to-text`, `audio-to-video`, `commercial`, `image-editing`, `image-to-3d`, `image-to-image`, `image-to-text`, `llm`, `speech-to-text`, `text-to-3d`, `text-to-image`, `training`, `video-to-text`, `video-to-video`, `vision`
+`3d-to-3d`, `audio-to-audio`, `audio-to-text`, `audio-to-video`, `commercial`, `image-editing`, `image-to-3d`, `image-to-image`, `image-to-text`, `llm`, `mcp_exposable`, `speech-to-text`, `text-to-3d`, `text-to-image`, `training`, `video-to-audio`, `video-to-text`, `video-to-video`, `vision`

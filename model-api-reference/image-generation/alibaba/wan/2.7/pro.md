@@ -13,7 +13,7 @@ seo:
   modelSlug: "wan/2.7/pro"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-04-01T12:18:29.243Z"
   capabilities: ["text-to-image"]
   category: "Image Generation"
 ---

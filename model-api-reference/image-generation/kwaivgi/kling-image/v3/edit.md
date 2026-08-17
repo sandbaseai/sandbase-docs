@@ -13,7 +13,7 @@ seo:
   modelSlug: "kling-image/v3/edit"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-02-03T18:30:19.013Z"
   capabilities: ["image-to-image"]
   category: "Image Generation"
 ---

@@ -13,7 +13,7 @@ seo:
   modelSlug: "flux-1/dev/edit"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2024-07-11T00:00:00Z"
   capabilities: ["image-to-image"]
   category: "Image Generation"
 ---

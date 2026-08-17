@@ -13,7 +13,7 @@ seo:
   modelSlug: "seedream/4.5/edit"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2025-12-03T10:44:48.263Z"
   capabilities: ["image-to-image","commercial"]
   category: "Image Generation"
 ---

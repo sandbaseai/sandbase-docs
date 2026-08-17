@@ -13,7 +13,7 @@ seo:
   modelSlug: "ideogram-v2a"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2025-02-27T00:00:00Z"
   capabilities: ["text-to-image"]
   category: "Image Generation"
 ---

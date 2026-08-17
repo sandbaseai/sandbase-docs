@@ -13,7 +13,7 @@ seo:
   modelSlug: "nano-banana-pro"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2025-11-20T14:24:45.001Z"
   capabilities: ["text-to-image","commercial"]
   category: "Image Generation"
 ---

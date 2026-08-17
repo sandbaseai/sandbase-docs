@@ -13,7 +13,7 @@ seo:
   modelSlug: "qwen3-coder-plus"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-09-23T21:25:07Z"
   capabilities: ["chat","structured_output","function_calling"]
   category: "LLM Models"
 ---

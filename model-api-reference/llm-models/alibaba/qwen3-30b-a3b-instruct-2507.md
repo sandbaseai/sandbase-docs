@@ -13,7 +13,7 @@ seo:
   modelSlug: "qwen3-30b-a3b-instruct-2507"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-07-29T16:36:05Z"
   capabilities: ["chat","structured_output","function_calling"]
   category: "LLM Models"
 ---

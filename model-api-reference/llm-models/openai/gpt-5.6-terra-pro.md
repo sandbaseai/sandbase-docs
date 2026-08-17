@@ -13,7 +13,7 @@ seo:
   modelSlug: "gpt-5.6-terra-pro"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2026-07-09T09:54:21Z"
   capabilities: ["chat","vision","reasoning","structured_output","function_calling"]
   category: "LLM Models"
 ---

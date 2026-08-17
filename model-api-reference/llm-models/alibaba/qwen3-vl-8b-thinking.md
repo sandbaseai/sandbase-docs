@@ -13,7 +13,7 @@ seo:
   modelSlug: "qwen3-vl-8b-thinking"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-10-14T17:42:26Z"
   capabilities: ["chat","vision","reasoning","structured_output","function_calling"]
   category: "LLM Models"
 ---

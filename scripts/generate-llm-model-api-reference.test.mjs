@@ -128,7 +128,7 @@ describe('Platform API reference generator', () => {
     const landing = fs.readFileSync(platformOverview, 'utf8')
     assert.match(landing, new RegExp(platformGeneratedMarker.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
     assert.match(landing, /^title: APIs$/m)
-    assert.match(landing, /^description: Browse 1082 SandBase API operations across 30 platforms\.$/m)
+    assert.match(landing, /^description: Browse 1091 SandBase API operations across 31 platforms\.$/m)
     assert.match(landing, /^aside: false$/m)
     assert.match(landing, /^outline: false$/m)
     assert.match(landing, /<PlatformApiLanding \/>/)
@@ -219,7 +219,7 @@ describe('Platform API reference generator', () => {
       }
       totalOperations += groupedOperations.length
     }
-    assert.equal(totalOperations, 1082)
+    assert.equal(totalOperations, 1091)
 
     const config = fs.readFileSync(configFile, 'utf8')
     const component = fs.readFileSync(platformSidebarComponent, 'utf8')
@@ -456,12 +456,12 @@ describe('Platform API reference generator', () => {
     assert.match(component, /note\.description/)
   })
 
-  test('constructs schema-valid request examples for all 1082 enabled API models', () => {
+  test('constructs schema-valid request examples for all 1091 enabled API models', () => {
     const models = walk(apiRegistryRoot, 'model.json')
       .map((file) => ({ ...JSON.parse(fs.readFileSync(file, 'utf8')), __category: 'api', __file: file }))
       .filter((model) => model.type === 'api' && model.enabled !== false)
 
-    assert.equal(models.length, 1082)
+    assert.equal(models.length, 1091)
     for (const model of models) {
       assert.doesNotThrow(() => platformRequestBody(model), model.name)
     }
@@ -512,7 +512,7 @@ describe('Platform API reference generator', () => {
     for (const content of pages) assert.doesNotMatch(content, /provider_name|upstream_model|adapter_config|\/v1\/runs\/\{task_id\}/)
   })
 
-  test('uses the B-098 public response matrix for all 1080 sync and 2 async operations', () => {
+  test('uses the B-098 public response matrix for all 1089 sync and 2 async operations', () => {
     const models = walk(apiRegistryRoot, 'model.json')
       .map((file) => JSON.parse(fs.readFileSync(file, 'utf8')))
       .filter((model) => model.type === 'api' && model.enabled !== false)
@@ -547,7 +547,7 @@ describe('Platform API reference generator', () => {
       }
     }
 
-    assert.deepEqual(counts, { sync: 1080, async: 2 })
+    assert.deepEqual(counts, { sync: 1089, async: 2 })
     const cloudsway = models.find((model) => model.name === 'cloudsway/search')
     assert.ok(cloudsway)
     assert.ok(Array.isArray(publicPlatformResponseBody(cloudsway, 'completed').outputs[0].data.results))

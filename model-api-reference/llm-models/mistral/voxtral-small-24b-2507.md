@@ -13,7 +13,7 @@ seo:
   modelSlug: "voxtral-small-24b-2507"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-10-30T14:39:04Z"
   capabilities: ["chat","audio_input","structured_output","function_calling"]
   category: "LLM Models"
 ---

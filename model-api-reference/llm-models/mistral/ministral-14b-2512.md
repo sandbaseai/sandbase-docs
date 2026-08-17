@@ -13,7 +13,7 @@ seo:
   modelSlug: "ministral-14b-2512"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-12-02T13:22:15Z"
   capabilities: ["chat","vision","structured_output","function_calling"]
   category: "LLM Models"
 ---

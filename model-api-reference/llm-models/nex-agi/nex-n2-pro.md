@@ -13,7 +13,7 @@ seo:
   modelSlug: "nex-n2-pro"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2026-06-08T16:45:40Z"
   capabilities: ["chat","vision","reasoning"]
   category: "LLM Models"
 ---

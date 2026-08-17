@@ -13,7 +13,7 @@ seo:
   modelSlug: "mistral-medium-3-5"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2026-04-30T17:33:59Z"
   capabilities: ["chat","vision","reasoning","structured_output","function_calling"]
   category: "LLM Models"
 ---

@@ -13,7 +13,7 @@ seo:
   modelSlug: "gemini-2.5-flash-image/edit"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2025-08-26T01:22:27.733Z"
   capabilities: ["image-to-image"]
   category: "Image Generation"
 ---

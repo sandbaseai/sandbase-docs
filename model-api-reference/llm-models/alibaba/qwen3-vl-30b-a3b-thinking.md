@@ -13,7 +13,7 @@ seo:
   modelSlug: "qwen3-vl-30b-a3b-thinking"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-10-06T23:47:59Z"
   capabilities: ["chat","vision","reasoning","structured_output","function_calling"]
   category: "LLM Models"
 ---

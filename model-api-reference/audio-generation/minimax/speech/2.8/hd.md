@@ -13,7 +13,7 @@ seo:
   modelSlug: "speech/2.8/hd"
   protocol: "Audio Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-02-04T00:13:29.621Z"
   capabilities: ["text-to-speech"]
   category: "Audio Generation"
 ---

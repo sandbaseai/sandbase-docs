@@ -13,7 +13,7 @@ seo:
   modelSlug: "flux-2/klein/4b/base/edit"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-01-15T20:55:54.156Z"
   capabilities: ["image-to-image"]
   category: "Image Generation"
 ---

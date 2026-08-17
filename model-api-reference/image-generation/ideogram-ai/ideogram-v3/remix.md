@@ -13,7 +13,7 @@ seo:
   modelSlug: "ideogram-v3/remix"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2025-05-01T16:01:06.063Z"
   capabilities: ["image-to-image"]
   category: "Image Generation"
 ---

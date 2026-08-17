@@ -13,7 +13,7 @@ seo:
   modelSlug: "qwen-image-2/pro"
   protocol: "Image Generation Reference"
   endpoint: "/v1/run"
-  publishedAt: ""
+  publishedAt: "2026-03-03T15:33:50.635Z"
   capabilities: ["text-to-image"]
   category: "Image Generation"
 ---
