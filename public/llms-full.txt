@@ -1,6 +1,6 @@
 # SandBase - Complete API Reference for AI Agents
 
-> One API key, 400+ models, agent workflows. Base URL: https://api.sandbase.ai/v1
+> One account, 2,000+ AI models and APIs, agent workflows, and an open-source CLI/MCP bridge. Base URL: https://api.sandbase.ai/v1
 
 ## Authentication
 
@@ -13,6 +13,46 @@ All requests require: Authorization: Bearer sk-sb-YOUR_KEY
 - Session: An agent execution via POST /v1/sessions. Stateful multi-turn workflow.
 
 The x-task-id response header on every request gives the task ID for cost lookup.
+
+---
+
+## SandBase CLI and MCP Bridge
+
+Source: https://github.com/sandbaseai/cli
+
+Use the open-source CLI to connect supported coding agents to SandBase without manually editing each client's MCP configuration.
+
+Read-only compatibility preview:
+
+```sh
+npx -y @sandbaseai/cli catalog --json
+```
+
+Connect all detected supported clients:
+
+```sh
+npx -y @sandbaseai/cli connect
+```
+
+Connect or diagnose a specific client:
+
+```sh
+npx -y @sandbaseai/cli connect --client codex
+npx -y @sandbaseai/cli doctor --client codex
+```
+
+The local stdio bridge exposes:
+
+- `sandbase_discover`: search the 2,000+ model and API catalog;
+- `sandbase_inspect`: retrieve input schema, pricing, and a request template;
+- `sandbase_run`: execute a selected model or API;
+- `sandbase_run_get`: poll asynchronous work such as video generation;
+- `sandbase_runs`: list recent calls and costs;
+- `sandbase_account`: inspect account balance.
+
+Recommended workflow: `sandbase_discover -> sandbase_inspect -> sandbase_run`.
+
+CLI guide: https://www.sandbase.ai/docs/setup/cli
 
 ---
 
@@ -453,6 +493,8 @@ Not retryable: 400, 401, 402, 403
 ## Links
 
 - Docs: https://www.sandbase.ai/docs/
+- CLI setup guide: https://www.sandbase.ai/docs/setup/cli
+- CLI source: https://github.com/sandbaseai/cli
 - Agent-Friendly overview: https://www.sandbase.ai/docs/for-agents/
 - OpenAPI spec: https://www.sandbase.ai/docs/openapi.yaml
 - Console: https://www.sandbase.ai/console

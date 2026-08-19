@@ -1,6 +1,6 @@
 # SandBase
 
-> AI agent infrastructure platform. One API key to call 400+ models (LLM, image, video, audio, embedding) and agent workflows.
+> AI agent infrastructure platform. One account to access 2,000+ AI models and APIs for LLM, image, video, audio, search, data, sandboxes, and agent workflows.
 
 ## API Base URL
 
@@ -9,6 +9,24 @@ https://api.sandbase.ai/v1
 ## Authentication
 
 Bearer token: `Authorization: Bearer sk-sb-YOUR_KEY`
+
+## SandBase CLI and MCP Bridge
+
+Open-source repository: https://github.com/sandbaseai/cli
+
+Preview supported clients without signing in or changing configuration:
+
+`npx -y @sandbaseai/cli catalog --json`
+
+Connect detected coding agents such as Codex, Claude Code, Cursor, Gemini CLI, Windsurf, OpenCode, Kiro, Warp, Amp, and Hermes:
+
+`npx -y @sandbaseai/cli connect`
+
+Diagnose an installation:
+
+`npx -y @sandbaseai/cli doctor`
+
+The installed MCP bridge exposes six tools: `sandbase_discover`, `sandbase_inspect`, `sandbase_run`, `sandbase_run_get`, `sandbase_runs`, and `sandbase_account`. The standard agent workflow is `discover -> inspect -> run`.
 
 ## Core Endpoints
 
@@ -70,6 +88,8 @@ Use GET /v1/models for the full real-time list.
 
 ## Docs
 
+- CLI setup guide: https://www.sandbase.ai/docs/setup/cli
+- CLI source: https://github.com/sandbaseai/cli
 - Full API reference: https://www.sandbase.ai/docs/for-agents/full
 - Models & Pricing: https://www.sandbase.ai/docs/for-agents/models
 - Error Codes: https://www.sandbase.ai/docs/for-agents/errors
