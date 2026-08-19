@@ -30,6 +30,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Quickstart', link: '/getting-started/quickstart' },
       { text: 'First API call', link: '/getting-started/first-call' },
       { text: 'Setup for AI tools', link: '/setup/' },
+      { text: 'SandBase CLI', link: '/setup/cli' },
     ],
   },
   {

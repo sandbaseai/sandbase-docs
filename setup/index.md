@@ -7,6 +7,12 @@ description: Connect an AI client to your SandBase workspace toolkit.
 
 Setup connects Codex, Claude Code, Cursor, and other supported clients to SandBase's remote MCP gateway. Your workspace toolkit determines which Models, APIs, and Services those clients can discover.
 
+For a terminal-first setup, follow the [SandBase CLI guide](./cli) or run:
+
+```sh
+npx -y @sandbaseai/cli connect
+```
+
 ## Connect a client
 
 1. Open **Setup** in the Console and choose a supported client.
@@ -33,6 +39,7 @@ SandBase may provide curated platform groups. A workspace can enable or disable 
 
 ## Next steps
 
+- [SandBase CLI guide](/setup/cli)
 - [Installed Tools](/setup/installed)
 - [Platform groups](/setup/groups)
 - [Store](/store/)
