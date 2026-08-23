@@ -134,6 +134,14 @@ npm run build
 npm run dev
 ```
 
+`npm run test:generator` and the model/API reference generator read the
+versioned catalog from the sibling `sandbase-registry` checkout at
+`../sandbase-registry/data/`. The public Docs repository does not vendor that
+catalog. If you only need to preview already-generated pages, `npm run build`
+does not require the sibling checkout; if you are changing generated references,
+prepare the matching registry checkout first and run the generator before
+committing its outputs.
+
 The site is built with [VitePress](https://vitepress.dev). Production deployment is owned by this repository; see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Contributing
