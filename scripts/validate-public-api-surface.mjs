@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 const openapi = readFileSync(new URL('../public/openapi.yaml', import.meta.url), 'utf8')
 const config = readFileSync(new URL('../.vitepress/config.ts', import.meta.url), 'utf8')
 const sidebar = readFileSync(new URL('../.vitepress/sidebar.ts', import.meta.url), 'utf8')
+const generatedReferenceSpecs = readFileSync(new URL('../.vitepress/theme/generatedApiReferenceSpecs.ts', import.meta.url), 'utf8')
 const root = fileURLToPath(new URL('..', import.meta.url))
 
 const forbiddenOpenApiPatterns = [
@@ -82,6 +83,15 @@ assert.match(agentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Agent metad
 assert.doesNotMatch(agentSchema, /^        (?:runtime_profile|multiagent):/m, 'Agent responses must not advertise fields omitted by the serializer')
 const sessionSchema = openapi.match(/^    Session:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(sessionSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Session metadata must allow the serializer\'s null output')
+assert.match(sessionSchema, /required: \[[^\]]*title[^\]]*metadata[^\]]*archived_at[^\]]*updated_at[^\]]*\]/, 'Session responses must require fields always emitted by the serializer')
+assert.match(sessionSchema, /source:\n\s+type: string\n\s+enum: \[direct, endpoint, deployment, store_trial\]/, 'Session source must include Service store trials')
+const sessionEventSchema = openapi.match(/^    SessionEvent:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(sessionEventSchema, /required: \[id, type, processed_at, created_at\]/, 'Session Events must require the serializer\'s created_at field')
+const sessionEventStream = openapi.match(/^  \/v1\/sessions\/\{id\}\/events\/stream:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(sessionEventStream, /does not synthesize preview deltas/, 'Session event_delta must not promise unimplemented preview deltas')
+const sessionStreamReference = generatedReferenceSpecs.match(/"sessions\/stream": \{[\s\S]*?(?=\n  \},\n  "skills\/create")/)?.[0] ?? ''
+assert.match(sessionStreamReference, /id: sevt_01/, 'Session SSE examples must include the emitted id field')
+assert.match(sessionStreamReference, /created_at/, 'Session SSE examples must include the emitted created_at field')
 const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(environmentSchema, /config:\n[\s\S]*?- type: 'null'/, 'Environment config must allow the serializer\'s null output')
 assert.match(environmentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Environment metadata must allow the serializer\'s null output')

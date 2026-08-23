@@ -1000,7 +1000,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Sessions",
     "method": "GET",
     "path": "/v1/sessions/{session_id}/events/stream",
-    "description": "Stream session events via Server-Sent Events (SSE).",
+    "description": "Replay persisted Session Events, then follow newly persisted Events via Server-Sent Events (SSE).",
     "groups": [
       {
         "title": "Path parameters",
@@ -1033,7 +1033,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": {
       "status": "200 OK",
-      "code": "data: {\"id\":\"sevt_01...\",\"type\":\"session.status_running\",\"processed_at\":\"2026-05-29T10:00:00Z\"}\n\n: heartbeat\n\ndata: {\"id\":\"sevt_02...\",\"type\":\"agent.tool_use\",\"content\":{\"name\":\"web_search\",\"input\":{\"query\":\"order 1234\"}},\"processed_at\":\"2026-05-29T10:00:01Z\"}\n\ndata: {\"id\":\"sevt_03...\",\"type\":\"agent.message\",\"content\":[{\"type\":\"text\",\"text\":\"Your order #1234 shipped yesterday.\"}],\"processed_at\":\"2026-05-29T10:00:03Z\"}"
+      "code": "id: sevt_01...\ndata: {\"id\":\"sevt_01...\",\"type\":\"session.status_running\",\"processed_at\":\"2026-05-29T10:00:00Z\",\"created_at\":\"2026-05-29T10:00:00Z\"}\n\n: heartbeat\n\nid: sevt_02...\ndata: {\"id\":\"sevt_02...\",\"type\":\"agent.tool_use\",\"content\":{\"name\":\"web_search\",\"input\":{\"query\":\"order 1234\"}},\"processed_at\":\"2026-05-29T10:00:01Z\",\"created_at\":\"2026-05-29T10:00:01Z\"}\n\nid: sevt_03...\ndata: {\"id\":\"sevt_03...\",\"type\":\"agent.message\",\"content\":[{\"type\":\"text\",\"text\":\"Your order #1234 shipped yesterday.\"}],\"processed_at\":\"2026-05-29T10:00:03Z\",\"created_at\":\"2026-05-29T10:00:03Z\"}"
     }
   },
   "skills/create": {

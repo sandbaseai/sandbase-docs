@@ -1044,7 +1044,7 @@ paths:
           schema:
             type: array
             items: { type: string, enum: [agent.message, agent.thinking] }
-          description: Repeatable Claude-compatible request for best-effort event preview deltas.
+          description: Compatibility parameter. Accepted values are validated, but the current stream emits persisted canonical Events only and does not synthesize preview deltas.
       responses:
         '200':
           description: SSE event stream
@@ -2853,7 +2853,7 @@ components:
 
     Session:
       type: object
-      required: [id, type, status, agent, agent_id, agent_version, agent_version_id, environment_id, source, created_at]
+      required: [id, type, status, agent, agent_id, agent_version, agent_version_id, environment_id, source, title, metadata, archived_at, created_at, updated_at]
       properties:
         id:
           type: string
@@ -2880,7 +2880,8 @@ components:
           enum: [idle, running, rescheduling, terminated]
         source:
           type: string
-          enum: [direct, endpoint, deployment]
+          enum: [direct, endpoint, deployment, store_trial]
+          description: Entry point that created the Session. store_trial identifies a Service store trial Session.
         metadata:
           type: [object, 'null']
         archived_at:
@@ -3117,7 +3118,7 @@ components:
 
     SessionEvent:
       type: object
-      required: [id, type, processed_at]
+      required: [id, type, processed_at, created_at]
       properties:
         id:
           type: string
