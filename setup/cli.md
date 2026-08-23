@@ -76,6 +76,32 @@ npx -y @sandbaseai/cli unregister --client codex
 SandBase leaves unrelated and user-managed MCP entries unchanged. Revoke the
 corresponding credential in the SandBase Dashboard when it is no longer needed.
 
+## FAQ
+
+### What is SandBase CLI?
+
+SandBase CLI is a local onboarding tool and MCP bridge. It connects supported AI
+clients to SandBase's remote model and API catalog without requiring a custom
+integration for each client.
+
+### Which AI clients does it support?
+
+The CLI supports Codex, Claude Code, Cursor, Gemini CLI, Windsurf, OpenCode, and
+other clients listed by `sandbase catalog --json`. The catalog command is the
+source of truth for the current compatibility list.
+
+### Does SandBase CLI install a background service?
+
+No. The MCP bridge starts on demand over stdio when the client invokes it. The
+CLI writes only the SandBase-owned client configuration and leaves unrelated MCP
+entries unchanged.
+
+### How do I remove SandBase CLI access?
+
+Run `npx -y @sandbaseai/cli unregister --client <client>` for each client, then
+revoke the corresponding credential in the SandBase Dashboard. This removes the
+managed entry without deleting user-managed configuration.
+
 ## Source and support
 
 - [Source code](https://github.com/sandbaseai/cli)
@@ -85,4 +111,3 @@ corresponding credential in the SandBase Dashboard when it is no longer needed.
 
 If the integration helps your workflow, [star SandBase CLI on
 GitHub](https://github.com/sandbaseai/cli) so other agent developers can find it.
-
