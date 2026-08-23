@@ -5,23 +5,25 @@ description: SandBase error codes reference. Standard error format, HTTP status 
 
 # Error Codes
 
-SandBase uses standard HTTP status codes and a consistent JSON error format across all endpoints. This page documents all error codes, their meanings, and recommended handling strategies.
+SandBase uses standard HTTP status codes. Error bodies vary by endpoint family, so clients should branch on HTTP
+status first and then parse the documented protocol-specific shape.
 
 ## Error Response Format
 
-All error responses follow this structure:
+Core `/v1/*` middleware and several model/resource endpoints return a flat error message:
 
 ```json
-{
-  "code": 400,
-  "message": "Invalid request: model field is required"
-}
+{"error":"API key rate limit exceeded"}
 ```
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `code` | integer | HTTP status code |
-| `message` | string | Human-readable error description |
+Agent resource APIs instead return a typed object such as:
+
+```json
+{"error":{"type":"invalid_request","message":"invalid request body"}}
+```
+
+OpenAI-compatible gateways retain their OpenAI-compatible error envelope. Do not require a universal `code`,
+`message`, `param`, or `request_id` field across every endpoint.
 
 ### Anthropic-Compatible Errors
 

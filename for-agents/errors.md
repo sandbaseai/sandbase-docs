@@ -7,31 +7,24 @@ description: Complete list of SandBase API error codes with HTTP status, descrip
 
 # Error Codes
 
-> All SandBase API errors return a consistent JSON structure. Use this page to look up any error code and its resolution.
+> Error bodies are protocol-specific. Always branch on HTTP status first, then parse the shape documented for the endpoint family.
 
 ## Error Response Format
 
+Core `/v1/*` middleware and some model/resource endpoints return a flat message:
+
 ```json
-{
-  "error": {
-    "code": "invalid_api_key",
-    "message": "The API key provided is invalid or has been revoked.",
-    "type": "authentication_error",
-    "param": null,
-    "request_id": "req_abc123"
-  }
-}
+{"error":"API key rate limit exceeded"}
 ```
 
-### Schema Fields
+Agent resource APIs return a typed error object:
 
-| Field | Type | Always Present | Description |
-|-------|------|:--------------:|-------------|
-| `code` | string | ✅ | Machine-readable error code (see tables below) |
-| `message` | string | ✅ | Human-readable explanation with specific details |
-| `type` | string | ✅ | Error category — one of: `authentication_error`, `rate_limit_error`, `billing_error`, `invalid_request_error`, `not_found_error`, `server_error`. Agent-specific errors (run_failed, tool_execution_failed) use `server_error` type. |
-| `param` | string or null | ✅ | The parameter that caused the error, or `null` if not applicable |
-| `request_id` | string | ✅ | Unique request ID — include this when contacting support |
+```json
+{"error":{"type":"invalid_request","message":"invalid request body"}}
+```
+
+OpenAI- and Anthropic-compatible gateways retain their protocol-specific error envelopes. Do not require a universal
+`code`, `param`, or `request_id` field.
 
 ---
 
@@ -49,9 +42,11 @@ description: Complete list of SandBase API error codes with HTTP status, descrip
 
 | Code | HTTP | Description | Fix |
 |------|------|-------------|-----|
-| `rate_limited` | 429 | Too many requests per minute | Respect `Retry-After` header; implement exponential backoff with jitter (see [Retry Strategy](#retry-strategy)) |
-| `concurrent_limit` | 429 | Too many concurrent requests | Reduce parallelism; default is 5 concurrent requests |
-| `daily_limit_exceeded` | 429 | Daily request quota exhausted | Wait for daily reset (midnight UTC) or upgrade plan in [Console → Billing](https://www.sandbase.ai/console/billing) |
+| `API key rate limit exceeded` | 429 | The optional per-key RPM cap was exceeded | Use bounded exponential backoff with jitter |
+| `global rate limit exceeded` | 429 | The current platform-wide RPM protection was exceeded | Use bounded exponential backoff with jitter |
+
+Rate-limit responses do not currently include `Retry-After` or `X-RateLimit-*` headers. There is no published
+universal RPM or concurrency default.
 
 ## Billing Errors
 
@@ -142,19 +137,17 @@ Recommended settings:
 - `max_retries`: 5
 - Always add random jitter
 
-The `Retry-After` header (when present) overrides the calculated wait time — always respect it.
+Do not wait for a `Retry-After` header; the public API does not currently emit one.
 
 ### Retryable vs. Non-Retryable Errors
 
 | Code | Retryable | Strategy |
 |------|:---------:|----------|
-| `rate_limited` | ✅ | Respect `Retry-After` header |
-| `concurrent_limit` | ✅ | Back off and reduce parallelism |
+| HTTP `429` | ✅ | Use bounded exponential backoff with jitter; no `Retry-After` header is sent |
 | `model_overloaded` | ✅ | Wait 5–10s or switch to fallback model |
 | `service_unavailable` | ✅ | Exponential backoff |
 | `gateway_timeout` | ✅ | Retry or switch model |
 | `internal_error` | ⚠️ | Retry 1–2 times only; if persistent, it's a real bug |
-| `daily_limit_exceeded` | ❌ | Wait for daily reset |
 | `run_failed` | ❌ | Terminal — inspect session events for cause |
 | `run_timeout` | ⚠️ | May retry with simpler input or higher timeout |
 | `content_policy_violation` | ❌ | Modify input; retrying the same content will fail again |

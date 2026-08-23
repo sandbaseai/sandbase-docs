@@ -85,7 +85,9 @@ curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
 
 ## Rate Limits
 
-Default: 60 requests/min, 5 concurrent. Upgrade plans have higher limits. See [Error Codes](./errors) for handling 429 responses.
+There is no published universal numeric default. Requests are subject to an optional per-key RPM cap and the
+current platform-wide RPM protection. A `429` response does not include quota or `Retry-After` headers; use bounded
+exponential backoff with jitter. See [Error Codes](./errors).
 
 ---
 

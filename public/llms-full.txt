@@ -379,13 +379,14 @@ capability tags, input schema, and pricing before sending a request.
 
 ## Error Codes
 
-All errors return: {"error": {"code": "...", "message": "...", "type": "...", "param": null, "request_id": "req_..."}}
+Error bodies are protocol-specific. Core middleware may return {"error":"message"}; Agent resource APIs return
+{"error":{"type":"...","message":"..."}}; OpenAI and Anthropic gateways retain compatible envelopes.
 
 | Code | HTTP | Description |
 | invalid_api_key | 401 | Key invalid or revoked |
 | missing_api_key | 401 | No Authorization header |
-| rate_limited | 429 | Too many requests - use Retry-After header |
-| concurrent_limit | 429 | Too many concurrent requests |
+| API key rate limit exceeded | 429 | Optional per-key RPM cap exceeded; back off with jitter |
+| global rate limit exceeded | 429 | Platform-wide RPM protection exceeded; back off with jitter |
 | insufficient_balance | 402 | Balance too low - top up |
 | model_not_found | 404 | Check model name via GET /v1/models |
 | model_overloaded | 503 | Retry after 5-10s or use fallback |
@@ -401,6 +402,7 @@ All errors return: {"error": {"code": "...", "message": "...", "type": "...", "p
 | gateway_timeout | 504 | Retry or switch model |
 
 Retry strategy: wait = min(1s * 2^attempt, 60s) + random jitter
+The API does not currently send Retry-After or X-RateLimit-* headers and has no published universal numeric default.
 Retryable: 429, 503, 504, 500 (1-2 times only)
 Not retryable: 400, 401, 402, 403
 

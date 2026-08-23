@@ -82,6 +82,8 @@ function inspectPublishedSources(directory) {
     assert.doesNotMatch(content, /\/events\/webhooks(?:\/|\b)/, `${relative} must not expose Sandbox event webhook paths`)
     assert.doesNotMatch(content, /\brun_abc123\b/, `${relative} must not assume a run ID prefix`)
     assert.doesNotMatch(content, /\btask_abc123\b/, `${relative} must not assume a task ID prefix`)
+    assert.doesNotMatch(content, /Default:\s*60 requests\/min,\s*5 concurrent/i, `${relative} must not publish obsolete universal rate limits`)
+    assert.doesNotMatch(content, /rate_limited[^\n]*Retry-After header/i, `${relative} must not claim public 429 responses include Retry-After`)
     if (relative.startsWith('model-api-reference/') && content.includes('"path":"/v1/run"')) {
       assert.doesNotMatch(content, /Error message if the task failed\. Empty on success\./, `${relative} must use the structured public run error`)
       assert.doesNotMatch(content, /Array of generated content\. Empty when status is not completed\./, `${relative} must omit outputs from non-terminal run responses`)

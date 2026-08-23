@@ -195,10 +195,8 @@ const client = new OpenAI({
 
 ## Rate Limiting by Key
 
-Each API key has its own rate limit allocation. Rate limits are not shared across keys within the same organization. This means:
-
-- Creating multiple keys does not increase your total rate limit
-- Each key independently tracks its request count
-- Exceeding the limit on one key does not affect other keys
+An API key may have an optional per-key RPM cap. Every request is also subject to the current platform-wide RPM
+protection, so creating more keys does not bypass the global limit. The API does not publish a universal numeric
+default or remaining-quota headers.
 
 See [Rate Limiting](/guides/rate-limiting) for details on limits and handling 429 responses.
