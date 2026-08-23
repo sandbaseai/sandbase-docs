@@ -1266,7 +1266,14 @@ paths:
         - { name: 'created_at[gte]', in: query, schema: { type: string, format: date-time } }
         - { name: 'created_at[lte]', in: query, schema: { type: string, format: date-time } }
         - { name: include_archived, in: query, schema: { type: boolean, default: false } }
-        - { name: status, in: query, schema: { type: string, enum: [active, paused] } }
+        - name: status
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items: { type: string, enum: [active, paused] }
+          description: Repeat the parameter to filter by one or more Deployment statuses.
         - { name: limit, in: query, schema: { type: integer, minimum: 1, maximum: 100, default: 20 } }
         - { name: page, in: query, schema: { type: string } }
       responses:
@@ -1520,11 +1527,22 @@ paths:
         - { name: 'created_at[lt]', in: query, schema: { type: string, format: date-time } }
         - { name: 'created_at[lte]', in: query, schema: { type: string, format: date-time } }
         - { name: has_error, in: query, schema: { type: boolean } }
-        - { name: trigger_type, in: query, schema: { type: string, enum: [schedule, manual] } }
+        - name: trigger_type
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items: { type: string, enum: [schedule, manual] }
+          description: Repeat the parameter, or use comma-separated values, to filter by trigger type.
         - name: status
           in: query
           description: Repeat to select one or more DeploymentRun creation outcomes. The current response object does not expose this internal status field.
-          schema: { type: string, enum: [pending, succeeded, failed] }
+          style: form
+          explode: true
+          schema:
+            type: array
+            items: { type: string, enum: [pending, succeeded, failed] }
         - name: limit
           in: query
           schema: { type: integer, minimum: 1, maximum: 1000, default: 20 }

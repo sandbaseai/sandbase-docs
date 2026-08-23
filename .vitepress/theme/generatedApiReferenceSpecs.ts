@@ -205,7 +205,20 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "method": "GET",
     "path": "/v1/deployments",
     "description": "List Deployments in the current organization.",
-    "groups": [],
+    "groups": [
+      {
+        "title": "Query parameters",
+        "fields": [
+          { "name": "agent_id", "type": "string", "required": false, "description": "Filter by owning Agent ID." },
+          { "name": "status", "type": "string[]", "required": false, "description": "Repeat to include active and/or paused Deployments." },
+          { "name": "include_archived", "type": "boolean", "required": false, "default": "false", "description": "Include archived Deployments." },
+          { "name": "created_at[gte]", "type": "string · RFC 3339", "required": false, "description": "Return Deployments created at or after this timestamp." },
+          { "name": "created_at[lte]", "type": "string · RFC 3339", "required": false, "description": "Return Deployments created at or before this timestamp." },
+          { "name": "limit", "type": "integer", "required": false, "default": "20", "description": "Number of Deployments to return, from 1 to 100." },
+          { "name": "page", "type": "string", "required": false, "description": "Opaque cursor from a previous response's next_page field." }
+        ]
+      }
+    ],
     "examples": [
       {
         "label": "cURL",
