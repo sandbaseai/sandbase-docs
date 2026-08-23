@@ -113,6 +113,9 @@ paths:
       tags: [Messages]
       summary: Create message (Anthropic compatible)
       description: Anthropic Messages API compatible endpoint.
+      security:
+        - BearerAuth: []
+        - AnthropicApiKey: []
       parameters:
         - name: anthropic-version
           in: header
@@ -1713,6 +1716,11 @@ components:
       type: http
       scheme: bearer
       description: "API key with `sk-sb-` prefix"
+    AnthropicApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: "Supported only by `POST /v1/messages` for Anthropic SDK compatibility"
 
   parameters:
     EndpointId:
