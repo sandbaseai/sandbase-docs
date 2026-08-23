@@ -323,26 +323,6 @@ paths:
           description: Asset not found
 
   # --- Services (Endpoint resources) -----------------------------
-  /v1/endpoint_runtime_profiles:
-    get:
-      operationId: listEndpointRuntimeProfiles
-      tags: [Services]
-      summary: List enabled Service runtime profiles
-      description: Returns the public capabilities of runtimes enabled for Service creation.
-      responses:
-        '200':
-          description: Enabled runtime profiles
-          content:
-            application/json:
-              schema:
-                type: object
-                required: [data]
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/EndpointRuntimeProfile'
-
   /v1/endpoints:
     post:
       operationId: createEndpoint
@@ -2319,28 +2299,6 @@ components:
               type: integer
 
     # --- Services (Endpoint resources) -----------------------------
-    EndpointRuntimeProfile:
-      type: object
-      required: [id, display_name, enabled, supports_skills, supports_state, protocols]
-      properties:
-        id:
-          type: string
-          example: hermes
-        display_name:
-          type: string
-          example: Hermes
-        enabled:
-          type: boolean
-        supports_skills:
-          type: boolean
-        supports_state:
-          type: boolean
-        protocols:
-          type: array
-          items:
-            type: string
-            enum: [rest, acp]
-
     CreateDeclarativeEndpointRequest:
       type: object
       additionalProperties: false
