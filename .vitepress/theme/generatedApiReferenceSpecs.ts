@@ -165,6 +165,24 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "description": "Identifier for deployment id."
           }
         ]
+      },
+      {
+        "title": "Query parameters",
+        "fields": [
+          {
+            "name": "limit",
+            "type": "integer",
+            "required": false,
+            "default": "20",
+            "description": "Page size from 1 to 1000. Pass it explicitly when following nested-list cursors."
+          },
+          {
+            "name": "page",
+            "type": "string",
+            "required": false,
+            "description": "Opaque cursor returned in the previous response's next_page field."
+          }
+        ]
       }
     ],
     "examples": [
@@ -172,6 +190,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
         "label": "cURL",
         "language": "bash",
         "code": "curl \"https://api.sandbase.ai/v1/deployments/depl_01.../runs?limit=20\" \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+      }
+    ],
+    "notes": [
+      {
+        "title": "Nested-list pagination",
+        "description": "Set limit explicitly. A full page includes next_page; because the current endpoint detects cursors from page fullness, following the final full-page cursor can return an empty page."
       }
     ]
   },

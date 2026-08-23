@@ -86,7 +86,7 @@ apiReference:
   errors:
     - status: 400
       type: invalid_request
-      description: The page cursor or another query parameter is invalid.
+      description: The page cursor is malformed.
     - status: 401
       type: authentication_error
       description: The API key is missing or invalid.
