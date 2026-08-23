@@ -833,6 +833,19 @@ function publicPlatformResponseFields() {
   ]
 }
 
+function publicGenerationResponseFields() {
+  return [
+    { name: 'id', type: 'string', required: true, description: 'Opaque SandBase run identifier. Use it exactly as returned; no prefix is guaranteed.' },
+    { name: 'status', type: 'string', required: true, description: 'Current public run status.', constraints: 'Allowed values: pending, running, completed, failed, timeout' },
+    { name: 'model', type: 'string', required: false, description: 'Public SandBase model name used for this run.' },
+    { name: 'outputs', type: 'array<object>', required: false, description: 'Present only for completed runs. Each object is capability-specific; inspect the selected model schema for its fields.' },
+    { name: 'error', type: 'object', required: false, description: 'Present only for failed or timeout runs. Contains a public error type and sanitized message.' },
+    { name: 'error.type', type: 'string', required: false, description: 'Stable public error category.' },
+    { name: 'error.message', type: 'string', required: false, description: 'Sanitized error message safe to show to clients.' },
+    { name: 'usage', type: 'object', required: false, description: 'Usage details when available.' },
+  ]
+}
+
 function validatePlatformModel(model) {
   for (const field of ['name', 'vendor', 'vendor_slug', 'model_slug', 'display_name']) {
     if (typeof model[field] !== 'string' || !model[field].trim()) throw new Error(`${model.__file}: missing ${field}`)
@@ -1032,7 +1045,7 @@ function modelReference(model) {
         description: isGeneration
           ? 'The submit endpoint returns an accepted generation task. Poll the result endpoint with the returned id for terminal outputs or errors.'
           : 'Fields returned by this model API response.',
-        fields: isGeneration ? publicPlatformResponseFields() : responseFields(model),
+        fields: isGeneration ? publicGenerationResponseFields() : responseFields(model),
       },
       {
         title: 'Model capabilities',
