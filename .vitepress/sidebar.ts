@@ -118,6 +118,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     collapsed: false,
     items: [
       { text: 'Chat Completions', link: '/api-reference/llm-gateway' },
+      { text: 'Responses', link: '/api-reference/responses' },
       { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
       { text: 'Image Generation', link: '/api-reference/models/image' },
       { text: 'Video Generation', link: '/api-reference/models/video' },

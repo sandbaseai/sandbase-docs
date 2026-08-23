@@ -38,6 +38,8 @@ security:
 tags:
   - name: Chat Completions
     description: OpenAI-compatible LLM Gateway
+  - name: Responses
+    description: OpenAI-compatible Responses API
   - name: Embeddings
     description: OpenAI-compatible text embeddings
   - name: Messages
@@ -86,6 +88,54 @@ paths:
               schema:
                 type: string
                 description: SSE stream of chat completion chunks
+
+  /v1/responses:
+    post:
+      operationId: createResponse
+      tags: [Responses]
+      summary: Create a model response
+      description: >-
+        OpenAI-compatible Responses API endpoint. SandBase validates the model and stream fields used for routing,
+        then forwards the remaining supported request fields to the selected provider.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [model]
+              additionalProperties: true
+              properties:
+                model:
+                  type: string
+                  description: Model identifier from the Models API.
+                stream:
+                  type: boolean
+                  default: false
+                  description: Return OpenAI-compatible Server-Sent Events.
+                input:
+                  description: Text, message items, or other input supported by the selected model and provider.
+                instructions:
+                  type: string
+                  description: System or developer instruction for the response.
+                tools:
+                  type: array
+                  description: Tools available to the model.
+                  items:
+                    type: object
+                    additionalProperties: true
+      responses:
+        '200':
+          description: OpenAI-compatible response object or event stream from the selected provider.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+            text/event-stream:
+              schema:
+                type: string
+                description: OpenAI-compatible Responses API event stream.
 
   /v1/embeddings:
     post:

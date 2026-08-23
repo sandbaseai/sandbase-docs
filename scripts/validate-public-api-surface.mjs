@@ -24,6 +24,7 @@ for (const [pattern, label] of forbiddenOpenApiPatterns) {
 const requiredPublicPaths = [
   '/v1/run:',
   '/v1/run/{id}:',
+  '/v1/responses:',
   '/v1/assets:',
   '/v1/assets/{id}:',
   '/v1/skills/files:',
@@ -53,6 +54,9 @@ assert.doesNotMatch(openapi, /^\s+mcp_url:$/m, 'Endpoint MCP transport URL must 
 assert.doesNotMatch(openapi, /^  \/v1\/generations(?:\/\{[^}]+\})?:$/m, 'Withdrawn generation paths must not be public')
 assert.doesNotMatch(openapi, /^  \/events\/webhooks(?:\/\{[^}]+\})?:$/m, 'Sandbox event webhook paths must not be public')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
+const responsesPath = openapi.match(/^  \/v1\/responses:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(responsesPath, /additionalProperties: true/, 'Responses must preserve provider-compatible request fields')
+assert.match(responsesPath, /text\/event-stream:/, 'Responses must document streaming output')
 const messagesPath = openapi.match(/^  \/v1\/messages:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(messagesPath, /security:\n\s+- BearerAuth: \[\]\n\s+- AnthropicApiKey: \[\]/, 'Messages must support Bearer or x-api-key authentication')
 assert.equal((openapi.match(/AnthropicApiKey:/g) ?? []).length, 2, 'Anthropic x-api-key authentication must be scoped only to Messages')

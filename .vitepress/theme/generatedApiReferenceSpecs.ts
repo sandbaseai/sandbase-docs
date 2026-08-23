@@ -1221,6 +1221,44 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       }
     ]
   },
+  "inference/responses": {
+    "title": "Create Response",
+    "operation": "Inference",
+    "method": "POST",
+    "path": "/v1/responses",
+    "description": "Create an OpenAI-compatible model response. Request fields beyond model and stream are forwarded when supported by the selected provider.",
+    "signature": "client.responses.create(params)",
+    "groups": [
+      {
+        "title": "Request body",
+        "schema": "ResponseCreateParams",
+        "fields": [
+          { "name": "model", "type": "string", "required": true, "description": "Model identifier from the Models API." },
+          { "name": "input", "type": "string | object[]", "required": false, "description": "Text, message items, or other input supported by the selected model and provider." },
+          { "name": "instructions", "type": "string", "required": false, "description": "System or developer instruction for the response." },
+          { "name": "stream", "type": "boolean", "required": false, "default": "false", "description": "Return OpenAI-compatible Server-Sent Events." },
+          { "name": "tools", "type": "object[]", "required": false, "description": "Tools available to the model." }
+        ]
+      }
+    ],
+    "examples": [
+      { "label": "cURL", "language": "bash", "code": "curl https://api.sandbase.ai/v1/responses \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"openai/gpt-5.2\",\"input\":\"Explain immutable infrastructure in one sentence.\"}'" },
+      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-sb-...\", base_url=\"https://api.sandbase.ai/v1\")\nresponse = client.responses.create(\n    model=\"openai/gpt-5.2\",\n    input=\"Explain immutable infrastructure in one sentence.\",\n)\nprint(response.output_text)" },
+      { "label": "TypeScript", "language": "typescript", "code": "import OpenAI from \"openai\";\n\nconst client = new OpenAI({ apiKey: process.env.SANDBASE_API_KEY, baseURL: \"https://api.sandbase.ai/v1\" });\nconst response = await client.responses.create({\n  model: \"openai/gpt-5.2\",\n  input: \"Explain immutable infrastructure in one sentence.\",\n});\nconsole.log(response.output_text);" }
+    ],
+    "response": { "status": "200 OK", "code": "{\n  \"id\": \"resp_01...\",\n  \"object\": \"response\",\n  \"status\": \"completed\",\n  \"model\": \"openai/gpt-5.2\",\n  \"output\": []\n}" },
+    "notes": [
+      { "title": "Transparent compatibility", "description": "SandBase uses model and stream for routing and forwards other supported fields to the selected provider. Available fields and output items can vary by model and provider." },
+      { "title": "Streaming", "description": "Set stream to true to receive OpenAI-compatible Responses API Server-Sent Events." }
+    ],
+    "errors": [
+      { "status": "400", "description": "Invalid JSON, missing model, or an invalid provider request." },
+      { "status": "401", "description": "Missing or invalid API key." },
+      { "status": "402", "description": "Organization spending limit reached." },
+      { "status": "404", "description": "Model not found or unavailable." },
+      { "status": "429", "description": "Rate limit exceeded." }
+    ]
+  },
   "inference/chat-completions": {
     "title": "Create Chat Completion",
     "operation": "Inference",

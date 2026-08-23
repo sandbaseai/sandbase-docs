@@ -118,6 +118,7 @@ Keys can optionally have an expiration date. Expired keys return:
 | Endpoint | Auth Method | Description |
 |----------|-------------|-------------|
 | `POST /v1/chat/completions` | API Key (Bearer) | LLM Gateway |
+| `POST /v1/responses` | API Key (Bearer) | OpenAI-compatible Responses API |
 | `POST /v1/embeddings` | API Key (Bearer) | Text embeddings |
 | `POST /v1/messages` | API Key (Bearer or x-api-key) | Anthropic Messages |
 
