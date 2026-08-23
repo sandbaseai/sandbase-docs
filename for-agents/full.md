@@ -31,7 +31,7 @@ Base URL: `https://api.sandbase.ai/v1`
 
 | Term | Meaning |
 |------|---------|
-| **Task** | Any billable unit of work (LLM call, image generation, etc.). Every API call produces a task with a cost. |
+| **Task** | A billable execution record for operations such as model inference. Not every API operation creates one. |
 | **Run** | A media generation request via `POST /v1/run`. May be sync or async. Poll with `GET /v1/run/{id}`. |
 | **Session** | An agent execution via `POST /v1/sessions`. A sequence of steps (tool calls, LLM reasoning). Query with `GET /v1/sessions/{id}`. |
 
@@ -93,8 +93,8 @@ curl https://api.sandbase.ai/v1/chat/completions \
 }
 ```
 
-> Some billable operations may return `x-task-id: task_abc123`; when present, use it to query
-> `GET /v1/tasks/task_abc123/cost`.
+> Some billable operations may return `x-task-id: f3d2e8a1-7c4b-4a12-9d2e-123456789abc`; when present, use it to query
+> `GET /v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost`.
 
 ---
 
@@ -328,7 +328,7 @@ The detail response adds `unified_schema`, `supported_modes`, and `model_card`. 
 Check the recorded cost of a task using the task ID returned by the API operation.
 
 ```bash
-curl https://api.sandbase.ai/v1/tasks/task_abc123/cost \
+curl https://api.sandbase.ai/v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -336,15 +336,20 @@ curl https://api.sandbase.ai/v1/tasks/task_abc123/cost \
 
 ```json
 {
-  "task_id": "task_abc123",
-  "model": "openai/gpt-4o",
-  "cost_usd": 0.000325,
+  "id": "f3d2e8a1-7c4b-4a12-9d2e-123456789abc",
+  "status": "completed",
+  "settled": true,
+  "currency": "USD",
+  "cost": "0.000325",
+  "estimated_cost": "0.000325",
   "usage": {
     "prompt_tokens": 24,
     "completion_tokens": 89,
-    "cache_read_input_tokens": 0
-  },
-  "created_at": "2026-08-02T12:00:00Z"
+    "total_tokens": 113,
+    "cached_tokens": 0,
+    "cache_creation_tokens": 0,
+    "reasoning_tokens": 0
+  }
 }
 ```
 

@@ -1326,7 +1326,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "name": "task_id",
             "type": "string",
             "required": true,
-            "description": "SandBase task ID returned by POST /v1/run."
+            "description": "Opaque task ID returned by a billable operation, including an x-task-id response header when present."
           }
         ]
       }

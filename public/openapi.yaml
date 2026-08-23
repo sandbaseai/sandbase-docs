@@ -208,7 +208,7 @@ paths:
         - name: task_id
           in: path
           required: true
-          description: SandBase run ID returned by POST /v1/run.
+          description: Opaque task ID returned by a billable operation, including an x-task-id response header when present.
           schema:
             type: string
       responses:

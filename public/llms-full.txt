@@ -8,7 +8,7 @@ All requests require: Authorization: Bearer sk-sb-YOUR_KEY
 
 ## Terminology
 
-- Task: Any billable unit of work. Every API call produces a task with a cost.
+- Task: A billable execution record. Not every API operation creates one.
 - Run: A media generation request via POST /v1/run. May be sync or async.
 - Session: An agent execution via POST /v1/sessions. Stateful multi-turn workflow.
 
@@ -223,15 +223,25 @@ Example: GET /v1/models/openai/gpt-4o
 
 Check recorded task cost using the task ID returned by the API operation.
 
-Example: GET /v1/tasks/task_abc123/cost
+Example: GET /v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost
 
 Response:
 ```
 {
-  "task_id": "task_abc123",
-  "model": "openai/gpt-4o",
-  "cost_usd": 0.000325,
-  "usage": {"prompt_tokens": 24, "completion_tokens": 89, "cache_read_input_tokens": 0}
+  "id": "f3d2e8a1-7c4b-4a12-9d2e-123456789abc",
+  "status": "completed",
+  "settled": true,
+  "currency": "USD",
+  "cost": "0.000325",
+  "estimated_cost": "0.000325",
+  "usage": {
+    "prompt_tokens": 24,
+    "completion_tokens": 89,
+    "total_tokens": 113,
+    "cached_tokens": 0,
+    "cache_creation_tokens": 0,
+    "reasoning_tokens": 0
+  }
 }
 ```
 
