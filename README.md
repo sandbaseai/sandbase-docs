@@ -33,6 +33,20 @@ Use the smallest surface that fits the job:
 
 The catalog, schemas, prices, and availability can change. Use the live Store and API reference as the source of truth instead of guessing model or API identifiers.
 
+## Open-source companion projects
+
+The documentation is part of a small, interoperable open-source stack:
+
+- [SandBase CLI](https://github.com/sandbaseai/cli) — connect supported AI
+  clients to the SandBase catalog through a local MCP bridge.
+- [SandBase Skills](https://github.com/sandbaseai/sandbase-skills) — install
+  reusable research, marketing, and business workflows into compatible agents.
+- [DeepSeek Harness Handbook](https://github.com/sandbaseai/deepseek-harness-handbook)
+  — use source-backed guides for operating and extending an agent runtime.
+
+Choose the project that matches the layer you are building; the links above
+are maintained as the canonical contribution and issue entry points.
+
 ## Build and contribute locally
 
 The published site is built from this repository with VitePress. To preview a documentation change before opening a pull request:
