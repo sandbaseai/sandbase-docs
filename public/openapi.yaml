@@ -2458,15 +2458,19 @@ components:
         session_metadata:
           type: object
           additionalProperties: true
+          description: Metadata applied when an invocation creates a new persistent Session.
         memory_config:
           type: object
           additionalProperties: true
+          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
         resource_config:
           type: object
           additionalProperties: true
+          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
         vault_config:
           type: object
           additionalProperties: true
+          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
 
     EndpointToolset:
       type: object
@@ -2505,10 +2509,22 @@ components:
             type: string
             enum: [rest, acp]
         config: { type: object, additionalProperties: true }
-        session_metadata: { type: object, additionalProperties: true }
-        memory_config: { type: object, additionalProperties: true }
-        resource_config: { type: object, additionalProperties: true }
-        vault_config: { type: object, additionalProperties: true }
+        session_metadata:
+          type: object
+          additionalProperties: true
+          description: Metadata applied when a later invocation creates a new persistent Session.
+        memory_config:
+          type: object
+          additionalProperties: true
+          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
+        resource_config:
+          type: object
+          additionalProperties: true
+          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
+        vault_config:
+          type: object
+          additionalProperties: true
+          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
 
     Endpoint:
       type: object
@@ -2535,9 +2551,29 @@ components:
           items:
             type: string
             enum: [rest, acp]
+        session_metadata:
+          type: [object, 'null']
+          additionalProperties: true
+          description: Metadata applied when an invocation creates a new persistent Session.
+        memory_config:
+          type: [object, 'null']
+          additionalProperties: true
+          description: Reserved configuration stored with the Endpoint; it is not currently applied to Session execution.
+        resource_config:
+          type: [object, 'null']
+          additionalProperties: true
+          description: Reserved configuration stored with the Endpoint; it is not currently applied to Session execution.
+        vault_config:
+          type: [object, 'null']
+          additionalProperties: true
+          description: Reserved configuration stored with the Endpoint; it is not currently applied to Session execution.
         status:
           type: string
           enum: [active, disabled]
+        store_status:
+          type: string
+          enum: [private, pending_review, public, suspended]
+          description: Publication and review state of the Endpoint in the Service store.
         creation_mode:
           type: string
           enum: [declarative, advanced]

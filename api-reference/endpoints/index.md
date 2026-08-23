@@ -21,7 +21,7 @@ Endpoint invocation accepts an optional `session_id`. When omitted, SandBase cre
 | `PATCH` or `POST` | `/v1/endpoints/{endpoint_id}` | Update an advanced Endpoint. Declarative definitions are immutable. |
 | `DELETE` | `/v1/endpoints/{endpoint_id}` | Delete an Endpoint. |
 
-For the advanced creation mode, `name` and `agent_id` are required. Optional fields include `agent_version`, `environment_id`, `slug`, `protocols`, and Session configuration. When `environment_id` is omitted, SandBase resolves or creates the Agent-owned Environment. A declarative definition instead provides `name` and `runtime`; it cannot be mixed with `agent_id` or `environment_id`.
+For the advanced creation mode, `name` and `agent_id` are required. Optional fields include `agent_version`, `environment_id`, `slug`, `protocols`, and Session configuration. `session_metadata` is copied to each newly created Session. `memory_config`, `resource_config`, and `vault_config` are reserved fields: SandBase stores and returns them, but does not currently apply them to Session execution. When `environment_id` is omitted, SandBase resolves or creates the Agent-owned Environment. A declarative definition instead provides `name` and `runtime`; it cannot be mixed with `agent_id` or `environment_id`.
 
 List requests support cursor pagination and `q` search across IDs, names, slugs, runtimes, Agent IDs, and Environment IDs. `search` is retained as an alias for `q`.
 
