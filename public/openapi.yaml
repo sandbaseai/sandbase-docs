@@ -294,12 +294,12 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateAssetRequest'
       responses:
-        '201':
+        '200':
           description: Asset registered
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Asset'
+                $ref: '#/components/schemas/CreateAssetResponse'
 
   /v1/assets/{id}:
     get:
@@ -318,7 +318,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Asset'
+                $ref: '#/components/schemas/GetAssetResponse'
         '404':
           description: Asset not found
 
@@ -1886,9 +1886,23 @@ components:
           enum: [Image, Video, Audio]
         name: { type: string }
 
-    Asset:
+    CreateAssetResponse:
       type: object
-      required: [asset_url, asset_type]
+      required: [id, asset_url, asset_type, created_at]
+      properties:
+        id: { type: string }
+        asset_url:
+          type: string
+          description: Persistent asset:// reference used in generation requests.
+        asset_type:
+          type: string
+          enum: [Image, Video, Audio]
+        name: { type: string }
+        created_at: { type: string, format: date-time }
+
+    GetAssetResponse:
+      type: object
+      required: [id, external_id, asset_url, status, asset_type, download_url]
       properties:
         id: { type: string }
         external_id: { type: string }

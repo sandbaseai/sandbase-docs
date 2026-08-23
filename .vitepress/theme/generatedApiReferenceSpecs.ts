@@ -343,7 +343,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       }
     ],
     "response": {
-      "status": "201 Created",
+      "status": "200 OK",
       "code": "{\n  \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"asset_url\": \"asset://asset-20260710150403-hx4hf\",\n  \"asset_type\": \"Video\",\n  \"name\": \"Tea ad reference video\",\n  \"created_at\": \"2026-07-10T15:04:03Z\"\n}"
     }
   },
