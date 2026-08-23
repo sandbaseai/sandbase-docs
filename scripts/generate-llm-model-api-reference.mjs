@@ -821,12 +821,15 @@ function publicPlatformResponseBody(model, status) {
 
 function publicPlatformResponseFields() {
   return [
-    { name: 'id', type: 'string', required: true, description: 'SandBase run identifier. Provider task identifiers are never exposed.' },
+    { name: 'id', type: 'string', required: true, description: 'Opaque SandBase run identifier. Use it exactly as returned; no prefix is guaranteed.' },
     { name: 'status', type: 'string', required: true, description: 'Current public run status.', constraints: 'Allowed values: pending, running, completed, failed, timeout' },
     { name: 'model', type: 'string', required: true, description: 'Public SandBase model name used for this run.' },
     { name: 'outputs', type: 'array<object>', required: false, description: 'Present only for completed runs. Contains exactly one item whose only field is data.' },
     { name: 'outputs[0].data', type: 'object | array', required: false, description: 'Operation-specific business payload. This reference uses an empty object when no safe example can be confirmed.' },
     { name: 'error', type: 'object', required: false, description: 'Present only for failed or timeout runs. Contains a public error type and sanitized message.' },
+    { name: 'error.type', type: 'string', required: false, description: 'Stable public error category.' },
+    { name: 'error.message', type: 'string', required: false, description: 'Sanitized error message safe to show to clients.' },
+    { name: 'usage', type: 'object', required: false, description: 'Usage details when available.' },
   ]
 }
 
@@ -1029,7 +1032,7 @@ function modelReference(model) {
         description: isGeneration
           ? 'The submit endpoint returns an accepted generation task. Poll the result endpoint with the returned id for terminal outputs or errors.'
           : 'Fields returned by this model API response.',
-        fields: responseFields(model),
+        fields: isGeneration ? publicPlatformResponseFields() : responseFields(model),
       },
       {
         title: 'Model capabilities',
