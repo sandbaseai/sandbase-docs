@@ -33,6 +33,17 @@ Use the smallest surface that fits the job:
 
 The catalog, schemas, prices, and availability can change. Use the live Store and API reference as the source of truth instead of guessing model or API identifiers.
 
+## Build and contribute locally
+
+The published site is built from this repository with VitePress. To preview a documentation change before opening a pull request:
+
+```bash
+npm ci
+npm run dev
+```
+
+For a production-equivalent check, run `npm run build`; the generated site is written to `.vitepress/dist`. Keep model IDs, request fields, and pricing tied to the linked live reference pages, and open an issue when the source of truth is unclear. See the repository's [open issues](https://github.com/sandbaseai/sandbase-docs/issues) for current deployment and content work.
+
 ## First LLM call
 
 Create an API key in the [Console](https://www.sandbase.ai/console/keys), export it, and select a current model ID from [Supported Models](https://www.sandbase.ai/docs/models/supported).
