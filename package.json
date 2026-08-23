@@ -7,10 +7,18 @@
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview",
+    "lint:openapi": "redocly lint public/openapi.yaml --extends=minimal",
+    "test:public-api": "node scripts/validate-public-api-surface.mjs",
+    "test:api-reference": "node scripts/validate-api-reference-contract.mjs",
+    "test:http-references": "node scripts/validate-http-references.mjs",
+    "test:links": "node scripts/validate-internal-links.mjs",
+    "validate": "npm run lint:openapi && npm run test:public-api && npm run test:api-reference && npm run test:http-references && npm run test:links && npm run build",
     "test:generator": "node --test scripts/generate-llm-model-api-reference.test.mjs"
   },
   "devDependencies": {
+    "@redocly/cli": "^2.47.0",
     "vitepress": "^1.6.0",
-    "vue": "^3.5.0"
+    "vue": "^3.5.0",
+    "yaml": "^2.9.0"
   }
 }

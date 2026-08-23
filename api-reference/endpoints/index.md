@@ -1,11 +1,11 @@
 ---
 title: Endpoints API
-description: Publish an Agent as a reusable REST, MCP, or experimental ACP Service.
+description: Publish an Agent as a reusable REST or experimental ACP Service.
 ---
 
 # Endpoints API
 
-An Endpoint is the API resource behind a SandBase **Service**. Its `protocols` may contain `rest`, `mcp`, or experimental `acp`. The response exposes `run_url`, `mcp_url`, and `acp_url`; callers must use only protocols enabled on that Endpoint.
+An Endpoint is the API resource behind a SandBase **Service**. Public invocation uses REST or the experimental ACP protocol.
 
 ::: info Session identity
 Endpoint invocation accepts an optional `session_id`. When omitted, SandBase creates a persistent Session. When supplied, the message is appended to that Session. No public Run or Runtime Session identity is created.
@@ -55,11 +55,10 @@ The Endpoint must be active and include the `rest` protocol.
 
 Read history or stream results through the Session Events APIs using the returned `session_id`.
 
-## Connect through MCP or ACP
+## Connect through ACP
 
-- `POST /v1/endpoints/{endpoint_id}/mcp` handles MCP JSON-RPC for Endpoints with the `mcp` protocol. `DELETE` on the same URL performs MCP transport cleanup.
-- `POST /v1/endpoints/{endpoint_id}/acp` handles the experimental ACP JSON-RPC transport for Endpoints with the `acp` protocol.
+`POST /v1/endpoints/{endpoint_id}/acp` handles the experimental ACP JSON-RPC transport for Endpoints with the `acp` protocol.
 
-REST, MCP, and ACP are invocation protocols on the same Endpoint. They do not create separate Service resources.
+REST and ACP are invocation protocols on the same Endpoint. They do not create separate Service resources.
 
 See the [Service quickstart](/agents/endpoint-quickstart) for a complete create-and-invoke example.

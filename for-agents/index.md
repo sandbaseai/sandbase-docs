@@ -13,7 +13,7 @@ description: Everything an AI agent needs to discover and use SandBase API — o
 
 ## What is SandBase?
 
-SandBase is an AI agent infrastructure platform. One API key gives you access to **400+ models** (LLM, image, video, audio, embedding), sandboxed environments, and agent workflows.
+SandBase is an AI agent infrastructure platform. One API key gives you access to **2,000+ models and APIs** across LLM, image, video, audio, embedding, search, and data, plus agent workflows.
 
 ## API Base URL
 

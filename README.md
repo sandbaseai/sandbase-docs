@@ -57,7 +57,7 @@ npm ci
 npm run dev
 ```
 
-For a production-equivalent check, run `npm run build`; the generated site is written to `.vitepress/dist`. Keep model IDs, request fields, and pricing tied to the linked live reference pages, and open an issue when the source of truth is unclear. See the repository's [open issues](https://github.com/sandbaseai/sandbase-docs/issues) for current deployment and content work.
+For a production-equivalent check, run `npm run validate`; it validates the OpenAPI document, checks that withdrawn sandbox APIs are not exposed, and writes the generated site to `.vitepress/dist`. Keep model IDs, request fields, and pricing tied to the linked live reference pages, and open an issue when the source of truth is unclear. See the repository's [open issues](https://github.com/sandbaseai/sandbase-docs/issues) for current deployment and content work.
 
 ## First LLM call
 

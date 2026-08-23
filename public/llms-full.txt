@@ -12,7 +12,7 @@ All requests require: Authorization: Bearer sk-sb-YOUR_KEY
 - Run: A media generation request via POST /v1/run. May be sync or async.
 - Session: An agent execution via POST /v1/sessions. Stateful multi-turn workflow.
 
-The x-task-id response header on every request gives the task ID for cost lookup.
+Some billable operations return an x-task-id response header. Not every API operation creates a task.
 
 ---
 
@@ -150,7 +150,7 @@ Response:
 ## POST /v1/run
 
 Unified generation endpoint. The model field determines output type (image, video, audio).
-Check response status: "completed" = done, "processing" = poll GET /v1/run/{id}.
+Check response status: "completed" = done; "pending" or "running" = poll GET /v1/run/{id}.
 
 Image example:
 ```
@@ -158,8 +158,9 @@ curl https://api.sandbase.ai/v1/run \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "flux/schnell",
-    "input": {"prompt": "A futuristic city at sunset", "width": 1024, "height": 1024}
+    "model": "bfl/flux-1/schnell",
+    "prompt": "A futuristic city at sunset",
+    "aspect_ratio": "1:1"
   }'
 ```
 
@@ -168,8 +169,8 @@ Response (sync):
 {
   "id": "run_abc123",
   "status": "completed",
-  "model": "flux/schnell",
-  "output": {"url": "https://cdn.sandbase.ai/outputs/run_abc123.png", "content_type": "image/png"}
+  "model": "bfl/flux-1/schnell",
+  "outputs": [{"url": "https://cdn.sandbase.ai/outputs/run_abc123.png", "content_type": "image/png"}]
 }
 ```
 
@@ -178,10 +179,10 @@ Video example (async):
 curl https://api.sandbase.ai/v1/run \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"model": "kling/v1-5", "input": {"prompt": "A drone over mountains", "duration": 5}}'
+  -d '{"model": "kwaivgi/kling-video/3.0/turbo/standard/text-to-video", "prompt": "A drone over mountains", "duration": 5}'
 ```
 
-Response: {"id": "run_xyz789", "status": "processing"}
+Response: {"id": "run_xyz789", "status": "running"}
 Poll: GET /v1/run/run_xyz789 until status = "completed"
 
 Audio example:
@@ -189,7 +190,7 @@ Audio example:
 curl https://api.sandbase.ai/v1/run \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"model": "elevenlabs/multilingual-v2", "input": {"text": "Hello world", "voice": "rachel"}}'
+  -d '{"model": "bytedance/seed-speech/tts/2.0", "text": "Hello world"}'
 ```
 
 Response:
@@ -197,7 +198,7 @@ Response:
 {
   "id": "run_audio456",
   "status": "completed",
-  "output": {"url": "https://cdn.sandbase.ai/outputs/run_audio456.mp3", "content_type": "audio/mpeg"}
+  "outputs": [{"url": "https://cdn.sandbase.ai/outputs/run_audio456.mp3", "content_type": "audio/mpeg"}]
 }
 ```
 
@@ -205,53 +206,22 @@ Response:
 
 ## GET /v1/models
 
-List all available models with pricing and capabilities.
-
-Response:
-```
-{
-  "data": [
-    {
-      "id": "openai/gpt-4o",
-      "type": "llm",
-      "vendor": "OpenAI",
-      "context_window": 128000,
-      "pricing": {"input_per_million": 2.50, "output_per_million": 10.00},
-      "capabilities": ["chat", "vision", "tools", "json_mode", "streaming"],
-      "status": "active"
-    }
-  ]
-}
-```
+List the enabled model catalog with pagination and lightweight discovery fields. Detailed token, cache, and
+reasoning pricing is intentionally omitted. The response contains data, total, page, and page_size; catalog items
+include name, vendor, type, capability_tags, execution_mode, context_length, and base_price.
 
 ---
 
 ## GET /v1/models/{name}
 
-Get full details for a specific model.
+Get full details for a specific model. The response adds unified_schema, supported_modes, and model_card. Detailed
+prices live inside model_card; there is no top-level pricing object.
 
 Example: GET /v1/models/openai/gpt-4o
 
-Response:
-```
-{
-  "id": "openai/gpt-4o",
-  "type": "llm",
-  "vendor": "OpenAI",
-  "context_window": 128000,
-  "max_output_tokens": 16384,
-  "pricing": {"input_per_million": 2.50, "output_per_million": 10.00, "cached_input_per_million": 1.25},
-  "capabilities": ["chat", "vision", "tools", "json_mode", "streaming"],
-  "status": "active",
-  "deprecation_date": null
-}
-```
-
----
-
 ## GET /v1/tasks/{id}/cost
 
-Check cost of any completed generation. Task ID from x-task-id response header.
+Check recorded task cost using the task ID returned by the API operation.
 
 Example: GET /v1/tasks/task_abc123/cost
 
@@ -400,54 +370,11 @@ Response: {"id": "wh_abc123", "secret": "whsec_...", "status": "active"}
 
 ## Model Categories & Pricing
 
-All LLM models support chat + streaming. Pricing is per million tokens.
+Model availability, capabilities, context limits, and pricing change independently. Do not infer that every LLM
+supports streaming, vision, tools, structured output, or caching.
 
-### LLM Models
-| Model | Vendor | Context | Input $/M | Output $/M | Extra |
-| openai/gpt-4o | OpenAI | 128K | $2.50 | $10.00 | vision, tools, json_mode |
-| openai/gpt-4o-mini | OpenAI | 128K | $0.15 | $0.60 | vision, tools, json_mode |
-| openai/o3 | OpenAI | 200K | $2.00 | $8.00 | reasoning |
-| anthropic/claude-sonnet-4-20250514 | Anthropic | 200K | $3.00 | $15.00 | vision, tools, cache |
-| anthropic/claude-haiku-3-5 | Anthropic | 200K | $0.80 | $4.00 | vision, tools, cache |
-| google/gemini-2.5-pro | Google | 1M | $1.25 | $10.00 | vision, tools |
-| google/gemini-2.5-flash | Google | 1M | $0.15 | $0.60 | vision, tools |
-| deepseek/deepseek-chat | DeepSeek | 128K | $0.14 | $0.28 | tools |
-| deepseek/deepseek-reasoner | DeepSeek | 128K | $0.55 | $2.19 | reasoning |
-| meta/llama-4-maverick | Meta | 1M | $0.20 | $0.60 | tools |
-| mistral/mistral-large | Mistral | 128K | $2.00 | $6.00 | tools |
-| qwen/qwen3-235b | Alibaba | 128K | $0.80 | $2.40 | tools |
-| minimax/minimax-01 | MiniMax | 1M | $0.20 | $1.10 | tools |
-
-### Image Models (flat per generation)
-| flux/schnell | $0.003 | 1024x1024 | ~2s |
-| flux/pro | $0.05 | 2048x2048 | ~10s |
-| ideogram/v3 | $0.04 | 2048x2048 | ~8s |
-| openai/dall-e-3 | $0.04 | 1792x1024 | ~15s |
-| google/imagen-4 | $0.04 | 2048x2048 | ~6s |
-
-### Video Models (flat per generation)
-| kling/v1-5 | $0.28 | 10s, 1080p |
-| kling/v2 | $0.35 | 10s, 1080p |
-| minimax/video-01 | $0.30 | 6s, 1080p |
-| runway/gen4 | $0.50 | 10s, 1080p |
-| luma/ray-2 | $0.30 | 5s, 1080p |
-
-### Audio Models
-| elevenlabs/multilingual-v2 | $0.30/1K chars | TTS, multilingual |
-| openai/tts-1-hd | $0.030/1K chars | TTS, 6 voices |
-| openai/whisper-1 | $0.006/min | STT, multilingual |
-
-### Embedding Models
-| openai/text-embedding-3-large | $0.13/M tokens | 3072 dims |
-| openai/text-embedding-3-small | $0.02/M tokens | 1536 dims |
-| voyage/voyage-3 | $0.06/M tokens | 1024 dims |
-
-Use GET /v1/models for real-time authoritative pricing.
-
-### Caching Discounts
-| Anthropic | Cache read: 90% off input price |
-| OpenAI | Cache read: 50% off input price |
-| Google | Cache read: 75% off input price |
+Use GET /v1/models to discover the current catalog, then GET /v1/models/{name} for the authoritative model card,
+capability tags, input schema, and pricing before sending a request.
 
 ---
 

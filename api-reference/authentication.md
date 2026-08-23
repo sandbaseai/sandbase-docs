@@ -1,11 +1,12 @@
 ---
 title: Authentication
-description: SandBase authentication reference. API key management, Bearer tokens, x-api-key header, and OAuth flow for the dashboard.
+description: Authenticate public SandBase API requests with Bearer tokens or the x-api-key header.
 ---
 
 # Authentication
 
-SandBase uses API keys to authenticate requests. Every API call must include a valid key. This page covers all authentication methods, key management, and the OAuth flow used by the dashboard.
+SandBase uses API keys to authenticate public API requests. This page covers the supported integration methods and
+key-management practices. Console authentication and its internal APIs are not part of the public API contract.
 
 ## Authentication Methods
 
@@ -54,7 +55,7 @@ sk-sb-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 | Component | Description |
 |-----------|-------------|
 | `sk-` | Standard "secret key" prefix |
-| `er-` | SandBase identifier |
+| `sb-` | SandBase identifier |
 | `xxxx...` | 32+ character random string |
 
 ::: warning
@@ -63,9 +64,9 @@ Never expose your API key in client-side code, public repositories, or logs. Tre
 
 ## Creating API Keys
 
-### Via Dashboard
+### Via Console
 
-1. Log in to the [SandBase Dashboard](https://www.sandbase.ai/dashboard)
+1. Log in to the [SandBase Console](https://www.sandbase.ai/console)
 2. Navigate to **Settings → API Keys**
 3. Click **Create New Key**
 4. Give the key a descriptive name (e.g., "Production Backend", "Development")
@@ -88,7 +89,7 @@ Never expose your API key in client-side code, public repositories, or logs. Tre
 
 To rotate a key:
 
-1. Create a new key in the Dashboard
+1. Create a new key in the Console
 2. Update your application to use the new key
 3. Verify the new key works in production
 4. Revoke the old key
@@ -126,44 +127,17 @@ Keys can optionally have an expiration date. Expired keys return:
 | `POST /v1/chat/completions` | API Key (Bearer or x-api-key) | LLM Gateway |
 | `POST /v1/embeddings` | API Key (Bearer or x-api-key) | Text embeddings |
 | `POST /v1/messages` | API Key (Bearer or x-api-key) | Anthropic Messages |
-| `POST /sandboxes` | API Key (Bearer) | Sandbox creation |
-| `GET /sandboxes` | API Key (Bearer) | Sandbox listing |
-| `POST /sandboxes/:id/*` | API Key (Bearer) | Sandbox operations |
 | `GET /events/webhooks` | API Key (Bearer) | Webhook management |
 | `POST /events/webhooks` | API Key (Bearer) | Webhook registration |
-| `POST /default/v1/*` | OAuth JWT | Dashboard/Playground endpoints |
 
-## OAuth Flow (Dashboard)
-
-The SandBase Dashboard and Playground use OAuth 2.0 for user authentication. This is separate from API key authentication and is only used for browser-based access.
-
-### Flow Overview
-
-```
-1. User clicks "Sign In" on dashboard
-2. Redirect to OAuth provider (Google/GitHub)
-3. User authenticates with provider
-4. Redirect back with authorization code
-5. Exchange code for JWT access token
-6. JWT used for all dashboard API calls
-```
-
-### Dashboard Endpoints
-
-Dashboard endpoints are prefixed with `/default/v1/` and require a JWT token:
-
-```http
-Authorization: Bearer eyJhbGciOiJSUzI1NiIs...
-```
-
-These endpoints are not intended for programmatic API access. Use API keys for all integration work.
+The SandBase Console uses a separate browser authentication flow. Its internal requests are not supported public
+endpoints and must not be used by integrations.
 
 ## Organization Isolation
 
 API keys are scoped to an organization. When you authenticate with a key:
 
 - You can only access resources belonging to your organization
-- Sandbox operations are restricted to sandboxes created by your org
 - Usage and billing are tracked per organization
 
 ## Error Responses
@@ -182,7 +156,7 @@ API keys are scoped to an organization. When you authenticate with a key:
 - **Store keys in environment variables** — Never hardcode keys in source code
 - **Use separate keys per environment** — Different keys for dev, staging, production
 - **Set expiration dates** — Rotate keys periodically (every 90 days recommended)
-- **Monitor usage** — Check the Dashboard for unexpected activity
+- **Monitor usage** — Check the Console for unexpected activity
 - **Use the minimum scope needed** — Create keys with appropriate permissions
 
 ### Don't

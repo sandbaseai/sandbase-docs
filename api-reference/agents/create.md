@@ -30,9 +30,6 @@ apiReference:
         - name: tools
           type: array
           description: Built-in toolset and custom tool configurations. Maximum 128 tools.
-        - name: mcp_servers
-          type: array
-          description: URL MCP servers referenced by MCP toolsets. Maximum 20.
         - name: metadata
           type: object
           description: Up to 16 application-defined key-value pairs.

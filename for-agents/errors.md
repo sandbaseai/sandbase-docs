@@ -68,7 +68,7 @@ description: Complete list of SandBase API error codes with HTTP status, descrip
 | `model_not_found` | 404 | Model doesn't exist or is disabled | Verify model name with `GET /v1/models`; check for typos in vendor/model format |
 | `model_overloaded` | 503 | Model is temporarily at capacity | Retry after 5–10s or use a fallback model (see [Retry Strategy](#retry-strategy)) |
 | `model_deprecated` | 410 | Model has been deprecated | Check `message` field for the suggested replacement model |
-| `context_length_exceeded` | 400 | Input exceeds model's context window | Reduce input tokens; check model's `context_window` via `GET /v1/models/{name}` |
+| `context_length_exceeded` | 400 | Input exceeds model's context window | Reduce input tokens; check `context_length` via `GET /v1/models/{name}` |
 | `output_length_exceeded` | 400 | Output hit `max_tokens` limit before completing | Increase `max_tokens` parameter or accept truncated output (`finish_reason: "length"`) |
 
 ## Request Errors

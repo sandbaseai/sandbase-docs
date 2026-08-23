@@ -37,7 +37,8 @@ Base URL: `https://api.sandbase.ai/v1`
 
 > **run vs session**: "Run" (`/v1/run`) is for model generation tasks. "Session" (`/v1/sessions`) is for persistent Agent interactions. They use different endpoints and ID prefixes (`run_*` vs `sess_*`). A Schedule trigger additionally creates a `drun_*` DeploymentRun.
 >
-> **task vs run**: A "run" or "session" is the request you make; a "task" is the billable record created. Use `GET /v1/tasks/{id}/cost` to check cost. The task ID is returned in the `x-task-id` response header of every API call.
+> **task vs run**: A "run" or "session" is the request you make; a "task" is a billable execution record. Use
+> `GET /v1/tasks/{id}/cost` when an operation returns a task ID. Not every API operation creates a task.
 
 ---
 
@@ -92,7 +93,8 @@ curl https://api.sandbase.ai/v1/chat/completions \
 }
 ```
 
-> **Response headers** (not shown in body): `x-task-id: task_abc123` — use this to query cost via `GET /v1/tasks/task_abc123/cost`.
+> Some billable operations may return `x-task-id: task_abc123`; when present, use it to query
+> `GET /v1/tasks/task_abc123/cost`.
 
 ---
 
@@ -175,20 +177,17 @@ curl https://api.sandbase.ai/v1/embeddings \
 The `/v1/run` endpoint is a **unified generation endpoint** — the `model` field determines the output type (image, video, or audio).
 
 > **How to handle the response:** Check the `status` field.
-> - `"completed"` → result is in `output`, done.
-> - `"processing"` → poll `GET /v1/run/{id}` every 2–5s until `status` becomes `"completed"` or `"failed"`.
+> - `"completed"` → results are in `outputs`, done.
+> - `"pending"` or `"running"` → poll `GET /v1/run/{id}` every 2–5s until a terminal status (`completed`, `failed`, or `timeout`).
 
 ```bash
 curl https://api.sandbase.ai/v1/run \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "flux/schnell",
-    "input": {
-      "prompt": "A futuristic city at sunset, cyberpunk style",
-      "width": 1024,
-      "height": 1024
-    }
+    "model": "bfl/flux-1/schnell",
+    "prompt": "A futuristic city at sunset, cyberpunk style",
+    "aspect_ratio": "1:1"
   }'
 ```
 
@@ -198,14 +197,14 @@ curl https://api.sandbase.ai/v1/run \
 {
   "id": "run_abc123",
   "status": "completed",
-  "model": "flux/schnell",
+  "model": "bfl/flux-1/schnell",
   "created_at": "2026-08-02T12:00:00Z",
-  "output": {
+  "outputs": [{
     "url": "https://cdn.sandbase.ai/outputs/run_abc123.png",
     "content_type": "image/png",
     "width": 1024,
     "height": 1024
-  }
+  }]
 }
 ```
 
@@ -222,11 +221,9 @@ curl https://api.sandbase.ai/v1/run \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "kling/v1-5",
-    "input": {
-      "prompt": "A drone flying over mountains at golden hour",
-      "duration": 5
-    }
+    "model": "kwaivgi/kling-video/3.0/turbo/standard/text-to-video",
+    "prompt": "A drone flying over mountains at golden hour",
+    "duration": 5
   }'
 ```
 
@@ -235,8 +232,8 @@ curl https://api.sandbase.ai/v1/run \
 ```json
 {
   "id": "run_xyz789",
-  "status": "processing",
-  "model": "kling/v1-5",
+  "status": "running",
+  "model": "kwaivgi/kling-video/3.0/turbo/standard/text-to-video",
   "created_at": "2026-08-02T12:00:00Z"
 }
 ```
@@ -247,11 +244,11 @@ curl https://api.sandbase.ai/v1/run \
 {
   "id": "run_xyz789",
   "status": "completed",
-  "output": {
+  "outputs": [{
     "url": "https://cdn.sandbase.ai/outputs/run_xyz789.mp4",
     "content_type": "video/mp4",
     "duration": 5
-  }
+  }]
 }
 ```
 
@@ -266,11 +263,8 @@ curl https://api.sandbase.ai/v1/run \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "elevenlabs/multilingual-v2",
-    "input": {
-      "text": "Hello world, this is a test of text to speech.",
-      "voice": "rachel"
-    }
+    "model": "bytedance/seed-speech/tts/2.0",
+    "text": "Hello world, this is a test of text to speech."
   }'
 ```
 
@@ -280,13 +274,13 @@ curl https://api.sandbase.ai/v1/run \
 {
   "id": "run_audio456",
   "status": "completed",
-  "model": "elevenlabs/multilingual-v2",
+  "model": "bytedance/seed-speech/tts/2.0",
   "created_at": "2026-08-02T12:00:00Z",
-  "output": {
+  "outputs": [{
     "url": "https://cdn.sandbase.ai/outputs/run_audio456.mp3",
     "content_type": "audio/mpeg",
     "duration_seconds": 3.2
-  }
+  }]
 }
 ```
 
@@ -300,38 +294,16 @@ curl https://api.sandbase.ai/v1/run \
 
 ### GET /v1/models
 
-Returns all available models with pricing, capabilities, and status.
+Returns the enabled model catalog with pagination and lightweight discovery fields. Detailed token, cache, and
+reasoning pricing is intentionally omitted from this response.
 
 ```bash
 curl https://api.sandbase.ai/v1/models \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
-**Response (excerpt — use `GET /v1/models/{name}` for full details including `max_output_tokens`):**
-
-```json
-{
-  "data": [
-    {
-      "id": "openai/gpt-4o",
-      "type": "llm",
-      "vendor": "OpenAI",
-      "context_window": 128000,
-      "pricing": { "input_per_million": 2.50, "output_per_million": 10.00 },
-      "capabilities": ["chat", "vision", "tools", "json_mode", "streaming"],
-      "status": "active"
-    },
-    {
-      "id": "flux/schnell",
-      "type": "image",
-      "vendor": "Black Forest Labs",
-      "pricing": { "base_price": 0.003 },
-      "capabilities": ["text_to_image"],
-      "status": "active"
-    }
-  ]
-}
-```
+The response contains `data`, `total`, `page`, and `page_size`. Catalog items expose `name`, `vendor`, `type`,
+`capability_tags`, `execution_mode`, `context_length`, `base_price`, and other discovery metadata.
 
 ---
 
@@ -344,25 +316,8 @@ curl https://api.sandbase.ai/v1/models/openai/gpt-4o \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
-**Response:**
-
-```json
-{
-  "id": "openai/gpt-4o",
-  "type": "llm",
-  "vendor": "OpenAI",
-  "context_window": 128000,
-  "max_output_tokens": 16384,
-  "pricing": {
-    "input_per_million": 2.50,
-    "output_per_million": 10.00,
-    "cached_input_per_million": 1.25
-  },
-  "capabilities": ["chat", "vision", "tools", "json_mode", "streaming"],
-  "status": "active",
-  "deprecation_date": null
-}
-```
+The detail response adds `unified_schema`, `supported_modes`, and `model_card`. Detailed prices live inside
+`model_card`; there is no top-level `pricing` object.
 
 ---
 
@@ -370,7 +325,7 @@ curl https://api.sandbase.ai/v1/models/openai/gpt-4o \
 
 ### GET /v1/tasks/{id}/cost
 
-Check the cost of any completed generation. The task ID is in the `x-task-id` response header of every API call.
+Check the recorded cost of a task using the task ID returned by the API operation.
 
 ```bash
 curl https://api.sandbase.ai/v1/tasks/task_abc123/cost \
@@ -753,7 +708,7 @@ Webhook management uses the same base path:
 - **Cached tokens**: significantly discounted — Anthropic 90% off input price, OpenAI 50% off, Google 75% off
 - **Image/Video/Audio**: flat `base_price` per generation
 - Check cost after generation: `GET /v1/tasks/{id}/cost`
-- The `x-task-id` response header on every request gives you the task ID for cost lookup
+- When a billable operation returns a task ID, use it with `GET /v1/tasks/{id}/cost`
 
 ### Budget control
 

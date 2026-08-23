@@ -47,8 +47,8 @@ The `/v1/messages` endpoint returns errors in Anthropic's format:
 | 401 | Unauthorized | Missing, invalid, revoked, or expired API key |
 | 402 | Payment Required | Insufficient account balance to process the request |
 | 403 | Forbidden | API key lacks permission for the requested resource |
-| 404 | Not Found | Requested resource (model, sandbox, webhook) does not exist |
-| 409 | Conflict | Resource state conflict (e.g., pausing an already-paused sandbox) |
+| 404 | Not Found | Requested resource (model, Agent, Session, or webhook) does not exist |
+| 409 | Conflict | Resource state conflict |
 | 429 | Too Many Requests | Rate limit exceeded |
 
 ### Server Errors (5xx)
@@ -69,9 +69,6 @@ The `/v1/messages` endpoint returns errors in Anthropic's format:
 | `invalid request body` | Malformed JSON or missing required fields | Check your JSON syntax and include all required fields |
 | `model field is required` | Missing `model` in request body | Add a valid model identifier |
 | `max_tokens is required` | Missing `max_tokens` (Anthropic endpoint) | Include `max_tokens` in the request |
-| `unknown agent: <slug>` | Invalid template ID for sandbox creation | Use a valid template slug (e.g., `code_interpreter`) |
-| `invalid sandbox id` | Malformed sandbox ID | Use the ID returned from sandbox creation |
-| `file too large` | File exceeds 1MB limit (sandbox filesystem) | Read smaller files or use streaming |
 | `events list cannot be empty` | Webhook registration with no events | Specify at least one event type |
 | `invalid webhook url` | Webhook URL too short or malformed | Provide a valid HTTPS URL |
 
@@ -81,7 +78,7 @@ The `/v1/messages` endpoint returns errors in Anthropic's format:
 |---------|-------|----------|
 | `missing API key in Authorization header` | No auth header provided | Add `Authorization: Bearer sk-sb-...` or `x-api-key: sk-sb-...` |
 | `invalid API key` | Key not found in database | Verify the key is correct and hasn't been deleted |
-| `API key has been revoked` | Key was disabled in the Dashboard | Create a new key or re-enable the existing one |
+| `API key has been revoked` | Key was disabled in the Console | Create a new key or re-enable the existing one |
 | `API key has expired` | Key past its expiration date | Create a new key with a later expiration |
 | `invalid signature` | Webhook signature verification failed | Check your webhook secret and signature computation |
 
@@ -89,22 +86,14 @@ The `/v1/messages` endpoint returns errors in Anthropic's format:
 
 | Message | Cause | Solution |
 |---------|-------|----------|
-| `insufficient balance` | Organization credit balance is zero or negative | Top up your account in the Dashboard under Billing |
+| `insufficient balance` | Organization credit balance is zero or negative | Top up your account in the Console under Billing |
 
 ### 404 — Not Found
 
 | Message | Cause | Solution |
 |---------|-------|----------|
 | `model not found` | Requested model doesn't exist or isn't enabled | Check the [Models](/models/) page for available models |
-| `sandbox not found` | Sandbox doesn't exist or belongs to another org | Verify the sandbox ID and that it hasn't been destroyed |
 | `webhook not found` | Webhook doesn't exist or belongs to another org | Verify the webhook ID |
-
-### 409 — Conflict
-
-| Message | Reason | Solution |
-|---------|--------|----------|
-| `sandbox is not active` | Attempting keepalive on a non-running sandbox | Only call keepalive on sandboxes with status `running` |
-| `sandbox maximum lifetime exceeded` | Sandbox has exceeded max allowed lifetime | Create a new sandbox instead |
 
 ### 429 — Too Many Requests
 
@@ -126,12 +115,6 @@ The `/v1/messages` endpoint returns errors in Anthropic's format:
 
 | Message | Cause | Solution |
 |---------|-------|----------|
-| `failed to create sandbox in provider` | E2B provider returned an error | Retry after a brief delay |
-| `failed to pause sandbox in provider` | Provider failed to pause | Check sandbox status and retry |
-| `failed to destroy sandbox in provider` | Provider failed to destroy | Retry or check Dashboard |
-| `failed to execute command in sandbox` | Command execution failed at provider level | Verify sandbox is running and retry |
-| `failed to read file from sandbox` | File read failed at provider level | Verify the file path exists |
-| `failed to list directory in sandbox` | Directory listing failed | Verify the path exists |
 | `upstream provider error` | LLM provider returned an error | Retry; SandBase may automatically failover |
 
 ## Retry Strategies
@@ -242,7 +225,7 @@ data: {"type":"message_stop"}
 
 ## Error Monitoring
 
-Monitor error rates in the [SandBase Dashboard](https://www.sandbase.ai/dashboard) under **Usage → Errors**. You can:
+Monitor error rates in the [SandBase Console](https://www.sandbase.ai/console) under **Usage → Errors**. You can:
 
 - View error rates by status code over time
 - Filter by endpoint, model, or API key

@@ -26,10 +26,10 @@ apiReference:
           type: boolean
           description: Include agents that have been archived.
           default: "false"
-        - name: created_at_gte
+        - name: created_at[gte]
           type: string · RFC 3339
           description: Return agents created at or after this timestamp.
-        - name: created_at_lte
+        - name: created_at[lte]
           type: string · RFC 3339
           description: Return agents created at or before this timestamp.
   examples:

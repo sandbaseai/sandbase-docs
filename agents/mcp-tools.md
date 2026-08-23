@@ -56,6 +56,6 @@ Credentials are private values used to authenticate an API, such as `GITHUB_TOKE
 
 - [APIs](/store/apis)
 - [Skills](/store/skills)
-- [API Credentials](/agents/sandboxes)
+- [API Credentials](/agents/api-credentials)
 - [Define an Agent](/agents/agent-api)
 - [Sessions](/agents/sessions)

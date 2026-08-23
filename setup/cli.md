@@ -74,7 +74,7 @@ npx -y @sandbaseai/cli unregister --client codex
 ```
 
 SandBase leaves unrelated and user-managed MCP entries unchanged. Revoke the
-corresponding credential in the SandBase Dashboard when it is no longer needed.
+corresponding credential in the SandBase Console when it is no longer needed.
 
 ## FAQ
 
@@ -99,7 +99,7 @@ entries unchanged.
 ### How do I remove SandBase CLI access?
 
 Run `npx -y @sandbaseai/cli unregister --client <client>` for each client, then
-revoke the corresponding credential in the SandBase Dashboard. This removes the
+revoke the corresponding credential in the SandBase Console. This removes the
 managed entry without deleting user-managed configuration.
 
 ## Source and support

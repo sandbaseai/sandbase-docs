@@ -19,4 +19,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - run: npm run lint:openapi
+      - run: npm run test:public-api
+      - run: npm run test:api-reference
+      - run: npm run test:links
       - run: npm run build

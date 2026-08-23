@@ -309,15 +309,15 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"openai/tts-1\",\"input\":\"Hello, welcome to SandBase!\",\"voice\":\"alloy\"}'"
+        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"bytedance/seed-speech/tts/2.0\",\"text\":\"Hello, welcome to SandBase!\"}'"
       },
       {
         "label": "Python",
         "language": "python",
-        "code": "response = client.post(\"/v1/run\", json={\n    \"model\": \"openai/tts-1\",\n    \"input\": \"Hello, welcome to SandBase!\",\n    \"voice\": \"alloy\"\n})\n# Returns audio URL\nprint(response.json()[\"outputs\"][0][\"url\"])"
+        "code": "response = client.post(\"/v1/run\", json={\n    \"model\": \"bytedance/seed-speech/tts/2.0\",\n    \"text\": \"Hello, welcome to SandBase!\"\n})\nprint(response.json()[\"outputs\"][0][\"url\"])"
       }
     ],
-    "response": { "status": "200 OK", "code": "{\n  \"id\": \"task_01...\",\n  \"status\": \"completed\",\n  \"outputs\": [{ \"url\": \"https://media.sandbase.ai/audio/output.mp3\" }]\n}" }
+    "response": { "status": "200 OK", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"completed\",\n  \"outputs\": [{ \"url\": \"https://media.sandbase.ai/audio/output.mp3\" }]\n}" }
   },
   "assets/create": {
     "title": "Register Asset",
@@ -480,7 +480,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "name": "model",
             "type": "string",
             "required": true,
-            "description": "Model name (e.g. flux/schnell, dall-e-3)"
+            "description": "Current model identifier, for example bfl/flux-1/schnell."
           },
           {
             "name": "prompt",
@@ -489,22 +489,22 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "description": "Text description of the image"
           },
           {
-            "name": "width",
-            "type": "integer",
+            "name": "aspect_ratio",
+            "type": "string",
             "required": false,
-            "description": "Image width in pixels"
+            "description": "Output aspect ratio. Flux 1 Schnell defaults to 16:9."
           },
           {
-            "name": "height",
-            "type": "integer",
+            "name": "guidance_scale",
+            "type": "number",
             "required": false,
-            "description": "Image height in pixels"
+            "description": "Prompt guidance strength from 1 to 20."
           },
           {
-            "name": "num_images",
-            "type": "integer",
+            "name": "output_format",
+            "type": "jpeg | png",
             "required": false,
-            "description": "Number of images to generate (default: 1)"
+            "description": "Output image format. Flux 1 Schnell defaults to jpeg."
           },
           {
             "name": "mode",
@@ -525,15 +525,15 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"flux/schnell\",\"prompt\":\"A futuristic city at sunset\",\"width\":1024,\"height\":1024}'"
+        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"bfl/flux-1/schnell\",\"prompt\":\"A futuristic city at sunset\",\"aspect_ratio\":\"1:1\"}'"
       },
       {
         "label": "Python",
         "language": "python",
-        "code": "response = client.post(\"/v1/run\", json={\n    \"model\": \"flux/schnell\",\n    \"prompt\": \"A futuristic city at sunset, cyberpunk style\",\n    \"width\": 1024,\n    \"height\": 1024\n})\nprint(response.json()[\"outputs\"][0][\"url\"])"
+        "code": "response = client.post(\"/v1/run\", json={\n    \"model\": \"bfl/flux-1/schnell\",\n    \"prompt\": \"A futuristic city at sunset, cyberpunk style\",\n    \"aspect_ratio\": \"1:1\"\n})\nprint(response.json()[\"outputs\"][0][\"url\"])"
       }
     ],
-    "response": { "status": "200 OK", "code": "{\n  \"id\": \"task_01...\",\n  \"status\": \"completed\",\n  \"outputs\": [{ \"url\": \"https://media.sandbase.ai/images/output.png\" }]\n}" }
+    "response": { "status": "200 OK", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"completed\",\n  \"outputs\": [{ \"url\": \"https://media.sandbase.ai/images/output.png\" }]\n}" }
   },
   "models/list": {
     "title": "List Models",
@@ -579,7 +579,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "name": "order",
             "type": "string",
             "required": false,
-            "description": "Sort order: sortorder, most-popular, newest, or name."
+            "description": "Sort order: sort_order, most-popular, newest, or name."
           }
         ]
       }
@@ -610,7 +610,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "name": "model",
             "type": "string",
             "required": true,
-            "description": "Model name (e.g. kling/v2, wan/2.1)"
+            "description": "Current model identifier, for example kwaivgi/kling-video/3.0/turbo/standard/text-to-video."
           },
           {
             "name": "prompt",
@@ -643,15 +643,15 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"kling/v2\",\"prompt\":\"A cat playing piano\",\"duration\":5}'"
+        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\",\"prompt\":\"A cat playing piano\",\"duration\":5}'"
       },
       {
         "label": "Python",
         "language": "python",
-        "code": "# 1. Submit generation request\nresponse = client.post(\"/v1/run\", json={\n    \"model\": \"kling/v2\",\n    \"prompt\": \"A cat playing piano\",\n    \"duration\": 5,\n    \"webhook_url\": \"https://hooks.example.com/sandbase/task?token=opaque-token\"\n})\ngeneration_id = response.json()[\"id\"]\n\n# 2. SandBase posts the terminal event to webhook_url.\n# You may still poll the existing result endpoint as a fallback.\nimport time\nwhile True:\n    result = client.get(f\"/v1/run/{generation_id}\").json()\n    if result[\"status\"] == \"completed\":\n        print(result[\"outputs\"][0][\"url\"])\n        break\n    time.sleep(5)"
+        "code": "# 1. Submit generation request\nresponse = client.post(\"/v1/run\", json={\n    \"model\": \"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\",\n    \"prompt\": \"A cat playing piano\",\n    \"duration\": 5,\n    \"webhook_url\": \"https://hooks.example.com/sandbase/task?token=opaque-token\"\n})\ngeneration_id = response.json()[\"id\"]\n\n# 2. SandBase posts the terminal event to webhook_url.\n# You may still poll the existing result endpoint as a fallback.\nimport time\nwhile True:\n    result = client.get(f\"/v1/run/{generation_id}\").json()\n    if result[\"status\"] in (\"completed\", \"failed\", \"timeout\"):\n        print(result)\n        break\n    time.sleep(5)"
       }
     ],
-    "response": { "status": "202 Accepted", "code": "{\n  \"id\": \"task_01...\",\n  \"status\": \"pending\",\n  \"model\": \"kling/v2\"\n}" }
+    "response": { "status": "202 Accepted", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"pending\",\n  \"model\": \"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\"\n}" }
   },
   "sessions/archive": {
     "title": "Archive Session",
@@ -894,28 +894,22 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "description": "Filter by Agent version. Only applies when agent_id is also set."
           },
           {
-            "name": "statuses",
-            "type": "string[]",
-            "required": false,
-            "description": "Filter by status. Repeat to match any of multiple: ?statuses=idle&statuses=running"
-          },
-          {
             "name": "include_archived",
             "type": "boolean",
             "required": false,
-            "description": "Include archived runs. Default false."
+            "description": "Include archived Sessions. Default false."
           },
           {
-            "name": "created_at_gte",
+            "name": "created_at[gte]",
             "type": "string",
             "required": false,
-            "description": "Only runs created at or after this RFC 3339 time."
+            "description": "Only Sessions created at or after this RFC 3339 time."
           },
           {
-            "name": "created_at_lte",
+            "name": "created_at[lte]",
             "type": "string",
             "required": false,
-            "description": "Only runs created at or before this RFC 3339 time."
+            "description": "Only Sessions created at or before this RFC 3339 time."
           },
           {
             "name": "limit",
@@ -941,7 +935,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/sessions?agent_id=agent_01HqR2k7...&statuses=idle&limit=20\" \\\n  -H \"Authorization: Bearer sk-sb-YOUR_KEY\""
+        "code": "curl \"https://api.sandbase.ai/v1/sessions?agent_id=agent_01HqR2k7...&created_at%5Bgte%5D=2026-05-01T00%3A00%3A00Z&limit=20\" \\\n  -H \"Authorization: Bearer sk-sb-YOUR_KEY\""
       }
     ],
     "response": {
@@ -1074,7 +1068,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       }
     ],
     "response": {
-      "status": "200 OK",
+      "status": "201 Created",
       "code": "{\n  \"id\": \"skill_01...\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"created_at\": \"2026-08-03T10:00:00Z\"\n}"
     }
   },
@@ -1264,7 +1258,6 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
           { "name": "n", "type": "integer", "required": false, "default": "1", "description": "Number of completion choices to generate." },
           { "name": "presence_penalty", "type": "number", "required": false, "default": "0", "description": "Presence penalty from -2 to 2." },
           { "name": "frequency_penalty", "type": "number", "required": false, "default": "0", "description": "Frequency penalty from -2 to 2." },
-          { "name": "user", "type": "string", "required": false, "description": "Stable end-user identifier for abuse monitoring." },
           { "name": "stream_options", "type": "object", "required": false, "description": "Streaming options such as include_usage." }
         ]
       }
@@ -1345,7 +1338,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "name": "task_id",
             "type": "string",
             "required": true,
-            "description": "SandBase task ID. This is the id returned by POST /v1/run or POST /v1/generations."
+            "description": "SandBase task ID returned by POST /v1/run."
           }
         ]
       }

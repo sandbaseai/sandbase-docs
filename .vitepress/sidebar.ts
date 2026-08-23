@@ -57,6 +57,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Overview', link: '/agents/' },
       { text: 'Define agent', link: '/agents/agent-api' },
       { text: 'Tools & credentials', link: '/agents/mcp-tools' },
+      { text: 'API Credentials', link: '/agents/api-credentials' },
     ],
   },
   {
@@ -67,14 +68,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Service quickstart', link: '/agents/endpoint-quickstart' },
       { text: 'Schedules', link: '/agents/schedules' },
       { text: 'Sessions', link: '/agents/sessions' },
-    ],
-  },
-  {
-    text: 'Use cases',
-    collapsed: false,
-    items: [
-      { text: 'Site Agent Copilot', link: '/use-cases/' },
-      { text: 'Integration', link: '/guides/site-agent-integration' },
     ],
   },
   {
@@ -153,6 +146,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Update Agent', link: '/api-reference/agents/update' },
       { text: 'Archive Agent', link: '/api-reference/agents/archive' },
       { text: 'Agent Versions', link: '/api-reference/agents/versions' },
+      { text: 'Environments', link: '/api-reference/environments/' },
     ],
   },
   {
@@ -215,6 +209,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     text: 'Integrations',
     collapsed: false,
     items: [
+      { text: 'Credentials', link: '/api-reference/credentials/' },
       { text: 'Webhooks', link: '/api-reference/webhooks' },
     ],
   },

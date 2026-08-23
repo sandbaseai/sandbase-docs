@@ -5,7 +5,7 @@ description: Publish a tested Agent as a stable callable Service.
 
 # Services
 
-A **Service** makes a tested Agent callable from an application or AI tool. The underlying API resource is an **Endpoint**, so Service management and invocation use `/v1/endpoints`. One Service can expose REST, MCP, and experimental ACP according to its `protocols` setting.
+A **Service** makes a tested Agent callable from an application or AI tool. The underlying API resource is an **Endpoint**, so Service management and invocation use `/v1/endpoints`. Public invocation uses REST or experimental ACP according to its `protocols` setting.
 
 ## When to create a Service
 
@@ -21,16 +21,6 @@ curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../run \
 ```
 
 Omit `session_id` to create a Session, or provide an existing authorized `session_id` to continue it. The response contains the persistent `session_id` and accepted Session events; it does not create a DeploymentRun.
-
-## Connect over MCP
-
-When the Service includes the `mcp` protocol, use the `mcp_url` returned by the Endpoint API:
-
-```text
-https://api.sandbase.ai/v1/endpoints/ep_01.../mcp
-```
-
-Send MCP JSON-RPC requests to that URL with the same SandBase API-key authentication. REST and MCP are protocols on the same Service; they are not separate published resources.
 
 ## Product and API names
 

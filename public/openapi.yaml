@@ -13,7 +13,6 @@ info:
     - **Embeddings** (`/v1/embeddings`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
     - **Anthropic Messages** (`/v1/messages`): Use Anthropic SDK with `base_url="https://api.sandbase.ai"`
     - **Agents and Sessions** (`/v1/agents`, `/v1/sessions`): Use Anthropic SDK with `base_url="https://api.sandbase.ai"`
-    - **Environments** (`/sandboxes`): Use E2B SDK with `api_url="https://api.sandbase.ai"`
   version: 1.0.0
   x-sandbase-session-contract:
     status: active
@@ -53,14 +52,16 @@ tags:
     description: Run event streaming
   - name: Environments
     description: Execution environment configuration
-  - name: Sandboxes
-    description: Lower-level environment runtime lifecycle
   - name: Models
     description: Model catalog
   - name: Tasks
     description: Asynchronous model task status, settlement, and usage
   - name: Webhooks
     description: Organization-scoped callback registrations
+  - name: Skills
+    description: Reusable Agent instruction and resource bundles
+  - name: Credentials
+    description: Private values injected into Agent runtimes
 
 paths:
   # --- LLM Gateway ------------------------------------------------
@@ -144,10 +145,51 @@ paths:
                         type: string
                         enum: [user, assistant]
                       content:
-                        type: string
+                        oneOf:
+                          - type: string
+                          - type: array
+                            items:
+                              type: object
+                              additionalProperties: true
+                system:
+                  oneOf:
+                    - type: string
+                    - type: array
+                      items:
+                        type: object
+                        additionalProperties: true
+                temperature:
+                  type: number
+                  minimum: 0
+                  maximum: 1
+                top_p:
+                  type: number
+                  minimum: 0
+                  maximum: 1
+                top_k:
+                  type: integer
+                  minimum: 0
+                stop_sequences:
+                  type: array
+                  items: { type: string }
                 stream:
                   type: boolean
                   default: false
+                metadata:
+                  type: object
+                  additionalProperties: true
+                tools:
+                  type: array
+                  items:
+                    type: object
+                    additionalProperties: true
+                tool_choice:
+                  type: object
+                  additionalProperties: true
+                thinking:
+                  type: object
+                  description: Extended thinking configuration when supported by the selected model.
+                  additionalProperties: true
       responses:
         '200':
           description: Message response
@@ -168,7 +210,7 @@ paths:
         - name: task_id
           in: path
           required: true
-          description: SandBase task ID returned by POST /v1/run or POST /v1/generations.
+          description: SandBase run ID returned by POST /v1/run.
           schema:
             type: string
       responses:
@@ -190,6 +232,96 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskCostError'
+
+  # --- Unified model and API execution ---------------------------
+  /v1/run:
+    post:
+      operationId: runCapability
+      tags: [Models]
+      summary: Run a model or API capability
+      description: |
+        Executes the selected catalog capability. Capability-specific fields must match the live schema returned by
+        the model detail endpoint or Store. Asynchronous capabilities can be polled with GET /v1/run/{id}.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunRequest'
+      responses:
+        '200':
+          description: Capability completed synchronously
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunResponse'
+        '202':
+          description: Capability accepted for asynchronous execution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunResponse'
+
+  /v1/run/{id}:
+    get:
+      operationId: getRun
+      tags: [Models]
+      summary: Get an asynchronous run
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, pattern: '^run_' }
+      responses:
+        '200':
+          description: Current or terminal run state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunResponse'
+        '404':
+          description: Run not found
+
+  # --- Assets -----------------------------------------------------
+  /v1/assets:
+    post:
+      operationId: createAsset
+      tags: [Models]
+      summary: Register a media asset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAssetRequest'
+      responses:
+        '201':
+          description: Asset registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+
+  /v1/assets/{id}:
+    get:
+      operationId: getAsset
+      tags: [Models]
+      summary: Get asset metadata and a signed download URL
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: External Asset ID without the asset:// prefix.
+          schema: { type: string }
+      responses:
+        '200':
+          description: Asset metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+        '404':
+          description: Asset not found
 
   # --- Services (Endpoint resources) -----------------------------
   /v1/endpoint_runtime_profiles:
@@ -354,7 +486,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIError'
         '422':
-          description: Runtime or Sandbox provider is unsupported; no turn was delivered
+          description: Runtime provider is unsupported; no turn was delivered
           content:
             application/json:
               schema:
@@ -514,7 +646,7 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Agent'
-                  next_page: { type: string, nullable: true }
+                  next_page: { type: [string, 'null'] }
 
   # --- Sessions ---------------------------------------------------
   /v1/sessions:
@@ -620,8 +752,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Session'
-                  next_page: { type: string, nullable: true }
-                  prev_page: { type: string, nullable: true }
+                  next_page: { type: [string, 'null'] }
+                  prev_page: { type: [string, 'null'] }
 
   /v1/sessions/{id}:
     get:
@@ -837,7 +969,7 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Environment'
-                  next_page: { type: string, nullable: true }
+                  next_page: { type: [string, 'null'] }
 
   /v1/environments/{id}:
     get:
@@ -913,107 +1045,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Environment'
-
-  # --- Sandboxes --------------------------------------------------
-  /sandboxes:
-    post:
-      operationId: createSandbox
-      tags: [Sandboxes]
-      summary: Create sandbox
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateSandboxRequest'
-      responses:
-        '200':
-          description: Sandbox created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Sandbox'
-
-  /sandboxes/{id}:
-    get:
-      operationId: getSandbox
-      tags: [Sandboxes]
-      summary: Get sandbox
-      parameters:
-        - $ref: '#/components/parameters/SandboxId'
-      responses:
-        '200':
-          description: Sandbox details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Sandbox'
-    delete:
-      operationId: destroySandbox
-      tags: [Sandboxes]
-      summary: Destroy sandbox
-      parameters:
-        - $ref: '#/components/parameters/SandboxId'
-      responses:
-        '204':
-          description: Sandbox destroyed
-
-  /sandboxes/{id}/pause:
-    post:
-      operationId: pauseSandbox
-      tags: [Sandboxes]
-      summary: Pause sandbox
-      parameters:
-        - $ref: '#/components/parameters/SandboxId'
-      responses:
-        '204':
-          description: Sandbox paused
-
-  /sandboxes/{id}/connect:
-    post:
-      operationId: resumeSandbox
-      tags: [Sandboxes]
-      summary: Resume sandbox
-      parameters:
-        - $ref: '#/components/parameters/SandboxId'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                timeoutMs:
-                  type: integer
-                  description: New timeout in milliseconds
-      responses:
-        '200':
-          description: Sandbox resumed
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Sandbox'
-
-  /sandboxes/{id}/timeout:
-    post:
-      operationId: setSandboxTimeout
-      tags: [Sandboxes]
-      summary: Set sandbox timeout
-      parameters:
-        - $ref: '#/components/parameters/SandboxId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [timeout]
-              properties:
-                timeout:
-                  type: integer
-                  description: Timeout in seconds
-      responses:
-        '204':
-          description: Timeout updated
 
   # --- Models -----------------------------------------------------
   /v1/models:
@@ -1101,11 +1132,11 @@ paths:
           application/json:
             schema:
               type: object
-              required: [name, url]
+              required: [name, url, resourceType]
               properties:
                 name: { type: string }
                 url: { type: string, format: uri }
-                resourceType: { type: string, enum: [sandbox, session, model], default: sandbox }
+                resourceType: { type: string, enum: [session, model] }
                 events: { type: array, items: { type: string } }
                 enabled: { type: boolean, default: true }
                 signatureSecret: { type: string, writeOnly: true }
@@ -1139,7 +1170,7 @@ paths:
               properties:
                 name: { type: string }
                 url: { type: string, format: uri }
-                resourceType: { type: string, enum: [sandbox, session, model] }
+                resourceType: { type: string, enum: [session, model] }
                 events: { type: array, items: { type: string } }
                 enabled: { type: boolean }
       responses:
@@ -1200,7 +1231,7 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Deployment'
-                  next_page: { type: string, nullable: true }
+                  next_page: { type: [string, 'null'] }
 
   /v1/deployments/{id}:
     get:
@@ -1273,6 +1304,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeploymentRun'
+
+  /v1/deployments/{id}/pause:
+    post:
+      operationId: pauseDeployment
+      tags: [Deployments]
+      summary: Pause scheduled triggers
+      parameters:
+        - $ref: '#/components/parameters/DeploymentId'
+      responses:
+        '200':
+          description: Deployment paused
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Deployment' }
+        '404': { description: Deployment not found }
+        '409': { description: Deployment cannot be paused from its current state }
+
+  /v1/deployments/{id}/unpause:
+    post:
+      operationId: unpauseDeployment
+      tags: [Deployments]
+      summary: Resume scheduled triggers
+      parameters:
+        - $ref: '#/components/parameters/DeploymentId'
+      responses:
+        '200':
+          description: Deployment resumed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Deployment' }
+        '404': { description: Deployment not found }
+        '409': { description: Deployment cannot be resumed from its current state }
+
+  /v1/deployments/{id}/archive:
+    post:
+      operationId: archiveDeployment
+      tags: [Deployments]
+      summary: Archive a Deployment
+      parameters:
+        - $ref: '#/components/parameters/DeploymentId'
+      responses:
+        '200':
+          description: Deployment archived
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Deployment' }
+        '404': { description: Deployment not found }
+        '409': { description: Deployment cannot be archived from its current state }
 
   /v1/deployments/{id}/runs:
     post:
@@ -1383,7 +1462,7 @@ paths:
                   data:
                     type: array
                     items: { $ref: '#/components/schemas/DeploymentRun' }
-                  next_page: { type: string, nullable: true }
+                  next_page: { type: [string, 'null'] }
 
   /v1/deployment_runs/{id}:
     get:
@@ -1403,6 +1482,118 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeploymentRun'
 
+  # --- Skills -----------------------------------------------------
+  /v1/skills/files:
+    post:
+      operationId: uploadSkillFile
+      tags: [Skills]
+      summary: Upload a Skill bundle
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file: { type: string, format: binary }
+      responses:
+        '201':
+          description: Skill bundle uploaded
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SkillFile' }
+        '400': { description: Invalid or missing Skill archive }
+
+  /v1/skills:
+    post:
+      operationId: createSkill
+      tags: [Skills]
+      summary: Create a Skill
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateSkillRequest' }
+      responses:
+        '201':
+          description: Skill created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Skill' }
+        '400': { description: Invalid Skill source or metadata }
+    get:
+      operationId: listSkills
+      tags: [Skills]
+      summary: List Skills
+      parameters:
+        - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+        - { name: page_size, in: query, schema: { type: integer, minimum: 1, maximum: 1000, default: 20 } }
+      responses:
+        '200':
+          description: Skill list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/Skill' } }
+                  total: { type: integer }
+                  page: { type: integer }
+                  page_size: { type: integer }
+
+  /v1/skills/{id}:
+    get:
+      operationId: getSkill
+      tags: [Skills]
+      summary: Get a Skill
+      parameters:
+        - $ref: '#/components/parameters/SkillId'
+      responses:
+        '200':
+          description: Skill details
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Skill' }
+        '404': { description: Skill not found }
+    put:
+      operationId: updateSkill
+      tags: [Skills]
+      summary: Update a Skill
+      parameters:
+        - $ref: '#/components/parameters/SkillId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateSkillRequest' }
+      responses:
+        '200':
+          description: Skill updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Skill' }
+        '404': { description: Skill not found }
+    delete:
+      operationId: deleteSkill
+      tags: [Skills]
+      summary: Soft-delete a Skill
+      parameters:
+        - $ref: '#/components/parameters/SkillId'
+      responses:
+        '200':
+          description: Skill deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, deleted]
+                properties:
+                  id: { type: string }
+                  deleted: { type: boolean, const: true }
+        '404': { description: Skill not found }
+
+  # --- Credentials -----------------------------------------------
   /v1/credentials:
     post:
       operationId: createCredential
@@ -1550,16 +1741,145 @@ components:
       schema:
         type: string
       description: Environment ID
-    SandboxId:
+    SkillId:
       name: id
       in: path
       required: true
       schema:
         type: string
-      description: Sandbox ID
-
+      description: Skill ID
   schemas:
+    # --- Skills ---------------------------------------------------
+    SkillFile:
+      type: object
+      required: [url, key, filename, size, content_type]
+      properties:
+        url: { type: string, format: uri }
+        key: { type: string }
+        filename: { type: string }
+        size: { type: integer }
+        content_type: { type: string }
+
+    CreateSkillRequest:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 100 }
+        description: { type: string, maxLength: 1000 }
+        categories: { type: array, items: { type: string } }
+        skill_file_url: { type: string, format: uri }
+        git_url: { type: string, format: uri }
+        preview_image_urls: { type: array, items: { type: string, format: uri } }
+      anyOf:
+        - required: [skill_file_url]
+        - required: [git_url]
+
+    UpdateSkillRequest:
+      type: object
+      properties:
+        name: { type: string, maxLength: 100 }
+        description: { type: string, maxLength: 1000 }
+        categories: { type: array, items: { type: string } }
+        skill_file_url: { type: string, format: uri }
+        preview_image_urls: { type: array, items: { type: string, format: uri } }
+
+    Skill:
+      type: object
+      required: [id, name, display_name, vendor_slug, plugin_slug, created_at]
+      properties:
+        id: { type: string }
+        name: { type: string, description: Full vendor_slug/plugin_slug reference. }
+        display_name: { type: string }
+        vendor_slug: { type: string }
+        plugin_slug: { type: string }
+        description: { type: string }
+        categories: { type: array, items: { type: string } }
+        icon_url: { type: string }
+        preview_urls: { type: array, items: { type: string } }
+        skill_file_url: { type: string }
+        git_url: { type: string }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+
     # --- Tasks ----------------------------------------------------
+    RunRequest:
+      type: object
+      required: [model]
+      description: Capability-specific request. Resolve the selected model's live input schema before sending fields.
+      properties:
+        model:
+          type: string
+          description: Current model or API capability identifier from the SandBase catalog.
+        mode:
+          type: string
+          enum: [sync, async]
+          description: Optional execution mode when supported by the selected capability.
+        webhook_url:
+          type: string
+          format: uri
+          description: Optional public HTTPS callback URL for supported asynchronous media tasks.
+      additionalProperties: true
+
+    RunResponse:
+      type: object
+      required: [id, status]
+      properties:
+        id:
+          type: string
+          description: Unique run identifier.
+          pattern: '^run_'
+        model: { type: string }
+        status:
+          type: string
+          enum: [pending, running, completed, failed, timeout]
+        outputs:
+          type: array
+          description: Generated outputs. Empty until a successful run completes.
+          items:
+            type: object
+            properties:
+              url: { type: string, format: uri }
+              content_type: { type: string }
+            additionalProperties: true
+        error:
+          type: string
+          description: Sanitized error message for a failed or timed-out run.
+
+    CreateAssetRequest:
+      type: object
+      required: [url, asset_type]
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Publicly accessible source URL.
+        asset_type:
+          type: string
+          enum: [Image, Video, Audio]
+        name: { type: string }
+
+    Asset:
+      type: object
+      required: [asset_url, asset_type]
+      properties:
+        id: { type: string }
+        external_id: { type: string }
+        asset_url:
+          type: string
+          description: Persistent asset:// reference used in generation requests.
+        asset_type:
+          type: string
+          enum: [Image, Video, Audio]
+        name: { type: string }
+        status:
+          type: string
+          enum: [Active, Processing, Failed]
+        download_url:
+          type: string
+          format: uri
+          description: Temporary signed download URL when available.
+        created_at: { type: string, format: date-time }
+
     TaskCostResponse:
       type: object
       required: [id, status, settled, currency, cost, estimated_cost, usage]
@@ -1662,9 +1982,8 @@ components:
         context_length:
           type: integer
         published_at:
-          type: string
+          type: [string, 'null']
           format: date-time
-          nullable: true
         vendor_slug:
           type: string
         model_slug:
@@ -1677,10 +1996,9 @@ components:
           oneOf:
             - type: string
             - type: number
-          nullable: true
+            - type: 'null'
         price_formula:
-          type: string
-          nullable: true
+          type: [string, 'null']
 
     ModelDetail:
       allOf:
@@ -1722,46 +2040,43 @@ components:
           oneOf:
             - type: string
             - type: number
-          nullable: true
+            - type: 'null'
         prompt_token_price:
           oneOf:
             - type: string
             - type: number
-          nullable: true
+            - type: 'null'
         completion_token_price:
           oneOf:
             - type: string
             - type: number
-          nullable: true
+            - type: 'null'
         cache_read_multiplier:
           oneOf:
             - type: string
             - type: number
-          nullable: true
+            - type: 'null'
         cache_write_multiplier:
           oneOf:
             - type: string
             - type: number
-          nullable: true
+            - type: 'null'
         reasoning_price:
           oneOf:
             - type: string
             - type: number
-          nullable: true
+            - type: 'null'
         price_formula:
-          type: string
-          nullable: true
+          type: [string, 'null']
         markup_ratio:
           oneOf:
             - type: string
             - type: number
-          nullable: true
+            - type: 'null'
         readme:
-          type: string
-          nullable: true
+          type: [string, 'null']
         cover_url:
-          type: string
-          nullable: true
+          type: [string, 'null']
 
     # --- Chat Completions -----------------------------------------
     ChatCompletionRequest:
@@ -1963,7 +2278,7 @@ components:
           type: array
           items:
             type: string
-            enum: [rest, acp, mcp]
+            enum: [rest, acp]
 
     CreateDeclarativeEndpointRequest:
       type: object
@@ -2004,7 +2319,7 @@ components:
           type: array
           items:
             type: string
-            enum: [rest, acp, mcp]
+            enum: [rest, acp]
           default: [rest]
 
     CreateAdvancedEndpointRequest:
@@ -2029,7 +2344,7 @@ components:
           type: array
           items:
             type: string
-            enum: [rest, acp, mcp]
+            enum: [rest, acp]
         config:
           type: object
           additionalProperties: true
@@ -2067,7 +2382,7 @@ components:
           type: array
           items:
             type: string
-            enum: [rest, acp, mcp]
+            enum: [rest, acp]
 
     Endpoint:
       type: object
@@ -2093,7 +2408,7 @@ components:
           type: array
           items:
             type: string
-            enum: [rest, acp, mcp]
+            enum: [rest, acp]
         status:
           type: string
           enum: [active, disabled]
@@ -2266,11 +2581,10 @@ components:
           properties:
             id: { type: string }
             effort:
-              type: object
-              nullable: true
+              type: [object, 'null']
               properties:
                 type: { type: string, enum: [low, medium, high, xhigh, max] }
-            speed: { type: string, enum: [standard, fast], nullable: true }
+            speed: { type: [string, 'null'], enum: [standard, fast] }
         system:
           type: string
         tools:
@@ -2296,9 +2610,8 @@ components:
           type: string
           format: date-time
         archived_at:
-          type: string
+          type: [string, 'null']
           format: date-time
-          nullable: true
 
     AgentListPage:
       type: object
@@ -2307,7 +2620,7 @@ components:
         data:
           type: array
           items: { $ref: '#/components/schemas/Agent' }
-        next_page: { type: string, nullable: true }
+        next_page: { type: [string, 'null'] }
 
     MCPServer:
       type: object
@@ -2387,8 +2700,7 @@ components:
             - $ref: '#/components/schemas/Agent'
           readOnly: true
         agent_version:
-          type: integer
-          nullable: true
+          type: [integer, 'null']
         agent_version_id:
           type: string
         environment_id:
@@ -2404,9 +2716,8 @@ components:
         metadata:
           type: object
         archived_at:
-          type: string
+          type: [string, 'null']
           format: date-time
-          nullable: true
         created_at:
           type: string
           format: date-time
@@ -2652,18 +2963,15 @@ components:
           type: object
           description: Present only for event types whose canonical payload is not content.
         stop_reason:
-          type: object
-          nullable: true
+          type: [object, 'null']
         model_used:
-          type: string
-          nullable: true
+          type: [string, 'null']
         tokens_in:
           type: integer
         tokens_out:
           type: integer
         duration_ms:
-          type: integer
-          nullable: true
+          type: [integer, 'null']
         processed_at:
           type: string
           format: date-time
@@ -2699,7 +3007,7 @@ components:
       properties:
         id: { type: string }
         agent_id: { type: string }
-        agent_version: { type: integer, nullable: true }
+        agent_version: { type: [integer, 'null'] }
         scope: { type: string }
         scope_name: { type: string }
         secret_key: { type: string }
@@ -2708,7 +3016,7 @@ components:
         strategy: { type: string }
         weight: { type: integer }
         status: { type: string, enum: [active, disabled] }
-        last_used_at: { type: string, format: date-time, nullable: true }
+        last_used_at: { type: [string, 'null'], format: date-time }
         created_at: { type: string, format: date-time }
         updated_at: { type: string, format: date-time }
 
@@ -2732,7 +3040,7 @@ components:
         initial_events:
           type: array
           items: { $ref: '#/components/schemas/SessionEventInput' }
-        schedule: { type: object, nullable: true }
+        schedule: { type: [object, 'null'] }
         resources: { type: array, items: { type: object, additionalProperties: true } }
         vault_ids: { type: array, items: { type: string, pattern: '^vlt_' } }
         metadata: { type: object, additionalProperties: { type: string } }
@@ -2754,7 +3062,7 @@ components:
         initial_events:
           type: array
           items: { $ref: '#/components/schemas/SessionEventInput' }
-        schedule: { type: object, nullable: true }
+        schedule: { type: [object, 'null'] }
         resources:
           type: array
           description: Reserved for Claude compatibility; rejected until resource attachment is supported.
@@ -2767,7 +3075,7 @@ components:
           type: object
           additionalProperties: false
           properties:
-            hard_timeout_sec: { type: integer, minimum: 60, maximum: 604800, nullable: true }
+            hard_timeout_sec: { type: [integer, 'null'], minimum: 60, maximum: 604800 }
             inactivity_timeout_sec: { type: integer, minimum: 180, maximum: 3600 }
         expected_version: { type: integer, minimum: 1 }
         agent_binding:
@@ -2783,7 +3091,7 @@ components:
           type: object
           additionalProperties: false
           properties:
-            feishu_webhook_url: { type: string, format: uri, nullable: true, writeOnly: true }
+            feishu_webhook_url: { type: [string, 'null'], format: uri, writeOnly: true }
 
     Deployment:
       allOf:
@@ -2795,8 +3103,8 @@ components:
             type: { type: string, enum: [deployment] }
             agent: { $ref: '#/components/schemas/AgentReference' }
             status: { type: string, enum: [active, paused, archived] }
-            paused_reason: { type: object, nullable: true, additionalProperties: true }
-            archived_at: { type: string, format: date-time, nullable: true }
+            paused_reason: { type: [object, 'null'], additionalProperties: true }
+            archived_at: { type: [string, 'null'], format: date-time }
             created_at: { type: string, format: date-time }
             updated_at: { type: string, format: date-time }
 
@@ -2809,10 +3117,9 @@ components:
         type: { type: string, enum: [deployment_run] }
         agent: { $ref: '#/components/schemas/AgentReference' }
         deployment_id: { type: string, pattern: '^depl_' }
-        session_id: { type: string, pattern: '^sess_', nullable: true }
+        session_id: { type: [string, 'null'], pattern: '^sess_' }
         error:
-          type: object
-          nullable: true
+          type: [object, 'null']
           required: [type, code, message]
           properties:
             type: { type: string }
@@ -2894,8 +3201,7 @@ components:
           type: string
           enum: [environment]
         agent_id:
-          type: string
-          nullable: true
+          type: [string, 'null']
           readOnly: true
           description: Owning Agent. Agent-owned Environments are never shared by multiple Agents.
         name:
@@ -2905,7 +3211,7 @@ components:
         config:
           $ref: '#/components/schemas/EnvironmentConfig'
           description: Mutable environment configuration. Its runtime/base template cannot change for an Agent-owned Environment.
-        scope: { type: string, enum: [organization, account], nullable: true }
+        scope: { type: [string, 'null'], enum: [organization, account] }
         metadata:
           type: object
         credential_bindings:
@@ -2913,9 +3219,8 @@ components:
           items:
             type: object
         archived_at:
-          type: string
+          type: [string, 'null']
           format: date-time
-          nullable: true
         created_at: { type: string, format: date-time }
         updated_at: { type: string, format: date-time }
 
@@ -2938,45 +3243,3 @@ components:
               type: object
               description: SandBase extension for managed runtime sizing.
               additionalProperties: true
-    # --- Sandboxes ------------------------------------------------
-    CreateSandboxRequest:
-      type: object
-      required: [templateID]
-      properties:
-        templateID:
-          type: string
-          description: Template identifier
-          enum: [code_interpreter, claude, codex, opencode, openclaw, hermes-agent, desktop, base]
-        timeout:
-          type: integer
-          description: Timeout in seconds
-          default: 300
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-        envVars:
-          type: object
-          additionalProperties:
-            type: string
-
-    Sandbox:
-      type: object
-      properties:
-        sandboxID:
-          type: string
-        templateID:
-          type: string
-        clientID:
-          type: string
-        metadata:
-          type: object
-        startedAt:
-          type: string
-          format: date-time
-        endAt:
-          type: string
-          format: date-time
-        status:
-          type: string
-          enum: [creating, running, paused, stopped, error]

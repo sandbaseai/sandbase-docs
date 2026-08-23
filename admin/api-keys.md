@@ -50,8 +50,5 @@ Revoking a key is permanent and cannot be undone. All requests using the revoked
 2. Click the delete icon next to the key
 3. Confirm revocation
 
-## API
-
-- [Create Key](/api-reference/) — `POST /default/v1/keys`
-- [List Keys](/api-reference/) — `GET /default/v1/keys`
-- [Revoke Key](/api-reference/) — `DELETE /default/v1/keys/:id`
+API key lifecycle operations are currently performed in the Console. Console network requests are internal and are
+not part of the supported public API.
