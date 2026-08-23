@@ -30,6 +30,15 @@ apiReference:
         - name: tools
           type: array
           description: Built-in toolset and custom tool configurations. Maximum 128 tools.
+        - name: mcp_servers
+          type: array
+          description: MCP server configurations available to the Agent runtime.
+        - name: skills
+          type: array
+          description: Skills available to the Agent runtime. Maximum 20 skills.
+        - name: handoffs
+          type: array
+          description: Agent handoff configurations.
         - name: metadata
           type: object
           description: Up to 16 application-defined key-value pairs.

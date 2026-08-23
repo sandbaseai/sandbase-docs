@@ -648,6 +648,31 @@ paths:
                       $ref: '#/components/schemas/Agent'
                   next_page: { type: [string, 'null'] }
 
+  /v1/agents/{id}/versions/{version}:
+    get:
+      operationId: getAgentVersion
+      tags: [Agents]
+      summary: Get agent version
+      description: Return one immutable Agent snapshot by version resource ID or positive numeric version.
+      parameters:
+        - $ref: '#/components/parameters/AgentId'
+        - name: version
+          in: path
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+                minimum: 1
+      responses:
+        '200':
+          description: Agent version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+        '404': { description: Agent or version not found }
+
   # --- Sessions ---------------------------------------------------
   /v1/sessions:
     post:
@@ -1285,6 +1310,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Deployment'
+    delete:
+      operationId: deleteDeployment
+      tags: [Deployments]
+      summary: Delete deployment
+      description: Permanently delete an eligible Deployment.
+      parameters:
+        - $ref: '#/components/parameters/DeploymentId'
+      responses:
+        '200':
+          description: Deployment deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, deleted]
+                properties:
+                  id: { type: string }
+                  deleted: { type: boolean, const: true }
+        '404': { description: Deployment not found }
+        '409': { description: Deployment cannot be deleted from its current state }
 
   /v1/deployments/{id}/run:
     post:
@@ -2522,11 +2567,17 @@ components:
           maxItems: 128
           items:
             type: object
+        mcp_servers:
+          type: array
+          description: MCP server configurations available to the Agent runtime.
         skills:
           type: array
           maxItems: 20
           items:
             type: object
+        handoffs:
+          type: array
+          description: Agent handoff configurations.
         multiagent:
           type: object
           description: Reserved for Claude compatibility; non-null values currently return unsupported_feature.
@@ -2556,6 +2607,8 @@ components:
         skills:
           type: array
         mcp_servers:
+          type: array
+        handoffs:
           type: array
         multiagent:
           type: object
@@ -2592,6 +2645,8 @@ components:
         mcp_servers:
           type: array
         skills:
+          type: array
+        handoffs:
           type: array
         multiagent:
           type: object

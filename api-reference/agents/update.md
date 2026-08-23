@@ -37,6 +37,15 @@ apiReference:
         - name: tools
           type: array · null
           description: Full replacement tool list. Send an empty array or null to clear all tools.
+        - name: mcp_servers
+          type: array · null
+          description: Full replacement MCP server configuration list.
+        - name: skills
+          type: array · null
+          description: Full replacement Skill list.
+        - name: handoffs
+          type: array · null
+          description: Full replacement handoff configuration list.
         - name: metadata
           type: object
           description: Full replacement metadata object. Omitted metadata is preserved; supplied metadata replaces caller-owned metadata rather than merging individual keys.
@@ -88,7 +97,7 @@ apiReference:
     - title: Optimistic locking
       description: When version is supplied, a stale value returns 409 conflict. Fetch the current Agent, reapply the change, and retry with the latest version.
     - title: Array replacement
-      description: The tools array is not merged. Read the current agent and send the complete intended list when adding or removing one tool.
+      description: Array fields are not merged. Read the current agent and send the complete intended list when changing tools, MCP servers, Skills, or handoffs.
   errors:
     - status: 400
       type: invalid_request
