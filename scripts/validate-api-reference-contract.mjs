@@ -2,7 +2,13 @@ import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { parse } from 'yaml'
-import { generatedApiReferenceSpecs } from '../.vitepress/theme/generatedApiReferenceSpecs.ts'
+
+const generatedSpecsSource = readFileSync('.vitepress/theme/generatedApiReferenceSpecs.ts', 'utf8')
+const generatedSpecsMatch = generatedSpecsSource.match(
+  /export const generatedApiReferenceSpecs[^=]*=\s*(\{[\s\S]*\})\s*$/,
+)
+assert.ok(generatedSpecsMatch, 'Could not parse generatedApiReferenceSpecs.ts')
+const generatedApiReferenceSpecs = JSON.parse(generatedSpecsMatch[1])
 
 function walk(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
