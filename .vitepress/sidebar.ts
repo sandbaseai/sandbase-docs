@@ -212,7 +212,6 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     collapsed: false,
     items: [
       { text: 'Credentials', link: '/api-reference/credentials/' },
-      { text: 'Webhooks', link: '/api-reference/webhooks' },
     ],
   },
 ]

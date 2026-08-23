@@ -1,6 +1,6 @@
 ---
 title: API Reference
-description: SandBase API reference for Models, inference, Agents, Sessions, Endpoints, Deployments, and Webhooks.
+description: SandBase API reference for Models, inference, Agents, Sessions, Endpoints, and Deployments.
 ---
 
 # API Reference
@@ -26,7 +26,6 @@ The Agent execution APIs use four related resources:
 | **Deployments** | Schedule or manually trigger repeatable Agent work | [Deployments API](/api-reference/deployments/) |
 | **DeploymentRuns** | Inspect each Deployment trigger and its nullable Session result | [DeploymentRuns](/api-reference/deployments/list-runs) |
 | **Skills** | Create and manage reusable Agent instruction bundles | [Skills API](/api-reference/skills/) |
-| **Webhooks** | Receive notifications when async work completes or fails | [Webhooks](/api-reference/webhooks) |
 
 Task cost lookup is intended for recent task-level settlement polling. Older task execution records may be archived and become unavailable from this endpoint; use billing records or billing exports for long-term reconciliation.
 

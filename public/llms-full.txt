@@ -353,17 +353,6 @@ The public DeploymentRun object contains id, type, deployment_id, agent, trigger
 
 ---
 
-## POST /events/webhooks
-
-Create webhook for session events.
-
-Request: {"url": "https://your-app.com/webhook", "events": ["session.completed", "session.failed"]}
-Response: {"id": "wh_abc123", "secret": "whsec_...", "status": "active"}
-
-## GET /events/webhooks - List webhook registrations
-## PATCH /events/webhooks/{id} - Update a webhook registration
-## DELETE /events/webhooks/{id} - Delete a webhook registration
-
 ## GET /v1/skills - List available skills
 
 ---

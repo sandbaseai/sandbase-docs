@@ -60,13 +60,6 @@ The installed MCP bridge exposes six tools: `sandbase_discover`, `sandbase_inspe
 - A DeploymentRun links to session_id when Session creation succeeds; failed trigger records have no Session.
 - Endpoint acceptance returns session_id and an events array. It does not create a DeploymentRun or expose an internal Runtime Session identity.
 
-## Webhooks
-
-- POST /events/webhooks - Register a callback
-- GET /events/webhooks - List callback registrations
-- PATCH /events/webhooks/{id} - Update a callback registration
-- DELETE /events/webhooks/{id} - Delete a callback registration
-
 ## Pricing
 
 Pay-per-use. No monthly minimums.

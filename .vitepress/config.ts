@@ -203,6 +203,7 @@ export default defineConfig({
     // This legacy guide uses dashboard-only /default/v1 routes and an unpublished embed API.
     'guides/site-agent-integration.md',
     'use-cases/site-agent-copilot.md',
+    'api-reference/webhooks.md',
   ],
   title: 'SandBase Docs',
   description: 'SandBase docs for connecting Agents to models, APIs, tools, Setup, Services, Schedules, and Sessions.',

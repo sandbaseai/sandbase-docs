@@ -56,8 +56,6 @@ tags:
     description: Model catalog
   - name: Tasks
     description: Asynchronous model task status, settlement, and usage
-  - name: Webhooks
-    description: Organization-scoped callback registrations
   - name: Skills
     description: Reusable Agent instruction and resource bundles
   - name: Credentials
@@ -1193,74 +1191,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModelDetail'
-
-  /events/webhooks:
-    post:
-      operationId: createWebhook
-      tags: [Webhooks]
-      summary: Register a webhook
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [name, url, resourceType]
-              properties:
-                name: { type: string }
-                url: { type: string, format: uri }
-                resourceType: { type: string, enum: [session, model] }
-                events: { type: array, items: { type: string } }
-                enabled: { type: boolean, default: true }
-                signatureSecret: { type: string, writeOnly: true }
-      responses:
-        '200':
-          description: Webhook registered; the signing secret is returned only on creation
-    get:
-      operationId: listWebhooks
-      tags: [Webhooks]
-      summary: List webhook registrations
-      responses:
-        '200':
-          description: Webhook registration list
-
-  /events/webhooks/{id}:
-    patch:
-      operationId: updateWebhook
-      tags: [Webhooks]
-      summary: Update a webhook registration
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema: { type: string }
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name: { type: string }
-                url: { type: string, format: uri }
-                resourceType: { type: string, enum: [session, model] }
-                events: { type: array, items: { type: string } }
-                enabled: { type: boolean }
-      responses:
-        '200':
-          description: Webhook updated
-    delete:
-      operationId: deleteWebhook
-      tags: [Webhooks]
-      summary: Delete a webhook registration
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema: { type: string }
-      responses:
-        '204':
-          description: Webhook deleted
 
   /v1/deployments:
     post:

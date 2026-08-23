@@ -641,7 +641,7 @@ Each returned object has `id` (`drun_*`), `type`, `deployment_id`, `agent`, `tri
 
 ---
 
-## Skills & Webhooks
+## Skills
 
 ### GET /v1/skills — List Skills
 
@@ -665,36 +665,6 @@ curl https://api.sandbase.ai/v1/skills \
       }
     }
   ]
-}
-```
-
-### POST /events/webhooks — Create Webhook
-
-```bash
-curl -X POST https://api.sandbase.ai/events/webhooks \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "url": "https://your-app.com/webhook",
-    "events": ["session.completed", "session.failed"]
-  }'
-```
-
-Webhook management uses the same base path:
-
-- `GET /events/webhooks` — list registrations
-- `PATCH /events/webhooks/{id}` — update a registration
-- `DELETE /events/webhooks/{id}` — delete a registration
-
-**Response:**
-
-```json
-{
-  "id": "wh_abc123",
-  "url": "https://your-app.com/webhook",
-  "events": ["session.completed", "session.failed"],
-  "secret": "whsec_...",
-  "status": "active"
 }
 ```
 

@@ -66,7 +66,7 @@ Beyond the core generation endpoints, SandBase provides full APIs for agent life
 | **Services (Endpoints)** | `POST /v1/endpoints/{id}/run` | Invoke a Service and create or continue a Session |
 | **Sessions** | `POST /v1/sessions`, `POST /v1/sessions/{id}/events` | Create persistent Agent Sessions and send messages |
 | **Schedules (Deployments)** | `POST /v1/deployments` | Define manual or cron triggers; each creates a DeploymentRun |
-| **Skills & Webhooks** | `GET /v1/skills`, `POST /events/webhooks` | Extend agent capabilities and register callbacks |
+| **Skills** | `GET /v1/skills` | Extend agent capabilities with reusable instruction and resource bundles |
 
 ## Pricing Model
 

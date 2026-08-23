@@ -127,8 +127,6 @@ Keys can optionally have an expiration date. Expired keys return:
 | `POST /v1/chat/completions` | API Key (Bearer or x-api-key) | LLM Gateway |
 | `POST /v1/embeddings` | API Key (Bearer or x-api-key) | Text embeddings |
 | `POST /v1/messages` | API Key (Bearer or x-api-key) | Anthropic Messages |
-| `GET /events/webhooks` | API Key (Bearer) | Webhook management |
-| `POST /events/webhooks` | API Key (Bearer) | Webhook registration |
 
 The SandBase Console uses a separate browser authentication flow. Its internal requests are not supported public
 endpoints and must not be used by integrations.
