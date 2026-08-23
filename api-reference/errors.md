@@ -71,31 +71,27 @@ The `/v1/messages` endpoint returns errors in Anthropic's format:
 | `invalid request body` | Malformed JSON or missing required fields | Check your JSON syntax and include all required fields |
 | `model field is required` | Missing `model` in request body | Add a valid model identifier |
 | `max_tokens is required` | Missing `max_tokens` (Anthropic endpoint) | Include `max_tokens` in the request |
-| `events list cannot be empty` | Webhook registration with no events | Specify at least one event type |
-| `invalid webhook url` | Webhook URL too short or malformed | Provide a valid HTTPS URL |
 
 ### 401 — Unauthorized
 
 | Message | Cause | Solution |
 |---------|-------|----------|
-| `missing API key in Authorization header` | No auth header provided | Add `Authorization: Bearer sk-sb-...` or `x-api-key: sk-sb-...` |
+| `missing API key in Authorization header` | Standard endpoint has no Bearer token | Add `Authorization: Bearer sk-sb-...`; only `/v1/messages` also accepts `x-api-key` |
 | `invalid API key` | Key not found in database | Verify the key is correct and hasn't been deleted |
 | `API key has been revoked` | Key was disabled in the Console | Create a new key or re-enable the existing one |
 | `API key has expired` | Key past its expiration date | Create a new key with a later expiration |
-| `invalid signature` | Webhook signature verification failed | Check your webhook secret and signature computation |
 
 ### 402 — Payment Required
 
 | Message | Cause | Solution |
 |---------|-------|----------|
-| `insufficient balance` | Organization credit balance is zero or negative | Top up your account in the Console under Billing |
+| `API key spending limit exceeded` | API key reached its configured spending limit | Raise the key limit or use another authorized key; Task Cost lookup remains available |
 
 ### 404 — Not Found
 
 | Message | Cause | Solution |
 |---------|-------|----------|
 | `model not found` | Requested model doesn't exist or isn't enabled | Check the [Models](/models/) page for available models |
-| `webhook not found` | Webhook doesn't exist or belongs to another org | Verify the webhook ID |
 
 ### 429 — Too Many Requests
 

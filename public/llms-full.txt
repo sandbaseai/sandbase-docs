@@ -382,12 +382,15 @@ capability tags, input schema, and pricing before sending a request.
 Error bodies are protocol-specific. Core middleware may return {"error":"message"}; Agent resource APIs return
 {"error":{"type":"...","message":"..."}}; OpenAI and Anthropic gateways retain compatible envelopes.
 
-| Code | HTTP | Description |
-| invalid_api_key | 401 | Key invalid or revoked |
-| missing_api_key | 401 | No Authorization header |
+| Message/type | HTTP | Description |
+| missing API key in Authorization header | 401 | Standard endpoint requires a Bearer token |
+| invalid API key | 401 | Key is unknown |
+| API key has been revoked | 401 | Key is disabled |
+| API key has expired | 401 | Key is past expiration |
+| insufficient_scope | 403 | Scoped key is not authorized for this endpoint |
 | API key rate limit exceeded | 429 | Optional per-key RPM cap exceeded; back off with jitter |
 | global rate limit exceeded | 429 | Platform-wide RPM protection exceeded; back off with jitter |
-| insufficient_balance | 402 | Balance too low - top up |
+| API key spending limit exceeded | 402 or protocol-specific 403 | Key spending limit reached |
 | model_not_found | 404 | Check model name via GET /v1/models |
 | model_overloaded | 503 | Retry after 5-10s or use fallback |
 | context_length_exceeded | 400 | Input too long for model |

@@ -1,6 +1,6 @@
 ---
 title: Authentication
-description: Authenticate public SandBase API requests with Bearer tokens or the x-api-key header.
+description: Authenticate SandBase APIs with Bearer tokens, or use x-api-key specifically with Anthropic Messages.
 ---
 
 # Authentication
@@ -10,7 +10,8 @@ key-management practices. Console authentication and its internal APIs are not p
 
 ## Authentication Methods
 
-SandBase supports two methods for passing your API key:
+Standard SandBase `/v1/*` endpoints require a Bearer token. The Anthropic-compatible `/v1/messages` endpoint also
+accepts `x-api-key` for Anthropic SDK compatibility.
 
 ### Method 1: Bearer Token
 
@@ -22,7 +23,7 @@ Authorization: Bearer sk-sb-your-api-key
 
 This is the standard method used by OpenAI-compatible SDKs.
 
-### Method 2: x-api-key Header
+### Anthropic Messages: x-api-key Header
 
 Include the key in the `x-api-key` header:
 
@@ -30,19 +31,17 @@ Include the key in the `x-api-key` header:
 x-api-key: sk-sb-your-api-key
 ```
 
-This is the method used by Anthropic-compatible SDKs.
+This header is supported only by `POST /v1/messages`. Other public endpoints do not extract it; use Bearer
+authentication for Chat Completions, Embeddings, `/v1/run`, and resource APIs.
 
 ### Priority
 
-When both headers are present, `x-api-key` takes priority. This allows the Anthropic SDK (which sends `x-api-key`) to work correctly even if a proxy adds a `Bearer` token.
+For `POST /v1/messages` only, `x-api-key` takes priority when both headers are present.
 
 ### Extraction Logic
 
-The API key is extracted from the request in this order:
-
-1. `x-api-key` header (if present)
-2. `Authorization: Bearer <key>` header
-3. If neither is found → `401 Unauthorized`
+Standard endpoints read `Authorization: Bearer <key>` only. The Anthropic Messages middleware reads `x-api-key`
+first and then falls back to the Bearer header. A missing supported credential returns `401 Unauthorized`.
 
 ## API Key Format
 
@@ -103,10 +102,7 @@ Always create the new key before revoking the old one to avoid downtime.
 Revoked keys immediately stop working. Any request using a revoked key receives:
 
 ```json
-{
-  "code": 401,
-  "message": "API key has been revoked"
-}
+{"error":"API key has been revoked"}
 ```
 
 ### Expiration
@@ -114,18 +110,15 @@ Revoked keys immediately stop working. Any request using a revoked key receives:
 Keys can optionally have an expiration date. Expired keys return:
 
 ```json
-{
-  "code": 401,
-  "message": "API key has expired"
-}
+{"error":"API key has expired"}
 ```
 
 ## Endpoint Authentication Requirements
 
 | Endpoint | Auth Method | Description |
 |----------|-------------|-------------|
-| `POST /v1/chat/completions` | API Key (Bearer or x-api-key) | LLM Gateway |
-| `POST /v1/embeddings` | API Key (Bearer or x-api-key) | Text embeddings |
+| `POST /v1/chat/completions` | API Key (Bearer) | LLM Gateway |
+| `POST /v1/embeddings` | API Key (Bearer) | Text embeddings |
 | `POST /v1/messages` | API Key (Bearer or x-api-key) | Anthropic Messages |
 
 The SandBase Console uses a separate browser authentication flow. Its internal requests are not supported public
@@ -146,6 +139,8 @@ API keys are scoped to an organization. When you authenticate with a key:
 | 401 | `invalid API key` | Key not found in database |
 | 401 | `API key has been revoked` | Key was disabled |
 | 401 | `API key has expired` | Key past expiration date |
+| 402 | `API key spending limit exceeded` | Key-level spending limit reached; Task Cost lookup remains available |
+| 403 | `insufficient_scope` | Scoped key is not authorized for this endpoint |
 
 ## Security Best Practices
 

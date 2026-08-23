@@ -30,17 +30,17 @@ OpenAI- and Anthropic-compatible gateways retain their protocol-specific error e
 
 ## Authentication Errors
 
-| Code | HTTP | Description | Fix |
+| Response message/type | HTTP | Description | Fix |
 |------|------|-------------|-----|
-| `invalid_api_key` | 401 | API key is invalid or revoked | Verify key at [Console → API Keys](https://www.sandbase.ai/console/keys). Regenerate if compromised. |
-| `missing_api_key` | 401 | No Authorization header provided | Add header: `Authorization: Bearer sk-sb-YOUR_KEY` |
-| `expired_api_key` | 401 | API key has expired | Generate a new key in [Console → API Keys](https://www.sandbase.ai/console/keys) |
-| `insufficient_permissions` | 403 | Key lacks permission for this operation | Check key scopes in console; create a new key with required permissions |
-| `organization_suspended` | 403 | Organization account is suspended | Contact support@sandbase.ai with your `request_id` |
+| `missing API key in Authorization header` | 401 | Standard endpoint received no Bearer key | Add `Authorization: Bearer sk-sb-YOUR_KEY`; only `/v1/messages` also accepts `x-api-key` |
+| `invalid API key` | 401 | Key is unknown | Verify or rotate the key in Console |
+| `API key has been revoked` | 401 | Key is disabled | Create or enable a valid key |
+| `API key has expired` | 401 | Key is past its expiration | Create a new key |
+| `insufficient_scope` | 403 | Scoped key is not authorized for this endpoint | Use a key with the required scope |
 
 ## Rate Limiting Errors
 
-| Code | HTTP | Description | Fix |
+| Response message | HTTP | Description | Fix |
 |------|------|-------------|-----|
 | `API key rate limit exceeded` | 429 | The optional per-key RPM cap was exceeded | Use bounded exponential backoff with jitter |
 | `global rate limit exceeded` | 429 | The current platform-wide RPM protection was exceeded | Use bounded exponential backoff with jitter |
@@ -50,11 +50,10 @@ universal RPM or concurrency default.
 
 ## Billing Errors
 
-| Code | HTTP | Description | Fix |
+| Response message | HTTP | Description | Fix |
 |------|------|-------------|-----|
-| `insufficient_balance` | 402 | Account balance too low | Top up at [Console → Billing](https://www.sandbase.ai/console/billing) |
-| `payment_required` | 402 | No payment method on file | Add payment method at [Console → Billing](https://www.sandbase.ai/console/billing) |
-| `spend_limit_reached` | 402 | Spend limit for this period reached | Increase limit in [Console → Billing → Spend Limits](https://www.sandbase.ai/console/billing) |
+| `API key spending limit exceeded` | 402 | Key-level spending limit reached on standard endpoints | Raise the key limit or use another authorized key; Task Cost lookup remains available |
+| `API key spending limit exceeded` | 403 | Same condition on Anthropic Messages' protocol-compatible middleware | Raise the key limit or use another authorized key |
 
 ## Model Errors
 
