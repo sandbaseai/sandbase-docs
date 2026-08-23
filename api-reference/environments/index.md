@@ -48,7 +48,7 @@ Credential bindings reference an existing Credential and the environment-variabl
 {
   "credential_bindings": [
     {
-      "credential_id": "cred_01...",
+      "credential_id": "sec_01...",
       "purpose": "GitHub API access",
       "target": "GITHUB_TOKEN"
     }

@@ -92,6 +92,13 @@ assert.match(sessionEventStream, /does not synthesize preview deltas/, 'Session 
 const sessionStreamReference = generatedReferenceSpecs.match(/"sessions\/stream": \{[\s\S]*?(?=\n  \},\n  "skills\/create")/)?.[0] ?? ''
 assert.match(sessionStreamReference, /id: sevt_01/, 'Session SSE examples must include the emitted id field')
 assert.match(sessionStreamReference, /created_at/, 'Session SSE examples must include the emitted created_at field')
+const credentialSchema = openapi.match(/^    Credential:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(credentialSchema, /id: \{ type: string, pattern: '\^sec_' \}/, 'Managed Credential IDs must use the implemented sec_ prefix')
+assert.match(credentialSchema, /required: \[[^\]]*last_used_at[^\]]*cooldown_until[^\]]*failure_count[^\]]*\]/, 'Credential responses must require fields always emitted by the serializer')
+assert.doesNotMatch(credentialSchema, /^        (?:value|value_encrypted):/m, 'Credential responses must never expose plaintext or encrypted values')
+const createCredentialSchema = openapi.match(/^    CreateCredentialRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(createCredentialSchema, /strategy: \{ type: string, enum: \[round_robin\]/, 'Credential creation must document the only implemented strategy')
+assert.match(createCredentialSchema, /weight: \{ type: integer, minimum: 1/, 'Credential creation must require a positive weight')
 const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(environmentSchema, /config:\n[\s\S]*?- type: 'null'/, 'Environment config must allow the serializer\'s null output')
 assert.match(environmentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Environment metadata must allow the serializer\'s null output')
@@ -133,6 +140,7 @@ function inspectPublishedSources(directory) {
     assert.doesNotMatch(content, /\/events\/webhooks(?:\/|\b)/, `${relative} must not expose Sandbox event webhook paths`)
     assert.doesNotMatch(content, /\brun_abc123\b/, `${relative} must not assume a run ID prefix`)
     assert.doesNotMatch(content, /\btask_abc123\b/, `${relative} must not assume a task ID prefix`)
+    assert.doesNotMatch(content, /\bcred_01/, `${relative} must use the implemented sec_ Managed Credential ID prefix`)
     assert.doesNotMatch(content, /Default:\s*60 requests\/min,\s*5 concurrent/i, `${relative} must not publish obsolete universal rate limits`)
     assert.doesNotMatch(content, /rate_limited[^\n]*Retry-After header/i, `${relative} must not claim public 429 responses include Retry-After`)
     assert.doesNotMatch(content, /"next_page": null/, `${relative} must omit next_page on a final page`)

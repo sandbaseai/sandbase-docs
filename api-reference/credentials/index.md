@@ -36,12 +36,14 @@ curl -X POST https://api.sandbase.ai/v1/credentials \
   }'
 ```
 
-The plaintext `value` is accepted only on creation or rotation. Retrieval and list responses return masked metadata, never the stored plaintext. Credential success responses use the standard `{ "code": 0, "data": ..., "message": "ok" }` envelope.
+Credential IDs use the `sec_` prefix. The plaintext `value` is accepted only on creation or rotation. Retrieval and list responses return masked metadata, never the stored plaintext or encrypted payload. Treat `value_hint` as sensitive metadata because it retains a short prefix and suffix. Credential success responses use the standard `{ "code": 0, "data": ..., "message": "ok" }` envelope.
+
+The only supported selection strategy is `round_robin`, and `weight` must be a positive integer.
 
 ## Rotate a credential
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/credentials/cred_01.../rotate \
+curl -X POST https://api.sandbase.ai/v1/credentials/sec_01.../rotate \
   -H "Authorization: Bearer $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"value":"YOUR_NEW_SECRET_VALUE"}'

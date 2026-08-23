@@ -322,7 +322,7 @@ paths:
         - name: id
           in: path
           required: true
-          schema: { type: string }
+          schema: { type: string, pattern: '^sec_' }
           description: Opaque ID returned by POST /v1/run. Do not assume a prefix or derive it independently.
       responses:
         '200':
@@ -1734,7 +1734,7 @@ paths:
         - name: id
           in: path
           required: true
-          schema: { type: string }
+          schema: { type: string, pattern: '^sec_' }
       responses:
         '200':
           description: Credential details (secret masked)
@@ -1750,7 +1750,7 @@ paths:
         - name: id
           in: path
           required: true
-          schema: { type: string }
+          schema: { type: string, pattern: '^sec_' }
       requestBody:
         required: true
         content:
@@ -1782,7 +1782,12 @@ paths:
               type: object
               required: [value]
               properties:
-                value: { type: string, description: "New plaintext value" }
+                value:
+                  type: string
+                  minLength: 1
+                  maxLength: 8192
+                  writeOnly: true
+                  description: New plaintext value. Blank or whitespace-only values are rejected.
       responses:
         '200':
           description: Rotated credential
@@ -3158,35 +3163,35 @@ components:
       required: [scope, scope_name, secret_key, value]
       properties:
         agent_id: { type: string }
-        scope: { type: string }
-        scope_name: { type: string }
-        secret_key: { type: string }
-        value: { type: string, writeOnly: true, description: Plaintext value encrypted at rest and never returned. }
+        scope: { type: string, minLength: 1, maxLength: 40 }
+        scope_name: { type: string, minLength: 1, maxLength: 100 }
+        secret_key: { type: string, minLength: 1, maxLength: 200 }
+        value: { type: string, minLength: 1, maxLength: 8192, writeOnly: true, description: Plaintext value encrypted at rest and never returned. Blank or whitespace-only values are rejected. }
         group_key: { type: string }
-        strategy: { type: string, default: round_robin }
-        weight: { type: integer, default: 1 }
+        strategy: { type: string, enum: [round_robin], default: round_robin }
+        weight: { type: integer, minimum: 1, default: 1 }
 
     UpdateCredentialRequest:
       type: object
       minProperties: 1
       properties:
         status: { type: string, enum: [active, disabled] }
-        strategy: { type: string }
-        weight: { type: integer }
+        strategy: { type: string, enum: [round_robin] }
+        weight: { type: integer, minimum: 1 }
 
     Credential:
       type: object
       description: Credential metadata. The plaintext and encrypted payload are never returned.
-      required: [id, scope, scope_name, secret_key, value_hint, status, created_at, updated_at]
+      required: [id, org_id, agent_id, agent_version, scope, scope_name, secret_key, value_hint, group_key, strategy, weight, status, last_used_at, cooldown_until, failure_count, created_at, updated_at]
       properties:
-        id: { type: string }
+        id: { type: string, pattern: '^sec_' }
         org_id: { type: string }
         agent_id: { type: string }
         agent_version: { type: [integer, 'null'] }
         scope: { type: string }
         scope_name: { type: string }
         secret_key: { type: string }
-        value_hint: { type: string, description: Non-secret masked hint. }
+        value_hint: { type: string, description: Masked prefix/suffix hint. Treat it as sensitive metadata even though it is not the stored plaintext. }
         group_key: { type: string }
         strategy: { type: string }
         weight: { type: integer }
@@ -3383,7 +3388,7 @@ components:
             type: object
             required: [credential_id, target]
             properties:
-              credential_id: { type: string }
+              credential_id: { type: string, pattern: '^sec_' }
               purpose: { type: string }
               target: { type: string, pattern: '^[A-Z_][A-Z0-9_]{0,127}$' }
 
@@ -3405,7 +3410,7 @@ components:
             type: object
             required: [credential_id, target]
             properties:
-              credential_id: { type: string }
+              credential_id: { type: string, pattern: '^sec_' }
               purpose: { type: string }
               target: { type: string, pattern: '^[A-Z_][A-Z0-9_]{0,127}$' }
 
