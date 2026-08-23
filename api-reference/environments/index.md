@@ -33,7 +33,6 @@ curl -X POST https://api.sandbase.ai/v1/environments \
   -d '{
     "name": "research-runtime",
     "config": {"type":"cloud"},
-    "scope": "organization",
     "metadata": {"team":"research"}
   }'
 ```

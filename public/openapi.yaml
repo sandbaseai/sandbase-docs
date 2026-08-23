@@ -1564,6 +1564,9 @@ paths:
               required: [file]
               properties:
                 file: { type: string, format: binary }
+                skill_id:
+                  type: string
+                  description: Optional Skill ID used to organize the uploaded file path.
       responses:
         '201':
           description: Skill bundle uploaded
@@ -1678,27 +1681,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Credential'
+                $ref: '#/components/schemas/CredentialResponse'
     get:
       operationId: listCredentials
       tags: [Credentials]
       summary: List credentials
-      parameters:
-        - name: agent_id
-          in: query
-          schema: { type: string }
       responses:
         '200':
           description: Credential list
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Credential'
+                $ref: '#/components/schemas/CredentialListResponse'
   /v1/credentials/{id}:
     get:
       operationId: getCredential
@@ -1715,11 +1709,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Credential'
+                $ref: '#/components/schemas/CredentialResponse'
     patch:
       operationId: updateCredential
       tags: [Credentials]
-      summary: Update credential metadata
+      summary: Update credential status or selection settings
       parameters:
         - name: id
           in: path
@@ -1737,7 +1731,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Credential'
+                $ref: '#/components/schemas/CredentialResponse'
   /v1/credentials/{id}/rotate:
     post:
       operationId: rotateCredential
@@ -1763,7 +1757,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Credential'
+                $ref: '#/components/schemas/CredentialResponse'
 components:
   securitySchemes:
     BearerAuth:
@@ -1837,6 +1831,8 @@ components:
         skill_file_url: { type: string, format: uri }
         git_url: { type: string, format: uri }
         preview_image_urls: { type: array, items: { type: string, format: uri } }
+        metadata: { type: object, additionalProperties: true }
+        unified_schema: { type: object, additionalProperties: true }
       anyOf:
         - required: [skill_file_url]
         - required: [git_url]
@@ -1849,6 +1845,8 @@ components:
         categories: { type: array, items: { type: string } }
         skill_file_url: { type: string, format: uri }
         preview_image_urls: { type: array, items: { type: string, format: uri } }
+        metadata: { type: object, additionalProperties: true }
+        unified_schema: { type: object, additionalProperties: true }
 
     Skill:
       type: object
@@ -3083,6 +3081,7 @@ components:
       required: [id, scope, scope_name, secret_key, value_hint, status, created_at, updated_at]
       properties:
         id: { type: string }
+        org_id: { type: string }
         agent_id: { type: string }
         agent_version: { type: [integer, 'null'] }
         scope: { type: string }
@@ -3094,8 +3093,29 @@ components:
         weight: { type: integer }
         status: { type: string, enum: [active, disabled] }
         last_used_at: { type: [string, 'null'], format: date-time }
+        cooldown_until: { type: [string, 'null'], format: date-time }
+        failure_count: { type: integer }
         created_at: { type: string, format: date-time }
         updated_at: { type: string, format: date-time }
+
+    CredentialResponse:
+      type: object
+      description: Credential endpoints currently use the standard response envelope; the plaintext secret is never included.
+      required: [code, data, message]
+      properties:
+        code: { type: integer, const: 0 }
+        data: { $ref: '#/components/schemas/Credential' }
+        message: { type: string, const: ok }
+
+    CredentialListResponse:
+      type: object
+      required: [code, data, message]
+      properties:
+        code: { type: integer, const: 0 }
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Credential' }
+        message: { type: string, const: ok }
 
     CreateDeploymentRequest:
       type: object
@@ -3225,7 +3245,7 @@ components:
     # --- Environments ---------------------------------------------
     CreateEnvironmentRequest:
       type: object
-      required: [name]
+      required: [name, config]
       properties:
         name:
           type: string
@@ -3233,7 +3253,6 @@ components:
           type: string
         config:
           $ref: '#/components/schemas/EnvironmentConfig'
-        scope: { type: string, enum: [organization, account] }
         metadata:
           type: object
         credential_bindings:
@@ -3288,7 +3307,6 @@ components:
         config:
           $ref: '#/components/schemas/EnvironmentConfig'
           description: Mutable environment configuration. Its runtime/base template cannot change for an Agent-owned Environment.
-        scope: { type: [string, 'null'], enum: [organization, account] }
         metadata:
           type: object
         credential_bindings:

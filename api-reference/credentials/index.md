@@ -16,9 +16,9 @@ Credential endpoints require a secret SandBase API key. Never call them from bro
 | Method | Path | Purpose |
 |---|---|---|
 | `POST` | `/v1/credentials` | Create a credential. |
-| `GET` | `/v1/credentials` | List credentials, optionally filtered by `agent_id`. |
+| `GET` | `/v1/credentials` | List all credentials in the organization. |
 | `GET` | `/v1/credentials/{credential_id}` | Get masked credential metadata. |
-| `PATCH` | `/v1/credentials/{credential_id}` | Update credential metadata. |
+| `PATCH` | `/v1/credentials/{credential_id}` | Update `status`, `strategy`, or `weight`. |
 | `POST` | `/v1/credentials/{credential_id}/rotate` | Replace the stored secret value. |
 
 ## Create a credential
@@ -36,7 +36,7 @@ curl -X POST https://api.sandbase.ai/v1/credentials \
   }'
 ```
 
-The plaintext `value` is accepted only on creation or rotation. Retrieval and list responses return masked metadata, never the stored plaintext.
+The plaintext `value` is accepted only on creation or rotation. Retrieval and list responses return masked metadata, never the stored plaintext. Credential success responses use the standard `{ "code": 0, "data": ..., "message": "ok" }` envelope.
 
 ## Rotate a credential
 
