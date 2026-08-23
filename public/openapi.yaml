@@ -2692,21 +2692,15 @@ components:
         system:
           type: string
         tools:
-          type: array
+          type: [array, 'null']
         mcp_servers:
-          type: array
+          type: [array, 'null']
         skills:
-          type: array
+          type: [array, 'null']
         handoffs:
-          type: array
-        multiagent:
-          type: object
-        runtime_profile:
-          type: string
-          readOnly: true
-          description: Runtime selected when the Agent is created; immutable for its lifetime.
+          type: [array, 'null']
         metadata:
-          type: object
+          type: [object, 'null']
         version:
           type: integer
         created_at:
@@ -2822,7 +2816,7 @@ components:
           type: string
           enum: [direct, endpoint, deployment]
         metadata:
-          type: object
+          type: [object, 'null']
         archived_at:
           type: [string, 'null']
           format: date-time
@@ -3366,12 +3360,14 @@ components:
         description:
           type: string
         config:
-          $ref: '#/components/schemas/EnvironmentConfig'
           description: Mutable environment configuration. Its runtime/base template cannot change for an Agent-owned Environment.
+          oneOf:
+            - $ref: '#/components/schemas/EnvironmentConfig'
+            - type: 'null'
         metadata:
-          type: object
+          type: [object, 'null']
         credential_bindings:
-          type: array
+          type: [array, 'null']
           items:
             type: object
         archived_at:
