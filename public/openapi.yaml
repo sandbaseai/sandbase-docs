@@ -770,6 +770,14 @@ paths:
         - name: agent_version
           in: query
           schema: { type: integer, minimum: 1 }
+        - name: statuses
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items: { type: string, enum: [idle, running, rescheduling, terminated] }
+          description: Repeat the parameter to filter by one or more Session statuses.
         - name: include_archived
           in: query
           schema: { type: boolean, default: false }
@@ -800,7 +808,6 @@ paths:
                     items:
                       $ref: '#/components/schemas/Session'
                   next_page: { type: [string, 'null'] }
-                  prev_page: { type: [string, 'null'] }
 
   /v1/sessions/{id}:
     get:
@@ -819,7 +826,8 @@ paths:
     post:
       operationId: updateSession
       tags: [Sessions]
-      summary: Update session title or metadata
+      summary: Update session metadata or Agent overrides
+      description: Update title, metadata, or Session-local tool and MCP server overrides. The pinned Agent version remains immutable.
       parameters:
         - $ref: '#/components/parameters/SessionId'
       requestBody:
@@ -854,6 +862,14 @@ paths:
       responses:
         '200':
           description: Session deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, type]
+                properties:
+                  id: { type: string, pattern: '^sess_' }
+                  type: { type: string, const: session_deleted }
   /v1/sessions/{id}/archive:
     post:
       operationId: archiveSession
@@ -916,6 +932,7 @@ paths:
           schema: { type: array, items: { type: string } }
           style: form
           explode: true
+          description: Repeat the parameter or provide a comma-separated list of event types.
         - name: order
           in: query
           schema: { type: string, enum: [asc, desc], default: asc }
@@ -949,6 +966,9 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/SessionEvent'
+                  next_page:
+                    type: [string, 'null']
+                    description: Opaque cursor present when another page is available.
 
   /v1/sessions/{id}/events/stream:
     get:
@@ -3032,8 +3052,12 @@ components:
         type:
           type: string
         content:
-          type: array
-          items: { type: object, additionalProperties: true }
+          description: Canonical event content. Message events use an array; tool and status events may use an object.
+          oneOf:
+            - type: array
+              items: { type: object, additionalProperties: true }
+            - type: object
+              additionalProperties: true
         data:
           type: object
           description: Present only for event types whose canonical payload is not content.
@@ -3048,8 +3072,9 @@ components:
         duration_ms:
           type: [integer, 'null']
         processed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
+          description: Null only while a native delivery outcome is still unknown.
         created_at:
           type: string
           format: date-time

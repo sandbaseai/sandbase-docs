@@ -37,3 +37,9 @@ If native runtime delivery returns `502` with a top-level `session_id`, the deli
 :::
 
 Archive keeps Session history readable and rejects new events with `409 session_archived`. Delete permanently removes the Session and its persisted events.
+
+## Filtering and updates
+
+List Sessions with repeated `statuses` parameters to select one or more of `idle`, `running`, `rescheduling`, or `terminated`. Cursor responses include `next_page` only when another page exists.
+
+`POST /v1/sessions/{session_id}` can update the title, metadata, and Session-local `agent.tools` or `agent.mcp_servers` overrides. It never changes the pinned Agent version. Successful deletion returns the deleted Session ID with `type: "session_deleted"`.
