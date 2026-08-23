@@ -23,6 +23,10 @@ Endpoint invocation accepts an optional `session_id`. When omitted, SandBase cre
 
 For the advanced creation mode, `name` and `agent_id` are required. Optional fields include `agent_version`, `environment_id`, `slug`, `protocols`, and Session configuration. When `environment_id` is omitted, SandBase resolves or creates the Agent-owned Environment. A declarative definition instead provides `name` and `runtime`; it cannot be mixed with `agent_id` or `environment_id`.
 
+List requests support cursor pagination and `q` search across IDs, names, slugs, runtimes, Agent IDs, and Environment IDs. `search` is retained as an alias for `q`.
+
+For advanced Endpoints, update requests can change the name, slug, bound Agent or Environment, protocols, status, and Session configuration. When changing `agent_version`, include the currently bound version as `expected_agent_version` to protect against concurrent upgrades. Declarative Endpoint definitions remain immutable.
+
 ## Invoke an Endpoint
 
 `POST /v1/endpoints/{endpoint_id}/run`

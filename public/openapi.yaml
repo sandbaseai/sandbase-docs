@@ -390,6 +390,18 @@ paths:
       operationId: listEndpoints
       tags: [Services]
       summary: List Services
+      parameters:
+        - name: q
+          in: query
+          schema: { type: string }
+          description: Search by ID, name, slug, runtime, Agent ID, or Environment ID. `search` is accepted as a compatibility alias.
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+        - name: page
+          in: query
+          schema: { type: string }
+          description: Opaque cursor from a previous response's next_page field.
       responses:
         '200':
           description: Service list
@@ -404,7 +416,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Endpoint'
                   next_page:
-                    type: string
+                    type: [string, 'null']
 
   /v1/endpoints/{id}:
     get:
@@ -475,6 +487,14 @@ paths:
       responses:
         '200':
           description: Service deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, deleted]
+                properties:
+                  id: { type: string }
+                  deleted: { type: boolean, const: true }
 
   /v1/endpoints/{id}/run:
     post:
@@ -2457,8 +2477,22 @@ components:
 
     UpdateEndpointRequest:
       type: object
+      minProperties: 1
       properties:
         name:
+          type: string
+        slug:
+          type: string
+        agent_id:
+          type: string
+        agent_version:
+          type: integer
+          minimum: 1
+        expected_agent_version:
+          type: integer
+          minimum: 1
+          description: Current bound version required when upgrading agent_version.
+        environment_id:
           type: string
         status:
           type: string
@@ -2468,6 +2502,11 @@ components:
           items:
             type: string
             enum: [rest, acp]
+        config: { type: object, additionalProperties: true }
+        session_metadata: { type: object, additionalProperties: true }
+        memory_config: { type: object, additionalProperties: true }
+        resource_config: { type: object, additionalProperties: true }
+        vault_config: { type: object, additionalProperties: true }
 
     Endpoint:
       type: object
@@ -3216,19 +3255,42 @@ components:
             feishu_webhook_url: { type: [string, 'null'], format: uri, writeOnly: true }
 
     Deployment:
-      allOf:
-        - $ref: '#/components/schemas/CreateDeploymentRequest'
-        - type: object
-          required: [id, type, agent, status, created_at, updated_at]
+      type: object
+      description: Deployment resource. List responses omit initial_events and config; detail responses may add resolved binding fields.
+      required: [id, type, name, agent, agent_id, environment_id, resources, vault_ids, status, version, creation_mode, created_at, updated_at]
+      properties:
+        id: { type: string, pattern: '^depl_' }
+        type: { type: string, enum: [deployment] }
+        name: { type: string }
+        description: { type: string }
+        metadata: { type: [object, 'null'], additionalProperties: true }
+        resources: { type: array, items: { type: object, additionalProperties: true } }
+        vault_ids: { type: array, items: { type: string } }
+        agent: { $ref: '#/components/schemas/AgentReference' }
+        agent_id: { type: string }
+        agent_version: { type: [integer, 'null'] }
+        environment_id: { type: string }
+        initial_events:
+          type: [array, 'null']
+          items: { $ref: '#/components/schemas/SessionEventInput' }
+        schedule: { type: [object, 'null'], additionalProperties: true }
+        timeout_policy: { type: object, additionalProperties: true }
+        config: { type: [object, 'null'], additionalProperties: true }
+        status: { type: string, enum: [active, paused, archived] }
+        version: { type: integer, minimum: 1 }
+        next_run_at: { type: [string, 'null'], format: date-time }
+        creation_mode: { type: string, enum: [declarative, advanced] }
+        runtime: { type: string, description: Present for declarative Deployments. }
+        skills: { type: array, items: { type: string }, description: Present for declarative Deployments. }
+        agent_binding: { type: object, additionalProperties: true }
+        environment_binding: { type: object, additionalProperties: true }
+        agent_config: { type: object, additionalProperties: true }
+        notification_settings:
+          type: object
           properties:
-            id: { type: string, pattern: '^depl_' }
-            type: { type: string, enum: [deployment] }
-            agent: { $ref: '#/components/schemas/AgentReference' }
-            status: { type: string, enum: [active, paused, archived] }
-            paused_reason: { type: [object, 'null'], additionalProperties: true }
-            archived_at: { type: [string, 'null'], format: date-time }
-            created_at: { type: string, format: date-time }
-            updated_at: { type: string, format: date-time }
+            feishu_webhook_configured: { type: boolean }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
 
     DeploymentRun:
       type: object
