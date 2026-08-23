@@ -444,6 +444,28 @@ paths:
                 $ref: '#/components/schemas/Endpoint'
         '409':
           description: Declarative Service definition is immutable
+    post:
+      operationId: updateEndpointCompatibility
+      tags: [Services]
+      summary: Update a Service (compatibility alias)
+      description: Compatibility alias for PATCH. New integrations should use PATCH.
+      parameters:
+        - $ref: '#/components/parameters/EndpointId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEndpointRequest'
+      responses:
+        '200':
+          description: Service updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Endpoint'
+        '409':
+          description: Declarative Service definition is immutable
     delete:
       operationId: deleteEndpoint
       tags: [Services]

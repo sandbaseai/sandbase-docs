@@ -19,7 +19,7 @@ Every trigger creates a durable `drun_*` DeploymentRun. A successful trigger ass
 | `GET` | `/v1/deployments` | List Deployments. |
 | `GET` | `/v1/deployments/{deployment_id}` | Get a Deployment and resolved bindings. |
 | `PATCH` or `POST` | `/v1/deployments/{deployment_id}` | Update supported fields. |
-| `DELETE` | `/v1/deployments/{deployment_id}` | Permanently delete an eligible Deployment. |
+| `DELETE` | `/v1/deployments/{deployment_id}` | [Permanently delete](./delete) an eligible Deployment. |
 | `POST` | `/v1/deployments/{deployment_id}/pause` | Pause scheduled triggers. |
 | `POST` | `/v1/deployments/{deployment_id}/unpause` | Resume scheduled triggers. |
 | `POST` | `/v1/deployments/{deployment_id}/archive` | Archive a Deployment. |

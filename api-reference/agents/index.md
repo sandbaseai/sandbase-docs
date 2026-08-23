@@ -17,7 +17,7 @@ An Agent is a reusable, versioned definition containing a model, instructions, t
 | `POST` | `/v1/agents/{agent_id}` | [Update an Agent](./update) and create a version |
 | `POST` | `/v1/agents/{agent_id}/archive` | [Archive an Agent](./archive) |
 | `GET` | `/v1/agents/{agent_id}/versions` | [List versions](./versions) |
-| `GET` | `/v1/agents/{agent_id}/versions/{version}` | Get one immutable version by resource ID or number. |
+| `GET` | `/v1/agents/{agent_id}/versions/{version}` | [Get one immutable version](./get-version) by resource ID or number. |
 
 All endpoints are organization-scoped and require a SandBase API key.
 

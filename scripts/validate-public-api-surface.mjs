@@ -42,8 +42,12 @@ for (const requiredPath of requiredPublicPaths) {
 }
 
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
+assert.match(config, /'guides\/site-agent-integration\.md'/, 'Legacy Site Agent guide must stay excluded from the public build')
+assert.match(config, /'use-cases\/site-agent-copilot\.md'/, 'Legacy Site Agent use case must stay excluded from the public build')
 assert.doesNotMatch(sidebar, /\/api-reference\/sandboxes?\b/i, 'Sidebar must not link to sandbox API pages')
 assert.doesNotMatch(openapi, /^  \/v1\/endpoints\/\{[^}]+\}\/mcp:$/m, 'Endpoint MCP transport must not be public')
+assert.doesNotMatch(openapi, /^  \/v1\/generations(?:\/\{[^}]+\})?:$/m, 'Withdrawn generation paths must not be public')
+assert.doesNotMatch(openapi, /^  \/default\/v1(?:\/|:)/m, 'Internal Console paths must not be public')
 
 const unpublishedFiles = new Set([
   'guides/site-agent-integration.md',
