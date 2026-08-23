@@ -2721,12 +2721,14 @@ components:
 
     AgentListPage:
       type: object
-      required: [data, next_page]
+      required: [data]
       properties:
         data:
           type: array
           items: { $ref: '#/components/schemas/Agent' }
-        next_page: { type: [string, 'null'] }
+        next_page:
+          type: string
+          description: Opaque cursor included only when another page is available.
 
     MCPServer:
       type: object

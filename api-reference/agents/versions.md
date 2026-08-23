@@ -60,12 +60,13 @@ apiReference:
             "system": "Always cite sources.",
             "created_at": "2026-05-29T11:00:00Z"
           }
-        ],
-        "next_page": null
+        ]
       }
   notes:
     - title: Immutable Agent projections
       description: Each item is the full Agent projection at that immutable version. No-op updates do not create a version.
+    - title: Pagination
+      description: When another page is available, the response includes next_page. The field is absent on the final page.
   errors:
     - status: 401
       type: authentication_error
