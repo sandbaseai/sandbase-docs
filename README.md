@@ -12,6 +12,7 @@
   </p>
   <p align="center">
     <a href="https://github.com/sandbaseai/sandbase-docs/stargazers"><img src="https://img.shields.io/github/stars/sandbaseai/sandbase-docs?style=social" alt="GitHub stars"></a>
+    <a href="https://github.com/sandbaseai/sandbase-docs/actions/workflows/validate.yml"><img src="https://github.com/sandbaseai/sandbase-docs/actions/workflows/validate.yml/badge.svg?branch=main" alt="Docs build validation"></a>
     <a href="https://github.com/sandbaseai/sandbase-docs/blob/main/LICENSE"><img src="https://img.shields.io/github/license/sandbaseai/sandbase-docs" alt="Apache-2.0 license"></a>
     <a href="https://www.sandbase.ai/docs/"><img src="https://img.shields.io/badge/docs-live-16a34a" alt="Documentation"></a>
   </p>
