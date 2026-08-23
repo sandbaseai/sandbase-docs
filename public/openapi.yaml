@@ -494,6 +494,7 @@ paths:
                 properties:
                   id: { type: string }
                   deleted: { type: boolean, const: true }
+        '404': { description: Service not found }
 
   /v1/endpoints/{id}/run:
     post:
@@ -889,6 +890,8 @@ paths:
                 properties:
                   id: { type: string, pattern: '^sess_' }
                   type: { type: string, const: session_deleted }
+        '404': { description: Session not found }
+        '409': { description: Running or rescheduling Session cannot be deleted }
   /v1/sessions/{id}/archive:
     post:
       operationId: archiveSession
@@ -1116,6 +1119,16 @@ paths:
       responses:
         '200':
           description: Environment deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, type]
+                properties:
+                  id: { type: string }
+                  type: { type: string, const: environment_deleted }
+        '404': { description: Environment not found }
+        '409': { description: Managed Environment or Environment referenced by active Sessions cannot be deleted }
 
   /v1/environments/{id}/archive:
     post:

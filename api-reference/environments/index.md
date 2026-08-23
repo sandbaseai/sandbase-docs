@@ -24,6 +24,9 @@ The public Environment API manages configuration resources only. It does not exp
 
 `POST /v1/environments/{environment_id}` is retained as a compatibility alias for `PATCH`. New integrations should use `PATCH`.
 
+Deletion returns `{ "id": "env_...", "type": "environment_deleted" }`. It returns `409 Conflict` for a managed
+Environment or one referenced by active Sessions; archive an Environment when its record should be retained.
+
 ## Create an Environment
 
 ```bash
