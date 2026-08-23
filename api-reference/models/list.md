@@ -1,6 +1,6 @@
 ---
 title: "List Models"
-description: "List enabled API models with pagination, filters, and fuzzy search by model name."
+description: "List enabled logical models in the OpenAI-compatible model-list format."
 aside: false
 outline: false
 apiReferenceKey: "models/list"

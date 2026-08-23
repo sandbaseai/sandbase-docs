@@ -540,23 +540,11 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Models",
     "method": "GET",
     "path": "/v1/models",
-    "description": "List enabled API models with pagination, filters, and fuzzy search by model name.",
+    "description": "List enabled logical models in the OpenAI-compatible model-list format.",
     "groups": [
       {
         "title": "Query parameters",
         "fields": [
-          {
-            "name": "page",
-            "type": "integer",
-            "required": false,
-            "description": "Page number. Values below 1 are treated as 1."
-          },
-          {
-            "name": "pageSize",
-            "type": "integer",
-            "required": false,
-            "description": "Number of results per page. Must be between 1 and 100; invalid values default to 20."
-          },
           {
             "name": "q",
             "type": "string",
@@ -573,7 +561,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "name": "type",
             "type": "string",
             "required": false,
-            "description": "Filter by type: llm, vision, image, video, audio, or embedding."
+            "description": "Filter by model type. Defaults to llm."
           },
           {
             "name": "order",
@@ -593,7 +581,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"data\": [\n    {\n      \"id\": \"model_01abc...\",\n      \"name\": \"openai/gpt-4o\",\n      \"display_name\": \"GPT-4o\",\n      \"vendor\": \"OpenAI\",\n      \"type\": \"llm\",\n      \"description\": \"Most capable GPT-4 model with vision...\",\n      \"capability_tags\": [\"chat\", \"vision\", \"tools\", \"json_mode\"],\n      \"execution_mode\": \"chat\",\n      \"context_length\": 128000,\n      \"published_at\": \"2026-07-07T00:00:00Z\",\n      \"vendor_slug\": \"openai\",\n      \"model_slug\": \"gpt-4o\",\n      \"enabled\": true,\n      \"featured\": true,\n      \"base_price\": \"0.000000\",\n      \"price_formula\": \"$input_tokens * 0.0000025 + $output_tokens * 0.000010\"\n    }\n  ],\n  \"total\": 42,\n  \"page\": 1,\n  \"page_size\": 20\n}"
+      "code": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"id\": \"openai/gpt-4o\",\n      \"object\": \"model\",\n      \"created\": 1783353600,\n      \"owned_by\": \"openai\"\n    }\n  ]\n}"
     }
   },
   "models/video": {

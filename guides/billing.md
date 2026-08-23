@@ -24,7 +24,7 @@ public API. Do not automate Console network requests or depend on internal Conso
 First discover an enabled model:
 
 ```bash
-curl 'https://api.sandbase.ai/v1/models?q=gpt&pageSize=20' \
+curl 'https://api.sandbase.ai/v1/models?q=gpt' \
   -H "Authorization: Bearer $SANDBASE_API_KEY"
 ```
 

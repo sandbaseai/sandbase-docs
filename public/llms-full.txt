@@ -167,10 +167,10 @@ curl https://api.sandbase.ai/v1/run \
 Response (sync):
 ```
 {
-  "id": "run_abc123",
+  "id": "f3d2e8a1-7c4b-4a12-9d2e-123456789abc",
   "status": "completed",
   "model": "bfl/flux-1/schnell",
-  "outputs": [{"url": "https://cdn.sandbase.ai/outputs/run_abc123.png", "content_type": "image/png"}]
+  "outputs": [{"url": "https://cdn.sandbase.ai/outputs/f3d2e8a1-7c4b-4a12-9d2e-123456789abc.png", "content_type": "image/png"}]
 }
 ```
 
@@ -182,8 +182,8 @@ curl https://api.sandbase.ai/v1/run \
   -d '{"model": "kwaivgi/kling-video/3.0/turbo/standard/text-to-video", "prompt": "A drone over mountains", "duration": 5}'
 ```
 
-Response: {"id": "run_xyz789", "status": "running"}
-Poll: GET /v1/run/run_xyz789 until status = "completed"
+Response: {"id": "6a7b9c10-2d3e-4f50-8a61-23456789abcd", "status": "running"}
+Poll: GET /v1/run/6a7b9c10-2d3e-4f50-8a61-23456789abcd until status = "completed"
 
 Audio example:
 ```
@@ -196,9 +196,9 @@ curl https://api.sandbase.ai/v1/run \
 Response:
 ```
 {
-  "id": "run_audio456",
+  "id": "7b8c0d21-3e4f-5061-9b72-3456789abcde",
   "status": "completed",
-  "outputs": [{"url": "https://cdn.sandbase.ai/outputs/run_audio456.mp3", "content_type": "audio/mpeg"}]
+  "outputs": [{"url": "https://cdn.sandbase.ai/outputs/7b8c0d21-3e4f-5061-9b72-3456789abcde.mp3", "content_type": "audio/mpeg"}]
 }
 ```
 
@@ -206,9 +206,9 @@ Response:
 
 ## GET /v1/models
 
-List the enabled model catalog with pagination and lightweight discovery fields. Detailed token, cache, and
-reasoning pricing is intentionally omitted. The response contains data, total, page, and page_size; catalog items
-include name, vendor, type, capability_tags, execution_mode, context_length, and base_price.
+List enabled logical models in the OpenAI-compatible model-list format. The endpoint is not paginated and defaults
+to type=llm. The response contains object="list" and data items with id, object, created, and owned_by. Use the item
+id as the logical model name, then retrieve it for capabilities, schemas, and pricing.
 
 ---
 

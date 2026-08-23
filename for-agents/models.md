@@ -16,9 +16,8 @@ pricing to another model.
 
 ## Catalog and detail responses
 
-`GET /v1/models` returns lightweight catalog fields such as `name`, `vendor`, `type`, `capability_tags`,
-`execution_mode`, `context_length`, and `base_price`. It intentionally omits detailed token, cache, and reasoning
-prices.
+`GET /v1/models` returns OpenAI-compatible identity records containing `id`, `object`, `created`, and `owned_by`.
+It intentionally omits SandBase capability, schema, and pricing metadata.
 
 `GET /v1/models/{name}` adds `unified_schema`, `supported_modes`, and `model_card`. Read detailed pricing from
 `model_card`; there is no top-level `pricing` object. Treat `capability_tags`, `supported_modes`, and
@@ -27,12 +26,16 @@ prices.
 ## Discover models
 
 ```bash
-curl 'https://api.sandbase.ai/v1/models?page=1&pageSize=20&type=llm' \
+curl 'https://api.sandbase.ai/v1/models?type=llm' \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
-The list endpoint supports `q`, `vendor`, `type`, `order`, `page`, and `pageSize` filters. Use the returned model
-`name` when requesting details or invoking the model.
+The list endpoint supports `q`, `vendor`, `type`, and `order`; it is not paginated and defaults to `type=llm`.
+It returns OpenAI-compatible items with `id`, `object`, `created`, and `owned_by`. Use the returned `id` as the
+model name when requesting details or invoking the model.
+
+For any asynchronous `202` response, poll `GET /v1/run/{id}` with the returned ID. Treat the ID as opaque; do not
+infer its format or construct a different polling path from an ID prefix or compatibility header.
 
 ## Inspect one model
 

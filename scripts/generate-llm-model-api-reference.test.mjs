@@ -508,7 +508,7 @@ describe('Platform API reference generator', () => {
     assert.ok(syncPage)
     assert.ok(asyncPage)
     assert.match(syncPage, /POST|\\"method\\":\\"POST\\"/)
-    assert.match(asyncPage, /GET \/v1\/run\/\{id\}|\/v1\/run\/run_abc123/)
+    assert.match(asyncPage, /GET \/v1\/run\/\{id\}|\/v1\/run\/f3d2e8a1-/)
     for (const content of pages) assert.doesNotMatch(content, /provider_name|upstream_model|adapter_config|\/v1\/runs\/\{task_id\}/)
   })
 

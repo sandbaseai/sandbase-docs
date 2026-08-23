@@ -5,7 +5,7 @@ description: Discover SandBase model metadata, pricing, support status, and capa
 
 # Models API
 
-Use the Models API to discover model metadata before choosing an inference endpoint. Catalog responses include model identity, vendor, type, execution mode, pricing, support status, and capability information when available.
+Use the Models API to discover models before choosing an inference endpoint. The list operation is OpenAI-compatible and returns compact identity records. Retrieve one model for SandBase capability, schema, and pricing metadata.
 
 | Operation | Endpoint | Documentation |
 |---|---|---|
@@ -15,3 +15,7 @@ Use the Models API to discover model metadata before choosing an inference endpo
 | Compare capabilities | — | [Capabilities](/models/capabilities) |
 
 To run a model, use the separate **Inference APIs** section for Chat Completions, Anthropic Messages, image, video, audio, vision, embeddings, assets, and task-cost lookup.
+
+`GET /v1/models` supports `q`, `vendor`, `type`, and `order`; it is not paginated. The default `type` is `llm`. Each list item contains `id`, `object`, `created`, and `owned_by`, where `id` is the logical model name used in requests.
+
+For an asynchronous `202` response from an inference API, poll `GET /v1/run/{id}` with the returned opaque ID. Do not infer an ID prefix or construct a different polling path from compatibility headers.

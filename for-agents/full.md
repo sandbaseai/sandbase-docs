@@ -35,7 +35,7 @@ Base URL: `https://api.sandbase.ai/v1`
 | **Run** | A media generation request via `POST /v1/run`. May be sync or async. Poll with `GET /v1/run/{id}`. |
 | **Session** | An agent execution via `POST /v1/sessions`. A sequence of steps (tool calls, LLM reasoning). Query with `GET /v1/sessions/{id}`. |
 
-> **run vs session**: "Run" (`/v1/run`) is for model generation tasks. "Session" (`/v1/sessions`) is for persistent Agent interactions. They use different endpoints and ID prefixes (`run_*` vs `sess_*`). A Schedule trigger additionally creates a `drun_*` DeploymentRun.
+> **run vs session**: "Run" (`/v1/run`) is for model generation tasks. "Session" (`/v1/sessions`) is for persistent Agent interactions. Run IDs are opaque and must not be parsed. A Schedule trigger additionally creates a `drun_*` DeploymentRun.
 >
 > **task vs run**: A "run" or "session" is the request you make; a "task" is a billable execution record. Use
 > `GET /v1/tasks/{id}/cost` when an operation returns a task ID. Not every API operation creates a task.
@@ -195,12 +195,12 @@ curl https://api.sandbase.ai/v1/run \
 
 ```json
 {
-  "id": "run_abc123",
+  "id": "f3d2e8a1-7c4b-4a12-9d2e-123456789abc",
   "status": "completed",
   "model": "bfl/flux-1/schnell",
   "created_at": "2026-08-02T12:00:00Z",
   "outputs": [{
-    "url": "https://cdn.sandbase.ai/outputs/run_abc123.png",
+    "url": "https://cdn.sandbase.ai/outputs/f3d2e8a1-7c4b-4a12-9d2e-123456789abc.png",
     "content_type": "image/png",
     "width": 1024,
     "height": 1024
@@ -231,7 +231,7 @@ curl https://api.sandbase.ai/v1/run \
 
 ```json
 {
-  "id": "run_xyz789",
+  "id": "6a7b9c10-2d3e-4f50-8a61-23456789abcd",
   "status": "running",
   "model": "kwaivgi/kling-video/3.0/turbo/standard/text-to-video",
   "created_at": "2026-08-02T12:00:00Z"
@@ -242,10 +242,10 @@ curl https://api.sandbase.ai/v1/run \
 
 ```json
 {
-  "id": "run_xyz789",
+  "id": "6a7b9c10-2d3e-4f50-8a61-23456789abcd",
   "status": "completed",
   "outputs": [{
-    "url": "https://cdn.sandbase.ai/outputs/run_xyz789.mp4",
+    "url": "https://cdn.sandbase.ai/outputs/6a7b9c10-2d3e-4f50-8a61-23456789abcd.mp4",
     "content_type": "video/mp4",
     "duration": 5
   }]
@@ -272,12 +272,12 @@ curl https://api.sandbase.ai/v1/run \
 
 ```json
 {
-  "id": "run_audio456",
+  "id": "7b8c0d21-3e4f-5061-9b72-3456789abcde",
   "status": "completed",
   "model": "bytedance/seed-speech/tts/2.0",
   "created_at": "2026-08-02T12:00:00Z",
   "outputs": [{
-    "url": "https://cdn.sandbase.ai/outputs/run_audio456.mp3",
+    "url": "https://cdn.sandbase.ai/outputs/7b8c0d21-3e4f-5061-9b72-3456789abcde.mp3",
     "content_type": "audio/mpeg",
     "duration_seconds": 3.2
   }]
@@ -294,16 +294,16 @@ curl https://api.sandbase.ai/v1/run \
 
 ### GET /v1/models
 
-Returns the enabled model catalog with pagination and lightweight discovery fields. Detailed token, cache, and
-reasoning pricing is intentionally omitted from this response.
+Returns enabled logical models in the OpenAI-compatible model-list format. The endpoint is not paginated and
+defaults to `type=llm`. Detailed capabilities and pricing are intentionally omitted.
 
 ```bash
 curl https://api.sandbase.ai/v1/models \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
-The response contains `data`, `total`, `page`, and `page_size`. Catalog items expose `name`, `vendor`, `type`,
-`capability_tags`, `execution_mode`, `context_length`, `base_price`, and other discovery metadata.
+The response contains `object: "list"` and a `data` array. Each item contains `id`, `object`, `created`, and
+`owned_by`; use `id` as the logical model name. Retrieve that model for capability and pricing metadata.
 
 ---
 

@@ -271,7 +271,8 @@ paths:
         - name: id
           in: path
           required: true
-          schema: { type: string, pattern: '^run_' }
+          schema: { type: string }
+          description: Opaque ID returned by POST /v1/run. Do not assume a prefix or derive it independently.
       responses:
         '200':
           description: Current or terminal run state
@@ -1139,23 +1140,8 @@ paths:
       operationId: listModels
       tags: [Models]
       summary: List models
-      description: List enabled API models with pagination, filters, and fuzzy search by model name. The list response returns lightweight catalog fields only; detailed pricing is available from the model detail endpoint inside model_card.
+      description: List enabled logical models in the OpenAI-compatible model-list shape. Use the detail endpoint for capabilities, schemas, and pricing.
       parameters:
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 1
-            minimum: 1
-          description: Page number.
-        - name: pageSize
-          in: query
-          schema:
-            type: integer
-            default: 20
-            minimum: 1
-            maximum: 100
-          description: Number of results per page.
         - name: q
           in: query
           schema:
@@ -1170,8 +1156,8 @@ paths:
           in: query
           schema:
             type: string
-            enum: [llm, vision, image, video, audio, embedding]
-          description: Filter by model type.
+            default: llm
+          description: Filter by model type. Defaults to llm when omitted or empty.
         - name: order
           in: query
           schema:
@@ -1931,15 +1917,14 @@ components:
       properties:
         id:
           type: string
-          description: Unique run identifier.
-          pattern: '^run_'
+          description: Opaque execution identifier. Use exactly as returned; no prefix is guaranteed.
         model: { type: string }
         status:
           type: string
           enum: [pending, running, completed, failed, timeout]
         outputs:
           type: array
-          description: Generated outputs. Empty until a successful run completes.
+          description: Generated outputs, present when a run completes successfully and omitted from non-terminal responses.
           items:
             type: object
             properties:
@@ -1947,8 +1932,16 @@ components:
               content_type: { type: string }
             additionalProperties: true
         error:
-          type: string
-          description: Sanitized error message for a failed or timed-out run.
+          type: object
+          description: Structured public error present for failed or timed-out runs.
+          required: [type, message]
+          properties:
+            type: { type: string }
+            message: { type: string }
+        usage:
+          type: object
+          additionalProperties: true
+          description: Usage details when available.
 
     CreateAssetRequest:
       type: object
@@ -2047,18 +2040,24 @@ components:
     # --- Models ---------------------------------------------------
     ModelListResponse:
       type: object
-      required: [data, total, page, page_size]
+      required: [object, data]
       properties:
+        object: { type: string, const: list }
         data:
           type: array
           items:
-            $ref: '#/components/schemas/ModelCatalogItem'
-        total:
-          type: integer
-        page:
-          type: integer
-        page_size:
-          type: integer
+            $ref: '#/components/schemas/OpenAIModelListItem'
+
+    OpenAIModelListItem:
+      type: object
+      required: [id, object, created, owned_by]
+      properties:
+        id:
+          type: string
+          description: Logical model name used in inference requests.
+        object: { type: string, const: model }
+        created: { type: integer, description: Unix creation timestamp. }
+        owned_by: { type: string, description: Representative enabled provider or sandbase. }
 
     ModelCatalogItem:
       type: object

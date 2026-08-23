@@ -48,6 +48,6 @@ curl -X POST https://api.sandbase.ai/v1/run \
 Poll the returned task id until the result is ready:
 
 ```bash
-curl https://api.sandbase.ai/v1/run/run_abc123 \
+curl https://api.sandbase.ai/v1/run/f3d2e8a1-7c4b-4a12-9d2e-123456789abc \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```

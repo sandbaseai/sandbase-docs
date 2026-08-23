@@ -35,7 +35,7 @@ The installed MCP bridge exposes six tools: `sandbase_discover`, `sandbase_inspe
 - POST /v1/embeddings - Generate text embeddings
 - POST /v1/run - Unified generation (image, video, audio, any async task)
 - GET /v1/run/{id} - Poll async generation status
-- GET /v1/models - List all available models
+- GET /v1/models - List enabled logical models (OpenAI-compatible; defaults to type=llm)
 - GET /v1/models/{name} - Get model details + pricing
 - GET /v1/tasks/{id}/cost - Get task cost and usage
 

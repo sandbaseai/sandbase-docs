@@ -80,6 +80,7 @@ const platformVendorPriority = [
 ]
 
 const platformGeneratedMarker = 'generatedBy: "sandbase-platform-api-reference"'
+const publicRunExampleID = 'f3d2e8a1-7c4b-4a12-9d2e-123456789abc'
 
 const sharedPlatformDomains = [
   { key: 'search', label: 'Search & Discovery', order: 10, matchOrder: 10, tokens: ['search', 'discover', 'discovery', 'trending', 'trend', 'recommend', 'recommendation', 'suggest', 'suggestion', 'suggestions', 'similar', 'explore', 'feed', 'hashtag', 'tag', 'keyword'] },
@@ -453,7 +454,7 @@ function resolveRef(model, schema) {
 }
 
 function pathWithExampleId(apiPath) {
-  return apiPath.replace('{id}', 'run_abc123')
+  return apiPath.replace('{id}', publicRunExampleID)
 }
 
 function isAsyncGenerationModel(model) {
@@ -809,7 +810,7 @@ function platformResponseData(model) {
 }
 
 function publicPlatformResponseBody(model, status) {
-  const response = { id: 'run_abc123', status, model: model.name }
+  const response = { id: publicRunExampleID, status, model: model.name }
   if (status === 'completed') return { ...response, outputs: [{ data: platformResponseData(model) }] }
   if (status === 'failed' || status === 'timeout') {
     return { ...response, error: { type: 'upstream_error', message: 'upstream request failed' } }
@@ -938,7 +939,7 @@ function platformReference(model) {
       },
     ],
     examples: [
-      { label: 'cURL', language: 'bash', code: [...submitLines, ...(isAsync ? ['', '# Poll a non-terminal task by its public run id', 'curl https://api.sandbase.ai/v1/run/run_abc123 \\', '  -H "Authorization: Bearer $SANDBASE_API_KEY"'] : [])].join('\n') },
+      { label: 'cURL', language: 'bash', code: [...submitLines, ...(isAsync ? ['', '# Poll a non-terminal task by its returned id', `curl https://api.sandbase.ai/v1/run/${publicRunExampleID} \\`, '  -H "Authorization: Bearer $SANDBASE_API_KEY"'] : [])].join('\n') },
       { label: 'Python', language: 'python', code: pythonLines.join('\n') },
       { label: 'TypeScript', language: 'typescript', code: typeScriptLines.join('\n') },
     ],
@@ -984,7 +985,7 @@ function modelReference(model) {
           messages: [{ role: 'user', content: 'Describe this product in one sentence.' }],
         }
   const responseBody = isGeneration
-    ? { id: 'run_abc123', model: model.name, status: 'running', outputs: [] }
+    ? { id: publicRunExampleID, model: model.name, status: 'running' }
     : isMessages
       ? {
           id: 'msg_abc123',
