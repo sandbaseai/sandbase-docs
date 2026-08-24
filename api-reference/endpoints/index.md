@@ -63,6 +63,8 @@ Read history or stream results through the Session Events APIs using the returne
 
 `POST /v1/endpoints/{endpoint_id}/acp` handles the experimental ACP JSON-RPC transport for Endpoints with the `acp` protocol.
 
+The implemented methods are `initialize`, `session/new`, `session/prompt`, and `session/cancel`. `session/new` returns a canonical `sess_*` Session ID. `session/prompt` returns `application/x-ndjson`: zero or more `session/update` notifications followed by the final JSON-RPC result. See [Invoke with ACP](./acp) for the request envelopes.
+
 REST and ACP are invocation protocols on the same Endpoint. They do not create separate Service resources.
 
 See the [Service quickstart](/agents/endpoint-quickstart) for a complete create-and-invoke example.

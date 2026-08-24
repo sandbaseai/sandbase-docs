@@ -13,7 +13,9 @@ const root = fileURLToPath(new URL('..', import.meta.url))
 
 const forbiddenOpenApiPatterns = [
   [/^  \/sandboxes(?:[/{:]|$)/m, 'sandbox path'],
+  [/^  \/[^:\n]*sandbox[^:\n]*:$/im, 'any sandbox path'],
   [/^  - name: Sandboxes$/m, 'Sandboxes tag'],
+  [/^    [A-Za-z0-9]*Sandbox[A-Za-z0-9]*:$/m, 'any Sandbox component schema'],
   [/^    SandboxId:$/m, 'SandboxId parameter'],
   [/^    CreateSandboxRequest:$/m, 'CreateSandboxRequest schema'],
   [/^    Sandbox:$/m, 'Sandbox schema'],
@@ -178,6 +180,7 @@ assert.match(updateDeploymentSchema, /notification_settings:\n\s+type: \[object,
 assert.match(updateDeploymentSchema, /required: \[feishu_webhook_url\]/, 'A non-null notification_settings object must contain only its implemented webhook field')
 assert.match(updateDeploymentSchema, /pattern: '\^https:\/\/open\\\.feishu\\\.cn\/open-apis\/bot\/v2\/hook\//, 'Deployment notifications must publish the enforced Feishu webhook origin and path')
 assert.match(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Sidebar must link to the Feishu notification test reference')
+assert.match(sidebar, /\/api-reference\/endpoints\/acp/, 'Sidebar must link to the Endpoint ACP reference')
 const agentSchema = openapi.match(/^    Agent:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 for (const field of ['tools', 'mcp_servers', 'skills', 'handoffs']) {
   assert.match(agentSchema, new RegExp(`${field}:\\n\\s+type: \\[array, 'null'\\]`), `Agent ${field} must allow the serializer's null output`)
@@ -255,6 +258,16 @@ for (const field of ['session_metadata', 'memory_config', 'resource_config', 'va
   assert.match(endpointSchema, new RegExp(`${field}:\\n\\s+type: \\[object, 'null'\\]`), `Endpoint ${field} must allow the serializer's null output`)
 }
 assert.match(endpointSchema, /store_status:\n\s+type: string\n\s+enum: \[private, pending_review, public, suspended\]/, 'Endpoint responses must document the serializer\'s store status')
+const endpointACPPath = openapi.match(/^  \/v1\/endpoints\/\{id\}\/acp:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(endpointACPPath, /ACPRequest/, 'Endpoint ACP must document its JSON-RPC request envelope')
+assert.match(endpointACPPath, /application\/x-ndjson:/, 'Endpoint ACP must document prompt streaming as NDJSON')
+for (const status of ['200', '400', '401', '404', '500']) {
+  assert.match(endpointACPPath, new RegExp(`'${status}':`), `Endpoint ACP must document ${status} responses`)
+}
+const acpRequestSchema = openapi.match(/^    ACPRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(acpRequestSchema, /enum: \[initialize, session\/new, session\/prompt, session\/cancel\]/, 'Endpoint ACP must document every implemented method')
+const acpResponseSchema = openapi.match(/^    ACPResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(acpResponseSchema, /oneOf:\n\s+- required: \[result\]\n\s+- required: \[error\]/, 'Endpoint ACP must distinguish JSON-RPC success and error responses')
 for (const field of ['memory_config', 'resource_config', 'vault_config']) {
   assert.match(endpointSchema, new RegExp(`${field}:[\\s\\S]*?not currently applied to Session execution`), `Endpoint ${field} must be documented as reserved`)
 }

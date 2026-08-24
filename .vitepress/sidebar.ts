@@ -187,6 +187,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     collapsed: false,
     items: [
       { text: 'Endpoints & Invoke', link: '/api-reference/endpoints/' },
+      { text: 'Invoke with ACP', link: '/api-reference/endpoints/acp' },
       {
         text: 'Sessions',
         collapsed: false,

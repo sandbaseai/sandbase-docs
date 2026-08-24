@@ -1061,24 +1061,38 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/ACPRequest'
       responses:
         '200':
           description: ACP JSON-RPC response or newline-delimited prompt stream
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/ACPResponse'
             application/x-ndjson:
               schema:
                 type: string
                 description: ACP session/update notifications followed by the final JSON-RPC result.
         '400':
           description: Invalid JSON-RPC request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ACPResponse' }
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
         '404':
           description: Service or ACP session not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ACPResponse' }
+        '500':
+          description: ACP Session could not be created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ACPResponse' }
 
   # --- Agents -----------------------------------------------------
   /v1/agents:
@@ -3873,6 +3887,57 @@ components:
               type: string
             message:
               type: string
+
+    ACPRequest:
+      type: object
+      required: [method]
+      properties:
+        jsonrpc:
+          type: string
+          description: JSON-RPC version supplied by the client. Use 2.0.
+          example: '2.0'
+        id:
+          description: Client request identifier echoed in the response.
+          oneOf:
+            - type: string
+            - type: number
+            - type: 'null'
+        method:
+          type: string
+          enum: [initialize, session/new, session/prompt, session/cancel]
+        params:
+          type: object
+          additionalProperties: true
+          description: Method-specific parameters. session/prompt and session/cancel require sessionId.
+      additionalProperties: true
+
+    ACPResponse:
+      type: object
+      required: [jsonrpc, id]
+      properties:
+        jsonrpc: { type: string, const: '2.0' }
+        id:
+          oneOf:
+            - type: string
+            - type: number
+            - type: 'null'
+        result:
+          type: object
+          additionalProperties: true
+          description: Method-specific result, present on success.
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code: { type: integer }
+            message: { type: string }
+            data:
+              type: object
+              additionalProperties: true
+          description: JSON-RPC error, present when the method cannot be completed.
+      oneOf:
+        - required: [result]
+        - required: [error]
 
     # --- Agents ---------------------------------------------------
     CreateAgentRequest:

@@ -58,6 +58,50 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       "code": "{\n  \"items\": [\n    {\n      \"id\": \"opaque-task-id\",\n      \"model\": \"openai/gpt-4o\",\n      \"type\": \"llm\",\n      \"execution_mode\": \"sync\",\n      \"status\": \"completed\",\n      \"latency_ms\": 842,\n      \"user_cost\": \"0.001250\",\n      \"prompt_tokens\": 120,\n      \"completion_tokens\": 48,\n      \"total_tokens\": 168,\n      \"cached_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"created_at\": \"2026-08-24T00:00:00Z\",\n      \"completed_at\": \"2026-08-24T00:00:01Z\",\n      \"api_key_prefix\": \"sk-1234567\"\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"page_size\": 20\n}"
     }
   },
+  "endpoints/acp": {
+    "title": "Invoke Service with ACP",
+    "operation": "Endpoints",
+    "method": "POST",
+    "path": "/v1/endpoints/{endpoint_id}/acp",
+    "description": "Experimental ACP-over-HTTP transport. initialize, session/new, and session/cancel return JSON-RPC JSON; session/prompt streams newline-delimited JSON-RPC messages.",
+    "groups": [
+      {
+        "title": "Path parameters",
+        "fields": [
+          { "name": "endpoint_id", "type": "string", "required": true, "description": "Active Endpoint configured with the acp protocol." }
+        ]
+      },
+      {
+        "title": "JSON-RPC request",
+        "fields": [
+          { "name": "jsonrpc", "type": "string", "required": false, "description": "Use 2.0." },
+          { "name": "id", "type": "string | number | null", "required": false, "description": "Client identifier echoed in the response." },
+          { "name": "method", "type": "string", "required": true, "description": "initialize, session/new, session/prompt, or session/cancel." },
+          { "name": "params", "type": "object", "required": false, "description": "Method-specific parameters. Prompt and cancel require sessionId." }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "label": "Initialize",
+        "language": "bash",
+        "code": "curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../acp -H \"Authorization: Bearer $SANDBASE_API_KEY\" -H \"Content-Type: application/json\" -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{}}'"
+      },
+      {
+        "label": "Create session",
+        "language": "bash",
+        "code": "curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../acp -H \"Authorization: Bearer $SANDBASE_API_KEY\" -H \"Content-Type: application/json\" -d '{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"session/new\",\"params\":{}}'"
+      }
+    ],
+    "response": {
+      "status": "200 OK",
+      "code": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"result\": {\n    \"sessionId\": \"sess_01...\"\n  }\n}"
+    },
+    "notes": [
+      { "title": "Prompt streaming", "description": "session/prompt returns application/x-ndjson session/update notifications followed by a final result containing stopReason." },
+      { "title": "Experimental transport", "description": "ACP-over-HTTP may change. ACP Session IDs are canonical SandBase Session IDs." }
+    ]
+  },
   "deployments/archive": {
     "title": "Archive Deployment",
     "operation": "Deployments",
