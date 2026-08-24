@@ -108,6 +108,12 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/ChatCompletionError'
                   - $ref: '#/components/schemas/TaskCostError'
+        '403':
+          description: API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyScopeError'
         '404': { description: Model not found or unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
         '429': { description: Rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '500': { description: Request persistence or organization lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
@@ -203,6 +209,12 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/EmbeddingError'
                   - $ref: '#/components/schemas/TaskCostError'
+        '403':
+          description: API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyScopeError'
         '404': { description: Logical model not found, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
         '500': { description: Request persistence or organization lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
         '503': { description: No provider route succeeded, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }

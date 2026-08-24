@@ -130,7 +130,7 @@ assert.match(responsesResponseSchema, /required: \[input_tokens, output_tokens, 
 assert.doesNotMatch(responsesResponseSchema, /^        (?:cost|provider|routing|account_balance):/m, 'Responses must not expose stripped provider or billing fields')
 const chatPath = openapi.match(/^  \/v1\/chat\/completions:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(chatPath, /text\/event-stream:/, 'Chat Completions must document streaming output')
-for (const status of ['402', '500', '502', '503']) {
+for (const status of ['402', '403', '500', '502', '503']) {
   assert.match(chatPath, new RegExp(`'${status}':`), `Chat Completions must document ${status} responses`)
 }
 const chatRequestSchema = openapi.match(/^    ChatCompletionRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
@@ -161,6 +161,10 @@ assert.match(embeddingRequestSchema, /additionalProperties: true/, 'Embedding re
 assert.doesNotMatch(embeddingRequestSchema, /enum: \[2048, 1536/, 'Embeddings must not publish an unimplemented universal dimensions list')
 assert.match(embeddingRequestSchema, /enum: \[float, base64\]/, 'Embeddings must document supported OpenAI encoding forms')
 assert.match(embeddingRequestSchema, /items:\n\s+type: array\n\s+items:\n\s+type: integer/, 'Embeddings must allow batched token-ID input')
+const embeddingsPath = openapi.match(/^  \/v1\/embeddings:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '402', '403', '404', '500', '503']) {
+  assert.match(embeddingsPath, new RegExp(`'${status}':`), `Embeddings must document ${status} responses`)
+}
 const embeddingResponseSchema = openapi.match(/^    EmbeddingResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(embeddingResponseSchema, /required: \[object, data, model, usage\]/, 'Embedding responses must require the OpenAI response envelope')
 assert.match(embeddingResponseSchema, /type: string\n\s+description: Base64-encoded vector/, 'Embedding responses must allow base64 vectors')
