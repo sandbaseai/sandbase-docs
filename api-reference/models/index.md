@@ -16,6 +16,8 @@ Use the Models API to discover models before choosing an inference endpoint. The
 
 To run a model, use the separate **Inference APIs** section for Chat Completions, Anthropic Messages, image, video, audio, vision, embeddings, assets, and task-cost lookup.
 
-`GET /v1/models` supports `q`, `vendor`, `type`, and `order`; it is not paginated. The default `type` is `llm`. Each list item contains `id`, `object`, `created`, and `owned_by`, where `id` is the logical model name used in requests.
+`GET /v1/models` supports `q`, `vendor`, `type`, and `order`; it is not paginated. Omitting `type` defaults to `llm`, while an explicitly empty `type=` lists all public model types. The `vendor` filter is exact and case-sensitive; `q` is a case-insensitive substring search. Each list item contains `id`, `object`, `created`, and `owned_by`, where `id` is the logical model name used in requests.
+
+Model names may contain `/`. Pass those slashes as path separators when calling the detail endpoint, for example `/v1/models/openai/gpt-4o`; the server route consumes the remaining path as one logical identifier.
 
 For an asynchronous `202` response from an inference API, poll `GET /v1/run/{id}` with the returned opaque ID. Do not infer an ID prefix or construct a different polling path from compatibility headers.

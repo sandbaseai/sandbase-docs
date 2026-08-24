@@ -1811,13 +1811,13 @@ paths:
           in: query
           schema:
             type: string
-          description: Filter by vendor.
+          description: Exact, case-sensitive vendor filter.
         - name: type
           in: query
           schema:
             type: string
             default: llm
-          description: Filter by model type. Defaults to llm when omitted or empty.
+          description: Filter by model type. Omission defaults to llm; an explicitly empty value removes the type filter.
         - name: order
           in: query
           schema:
@@ -1837,14 +1837,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIError'
+                $ref: '#/components/schemas/TaskCostError'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
 
   /v1/models/{id_or_name}:
     get:
       operationId: getModel
       tags: [Models]
       summary: Get model details
-      description: Get model details by UUID or full logical model name. Model names containing slashes are supported, for example /v1/models/openai/gpt-4o. Name lookup returns enabled catalog models; UUID lookup can return a disabled catalog record with enabled set to false. Protocol-ingress-only models are never returned.
+      description: Get model details by UUID or full logical model name. Model names containing slashes are supported as path segments, for example /v1/models/openai/gpt-4o. Name lookup returns enabled catalog models; UUID lookup can return a disabled catalog record with enabled set to false. Protocol-ingress-only models are never returned.
       parameters:
         - name: id_or_name
           in: path
@@ -1864,13 +1870,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIError'
+                $ref: '#/components/schemas/TaskCostError'
         '404':
           description: Model not found or not publicly discoverable
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIError'
+                $ref: '#/components/schemas/TaskCostError'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
 
   /v1/deployments:
     post:

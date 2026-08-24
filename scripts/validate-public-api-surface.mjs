@@ -326,6 +326,20 @@ const modelDetailSchema = openapi.match(/^    ModelDetail:\n[\s\S]*?(?=^    [A-Z
 assert.match(modelDetailSchema, /id:\n\s+type: string\n\s+format: uuid/, 'Model detail IDs must document the implemented UUID identity')
 assert.match(modelDetailSchema, /required: \[[^\]]*run_count[^\]]*sort_order[^\]]*created_at[^\]]*examples[^\]]*\]/, 'Model details must require fields always emitted by the serializer')
 assert.doesNotMatch(modelDetailSchema, /^        (?:context_length|base_price|price_formula):/m, 'Model details must not advertise fields absent from the top-level serializer')
+const modelsPath = openapi.match(/^  \/v1\/models:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(modelsPath, /an explicitly empty value removes the type filter/, 'Model lists must document the implemented empty type filter')
+assert.match(modelsPath, /Exact, case-sensitive vendor filter/, 'Model lists must document exact vendor filtering')
+for (const status of ['200', '401', '500']) {
+  assert.match(modelsPath, new RegExp(`'${status}':`), `Model lists must document ${status} responses`)
+}
+assert.doesNotMatch(modelsPath, /components\/schemas\/APIError/, 'Model list errors use the Open API string error shape')
+const modelPath = openapi.match(/^  \/v1\/models\/\{id_or_name\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(modelPath, /containing slashes are supported as path segments/, 'Model detail must document wildcard logical names')
+for (const status of ['200', '400', '401', '404']) {
+  assert.match(modelPath, new RegExp(`'${status}':`), `Model detail must document ${status} responses`)
+}
+assert.doesNotMatch(modelPath, /components\/schemas\/APIError/, 'Model detail errors use the Open API string error shape')
+assert.doesNotMatch(modelPath, /'500':/, 'Model detail collapses lookup failures to not found')
 const modelCardSchema = openapi.match(/^    ModelCard:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(modelCardSchema, /cache_write_1h_multiplier:/, 'Model cards must include the implemented one-hour cache multiplier')
 assert.match(modelCardSchema, /required: \[[^\]]*cache_write_1h_multiplier[^\]]*cover_url[^\]]*\]/, 'Present model cards must require every serializer field')
