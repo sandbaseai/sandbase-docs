@@ -146,7 +146,7 @@ paths:
       operationId: createEmbedding
       tags: [Embeddings]
       summary: Create embeddings
-      description: OpenAI-compatible embeddings endpoint for semantic search, RAG, clustering, and classification.
+      description: OpenAI-compatible embeddings endpoint for semantic search, RAG, clustering, and classification. SandBase validates the logical model and forwards provider-compatible embedding fields; model-specific constraints are defined by the selected model and upstream provider.
       requestBody:
         required: true
         content:
@@ -160,6 +160,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmbeddingResponse'
+        '400': { description: Invalid request or non-embedding model, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402':
+          description: Organization or API Key spending limit reached
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/EmbeddingError'
+                  - $ref: '#/components/schemas/TaskCostError'
+        '404': { description: Logical model not found, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
+        '500': { description: Request persistence or organization lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
+        '503': { description: No provider route succeeded, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
 
   /v1/messages:
     post:
@@ -2712,13 +2725,15 @@ components:
     EmbeddingRequest:
       type: object
       required: [model, input]
+      additionalProperties: true
+      description: OpenAI-compatible request. Additional provider-compatible fields are forwarded unchanged.
       properties:
         model:
           type: string
           description: Embedding model identifier.
           example: "alibaba/text-embedding-v4"
         input:
-          description: Text or list of texts to embed.
+          description: Text, token IDs, or a batch of texts or token-ID arrays to embed. Provider limits apply.
           oneOf:
             - type: string
               example: "SandBase provides a unified API for AI models, agents, and developer tools."
@@ -2728,19 +2743,29 @@ components:
               example:
                 - "First document"
                 - "Second document"
+            - type: array
+              items:
+                type: integer
+            - type: array
+              items:
+                type: array
+                items:
+                  type: integer
         dimensions:
           type: integer
-          description: Optional output embedding dimension when the model supports dimension selection.
-          enum: [2048, 1536, 1024, 768, 512, 256, 128, 64]
+          minimum: 1
+          description: Optional output dimension when supported by the selected model. SandBase does not impose a universal dimension list.
           example: 1024
         encoding_format:
           type: string
-          description: Embedding encoding format.
-          enum: [float]
+          description: Requested embedding encoding. Support is provider- and model-specific.
+          enum: [float, base64]
           default: float
 
     EmbeddingResponse:
       type: object
+      required: [object, data, model, usage]
+      additionalProperties: true
       properties:
         object:
           type: string
@@ -2749,6 +2774,8 @@ components:
           type: array
           items:
             type: object
+            required: [object, index, embedding]
+            additionalProperties: true
             properties:
               object:
                 type: string
@@ -2756,20 +2783,38 @@ components:
               index:
                 type: integer
               embedding:
-                type: array
-                items:
-                  type: number
-                  format: float
+                oneOf:
+                  - type: array
+                    items:
+                      type: number
+                      format: float
+                  - type: string
+                    description: Base64-encoded vector when encoding_format is base64.
         model:
           type: string
           example: "alibaba/text-embedding-v4"
         usage:
           type: object
+          required: [prompt_tokens, total_tokens]
+          additionalProperties: true
           properties:
             prompt_tokens:
               type: integer
             total_tokens:
               type: integer
+
+    EmbeddingError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [message, type, code, param]
+          properties:
+            message: { type: string }
+            type: { type: string }
+            code: { type: ['null', string] }
+            param: { type: ['null', string] }
 
     # --- Services (Endpoint resources) -----------------------------
     CreateDeclarativeEndpointRequest:

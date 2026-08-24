@@ -476,7 +476,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Models",
     "method": "POST",
     "path": "/v1/embeddings",
-    "description": "OpenAI-compatible embeddings API reference for SandBase. Generate vectors for semantic search, RAG, clustering, and classification.",
+    "description": "OpenAI-compatible vector embeddings API. Input forms, dimensions, encoding, and additional fields remain subject to the selected model and provider.",
     "groups": [
       {
         "title": "Request body",
@@ -489,21 +489,21 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
           },
           {
             "name": "input",
-            "type": "string or string[]",
+            "type": "string | string[] | integer[] | integer[][]",
             "required": true,
-            "description": "Text or list of texts to embed"
+            "description": "Text, token IDs, or a batch of texts or token-ID arrays to embed"
           },
           {
             "name": "dimensions",
             "type": "integer",
             "required": false,
-            "description": "Output vector dimension when supported"
+            "description": "Output vector dimension when supported by the selected model; there is no universal dimension list"
           },
           {
             "name": "encoding_format",
             "type": "string",
             "required": false,
-            "description": "Embedding encoding format. float is supported"
+            "description": "Embedding encoding format. Provider support determines whether float or base64 is available"
           }
         ]
       }
@@ -512,7 +512,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "HTTP",
         "language": "http",
-        "code": "POST https://api.sandbase.ai/v1/embeddings\nAuthorization: Bearer sk-sb-your-api-key\nContent-Type: application/json"
+        "code": "POST https://api.sandbase.ai/v1/embeddings\nAuthorization: Bearer sk-your-api-key\nContent-Type: application/json\n\n{\"model\":\"alibaba/text-embedding-v4\",\"input\":\"SandBase provides a unified API for AI models, agents, and developer tools.\",\"dimensions\":1024,\"encoding_format\":\"float\"}"
       },
       {
         "label": "Python",

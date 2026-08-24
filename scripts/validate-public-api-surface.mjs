@@ -72,6 +72,14 @@ const messagesPath = openapi.match(/^  \/v1\/messages:\n[\s\S]*?(?=^  \/)/m)?.[0
 assert.match(messagesPath, /security:\n\s+- BearerAuth: \[\]\n\s+- AnthropicApiKey: \[\]/, 'Messages must support Bearer or x-api-key authentication')
 assert.equal((openapi.match(/AnthropicApiKey:/g) ?? []).length, 2, 'Anthropic x-api-key authentication must be scoped only to Messages')
 assert.match(openapi, /AnthropicApiKey:\n\s+type: apiKey\n\s+in: header\n\s+name: x-api-key/, 'AnthropicApiKey must describe the x-api-key header')
+const embeddingRequestSchema = openapi.match(/^    EmbeddingRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(embeddingRequestSchema, /additionalProperties: true/, 'Embedding requests must preserve provider-compatible fields')
+assert.doesNotMatch(embeddingRequestSchema, /enum: \[2048, 1536/, 'Embeddings must not publish an unimplemented universal dimensions list')
+assert.match(embeddingRequestSchema, /enum: \[float, base64\]/, 'Embeddings must document supported OpenAI encoding forms')
+assert.match(embeddingRequestSchema, /items:\n\s+type: array\n\s+items:\n\s+type: integer/, 'Embeddings must allow batched token-ID input')
+const embeddingResponseSchema = openapi.match(/^    EmbeddingResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(embeddingResponseSchema, /required: \[object, data, model, usage\]/, 'Embedding responses must require the OpenAI response envelope')
+assert.match(embeddingResponseSchema, /type: string\n\s+description: Base64-encoded vector/, 'Embedding responses must allow base64 vectors')
 assert.match(apiKeyGuide, /Only `POST \/v1\/messages` reads `x-api-key`/, 'API key guide must scope x-api-key to Anthropic Messages')
 assert.doesNotMatch(apiKeyGuide, /There is no per-model or per-resource restriction/, 'API key guide must not deny implemented credential restrictions')
 for (const content of [apiKeyGuide, authenticationReference]) {
