@@ -22,5 +22,7 @@ jobs:
       - run: npm run lint:openapi
       - run: npm run test:public-api
       - run: npm run test:api-reference
+      - run: npm run test:http-references
       - run: npm run test:links
       - run: npm run build
+      - run: npm run test:built-public-api
