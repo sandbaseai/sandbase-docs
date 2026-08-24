@@ -12,7 +12,8 @@
     "test:api-reference": "node scripts/validate-api-reference-contract.mjs",
     "test:http-references": "node scripts/validate-http-references.mjs",
     "test:links": "node scripts/validate-internal-links.mjs",
-    "validate": "npm run lint:openapi && npm run test:public-api && npm run test:api-reference && npm run test:http-references && npm run test:links && npm run build",
+    "test:built-public-api": "node scripts/validate-built-public-surface.mjs",
+    "validate": "npm run lint:openapi && npm run test:public-api && npm run test:api-reference && npm run test:http-references && npm run test:links && npm run build && npm run test:built-public-api",
     "test:generator": "node --test scripts/generate-llm-model-api-reference.test.mjs"
   },
   "devDependencies": {
