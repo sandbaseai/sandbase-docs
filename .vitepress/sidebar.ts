@@ -122,6 +122,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
       { text: 'Google Gemini', link: '/api-reference/gemini-generate-content' },
       { text: 'Gemini Interactions', link: '/api-reference/gemini-interactions' },
+      { text: 'Volcengine Ark Video', link: '/api-reference/volcengine-contents-generations' },
       {
         text: 'Images',
         collapsed: false,

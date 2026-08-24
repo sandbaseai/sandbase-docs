@@ -163,7 +163,7 @@ for (const [key, spec] of referenceSpecs) {
 }
 
 for (const match of JSON.stringify(referenceSpecs).matchAll(
-  /\b(GET|POST|PUT|PATCH|DELETE) (\/(?:v1(?:beta)?|events)\/[A-Za-z0-9_{}./:-]+)/g,
+  /\b(GET|POST|PUT|PATCH|DELETE) (\/(?:v1(?:beta)?|api\/v3|events)\/[A-Za-z0-9_{}./:-]+)/g,
 )) {
   const candidate = match[2].replace(/[.,;:]$/, '')
   if (!openapiOperations.some((operation) => operation.method === match[1] && pathMatches(operation.path, candidate))) {

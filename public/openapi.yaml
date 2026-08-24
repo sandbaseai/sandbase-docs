@@ -50,6 +50,8 @@ tags:
     description: Anthropic-compatible Messages API
   - name: Gemini
     description: Google Gemini-compatible GenerateContent and Interactions APIs
+  - name: Volcengine Contents Generations
+    description: Volcengine Ark-compatible asynchronous video generation tasks
   - name: Agents
     description: Build and manage Agent definitions
   - name: Services
@@ -592,6 +594,90 @@ paths:
         '500': { description: Organization admission lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '502': { description: Upstream Interaction response exceeded the gateway size limit, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '503': { description: 'Affinity storage, provider lookup, credentials, or upstream retrieval is temporarily unavailable', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+
+  # --- Volcengine Ark Contents Generations ----------------------
+  /api/v3/contents/generations/tasks:
+    post:
+      operationId: createVolcengineContentsGenerationTask
+      tags: [Volcengine Contents Generations]
+      summary: Create a content generation task
+      description: Creates an asynchronous Seedance video generation task using the Volcengine Ark native request shape.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/VolcengineContentsGenerationRequest' }
+      responses:
+        '200': { description: Task accepted, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineTaskCreated' } } } }
+        '400': { description: 'Invalid JSON, unsupported model or content mode, or rejected generation parameters', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '403': { description: 'API Key spending limit reached, organization disabled, or upstream permission rejected', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '404': { description: Model or upstream resource not found, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '429': { description: Provider rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '500': { description: Prediction lifecycle or provider error, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+    get:
+      operationId: listVolcengineContentsGenerationTasks
+      tags: [Volcengine Contents Generations]
+      summary: List content generation tasks
+      description: Lists non-deleted native video tasks created by the same organization and API key, newest first.
+      security:
+        - BearerAuth: []
+      parameters:
+        - { name: page_num, in: query, schema: { type: integer, minimum: 1, maximum: 500, default: 1 } }
+        - { name: page_size, in: query, schema: { type: integer, minimum: 1, maximum: 500, default: 10 } }
+        - name: filter.task_ids
+          in: query
+          description: Task IDs, supplied as repeated parameters or a comma-separated value.
+          schema: { type: array, items: { type: string } }
+          style: form
+          explode: true
+        - { name: filter.model, in: query, schema: { type: string } }
+        - { name: filter.status, in: query, schema: { type: string, enum: [queued, running, cancelled, succeeded, failed, expired] } }
+      responses:
+        '200': { description: Task page, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineTaskList' } } } }
+        '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '403': { description: API Key spending limit reached or organization disabled, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '500': { description: Task lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+
+  /api/v3/contents/generations/tasks/{task_id}:
+    parameters:
+      - name: task_id
+        in: path
+        required: true
+        schema: { type: string, minLength: 1 }
+        description: Task ID returned by the create operation.
+    get:
+      operationId: getVolcengineContentsGenerationTask
+      tags: [Volcengine Contents Generations]
+      summary: Get a content generation task
+      security:
+        - BearerAuth: []
+      responses:
+        '200': { description: Current task state, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineTask' } } } }
+        '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '403': { description: API Key spending limit reached or organization disabled, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '404': { description: 'Task is unknown, deleted, not native, or not owned by the current API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '500': { description: Task lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+    delete:
+      operationId: deleteVolcengineContentsGenerationTask
+      tags: [Volcengine Contents Generations]
+      summary: Cancel or delete a content generation task
+      description: Cancels a queued task or hides a terminal task. Running and already-cancelled tasks cannot be deleted.
+      security:
+        - BearerAuth: []
+      responses:
+        '204': { description: Task cancelled or deleted }
+        '400': { description: 'Task is running, already cancelled, or otherwise cannot be deleted in its current state', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '403': { description: API Key spending limit reached or organization disabled, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '404': { description: 'Task is unknown, deleted, not native, or not owned by the current API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+        '500': { description: Task update failed, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
 
   # --- Embed Configs ---------------------------------------------
   /v1/embeds:
@@ -4484,6 +4570,116 @@ components:
             status:
               type: string
               description: Google canonical error status, such as INVALID_ARGUMENT, UNAUTHENTICATED, PERMISSION_DENIED, NOT_FOUND, RESOURCE_EXHAUSTED, INTERNAL, UNAVAILABLE, or DEADLINE_EXCEEDED.
+
+    VolcengineContentsGenerationRequest:
+      type: object
+      required: [model, content]
+      additionalProperties: true
+      properties:
+        model:
+          type: string
+          enum: [doubao-seedance-2-0-260128, doubao-seedance-2-0-fast-260128, doubao-seedance-2-5-260628]
+        content:
+          type: array
+          minItems: 1
+          description: Must include text. Media items select image-to-video or reference-to-video mode according to role.
+          items: { $ref: '#/components/schemas/VolcengineContentItem' }
+        callback_url: { type: string, minLength: 1, description: Receives the terminal task response. }
+        duration: { type: integer }
+        resolution: { type: string }
+        ratio: { type: string }
+        generate_audio: { type: boolean }
+        seed: { type: integer }
+        camera_fixed: { type: boolean }
+        watermark: { type: boolean }
+        draft: { type: boolean }
+        return_last_frame: { type: boolean }
+        service_tier: { type: string }
+        execution_expires_after: { type: integer }
+        frames: { type: integer }
+        framespersecond: { type: integer }
+        tools: { type: array, items: { type: object, additionalProperties: true } }
+
+    VolcengineContentItem:
+      type: object
+      required: [type]
+      additionalProperties: true
+      properties:
+        type: { type: string, enum: [text, image_url, video_url, audio_url] }
+        text: { type: string }
+        image_url:
+          oneOf:
+            - { type: string }
+            - { type: object, required: [url], properties: { url: { type: string } } }
+        video_url:
+          oneOf:
+            - { type: string }
+            - { type: object, required: [url], properties: { url: { type: string } } }
+        audio_url:
+          oneOf:
+            - { type: string }
+            - { type: object, required: [url], properties: { url: { type: string } } }
+        role: { type: string, enum: [first_frame, last_frame, reference_image, reference_video, reference_audio] }
+
+    VolcengineTaskCreated:
+      type: object
+      required: [id]
+      properties:
+        id: { type: string }
+
+    VolcengineTask:
+      type: object
+      required: [id, model, status, created_at, updated_at, content, usage]
+      additionalProperties: true
+      properties:
+        id: { type: string }
+        model: { type: string }
+        status: { type: string, enum: [queued, running, cancelled, succeeded, failed, expired] }
+        created_at: { type: integer, format: int64, description: Unix timestamp in seconds. }
+        updated_at: { type: integer, format: int64, description: Unix timestamp in seconds. }
+        content:
+          type: object
+          properties:
+            video_url: { type: string }
+            last_frame_url: { type: string }
+            file_url: { type: string }
+        usage:
+          type: object
+          required: [prompt_tokens, completion_tokens, total_tokens, prompt_tokens_details, completion_tokens_details]
+          properties:
+            prompt_tokens: { type: integer, minimum: 0 }
+            completion_tokens: { type: integer, minimum: 0 }
+            total_tokens: { type: integer, minimum: 0 }
+            prompt_tokens_details: { type: object, additionalProperties: true }
+            completion_tokens_details: { type: object, additionalProperties: true }
+        error: { $ref: '#/components/schemas/VolcengineTaskFailure' }
+        failure_reason: { $ref: '#/components/schemas/VolcengineTaskFailure' }
+
+    VolcengineTaskFailure:
+      type: object
+      required: [code, message]
+      properties:
+        code: { type: string }
+        message: { type: string }
+
+    VolcengineTaskList:
+      type: object
+      required: [items, total]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/VolcengineTask' } }
+        total: { type: integer, minimum: 0 }
+
+    VolcengineError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, type]
+          properties:
+            code: { type: string, description: 'InvalidParameter, AuthenticationError, PermissionDenied, ResourceNotFound, RateLimitExceeded, or InternalServiceError.' }
+            message: { type: string }
+            type: { type: string, description: HTTP-style Volcengine error type. }
 
     # --- Embeddings -----------------------------------------------
     EmbeddingRequest:

@@ -342,6 +342,38 @@ assert.ok(
   'Gemini Interactions create must document the pollable Location header',
 )
 assert.match(sidebar, /\/api-reference\/gemini-interactions/, 'Sidebar must link to the Gemini Interactions reference')
+const volcengineCollection = openapiDocument.paths['/api/v3/contents/generations/tasks']
+const volcengineTask = openapiDocument.paths['/api/v3/contents/generations/tasks/{task_id}']
+assert.ok(volcengineCollection?.post, 'Public OpenAPI must expose Volcengine task creation')
+assert.ok(volcengineCollection?.get, 'Public OpenAPI must expose Volcengine task listing')
+assert.ok(volcengineTask?.get, 'Public OpenAPI must expose Volcengine task lookup')
+assert.ok(volcengineTask?.delete, 'Public OpenAPI must expose Volcengine task deletion')
+for (const operation of [volcengineCollection.post, volcengineCollection.get, volcengineTask.get, volcengineTask.delete]) {
+  assert.deepEqual(operation.security, [{ BearerAuth: [] }], 'Volcengine tasks must remain Bearer-only')
+}
+assert.equal(
+  volcengineCollection.post.responses['200']?.content?.['application/json']?.schema?.$ref,
+  '#/components/schemas/VolcengineTaskCreated',
+  'Volcengine task creation must preserve its implemented HTTP 200 response',
+)
+assert.ok(!volcengineCollection.post.responses['201'] && !volcengineCollection.post.responses['202'], 'Volcengine task creation is not a 201 or 202 operation')
+assert.ok(!volcengineTask.delete.responses['204']?.content, 'Volcengine task deletion 204 must not document a body')
+for (const operation of [volcengineCollection.post, volcengineCollection.get, volcengineTask.get, volcengineTask.delete]) {
+  for (const [status, response] of Object.entries(operation.responses)) {
+    if (Number(status) < 400) continue
+    assert.equal(
+      response.content?.['application/json']?.schema?.$ref,
+      '#/components/schemas/VolcengineError',
+      `Volcengine task ${status} must use the Volcengine error envelope`,
+    )
+  }
+}
+assert.deepEqual(
+  volcengineCollection.get.parameters.find((parameter) => parameter.name === 'filter.status')?.schema?.enum,
+  ['queued', 'running', 'cancelled', 'succeeded', 'failed', 'expired'],
+  'Volcengine task listing must document every implemented native status',
+)
+assert.match(sidebar, /\/api-reference\/volcengine-contents-generations/, 'Sidebar must link to the Volcengine native protocol reference')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
 const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.doesNotMatch(getRunPath, /pattern:/, 'Run result lookup IDs must not inherit another resource prefix')
