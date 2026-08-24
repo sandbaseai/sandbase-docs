@@ -292,6 +292,18 @@ assert.match(updateDeploymentSchema, /pattern: '\^https:\/\/open\\\.feishu\\\.cn
 assert.match(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Sidebar must link to the Feishu notification test reference')
 assert.match(sidebar, /\/api-reference\/endpoints\/acp/, 'Sidebar must link to the Endpoint ACP reference')
 const deploymentSchema = openapi.match(/^    Deployment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
+  if (!publicPath.startsWith('/v1/deployment')) continue
+  for (const method of publicMethods) {
+    const operation = pathItem[method]
+    if (!operation) continue
+    assert.equal(
+      operation.responses['401'].content?.['application/json']?.schema?.$ref,
+      '#/components/schemas/TaskCostError',
+      `${method.toUpperCase()} ${publicPath} must document the implemented string-error authentication envelope`,
+    )
+  }
+}
 assert.match(deploymentSchema, /required: \[id, type, name, description, metadata, resources, vault_ids, agent, agent_id, agent_version, environment_id, schedule, timeout_policy, status, version, next_run_at, creation_mode, created_at, updated_at\]/, 'Deployment responses must require fields emitted by every list and detail projection')
 const deploymentResourcePath = openapi.match(/^  \/v1\/deployments\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 for (const status of ['400', '401', '402', '403', '404', '409', '422', '500']) {
