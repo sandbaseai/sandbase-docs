@@ -1419,7 +1419,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Inference",
     "method": "POST",
     "path": "/v1/responses",
-    "description": "Create an OpenAI-compatible model response. Request fields beyond model and stream are forwarded when supported by the selected provider.",
+    "description": "Create an OpenAI-compatible model response. SandBase preserves request fields after model mapping, then sanitizes responses to public OpenAI fields.",
     "signature": "client.responses.create(params)",
     "groups": [
       {
@@ -1430,7 +1430,19 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
           { "name": "input", "type": "string | object[]", "required": false, "description": "Text, message items, or other input supported by the selected model and provider." },
           { "name": "instructions", "type": "string", "required": false, "description": "System or developer instruction for the response." },
           { "name": "stream", "type": "boolean", "required": false, "default": "false", "description": "Return OpenAI-compatible Server-Sent Events." },
-          { "name": "tools", "type": "object[]", "required": false, "description": "Tools available to the model." }
+          { "name": "background", "type": "boolean", "required": false, "description": "Request background execution when supported by the selected provider." },
+          { "name": "include", "type": "string[]", "required": false, "description": "Additional public response data to include when supported." },
+          { "name": "max_output_tokens", "type": "integer", "required": false, "description": "Maximum generated tokens." },
+          { "name": "max_tool_calls", "type": "integer", "required": false, "description": "Maximum built-in tool calls when supported." },
+          { "name": "metadata", "type": "object", "required": false, "description": "Request metadata forwarded to the provider." },
+          { "name": "parallel_tool_calls", "type": "boolean", "required": false, "description": "Allow supported models to invoke tools in parallel." },
+          { "name": "previous_response_id", "type": "string", "required": false, "description": "Previous response to continue when supported by the selected route." },
+          { "name": "reasoning", "type": "object", "required": false, "description": "Reasoning configuration for supported models." },
+          { "name": "store", "type": "boolean", "required": false, "description": "Request provider-side response storage when supported." },
+          { "name": "text", "type": "object", "required": false, "description": "Text output and structured-format configuration." },
+          { "name": "tool_choice", "type": "string | object", "required": false, "description": "Controls tool selection." },
+          { "name": "tools", "type": "object[]", "required": false, "description": "Tools available to the model." },
+          { "name": "truncation", "type": "string", "required": false, "description": "Input truncation behavior." }
         ]
       }
     ],
@@ -1439,17 +1451,21 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-sb-...\", base_url=\"https://api.sandbase.ai/v1\")\nresponse = client.responses.create(\n    model=\"openai/gpt-5.2\",\n    input=\"Explain immutable infrastructure in one sentence.\",\n)\nprint(response.output_text)" },
       { "label": "TypeScript", "language": "typescript", "code": "import OpenAI from \"openai\";\n\nconst client = new OpenAI({ apiKey: process.env.SANDBASE_API_KEY, baseURL: \"https://api.sandbase.ai/v1\" });\nconst response = await client.responses.create({\n  model: \"openai/gpt-5.2\",\n  input: \"Explain immutable infrastructure in one sentence.\",\n});\nconsole.log(response.output_text);" }
     ],
-    "response": { "status": "200 OK", "code": "{\n  \"id\": \"resp_01...\",\n  \"object\": \"response\",\n  \"status\": \"completed\",\n  \"model\": \"openai/gpt-5.2\",\n  \"output\": []\n}" },
+    "response": { "status": "200 OK", "code": "{\n  \"id\": \"resp_01...\",\n  \"object\": \"response\",\n  \"status\": \"completed\",\n  \"model\": \"openai/gpt-5.2\",\n  \"output\": [],\n  \"usage\": {\n    \"input_tokens\": 18,\n    \"output_tokens\": 12,\n    \"total_tokens\": 30,\n    \"input_tokens_details\": {\"cached_tokens\": 0},\n    \"output_tokens_details\": {\"reasoning_tokens\": 0}\n  }\n}" },
     "notes": [
-      { "title": "Transparent compatibility", "description": "SandBase uses model and stream for routing and forwards other supported fields to the selected provider. Available fields and output items can vary by model and provider." },
-      { "title": "Streaming", "description": "Set stream to true to receive OpenAI-compatible Responses API Server-Sent Events." }
+      { "title": "Request compatibility", "description": "SandBase rewrites model to the selected upstream model and preserves other request fields. Provider support still varies." },
+      { "title": "Sanitized responses", "description": "Only public OpenAI response fields and token usage are returned. Provider billing, account, routing, and unknown top-level extensions are removed; output item content is preserved." },
+      { "title": "Streaming", "description": "Public response.* and error SSE events are sanitized and forwarded. Unknown private events are dropped; malformed data closes the stream rather than forwarding unsafe content." }
     ],
     "errors": [
       { "status": "400", "description": "Invalid JSON, missing model, or an invalid provider request." },
       { "status": "401", "description": "Missing or invalid API key." },
-      { "status": "402", "description": "Organization spending limit reached." },
-      { "status": "404", "description": "Model not found or unavailable." },
-      { "status": "429", "description": "Rate limit exceeded." }
+      { "status": "402", "description": "Organization or API Key spending limit reached." },
+      { "status": "403", "description": "API key scope or upstream permission rejection." },
+      { "status": "413", "description": "The upstream provider rejected the request as too large." },
+      { "status": "500", "description": "Prediction lifecycle or organization lookup failed." },
+      { "status": "502", "description": "The upstream response could not be safely parsed and sanitized." },
+      { "status": "503", "description": "Routing failed or every provider candidate was exhausted." }
     ]
   },
   "inference/chat-completions": {

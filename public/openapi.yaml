@@ -120,47 +120,59 @@ paths:
       tags: [Responses]
       summary: Create a model response
       description: >-
-        OpenAI-compatible Responses API endpoint. SandBase validates the model and stream fields used for routing,
-        then forwards the remaining supported request fields to the selected provider.
+        OpenAI-compatible Responses API endpoint. SandBase validates model and stream for routing, rewrites model
+        to the selected provider mapping, and preserves other request fields. Responses are rebuilt from public
+        OpenAI fields: unknown provider, routing, account, and billing extensions are removed. Unsafe responses fail
+        closed instead of being forwarded.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required: [model]
-              additionalProperties: true
-              properties:
-                model:
-                  type: string
-                  description: Model identifier from the Models API.
-                stream:
-                  type: boolean
-                  default: false
-                  description: Return OpenAI-compatible Server-Sent Events.
-                input:
-                  description: Text, message items, or other input supported by the selected model and provider.
-                instructions:
-                  type: string
-                  description: System or developer instruction for the response.
-                tools:
-                  type: array
-                  description: Tools available to the model.
-                  items:
-                    type: object
-                    additionalProperties: true
+              $ref: '#/components/schemas/ResponsesRequest'
       responses:
         '200':
           description: OpenAI-compatible response object or event stream from the selected provider.
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/ResponsesResponse'
             text/event-stream:
               schema:
                 type: string
-                description: OpenAI-compatible Responses API event stream.
+                description: >-
+                  Sanitized OpenAI Responses events. Public response.* and error events are forwarded; unknown
+                  private events and non-public event fields are removed. A malformed stream closes without
+                  forwarding unsafe data.
+        '400': { description: "Invalid JSON, missing model, no provider, or upstream request rejected", content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
+        '401':
+          description: Missing or invalid API key, or upstream authentication rejection
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/TaskCostError'
+                  - $ref: '#/components/schemas/ChatCompletionError'
+        '402':
+          description: Organization or API Key spending limit reached
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/TaskCostError'
+                  - $ref: '#/components/schemas/ChatCompletionError'
+        '403':
+          description: API key scope or upstream permission rejection
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/APIKeyScopeError'
+                  - $ref: '#/components/schemas/ChatCompletionError'
+        '413': { description: Upstream provider rejected the request as too large, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
+        '500': { description: Prediction lifecycle or organization lookup failed, content: { application/json: { schema: { oneOf: [{ $ref: '#/components/schemas/ChatCompletionError' }, { $ref: '#/components/schemas/TaskCostError' }] } } } }
+        '502': { description: Upstream response could not be safely parsed and sanitized, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
+        '503': { description: Routing failed or every provider candidate was exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
 
   /v1/embeddings:
     post:
@@ -2736,6 +2748,146 @@ components:
           type: string
         cover_url:
           type: string
+
+    # --- Responses ------------------------------------------------
+    ResponsesRequest:
+      type: object
+      required: [model]
+      additionalProperties: true
+      description: OpenAI-compatible request. SandBase rewrites model for the selected provider and preserves other fields.
+      properties:
+        model:
+          type: string
+          description: Model identifier from the Models API.
+        input:
+          description: Text, message items, or other input supported by the selected model and provider.
+        instructions:
+          type: string
+        stream:
+          type: boolean
+          default: false
+          description: Return sanitized OpenAI Responses Server-Sent Events.
+        background:
+          type: boolean
+        include:
+          type: array
+          items: { type: string }
+        max_output_tokens:
+          type: integer
+          minimum: 1
+        max_tool_calls:
+          type: integer
+          minimum: 1
+        metadata:
+          type: object
+          additionalProperties: true
+        parallel_tool_calls:
+          type: boolean
+        previous_response_id:
+          type: string
+        reasoning:
+          type: object
+          additionalProperties: true
+        service_tier:
+          type: string
+        store:
+          type: boolean
+        temperature:
+          type: number
+        text:
+          type: object
+          additionalProperties: true
+        tool_choice:
+          oneOf:
+            - type: string
+            - type: object
+              additionalProperties: true
+        tools:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        top_logprobs:
+          type: integer
+        top_p:
+          type: number
+        truncation:
+          type: string
+        user:
+          type: string
+
+    ResponsesResponse:
+      type: object
+      additionalProperties: false
+      description: >-
+        Public OpenAI Responses fields retained by SandBase. Provider-specific top-level fields are removed;
+        output items remain provider-compatible free-form objects.
+      properties:
+        id: { type: string }
+        object: { type: string }
+        created_at: { type: integer }
+        status: { type: string }
+        error:
+          type: [object, 'null']
+          additionalProperties: true
+        incomplete_details:
+          type: [object, 'null']
+          additionalProperties: true
+        instructions:
+          type: [string, 'null']
+        max_output_tokens: { type: [integer, 'null'] }
+        max_tool_calls: { type: [integer, 'null'] }
+        model: { type: string }
+        output:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        parallel_tool_calls: { type: boolean }
+        previous_response_id: { type: [string, 'null'] }
+        reasoning:
+          type: [object, 'null']
+          additionalProperties: true
+        store: { type: boolean }
+        temperature: { type: [number, 'null'] }
+        text:
+          type: object
+          additionalProperties: true
+        tool_choice: {}
+        tools:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        top_logprobs: { type: integer }
+        top_p: { type: [number, 'null'] }
+        truncation: { type: string }
+        usage:
+          type: object
+          additionalProperties: false
+          required: [input_tokens, output_tokens, total_tokens, input_tokens_details, output_tokens_details]
+          properties:
+            input_tokens: { type: integer, minimum: 0 }
+            output_tokens: { type: integer, minimum: 0 }
+            total_tokens: { type: integer, minimum: 0 }
+            input_tokens_details:
+              type: object
+              additionalProperties: false
+              required: [cached_tokens]
+              properties:
+                cached_tokens: { type: integer, minimum: 0 }
+            output_tokens_details:
+              type: object
+              additionalProperties: false
+              required: [reasoning_tokens]
+              properties:
+                reasoning_tokens: { type: integer, minimum: 0 }
+        metadata:
+          type: object
+          additionalProperties: true
+        service_tier: { type: string }
+        user: { type: string }
+        background: { type: boolean }
 
     # --- Chat Completions -----------------------------------------
     ChatCompletionRequest:

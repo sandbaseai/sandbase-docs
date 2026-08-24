@@ -68,8 +68,22 @@ const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[
 assert.doesNotMatch(getRunPath, /pattern:/, 'Run result lookup IDs must not inherit another resource prefix')
 assert.doesNotMatch(openapi, /next_page:\s*(?:\{[^\n]*type:\s*\[string, 'null'\]|\n\s+type:\s*\[string, 'null'\])/, 'List cursors must be omitted rather than returned as null')
 const responsesPath = openapi.match(/^  \/v1\/responses:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-assert.match(responsesPath, /additionalProperties: true/, 'Responses must preserve provider-compatible request fields')
+assert.match(responsesPath, /ResponsesRequest/, 'Responses must use the governed request schema')
 assert.match(responsesPath, /text\/event-stream:/, 'Responses must document streaming output')
+for (const status of ['403', '413', '500', '502', '503']) {
+  assert.match(responsesPath, new RegExp(`'${status}':`), `Responses must document ${status} responses`)
+}
+assert.doesNotMatch(responsesPath, /'404':/, 'Responses retries upstream 404 responses and must not promise a final 404')
+assert.doesNotMatch(responsesPath, /'429':/, 'Responses retries upstream 429 responses and must not promise a final 429')
+const responsesRequestSchema = openapi.match(/^    ResponsesRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(responsesRequestSchema, /additionalProperties: true/, 'Responses requests must preserve provider-compatible fields')
+for (const field of ['background', 'max_output_tokens', 'parallel_tool_calls', 'previous_response_id', 'reasoning', 'text', 'tool_choice']) {
+  assert.match(responsesRequestSchema, new RegExp(`^        ${field}:`, 'm'), `Responses must document ${field}`)
+}
+const responsesResponseSchema = openapi.match(/^    ResponsesResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(responsesResponseSchema, /additionalProperties: false/, 'Responses must document top-level response sanitization')
+assert.match(responsesResponseSchema, /required: \[input_tokens, output_tokens, total_tokens, input_tokens_details, output_tokens_details\]/, 'Responses must document sanitized token usage')
+assert.doesNotMatch(responsesResponseSchema, /^        (?:cost|provider|routing|account_balance):/m, 'Responses must not expose stripped provider or billing fields')
 const chatPath = openapi.match(/^  \/v1\/chat\/completions:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(chatPath, /text\/event-stream:/, 'Chat Completions must document streaming output')
 for (const status of ['402', '500', '502', '503']) {
