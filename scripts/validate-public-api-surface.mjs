@@ -258,6 +258,10 @@ for (const field of ['session_metadata', 'memory_config', 'resource_config', 'va
   assert.match(endpointSchema, new RegExp(`${field}:\\n\\s+type: \\[object, 'null'\\]`), `Endpoint ${field} must allow the serializer's null output`)
 }
 assert.match(endpointSchema, /store_status:\n\s+type: string\n\s+enum: \[private, pending_review, public, suspended\]/, 'Endpoint responses must document the serializer\'s store status')
+assert.match(endpointSchema, /required: \[id, type, name, slug, agent_id, agent_version, environment_id, protocols, config, session_metadata, memory_config, resource_config, vault_config, status, store_status, creation_mode, run_url, acp_url, created_at, updated_at\]/, 'Endpoint responses must require every field always emitted by the serializer')
+assert.match(endpointSchema, /config:\n\s+type: \[object, 'null'\]/, 'Endpoint responses must document advanced config and declarative null output')
+assert.match(endpointSchema, /acp_url:[\s\S]*?presence does not mean ACP is enabled/, 'Endpoint ACP URLs must not imply the protocol is enabled')
+assert.doesNotMatch(endpointSchema, /^        mcp_url:/m, 'Endpoint responses must not document the hidden MCP transport URL')
 assert.doesNotMatch(endpointSchema, /protocols:[\s\S]*?enum: \[rest, acp\]/, 'Endpoint responses must not claim internal transport values are normalized to the public request enum')
 for (const schemaName of ['CreateDeclarativeEndpointRequest', 'CreateAdvancedEndpointRequest']) {
   const schema = openapi.match(new RegExp(`^    ${schemaName}:\\n[\\s\\S]*?(?=^    [A-Za-z])`, 'm'))?.[0] ?? ''

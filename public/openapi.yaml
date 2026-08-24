@@ -3777,7 +3777,7 @@ components:
 
     Endpoint:
       type: object
-      required: [id, type, name, agent_id, environment_id, protocols, status, creation_mode, run_url]
+      required: [id, type, name, slug, agent_id, agent_version, environment_id, protocols, config, session_metadata, memory_config, resource_config, vault_config, status, store_status, creation_mode, run_url, acp_url, created_at, updated_at]
       properties:
         id:
           type: string
@@ -3800,6 +3800,10 @@ components:
           description: Enabled transport identifiers. The documented public request values are rest and acp; other returned values are reserved.
           items:
             type: string
+        config:
+          type: [object, 'null']
+          additionalProperties: true
+          description: Advanced Endpoint configuration. Declarative Endpoint responses always return null here.
         session_metadata:
           type: [object, 'null']
           additionalProperties: true
@@ -3840,6 +3844,7 @@ components:
         acp_url:
           type: string
           format: uri
+          description: Experimental ACP invocation URL. Its presence does not mean ACP is enabled; inspect protocols first.
         created_at:
           type: string
           format: date-time
