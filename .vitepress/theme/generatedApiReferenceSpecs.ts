@@ -443,7 +443,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "title": "Request body",
         "fields": [
-          { "name": "url", "type": "string", "required": true, "description": "Publicly accessible media URL." },
+          { "name": "url", "type": "string", "required": true, "description": "Non-empty source URL forwarded to the Asset provider. The provider must be able to fetch it." },
           { "name": "asset_type", "type": "Image | Video | Audio", "required": true, "description": "Case-sensitive asset type." },
           { "name": "name", "type": "string", "required": false, "description": "Optional display name." }
         ]
@@ -484,10 +484,10 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"external_id\": \"asset-20260710150403-hx4hf\",\n  \"asset_url\": \"asset://asset-20260710150403-hx4hf\",\n  \"status\": \"Active\",\n  \"asset_type\": \"Video\",\n  \"download_url\": \"https://cdn.example.com/signed-url\"\n}"
+      "code": "{\n  \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"external_id\": \"asset-20260710150403-hx4hf\",\n  \"asset_url\": \"asset://asset-20260710150403-hx4hf\",\n  \"status\": \"Active\",\n  \"asset_type\": \"Video\",\n  \"download_url\": \"https://cdn.example.com/signed-url\",\n  \"created_at\": \"2026-07-10T15:04:03Z\"\n}"
     },
     "notes": [
-      { "title": "Expiration", "description": "The asset:// reference is persistent. The signed download_url expires after 12 hours; call this endpoint again to refresh it." }
+      { "title": "Provider-managed URL", "description": "The asset:// value is the reusable Asset reference. download_url is provider-managed and can be empty; query this endpoint again for its current value." }
     ]
   },
   "models/embedding": {

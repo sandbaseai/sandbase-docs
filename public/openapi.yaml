@@ -744,6 +744,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateAssetResponse'
+        '400':
+          description: Invalid JSON, missing URL, or unsupported asset type
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '500':
+          description: Asset provider credentials are unavailable or the asset record could not be saved
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '502':
+          description: Upstream asset registration failed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
 
   /v1/assets/{id}:
     get:
@@ -763,8 +783,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAssetResponse'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
         '404':
           description: Asset not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '500':
+          description: Internal asset lookup error or provider credentials are unavailable
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '502':
+          description: Upstream asset query failed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
 
   # --- Services (Endpoint resources) -----------------------------
   /v1/endpoints:
@@ -2564,8 +2602,8 @@ components:
       properties:
         url:
           type: string
-          format: uri
-          description: Publicly accessible source URL.
+          minLength: 1
+          description: Source URL forwarded to the asset provider. SandBase requires a non-empty string; the provider must be able to fetch it.
         asset_type:
           type: string
           enum: [Image, Video, Audio]
@@ -2587,7 +2625,7 @@ components:
 
     GetAssetResponse:
       type: object
-      required: [id, external_id, asset_url, status, asset_type, download_url]
+      required: [id, external_id, asset_url, status, asset_type, download_url, created_at]
       properties:
         id: { type: string }
         external_id: { type: string }
@@ -2600,11 +2638,10 @@ components:
         name: { type: string }
         status:
           type: string
-          enum: [Active, Processing, Failed]
+          description: Provider-reported asset status, returned without normalization.
         download_url:
           type: string
-          format: uri
-          description: Temporary signed download URL when available.
+          description: Provider-returned download URL. It can be empty until the provider makes a URL available.
         created_at: { type: string, format: date-time }
 
     TaskCostResponse:

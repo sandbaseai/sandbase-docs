@@ -247,6 +247,17 @@ for (const field of ['memory_config', 'resource_config', 'vault_config']) {
 const assetRegistrationPath = openapi.match(/^  \/v1\/assets:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(assetRegistrationPath, /responses:\n\s+'200':/, 'Asset registration must document the implemented 200 response')
 assert.doesNotMatch(assetRegistrationPath, /\s+'201':/, 'Asset registration must not document an unimplemented 201 response')
+for (const status of ['400', '401', '500', '502']) {
+  assert.match(assetRegistrationPath, new RegExp(`'${status}':`), `Asset registration must document ${status} responses`)
+}
+const createAssetRequest = openapi.match(/^    CreateAssetRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.doesNotMatch(createAssetRequest, /format: uri/, 'Asset registration must not claim URL syntax validation that the handler does not perform')
+const getAssetResponse = openapi.match(/^    GetAssetResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(getAssetResponse, /required: \[id, external_id, asset_url, status, asset_type, download_url, created_at\]/, 'Asset lookup must require every always-emitted field')
+assert.doesNotMatch(getAssetResponse, /enum: \[Active, Processing, Failed\]/, 'Asset lookup must not restrict provider-reported statuses')
+assert.doesNotMatch(getAssetResponse, /download_url:[\s\S]*?format: uri/, 'Asset download_url must allow the emitted empty string')
+const assetOverview = readFileSync(new URL('../api-reference/models/assets.md', import.meta.url), 'utf8')
+assert.doesNotMatch(assetOverview, /12 hours|images < 5MB|video\/audio < 50MB/, 'Asset docs must not publish limits or expiry not enforced by the current implementation')
 assert.match(openapi, /type:\s*\{ type: string, const: environment_deleted \}/, 'Environment deletion must document its response discriminator')
 assert.doesNotMatch(openapi, /^  \/default\/v1(?:\/|:)/m, 'Internal Console paths must not be public')
 

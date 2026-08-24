@@ -57,7 +57,7 @@ Content-Type: application/json
 
 ### Using asset_url
 
-Once registered, reference the asset in the `content` array of a video generation request:
+Once registered, pass the `asset_url` to an input field that accepts an Asset reference in the selected model's live schema. Field names vary by model; for example:
 
 ```json
 {
@@ -111,7 +111,7 @@ Authorization: Bearer sk-xxx
 |-------|--------------|
 | `asset_url` | Reference address for video generation (permanent) |
 | `status` | Asset status: `Active` / `Processing` / `Failed` |
-| `download_url` | File download URL (**valid for 12 hours**; call this endpoint again to refresh) |
+| `download_url` | Provider-returned download URL; it can be empty while the Asset is not ready |
 
 ### Errors
 
@@ -125,9 +125,8 @@ Authorization: Bearer sk-xxx
 ## Notes
 
 ::: tip Important
-- `asset_url` has the format `asset://{external_id}` and never expires — use it to reference the asset in video generation requests
-- `download_url` is a signed URL for downloading/previewing the file only, and **expires after 12 hours**
+- `asset_url` has the format `asset://{external_id}` and is the reusable reference to pass to supported model inputs
+- Treat `download_url` as provider-managed. If it is empty or no longer works, query this endpoint again for the current value
 - `asset_type` is case-sensitive: `Image` / `Video` / `Audio`
 - The submitted URL must be publicly accessible (the platform needs to be able to fetch it)
-- Recommended size limits: images < 5MB, video/audio < 50MB
 :::
