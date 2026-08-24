@@ -23,6 +23,7 @@ Every trigger creates a durable `drun_*` DeploymentRun. A successful trigger ass
 | `POST` | `/v1/deployments/{deployment_id}/pause` | Pause scheduled triggers. |
 | `POST` | `/v1/deployments/{deployment_id}/unpause` | Resume scheduled triggers. |
 | `POST` | `/v1/deployments/{deployment_id}/archive` | Archive a Deployment. |
+| `POST` | `/v1/deployments/{deployment_id}/notifications/feishu/test` | Test the saved Feishu notification target. |
 
 ## Next steps
 
@@ -65,3 +66,5 @@ Use `POST /v1/deployments/{deployment_id}/runs` to trigger manually. The request
 List one Deployment's records at `/v1/deployments/{deployment_id}/runs`, or query `/v1/deployment_runs` across Deployments. The global list accepts `trigger_type=manual|schedule`, status filters `pending|succeeded|failed`, `has_error`, Agent/Deployment IDs, time bounds, and cursor pagination. These filters select trigger outcomes; the current public DeploymentRun object does not include a `status` field. A nested get returns `409 deployment_trigger_in_progress` while the record is pending.
 
 Updates support `name`, `initial_events`, `schedule`, `timeout_policy`, `expected_version`, `agent_binding`, `agent_config`, and `notification_settings`. Changing the Agent binding requires a paused Deployment and the current `expected_version` when applicable.
+
+`notification_settings` accepts exactly one `feishu_webhook_url` on the official `open.feishu.cn` custom-bot path. The URL is encrypted and never returned; detail responses expose only `feishu_webhook_configured`. Send `notification_settings: null` or `feishu_webhook_url: null` to remove it. The test endpoint sends a fixed SandBase message to the saved target and accepts only an absent body or `{}`.

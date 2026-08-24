@@ -47,6 +47,7 @@ const requiredPublicPaths = [
   '/v1/deployments/{id}/pause:',
   '/v1/deployments/{id}/unpause:',
   '/v1/deployments/{id}/archive:',
+  '/v1/deployments/{id}/notifications/feishu/test:',
 ]
 
 for (const requiredPath of requiredPublicPaths) {
@@ -166,6 +167,17 @@ const deploymentRunsPath = openapi.match(/^  \/v1\/deployment_runs:\n[\s\S]*?(?=
 for (const field of ['trigger_type', 'status']) {
   assert.match(deploymentRunsPath, new RegExp(`name: ${field}\\n\\s+in: query[\\s\\S]*?type: array`), `DeploymentRun ${field} filters must be repeatable`)
 }
+const feishuTestPath = openapi.match(/^  \/v1\/deployments\/\{id\}\/notifications\/feishu\/test:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(feishuTestPath, /maxProperties: 0/, 'Feishu notification tests must reject custom request fields')
+assert.match(feishuTestPath, /This endpoint never accepts a webhook URL or custom message/, 'Feishu notification tests must document the saved-target-only boundary')
+for (const status of ['200', '400', '401', '404', '409', '502']) {
+  assert.match(feishuTestPath, new RegExp(`'${status}':`), `Feishu notification test must document ${status} responses`)
+}
+const updateDeploymentSchema = openapi.match(/^    UpdateDeploymentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(updateDeploymentSchema, /notification_settings:\n\s+type: \[object, 'null'\]/, 'Deployment notifications must allow null to clear the saved target')
+assert.match(updateDeploymentSchema, /required: \[feishu_webhook_url\]/, 'A non-null notification_settings object must contain only its implemented webhook field')
+assert.match(updateDeploymentSchema, /pattern: '\^https:\/\/open\\\.feishu\\\.cn\/open-apis\/bot\/v2\/hook\//, 'Deployment notifications must publish the enforced Feishu webhook origin and path')
+assert.match(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Sidebar must link to the Feishu notification test reference')
 const agentSchema = openapi.match(/^    Agent:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 for (const field of ['tools', 'mcp_servers', 'skills', 'handoffs']) {
   assert.match(agentSchema, new RegExp(`${field}:\\n\\s+type: \\[array, 'null'\\]`), `Agent ${field} must allow the serializer's null output`)

@@ -366,6 +366,40 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       }
     ]
   },
+  "deployments/test-feishu-notification": {
+    "title": "Test Feishu Notification",
+    "operation": "Deployments",
+    "method": "POST",
+    "path": "/v1/deployments/{deployment_id}/notifications/feishu/test",
+    "description": "Send a fixed SandBase test message to the Feishu webhook already saved on a Deployment. No URL or custom message is accepted.",
+    "groups": [
+      {
+        "title": "Path parameters",
+        "fields": [
+          { "name": "deployment_id", "type": "string", "required": true, "description": "Deployment identifier." }
+        ]
+      },
+      {
+        "title": "Request body",
+        "description": "Omit the body or send an empty JSON object.",
+        "fields": []
+      }
+    ],
+    "examples": [
+      {
+        "label": "cURL",
+        "language": "bash",
+        "code": "curl -X POST https://api.sandbase.ai/v1/deployments/depl_01.../notifications/feishu/test \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{}'"
+      }
+    ],
+    "response": {
+      "status": "200 OK",
+      "code": "{\n  \"delivered\": true\n}"
+    },
+    "notes": [
+      { "title": "Saved target only", "description": "Configure notification_settings.feishu_webhook_url through the Deployment update API first. The secret URL is never returned." }
+    ]
+  },
   "deployments/update": {
     "title": "Update Deployment",
     "operation": "Deployments",

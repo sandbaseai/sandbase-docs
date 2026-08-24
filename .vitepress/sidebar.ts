@@ -216,6 +216,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Archive Deployment', link: '/api-reference/deployments/archive' },
       { text: 'Pause Deployment', link: '/api-reference/deployments/pause' },
       { text: 'Unpause Deployment', link: '/api-reference/deployments/unpause' },
+      { text: 'Test Feishu Notification', link: '/api-reference/deployments/test-feishu-notification' },
       {
         text: 'DeploymentRuns',
         collapsed: false,

@@ -1932,6 +1932,60 @@ paths:
         '404': { description: Deployment not found }
         '409': { description: Deployment cannot be archived from its current state }
 
+  /v1/deployments/{id}/notifications/feishu/test:
+    post:
+      operationId: testDeploymentFeishuNotification
+      tags: [Deployments]
+      summary: Test the saved Feishu notification target
+      description: |
+        Sends a fixed SandBase test notification to the Feishu webhook already saved on this Deployment.
+        The request body must be absent or an empty JSON object. This endpoint never accepts a webhook URL or custom message.
+      parameters:
+        - $ref: '#/components/parameters/DeploymentId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              maxProperties: 0
+              additionalProperties: false
+      responses:
+        '200':
+          description: Test notification delivered
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [delivered]
+                properties:
+                  delivered: { type: boolean, const: true }
+        '400':
+          description: Request body is not absent or an empty JSON object
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '404':
+          description: Deployment not found for the current organization
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '409':
+          description: Deployment is archived or no Feishu webhook is configured
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '502':
+          description: Feishu rejected the test notification or delivery failed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+
   /v1/deployments/{id}/runs:
     post:
       operationId: triggerDeploymentRun
@@ -4479,10 +4533,17 @@ components:
             environment_id: { type: string }
         agent_config: { type: object, additionalProperties: true }
         notification_settings:
-          type: object
+          type: [object, 'null']
+          description: Set to null to remove the saved Feishu webhook. A configured webhook is encrypted and never returned.
           additionalProperties: false
+          required: [feishu_webhook_url]
           properties:
-            feishu_webhook_url: { type: [string, 'null'], format: uri, writeOnly: true }
+            feishu_webhook_url:
+              type: [string, 'null']
+              format: uri
+              pattern: '^https://open\.feishu\.cn/open-apis/bot/v2/hook/[A-Za-z0-9_-]+$'
+              writeOnly: true
+              description: Official Feishu custom-bot webhook. Set to null, or set notification_settings itself to null, to remove it.
 
     Deployment:
       type: object
