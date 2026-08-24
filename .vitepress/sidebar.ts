@@ -121,6 +121,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Responses', link: '/api-reference/responses' },
       { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
       { text: 'Google Gemini', link: '/api-reference/gemini-generate-content' },
+      { text: 'Gemini Interactions', link: '/api-reference/gemini-interactions' },
       {
         text: 'Images',
         collapsed: false,

@@ -49,7 +49,7 @@ tags:
   - name: Messages
     description: Anthropic-compatible Messages API
   - name: Gemini
-    description: Google Gemini-compatible GenerateContent API
+    description: Google Gemini-compatible GenerateContent and Interactions APIs
   - name: Agents
     description: Build and manage Agent definitions
   - name: Services
@@ -517,6 +517,81 @@ paths:
         '502': { description: Upstream stream could not be translated, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '503': { description: Routing failed or all provider candidates were unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '504': { description: Upstream request timed out before streaming starts, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+
+  # --- Google Gemini Interactions --------------------------------
+  /v1beta/interactions:
+    post:
+      operationId: createGeminiInteraction
+      tags: [Gemini]
+      summary: Create a Google Gemini Interaction
+      description: |
+        Proxies the Google Interactions protocol while routing the logical model through SandBase. Successful requests
+        always return HTTP 200. Check status: an in_progress response is pollable and is not a completed result.
+        Set stream=true for SSE, or background=true for a durable background submission; they cannot both be true.
+      security:
+        - GoogleApiKey: []
+        - BearerAuth: []
+        - GoogleQueryApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/GeminiInteractionRequest' }
+      responses:
+        '200':
+          description: Current or terminal Interaction, or an Interaction event stream
+          headers:
+            Location:
+              schema: { type: string }
+              description: Polling path when the returned Interaction is still in_progress. This convenience header may be omitted for a terminal response.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/GeminiInteraction' }
+            text/event-stream:
+              schema:
+                type: string
+                description: Google Interactions SSE events ending with a done event and data [DONE]. In-stream failures use an error event after headers are written.
+        '400': { description: 'Invalid JSON, missing model, unsupported Agent interaction, incompatible background and stream settings, stale conversation affinity, or upstream request rejection', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '403': { description: 'API Key spending limit reached, organization disabled, or upstream permission rejected', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '404': { description: Logical model or usable provider was not found, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '422': { description: Upstream rejected otherwise valid Interaction fields, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '429': { description: Provider rate limit exceeded after failover attempts, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '500': { description: Prediction lifecycle or internal persistence failed, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '502': { description: Upstream response exceeded the gateway size limit, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '503': { description: 'Routing, upstream connection, or durable background handoff failed', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '504': { description: Upstream request timed out after failover attempts, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+
+  /v1beta/interactions/{id}:
+    get:
+      operationId: getGeminiInteraction
+      tags: [Gemini]
+      summary: Get a Google Gemini Interaction
+      description: |
+        Retrieves the Interaction created by the same SandBase API key. Non-terminal responses omit partial output and
+        usage. When upstream media has expired, a terminal fallback can preserve structure and metadata without the
+        original media bytes; download terminal media promptly rather than treating this endpoint as durable storage.
+      security:
+        - GoogleApiKey: []
+        - BearerAuth: []
+        - GoogleQueryApiKey: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, minLength: 1 }
+          description: Upstream Interaction ID returned by POST. It is not a SandBase prediction ID.
+      responses:
+        '200': { description: Current or terminal Interaction, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiInteraction' } } } }
+        '400': { description: Empty Interaction ID, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '403': { description: API Key spending limit reached or organization disabled, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '404': { description: 'Interaction is unknown, expired, or not owned by the current API key', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '500': { description: Organization admission lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '502': { description: Upstream Interaction response exceeded the gateway size limit, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '503': { description: 'Affinity storage, provider lookup, credentials, or upstream retrieval is temporarily unavailable', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
 
   # --- Embed Configs ---------------------------------------------
   /v1/embeds:
@@ -4305,6 +4380,95 @@ components:
         promptFeedback: { type: object, additionalProperties: true }
         modelVersion: { type: string }
         responseId: { type: string }
+
+    GeminiInteractionRequest:
+      type: object
+      required: [model, input]
+      additionalProperties: true
+      description: |
+        Google Interactions request. Except for fields used for routing and lifecycle control, fields are forwarded to
+        the selected upstream. Agent interactions are not supported. background and stream cannot both be true.
+      properties:
+        model:
+          type: string
+          minLength: 1
+          description: Logical SandBase model name. The response echoes this name instead of an upstream model identifier.
+        input:
+          description: Google Interactions input; it can be text, an object, or an array of typed input items.
+        stream:
+          type: boolean
+          default: false
+          description: Requests an SSE event stream when the selected model supports it.
+        background:
+          type: boolean
+          default: false
+          description: Requests durable background execution and an immediately pollable in_progress Interaction.
+        previous_interaction_id:
+          type: string
+          description: Previous Interaction ID. SandBase keeps the request on the same upstream provider when the mapping is still available.
+        store:
+          type: boolean
+          description: Forwarded upstream. Stored upstream state may be required for previous_interaction_id.
+        system_instruction: { type: string }
+        tools: { type: array, items: { type: object, additionalProperties: true } }
+        generation_config: { type: object, additionalProperties: true }
+        response_format:
+          oneOf:
+            - type: object
+              additionalProperties: true
+            - type: array
+              items: {}
+        response_modalities: { type: array, items: { type: string } }
+
+    GeminiInteraction:
+      type: object
+      required: [id, object, model, status]
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+          description: Upstream Interaction ID used by GET and previous_interaction_id.
+        object: { type: string, const: interaction }
+        model:
+          type: string
+          description: Logical SandBase model name supplied by the client.
+        role: { type: string }
+        status:
+          type: string
+          enum: [in_progress, requires_action, completed, failed, cancelled, incomplete]
+        created: { type: string }
+        updated: { type: string }
+        steps:
+          type: array
+          description: Polymorphic Google Interaction steps. Unknown step and content types are preserved.
+          items: { type: object, additionalProperties: true }
+        usage:
+          $ref: '#/components/schemas/GeminiInteractionUsage'
+
+    GeminiInteractionUsage:
+      type: object
+      additionalProperties: true
+      properties:
+        total_input_tokens: { type: integer, minimum: 0 }
+        total_output_tokens: { type: integer, minimum: 0 }
+        total_cached_tokens: { type: integer, minimum: 0 }
+        total_thought_tokens: { type: integer, minimum: 0 }
+        total_tool_use_tokens: { type: integer, minimum: 0 }
+        total_tokens: { type: integer, minimum: 0 }
+        input_tokens_by_modality:
+          type: array
+          items: { $ref: '#/components/schemas/GeminiInteractionModalityUsage' }
+        output_tokens_by_modality:
+          type: array
+          items: { $ref: '#/components/schemas/GeminiInteractionModalityUsage' }
+
+    GeminiInteractionModalityUsage:
+      type: object
+      required: [modality, tokens]
+      additionalProperties: true
+      properties:
+        modality: { type: string }
+        tokens: { type: integer, minimum: 0 }
 
     GeminiError:
       type: object

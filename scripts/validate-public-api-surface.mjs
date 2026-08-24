@@ -41,6 +41,8 @@ const requiredPublicPaths = [
   '/v1/responses:',
   '/v1beta/models/{model}:generateContent:',
   '/v1beta/models/{model}:streamGenerateContent:',
+  '/v1beta/interactions:',
+  '/v1beta/interactions/{id}:',
   '/v1/images/generations:',
   '/v1/images/edits:',
   '/v1/assets:',
@@ -303,6 +305,43 @@ assert.ok(
   'Gemini streaming must document the default JSON-array carrier',
 )
 assert.match(sidebar, /\/api-reference\/gemini-generate-content/, 'Sidebar must link to the Gemini native protocol reference')
+const geminiInteractionsCreate = openapiDocument.paths['/v1beta/interactions']?.post
+const geminiInteractionsGet = openapiDocument.paths['/v1beta/interactions/{id}']?.get
+assert.ok(geminiInteractionsCreate, 'Public OpenAPI must expose the implemented Gemini Interactions create endpoint')
+assert.ok(geminiInteractionsGet, 'Public OpenAPI must expose the implemented Gemini Interactions get endpoint')
+assert.ok(!openapiDocument.paths['/v1beta/interactions']?.get, 'Gemini Interactions list is not implemented and must stay hidden')
+assert.ok(!openapiDocument.paths['/v1beta/interactions/{id}']?.delete, 'Gemini Interaction deletion is not implemented and must stay hidden')
+assert.ok(!openapiDocument.paths['/v1beta/interactions/{id}/cancel'], 'Gemini Interaction cancellation is not implemented and must stay hidden')
+for (const operation of [geminiInteractionsCreate, geminiInteractionsGet]) {
+  assert.deepEqual(
+    operation.security,
+    [{ GoogleApiKey: [] }, { BearerAuth: [] }, { GoogleQueryApiKey: [] }],
+    'Gemini Interactions must document all three implemented API-key locations',
+  )
+}
+for (const status of ['400', '401', '402', '403', '404', '422', '429', '500', '502', '503', '504']) {
+  assert.equal(
+    geminiInteractionsCreate.responses[status]?.content?.['application/json']?.schema?.$ref,
+    '#/components/schemas/GeminiError',
+    `Gemini Interactions create ${status} must use the Google error envelope`,
+  )
+}
+for (const status of ['400', '401', '402', '403', '404', '500', '502', '503']) {
+  assert.equal(
+    geminiInteractionsGet.responses[status]?.content?.['application/json']?.schema?.$ref,
+    '#/components/schemas/GeminiError',
+    `Gemini Interactions get ${status} must use the Google error envelope`,
+  )
+}
+assert.ok(
+  geminiInteractionsCreate.responses['200']?.content?.['text/event-stream']?.schema,
+  'Gemini Interactions create must document implemented SSE output',
+)
+assert.ok(
+  geminiInteractionsCreate.responses['200']?.headers?.Location,
+  'Gemini Interactions create must document the pollable Location header',
+)
+assert.match(sidebar, /\/api-reference\/gemini-interactions/, 'Sidebar must link to the Gemini Interactions reference')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
 const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.doesNotMatch(getRunPath, /pattern:/, 'Run result lookup IDs must not inherit another resource prefix')
