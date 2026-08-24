@@ -693,8 +693,12 @@ for (const field of ['memory_config', 'resource_config', 'vault_config']) {
 const assetRegistrationPath = openapi.match(/^  \/v1\/assets:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(assetRegistrationPath, /responses:\n\s+'200':/, 'Asset registration must document the implemented 200 response')
 assert.doesNotMatch(assetRegistrationPath, /\s+'201':/, 'Asset registration must not document an unimplemented 201 response')
-for (const status of ['400', '401', '500', '502']) {
+for (const status of ['400', '401', '402', '403', '500', '502']) {
   assert.match(assetRegistrationPath, new RegExp(`'${status}':`), `Asset registration must document ${status} responses`)
+}
+const assetLookupPath = openapi.match(/^  \/v1\/assets\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '401', '402', '403', '404', '500', '502']) {
+  assert.match(assetLookupPath, new RegExp(`'${status}':`), `Asset lookup must document ${status} responses`)
 }
 const createAssetRequest = openapi.match(/^    CreateAssetRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.doesNotMatch(createAssetRequest, /format: uri/, 'Asset registration must not claim URL syntax validation that the handler does not perform')
@@ -706,7 +710,7 @@ const assetOverview = readFileSync(new URL('../api-reference/models/assets.md', 
 assert.doesNotMatch(assetOverview, /12 hours|images < 5MB|video\/audio < 50MB/, 'Asset docs must not publish limits or expiry not enforced by the current implementation')
 const uploadMediaPath = openapi.match(/^  \/v1\/upload:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(uploadMediaPath, /multipart\/form-data:/, 'Media upload must document multipart input')
-for (const status of ['200', '400', '401', '500', '503']) {
+for (const status of ['200', '400', '401', '402', '403', '500', '503']) {
   assert.match(uploadMediaPath, new RegExp(`'${status}':`), `Media upload must document ${status} responses`)
 }
 const uploadMediaRequest = openapi.match(/^    UploadMediaRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
