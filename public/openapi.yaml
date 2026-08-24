@@ -109,11 +109,13 @@ paths:
                   - $ref: '#/components/schemas/ChatCompletionError'
                   - $ref: '#/components/schemas/TaskCostError'
         '403':
-          description: API key scope does not authorize this endpoint
+          description: Organization is disabled, or the API key scope does not authorize this endpoint
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyScopeError'
+                oneOf:
+                  - $ref: '#/components/schemas/ChatCompletionError'
+                  - $ref: '#/components/schemas/APIKeyScopeError'
         '404': { description: Model not found or unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
         '429': { description: Rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '500': { description: Request persistence or organization lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
@@ -173,6 +175,7 @@ paths:
             application/json:
               schema:
                 oneOf:
+                  - $ref: '#/components/schemas/TaskCostError'
                   - $ref: '#/components/schemas/APIKeyScopeError'
                   - $ref: '#/components/schemas/ChatCompletionError'
         '413': { description: Upstream provider rejected the request as too large, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
@@ -210,11 +213,13 @@ paths:
                   - $ref: '#/components/schemas/EmbeddingError'
                   - $ref: '#/components/schemas/TaskCostError'
         '403':
-          description: API key scope does not authorize this endpoint
+          description: Organization is disabled, or the API key scope does not authorize this endpoint
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyScopeError'
+                oneOf:
+                  - $ref: '#/components/schemas/EmbeddingError'
+                  - $ref: '#/components/schemas/APIKeyScopeError'
         '404': { description: Logical model not found, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
         '500': { description: Request persistence or organization lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
         '503': { description: No provider route succeeded, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
@@ -251,7 +256,14 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/OpenAIImagesError'
                   - $ref: '#/components/schemas/TaskCostError'
-        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '403':
+          description: Organization is disabled, or the API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/TaskCostError'
+                  - $ref: '#/components/schemas/APIKeyScopeError'
         '404': { description: Routed image model is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/OpenAIImagesError' } } } }
         '429': { description: Rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '500': { description: Request persistence or response processing failed, content: { application/json: { schema: { oneOf: [{ $ref: '#/components/schemas/OpenAIImagesError' }, { $ref: '#/components/schemas/TaskCostError' }] } } } }
@@ -290,7 +302,14 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/OpenAIImagesError'
                   - $ref: '#/components/schemas/TaskCostError'
-        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '403':
+          description: Organization is disabled, or the API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/TaskCostError'
+                  - $ref: '#/components/schemas/APIKeyScopeError'
         '404': { description: Routed image-edit model is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/OpenAIImagesError' } } } }
         '429': { description: Rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '500': { description: Request persistence or response processing failed, content: { application/json: { schema: { oneOf: [{ $ref: '#/components/schemas/OpenAIImagesError' }, { $ref: '#/components/schemas/TaskCostError' }] } } } }

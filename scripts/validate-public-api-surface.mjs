@@ -376,6 +376,32 @@ assert.match(imageEditRequest, /type: array\n\s+items:\n\s+type: string\n\s+form
 const imagesResponse = openapi.match(/^    ImagesResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(imagesResponse, /required: \[data, usage\]/, 'Images must document the validated success envelope')
 assert.match(imagesResponse, /required: \[input_tokens, output_tokens, total_tokens, input_tokens_details\]/, 'Images must document authoritative usage')
+const embeddingPath = openapi.match(/^  \/v1\/embeddings:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '402', '403', '404', '500', '503']) {
+  assert.match(embeddingPath, new RegExp(`'${status}':`), `Embeddings must document ${status} responses`)
+}
+assert.deepEqual(
+  jsonErrorSchema('post', '/v1/embeddings', '403')?.oneOf?.map((schema) => schema.$ref),
+  ['#/components/schemas/EmbeddingError', '#/components/schemas/APIKeyScopeError'],
+  'Embeddings must document both organization-admission and scoped-key rejections',
+)
+assert.deepEqual(
+  jsonErrorSchema('post', '/v1/chat/completions', '403')?.oneOf?.map((schema) => schema.$ref),
+  ['#/components/schemas/ChatCompletionError', '#/components/schemas/APIKeyScopeError'],
+  'Chat Completions must document both organization-admission and scoped-key rejections',
+)
+assert.deepEqual(
+  jsonErrorSchema('post', '/v1/responses', '403')?.oneOf?.map((schema) => schema.$ref),
+  ['#/components/schemas/TaskCostError', '#/components/schemas/APIKeyScopeError', '#/components/schemas/ChatCompletionError'],
+  'Responses must document admission, scoped-key, and upstream permission rejections',
+)
+for (const publicPath of ['/v1/images/generations', '/v1/images/edits']) {
+  assert.deepEqual(
+    jsonErrorSchema('post', publicPath, '403')?.oneOf?.map((schema) => schema.$ref),
+    ['#/components/schemas/TaskCostError', '#/components/schemas/APIKeyScopeError'],
+    `${publicPath} must document both organization-admission and scoped-key rejections`,
+  )
+}
 assert.match(apiKeyGuide, /Only `POST \/v1\/messages` reads `x-api-key`/, 'API key guide must scope x-api-key to Anthropic Messages')
 assert.doesNotMatch(apiKeyGuide, /There is no per-model or per-resource restriction/, 'API key guide must not deny implemented credential restrictions')
 for (const content of [apiKeyGuide, authenticationReference]) {
