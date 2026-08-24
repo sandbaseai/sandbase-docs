@@ -1140,4 +1140,29 @@ function inspectPublishedSources(directory) {
 
 inspectPublishedSources(root)
 
+const h3Models = ['text-to-video', 'image-to-video', 'reference-to-video', 'video-regeneration']
+for (const modelSlug of h3Models) {
+  const relative = `model-api-reference/video-generation/minimax/h3/${modelSlug}.md`
+  const content = readFileSync(path.join(root, relative), 'utf8')
+  const encoded = content.match(/^apiReferenceJson: (.+)$/m)?.[1]
+  assert.ok(encoded, `${relative} must contain its generated API reference`)
+  const reference = JSON.parse(JSON.parse(encoded))
+  const responseFields = reference.groups.find((group) => group.title === 'Response Schema')?.fields ?? []
+  assert.deepEqual(
+    responseFields.filter((field) => field.name.startsWith('usage.')).map((field) => field.name).sort(),
+    ['usage.input_image_count', 'usage.input_seconds', 'usage.output_seconds', 'usage.total_seconds'],
+    `${relative} must document the exact public MiniMax H3 official usage allowlist`,
+  )
+  assert.doesNotMatch(
+    JSON.stringify(responseFields),
+    /billing_breakdown|provider_cost|upstream_cost|credential|endpoint|task_id/,
+    `${relative} must not expose internal MiniMax H3 settlement or routing fields`,
+  )
+  if (modelSlug === 'video-regeneration') {
+    for (const example of reference.examples) {
+      assert.match(example.code, /["']?videos["']?\s*[:=]\s*\[/, `${example.language} must submit the required videos array`)
+    }
+  }
+}
+
 console.log('public API surface: ok')

@@ -4,7 +4,13 @@ import { fileURLToPath } from 'node:url'
 
 const docsRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const repoRoot = path.resolve(docsRoot, '..')
-const registryDataRoot = path.join(repoRoot, 'sandbase-registry', 'data')
+const standaloneRegistryDataRoot = path.join(repoRoot, 'sandbase-registry', 'data')
+const monorepoRegistryDataRoot = path.join(repoRoot, 'sandbase-monorepo', 'sandbase-registry', 'data')
+const registryDataRoot = process.env.SANDBASE_REGISTRY_DATA_ROOT
+  ? path.resolve(process.env.SANDBASE_REGISTRY_DATA_ROOT)
+  : fs.existsSync(standaloneRegistryDataRoot)
+    ? standaloneRegistryDataRoot
+    : monorepoRegistryDataRoot
 const llmRegistryRoot = path.join(registryDataRoot, 'llm')
 const multimodalRegistryRoot = path.join(registryDataRoot, 'multimodal')
 const apiRegistryRoot = path.join(registryDataRoot, 'api')
@@ -81,6 +87,9 @@ const platformVendorPriority = [
 
 const platformGeneratedMarker = 'generatedBy: "sandbase-platform-api-reference"'
 const publicRunExampleID = 'f3d2e8a1-7c4b-4a12-9d2e-123456789abc'
+const requestedModelNames = new Set(
+  (process.env.SANDBASE_GENERATE_MODELS ?? '').split(',').map((name) => name.trim()).filter(Boolean),
+)
 
 const sharedPlatformDomains = [
   { key: 'search', label: 'Search & Discovery', order: 10, matchOrder: 10, tokens: ['search', 'discover', 'discovery', 'trending', 'trend', 'recommend', 'recommendation', 'suggest', 'suggestion', 'suggestions', 'similar', 'explore', 'feed', 'hashtag', 'tag', 'keyword'] },
@@ -549,6 +558,16 @@ function protocolForModel(model) {
 
 function exampleValueForField(name, schema = {}) {
   if (schema.default !== undefined) return schema.default
+  if (schema.type === 'array') {
+    if (Array.isArray(schema.example)) return schema.example
+    if (schema.examples?.length) {
+      if (Array.isArray(schema.examples[0])) return schema.examples[0]
+      return schema.examples.slice(0, schema.maxItems ?? schema.examples.length)
+    }
+    const count = Math.max(1, schema.minItems ?? 0)
+    const itemName = name.endsWith('s') ? name.slice(0, -1) : `${name}_item`
+    return Array.from({ length: count }, () => exampleValueForField(itemName, schema.items ?? {}))
+  }
   if (schema.examples?.length) return schema.examples[0]
   if (name === 'prompt') return 'A cinematic product photo of a matte black smart speaker on a marble table, soft studio lighting'
   if (name.includes('audio')) return 'https://static.sandbase.ai/examples/input.mp3'
@@ -656,9 +675,10 @@ function placeholderForSchema(model, name, schema, seen = new Set()) {
   if (resolved.type === 'null') return null
   if (resolved.type === 'string' || !resolved.type) {
     const pattern = resolved.pattern ? new RegExp(resolved.pattern) : undefined
+    const literalPrefix = resolved.pattern?.match(/^\^([A-Za-z0-9_-]+)(?=\\?\[)/)?.[1]
     const candidates = resolved.format === 'uri' || /(^|_)(url|uri)$/.test(name)
-      ? ['https://example.com/resource']
-      : [name.replace(/[^A-Za-z0-9_-]/g, '_'), 'example', 'abc123', 'A1_b']
+      ? ['https://example.com/resource', 'https://mp.weixin.qq.com/s/example']
+      : [...(literalPrefix ? [`${literalPrefix}example`] : []), name.replace(/[^A-Za-z0-9_-]/g, '_'), 'example', 'abc123', 'A1_b', '123456', 'v2_abcdef@finder']
     let value = candidates.find((candidate) => !pattern || pattern.test(candidate))
     if (value === undefined) throw new Error(`${model.name}: cannot construct string matching pattern for ${name}`)
     const minLength = Number.isInteger(resolved.minLength) ? resolved.minLength : 0
@@ -833,8 +853,21 @@ function publicPlatformResponseFields() {
   ]
 }
 
-function publicGenerationResponseFields() {
-  return [
+const minimaxH3UsageModels = new Set([
+  'minimax/h3/text-to-video',
+  'minimax/h3/image-to-video',
+  'minimax/h3/reference-to-video',
+  'minimax/h3/video-regeneration',
+])
+const minimaxH3UsageDescriptions = {
+  total_seconds: 'Total seconds reported by the MiniMax H3 official completed task.',
+  input_seconds: 'Input video seconds reported by the MiniMax H3 official completed task.',
+  output_seconds: 'Generated video seconds reported by the MiniMax H3 official completed task.',
+  input_image_count: 'Input image count reported by the MiniMax H3 official completed task.',
+}
+
+function publicGenerationResponseFields(model) {
+  const fields = [
     { name: 'id', type: 'string', required: true, description: 'Opaque SandBase run identifier. Use it exactly as returned; no prefix is guaranteed.' },
     { name: 'status', type: 'string', required: true, description: 'Current public run status.', constraints: 'Allowed values: pending, running, completed, failed, timeout' },
     { name: 'model', type: 'string', required: false, description: 'Public SandBase model name used for this run.' },
@@ -843,6 +876,16 @@ function publicGenerationResponseFields() {
     { name: 'error.type', type: 'string', required: false, description: 'Stable public error category.' },
     { name: 'error.message', type: 'string', required: false, description: 'Sanitized error message safe to show to clients.' },
     { name: 'usage', type: 'object', required: false, description: 'Usage details when available.' },
+  ]
+  if (!minimaxH3UsageModels.has(model.name)) return fields
+  const usageSchema = resolveRef(model, responseSchema(model).properties?.usage) ?? {}
+  return [
+    ...fields,
+    ...fieldsFromSchema(usageSchema, 'Optional MiniMax H3 official usage value.').map((field) => ({
+      ...field,
+      name: `usage.${field.name}`,
+      description: minimaxH3UsageDescriptions[field.name] ?? field.description,
+    })),
   ]
 }
 
@@ -1045,7 +1088,7 @@ function modelReference(model) {
         description: isGeneration
           ? 'The submit endpoint returns an accepted generation task. Poll the result endpoint with the returned id for terminal outputs or errors.'
           : 'Fields returned by this model API response.',
-        fields: isGeneration ? publicGenerationResponseFields() : responseFields(model),
+        fields: isGeneration ? publicGenerationResponseFields(model) : responseFields(model),
       },
       {
         title: 'Model capabilities',
@@ -1307,10 +1350,13 @@ const expectedPlatformPages = new Set([
   path.resolve(platformOverviewPath),
   ...platformData.models.map((model) => path.resolve(platformPagesRoot, `${slugPath(model)}.md`)),
 ])
-const removedPlatformPages = cleanLegacyPlatformOverview() + cleanManagedPlatformPages(expectedPlatformPages)
+const removedPlatformPages = requestedModelNames.size
+  ? 0
+  : cleanLegacyPlatformOverview() + cleanManagedPlatformPages(expectedPlatformPages)
 
 for (const category of categoryData) {
 for (const model of category.models) {
+  if (requestedModelNames.size && !requestedModelNames.has(model.name)) continue
   const pagesRoot = path.join(modelApiRoot, category.slug)
   const pageDir = path.join(pagesRoot, model.vendor_slug)
   fs.mkdirSync(pageDir, { recursive: true })
@@ -1351,6 +1397,14 @@ for (const model of category.models) {
     ].join('\n'),
   )
 }
+}
+
+if (requestedModelNames.size) {
+  const knownModelNames = new Set(models.map((model) => model.name))
+  const missing = [...requestedModelNames].filter((name) => !knownModelNames.has(name))
+  if (missing.length) throw new Error(`Requested model references were not found: ${missing.join(', ')}`)
+  console.log(`Generated ${requestedModelNames.size} requested model reference page(s).`)
+  process.exit(0)
 }
 
 function writeCategoryOverview(category) {

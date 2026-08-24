@@ -333,6 +333,21 @@ describe('Platform API reference generator', () => {
     assert.deepEqual(platformRequestBody(model), { model: model.name, from_path: 'path-value' })
   })
 
+  test('keeps required media arrays as arrays in generated model examples', () => {
+    const page = fs.readFileSync(path.join(docsRoot, 'model-api-reference', 'video-generation', 'minimax', 'h3', 'video-regeneration.md'), 'utf8')
+    const encoded = page.match(/^apiReferenceJson: (.+)$/m)?.[1]
+    assert.ok(encoded)
+    const reference = JSON.parse(JSON.parse(encoded))
+    for (const example of reference.examples) {
+      assert.match(example.code, /["']?videos["']?\s*[:=]\s*\[/, `${example.language} must submit videos as an array`)
+    }
+    const responseFields = reference.groups.find((group) => group.title === 'Response Schema').fields
+    assert.deepEqual(
+      responseFields.filter((field) => field.name.startsWith('usage.')).map((field) => field.name).sort(),
+      ['usage.input_image_count', 'usage.input_seconds', 'usage.output_seconds', 'usage.total_seconds'],
+    )
+  })
+
   test('builds valid required examples using default, example, examples, enum, arrays, objects and oneOf', () => {
     const model = fixture()
     model.unified_schema.components.schemas.GenerationRequest = {
