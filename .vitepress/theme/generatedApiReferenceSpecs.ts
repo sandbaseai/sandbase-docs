@@ -962,7 +962,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"id\": \"sess_01...\",\n  \"type\": \"session\",\n  \"agent_id\": \"agent_01...\",\n  \"agent_version\": 1,\n  \"environment_id\": \"env_01...\",\n  \"title\": \"Customer research\",\n  \"status\": \"idle\",\n  \"metadata\": {},\n  \"archived_at\": null,\n  \"created_at\": \"2026-08-03T10:00:00Z\",\n  \"updated_at\": \"2026-08-03T10:00:00Z\"\n}"
+      "code": "{\n  \"id\": \"sess_01...\",\n  \"type\": \"session\",\n  \"agent_id\": \"agent_01...\",\n  \"agent_version\": 1,\n  \"agent_version_id\": \"av_01...\",\n  \"agent\": { \"id\": \"agent_01...\", \"type\": \"agent\", \"version\": 1 },\n  \"environment_id\": \"env_01...\",\n  \"source\": \"direct\",\n  \"title\": \"Customer research\",\n  \"status\": \"idle\",\n  \"metadata\": {},\n  \"archived_at\": null,\n  \"created_at\": \"2026-08-03T10:00:00Z\",\n  \"updated_at\": \"2026-08-03T10:00:00Z\"\n}"
     }
   },
   "sessions/get": {
@@ -1003,7 +1003,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"id\": \"sess_01abc...\",\n  \"type\": \"session\",\n  \"status\": \"idle\",\n  \"title\": \"Research task\",\n  \"agent_id\": \"agent_01HqR2k7...\",\n  \"agent_version\": 1,\n  \"environment_id\": \"env_01abc...\",\n  \"metadata\": { \"user_id\": \"usr_123\", \"task\": \"research\" },\n  \"archived_at\": null,\n  \"created_at\": \"2026-05-29T10:00:00Z\",\n  \"updated_at\": \"2026-05-29T10:05:00Z\"\n}"
+      "code": "{\n  \"id\": \"sess_01abc...\",\n  \"type\": \"session\",\n  \"status\": \"idle\",\n  \"title\": \"Research task\",\n  \"agent_id\": \"agent_01HqR2k7...\",\n  \"agent_version\": 1,\n  \"agent_version_id\": \"av_01...\",\n  \"agent\": { \"id\": \"agent_01HqR2k7...\", \"type\": \"agent\", \"version\": 1 },\n  \"environment_id\": \"env_01abc...\",\n  \"source\": \"direct\",\n  \"metadata\": { \"user_id\": \"usr_123\", \"task\": \"research\" },\n  \"archived_at\": null,\n  \"created_at\": \"2026-05-29T10:00:00Z\",\n  \"updated_at\": \"2026-05-29T10:05:00Z\"\n}"
     }
   },
   "sessions/list-events": {

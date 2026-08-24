@@ -196,6 +196,8 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
           { text: 'Create Session', link: '/api-reference/sessions/create' },
           { text: 'List Sessions', link: '/api-reference/sessions/list' },
           { text: 'Get Session', link: '/api-reference/sessions/get' },
+          { text: 'Update Session', link: '/api-reference/sessions/update' },
+          { text: 'Delete Session', link: '/api-reference/sessions/delete' },
           { text: 'Send Events', link: '/api-reference/sessions/send-events' },
           { text: 'Stream Events', link: '/api-reference/sessions/stream' },
           { text: 'List Events', link: '/api-reference/sessions/list-events' },

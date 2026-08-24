@@ -1396,6 +1396,7 @@ paths:
       operationId: createSession
       tags: [Sessions]
       summary: Create session
+      description: Unknown top-level fields are rejected. resources and vault_ids are reserved and any non-null value is rejected.
       requestBody:
         required: true
         content:
@@ -1409,8 +1410,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Session'
+        '400': { description: 'Invalid body, Agent reference, initial Event, or initial Event batch', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403':
+          description: The Agent is archived or the API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/SessionAPIError'
+                  - $ref: '#/components/schemas/APIKeyScopeError'
+        '404': { description: 'Agent, Agent version, or Environment not found', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '422':
-          description: The initial_events batch was rejected without persisting Events; Session cleanup follows the documented best-effort compensation path. Tool confirmation, custom tool result, tool result, and define outcome currently return `unsupported_event_type`; any `session_thread_id` returns `unsupported_multiagent`.
+          description: The Agent and Environment runtime profiles do not match; a reserved resources or vault_ids value was supplied; or initial_events used unsupported multi-Agent or runtime-resume behavior. When rejection occurs after Session creation, Events are not persisted and Session cleanup follows the documented best-effort compensation path.
           content:
             application/json:
               schema:
@@ -1423,8 +1435,10 @@ paths:
                     properties:
                       type:
                         type: string
-                        enum: [unsupported_event_type, unsupported_multiagent]
+                        enum: [unsupported_event_type, unsupported_multiagent, unsupported_feature, agent_runtime_environment_mismatch]
                       message: { type: string }
+        '500': { description: Session could not be created, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '503': { description: Initial Event delivery is not configured, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '502':
           description: Native runtime delivery outcome is unknown. Recover the returned Session and inspect Events before retrying.
           content:
@@ -1503,6 +1517,10 @@ paths:
                     items:
                       $ref: '#/components/schemas/Session'
                   next_page: { type: string, description: Opaque cursor included only when another page is available. }
+        '400': { description: Invalid created-at filter or page cursor, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '500': { description: Sessions could not be listed, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
   /v1/sessions/{id}:
     get:
@@ -1518,11 +1536,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Session'
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Session not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Session could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
     post:
       operationId: updateSession
       tags: [Sessions]
       summary: Update session metadata or Agent overrides
-      description: Update title, metadata, or Session-local tool and MCP server overrides. The pinned Agent version remains immutable.
+      description: Update title, shallow-merge metadata, or fully replace Session-local tool and MCP server overrides. In metadata, null removes a key. Omitted fields and a null title preserve the current value. The pinned Agent version remains immutable. Unknown fields are accepted and ignored.
       parameters:
         - $ref: '#/components/parameters/SessionId'
       requestBody:
@@ -1531,9 +1553,13 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: true
               properties:
-                title: { type: string }
-                metadata: { type: object }
+                title: { type: [string, 'null'] }
+                metadata:
+                  type: object
+                  additionalProperties: true
+                  description: Shallow merge patch. Null property values delete existing keys; the metadata field itself cannot be null.
                 agent:
                   $ref: '#/components/schemas/SessionAgentUpdate'
                 vault_ids:
@@ -1547,6 +1573,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Session'
+        '400': { description: 'Invalid JSON, metadata, Agent override, or reserved vault_ids', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Session not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Session could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
     delete:
       operationId: deleteSession
       tags: [Sessions]
@@ -1567,6 +1598,9 @@ paths:
                   type: { type: string, const: session_deleted }
         '404': { description: Session not found }
         '409': { description: Running or rescheduling Session cannot be deleted }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '500': { description: Session could not be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
   /v1/sessions/{id}/archive:
     post:
       operationId: archiveSession
@@ -1581,6 +1615,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Session'
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Session not found or already archived, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Session could not be archived, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
   /v1/sessions/{id}/events:
     post:
@@ -1602,6 +1640,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AcceptedSessionEvents'
+        '400': { description: 'Invalid body, Event type, payload, or server-owned field', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Session not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '409': { description: Event conflicts with Session state or the Session is archived or terminated, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '422':
           description: The batch was rejected without persisting any event. Tool confirmation, custom tool result, tool result, and define outcome currently return `unsupported_event_type`; any `session_thread_id` returns `unsupported_multiagent`.
           content:
@@ -1618,6 +1661,7 @@ paths:
                         type: string
                         enum: [unsupported_event_type, unsupported_multiagent]
                       message: { type: string }
+        '500': { description: Events could not be accepted, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
     get:
       operationId: listEvents
       tags: [Events]
@@ -1666,6 +1710,11 @@ paths:
                   next_page:
                     type: string
                     description: Opaque cursor present when another page is available.
+        '400': { description: 'Invalid order, limit, page cursor, or created-at filter', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Session not found or no longer stream-accessible, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Events could not be listed, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
   /v1/sessions/{id}/events/stream:
     get:
@@ -1693,6 +1742,11 @@ paths:
             text/event-stream:
               schema:
                 type: string
+        '400': { description: Invalid event_delta or stream cursor, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Session not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Event history could not be loaded before streaming, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
   # --- Environments -----------------------------------------------
   /v1/environments:
@@ -4563,8 +4617,7 @@ components:
         agent_id:
           type: string
         agent:
-          allOf:
-            - $ref: '#/components/schemas/Agent'
+          $ref: '#/components/schemas/SessionAgentProjection'
           readOnly: true
         agent_version:
           type: [integer, 'null']
@@ -4592,6 +4645,28 @@ components:
         updated_at:
           type: string
           format: date-time
+
+    SessionAPIError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [type, message]
+          properties:
+            type: { type: string }
+            message: { type: string }
+
+    SessionAgentProjection:
+      description: The immutable pinned Agent snapshot when available; legacy or unavailable snapshots fall back to the minimal identity projection.
+      anyOf:
+        - $ref: '#/components/schemas/Agent'
+        - type: object
+          required: [id, type, version]
+          properties:
+            id: { type: string, pattern: '^agent_' }
+            type: { type: string, const: agent }
+            version: { type: [integer, 'null'] }
 
     SendEventsRequest:
       type: object

@@ -422,6 +422,45 @@ for (const status of ['200', '401', '403', '404']) {
 }
 assert.match(taskCostPath, /'403':[\s\S]*APIKeyScopeError/, 'Task cost scope failures must use their implemented nested error shape')
 assert.doesNotMatch(taskCostPath, /'500':/, 'Task cost lookup does not expose an internal-error branch')
+const sessionsPath = openapi.match(/^  \/v1\/sessions:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+const createSession = sessionsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
+assert.match(createSession, /Unknown top-level fields are rejected/, 'Session creation must document strict unknown-field handling')
+assert.match(createSession, /unsupported_feature, agent_runtime_environment_mismatch/, 'Session creation must document every implemented 422 class')
+for (const status of ['200', '400', '401', '403', '404', '422', '500', '502', '503']) {
+  assert.match(createSession, new RegExp(`'${status}':`), `Session creation must document ${status} responses`)
+}
+const listSessions = sessionsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '403', '500']) {
+  assert.match(listSessions, new RegExp(`'${status}':`), `Session listing must document ${status} responses`)
+}
+const sessionPath = openapi.match(/^  \/v1\/sessions\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+const updateSession = sessionPath.match(/^    post:\n[\s\S]*?(?=^    delete:)/m)?.[0] ?? ''
+assert.match(updateSession, /shallow-merge metadata/, 'Session updates must document metadata merge semantics')
+assert.match(updateSession, /null removes a key/, 'Session updates must document metadata key deletion')
+assert.match(updateSession, /additionalProperties: true/, 'Session updates must allow ignored compatibility fields')
+for (const status of ['200', '400', '401', '403', '404', '500']) {
+  assert.match(updateSession, new RegExp(`'${status}':`), `Session updates must document ${status} responses`)
+}
+const deleteSession = sessionPath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
+for (const status of ['200', '401', '403', '404', '409', '500']) {
+  assert.match(deleteSession, new RegExp(`'${status}':`), `Session deletion must document ${status} responses`)
+}
+const sessionEventsPath = openapi.match(/^  \/v1\/sessions\/\{id\}\/events:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '403', '404', '409', '422', '500']) {
+  assert.match(sessionEventsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? '', new RegExp(`'${status}':`), `Session Event send must document ${status} responses`)
+}
+for (const status of ['200', '400', '401', '403', '404', '500']) {
+  assert.match(sessionEventsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? '', new RegExp(`'${status}':`), `Session Event listing must document ${status} responses`)
+}
+const sessionStreamPath = openapi.match(/^  \/v1\/sessions\/\{id\}\/events\/stream:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '403', '404', '500']) {
+  assert.match(sessionStreamPath, new RegExp(`'${status}':`), `Session Event streaming must document ${status} responses`)
+}
+const publicSessionSchema = openapi.match(/^    Session:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(publicSessionSchema, /SessionAgentProjection/, 'Session responses must use the implemented full-or-minimal Agent projection')
+const sessionAgentProjection = openapi.match(/^    SessionAgentProjection:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(sessionAgentProjection, /legacy or unavailable snapshots fall back/, 'Session Agent projection must document its fallback behavior')
+assert.match(sessionAgentProjection, /required: \[id, type, version\]/, 'Session Agent fallback must require every serializer field')
 const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(environmentSchema, /required: \[id, type, agent_id, name, description, config, metadata, credential_bindings, archived_at, created_at, updated_at\]/, 'Environment responses must require every serializer field')
 assert.match(environmentSchema, /id:\n\s+type: string\n\s+pattern: '\^env_'/, 'Environment IDs must document their public prefix')
