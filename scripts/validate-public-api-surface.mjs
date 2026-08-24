@@ -239,6 +239,7 @@ assert.doesNotMatch(openapi, /^\s+mcp_url:$/m, 'Endpoint MCP transport URL must 
 assert.doesNotMatch(openapi, /^  \/v1\/generations(?:\/\{[^}]+\})?:$/m, 'Withdrawn generation paths must not be public')
 assert.doesNotMatch(openapi, /https:\/\/api\.sandbase\.ai\/v1\/generations(?:\/|\b)/, 'Public OpenAPI examples must not call withdrawn generation paths')
 assert.doesNotMatch(openapi, /^  \/v1\/blog\/assets:$/m, 'Blog publishing storage must not be exposed as a general developer API')
+assert.doesNotMatch(openapi, /^  \/v1\/mcp:$/m, 'Generic MCP transport must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/mcp\/(?:servers|\{[^}]+\}\/config):$/m, 'MCP discovery and runtime config routes must not be public')
 assert.doesNotMatch(openapi, /^  \/mcp\/\{[^}]+\}\/sse:$/m, 'MCP SSE proxy must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/skills\/\{[^}]+\}\/mcp-publications:$/m, 'Skill MCP publication creation must not be public')

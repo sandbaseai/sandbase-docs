@@ -14,6 +14,7 @@ const forbidden = [
   [/\/events\/webhooks(?:\/|\b)/i, 'Sandbox event webhook API'],
   [/\/v1\/endpoints\/[A-Za-z0-9_{}%.-]+\/mcp\b/i, 'Endpoint MCP transport'],
   [/\/v1\/endpoint_runtime_profiles\b/i, 'Endpoint runtime-profile discovery'],
+  [/\/v1\/mcp(?:\/|\b)/i, 'generic MCP transport or discovery'],
   [/\/v1\/mcp\/(?:servers|[A-Za-z0-9_{}%.-]+\/config)\b/i, 'MCP discovery or runtime config'],
   [/\/mcp\/[A-Za-z0-9_{}%.-]+\/sse\b/i, 'MCP SSE proxy'],
   [/\/v1\/skills\/[A-Za-z0-9_{}%.-]+\/mcp-publications\b/i, 'Skill MCP publication creation'],

@@ -21,7 +21,7 @@ npx -y @sandbaseai/cli connect
 4. Restart the client if it was already open.
 5. Ask it to discover SandBase tools and make a small test call.
 
-The JavaScript CLI manages authorization, the local client configuration, and the MCP bridge. SandBase capabilities remain remote at `/v1/mcp`.
+The JavaScript CLI manages authorization, the local client configuration, and the remote capability bridge. Transport endpoints are managed by the CLI and are not part of the public API contract.
 
 ## Manage the workspace toolkit
 
