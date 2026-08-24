@@ -13,6 +13,7 @@ info:
     - **Embeddings** (`/v1/embeddings`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
     - **Images** (`/v1/images/generations`, `/v1/images/edits`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
     - **Anthropic Messages** (`/v1/messages`): Use Anthropic SDK with `base_url="https://api.sandbase.ai"`
+    - **Google Gemini GenerateContent** (`/v1beta/models/{model}:generateContent`): Configure the Google Gen AI SDK to use `https://api.sandbase.ai`
     - **Agents and Sessions** (`/v1/agents`, `/v1/sessions`): Use Anthropic SDK with `base_url="https://api.sandbase.ai"`
   version: 1.0.0
   x-sandbase-session-contract:
@@ -47,6 +48,8 @@ tags:
     description: OpenAI-compatible image generation and editing
   - name: Messages
     description: Anthropic-compatible Messages API
+  - name: Gemini
+    description: Google Gemini-compatible GenerateContent API
   - name: Agents
     description: Build and manage Agent definitions
   - name: Services
@@ -436,6 +439,84 @@ paths:
         '500': { description: Prediction lifecycle or provider error, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
         '502': { description: Upstream stream ended before usable content, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
         '503': { description: Routing failed or all provider candidates were unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+
+  # --- Google Gemini GenerateContent -----------------------------
+  /v1beta/models/{model}:generateContent:
+    post:
+      operationId: generateGeminiContent
+      tags: [Gemini]
+      summary: Generate content with the Google Gemini protocol
+      description: |
+        Accepts a Google Gemini GenerateContent request and returns a Gemini-compatible response. A bare model name,
+        such as gemini-2.5-flash, is normalized to the SandBase catalog name google/gemini-2.5-flash. This endpoint
+        also accepts x-goog-api-key and the key query parameter for Google SDK compatibility, although headers are safer.
+      security:
+        - GoogleApiKey: []
+        - BearerAuth: []
+        - GoogleQueryApiKey: []
+      parameters:
+        - $ref: '#/components/parameters/GeminiModel'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/GeminiGenerateContentRequest' }
+      responses:
+        '200': { description: Gemini GenerateContent response, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiGenerateContentResponse' } } } }
+        '400': { description: Invalid JSON or an input field that SandBase cannot safely translate, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '403': { description: 'API Key spending limit reached, organization disabled, or upstream permission rejected', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '404': { description: 'Model, method, or upstream resource not found', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '429': { description: Provider rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '500': { description: Prediction lifecycle or provider error, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '502': { description: Upstream response could not be translated, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '503': { description: Routing failed or all provider candidates were unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '504': { description: Upstream request timed out, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+
+  /v1beta/models/{model}:streamGenerateContent:
+    post:
+      operationId: streamGeminiContent
+      tags: [Gemini]
+      summary: Stream content with the Google Gemini protocol
+      description: Returns a streamed JSON array by default. Add alt=sse to receive Server-Sent Events instead.
+      security:
+        - GoogleApiKey: []
+        - BearerAuth: []
+        - GoogleQueryApiKey: []
+      parameters:
+        - $ref: '#/components/parameters/GeminiModel'
+        - name: alt
+          in: query
+          schema: { type: string, enum: [sse] }
+          description: Set to sse for Server-Sent Events. Any other or omitted value uses the Google-compatible streamed JSON array.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/GeminiGenerateContentRequest' }
+      responses:
+        '200':
+          description: Gemini response frames
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/GeminiGenerateContentResponse' }
+            text/event-stream:
+              schema:
+                type: string
+                description: SSE data frames containing Gemini GenerateContentResponse objects.
+        '400': { description: Invalid JSON or an input field that SandBase cannot safely translate, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '403': { description: 'API Key spending limit reached, organization disabled, or upstream permission rejected', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '404': { description: 'Model, method, or upstream resource not found', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '429': { description: Provider rate limit exceeded before streaming starts, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '500': { description: Prediction lifecycle or provider error before streaming starts, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '502': { description: Upstream stream could not be translated, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '503': { description: Routing failed or all provider candidates were unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '504': { description: Upstream request timed out before streaming starts, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
 
   # --- Embed Configs ---------------------------------------------
   /v1/embeds:
@@ -3102,8 +3183,24 @@ components:
       in: header
       name: x-api-key
       description: "Supported only by `POST /v1/messages` for Anthropic SDK compatibility"
+    GoogleApiKey:
+      type: apiKey
+      in: header
+      name: x-goog-api-key
+      description: Supported by Google Gemini-compatible endpoints. Takes precedence over the other key locations.
+    GoogleQueryApiKey:
+      type: apiKey
+      in: query
+      name: key
+      description: Google SDK compatibility fallback. Prefer x-goog-api-key or Authorization because URLs can be logged.
 
   parameters:
+    GeminiModel:
+      name: model
+      in: path
+      required: true
+      schema: { type: string, minLength: 1 }
+      description: Bare Gemini model name, such as gemini-2.5-flash. SandBase adds the google/ catalog prefix.
     EmbedConfigId:
       name: id
       in: path
@@ -4128,6 +4225,101 @@ components:
               type: string
               description: Anthropic error type, such as invalid_request_error, authentication_error, permission_error, request_too_large, rate_limit_error, or api_error.
             message: { type: string }
+
+    GeminiGenerateContentRequest:
+      type: object
+      additionalProperties: true
+      description: Google Gemini GenerateContent request. Unknown top-level fields are ignored by the current translator.
+      properties:
+        contents:
+          type: array
+          items: { $ref: '#/components/schemas/GeminiContent' }
+        systemInstruction:
+          $ref: '#/components/schemas/GeminiContent'
+        generationConfig:
+          type: object
+          additionalProperties: true
+          properties:
+            temperature: { type: number }
+            topP: { type: number }
+            topK: { type: integer }
+            maxOutputTokens: { type: integer }
+            stopSequences: { type: array, items: { type: string } }
+            candidateCount: { type: integer, description: The current translator accepts only 1 when supplied. }
+            seed: { type: integer }
+            presencePenalty: { type: number }
+            frequencyPenalty: { type: number }
+            responseMimeType: { type: string, enum: [text/plain, application/json, text/x.enum] }
+            responseSchema: { type: object, additionalProperties: true }
+            responseModalities:
+              type: array
+              items: { type: string }
+              description: The current translator supports TEXT only.
+            thinkingConfig: { type: object, additionalProperties: true }
+        tools:
+          type: array
+          items: { type: object, additionalProperties: true }
+        toolConfig: { type: object, additionalProperties: true }
+        safetySettings:
+          type: array
+          items: { type: object, additionalProperties: true }
+        cachedContent:
+          type: string
+          description: Passed through when the selected provider supports Gemini context caching.
+
+    GeminiContent:
+      type: object
+      additionalProperties: true
+      properties:
+        role: { type: string, enum: [user, model] }
+        parts:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+            description: Text, image inlineData, public HTTP(S) image fileData, functionCall, or functionResponse part.
+
+    GeminiGenerateContentResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        candidates:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+            properties:
+              content: { $ref: '#/components/schemas/GeminiContent' }
+              finishReason: { type: string }
+              index: { type: integer }
+              safetyRatings: { type: array, items: { type: object, additionalProperties: true } }
+        usageMetadata:
+          type: object
+          additionalProperties: true
+          properties:
+            promptTokenCount: { type: integer, minimum: 0 }
+            candidatesTokenCount: { type: integer, minimum: 0 }
+            totalTokenCount: { type: integer, minimum: 0 }
+            cachedContentTokenCount: { type: integer, minimum: 0 }
+            thoughtsTokenCount: { type: integer, minimum: 0 }
+        promptFeedback: { type: object, additionalProperties: true }
+        modelVersion: { type: string }
+        responseId: { type: string }
+
+    GeminiError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, status]
+          additionalProperties: true
+          properties:
+            code: { type: integer }
+            message: { type: string }
+            status:
+              type: string
+              description: Google canonical error status, such as INVALID_ARGUMENT, UNAUTHENTICATED, PERMISSION_DENIED, NOT_FOUND, RESOURCE_EXHAUSTED, INTERNAL, UNAVAILABLE, or DEADLINE_EXCEEDED.
 
     # --- Embeddings -----------------------------------------------
     EmbeddingRequest:

@@ -39,6 +39,8 @@ const requiredPublicPaths = [
   '/v1/embeds/{id}:',
   '/v1/embeds/{id}/usage:',
   '/v1/responses:',
+  '/v1beta/models/{model}:generateContent:',
+  '/v1beta/models/{model}:streamGenerateContent:',
   '/v1/images/generations:',
   '/v1/images/edits:',
   '/v1/assets:',
@@ -270,6 +272,37 @@ assert.doesNotMatch(openapi, /^  \/v1\/skill-mcp-publications(?:\/\{[^}]+\})?:$/
 assert.doesNotMatch(openapi, /^  \/v1\/capabilities\/\{[^}]+\}\/mcp:$/m, 'Capability MCP transport must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/skill-mcp\/\{[^}]+\}\/mcp:$/m, 'Published Skill MCP transport must not be public')
 assert.doesNotMatch(openapi, /^  \/events\/webhooks(?:\/\{[^}]+\})?:$/m, 'Sandbox event webhook paths must not be public')
+const geminiGeneratePath = openapiDocument.paths['/v1beta/models/{model}:generateContent']?.post
+const geminiStreamPath = openapiDocument.paths['/v1beta/models/{model}:streamGenerateContent']?.post
+assert.ok(geminiGeneratePath, 'Public OpenAPI must expose the implemented Gemini GenerateContent endpoint')
+assert.ok(geminiStreamPath, 'Public OpenAPI must expose the implemented Gemini streamGenerateContent endpoint')
+for (const operation of [geminiGeneratePath, geminiStreamPath]) {
+  assert.deepEqual(
+    operation.security,
+    [{ GoogleApiKey: [] }, { BearerAuth: [] }, { GoogleQueryApiKey: [] }],
+    'Gemini endpoints must document all three implemented API-key locations in precedence order',
+  )
+  for (const status of ['400', '401', '402', '403', '404', '429', '500', '502', '503', '504']) {
+    assert.equal(
+      operation.responses[status]?.content?.['application/json']?.schema?.$ref,
+      '#/components/schemas/GeminiError',
+      `Gemini ${operation.operationId} ${status} must use the Google error envelope`,
+    )
+  }
+}
+assert.ok(
+  geminiStreamPath.parameters.some((parameter) => parameter.name === 'alt' && parameter.schema?.enum?.includes('sse')),
+  'Gemini streaming must document the implemented alt=sse carrier',
+)
+assert.ok(
+  geminiStreamPath.responses['200']?.content?.['text/event-stream']?.schema,
+  'Gemini streaming must document SSE output',
+)
+assert.ok(
+  geminiStreamPath.responses['200']?.content?.['application/json']?.schema?.items?.$ref === '#/components/schemas/GeminiGenerateContentResponse',
+  'Gemini streaming must document the default JSON-array carrier',
+)
+assert.match(sidebar, /\/api-reference\/gemini-generate-content/, 'Sidebar must link to the Gemini native protocol reference')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
 const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.doesNotMatch(getRunPath, /pattern:/, 'Run result lookup IDs must not inherit another resource prefix')

@@ -120,6 +120,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Chat Completions', link: '/api-reference/llm-gateway' },
       { text: 'Responses', link: '/api-reference/responses' },
       { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
+      { text: 'Google Gemini', link: '/api-reference/gemini-generate-content' },
       {
         text: 'Images',
         collapsed: false,

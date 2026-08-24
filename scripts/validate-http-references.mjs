@@ -31,7 +31,7 @@ function walk(directory) {
     if (entry.isDirectory()) walk(filename)
     else if (/\.(?:md|mdx|txt)$/.test(entry.name)) {
       const content = fs.readFileSync(filename, 'utf8')
-      for (const match of content.matchAll(/\b(GET|POST|PUT|PATCH|DELETE)\s+(\/(?:v1|events)\/[A-Za-z0-9_{}./:-]+)/g)) {
+      for (const match of content.matchAll(/\b(GET|POST|PUT|PATCH|DELETE)\s+(\/(?:v1(?:beta)?|events)\/[A-Za-z0-9_{}./:-]+)/g)) {
         references.push({
           file: path.relative(root, filename),
           line: content.slice(0, match.index).split('\n').length,
