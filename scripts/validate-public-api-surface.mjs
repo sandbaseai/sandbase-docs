@@ -398,13 +398,13 @@ assert.doesNotMatch(modelDetailSchema, /^        (?:context_length|base_price|pr
 const modelsPath = openapi.match(/^  \/v1\/models:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(modelsPath, /an explicitly empty value removes the type filter/, 'Model lists must document the implemented empty type filter')
 assert.match(modelsPath, /Exact, case-sensitive vendor filter/, 'Model lists must document exact vendor filtering')
-for (const status of ['200', '401', '500']) {
+for (const status of ['200', '401', '402', '403', '500']) {
   assert.match(modelsPath, new RegExp(`'${status}':`), `Model lists must document ${status} responses`)
 }
 assert.doesNotMatch(modelsPath, /components\/schemas\/APIError/, 'Model list errors use the Open API string error shape')
 const modelPath = openapi.match(/^  \/v1\/models\/\{id_or_name\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(modelPath, /containing slashes are supported as path segments/, 'Model detail must document wildcard logical names')
-for (const status of ['200', '400', '401', '404']) {
+for (const status of ['200', '400', '401', '402', '403', '404']) {
   assert.match(modelPath, new RegExp(`'${status}':`), `Model detail must document ${status} responses`)
 }
 assert.doesNotMatch(modelPath, /components\/schemas\/APIError/, 'Model detail errors use the Open API string error shape')
@@ -419,7 +419,7 @@ const accountBalanceSchema = openapi.match(/^    AccountBalance:\n[\s\S]*?(?=^  
 assert.match(accountBalanceSchema, /required: \[org_id, balance, credit_limit, alert_threshold\]/, 'Account balance must require every emitted field')
 assert.match(accountBalanceSchema, /credit_limit:\n\s+oneOf:[\s\S]*?- type: 'null'/, 'Account credit limit must allow null')
 const accountBalancePath = openapi.match(/^  \/v1\/account\/balance:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '404']) {
+for (const status of ['200', '401', '402', '403', '404']) {
   assert.match(accountBalancePath, new RegExp(`'${status}':`), `Account balance must document ${status} responses`)
 }
 assert.doesNotMatch(accountBalancePath, /components\/schemas\/APIError/, 'Account balance uses the Open API string error shape')
@@ -430,7 +430,7 @@ assert.match(accountHistoryPath, /raw response timestamps remain unchanged/, 'Ac
 assert.match(accountHistoryPath, /Exact request_id mode ignores it/, 'Account history must document request-ID timezone bypass')
 assert.match(accountHistoryPath, /any other value applies no type filter/, 'Account history must document unknown type filter behavior')
 assert.match(accountHistoryPath, /every other value falls back to 7d/, 'Account history must document unsupported rolling range fallback')
-for (const status of ['200', '400', '401', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '500']) {
   assert.match(accountHistoryPath, new RegExp(`'${status}':`), `Account history must document ${status} responses`)
 }
 assert.doesNotMatch(accountHistoryPath, /components\/schemas\/APIError/, 'Account history uses the Open API string error shape')
