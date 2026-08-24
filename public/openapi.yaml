@@ -1586,7 +1586,8 @@ paths:
     post:
       operationId: uploadSkillFile
       tags: [Skills]
-      summary: Upload a Skill bundle
+      summary: Upload a Skill bundle or preview image
+      description: Archives are limited to 50 MB. JPEG, PNG, WebP, and GIF preview images are limited to 10 MB.
       requestBody:
         required: true
         content:
@@ -1598,14 +1599,15 @@ paths:
                 file: { type: string, format: binary }
                 skill_id:
                   type: string
+                  format: uuid
                   description: Optional Skill ID used to organize the uploaded file path.
       responses:
         '201':
-          description: Skill bundle uploaded
+          description: Skill file uploaded
           content:
             application/json:
               schema: { $ref: '#/components/schemas/SkillFile' }
-        '400': { description: Invalid or missing Skill archive }
+        '400': { description: "Missing file, unsupported file type, or file over its category limit" }
 
   /v1/skills:
     post:
@@ -1638,6 +1640,7 @@ paths:
             application/json:
               schema:
                 type: object
+                required: [data, total, page, page_size]
                 properties:
                   data: { type: array, items: { $ref: '#/components/schemas/Skill' } }
                   total: { type: integer }
@@ -1691,7 +1694,7 @@ paths:
                 type: object
                 required: [id, deleted]
                 properties:
-                  id: { type: string }
+                  id: { type: string, format: uuid }
                   deleted: { type: boolean, const: true }
         '404': { description: Skill not found }
 
@@ -1850,7 +1853,8 @@ components:
       required: true
       schema:
         type: string
-      description: Skill ID
+        format: uuid
+      description: Skill UUID
   schemas:
     # --- Skills ---------------------------------------------------
     SkillFile:
@@ -1867,11 +1871,11 @@ components:
       type: object
       required: [name]
       properties:
-        name: { type: string, minLength: 1, maxLength: 100 }
+        name: { type: string, minLength: 1, maxLength: 100, pattern: '.*\S.*' }
         description: { type: string, maxLength: 1000 }
         categories: { type: array, items: { type: string } }
-        skill_file_url: { type: string, format: uri }
-        git_url: { type: string, format: uri }
+        skill_file_url: { type: string, format: uri, minLength: 1 }
+        git_url: { type: string, format: uri, minLength: 1 }
         preview_image_urls: { type: array, items: { type: string, format: uri } }
         metadata: { type: object, additionalProperties: true }
         unified_schema: { type: object, additionalProperties: true }
@@ -1892,9 +1896,9 @@ components:
 
     Skill:
       type: object
-      required: [id, name, display_name, vendor_slug, plugin_slug, created_at]
+      required: [id, name, display_name, vendor_slug, plugin_slug, icon_url, preview_urls, created_at]
       properties:
-        id: { type: string }
+        id: { type: string, format: uuid }
         name: { type: string, description: Full vendor_slug/plugin_slug reference. }
         display_name: { type: string }
         vendor_slug: { type: string }

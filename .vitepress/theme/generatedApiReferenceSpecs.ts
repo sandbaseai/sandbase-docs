@@ -1094,7 +1094,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": {
       "status": "201 Created",
-      "code": "{\n  \"id\": \"skill_01...\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"created_at\": \"2026-08-03T10:00:00Z\"\n}"
+      "code": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"created_at\": \"2026-08-03T10:00:00Z\"\n}"
     }
   },
   "skills/delete": {
@@ -1111,7 +1111,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "name": "skill_id",
             "type": "string",
             "required": true,
-            "description": "Identifier for skill id."
+            "description": "Skill UUID."
           }
         ]
       }
@@ -1120,12 +1120,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X DELETE https://api.sandbase.ai/v1/skills/skill_01... \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl -X DELETE https://api.sandbase.ai/v1/skills/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
       }
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"id\": \"skill_01...\",\n  \"deleted\": true\n}"
+      "code": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"deleted\": true\n}"
     }
   },
   "skills/get": {
@@ -1142,7 +1142,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "name": "skill_id",
             "type": "string",
             "required": true,
-            "description": "Identifier for skill id."
+            "description": "Skill UUID."
           }
         ]
       }
@@ -1151,12 +1151,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl https://api.sandbase.ai/v1/skills/skill_01... \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl https://api.sandbase.ai/v1/skills/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
       }
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"id\": \"skill_01...\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"description\": \"Draft concise release notes\",\n  \"categories\": [\"writing\"],\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"skill_file_url\": \"https://media.sandbase.ai/_private/.../release-notes.zip\",\n  \"git_url\": \"\",\n  \"created_at\": \"2026-08-03T10:00:00Z\",\n  \"updated_at\": \"2026-08-03T10:00:00Z\"\n}"
+      "code": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"description\": \"Draft concise release notes\",\n  \"categories\": [\"writing\"],\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"skill_file_url\": \"https://media.sandbase.ai/_private/.../release-notes.zip\",\n  \"git_url\": \"\",\n  \"created_at\": \"2026-08-03T10:00:00Z\",\n  \"updated_at\": \"2026-08-03T10:00:00Z\"\n}"
     }
   },
   "skills/list": {
@@ -1193,7 +1193,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"data\": [\n    {\n      \"id\": \"skill_01...\",\n      \"name\": \"acme/release-notes\",\n      \"display_name\": \"release-notes\",\n      \"vendor_slug\": \"acme\",\n      \"plugin_slug\": \"release-notes\",\n      \"description\": \"Draft concise release notes\",\n      \"icon_url\": \"\",\n      \"preview_urls\": [],\n      \"created_at\": \"2026-08-03T10:00:00Z\",\n      \"updated_at\": \"2026-08-03T10:00:00Z\"\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"page_size\": 20\n}"
+      "code": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"acme/release-notes\",\n      \"display_name\": \"release-notes\",\n      \"vendor_slug\": \"acme\",\n      \"plugin_slug\": \"release-notes\",\n      \"description\": \"Draft concise release notes\",\n      \"icon_url\": \"\",\n      \"preview_urls\": [],\n      \"created_at\": \"2026-08-03T10:00:00Z\",\n      \"updated_at\": \"2026-08-03T10:00:00Z\"\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"page_size\": 20\n}"
     }
   },
   "skills/update": {
@@ -1210,7 +1210,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "name": "skill_id",
             "type": "string",
             "required": true,
-            "description": "Identifier for skill id."
+            "description": "Skill UUID."
           }
         ]
       },
@@ -1254,9 +1254,13 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X PUT https://api.sandbase.ai/v1/skills/skill_01... \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"release-notes\",\n    \"description\": \"Draft release notes with a concise changelog\",\n    \"categories\": [\"writing\", \"product\"]\n  }'"
+        "code": "curl -X PUT https://api.sandbase.ai/v1/skills/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"release-notes\",\n    \"description\": \"Draft release notes with a concise changelog\",\n    \"categories\": [\"writing\", \"product\"]\n  }'"
       }
-    ]
+    ],
+    "response": {
+      "status": "200 OK",
+      "code": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"description\": \"Draft release notes with a concise changelog\",\n  \"categories\": [\"writing\", \"product\"],\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"skill_file_url\": \"https://media.sandbase.ai/_private/.../release-notes.zip\",\n  \"git_url\": \"\",\n  \"created_at\": \"2026-08-03T10:00:00Z\",\n  \"updated_at\": \"2026-08-03T10:05:00Z\"\n}"
+    }
   },
   "inference/responses": {
     "title": "Create Response",

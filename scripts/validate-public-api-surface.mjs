@@ -99,6 +99,14 @@ assert.doesNotMatch(credentialSchema, /^        (?:value|value_encrypted):/m, 'C
 const createCredentialSchema = openapi.match(/^    CreateCredentialRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(createCredentialSchema, /strategy: \{ type: string, enum: \[round_robin\]/, 'Credential creation must document the only implemented strategy')
 assert.match(createCredentialSchema, /weight: \{ type: integer, minimum: 1/, 'Credential creation must require a positive weight')
+const skillSchema = openapi.match(/^    Skill:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(skillSchema, /id: \{ type: string, format: uuid \}/, 'Skill resources must document their UUID identity')
+assert.match(skillSchema, /required: \[[^\]]*icon_url[^\]]*preview_urls[^\]]*\]/, 'Skill responses must require fields always emitted by every projection')
+const skillUploadPath = openapi.match(/^  \/v1\/skills\/files:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(skillUploadPath, /preview image[\s\S]*?10 MB/, 'Skill uploads must document supported preview images and their size limit')
+const skillReferences = generatedReferenceSpecs.match(/"skills\/create": \{[\s\S]*?(?=\n  "inference\/responses")/)?.[0] ?? ''
+assert.doesNotMatch(skillReferences, /skill_01/, 'Skill reference examples must not invent a skill_ ID prefix')
+assert.match(skillReferences, /550e8400-e29b-41d4-a716-446655440000/, 'Skill reference examples must use a UUID')
 const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(environmentSchema, /config:\n[\s\S]*?- type: 'null'/, 'Environment config must allow the serializer\'s null output')
 assert.match(environmentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Environment metadata must allow the serializer\'s null output')

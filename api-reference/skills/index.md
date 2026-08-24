@@ -104,14 +104,14 @@ curl -fsS -X POST "$SANDBASE_API_BASE/v1/endpoints" \
 
 SandBase validates and installs the bundle before the Service invokes its Agent. Missing or duplicate `SKILL.md` files, invalid frontmatter names, unsafe archive paths, and unreadable bundles fail materialization instead of starting the Agent without the Skill.
 
-## Upload a Skill bundle
+## Upload a Skill file
 
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
   <span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700">POST</span>
   <code>/v1/skills/files</code>
 </div>
 
-Send `multipart/form-data` with a required `file` field. The response is `201 Created`:
+Send `multipart/form-data` with a required `file` field. The same endpoint accepts Skill archives and preview images. The response is `201 Created`:
 
 ```json
 {
@@ -123,7 +123,7 @@ Send `multipart/form-data` with a required `file` field. The response is `201 Cr
 }
 ```
 
-Skill bundles can be up to 50 MB. Although the upload API accepts several archive formats, use ZIP for Agent runtime usage. A bundle can contain up to 1,024 files and 60 MB of uncompressed data at runtime. Files outside the directory containing the unique `SKILL.md` are not installed.
+Skill archives can be up to 50 MB. JPEG, PNG, WebP, and GIF preview images can be up to 10 MB. Although the upload API accepts several archive formats, use ZIP for Agent runtime usage. A bundle can contain up to 1,024 files and 60 MB of uncompressed data at runtime. Files outside the directory containing the unique `SKILL.md` are not installed.
 
 ## Create a Skill resource
 
@@ -155,7 +155,7 @@ A successful response is `201 Created`. Its `name` is the generated full Skill r
 
 ```json
 {
-  "id": "skill-uuid",
+  "id": "550e8400-e29b-41d4-a716-446655440000",
   "name": "vendor-slug/my-skill",
   "display_name": "my-skill",
   "vendor_slug": "vendor-slug",
@@ -169,6 +169,8 @@ A successful response is `201 Created`. Its `name` is the generated full Skill r
 ## Manage Skills
 
 All operations are scoped to the organization associated with the API key.
+
+Skill resource IDs are UUIDs. Agent and Service definitions use the separate `vendor_slug/plugin_slug` reference returned in `name`.
 
 | Method | Path | Description |
 |--------|------|-------------|
