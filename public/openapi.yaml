@@ -580,6 +580,7 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '500': { description: Usage statistics could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   # --- Account ----------------------------------------------------
   /v1/account/balance:

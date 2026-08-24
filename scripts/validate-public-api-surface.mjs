@@ -226,6 +226,29 @@ for (const status of ['404', '409', '500']) {
     `DELETE /v1/sessions/{id} ${status} must document its implemented typed error envelope`,
   )
 }
+for (const [method, publicPath, statuses] of [
+  ['post', '/v1/embeds', ['400', '404', '422', '500']],
+  ['get', '/v1/embeds', ['500']],
+  ['get', '/v1/embeds/{id}', ['404', '500']],
+  ['patch', '/v1/embeds/{id}', ['400', '404', '422', '500']],
+  ['post', '/v1/embeds/{id}', ['400', '404', '422', '500']],
+  ['put', '/v1/embeds/{id}', ['400', '404', '422', '500']],
+  ['delete', '/v1/embeds/{id}', ['404', '500']],
+  ['get', '/v1/embeds/{id}/usage', ['404', '500']],
+]) {
+  for (const status of statuses) {
+    assert.equal(
+      jsonErrorSchema(method, publicPath, status)?.$ref,
+      '#/components/schemas/APIError',
+      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
+    )
+  }
+}
+assert.deepEqual(
+  jsonErrorSchema('post', '/v1/embeds', '403')?.oneOf?.map((schema) => schema.$ref),
+  ['#/components/schemas/APIError', '#/components/schemas/APIKeyScopeError'],
+  'Embed Config creation must document both resource-limit and scoped-key rejections',
+)
 
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
 assert.match(config, /'guides\/site-agent-integration\.md'/, 'Legacy Site Agent guide must stay excluded from the public build')
@@ -666,10 +689,10 @@ for (const status of ['200', '401', '402', '403', '404', '500']) {
 }
 const embedUsagePath = openapi.match(/^  \/v1\/embeds\/\{id\}\/usage:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(embedUsagePath, /Session Event record/, 'Embed usage must describe what message_count actually counts')
-for (const status of ['200', '401', '402', '403', '404']) {
+for (const status of ['200', '401', '402', '403', '404', '500']) {
   assert.match(embedUsagePath, new RegExp(`'${status}':`), `Embed usage must document ${status} responses`)
 }
-assert.doesNotMatch(embedUsagePath, /'500':/, 'Embed usage aggregation currently returns counts without propagating query failures')
+assert.match(embedUsagePath, /'500': \{ description: Usage statistics could not be loaded/, 'Embed usage must document configuration lookup failures without implying that aggregation count errors propagate')
 const taskCostPath = openapi.match(/^  \/v1\/tasks\/\{task_id\}\/cost:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(taskCostPath, /same API key/, 'Task cost lookup must document its API-key ownership boundary')
 assert.match(taskCostPath, /spending limit/, 'Task cost lookup must document its spending-limit exception')
