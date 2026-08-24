@@ -1165,4 +1165,24 @@ for (const modelSlug of h3Models) {
   }
 }
 
+for (const resolution of ['480p', '720p']) {
+  const relative = `model-api-reference/video-generation/alibaba/wan/2.2/i2v-${resolution}-lora.md`
+  const content = readFileSync(path.join(root, relative), 'utf8')
+  const encoded = content.match(/^apiReferenceJson: (.+)$/m)?.[1]
+  assert.ok(encoded, `${relative} must contain its generated API reference`)
+  const reference = JSON.parse(JSON.parse(encoded))
+  const requestFields = reference.groups.find((group) => group.title === 'Request body')?.fields ?? []
+  const fieldByName = new Map(requestFields.map((field) => [field.name, field]))
+  assert.equal(fieldByName.get('duration')?.constraints, 'Allowed values: 5, 8', `${relative} must publish the implemented duration enum`)
+  for (const name of ['negative_prompt', 'last_image', 'loras', 'high_noise_loras', 'low_noise_loras', 'seed', 'enable_safety_checker']) {
+    assert.ok(fieldByName.has(name), `${relative} must document ${name}`)
+  }
+  for (const name of ['loras', 'high_noise_loras', 'low_noise_loras']) {
+    assert.equal(fieldByName.get(name)?.constraints, 'Items: 0 to 3', `${relative} must publish the ${name} item limit`)
+    assert.equal(fieldByName.get(`${name}[].path`)?.required, true, `${relative} must require ${name}[].path`)
+    assert.equal(fieldByName.get(`${name}[].scale`)?.default, '1', `${relative} must publish the ${name}[].scale default`)
+  }
+  assert.equal(fieldByName.has('resolution'), false, `${relative} must not expose the model-fixed resolution as input`)
+}
+
 console.log('public API surface: ok')

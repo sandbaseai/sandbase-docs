@@ -409,12 +409,24 @@ const fieldDescriptions = {
   prompt: 'Text prompt that describes the image or asset to generate.',
   image: 'Input image URL or image data used by this model.',
   image_url: 'Input image URL used as a source image.',
+  last_image: 'Optional ending-frame image URL.',
   images_data_url: 'URL of an archive or image collection used by this model.',
   aspect_ratio: 'Aspect ratio of the generated image.',
   output_format: 'File format for generated image outputs.',
   negative_prompt: 'Text describing content the model should avoid generating.',
+  loras: 'LoRA adapters applied to the generation. At most three items are accepted.',
+  high_noise_loras: 'LoRA adapters applied to the high-noise transformer. At most three items are accepted.',
+  low_noise_loras: 'LoRA adapters applied to the low-noise transformer. At most three items are accepted.',
+  path: 'URL or path of the LoRA weights.',
+  scale: 'LoRA weight multiplier.',
+  enable_safety_checker: 'Whether to request the provider safety checker. The provider may still enforce mandatory moderation.',
   num_inference_steps: 'Number of denoising or inference steps to run when supported.',
 }
+
+const nestedGenerationSchemaModels = new Set([
+  'alibaba/wan/2.2/i2v-480p-lora',
+  'alibaba/wan/2.2/i2v-720p-lora',
+])
 
 const fieldOrder = [
   'messages',
@@ -505,7 +517,11 @@ function fieldsFromSchema(schema = {}, fallbackDescription) {
 }
 
 function schemaFields(model) {
-  return fieldsFromSchema(requestSchema(model), 'Request parameter supported by this model.')
+  const schema = requestSchema(model)
+  if (nestedGenerationSchemaModels.has(model.name)) {
+    return platformFieldsFromSchema(model, schema, 'Request parameter supported by this model.')
+  }
+  return fieldsFromSchema(schema, 'Request parameter supported by this model.')
 }
 
 function responseSchema(model) {
