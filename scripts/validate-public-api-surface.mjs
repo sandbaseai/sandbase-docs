@@ -561,6 +561,18 @@ const sessionAgentProjection = openapi.match(/^    SessionAgentProjection:\n[\s\
 assert.match(sessionAgentProjection, /legacy or unavailable snapshots fall back/, 'Session Agent projection must document its fallback behavior')
 assert.match(sessionAgentProjection, /required: \[id, type, version\]/, 'Session Agent fallback must require every serializer field')
 const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
+  if (!publicPath.startsWith('/v1/environments')) continue
+  for (const method of publicMethods) {
+    const operation = pathItem[method]
+    if (!operation) continue
+    assert.equal(
+      operation.responses['401'].content?.['application/json']?.schema?.$ref,
+      '#/components/schemas/TaskCostError',
+      `${method.toUpperCase()} ${publicPath} must document the implemented string-error authentication envelope`,
+    )
+  }
+}
 assert.match(environmentSchema, /required: \[id, type, agent_id, name, description, config, metadata, credential_bindings, archived_at, created_at, updated_at\]/, 'Environment responses must require every serializer field')
 assert.match(environmentSchema, /id:\n\s+type: string\n\s+pattern: '\^env_'/, 'Environment IDs must document their public prefix')
 assert.match(environmentSchema, /config:\n[\s\S]*?- type: 'null'/, 'Environment config must allow the serializer\'s null output')
