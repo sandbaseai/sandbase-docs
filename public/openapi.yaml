@@ -1226,13 +1226,13 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/APIError' }
-        '400': { description: 'Invalid request, status, protocols, Agent binding, or required expected version' }
+        '400': { description: 'Invalid request, status, protocols, Agent binding, or required expected version', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: 'Service, Agent version, or Environment not found' }
-        '422': { description: Runtime provider is unsupported }
-        '500': { description: Service update failed }
+        '404': { description: 'Service, Agent version, or Environment not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '422': { description: Runtime provider is unsupported, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Service update failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     post:
       operationId: updateEndpointCompatibility
       tags: [Services]
@@ -1258,13 +1258,13 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/APIError' }
-        '400': { description: 'Invalid request, status, protocols, Agent binding, or required expected version' }
+        '400': { description: 'Invalid request, status, protocols, Agent binding, or required expected version', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: 'Service, Agent version, or Environment not found' }
-        '422': { description: Runtime provider is unsupported }
-        '500': { description: Service update failed }
+        '404': { description: 'Service, Agent version, or Environment not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '422': { description: Runtime provider is unsupported, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Service update failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     delete:
       operationId: deleteEndpoint
       tags: [Services]
@@ -1282,11 +1282,11 @@ paths:
                 properties:
                   id: { type: string }
                   deleted: { type: boolean, const: true }
-        '404': { description: Service not found }
+        '404': { description: Service not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Service deletion failed }
+        '500': { description: Service deletion failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/endpoints/{id}/run:
     post:
@@ -1806,8 +1806,8 @@ paths:
                 properties:
                   id: { type: string, pattern: '^sess_' }
                   type: { type: string, const: session_deleted }
-        '404': { description: Session not found }
-        '409': { description: Running or rescheduling Session cannot be deleted }
+        '404': { description: Session not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '409': { description: Running or rescheduling Session cannot be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }

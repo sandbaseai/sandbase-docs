@@ -64,6 +64,13 @@ for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
   for (const method of publicMethods) {
     const operation = pathItem[method]
     if (!operation) continue
+    for (const [status, response] of Object.entries(operation.responses)) {
+      if (Number(status) < 400) continue
+      assert.ok(
+        response.content?.['application/json']?.schema,
+        `${method.toUpperCase()} ${publicPath} ${status} must document its implemented JSON error envelope`,
+      )
+    }
     if (publicPath === '/v1/messages') continue
     assert.ok(
       operation.responses['401']?.content?.['application/json']?.schema,
@@ -183,6 +190,26 @@ for (const [method, publicPath, statuses] of [
       `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
     )
   }
+}
+for (const [method, publicPath, statuses] of [
+  ['patch', '/v1/endpoints/{id}', ['400', '404', '409', '422', '500']],
+  ['post', '/v1/endpoints/{id}', ['400', '404', '409', '422', '500']],
+  ['delete', '/v1/endpoints/{id}', ['404', '500']],
+]) {
+  for (const status of statuses) {
+    assert.equal(
+      jsonErrorSchema(method, publicPath, status)?.$ref,
+      '#/components/schemas/APIError',
+      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
+    )
+  }
+}
+for (const status of ['404', '409', '500']) {
+  assert.equal(
+    jsonErrorSchema('delete', '/v1/sessions/{id}', status)?.$ref,
+    '#/components/schemas/SessionAPIError',
+    `DELETE /v1/sessions/{id} ${status} must document its implemented typed error envelope`,
+  )
 }
 
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
