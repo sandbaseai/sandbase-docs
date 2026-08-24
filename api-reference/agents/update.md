@@ -29,11 +29,11 @@ apiReference:
           type: string
           description: Replacement name. Omit to preserve the current value.
         - name: description
-          type: string · null
-          description: Replacement description. Send null or an empty string to clear it.
+          type: string
+          description: Replacement description. Send an empty string to clear it; null is treated as omitted and preserves the current value.
         - name: system
-          type: string · null
-          description: Replacement system instructions. Send null or an empty string to clear them.
+          type: string
+          description: Replacement system instructions. Send an empty string to clear them; null is treated as omitted and preserves the current value.
         - name: tools
           type: array · null
           description: Full replacement tool list. Send an empty array or null to clear all tools.
@@ -47,8 +47,8 @@ apiReference:
           type: array · null
           description: Full replacement handoff configuration list.
         - name: metadata
-          type: object
-          description: Full replacement metadata object. Omitted metadata is preserved; supplied metadata replaces caller-owned metadata rather than merging individual keys.
+          type: object · null
+          description: Full replacement metadata object. Omitted metadata is preserved; null clears caller-owned metadata. Supplied metadata replaces caller-owned metadata rather than merging individual keys, while the platform-owned _sandbase namespace remains unchanged.
   examples:
     - label: cURL
       language: bash

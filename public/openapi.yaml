@@ -629,6 +629,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
+        '400': { description: Missing or invalid name or model }
+        '422': { description: Model identity is invalid or unavailable }
     get:
       operationId: listAgents
       tags: [Agents]
@@ -664,6 +666,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
+        '400': { description: Invalid numeric version selector }
+        '404': { description: Agent or requested version not found }
     post:
       operationId: updateAgent
       tags: [Agents]
@@ -684,6 +688,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
+        '400': { description: Invalid request or unsupported configuration }
+        '403': { description: Agent is archived }
+        '404': { description: Agent not found }
+        '409': { description: Supplied version does not match the current Agent version }
+        '422': { description: Model identity is invalid or unavailable }
 
   /v1/agents/{id}/archive:
     post:
@@ -700,6 +709,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
+        '404': { description: Agent not found }
+        '409': { description: Agent is already archived }
 
   /v1/agents/{id}/versions:
     get:
@@ -717,12 +728,14 @@ paths:
             application/json:
               schema:
                 type: object
+                required: [data]
                 properties:
                   data:
                     type: array
                     items:
                       $ref: '#/components/schemas/Agent'
                   next_page: { type: string, description: Opaque cursor included only when another page is available. }
+        '404': { description: Agent not found }
 
   /v1/agents/{id}/versions/{version}:
     get:
@@ -1824,6 +1837,7 @@ components:
       required: true
       schema:
         type: string
+        pattern: '^agent_'
       description: Agent ID
     SessionId:
       name: id
@@ -2665,6 +2679,7 @@ components:
             - type: string
               example: "claude-sonnet-4"
             - type: object
+              required: [id]
               properties:
                 id:
                   type: string
@@ -2709,14 +2724,15 @@ components:
           description: Reserved for Claude compatibility; non-null values currently return unsupported_feature.
         metadata:
           type: object
-          additionalProperties:
-            type: string
+          additionalProperties: true
+          description: Application-defined JSON metadata. The reserved _sandbase namespace is stripped from public requests.
 
     UpdateAgentRequest:
       type: object
       properties:
         version:
           type: integer
+          minimum: 1
           description: Current version (optimistic lock)
         name:
           type: string
@@ -2726,24 +2742,38 @@ components:
           oneOf:
             - type: string
             - type: object
+              required: [id]
+              properties:
+                id: { type: string }
+                speed: { type: string, enum: [standard, fast] }
+                effort:
+                  oneOf:
+                    - type: string
+                      enum: [low, medium, high, xhigh, max]
+                    - type: object
+                      required: [type]
+                      properties:
+                        type: { type: string, enum: [low, medium, high, xhigh, max] }
         system:
           type: string
         tools:
-          type: array
+          type: [array, 'null']
         skills:
-          type: array
+          type: [array, 'null']
         mcp_servers:
-          type: array
+          type: [array, 'null']
         handoffs:
-          type: array
+          type: [array, 'null']
         multiagent:
           type: object
           description: Reserved; non-null values currently return unsupported_feature.
         metadata:
-          type: object
+          type: [object, 'null']
+          description: Full replacement for caller-owned metadata. The reserved _sandbase namespace cannot be changed through this API.
 
     Agent:
       type: object
+      required: [id, type, name, description, model, system, tools, mcp_servers, skills, handoffs, metadata, version, created_at, updated_at, archived_at]
       properties:
         id:
           type: string
@@ -2760,10 +2790,15 @@ components:
           properties:
             id: { type: string }
             effort:
-              type: [object, 'null']
-              properties:
-                type: { type: string, enum: [low, medium, high, xhigh, max] }
-            speed: { type: [string, 'null'], enum: [standard, fast] }
+              oneOf:
+                - type: string
+                  enum: [low, medium, high, xhigh, max]
+                - type: object
+                  required: [type]
+                  properties:
+                    type: { type: string, enum: [low, medium, high, xhigh, max] }
+                - type: 'null'
+            speed: { type: [string, 'null'], enum: [standard, fast, null] }
         system:
           type: string
         tools:

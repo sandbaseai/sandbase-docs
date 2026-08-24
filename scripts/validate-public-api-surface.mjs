@@ -81,6 +81,16 @@ for (const field of ['tools', 'mcp_servers', 'skills', 'handoffs']) {
 }
 assert.match(agentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Agent metadata must allow the serializer\'s null output')
 assert.doesNotMatch(agentSchema, /^        (?:runtime_profile|multiagent):/m, 'Agent responses must not advertise fields omitted by the serializer')
+assert.match(agentSchema, /required: \[id, type, name, description, model, system, tools, mcp_servers, skills, handoffs, metadata, version, created_at, updated_at, archived_at\]/, 'Agent responses must require every field always emitted by the serializer')
+assert.match(agentSchema, /effort:\n\s+oneOf:\n\s+- type: string/, 'Agent model effort responses must allow the implemented string form')
+const updateAgentSchema = openapi.match(/^    UpdateAgentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+for (const field of ['tools', 'skills', 'mcp_servers', 'handoffs']) {
+  assert.match(updateAgentSchema, new RegExp(`${field}:\\n\\s+type: \\[array, 'null'\\]`), `Agent update ${field} must allow explicit null replacement`)
+}
+assert.match(updateAgentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Agent update metadata must allow explicit null replacement')
+const updateAgentReference = readFileSync(new URL('../api-reference/agents/update.md', import.meta.url), 'utf8')
+assert.match(updateAgentReference, /null is treated as omitted and preserves the current value/, 'Agent string updates must document their implemented null semantics')
+assert.doesNotMatch(updateAgentReference, /Send null or an empty string to clear/, 'Agent string updates must not claim null clears pointer fields')
 const sessionSchema = openapi.match(/^    Session:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(sessionSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Session metadata must allow the serializer\'s null output')
 assert.match(sessionSchema, /required: \[[^\]]*title[^\]]*metadata[^\]]*archived_at[^\]]*updated_at[^\]]*\]/, 'Session responses must require fields always emitted by the serializer')

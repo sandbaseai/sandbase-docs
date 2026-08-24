@@ -41,7 +41,7 @@ apiReference:
           description: Agent handoff configurations.
         - name: metadata
           type: object
-          description: Up to 16 application-defined key-value pairs.
+          description: Application-defined JSON metadata. The platform-owned _sandbase namespace is stripped from public requests.
     - title: Agent object
       description: Fields returned for an agent resource.
       fields:
@@ -105,11 +105,11 @@ apiReference:
         "type": "agent",
         "version": 1,
         "name": "Research Assistant",
-        "description": null,
-        "model": {"id": "claude-sonnet-4", "effort": {"type": "high"}, "speed": "standard"},
+        "description": "",
+        "model": {"id": "claude-sonnet-4"},
         "system": "Research carefully and cite sources.",
         "tools": [{ "type": "agent_toolset_20260401" }],
-        "metadata": {},
+        "metadata": null,
         "archived_at": null,
         "created_at": "2026-05-29T10:00:00Z",
         "updated_at": "2026-05-29T10:00:00Z"
