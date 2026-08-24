@@ -2740,6 +2740,8 @@ paths:
                 $ref: '#/components/schemas/CredentialResponse'
         '400': { description: 'Missing, blank, oversized, unsupported, or otherwise invalid credential field' }
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Credential could not be encrypted or created }
     get:
       operationId: listCredentials
@@ -2753,6 +2755,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CredentialListResponse'
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Credential list could not be loaded }
   /v1/credentials/{id}:
     get:
@@ -2772,6 +2776,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CredentialResponse'
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Credential not found or belongs to another organization }
         '500': { description: Credential could not be loaded }
     patch:
@@ -2798,6 +2804,8 @@ paths:
                 $ref: '#/components/schemas/CredentialResponse'
         '400': { description: 'Invalid JSON body, unsupported status or strategy, non-positive weight, or no mutable fields' }
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Credential not found or belongs to another organization }
         '500': { description: Credential could not be updated }
   /v1/credentials/{id}/rotate:
@@ -2834,6 +2842,8 @@ paths:
                 $ref: '#/components/schemas/CredentialResponse'
         '400': { description: 'Missing, blank, oversized, or invalid replacement value' }
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Credential not found or belongs to another organization }
         '500': { description: Credential value could not be encrypted or stored }
 components:
