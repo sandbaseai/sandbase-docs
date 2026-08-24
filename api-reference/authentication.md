@@ -18,7 +18,7 @@ accepts `x-api-key` for Anthropic SDK compatibility.
 Include the key in the `Authorization` header:
 
 ```http
-Authorization: Bearer sk-sb-your-api-key
+Authorization: Bearer sk-your-api-key
 ```
 
 This is the standard method used by OpenAI-compatible SDKs.
@@ -28,7 +28,7 @@ This is the standard method used by OpenAI-compatible SDKs.
 Include the key in the `x-api-key` header:
 
 ```http
-x-api-key: sk-sb-your-api-key
+x-api-key: sk-your-api-key
 ```
 
 This header is supported only by `POST /v1/messages`. Other public endpoints do not extract it; use Bearer
@@ -45,17 +45,19 @@ first and then falls back to the Bearer header. A missing supported credential r
 
 ## API Key Format
 
-SandBase API keys follow a consistent format:
+New Console-created API keys have this format:
 
 ```
-sk-sb-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 | Component | Description |
 |-----------|-------------|
 | `sk-` | Standard "secret key" prefix |
-| `sb-` | SandBase identifier |
-| `xxxx...` | 32+ character random string |
+| `xxxx...` | 64 hexadecimal characters generated from 32 random bytes |
+
+Legacy `sk-sb-...` keys remain usable until they expire or are revoked. Clients should treat keys as opaque strings
+instead of rejecting a credential based on its prefix or length.
 
 ::: warning
 Never expose your API key in client-side code, public repositories, or logs. Treat it like a password.
@@ -99,7 +101,7 @@ Always create the new key before revoking the old one to avoid downtime.
 
 ### Revocation
 
-Revoked keys immediately stop working. Any request using a revoked key receives:
+Revoked keys cannot authenticate new requests. The API returns `401 Unauthorized` with the message:
 
 ```json
 {"error":"API key has been revoked"}
@@ -107,7 +109,7 @@ Revoked keys immediately stop working. Any request using a revoked key receives:
 
 ### Expiration
 
-Keys can optionally have an expiration date. Expired keys return:
+Keys can optionally have an expiration date. Expired keys return `401 Unauthorized` with the message:
 
 ```json
 {"error":"API key has expired"}
@@ -149,7 +151,7 @@ API keys are scoped to an organization. When you authenticate with a key:
 
 - **Store keys in environment variables** — Never hardcode keys in source code
 - **Use separate keys per environment** — Different keys for dev, staging, production
-- **Set expiration dates** — Rotate keys periodically (every 90 days recommended)
+- **Set expiration dates** — Choose a rotation interval appropriate for your security policy
 - **Monitor usage** — Check the Console for unexpected activity
 - **Use the minimum scope needed** — Create keys with appropriate permissions
 
@@ -165,7 +167,7 @@ API keys are scoped to an organization. When you authenticate with a key:
 ::: code-group
 
 ```bash [.env]
-SANDBASE_API_KEY=sk-sb-your-api-key
+SANDBASE_API_KEY=sk-your-api-key
 ```
 
 ```python [Python]

@@ -20,15 +20,16 @@ API keys authenticate your requests to SandBase. This guide covers how to create
 Your API key is shown only once at creation time. If you lose it, you'll need to create a new one. Store it securely before closing the dialog.
 :::
 
-## Key Format
+## Key format
 
-All SandBase API keys use the prefix `sk-sb-` followed by a random string:
+New API keys created in the Console use the `sk-` prefix followed by 64 hexadecimal characters:
 
 ```
-sk-sb-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-This prefix makes it easy to identify SandBase keys in your codebase and helps secret scanning tools detect accidental exposure.
+Existing `sk-sb-...` keys remain valid until they expire or are revoked. Do not use the prefix alone to validate a
+credential; always treat the complete value as an opaque secret.
 
 ## Authentication Methods
 
@@ -40,34 +41,35 @@ Use the standard `Authorization: Bearer` header. This is compatible with the Ope
 
 ```bash
 curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-sb-YOUR_API_KEY" \
+  -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "deepseek/deepseek-v3", "messages": [{"role": "user", "content": "Hi"}]}'
 ```
 
-### x-api-key Header
+### Anthropic Messages: x-api-key header
 
-Alternatively, use the `x-api-key` header. This is the native Anthropic authentication style:
+`POST /v1/messages` also accepts the native Anthropic `x-api-key` header:
 
 ```bash
 curl https://api.sandbase.ai/v1/messages \
-  -H "x-api-key: sk-sb-YOUR_API_KEY" \
+  -H "x-api-key: sk-YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "anthropic/claude-sonnet-4-20250514", "max_tokens": 1024, "messages": [{"role": "user", "content": "Hi"}]}'
 ```
 
 ::: tip
-When both headers are present, `x-api-key` takes priority. In practice, just pick one method and use it consistently.
+Only `POST /v1/messages` reads `x-api-key`, and it takes priority when both supported headers are present. Use the
+Bearer header for every other public endpoint.
 :::
 
 ## Key Permissions
 
 SandBase API keys are scoped at the **organization level**:
 
-- A key can call Models, APIs, Services, and other API resources available to the organization
+- A standard key can call public API resources available to the organization
 - Usage is billed to the organization that owns the key
-- Any team member with console access can create keys for the organization
-- There is no per-model or per-resource restriction on individual keys
+- A key can have an optional expiration and spending limit
+- SandBase-issued credentials can be restricted to a specific scope; a scoped credential returns `403` outside that scope
 
 Treat each key as an application credential rather than a personal password. Use organization membership for human access and API keys for workloads.
 
@@ -101,7 +103,7 @@ To revoke (disable) a key:
 3. Click the **Revoke** button
 4. Confirm the action
 
-Revoked keys immediately stop working. Any in-flight requests using the key will fail. This action cannot be undone — you'll need to create a new key if you revoke one by mistake.
+Revoked keys cannot authenticate new requests. Revocation cannot be undone — create a new key if you revoke one by mistake.
 
 ## Security Best Practices
 
@@ -111,7 +113,7 @@ Use environment variables or a secrets manager instead:
 
 ```bash
 # .env file (add to .gitignore!)
-SANDBASE_API_KEY=sk-sb-your-key-here
+SANDBASE_API_KEY=sk-your-key-here
 ```
 
 ```python
@@ -155,10 +157,12 @@ For temporary access (CI/CD pipelines, contractor access, demos), set an expirat
 
 | Error | Cause | Fix |
 |-------|-------|-----|
-| `401 - missing API key` | No key provided in request | Add `Authorization: Bearer sk-sb-...` header |
-| `401 - invalid API key` | Key doesn't exist or is malformed | Check for typos, ensure the full key is included |
+| `401 - missing API key` | No key provided in request | Add an `Authorization: Bearer <key>` header |
+| `401 - invalid API key` | Key doesn't exist | Check for typos and ensure the full key is included |
 | `401 - API key has been revoked` | Key was disabled in the console | Create a new key |
 | `401 - API key has expired` | Key passed its expiration date | Create a new key or extend expiration |
+| `402 - API key spending limit exceeded` | Key reached its configured spending limit | Raise the limit or use another authorized key |
+| `403 - insufficient_scope` | A scoped credential cannot call this endpoint | Use a key authorized for the endpoint |
 
 ## Next Steps
 

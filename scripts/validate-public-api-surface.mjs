@@ -7,6 +7,8 @@ const openapi = readFileSync(new URL('../public/openapi.yaml', import.meta.url),
 const config = readFileSync(new URL('../.vitepress/config.ts', import.meta.url), 'utf8')
 const sidebar = readFileSync(new URL('../.vitepress/sidebar.ts', import.meta.url), 'utf8')
 const generatedReferenceSpecs = readFileSync(new URL('../.vitepress/theme/generatedApiReferenceSpecs.ts', import.meta.url), 'utf8')
+const apiKeyGuide = readFileSync(new URL('../getting-started/api-keys.md', import.meta.url), 'utf8')
+const authenticationReference = readFileSync(new URL('../api-reference/authentication.md', import.meta.url), 'utf8')
 const root = fileURLToPath(new URL('..', import.meta.url))
 
 const forbiddenOpenApiPatterns = [
@@ -63,6 +65,12 @@ const messagesPath = openapi.match(/^  \/v1\/messages:\n[\s\S]*?(?=^  \/)/m)?.[0
 assert.match(messagesPath, /security:\n\s+- BearerAuth: \[\]\n\s+- AnthropicApiKey: \[\]/, 'Messages must support Bearer or x-api-key authentication')
 assert.equal((openapi.match(/AnthropicApiKey:/g) ?? []).length, 2, 'Anthropic x-api-key authentication must be scoped only to Messages')
 assert.match(openapi, /AnthropicApiKey:\n\s+type: apiKey\n\s+in: header\n\s+name: x-api-key/, 'AnthropicApiKey must describe the x-api-key header')
+assert.match(apiKeyGuide, /Only `POST \/v1\/messages` reads `x-api-key`/, 'API key guide must scope x-api-key to Anthropic Messages')
+assert.doesNotMatch(apiKeyGuide, /There is no per-model or per-resource restriction/, 'API key guide must not deny implemented credential restrictions')
+for (const content of [apiKeyGuide, authenticationReference]) {
+  assert.match(content, /64 hexadecimal characters/, 'API key docs must describe the current sk- key format')
+  assert.match(content, /(?:Existing|Legacy) `sk-sb-\.\.\.` keys remain/, 'API key docs must preserve legacy-key guidance')
+}
 const agentListPage = openapi.match(/^    AgentListPage:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(agentListPage, /required: \[data\]/, 'Agent list responses must require data')
 assert.doesNotMatch(agentListPage, /required: \[[^\]]*next_page/, 'Agent list next_page must be optional on the final page')
