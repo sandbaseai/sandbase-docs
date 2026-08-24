@@ -453,33 +453,33 @@ assert.match(updateEmbedSchema, /additionalProperties: true/, 'Embed updates mus
 assert.match(updateEmbedSchema, /enabled: \{ type: \[boolean, 'null'\]/, 'Null Embed enabled values must preserve the current state')
 const embedsPath = openapi.match(/^  \/v1\/embeds:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 const createEmbed = embedsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-for (const status of ['201', '400', '401', '403', '404', '422', '500']) {
+for (const status of ['201', '400', '401', '402', '403', '404', '422', '500']) {
   assert.match(createEmbed, new RegExp(`'${status}':`), `Embed creation must document ${status} responses`)
 }
 const listEmbeds = embedsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '401', '500']) {
+for (const status of ['200', '401', '402', '403', '500']) {
   assert.match(listEmbeds, new RegExp(`'${status}':`), `Embed listing must document ${status} responses`)
 }
 const embedPath = openapi.match(/^  \/v1\/embeds\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 const getEmbed = embedPath.match(/^    get:\n[\s\S]*?(?=^    patch:)/m)?.[0] ?? ''
-for (const status of ['200', '401', '404', '500']) {
+for (const status of ['200', '401', '402', '403', '404', '500']) {
   assert.match(getEmbed, new RegExp(`'${status}':`), `Embed reads must document ${status} responses`)
 }
 for (const method of ['patch', 'post', 'put']) {
   const next = method === 'patch' ? 'post' : method === 'post' ? 'put' : 'delete'
   const operation = embedPath.match(new RegExp(`^    ${method}:\\n[\\s\\S]*?(?=^    ${next}:)`, 'm'))?.[0] ?? ''
   assert.match(operation, /UpdateEmbedConfigRequest/, `${method.toUpperCase()} Embed updates must use the implemented request schema`)
-  for (const status of ['200', '400', '401', '404', '422', '500']) {
+  for (const status of ['200', '400', '401', '402', '403', '404', '422', '500']) {
     assert.match(operation, new RegExp(`'${status}':`), `${method.toUpperCase()} Embed updates must document ${status} responses`)
   }
 }
 const deleteEmbed = embedPath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '401', '404', '500']) {
+for (const status of ['200', '401', '402', '403', '404', '500']) {
   assert.match(deleteEmbed, new RegExp(`'${status}':`), `Embed deletion must document ${status} responses`)
 }
 const embedUsagePath = openapi.match(/^  \/v1\/embeds\/\{id\}\/usage:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(embedUsagePath, /Session Event record/, 'Embed usage must describe what message_count actually counts')
-for (const status of ['200', '401', '404']) {
+for (const status of ['200', '401', '402', '403', '404']) {
   assert.match(embedUsagePath, new RegExp(`'${status}':`), `Embed usage must document ${status} responses`)
 }
 assert.doesNotMatch(embedUsagePath, /'500':/, 'Embed usage aggregation currently returns counts without propagating query failures')

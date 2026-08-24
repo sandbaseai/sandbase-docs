@@ -427,7 +427,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateEmbedConfigResponse'
         '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '403': { description: Agent Embed Config limit reached, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403':
+          description: Agent Embed Config limit reached, or the API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/APIError'
+                  - $ref: '#/components/schemas/APIKeyScopeError'
         '404': { description: Agent or Environment binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
@@ -450,6 +458,8 @@ paths:
                 $ref: '#/components/schemas/EmbedConfigList'
         '500': { description: List failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
 
   /v1/embeds/{id}:
     get:
@@ -462,6 +472,8 @@ paths:
         '200': { description: Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
         '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Embed Config could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     patch:
       operationId: updateEmbedConfig
@@ -482,6 +494,8 @@ paths:
         '404': { description: Embed Config or binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Embed Config could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     post:
       operationId: updateEmbedConfigPost
@@ -499,6 +513,8 @@ paths:
         '200': { description: Updated Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
         '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Embed Config or binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '500': { description: Embed Config could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
@@ -518,6 +534,8 @@ paths:
         '200': { description: Updated Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
         '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Embed Config or binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '500': { description: Embed Config could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
@@ -532,6 +550,8 @@ paths:
         '200': { description: Embed Config deleted, content: { application/json: { schema: { $ref: '#/components/schemas/DeleteEmbedConfigResponse' } } } }
         '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Embed Config could not be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/embeds/{id}/usage:
@@ -546,6 +566,8 @@ paths:
         '200': { description: Aggregate usage, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfigUsage' } } } }
         '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
 
   # --- Account ----------------------------------------------------
   /v1/account/balance:
