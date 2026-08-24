@@ -1411,6 +1411,7 @@ paths:
                 $ref: '#/components/schemas/Agent'
         '400': { description: 'Missing or invalid name, model, visibility, multiagent configuration, or MCP headers', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '422': { description: Model identity is invalid or unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '500': { description: Agent could not be created or validated, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
@@ -1432,6 +1433,7 @@ paths:
               schema: { $ref: '#/components/schemas/AgentListPage' }
         '400': { description: Invalid page cursor, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Agents could not be listed, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
@@ -1455,6 +1457,7 @@ paths:
                 $ref: '#/components/schemas/Agent'
         '400': { description: Invalid numeric version selector, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Agent or requested version not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '500': { description: Agent or snapshot could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
@@ -1480,6 +1483,7 @@ paths:
                 $ref: '#/components/schemas/Agent'
         '400': { description: 'Invalid request, model, multiagent configuration, or MCP headers', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403':
           description: Agent is archived or the API key scope does not authorize this endpoint
           content:
@@ -1509,6 +1513,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Agent'
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Agent not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '409': { description: Agent is already archived, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
@@ -1539,6 +1544,7 @@ paths:
                   next_page: { type: string, description: Opaque cursor included only when another page is available. }
         '400': { description: Invalid page cursor, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Agent not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '500': { description: Agent versions or a stored snapshot could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
@@ -1567,6 +1573,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Agent'
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Agent or version not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '500': { description: Agent version or stored snapshot could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }

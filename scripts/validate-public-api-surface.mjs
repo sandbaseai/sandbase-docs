@@ -304,32 +304,32 @@ assert.match(createAgentSchema, /tools:\n\s+type: \[array, 'null'\]/, 'Agent cre
 assert.doesNotMatch(createAgentSchema, /maxItems: (?:20|128)|maxLength: (?:256|2048|100000)/, 'Agent creation must not advertise limits that are not enforced')
 const agentsPath = openapi.match(/^  \/v1\/agents:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 const createAgent = agentsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '403', '422', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '422', '500']) {
   assert.match(createAgent, new RegExp(`'${status}':`), `Agent creation must document ${status} responses`)
 }
 const listAgents = agentsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '403', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '500']) {
   assert.match(listAgents, new RegExp(`'${status}':`), `Agent listing must document ${status} responses`)
 }
 const agentPath = openapi.match(/^  \/v1\/agents\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '403', '404', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
   assert.match(agentPath.match(/^    get:\n[\s\S]*?(?=^    post:)/m)?.[0] ?? '', new RegExp(`'${status}':`), `Agent reads must document ${status} responses`)
 }
 const updateAgent = agentPath.match(/^    post:\n[\s\S]*/m)?.[0] ?? ''
 assert.match(updateAgent, /a no-op returns the current Agent without incrementing/, 'Agent updates must document no-op version semantics')
-for (const status of ['200', '400', '401', '403', '404', '409', '422', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '404', '409', '422', '500']) {
   assert.match(updateAgent, new RegExp(`'${status}':`), `Agent updates must document ${status} responses`)
 }
 const archiveAgentPath = openapi.match(/^  \/v1\/agents\/\{id\}\/archive:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '403', '404', '409', '500']) {
+for (const status of ['200', '401', '402', '403', '404', '409', '500']) {
   assert.match(archiveAgentPath, new RegExp(`'${status}':`), `Agent archival must document ${status} responses`)
 }
 const agentVersionsPath = openapi.match(/^  \/v1\/agents\/\{id\}\/versions:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '403', '404', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
   assert.match(agentVersionsPath, new RegExp(`'${status}':`), `Agent version listing must document ${status} responses`)
 }
 const agentVersionPath = openapi.match(/^  \/v1\/agents\/\{id\}\/versions\/\{version\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '403', '404', '500']) {
+for (const status of ['200', '401', '402', '403', '404', '500']) {
   assert.match(agentVersionPath, new RegExp(`'${status}':`), `Agent version reads must document ${status} responses`)
 }
 const updateAgentReference = readFileSync(new URL('../api-reference/agents/update.md', import.meta.url), 'utf8')
