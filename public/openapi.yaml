@@ -883,12 +883,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIError'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '404':
+          description: Referenced Skill, Agent version, or Environment was not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '409':
+          description: Referenced Agent is archived
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '415':
+          description: Content-Type is not application/json, application/yaml, or application/x-yaml
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
         '422':
           description: Runtime or Skill is incompatible
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIError'
+        '500':
+          description: Endpoint creation or declarative compilation failed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
     get:
       operationId: listEndpoints
       tags: [Services]
@@ -921,6 +946,21 @@ paths:
                   next_page:
                     type: string
                     description: Opaque cursor included only when another page is available.
+        '400':
+          description: Invalid page cursor
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '500':
+          description: Endpoint list could not be loaded
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
 
   /v1/endpoints/{id}:
     get:
@@ -938,6 +978,14 @@ paths:
                 $ref: '#/components/schemas/Endpoint'
         '404':
           description: Service not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
     patch:
       operationId: updateEndpoint
       tags: [Services]
@@ -959,7 +1007,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/Endpoint'
         '409':
-          description: Declarative Service definition is immutable
+          description: Agent version conflict, archived Agent, or immutable declarative definition
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '400': { description: 'Invalid request, status, protocols, Agent binding, or required expected version' }
+        '401': { description: Missing or invalid API key }
+        '404': { description: 'Service, Agent version, or Environment not found' }
+        '422': { description: Runtime provider is unsupported }
+        '500': { description: Service update failed }
     post:
       operationId: updateEndpointCompatibility
       tags: [Services]
@@ -981,7 +1037,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/Endpoint'
         '409':
-          description: Declarative Service definition is immutable
+          description: Agent version conflict, archived Agent, or immutable declarative definition
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '400': { description: 'Invalid request, status, protocols, Agent binding, or required expected version' }
+        '401': { description: Missing or invalid API key }
+        '404': { description: 'Service, Agent version, or Environment not found' }
+        '422': { description: Runtime provider is unsupported }
+        '500': { description: Service update failed }
     delete:
       operationId: deleteEndpoint
       tags: [Services]
@@ -1000,6 +1064,8 @@ paths:
                   id: { type: string }
                   deleted: { type: boolean, const: true }
         '404': { description: Service not found }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Service deletion failed }
 
   /v1/endpoints/{id}/run:
     post:

@@ -270,6 +270,17 @@ for (const schemaName of ['CreateDeclarativeEndpointRequest', 'CreateAdvancedEnd
   assert.match(schema, /enum: \[rest, acp\]/, `${schemaName} must expose only public invocation transports`)
   assert.doesNotMatch(schema, /default: \[rest\]/, `${schemaName} must not claim an unimplemented REST-only server default`)
 }
+const endpointsPath = openapi.match(/^  \/v1\/endpoints:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+const createEndpointOperation = endpointsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
+assert.match(createEndpointOperation, /responses:\n\s+'201':/, 'Endpoint creation must document its implemented 201 response')
+assert.doesNotMatch(createEndpointOperation, /responses:\n\s+'200':/, 'Endpoint creation must not document an unimplemented 200 response')
+for (const status of ['400', '401', '404', '409', '415', '422', '500']) {
+  assert.match(createEndpointOperation, new RegExp(`'${status}':`), `Endpoint creation must document ${status} responses`)
+}
+const listEndpointOperation = endpointsPath.match(/^    get:\n[\s\S]*$/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '500']) {
+  assert.match(listEndpointOperation, new RegExp(`'${status}':`), `Endpoint listing must document ${status} responses`)
+}
 const endpointACPPath = openapi.match(/^  \/v1\/endpoints\/\{id\}\/acp:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(endpointACPPath, /ACPRequest/, 'Endpoint ACP must document its JSON-RPC request envelope')
 assert.match(endpointACPPath, /application\/x-ndjson:/, 'Endpoint ACP must document prompt streaming as NDJSON')
