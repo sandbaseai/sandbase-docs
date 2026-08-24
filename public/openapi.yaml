@@ -1243,7 +1243,7 @@ paths:
       operationId: createAgent
       tags: [Agents]
       summary: Create agent
-      description: Create a reusable, versioned agent configuration.
+      description: Create a reusable, versioned Agent configuration. Model IDs must use the public vendor/model identity. Unknown request fields are accepted and ignored. Omitted tools default to the built-in Agent toolset; an explicit null leaves tools null.
       requestBody:
         required: true
         content:
@@ -1257,8 +1257,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
-        '400': { description: Missing or invalid name or model }
-        '422': { description: Model identity is invalid or unavailable }
+        '400': { description: 'Missing or invalid name, model, visibility, multiagent configuration, or MCP headers', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '422': { description: Model identity is invalid or unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Agent could not be created or validated, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
     get:
       operationId: listAgents
       tags: [Agents]
@@ -1275,6 +1278,10 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/AgentListPage' }
+        '400': { description: Invalid page cursor, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '500': { description: Agents could not be listed, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
   /v1/agents/{id}:
     get:
@@ -1294,13 +1301,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
-        '400': { description: Invalid numeric version selector }
-        '404': { description: Agent or requested version not found }
+        '400': { description: Invalid numeric version selector, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Agent or requested version not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Agent or snapshot could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
     post:
       operationId: updateAgent
       tags: [Agents]
       summary: Update agent
-      description: Update agent configuration. Creates a new version when changes are made.
+      description: Update Agent configuration. Effective changes create a new version; a no-op returns the current Agent without incrementing it. Omitted fields and null scalar fields preserve their current values. Array null values clear those arrays. Unknown fields are accepted and ignored.
       parameters:
         - $ref: '#/components/parameters/AgentId'
       requestBody:
@@ -1316,11 +1326,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
-        '400': { description: Invalid request or unsupported configuration }
-        '403': { description: Agent is archived }
-        '404': { description: Agent not found }
-        '409': { description: Supplied version does not match the current Agent version }
-        '422': { description: Model identity is invalid or unavailable }
+        '400': { description: 'Invalid request, model, multiagent configuration, or MCP headers', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403':
+          description: Agent is archived or the API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/SessionAPIError'
+                  - $ref: '#/components/schemas/APIKeyScopeError'
+        '404': { description: Agent not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '409': { description: Supplied version does not match the current Agent version, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '422': { description: Model identity is invalid or unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Agent could not be updated or validated, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
   /v1/agents/{id}/archive:
     post:
@@ -1337,8 +1356,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
-        '404': { description: Agent not found }
-        '409': { description: Agent is already archived }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Agent not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '409': { description: Agent is already archived, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Agent could not be archived, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
   /v1/agents/{id}/versions:
     get:
@@ -1363,7 +1385,11 @@ paths:
                     items:
                       $ref: '#/components/schemas/Agent'
                   next_page: { type: string, description: Opaque cursor included only when another page is available. }
-        '404': { description: Agent not found }
+        '400': { description: Invalid page cursor, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Agent not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Agent versions or a stored snapshot could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
   /v1/agents/{id}/versions/{version}:
     get:
@@ -1388,7 +1414,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
-        '404': { description: Agent or version not found }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Agent or version not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '500': { description: Agent version or stored snapshot could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
   # --- Sessions ---------------------------------------------------
   /v1/sessions:
@@ -4381,90 +4410,79 @@ components:
     # --- Agents ---------------------------------------------------
     CreateAgentRequest:
       type: object
+      additionalProperties: true
       required: [model, name]
       properties:
         model:
           oneOf:
             - type: string
-              example: "claude-sonnet-4"
+              pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*$'
+              example: "anthropic/claude-sonnet-4"
             - type: object
+              additionalProperties: true
               required: [id]
               properties:
                 id:
                   type: string
+                  pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*$'
                 speed:
                   type: string
-                  enum: [standard, fast]
                 effort:
-                  oneOf:
-                    - type: string
-                      enum: [low, medium, high, xhigh, max]
-                    - type: object
-                      required: [type]
-                      properties:
-                        type: { type: string, enum: [low, medium, high, xhigh, max] }
+                  description: Optional model runtime hint preserved with the Agent configuration.
         name:
           type: string
-          maxLength: 256
         description:
-          type: string
-          maxLength: 2048
+          type: [string, 'null']
         system:
-          type: string
-          maxLength: 100000
+          type: [string, 'null']
         tools:
-          type: array
-          maxItems: 128
+          type: [array, 'null']
           items:
             type: object
         mcp_servers:
-          type: array
+          type: [array, 'null']
           description: MCP server configurations available to the Agent runtime.
         skills:
-          type: array
-          maxItems: 20
+          type: [array, 'null']
           items:
             type: object
         handoffs:
-          type: array
+          type: [array, 'null']
           description: Agent handoff configurations.
         multiagent:
-          type: object
-          description: Reserved for Claude compatibility; non-null values currently return unsupported_feature.
+          type: [object, 'null']
+          description: Reserved for Claude compatibility. Omit, send null, or send an empty object; any non-empty object returns unsupported_feature.
         metadata:
-          type: object
+          type: [object, 'null']
           additionalProperties: true
           description: Application-defined JSON metadata. The reserved _sandbase namespace is stripped from public requests.
 
     UpdateAgentRequest:
       type: object
+      additionalProperties: true
       properties:
         version:
           type: integer
           minimum: 1
           description: Current version (optimistic lock)
         name:
-          type: string
+          type: [string, 'null']
         description:
-          type: string
+          type: [string, 'null']
         model:
           oneOf:
             - type: string
+              pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*$'
             - type: object
+              additionalProperties: true
               required: [id]
               properties:
-                id: { type: string }
-                speed: { type: string, enum: [standard, fast] }
+                id: { type: string, pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*$' }
+                speed: { type: string }
                 effort:
-                  oneOf:
-                    - type: string
-                      enum: [low, medium, high, xhigh, max]
-                    - type: object
-                      required: [type]
-                      properties:
-                        type: { type: string, enum: [low, medium, high, xhigh, max] }
+                  description: Optional model runtime hint preserved with the Agent configuration.
         system:
-          type: string
+          type: [string, 'null']
         tools:
           type: [array, 'null']
         skills:
@@ -4474,8 +4492,8 @@ components:
         handoffs:
           type: [array, 'null']
         multiagent:
-          type: object
-          description: Reserved; non-null values currently return unsupported_feature.
+          type: [object, 'null']
+          description: Reserved. Omit, send null, or send an empty object; any non-empty object returns unsupported_feature.
         metadata:
           type: [object, 'null']
           description: Full replacement for caller-owned metadata. The reserved _sandbase namespace cannot be changed through this API.
@@ -4486,6 +4504,7 @@ components:
       properties:
         id:
           type: string
+          pattern: '^agent_[0-9a-f]{8}-[0-9a-f]{3}$'
         type:
           type: string
           enum: [agent]
@@ -4499,15 +4518,8 @@ components:
           properties:
             id: { type: string }
             effort:
-              oneOf:
-                - type: string
-                  enum: [low, medium, high, xhigh, max]
-                - type: object
-                  required: [type]
-                  properties:
-                    type: { type: string, enum: [low, medium, high, xhigh, max] }
-                - type: 'null'
-            speed: { type: [string, 'null'], enum: [standard, fast, null] }
+              description: Optional model runtime hint preserved from the submitted model object; absent for string model input.
+            speed: { type: [string, 'null'], description: Optional model runtime hint preserved from the submitted model object. }
         system:
           type: string
         tools:
@@ -4522,6 +4534,7 @@ components:
           type: [object, 'null']
         version:
           type: integer
+          minimum: 1
         created_at:
           type: string
           format: date-time

@@ -8,7 +8,7 @@ apiReference:
   operation: Agents
   method: POST
   path: /v1/agents/{agent_id}
-  description: Update an agent configuration. Every effective change creates a new immutable version; existing sessions keep the version they started with.
+  description: Update an Agent configuration. Every effective change creates a new immutable version; a no-op returns the current version unchanged. Existing Sessions keep the version they started with. Unknown request fields are accepted and ignored.
   groups:
     - title: Path parameters
       fields:
@@ -89,9 +89,17 @@ apiReference:
         "type": "agent",
         "version": 2,
         "name": "Research Assistant",
-        "model": {"id": "claude-sonnet-4", "effort": {"type": "high"}, "speed": "standard"},
+        "description": "",
+        "model": {"id": "anthropic/claude-sonnet-4", "effort": {"type": "high"}, "speed": "standard"},
         "system": "Research carefully and always cite sources.",
-        "updated_at": "2026-05-29T11:00:00Z"
+        "tools": [{"type":"agent_toolset_20260401"}],
+        "mcp_servers": null,
+        "skills": null,
+        "handoffs": null,
+        "metadata": null,
+        "created_at": "2026-05-29T10:00:00Z",
+        "updated_at": "2026-05-29T11:00:00Z",
+        "archived_at": null
       }
   notes:
     - title: Optimistic locking

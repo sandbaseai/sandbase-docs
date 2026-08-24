@@ -261,15 +261,57 @@ for (const field of ['tools', 'mcp_servers', 'skills', 'handoffs']) {
 assert.match(agentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Agent metadata must allow the serializer\'s null output')
 assert.doesNotMatch(agentSchema, /^        (?:runtime_profile|multiagent):/m, 'Agent responses must not advertise fields omitted by the serializer')
 assert.match(agentSchema, /required: \[id, type, name, description, model, system, tools, mcp_servers, skills, handoffs, metadata, version, created_at, updated_at, archived_at\]/, 'Agent responses must require every field always emitted by the serializer')
-assert.match(agentSchema, /effort:\n\s+oneOf:\n\s+- type: string/, 'Agent model effort responses must allow the implemented string form')
+assert.match(agentSchema, /effort:\n\s+description: Optional model runtime hint preserved/, 'Agent model effort responses must allow the implemented pass-through value')
+assert.match(agentSchema, /id:\n\s+type: string\n\s+pattern: '\^agent_\[0-9a-f\]\{8\}-\[0-9a-f\]\{3\}\$'/, 'Agent IDs must document the implemented generated shape')
 const updateAgentSchema = openapi.match(/^    UpdateAgentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 for (const field of ['tools', 'skills', 'mcp_servers', 'handoffs']) {
   assert.match(updateAgentSchema, new RegExp(`${field}:\\n\\s+type: \\[array, 'null'\\]`), `Agent update ${field} must allow explicit null replacement`)
 }
 assert.match(updateAgentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Agent update metadata must allow explicit null replacement')
+assert.match(updateAgentSchema, /additionalProperties: true/, 'Agent updates must allow ignored compatibility fields')
+assert.match(updateAgentSchema, /name:\n\s+type: \[string, 'null'\]/, 'Agent updates must allow null scalar fields to preserve their values')
+const createAgentSchema = openapi.match(/^    CreateAgentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(createAgentSchema, /additionalProperties: true/, 'Agent creation must allow ignored compatibility fields')
+assert.match(createAgentSchema, /pattern: '\^\[A-Za-z0-9\]/, 'Agent model identities must require implemented vendor/model syntax')
+assert.match(createAgentSchema, /tools:\n\s+type: \[array, 'null'\]/, 'Agent creation must distinguish omitted default tools from explicit null')
+assert.doesNotMatch(createAgentSchema, /maxItems: (?:20|128)|maxLength: (?:256|2048|100000)/, 'Agent creation must not advertise limits that are not enforced')
+const agentsPath = openapi.match(/^  \/v1\/agents:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+const createAgent = agentsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '403', '422', '500']) {
+  assert.match(createAgent, new RegExp(`'${status}':`), `Agent creation must document ${status} responses`)
+}
+const listAgents = agentsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '403', '500']) {
+  assert.match(listAgents, new RegExp(`'${status}':`), `Agent listing must document ${status} responses`)
+}
+const agentPath = openapi.match(/^  \/v1\/agents\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '403', '404', '500']) {
+  assert.match(agentPath.match(/^    get:\n[\s\S]*?(?=^    post:)/m)?.[0] ?? '', new RegExp(`'${status}':`), `Agent reads must document ${status} responses`)
+}
+const updateAgent = agentPath.match(/^    post:\n[\s\S]*/m)?.[0] ?? ''
+assert.match(updateAgent, /a no-op returns the current Agent without incrementing/, 'Agent updates must document no-op version semantics')
+for (const status of ['200', '400', '401', '403', '404', '409', '422', '500']) {
+  assert.match(updateAgent, new RegExp(`'${status}':`), `Agent updates must document ${status} responses`)
+}
+const archiveAgentPath = openapi.match(/^  \/v1\/agents\/\{id\}\/archive:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '401', '403', '404', '409', '500']) {
+  assert.match(archiveAgentPath, new RegExp(`'${status}':`), `Agent archival must document ${status} responses`)
+}
+const agentVersionsPath = openapi.match(/^  \/v1\/agents\/\{id\}\/versions:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '403', '404', '500']) {
+  assert.match(agentVersionsPath, new RegExp(`'${status}':`), `Agent version listing must document ${status} responses`)
+}
+const agentVersionPath = openapi.match(/^  \/v1\/agents\/\{id\}\/versions\/\{version\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '401', '403', '404', '500']) {
+  assert.match(agentVersionPath, new RegExp(`'${status}':`), `Agent version reads must document ${status} responses`)
+}
 const updateAgentReference = readFileSync(new URL('../api-reference/agents/update.md', import.meta.url), 'utf8')
 assert.match(updateAgentReference, /null is treated as omitted and preserves the current value/, 'Agent string updates must document their implemented null semantics')
 assert.doesNotMatch(updateAgentReference, /Send null or an empty string to clear/, 'Agent string updates must not claim null clears pointer fields')
+const agentReferenceText = ['create', 'get', 'list', 'update', 'get-version', 'versions']
+  .map((page) => readFileSync(new URL(`../api-reference/agents/${page}.md`, import.meta.url), 'utf8'))
+  .join('\n')
+assert.doesNotMatch(agentReferenceText, /"model":\s*(?:"|\{"id":\s*")claude-sonnet-4/, 'Agent examples must use implemented vendor/model identities')
 const sessionSchema = openapi.match(/^    Session:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(sessionSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Session metadata must allow the serializer\'s null output')
 assert.match(sessionSchema, /required: \[[^\]]*title[^\]]*metadata[^\]]*archived_at[^\]]*updated_at[^\]]*\]/, 'Session responses must require fields always emitted by the serializer')
