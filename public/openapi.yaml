@@ -74,7 +74,10 @@ paths:
       operationId: createChatCompletion
       tags: [Chat Completions]
       summary: Create chat completion
-      description: OpenAI-compatible chat completions endpoint for SandBase model APIs.
+      description: >-
+        OpenAI-compatible chat completions endpoint. SandBase uses model and stream for routing and preserves
+        additional provider-compatible fields when the selected route uses the same protocol. Support for
+        provider-specific fields can vary when SandBase translates between protocols.
       requestBody:
         required: true
         content:
@@ -91,7 +94,22 @@ paths:
             text/event-stream:
               schema:
                 type: string
-                description: SSE stream of chat completion chunks
+                description: "SSE stream of chat.completion.chunk events, followed by data: [DONE]."
+        '400': { description: "Invalid JSON, missing model, or an invalid provider request", content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402':
+          description: Organization spending limit reached
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ChatCompletionError'
+                  - $ref: '#/components/schemas/TaskCostError'
+        '404': { description: Model not found or unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
+        '429': { description: Rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '500': { description: Request persistence or organization lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
+        '502': { description: Invalid response from the selected provider, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
+        '503': { description: No provider route succeeded, content: { application/json: { schema: { $ref: '#/components/schemas/ChatCompletionError' } } } }
 
   /v1/responses:
     post:
@@ -2609,6 +2627,8 @@ components:
     ChatCompletionRequest:
       type: object
       required: [model, messages]
+      additionalProperties: true
+      description: OpenAI-compatible request. Additional provider-compatible fields are forwarded when supported by the selected route.
       properties:
         model:
           type: string
@@ -2618,17 +2638,20 @@ components:
           type: array
           items:
             type: object
-            required: [role, content]
+            required: [role]
+            additionalProperties: true
             properties:
               role:
                 type: string
-                enum: [system, user, assistant, tool]
+                description: Message role supported by the selected provider, such as system, developer, user, assistant, or tool.
               content:
                 oneOf:
                   - type: string
                   - type: array
                     items:
                       type: object
+                      additionalProperties: true
+                  - type: 'null'
               name:
                 type: string
               tool_calls:
@@ -2665,8 +2688,27 @@ components:
           oneOf:
             - type: string
             - type: object
+        parallel_tool_calls:
+          type: boolean
+        user:
+          type: string
         response_format:
           type: object
+        reasoning_effort:
+          type: string
+          description: Provider-compatible reasoning effort setting.
+        reasoning:
+          type: object
+          additionalProperties: true
+          description: Reasoning configuration; common fields include effort and max_tokens.
+        thinking:
+          type: object
+          additionalProperties: true
+          description: Thinking configuration; common fields include type and budget_tokens.
+        extra_body:
+          type: object
+          additionalProperties: true
+          description: Provider-specific parameters used when SandBase translates the request between protocols.
         n:
           type: integer
           default: 1
@@ -2682,6 +2724,8 @@ components:
 
     ChatCompletionResponse:
       type: object
+      required: [id, object, created, model, choices, usage]
+      additionalProperties: true
       properties:
         id:
           type: string
@@ -2696,23 +2740,33 @@ components:
           type: array
           items:
             type: object
+            required: [index, message, finish_reason, logprobs]
+            additionalProperties: true
             properties:
               index:
                 type: integer
               message:
                 type: object
+                required: [role, content]
+                additionalProperties: true
                 properties:
                   role:
                     type: string
                   content:
-                    type: string
+                    type: [string, 'null']
                   tool_calls:
                     type: array
+                  reasoning_content:
+                    type: [string, 'null']
               finish_reason:
-                type: string
-                enum: [stop, length, tool_calls, content_filter]
+                type: [string, 'null']
+                description: Provider finish reason. Values can vary by model and provider.
+              logprobs:
+                description: Token log probabilities when requested and supported; otherwise null.
         usage:
           type: object
+          required: [prompt_tokens, completion_tokens, total_tokens, prompt_tokens_details, completion_tokens_details]
+          additionalProperties: true
           properties:
             prompt_tokens:
               type: integer
@@ -2720,6 +2774,30 @@ components:
               type: integer
             total_tokens:
               type: integer
+            prompt_tokens_details:
+              type: object
+              required: [cached_tokens, cache_write_tokens]
+              properties:
+                cached_tokens: { type: integer }
+                cache_write_tokens: { type: integer }
+            completion_tokens_details:
+              type: object
+              required: [reasoning_tokens]
+              properties:
+                reasoning_tokens: { type: integer }
+
+    ChatCompletionError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [message, type, code, param]
+          properties:
+            message: { type: string }
+            type: { type: string }
+            code: { type: ['null', string] }
+            param: { type: ['null', string] }
 
     # --- Embeddings -----------------------------------------------
     EmbeddingRequest:

@@ -68,6 +68,21 @@ assert.doesNotMatch(openapi, /next_page:\s*(?:\{[^\n]*type:\s*\[string, 'null'\]
 const responsesPath = openapi.match(/^  \/v1\/responses:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(responsesPath, /additionalProperties: true/, 'Responses must preserve provider-compatible request fields')
 assert.match(responsesPath, /text\/event-stream:/, 'Responses must document streaming output')
+const chatPath = openapi.match(/^  \/v1\/chat\/completions:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(chatPath, /text\/event-stream:/, 'Chat Completions must document streaming output')
+for (const status of ['402', '500', '502', '503']) {
+  assert.match(chatPath, new RegExp(`'${status}':`), `Chat Completions must document ${status} responses`)
+}
+const chatRequestSchema = openapi.match(/^    ChatCompletionRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(chatRequestSchema, /additionalProperties: true/, 'Chat Completions must preserve provider-compatible request fields')
+for (const field of ['parallel_tool_calls', 'reasoning_effort', 'reasoning', 'thinking', 'extra_body']) {
+  assert.match(chatRequestSchema, new RegExp(`^        ${field}:`, 'm'), `Chat Completions must document ${field}`)
+}
+assert.doesNotMatch(chatRequestSchema, /enum: \[system, user, assistant, tool\]/, 'Chat message roles must not publish an unimplemented enum restriction')
+const chatResponseSchema = openapi.match(/^    ChatCompletionResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(chatResponseSchema, /required: \[id, object, created, model, choices, usage\]/, 'Chat Completions must require the emitted response envelope')
+assert.match(chatResponseSchema, /required: \[prompt_tokens, completion_tokens, total_tokens, prompt_tokens_details, completion_tokens_details\]/, 'Chat usage must require emitted token detail objects')
+assert.match(chatResponseSchema, /reasoning_content:/, 'Chat responses must document reasoning content')
 const messagesPath = openapi.match(/^  \/v1\/messages:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(messagesPath, /security:\n\s+- BearerAuth: \[\]\n\s+- AnthropicApiKey: \[\]/, 'Messages must support Bearer or x-api-key authentication')
 assert.equal((openapi.match(/AnthropicApiKey:/g) ?? []).length, 2, 'Anthropic x-api-key authentication must be scoped only to Messages')

@@ -1363,7 +1363,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Inference",
     "method": "POST",
     "path": "/v1/chat/completions",
-    "description": "Create an OpenAI-compatible chat completion with any supported SandBase chat model.",
+    "description": "Create an OpenAI-compatible chat completion with any supported SandBase chat model. Provider-compatible fields are preserved when supported by the selected route.",
     "signature": "client.chat.completions.create(params)",
     "groups": [
       {
@@ -1371,7 +1371,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
         "schema": "ChatCompletionCreateParams",
         "fields": [
           { "name": "model", "type": "string", "required": true, "description": "Model identifier from the Models API." },
-          { "name": "messages", "type": "object[]", "required": true, "description": "Conversation messages in system, user, assistant, or tool order." },
+          { "name": "messages", "type": "object[]", "required": true, "description": "Conversation messages using roles supported by the selected provider, commonly system, developer, user, assistant, or tool." },
           { "name": "temperature", "type": "number", "required": false, "default": "1", "description": "Sampling temperature from 0 to 2." },
           { "name": "top_p", "type": "number", "required": false, "default": "1", "description": "Nucleus sampling threshold." },
           { "name": "max_tokens", "type": "integer", "required": false, "description": "Maximum number of output tokens." },
@@ -1379,7 +1379,13 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
           { "name": "stop", "type": "string | string[]", "required": false, "description": "Sequence or sequences that stop generation." },
           { "name": "tools", "type": "object[]", "required": false, "description": "Function definitions available to the model." },
           { "name": "tool_choice", "type": "string | object", "required": false, "default": "auto", "description": "Controls whether and which tool is selected." },
+          { "name": "parallel_tool_calls", "type": "boolean", "required": false, "description": "Allow supported models to emit multiple tool calls in one turn." },
+          { "name": "user", "type": "string", "required": false, "description": "Provider-compatible end-user identifier." },
           { "name": "response_format", "type": "object", "required": false, "description": "JSON object or JSON Schema output configuration." },
+          { "name": "reasoning_effort", "type": "string", "required": false, "description": "Provider-compatible reasoning effort setting." },
+          { "name": "reasoning", "type": "object", "required": false, "description": "Reasoning configuration such as effort or max_tokens." },
+          { "name": "thinking", "type": "object", "required": false, "description": "Thinking configuration such as type or budget_tokens." },
+          { "name": "extra_body", "type": "object", "required": false, "description": "Provider-specific parameters for routes that require protocol translation." },
           { "name": "n", "type": "integer", "required": false, "default": "1", "description": "Number of completion choices to generate." },
           { "name": "presence_penalty", "type": "number", "required": false, "default": "0", "description": "Presence penalty from -2 to 2." },
           { "name": "frequency_penalty", "type": "number", "required": false, "default": "0", "description": "Frequency penalty from -2 to 2." },
@@ -1394,14 +1400,18 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": { "status": "200 OK", "code": "{\n  \"id\": \"chatcmpl_01...\",\n  \"object\": \"chat.completion\",\n  \"model\": \"deepseek/deepseek-v4-flash\",\n  \"choices\": [{\n    \"index\": 0,\n    \"message\": { \"role\": \"assistant\", \"content\": \"Hello! How can I help?\" },\n    \"finish_reason\": \"stop\"\n  }],\n  \"usage\": { \"prompt_tokens\": 8, \"completion_tokens\": 7, \"total_tokens\": 15 }\n}" },
     "notes": [
-      { "title": "Streaming and tools", "description": "Set stream to true for SSE. Tool calls and multimodal content follow the OpenAI-compatible schema; detailed workflows live in the Chat Completions guide." },
-      { "title": "Model support", "description": "Optional capabilities depend on the selected model. Inspect model metadata before using tools, vision, or strict structured output." }
+      { "title": "Streaming and tools", "description": "Set stream to true for SSE; the stream ends with data: [DONE]. Add stream_options.include_usage for the final usage chunk. Tool calls and multimodal content follow the OpenAI-compatible schema." },
+      { "title": "Provider compatibility", "description": "SandBase preserves additional compatible fields on same-protocol routes. Cross-protocol and provider-specific field support varies; use extra_body where applicable." }
     ],
     "errors": [
       { "status": "400", "description": "Invalid request body or unsupported parameter." },
       { "status": "401", "description": "Missing or invalid API key." },
+      { "status": "402", "description": "Organization spending limit reached." },
       { "status": "404", "description": "Model not found or unavailable." },
-      { "status": "429", "description": "Rate limit exceeded." }
+      { "status": "429", "description": "Rate limit exceeded." },
+      { "status": "500", "description": "Request persistence or organization lookup failed." },
+      { "status": "502", "description": "The selected provider returned an invalid response." },
+      { "status": "503", "description": "No provider route succeeded." }
     ]
   },
   "inference/anthropic-messages": {

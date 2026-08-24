@@ -18,7 +18,7 @@ client = OpenAI(
 
 ## Messages and multimodal content
 
-Send `system`, `user`, `assistant`, and `tool` messages in conversation order. Text may be a string. Models that support vision also accept content parts such as `text` and `image_url`.
+Send messages in conversation order using roles supported by the selected provider, commonly `system`, `developer`, `user`, `assistant`, and `tool`. Text may be a string. Models that support vision also accept content parts such as `text` and `image_url`.
 
 ## Streaming
 
@@ -32,6 +32,10 @@ Define callable functions in `tools`. When the assistant returns `tool_calls`, e
 
 Use `response_format` to request a JSON object or JSON Schema response. Support varies by model, so check the selected model’s capabilities before relying on strict schema enforcement.
 
+## Provider-specific parameters
+
+SandBase uses `model` and `stream` for routing. Additional OpenAI-compatible request fields are preserved when the selected provider uses the same protocol. When SandBase translates between protocols, use documented fields or `extra_body`; support varies by provider.
+
 ## Errors and retries
 
-Retry `429`, `500`, and `502` responses with exponential backoff and jitter. Do not automatically retry malformed requests or authentication failures. For the complete field and response schema, see [Create Chat Completion](/api-reference/llm-gateway).
+Retry `429`, `500`, `502`, and `503` responses with exponential backoff and jitter. Do not automatically retry malformed requests or authentication failures. For the complete field and response schema, see [Create Chat Completion](/api-reference/llm-gateway).
