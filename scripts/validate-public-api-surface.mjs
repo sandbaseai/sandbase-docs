@@ -538,33 +538,33 @@ assert.match(environmentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Envir
 assert.match(environmentSchema, /credential_bindings:\n\s+type: \[array, 'null'\]/, 'Environment credential bindings must allow the serializer\'s null output')
 const environmentsPath = openapi.match(/^  \/v1\/environments:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 const createEnvironment = environmentsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '422', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '422', '500']) {
   assert.match(createEnvironment, new RegExp(`'${status}':`), `Environment creation must document ${status} responses`)
 }
 const listEnvironments = environmentsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
 assert.match(listEnvironments, /name: include_archived/, 'Environment lists must document the implemented archive filter')
 assert.match(listEnvironments, /required: \[data\]/, 'Environment lists must require data')
-for (const status of ['200', '400', '401', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '500']) {
   assert.match(listEnvironments, new RegExp(`'${status}':`), `Environment lists must document ${status} responses`)
 }
 const environmentPath = openapi.match(/^  \/v1\/environments\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '404', '500']) {
+for (const status of ['200', '401', '402', '403', '404', '500']) {
   assert.match(environmentPath.match(/^    get:\n[\s\S]*?(?=^    patch:)/m)?.[0] ?? '', new RegExp(`'${status}':`), `Environment reads must document ${status} responses`)
 }
 for (const method of ['patch', 'post']) {
   const terminator = method === 'patch' ? 'post' : 'delete'
   const operation = environmentPath.match(new RegExp(`^    ${method}:\\n[\\s\\S]*?(?=^    ${terminator}:)`, 'm'))?.[0] ?? ''
   assert.match(operation, /UpdateEnvironmentRequest/, `${method.toUpperCase()} Environment updates must use the partial update schema`)
-  for (const status of ['200', '400', '401', '403', '404', '409', '422', '500']) {
+  for (const status of ['200', '400', '401', '402', '403', '404', '409', '422', '500']) {
     assert.match(operation, new RegExp(`'${status}':`), `${method.toUpperCase()} Environment updates must document ${status} responses`)
   }
 }
 const deleteEnvironment = environmentPath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '401', '404', '409', '500']) {
+for (const status of ['200', '401', '402', '403', '404', '409', '500']) {
   assert.match(deleteEnvironment, new RegExp(`'${status}':`), `Environment deletion must document ${status} responses`)
 }
 const archiveEnvironment = openapi.match(/^  \/v1\/environments\/\{id\}\/archive:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '404', '409', '500']) {
+for (const status of ['200', '401', '402', '403', '404', '409', '500']) {
   assert.match(archiveEnvironment, new RegExp(`'${status}':`), `Environment archival must document ${status} responses`)
 }
 const createEnvironmentSchema = openapi.match(/^    CreateEnvironmentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''

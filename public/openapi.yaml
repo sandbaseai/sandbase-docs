@@ -1856,6 +1856,8 @@ paths:
                 $ref: '#/components/schemas/Environment'
         '400': { description: 'Name or config is missing, or the JSON body is invalid' }
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '422': { description: 'Credential bindings are invalid, duplicated, reserved, missing, or inaccessible' }
         '500': { description: Environment could not be created }
     get:
@@ -1882,6 +1884,8 @@ paths:
                   next_page: { type: string, description: Opaque cursor included only when another page is available. }
         '400': { description: Invalid page cursor }
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Environment list could not be loaded }
 
   /v1/environments/{id}:
@@ -1899,6 +1903,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Environment'
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Environment not found }
         '500': { description: Environment could not be loaded }
     patch:
@@ -1922,7 +1928,15 @@ paths:
                 $ref: '#/components/schemas/Environment'
         '400': { description: Invalid JSON request body }
         '401': { description: Missing or invalid API key }
-        '403': { description: Archived Environment cannot be modified }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403':
+          description: Archived Environment cannot be modified, or the API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/APIError'
+                  - $ref: '#/components/schemas/APIKeyScopeError'
         '404': { description: Environment not found }
         '409': { description: 'Managed Environment cannot be modified, or an Agent-owned Environment runtime would change' }
         '422': { description: 'Credential bindings are invalid, duplicated, reserved, missing, or inaccessible' }
@@ -1946,7 +1960,15 @@ paths:
               schema: { $ref: '#/components/schemas/Environment' }
         '400': { description: Invalid JSON request body }
         '401': { description: Missing or invalid API key }
-        '403': { description: Archived Environment cannot be modified }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403':
+          description: Archived Environment cannot be modified, or the API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/APIError'
+                  - $ref: '#/components/schemas/APIKeyScopeError'
         '404': { description: Environment not found }
         '409': { description: 'Managed Environment cannot be modified, or an Agent-owned Environment runtime would change' }
         '422': { description: 'Credential bindings are invalid, duplicated, reserved, missing, or inaccessible' }
@@ -1971,6 +1993,8 @@ paths:
         '404': { description: Environment not found }
         '409': { description: Managed Environment or Environment referenced by active Sessions cannot be deleted }
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Environment could not be deleted }
 
   /v1/environments/{id}/archive:
@@ -1988,6 +2012,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Environment'
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: 'Environment not found, already archived, or belongs to another organization' }
         '409': { description: Managed Environment cannot be archived }
         '500': { description: Environment could not be archived }
