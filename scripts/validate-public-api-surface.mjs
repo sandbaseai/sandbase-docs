@@ -169,6 +169,27 @@ const deploymentRunsPath = openapi.match(/^  \/v1\/deployment_runs:\n[\s\S]*?(?=
 for (const field of ['trigger_type', 'status']) {
   assert.match(deploymentRunsPath, new RegExp(`name: ${field}\\n\\s+in: query[\\s\\S]*?type: array`), `DeploymentRun ${field} filters must be repeatable`)
 }
+const deploymentsPathForCreate = openapi.match(/^  \/v1\/deployments:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+const createDeploymentOperation = deploymentsPathForCreate.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
+for (const mediaType of ['application/json', 'application/yaml', 'application/x-yaml']) {
+  assert.match(createDeploymentOperation, new RegExp(mediaType.replace('/', '\\/') + ':'), `Deployment creation must document ${mediaType}`)
+}
+for (const status of ['200', '400', '401', '404', '415', '422', '500']) {
+  assert.match(createDeploymentOperation, new RegExp(`'${status}':`), `Deployment creation must document ${status} responses`)
+}
+assert.match(createDeploymentOperation, /CreateDeclarativeDeploymentRequest/, 'Deployment creation must document declarative runtime definitions')
+const declarativeDeploymentRequest = openapi.match(/^    CreateDeclarativeDeploymentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(declarativeDeploymentRequest, /required: \[name, runtime, initial_events\]/, 'Declarative Deployments must require runtime and initial events')
+assert.doesNotMatch(declarativeDeploymentRequest, /mcp_servers:|protocols:/, 'Declarative Deployment creation must not expose hidden transports')
+assert.doesNotMatch(declarativeDeploymentRequest, /metadata:/, 'Declarative Deployment creation must not document ignored metadata')
+const advancedDeploymentRequest = openapi.match(/^    CreateDeploymentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(advancedDeploymentRequest, /anyOf:[\s\S]*?- required: \[agent_id\][\s\S]*?- required: \[agent\]/, 'Advanced Deployment creation must allow the implemented Agent compatibility alias')
+for (const field of ['agent_version', 'timeout_policy']) {
+  assert.match(advancedDeploymentRequest, new RegExp(`^        ${field}:`, 'm'), `Advanced Deployment creation must document ${field}`)
+}
+for (const field of ['resources', 'vault_ids']) {
+  assert.match(advancedDeploymentRequest, new RegExp(`${field}: \\{ type: array, maxItems: 0`), `Advanced Deployment creation must reject non-empty ${field}`)
+}
 const feishuTestPath = openapi.match(/^  \/v1\/deployments\/\{id\}\/notifications\/feishu\/test:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(feishuTestPath, /maxProperties: 0/, 'Feishu notification tests must reject custom request fields')
 assert.match(feishuTestPath, /This endpoint never accepts a webhook URL or custom message/, 'Feishu notification tests must document the saved-target-only boundary')

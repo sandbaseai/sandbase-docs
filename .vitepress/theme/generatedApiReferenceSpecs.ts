@@ -134,10 +134,10 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Deployments",
     "method": "POST",
     "path": "/v1/deployments",
-    "description": "Create a manually triggered or scheduled Agent Deployment.",
+    "description": "Create a manually triggered or scheduled Deployment from an existing Agent or a declarative runtime definition. JSON and YAML are supported.",
     "groups": [
       {
-        "title": "Request body",
+        "title": "Advanced request body",
         "fields": [
           {
             "name": "name",
@@ -164,6 +164,19 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "description": "At least one valid user.message event."
           }
         ]
+      },
+      {
+        "title": "Declarative request body",
+        "fields": [
+          { "name": "name", "type": "string", "required": true, "description": "Display name for the Deployment." },
+          { "name": "runtime", "type": "string", "required": true, "description": "Enabled declarative runtime. This release supports hermes." },
+          { "name": "initial_events", "type": "array", "required": true, "description": "At least one valid user.message event." },
+          { "name": "model", "type": "string | object", "required": false, "description": "Optional model override for the generated Agent." },
+          { "name": "system", "type": "string", "required": false, "description": "Optional system instructions for the generated Agent." },
+          { "name": "skills", "type": "array<string> | null", "required": false, "description": "Up to 20 vendor/plugin references." },
+          { "name": "schedule", "type": "object | null", "required": false, "description": "Optional cron schedule." },
+          { "name": "timeout_policy", "type": "object", "required": false, "description": "Optional hard and inactivity timeout settings." }
+        ]
       }
     ],
     "examples": [
@@ -171,6 +184,11 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
         "label": "cURL",
         "language": "bash",
         "code": "curl -X POST https://api.sandbase.ai/v1/deployments \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"Daily customer brief\",\n    \"agent_id\": \"agent_01...\",\n    \"environment_id\": \"env_01...\",\n    \"initial_events\": [{\n      \"type\": \"user.message\",\n      \"content\": [{\"type\":\"text\",\"text\":\"Prepare today’s brief.\"}]\n    }],\n    \"schedule\": {\n      \"type\": \"cron\",\n      \"expression\": \"0 9 * * *\",\n      \"timezone\": \"Asia/Shanghai\"\n    }\n  }'"
+      },
+      {
+        "label": "Declarative YAML",
+        "language": "bash",
+        "code": "curl -X POST https://api.sandbase.ai/v1/deployments -H \"Authorization: Bearer $SANDBASE_API_KEY\" -H \"Content-Type: application/yaml\" --data-binary $'name: Daily customer brief\\nruntime: hermes\\ninitial_events:\\n  - type: user.message\\n    content:\\n      - type: text\\n        text: Prepare today’s brief.'"
       }
     ]
   },

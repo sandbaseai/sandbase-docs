@@ -59,6 +59,8 @@ curl -X POST https://api.sandbase.ai/v1/deployments \
 
 The schedule object requires `type: "cron"`, a valid cron `expression`, and an IANA `timezone`. Omit `schedule` only when the Deployment will be triggered manually.
 
+Alternatively, create a declarative Deployment with `name`, `runtime`, and `initial_events` in JSON or YAML. Declarative Deployments generate their Agent and Environment from the runtime definition and use the public REST invocation transport. This release supports the `hermes` runtime. Do not combine `runtime` with `agent_id` or `environment_id`.
+
 ## DeploymentRun records
 
 Use `POST /v1/deployments/{deployment_id}/runs` to trigger manually. The request body must be empty or `{}`; input overrides are rejected. The response is a DeploymentRun object with `id`, `type`, `deployment_id`, `agent`, `trigger_context`, nullable `session_id`, nullable `error`, and `created_at`.

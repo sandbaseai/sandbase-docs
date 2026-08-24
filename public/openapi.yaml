@@ -1846,12 +1846,25 @@ paths:
       operationId: createDeployment
       tags: [Deployments]
       summary: Create deployment
+      description: Create either a declarative REST Deployment from a runtime definition or an advanced Deployment bound to an existing Agent.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateDeploymentRequest'
+              oneOf:
+                - $ref: '#/components/schemas/CreateDeclarativeDeploymentRequest'
+                - $ref: '#/components/schemas/CreateDeploymentRequest'
+          application/yaml:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/CreateDeclarativeDeploymentRequest'
+                - $ref: '#/components/schemas/CreateDeploymentRequest'
+          application/x-yaml:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/CreateDeclarativeDeploymentRequest'
+                - $ref: '#/components/schemas/CreateDeploymentRequest'
       responses:
         '200':
           description: Deployment created
@@ -1859,6 +1872,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Deployment'
+        '400':
+          description: Invalid definition, creation mode, initial events, schedule, timeout policy, Agent, or reserved fields
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '404':
+          description: Referenced Skill or Environment not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '415':
+          description: Content-Type is not application/json, application/yaml, or application/x-yaml
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '422':
+          description: Runtime or Skill is incompatible
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '500':
+          description: Deployment creation or declarative compilation failed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
     get:
       operationId: listDeployments
       tags: [Deployments]
@@ -4644,9 +4687,58 @@ components:
           items: { $ref: '#/components/schemas/Credential' }
         message: { type: string, const: ok }
 
+    CreateDeclarativeDeploymentRequest:
+      type: object
+      additionalProperties: false
+      required: [name, runtime, initial_events]
+      properties:
+        name: { type: string, minLength: 1 }
+        runtime:
+          type: string
+          description: Enabled declarative runtime. This release supports hermes.
+          example: hermes
+        description: { type: string }
+        model:
+          oneOf:
+            - type: string
+            - type: object
+              additionalProperties: true
+        system: { type: string }
+        skills:
+          type: [array, 'null']
+          maxItems: 20
+          items:
+            type: string
+            pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*$'
+        tools:
+          type: [array, 'null']
+          maxItems: 1
+          items: { $ref: '#/components/schemas/EndpointToolset' }
+        initial_events:
+          type: array
+          minItems: 1
+          description: Must contain at least one user.message event.
+          items: { $ref: '#/components/schemas/SessionEventInput' }
+        schedule: { type: [object, 'null'] }
+        timeout_policy:
+          type: object
+          additionalProperties: false
+          properties:
+            hard_timeout_sec: { type: [integer, 'null'], minimum: 60, maximum: 604800 }
+            inactivity_timeout_sec: { type: integer, minimum: 180, maximum: 3600 }
+        resources: { type: array, maxItems: 0, description: Reserved; only an empty array is accepted. }
+        vault_ids: { type: array, maxItems: 0, description: Reserved; only an empty array is accepted. }
+
     CreateDeploymentRequest:
       type: object
-      required: [name, agent_id, initial_events]
+      required: [name, initial_events]
+      anyOf:
+        - required: [agent_id]
+          properties:
+            agent_id: {}
+        - required: [agent]
+          properties:
+            agent: {}
       properties:
         name: { type: string }
         description: { type: string }
@@ -4659,15 +4751,24 @@ components:
           oneOf:
             - type: string
             - $ref: '#/components/schemas/AgentReference'
+        agent_version: { type: integer, minimum: 1 }
         environment_id:
           type: string
         initial_events:
           type: array
+          minItems: 1
+          description: Must contain at least one user.message event.
           items: { $ref: '#/components/schemas/SessionEventInput' }
         schedule: { type: [object, 'null'] }
-        resources: { type: array, items: { type: object, additionalProperties: true } }
-        vault_ids: { type: array, items: { type: string, pattern: '^vlt_' } }
-        metadata: { type: object, additionalProperties: { type: string } }
+        timeout_policy:
+          type: object
+          additionalProperties: false
+          properties:
+            hard_timeout_sec: { type: [integer, 'null'], minimum: 60, maximum: 604800 }
+            inactivity_timeout_sec: { type: integer, minimum: 180, maximum: 3600 }
+        resources: { type: array, maxItems: 0, description: Reserved; only an empty array is accepted. }
+        vault_ids: { type: array, maxItems: 0, description: Reserved; only an empty array is accepted. }
+        metadata: { type: object, additionalProperties: true }
         config: { type: object }
 
     UpdateDeploymentRequest:
