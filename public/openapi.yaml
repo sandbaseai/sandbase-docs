@@ -1982,12 +1982,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Environment'
-        '400': { description: 'Name or config is missing, or the JSON body is invalid' }
+        '400': { description: 'Name or config is missing, or the JSON body is invalid', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '422': { description: 'Credential bindings are invalid, duplicated, reserved, missing, or inaccessible' }
-        '500': { description: Environment could not be created }
+        '422': { description: 'Credential bindings are invalid, duplicated, reserved, missing, or inaccessible', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Environment could not be created, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     get:
       operationId: listEnvironments
       tags: [Environments]
@@ -2010,11 +2010,11 @@ paths:
                     items:
                       $ref: '#/components/schemas/Environment'
                   next_page: { type: string, description: Opaque cursor included only when another page is available. }
-        '400': { description: Invalid page cursor }
+        '400': { description: Invalid page cursor, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Environment list could not be loaded }
+        '500': { description: Environment list could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/environments/{id}:
     get:
@@ -2033,8 +2033,8 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: Environment not found }
-        '500': { description: Environment could not be loaded }
+        '404': { description: Environment not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Environment could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     patch:
       operationId: updateEnvironment
       tags: [Environments]
@@ -2054,7 +2054,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Environment'
-        '400': { description: Invalid JSON request body }
+        '400': { description: Invalid JSON request body, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403':
@@ -2065,10 +2065,10 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/APIError'
                   - $ref: '#/components/schemas/APIKeyScopeError'
-        '404': { description: Environment not found }
-        '409': { description: 'Managed Environment cannot be modified, or an Agent-owned Environment runtime would change' }
-        '422': { description: 'Credential bindings are invalid, duplicated, reserved, missing, or inaccessible' }
-        '500': { description: Environment could not be updated }
+        '404': { description: Environment not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: 'Managed Environment cannot be modified, or an Agent-owned Environment runtime would change', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '422': { description: 'Credential bindings are invalid, duplicated, reserved, missing, or inaccessible', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Environment could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     post:
       operationId: updateEnvironmentClaude
       tags: [Environments]
@@ -2086,7 +2086,7 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Environment' }
-        '400': { description: Invalid JSON request body }
+        '400': { description: Invalid JSON request body, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403':
@@ -2097,10 +2097,10 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/APIError'
                   - $ref: '#/components/schemas/APIKeyScopeError'
-        '404': { description: Environment not found }
-        '409': { description: 'Managed Environment cannot be modified, or an Agent-owned Environment runtime would change' }
-        '422': { description: 'Credential bindings are invalid, duplicated, reserved, missing, or inaccessible' }
-        '500': { description: Environment could not be updated }
+        '404': { description: Environment not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: 'Managed Environment cannot be modified, or an Agent-owned Environment runtime would change', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '422': { description: 'Credential bindings are invalid, duplicated, reserved, missing, or inaccessible', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Environment could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     delete:
       operationId: deleteEnvironment
       tags: [Environments]
@@ -2118,12 +2118,12 @@ paths:
                 properties:
                   id: { type: string, pattern: '^env_' }
                   type: { type: string, const: environment_deleted }
-        '404': { description: Environment not found }
-        '409': { description: Managed Environment or Environment referenced by active Sessions cannot be deleted }
+        '404': { description: Environment not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: Managed Environment or Environment referenced by active Sessions cannot be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Environment could not be deleted }
+        '500': { description: Environment could not be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/environments/{id}/archive:
     post:
@@ -2142,9 +2142,9 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: 'Environment not found, already archived, or belongs to another organization' }
-        '409': { description: Managed Environment cannot be archived }
-        '500': { description: Environment could not be archived }
+        '404': { description: 'Environment not found, already archived, or belongs to another organization', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: Managed Environment cannot be archived, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Environment could not be archived, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   # --- Models -----------------------------------------------------
   /v1/models:
@@ -2846,11 +2846,11 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/SkillCreated' }
-        '400': { description: Invalid Skill source or metadata, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
-        '401': { description: Missing API identity or organization context, content: { application/json: { schema: { oneOf: [{ $ref: '#/components/schemas/TaskCostError' }, { $ref: '#/components/schemas/BetaResourceError' }] } } } }
+        '400': { description: Invalid Skill source or metadata, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '401': { description: Missing API identity or organization context, content: { application/json: { schema: { oneOf: [{ $ref: '#/components/schemas/TaskCostError' }, { $ref: '#/components/schemas/APIError' }] } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Skill could not be created, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
+        '500': { description: Skill could not be created, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     get:
       operationId: listSkills
       tags: [Skills]
@@ -2874,7 +2874,7 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Skill list could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
+        '500': { description: Skill list could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/skills/{id}:
     get:
@@ -2889,11 +2889,11 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Skill' }
-        '404': { description: Skill not found, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
+        '404': { description: Skill not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Skill could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
+        '500': { description: Skill could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     put:
       operationId: updateSkill
       tags: [Skills]
@@ -2912,12 +2912,12 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Skill' }
-        '404': { description: Skill not found, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
-        '400': { description: 'Invalid JSON body, field length, or unified schema', content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
+        '404': { description: Skill not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '400': { description: 'Invalid JSON body, field length, or unified schema', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Skill could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
+        '500': { description: Skill could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     delete:
       operationId: deleteSkill
       tags: [Skills]
@@ -2935,11 +2935,11 @@ paths:
                 properties:
                   id: { type: string, format: uuid }
                   deleted: { type: boolean, const: true }
-        '404': { description: Skill not found, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
+        '404': { description: Skill not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Skill could not be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
+        '500': { description: Skill could not be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   # --- Credentials -----------------------------------------------
   /v1/credentials:
@@ -4372,17 +4372,6 @@ components:
             code: { type: string, const: insufficient_scope }
             message: { type: string }
             request_id: { type: string }
-
-    BetaResourceError:
-      type: object
-      required: [error]
-      properties:
-        error:
-          type: object
-          required: [type, message]
-          properties:
-            type: { type: string }
-            message: { type: string }
 
     LegacyResourceError:
       type: object

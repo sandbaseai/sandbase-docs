@@ -99,14 +99,14 @@ for (const [method, publicPath, statuses] of [
   for (const status of statuses) {
     assert.equal(
       jsonErrorSchema(method, publicPath, status)?.$ref,
-      '#/components/schemas/BetaResourceError',
+      '#/components/schemas/APIError',
       `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
     )
   }
 }
 assert.deepEqual(
   jsonErrorSchema('post', '/v1/skills', '401')?.oneOf?.map((schema) => schema.$ref),
-  ['#/components/schemas/TaskCostError', '#/components/schemas/BetaResourceError'],
+  ['#/components/schemas/TaskCostError', '#/components/schemas/APIError'],
   'Skill creation must document both middleware and creator-context authentication envelopes',
 )
 for (const [method, publicPath, statuses] of [
@@ -123,6 +123,30 @@ for (const [method, publicPath, statuses] of [
       `${method.toUpperCase()} ${publicPath} ${status} must document its implemented legacy error envelope`,
     )
   }
+}
+for (const [method, publicPath, statuses] of [
+  ['post', '/v1/environments', ['400', '422', '500']],
+  ['get', '/v1/environments', ['400', '500']],
+  ['get', '/v1/environments/{id}', ['404', '500']],
+  ['patch', '/v1/environments/{id}', ['400', '404', '409', '422', '500']],
+  ['post', '/v1/environments/{id}', ['400', '404', '409', '422', '500']],
+  ['delete', '/v1/environments/{id}', ['404', '409', '500']],
+  ['post', '/v1/environments/{id}/archive', ['404', '409', '500']],
+]) {
+  for (const status of statuses) {
+    assert.equal(
+      jsonErrorSchema(method, publicPath, status)?.$ref,
+      '#/components/schemas/APIError',
+      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
+    )
+  }
+}
+for (const method of ['patch', 'post']) {
+  assert.deepEqual(
+    jsonErrorSchema(method, '/v1/environments/{id}', '403')?.oneOf?.map((schema) => schema.$ref),
+    ['#/components/schemas/APIError', '#/components/schemas/APIKeyScopeError'],
+    `${method.toUpperCase()} Environment update must document both archived-resource and scoped-key rejections`,
+  )
 }
 
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
