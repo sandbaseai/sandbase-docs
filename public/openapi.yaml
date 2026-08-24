@@ -630,17 +630,69 @@ paths:
               $ref: '#/components/schemas/RunRequest'
       responses:
         '200':
-          description: Capability completed synchronously
+          description: Capability completed synchronously, or a streaming response started
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RunResponse'
+            text/event-stream:
+              schema:
+                type: string
+                description: Server-Sent Events when stream is true or mode is stream and the selected model supports streaming.
         '202':
           description: Capability accepted for asynchronous execution
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RunResponse'
+        '400':
+          description: Invalid JSON, unsupported execution mode, invalid capability input, or invalid webhook URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
+        '402':
+          description: Insufficient balance or spending limit reached
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
+        '403':
+          description: The current API key cannot use the selected capability
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
+        '404':
+          description: Model or capability not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
+        '500':
+          description: Internal execution error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
+        '502':
+          description: Upstream provider returned an invalid response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
+        '503':
+          description: No provider is currently available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
 
   /v1/run/{id}:
     get:
@@ -662,6 +714,16 @@ paths:
                 $ref: '#/components/schemas/RunResponse'
         '404':
           description: Run not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCostError'
 
   # --- Assets -----------------------------------------------------
   /v1/assets:
@@ -2451,17 +2513,22 @@ components:
           description: Current model or API capability identifier from the SandBase catalog.
         mode:
           type: string
-          enum: [sync, async]
-          description: Optional execution mode when supported by the selected capability.
+          enum: [auto, sync, async, stream]
+          default: auto
+          description: Execution mode when supported by the selected capability. Auto uses the capability's configured default.
+        stream:
+          type: boolean
+          default: false
+          description: Requests streaming output. Equivalent to mode stream and valid only for a capability that supports streaming.
         webhook_url:
           type: string
           format: uri
-          description: Optional public HTTPS callback URL for supported asynchronous media tasks.
+          description: Optional public HTTPS callback URL for asynchronous image, video, audio, or API tasks. It is validated only for those tasks and ignored for other execution types.
       additionalProperties: true
 
     RunResponse:
       type: object
-      required: [id, status]
+      required: [id, status, model]
       properties:
         id:
           type: string
@@ -2489,7 +2556,7 @@ components:
         usage:
           type: object
           additionalProperties: true
-          description: Usage details when available.
+          description: Model-specific public usage details when available; omitted for models that do not report them.
 
     CreateAssetRequest:
       type: object
