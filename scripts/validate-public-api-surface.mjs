@@ -27,6 +27,8 @@ for (const [pattern, label] of forbiddenOpenApiPatterns) {
 const requiredPublicPaths = [
   '/v1/run:',
   '/v1/run/{id}:',
+  '/v1/account/balance:',
+  '/v1/account/history:',
   '/v1/responses:',
   '/v1/assets:',
   '/v1/assets/{id}:',
@@ -57,6 +59,8 @@ assert.doesNotMatch(openapi, /^\s+mcp_url:$/m, 'Endpoint MCP transport URL must 
 assert.doesNotMatch(openapi, /^  \/v1\/generations(?:\/\{[^}]+\})?:$/m, 'Withdrawn generation paths must not be public')
 assert.doesNotMatch(openapi, /^  \/events\/webhooks(?:\/\{[^}]+\})?:$/m, 'Sandbox event webhook paths must not be public')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
+const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.doesNotMatch(getRunPath, /pattern:/, 'Run result lookup IDs must not inherit another resource prefix')
 assert.doesNotMatch(openapi, /next_page:\s*(?:\{[^\n]*type:\s*\[string, 'null'\]|\n\s+type:\s*\[string, 'null'\])/, 'List cursors must be omitted rather than returned as null')
 const responsesPath = openapi.match(/^  \/v1\/responses:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(responsesPath, /additionalProperties: true/, 'Responses must preserve provider-compatible request fields')
@@ -135,6 +139,13 @@ assert.match(modelCardSchema, /required: \[[^\]]*cache_write_1h_multiplier[^\]]*
 const modelGetReference = generatedReferenceSpecs.match(/"models\/get": \{[\s\S]*?(?=\n  "models\/image")/)?.[0] ?? ''
 assert.match(modelGetReference, /"required": true/, 'Get Model must require its path parameter')
 assert.doesNotMatch(modelGetReference, /model_01/, 'Get Model examples must not invent a model_ ID prefix')
+const accountBalanceSchema = openapi.match(/^    AccountBalance:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(accountBalanceSchema, /required: \[org_id, balance, credit_limit, alert_threshold\]/, 'Account balance must require every emitted field')
+assert.match(accountBalanceSchema, /credit_limit:\n\s+oneOf:[\s\S]*?- type: 'null'/, 'Account credit limit must allow null')
+const accountHistorySchema = openapi.match(/^    AccountHistoryItem:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+for (const field of ['latency_ms', 'user_cost', 'cache_creation_tokens', 'api_key_prefix']) {
+  assert.match(accountHistorySchema, new RegExp(`required: \\[[^\\]]*${field}`), `Account history must require emitted ${field}`)
+}
 const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(environmentSchema, /config:\n[\s\S]*?- type: 'null'/, 'Environment config must allow the serializer\'s null output')
 assert.match(environmentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Environment metadata must allow the serializer\'s null output')

@@ -137,6 +137,15 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
+    text: 'Account',
+    collapsed: false,
+    items: [
+      { text: 'Overview', link: '/api-reference/account/' },
+      { text: 'Get Balance', link: '/api-reference/account/balance' },
+      { text: 'List History', link: '/api-reference/account/history' },
+    ],
+  },
+  {
     text: 'Agent APIs',
     collapsed: false,
     items: [

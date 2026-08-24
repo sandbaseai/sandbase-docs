@@ -1,5 +1,63 @@
 // Structured endpoint data shared by the API Reference pages.
 export const generatedApiReferenceSpecs: Record<string, any> = {
+  "account/balance": {
+    "title": "Get Account Balance",
+    "operation": "Account",
+    "method": "GET",
+    "path": "/v1/account/balance",
+    "description": "Return the current USD balance and optional credit settings for the organization resolved from the API key.",
+    "examples": [
+      {
+        "label": "cURL",
+        "language": "bash",
+        "code": "curl https://api.sandbase.ai/v1/account/balance \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+      }
+    ],
+    "response": {
+      "status": "200 OK",
+      "code": "{\n  \"org_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"balance\": \"42.125000\",\n  \"credit_limit\": \"10.000000\",\n  \"alert_threshold\": \"5.000000\"\n}"
+    }
+  },
+  "account/history": {
+    "title": "List Account History",
+    "operation": "Account",
+    "method": "GET",
+    "path": "/v1/account/history",
+    "description": "List recent organization-scoped execution records, newest first. Error messages are sanitized and stored JSON snapshots are omitted when they cannot be decoded.",
+    "groups": [
+      {
+        "title": "Query parameters",
+        "fields": [
+          { "name": "model", "type": "string", "required": false, "description": "Exact logical model name." },
+          { "name": "api_key_id", "type": "string", "required": false, "description": "Exact API Key resource ID." },
+          { "name": "type", "type": "multimodal | llm | api", "required": false, "description": "Execution category; multimodal includes image, video, and audio." },
+          { "name": "status", "type": "completed | failure | in_progress", "required": false, "description": "Grouped execution status." },
+          { "name": "error_type", "type": "string", "required": false, "description": "Exact error type, or unknown for records without one." },
+          { "name": "range", "type": "1h | 24h | 7d | 30d", "required": false, "description": "Rolling created-at range; defaults to 7d." },
+          { "name": "page", "type": "integer", "required": false, "description": "Page number, starting at 1." },
+          { "name": "page_size", "type": "integer", "required": false, "description": "Items per page from 1 to 100; defaults to 20." },
+          { "name": "request_id", "type": "string", "required": false, "description": "Exact organization-scoped execution ID. When set, other filters are ignored and one result is requested." },
+          { "name": "time_basis", "type": "created_at | settled_at", "required": false, "description": "Timestamp basis for an explicit window." },
+          { "name": "billing_scope", "type": "any | positive | token", "required": false, "description": "Settlement filter; positive and token require time_basis=settled_at." },
+          { "name": "start_at", "type": "RFC 3339 timestamp", "required": false, "description": "Inclusive window start, paired with end_at." },
+          { "name": "end_at", "type": "RFC 3339 timestamp", "required": false, "description": "Exclusive window end; the window cannot exceed 32 days." },
+          { "name": "latency_sample", "type": "positive | terminal_positive", "required": false, "description": "Restrict latency samples to positive values." },
+          { "name": "min_latency_ms", "type": "integer", "required": false, "description": "Minimum latency in milliseconds." }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "label": "cURL",
+        "language": "bash",
+        "code": "curl \"https://api.sandbase.ai/v1/account/history?range=24h&page_size=20\" \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+      }
+    ],
+    "response": {
+      "status": "200 OK",
+      "code": "{\n  \"items\": [\n    {\n      \"id\": \"opaque-task-id\",\n      \"model\": \"openai/gpt-4o\",\n      \"type\": \"llm\",\n      \"execution_mode\": \"sync\",\n      \"status\": \"completed\",\n      \"latency_ms\": 842,\n      \"user_cost\": \"0.001250\",\n      \"prompt_tokens\": 120,\n      \"completion_tokens\": 48,\n      \"total_tokens\": 168,\n      \"cached_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"created_at\": \"2026-08-24T00:00:00Z\",\n      \"completed_at\": \"2026-08-24T00:00:01Z\",\n      \"api_key_prefix\": \"sk-1234567\"\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"page_size\": 20\n}"
+    }
+  },
   "deployments/archive": {
     "title": "Archive Deployment",
     "operation": "Deployments",

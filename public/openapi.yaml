@@ -58,6 +58,8 @@ tags:
     description: Model catalog
   - name: Tasks
     description: Asynchronous model task status, settlement, and usage
+  - name: Account
+    description: Organization balance and API execution history
   - name: Skills
     description: Reusable Agent instruction and resource bundles
   - name: Credentials
@@ -245,6 +247,81 @@ paths:
         '200':
           description: Message response
 
+  # --- Account ----------------------------------------------------
+  /v1/account/balance:
+    get:
+      operationId: getAccountBalance
+      tags: [Account]
+      summary: Get account balance
+      description: Returns the balance and optional credit settings for the organization that owns the API key.
+      responses:
+        '200':
+          description: Organization balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalance'
+        '401':
+          description: The API key did not resolve an organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+        '404':
+          description: Organization not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+
+  /v1/account/history:
+    get:
+      operationId: listAccountHistory
+      tags: [Account]
+      summary: List execution history
+      description: Lists recent execution records for the API key's organization, newest first. Input and output snapshots are included only when stored JSON can be decoded. Error messages are sanitized before they are returned.
+      parameters:
+        - { name: model, in: query, schema: { type: string }, description: Exact logical model name. }
+        - { name: api_key_id, in: query, schema: { type: string }, description: Exact API Key resource ID within the organization. }
+        - { name: type, in: query, schema: { type: string, enum: [multimodal, llm, api] }, description: "Execution category. multimodal includes image, video, and audio." }
+        - { name: status, in: query, schema: { type: string, enum: [completed, failure, in_progress] }, description: Status group. failure includes failed and timeout; in_progress includes pending and running. }
+        - { name: error_type, in: query, schema: { type: string, maxLength: 50 }, description: Exact error type. Use unknown for records without an error type. }
+        - { name: range, in: query, schema: { type: string, enum: [1h, 24h, 7d, 30d], default: 7d }, description: Rolling created-at range when an explicit analytics window is not used. Unsupported values fall back to 7d. }
+        - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+        - { name: page_size, in: query, schema: { type: integer, minimum: 1, maximum: 100, default: 20 } }
+        - { name: request_id, in: query, schema: { type: string, maxLength: 64 }, description: "Exact organization-scoped execution ID lookup. When set, other filters are ignored and the response is forced to page 1 with page_size 1." }
+        - { name: time_basis, in: query, schema: { type: string, enum: [created_at, settled_at], default: created_at }, description: Timestamp basis for an explicit start_at/end_at window. }
+        - { name: billing_scope, in: query, schema: { type: string, enum: [any, positive, token], default: any }, description: Settlement filter. positive and token are valid only with time_basis=settled_at. }
+        - { name: start_at, in: query, schema: { type: string, format: date-time }, description: Inclusive RFC 3339 window start. Must be paired with end_at; the window cannot exceed 32 days. }
+        - { name: end_at, in: query, schema: { type: string, format: date-time }, description: Exclusive RFC 3339 window end. Must be paired with start_at. }
+        - { name: latency_sample, in: query, schema: { type: string, enum: [positive, terminal_positive] }, description: "Restrict latency samples to positive values, optionally only for terminal executions." }
+        - { name: min_latency_ms, in: query, schema: { type: integer, minimum: 0 }, description: Minimum recorded latency in milliseconds. }
+      responses:
+        '200':
+          description: Paginated execution history
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountHistoryPage'
+        '400':
+          description: Invalid filter or analytics window
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+        '401':
+          description: The API key did not resolve an organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+        '500':
+          description: History lookup failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+
   # --- Tasks ------------------------------------------------------
   /v1/tasks/{task_id}/cost:
     get:
@@ -322,7 +399,7 @@ paths:
         - name: id
           in: path
           required: true
-          schema: { type: string, pattern: '^sec_' }
+          schema: { type: string }
           description: Opaque ID returned by POST /v1/run. Do not assume a prefix or derive it independently.
       responses:
         '200':
@@ -1943,6 +2020,72 @@ components:
         git_url: { type: string }
         created_at: { type: string, format: date-time }
         updated_at: { type: string, format: date-time }
+
+    # --- Account --------------------------------------------------
+    AccountBalance:
+      type: object
+      required: [org_id, balance, credit_limit, alert_threshold]
+      properties:
+        org_id:
+          type: string
+          format: uuid
+        balance:
+          type: string
+          description: Current organization balance in USD, serialized as an exact decimal string.
+        credit_limit:
+          oneOf:
+            - type: string
+            - type: 'null'
+          description: Optional USD credit limit. Null means no credit limit.
+        alert_threshold:
+          oneOf:
+            - type: string
+            - type: 'null'
+          description: Optional USD balance alert threshold.
+
+    AccountHistoryPage:
+      type: object
+      required: [items, total, page, page_size]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountHistoryItem'
+        total: { type: integer, minimum: 0 }
+        page: { type: integer, minimum: 1 }
+        page_size: { type: integer, minimum: 1, maximum: 100 }
+
+    AccountHistoryItem:
+      type: object
+      required: [id, model, type, execution_mode, status, latency_ms, user_cost, prompt_tokens, completion_tokens, total_tokens, cached_tokens, cache_creation_tokens, created_at, api_key_prefix]
+      properties:
+        id: { type: string, description: Opaque execution ID. }
+        model: { type: string }
+        type: { type: string }
+        execution_mode: { type: string }
+        status: { type: string, enum: [pending, running, completed, failed, timeout] }
+        latency_ms: { type: integer, minimum: 0 }
+        user_cost:
+          type: string
+          description: USD cost serialized as an exact decimal string.
+        prompt_tokens: { type: integer, minimum: 0 }
+        completion_tokens: { type: integer, minimum: 0 }
+        total_tokens: { type: integer, minimum: 0 }
+        cached_tokens: { type: integer, minimum: 0 }
+        cache_creation_tokens: { type: integer, minimum: 0 }
+        created_at: { type: string, format: date-time }
+        api_key_prefix: { type: string }
+        error_message: { type: string, description: Sanitized failure message when recorded. }
+        error_type: { type: string }
+        completed_at: { type: string, format: date-time }
+        period_settled_cost:
+          type: string
+          pattern: '^-?\d+\.\d{6}$'
+          description: Settlement cost attributed to the selected settlement window when available.
+        input_params:
+          description: Parsed stored request parameters; omitted when absent or invalid JSON.
+        output_result:
+          description: Parsed stored output; numbers retain their JSON precision. Omitted when absent or invalid JSON.
 
     # --- Tasks ----------------------------------------------------
     RunRequest:
