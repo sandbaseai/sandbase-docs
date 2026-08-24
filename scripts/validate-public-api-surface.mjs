@@ -27,6 +27,7 @@ for (const [pattern, label] of forbiddenOpenApiPatterns) {
 const requiredPublicPaths = [
   '/v1/run:',
   '/v1/run/{id}:',
+  '/v1/upload:',
   '/v1/account/balance:',
   '/v1/account/history:',
   '/v1/embeds:',
@@ -63,6 +64,7 @@ assert.doesNotMatch(openapi, /^  \/v1\/endpoint_runtime_profiles:$/m, 'Endpoint 
 assert.doesNotMatch(openapi, /^\s+mcp_url:$/m, 'Endpoint MCP transport URL must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/generations(?:\/\{[^}]+\})?:$/m, 'Withdrawn generation paths must not be public')
 assert.doesNotMatch(openapi, /https:\/\/api\.sandbase\.ai\/v1\/generations(?:\/|\b)/, 'Public OpenAPI examples must not call withdrawn generation paths')
+assert.doesNotMatch(openapi, /^  \/v1\/blog\/assets:$/m, 'Blog publishing storage must not be exposed as a general developer API')
 assert.doesNotMatch(openapi, /^  \/events\/webhooks(?:\/\{[^}]+\})?:$/m, 'Sandbox event webhook paths must not be public')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
 const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
@@ -258,6 +260,17 @@ assert.doesNotMatch(getAssetResponse, /enum: \[Active, Processing, Failed\]/, 'A
 assert.doesNotMatch(getAssetResponse, /download_url:[\s\S]*?format: uri/, 'Asset download_url must allow the emitted empty string')
 const assetOverview = readFileSync(new URL('../api-reference/models/assets.md', import.meta.url), 'utf8')
 assert.doesNotMatch(assetOverview, /12 hours|images < 5MB|video\/audio < 50MB/, 'Asset docs must not publish limits or expiry not enforced by the current implementation')
+const uploadMediaPath = openapi.match(/^  \/v1\/upload:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(uploadMediaPath, /multipart\/form-data:/, 'Media upload must document multipart input')
+for (const status of ['200', '400', '401', '500', '503']) {
+  assert.match(uploadMediaPath, new RegExp(`'${status}':`), `Media upload must document ${status} responses`)
+}
+const uploadMediaRequest = openapi.match(/^    UploadMediaRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(uploadMediaRequest, /required: \[file\]/, 'Media upload must require the file part')
+assert.match(uploadMediaRequest, /Image \(up to 20 MB\), audio \(up to 50 MB\), or video \(up to 500 MB\)/, 'Media upload must publish implemented category size limits')
+const uploadMediaResponse = openapi.match(/^    UploadMediaResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(uploadMediaResponse, /required: \[url, filename, size, type, content_type\]/, 'Media upload must require every emitted success field')
+assert.match(sidebar, /\/api-reference\/models\/upload/, 'Sidebar must link to the media upload reference')
 assert.match(openapi, /type:\s*\{ type: string, const: environment_deleted \}/, 'Environment deletion must document its response discriminator')
 assert.doesNotMatch(openapi, /^  \/default\/v1(?:\/|:)/m, 'Internal Console paths must not be public')
 

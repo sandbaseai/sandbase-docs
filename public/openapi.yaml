@@ -725,6 +725,48 @@ paths:
               schema:
                 $ref: '#/components/schemas/TaskCostError'
 
+  /v1/upload:
+    post:
+      operationId: uploadMedia
+      tags: [Models]
+      summary: Upload media for model input
+      description: |
+        Uploads one image, audio, or video file and returns its stored URL. The server detects the actual MIME type
+        from the file bytes and filename; the optional type form field is only a hint and does not override detection.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadMediaRequest'
+      responses:
+        '200':
+          description: Media uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadMediaResponse'
+        '400':
+          description: Missing file, invalid multipart data, unsupported MIME type, or file too large
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '500':
+          description: File could not be read or stored
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '503':
+          description: File storage is not configured
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+
   # --- Assets -----------------------------------------------------
   /v1/assets:
     post:
@@ -2595,6 +2637,40 @@ components:
           type: object
           additionalProperties: true
           description: Model-specific public usage details when available; omitted for models that do not report them.
+
+    UploadMediaRequest:
+      type: object
+      required: [file]
+      properties:
+        file:
+          type: string
+          format: binary
+          description: Image (up to 20 MB), audio (up to 50 MB), or video (up to 500 MB).
+        type:
+          type: string
+          enum: [image, audio, video]
+          description: Optional category hint. The server still uses the detected MIME type for validation and storage.
+
+    UploadMediaResponse:
+      type: object
+      required: [url, filename, size, type, content_type]
+      properties:
+        url:
+          type: string
+          description: Stored media URL to pass to a supported model input.
+        filename:
+          type: string
+          description: Original multipart filename.
+        size:
+          type: integer
+          minimum: 0
+          description: Uploaded file size in bytes.
+        type:
+          type: string
+          description: Detected MIME type. This currently matches content_type.
+        content_type:
+          type: string
+          description: Detected MIME type used when storing the file.
 
     CreateAssetRequest:
       type: object

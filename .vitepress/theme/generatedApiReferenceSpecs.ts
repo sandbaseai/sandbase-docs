@@ -433,6 +433,44 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": { "status": "200 OK", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"completed\",\n  \"outputs\": [{ \"url\": \"https://media.sandbase.ai/audio/output.mp3\" }]\n}" }
   },
+  "assets/upload": {
+    "title": "Upload Media",
+    "operation": "Assets",
+    "method": "POST",
+    "path": "/v1/upload",
+    "description": "Upload an image, audio, or video file and receive a stored URL for a supported model input.",
+    "groups": [
+      {
+        "title": "Multipart form",
+        "fields": [
+          { "name": "file", "type": "binary", "required": true, "description": "Image up to 20 MB, audio up to 50 MB, or video up to 500 MB. Supported formats are listed below." },
+          { "name": "type", "type": "image | audio | video", "required": false, "description": "Optional category hint. MIME detection from the file still controls validation." }
+        ]
+      },
+      {
+        "title": "Supported MIME types",
+        "fields": [
+          { "name": "Image", "type": "string", "required": false, "description": "image/jpeg, image/png, image/webp, image/gif — maximum 20 MB." },
+          { "name": "Audio", "type": "string", "required": false, "description": "audio/mpeg, audio/mp4, audio/wav, audio/x-wav, audio/ogg, audio/aac, audio/flac — maximum 50 MB." },
+          { "name": "Video", "type": "string", "required": false, "description": "video/mp4, video/quicktime, video/webm — maximum 500 MB." }
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "label": "cURL",
+        "language": "bash",
+        "code": "curl -X POST https://api.sandbase.ai/v1/upload \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -F \"file=@reference.mp4\" \\\n  -F \"type=video\""
+      }
+    ],
+    "response": {
+      "status": "200 OK",
+      "code": "{\n  \"url\": \"https://media.sandbase.ai/uploads/2026/08/550e8400-e29b-41d4-a716-446655440000.mp4\",\n  \"filename\": \"reference.mp4\",\n  \"size\": 1048576,\n  \"type\": \"video/mp4\",\n  \"content_type\": \"video/mp4\"\n}"
+    },
+    "notes": [
+      { "title": "MIME detection", "description": "The server detects the file type from its bytes and filename. The optional type field does not force a MIME type." }
+    ]
+  },
   "assets/create": {
     "title": "Register Asset",
     "operation": "Assets",

@@ -137,6 +137,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
         collapsed: false,
         items: [
           { text: 'Overview', link: '/api-reference/models/assets' },
+          { text: 'Upload Media', link: '/api-reference/models/upload' },
           { text: 'Register Asset', link: '/api-reference/models/assets-create' },
           { text: 'Get Asset', link: '/api-reference/models/assets-get' },
         ],
