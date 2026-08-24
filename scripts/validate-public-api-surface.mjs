@@ -65,6 +65,10 @@ for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
     const operation = pathItem[method]
     if (!operation) continue
     if (publicPath === '/v1/messages') continue
+    assert.ok(
+      operation.responses['401']?.content?.['application/json']?.schema,
+      `${method.toUpperCase()} ${publicPath} must document its implemented JSON authentication-error envelope`,
+    )
     if (publicPath === '/v1/tasks/{task_id}/cost') {
       assert.ok(!operation.responses['402'], 'Task cost lookup must preserve its implemented spending-limit exception')
       assert.ok(operation.responses['403'], 'Task cost lookup must document scoped-key rejection')
