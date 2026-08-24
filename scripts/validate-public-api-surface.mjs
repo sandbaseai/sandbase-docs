@@ -71,6 +71,10 @@ assert.doesNotMatch(openapi, /https:\/\/api\.sandbase\.ai\/v1\/generations(?:\/|
 assert.doesNotMatch(openapi, /^  \/v1\/blog\/assets:$/m, 'Blog publishing storage must not be exposed as a general developer API')
 assert.doesNotMatch(openapi, /^  \/v1\/mcp\/(?:servers|\{[^}]+\}\/config):$/m, 'MCP discovery and runtime config routes must not be public')
 assert.doesNotMatch(openapi, /^  \/mcp\/\{[^}]+\}\/sse:$/m, 'MCP SSE proxy must not be public')
+assert.doesNotMatch(openapi, /^  \/v1\/skills\/\{[^}]+\}\/mcp-publications:$/m, 'Skill MCP publication creation must not be public')
+assert.doesNotMatch(openapi, /^  \/v1\/skill-mcp-publications(?:\/\{[^}]+\})?:$/m, 'Skill MCP publication management must not be public')
+assert.doesNotMatch(openapi, /^  \/v1\/capabilities\/\{[^}]+\}\/mcp:$/m, 'Capability MCP transport must not be public')
+assert.doesNotMatch(openapi, /^  \/v1\/skill-mcp\/\{[^}]+\}\/mcp:$/m, 'Published Skill MCP transport must not be public')
 assert.doesNotMatch(openapi, /^  \/events\/webhooks(?:\/\{[^}]+\})?:$/m, 'Sandbox event webhook paths must not be public')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
 const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
@@ -633,6 +637,25 @@ const listEndpointOperation = endpointsPath.match(/^    get:\n[\s\S]*$/m)?.[0] ?
 for (const status of ['200', '400', '401', '500']) {
   assert.match(listEndpointOperation, new RegExp(`'${status}':`), `Endpoint listing must document ${status} responses`)
 }
+const endpointResourcePath = openapi.match(/^  \/v1\/endpoints\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+const getEndpointOperation = endpointResourcePath.match(/^    get:\n[\s\S]*?(?=^    patch:)/m)?.[0] ?? ''
+assert.match(getEndpointOperation, /EndpointId/, 'Endpoint reads must use the Endpoint path parameter')
+assert.doesNotMatch(getEndpointOperation, /EnvironmentId|Environment updated/, 'Endpoint reads must not inherit Environment contracts')
+for (const method of ['patch', 'post']) {
+  const next = method === 'patch' ? 'post' : 'delete'
+  const operation = endpointResourcePath.match(new RegExp(`^    ${method}:\\n[\\s\\S]*?(?=^    ${next}:)`, 'm'))?.[0] ?? ''
+  assert.match(operation, /UpdateEndpointRequest/, `${method.toUpperCase()} Endpoint updates must use the implemented request schema`)
+  assert.doesNotMatch(operation, /UpdateEnvironmentRequest|Environment updated/, `${method.toUpperCase()} Endpoint updates must not inherit Environment contracts`)
+  for (const status of ['200', '400', '401', '404', '409', '422', '500']) {
+    assert.match(operation, new RegExp(`'${status}':`), `${method.toUpperCase()} Endpoint updates must document ${status} responses`)
+  }
+}
+const deleteEndpointOperation = endpointResourcePath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
+assert.match(deleteEndpointOperation, /required: \[id, deleted\]/, 'Endpoint deletion must use its implemented response projection')
+assert.doesNotMatch(deleteEndpointOperation, /environment_deleted|EnvironmentId/, 'Endpoint deletion must not inherit Environment contracts')
+for (const status of ['200', '401', '404', '500']) {
+  assert.match(deleteEndpointOperation, new RegExp(`'${status}':`), `Endpoint deletion must document ${status} responses`)
+}
 const endpointACPPath = openapi.match(/^  \/v1\/endpoints\/\{id\}\/acp:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(endpointACPPath, /ACPRequest/, 'Endpoint ACP must document its JSON-RPC request envelope')
 assert.match(endpointACPPath, /application\/x-ndjson:/, 'Endpoint ACP must document prompt streaming as NDJSON')
@@ -728,6 +751,10 @@ function inspectPublishedSources(directory) {
     assert.doesNotMatch(content, /\/v1\/endpoint_runtime_profiles\b/i, `${relative} must not expose Endpoint runtime profiles that reveal MCP transport`)
     assert.doesNotMatch(content, /\/v1\/mcp\/(?:servers|[^\s/]+\/config)\b/i, `${relative} must not expose MCP discovery or runtime config routes`)
     assert.doesNotMatch(content, /\/mcp\/[^\s/]+\/sse\b/i, `${relative} must not expose the MCP SSE proxy`)
+    assert.doesNotMatch(content, /\/v1\/skills\/[^\s/]+\/mcp-publications\b/i, `${relative} must not expose Skill MCP publication creation`)
+    assert.doesNotMatch(content, /\/v1\/skill-mcp-publications(?:\/[^\s/]+)?\b/i, `${relative} must not expose Skill MCP publication management`)
+    assert.doesNotMatch(content, /\/v1\/capabilities\/[^\s/]+\/mcp\b/i, `${relative} must not expose Capability MCP transport`)
+    assert.doesNotMatch(content, /\/v1\/skill-mcp\/[^\s/]+\/mcp\b/i, `${relative} must not expose published Skill MCP transport`)
   }
 }
 
