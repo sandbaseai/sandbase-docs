@@ -577,32 +577,32 @@ assert.match(updateEnvironmentSchema, /credential_bindings:\n\s+type: \[array, '
 assert.doesNotMatch(openapi, /^  \/v1\/skills\/\{id\}\/mcp-publications:$/m, 'Skill MCP publication management must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/skill-mcp(?:-publications)?(?:\/|:)/m, 'Skill MCP transports and publications must not be public')
 const skillFilesPath = openapi.match(/^  \/v1\/skills\/files:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['201', '400', '401', '500', '503']) {
+for (const status of ['201', '400', '401', '402', '403', '500', '503']) {
   assert.match(skillFilesPath, new RegExp(`'${status}':`), `Skill file uploads must document ${status} responses`)
 }
 const skillsPath = openapi.match(/^  \/v1\/skills:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 const createSkill = skillsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
 assert.match(createSkill, /SkillCreated/, 'Skill creation must use its compact response projection')
-for (const status of ['201', '400', '401', '500']) {
+for (const status of ['201', '400', '401', '402', '403', '500']) {
   assert.match(createSkill, new RegExp(`'${status}':`), `Skill creation must document ${status} responses`)
 }
 const listSkills = skillsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
 assert.match(listSkills, /SkillListItem/, 'Skill lists must use their list-item response projection')
-for (const status of ['200', '401', '500']) {
+for (const status of ['200', '401', '402', '403', '500']) {
   assert.match(listSkills, new RegExp(`'${status}':`), `Skill lists must document ${status} responses`)
 }
 const skillPath = openapi.match(/^  \/v1\/skills\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 const getSkill = skillPath.match(/^    get:\n[\s\S]*?(?=^    put:)/m)?.[0] ?? ''
-for (const status of ['200', '401', '404', '500']) {
+for (const status of ['200', '401', '402', '403', '404', '500']) {
   assert.match(getSkill, new RegExp(`'${status}':`), `Skill reads must document ${status} responses`)
 }
 const updateSkill = skillPath.match(/^    put:\n[\s\S]*?(?=^    delete:)/m)?.[0] ?? ''
 assert.match(updateSkill, /Omitted name, description, and categories are cleared/, 'Skill PUT must document its replacement-style display fields')
-for (const status of ['200', '400', '401', '404', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
   assert.match(updateSkill, new RegExp(`'${status}':`), `Skill updates must document ${status} responses`)
 }
 const deleteSkill = skillPath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '401', '404', '500']) {
+for (const status of ['200', '401', '402', '403', '404', '500']) {
   assert.match(deleteSkill, new RegExp(`'${status}':`), `Skill deletion must document ${status} responses`)
 }
 const skillCreatedSchema = openapi.match(/^    SkillCreated:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
