@@ -428,8 +428,8 @@ paths:
                 description: Anthropic SSE events, including provider-defined beta events and possible in-stream error events.
         '400': { description: "Invalid JSON, missing model, unsupported feature, or invalid provider request", content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
         '401': { description: "Missing, invalid, revoked, or expired API key", content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
-        '402': { description: Organization spending limit reached, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
-        '403': { description: API Key spending limit or organization permission failure, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '403': { description: 'API Key spending limit reached, organization disabled, or upstream permission rejected', content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
         '404': { description: Model or upstream resource not found, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
         '413': { description: Provider rejected the request as too large, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
         '429': { description: Provider rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }

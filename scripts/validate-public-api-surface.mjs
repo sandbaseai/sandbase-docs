@@ -347,6 +347,8 @@ assert.match(messagesPath, /text\/event-stream:/, 'Messages must document Anthro
 for (const status of ['402', '403', '413', '500', '502', '503']) {
   assert.match(messagesPath, new RegExp(`'${status}':`), `Messages must document ${status} responses`)
 }
+assert.match(messagesPath, /'402': \{ description: Organization balance and credit are exhausted/, 'Messages 402 must describe organization admission rather than API-key limits')
+assert.match(messagesPath, /'403': \{ description: 'API Key spending limit reached, organization disabled, or upstream permission rejected'/, 'Messages 403 must document every implemented rejection source')
 assert.match(messagesPath, /AnthropicError/, 'Messages must document the Anthropic error envelope')
 assert.equal((openapi.match(/AnthropicApiKey:/g) ?? []).length, 2, 'Anthropic x-api-key authentication must be scoped only to Messages')
 assert.match(openapi, /AnthropicApiKey:\n\s+type: apiKey\n\s+in: header\n\s+name: x-api-key/, 'AnthropicApiKey must describe the x-api-key header')
