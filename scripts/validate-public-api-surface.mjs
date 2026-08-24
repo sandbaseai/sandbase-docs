@@ -689,6 +689,7 @@ for (const method of ['patch', 'post']) {
   for (const status of ['200', '400', '401', '402', '403', '404', '409', '422', '500']) {
     assert.match(operation, new RegExp(`'${status}':`), `${method.toUpperCase()} Endpoint updates must document ${status} responses`)
   }
+  assert.match(operation, /'401':[\s\S]*?TaskCostError/, `${method.toUpperCase()} Endpoint updates must document the implemented string-error envelope for authentication failures`)
 }
 const deleteEndpointOperation = endpointResourcePath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
 assert.match(deleteEndpointOperation, /required: \[id, deleted\]/, 'Endpoint deletion must use its implemented response projection')
@@ -696,6 +697,7 @@ assert.doesNotMatch(deleteEndpointOperation, /environment_deleted|EnvironmentId/
 for (const status of ['200', '401', '402', '403', '404', '500']) {
   assert.match(deleteEndpointOperation, new RegExp(`'${status}':`), `Endpoint deletion must document ${status} responses`)
 }
+assert.match(deleteEndpointOperation, /'401':[\s\S]*?TaskCostError/, 'Endpoint deletion must document the implemented string-error envelope for authentication failures')
 const endpointACPPath = openapi.match(/^  \/v1\/endpoints\/\{id\}\/acp:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(endpointACPPath, /ACPRequest/, 'Endpoint ACP must document its JSON-RPC request envelope')
 assert.match(endpointACPPath, /application\/x-ndjson:/, 'Endpoint ACP must document prompt streaming as NDJSON')
