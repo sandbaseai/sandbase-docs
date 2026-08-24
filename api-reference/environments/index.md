@@ -5,7 +5,7 @@ description: Configure the high-level runtime environment and credential binding
 
 # Environments API
 
-An Environment is the versioned runtime configuration bound to an Agent or Service. It stores metadata, runtime configuration, and references to Credentials without exposing their plaintext values.
+An Environment is a mutable, non-versioned runtime configuration used by an Agent or Service. Updates modify the resource in place. It stores metadata, runtime configuration, and references to Credentials without exposing their plaintext values.
 
 ::: info Resource boundary
 The public Environment API manages configuration resources only. It does not expose lower-level runtime instances, process execution, filesystems, pause/resume controls, or sandbox lifecycle APIs.
@@ -24,8 +24,12 @@ The public Environment API manages configuration resources only. It does not exp
 
 `POST /v1/environments/{environment_id}` is retained as a compatibility alias for `PATCH`. New integrations should use `PATCH`.
 
+Lists are ordered newest first. Use the opaque `next_page` value as the next request's `page` parameter. `include_archived=true` includes archived records; other values behave as false. Invalid cursors return `400`, while limits above 100 are clamped to 100.
+
 Deletion returns `{ "id": "env_...", "type": "environment_deleted" }`. It returns `409 Conflict` for a managed
 Environment or one referenced by active Sessions; archive an Environment when its record should be retained.
+
+Updates are partial and in place. `{}` is accepted as a no-op. A JSON `null` for `name` or `description` preserves the current value, while `metadata: null` or `credential_bindings: null` clears that field. Archived Environments return `403`; managed Environments and Agent-owned runtime changes return `409`.
 
 ## Create an Environment
 
@@ -56,4 +60,4 @@ Credential bindings reference an existing Credential and the environment-variabl
 }
 ```
 
-Targets must use uppercase environment-variable syntax. Credential plaintext is never returned by the Environment API. See [Credentials API](/api-reference/credentials/).
+Targets must be unique, use uppercase environment-variable syntax, and must not begin with `SANDBASE_`. Each Credential must be active and belong to the caller's organization; otherwise creation or update returns `422`. Credential plaintext is never returned by the Environment API. See [Credentials API](/api-reference/credentials/).

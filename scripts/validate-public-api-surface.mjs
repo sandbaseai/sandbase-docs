@@ -323,9 +323,49 @@ const updateEmbedSchema = openapi.match(/^    UpdateEmbedConfigRequest:\n[\s\S]*
 assert.doesNotMatch(updateEmbedSchema, /^        (?:agent_id|environment_id):/m, 'Embed updates must not advertise immutable bindings')
 assert.match(updateEmbedSchema, /null values preserve the current value/, 'Embed updates must document implemented null semantics')
 const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(environmentSchema, /required: \[id, type, agent_id, name, description, config, metadata, credential_bindings, archived_at, created_at, updated_at\]/, 'Environment responses must require every serializer field')
+assert.match(environmentSchema, /id:\n\s+type: string\n\s+pattern: '\^env_'/, 'Environment IDs must document their public prefix')
 assert.match(environmentSchema, /config:\n[\s\S]*?- type: 'null'/, 'Environment config must allow the serializer\'s null output')
 assert.match(environmentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Environment metadata must allow the serializer\'s null output')
 assert.match(environmentSchema, /credential_bindings:\n\s+type: \[array, 'null'\]/, 'Environment credential bindings must allow the serializer\'s null output')
+const environmentsPath = openapi.match(/^  \/v1\/environments:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+const createEnvironment = environmentsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '422', '500']) {
+  assert.match(createEnvironment, new RegExp(`'${status}':`), `Environment creation must document ${status} responses`)
+}
+const listEnvironments = environmentsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
+assert.match(listEnvironments, /name: include_archived/, 'Environment lists must document the implemented archive filter')
+assert.match(listEnvironments, /required: \[data\]/, 'Environment lists must require data')
+for (const status of ['200', '400', '401', '500']) {
+  assert.match(listEnvironments, new RegExp(`'${status}':`), `Environment lists must document ${status} responses`)
+}
+const environmentPath = openapi.match(/^  \/v1\/environments\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '401', '404', '500']) {
+  assert.match(environmentPath.match(/^    get:\n[\s\S]*?(?=^    patch:)/m)?.[0] ?? '', new RegExp(`'${status}':`), `Environment reads must document ${status} responses`)
+}
+for (const method of ['patch', 'post']) {
+  const terminator = method === 'patch' ? 'post' : 'delete'
+  const operation = environmentPath.match(new RegExp(`^    ${method}:\\n[\\s\\S]*?(?=^    ${terminator}:)`, 'm'))?.[0] ?? ''
+  assert.match(operation, /UpdateEnvironmentRequest/, `${method.toUpperCase()} Environment updates must use the partial update schema`)
+  for (const status of ['200', '400', '401', '403', '404', '409', '422', '500']) {
+    assert.match(operation, new RegExp(`'${status}':`), `${method.toUpperCase()} Environment updates must document ${status} responses`)
+  }
+}
+const deleteEnvironment = environmentPath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
+for (const status of ['200', '401', '404', '409', '500']) {
+  assert.match(deleteEnvironment, new RegExp(`'${status}':`), `Environment deletion must document ${status} responses`)
+}
+const archiveEnvironment = openapi.match(/^  \/v1\/environments\/\{id\}\/archive:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '401', '404', '409', '500']) {
+  assert.match(archiveEnvironment, new RegExp(`'${status}':`), `Environment archival must document ${status} responses`)
+}
+const createEnvironmentSchema = openapi.match(/^    CreateEnvironmentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(createEnvironmentSchema, /required: \[name, config\]/, 'Environment creation must require name and config')
+assert.match(createEnvironmentSchema, /credential_bindings:\n\s+type: \[array, 'null'\]/, 'Environment creation must allow null credential bindings')
+const updateEnvironmentSchema = openapi.match(/^    UpdateEnvironmentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.doesNotMatch(updateEnvironmentSchema, /minProperties:/, 'Empty Environment updates are implemented no-ops')
+assert.match(updateEnvironmentSchema, /name:\n\s+type: \[string, 'null'\]/, 'Null Environment names must preserve the current value')
+assert.match(updateEnvironmentSchema, /credential_bindings:\n\s+type: \[array, 'null'\]/, 'Null Environment credential bindings must clear the field')
 const endpointSchema = openapi.match(/^    Endpoint:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 for (const field of ['session_metadata', 'memory_config', 'resource_config', 'vault_config']) {
   assert.match(endpointSchema, new RegExp(`${field}:\\n\\s+type: \\[object, 'null'\\]`), `Endpoint ${field} must allow the serializer's null output`)
