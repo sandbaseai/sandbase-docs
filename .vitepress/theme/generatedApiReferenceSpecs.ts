@@ -399,7 +399,26 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "method": "POST",
     "path": "/v1/run",
     "description": "Run a text-to-speech or speech-to-text model. Asynchronous audio models may include webhook_url for a task callback.",
-    "groups": [],
+    "groups": [
+      {
+        "title": "Request body",
+        "schema": "ImageEditParams",
+        "fields": [
+          { "name": "model", "type": "string", "required": true, "description": "Use gpt-image-2 on this endpoint." },
+          { "name": "prompt", "type": "string", "required": true, "description": "Text description of the requested edit." },
+          { "name": "image", "type": "file | file[]", "required": true, "description": "One or more source image files. Repeat the multipart field for multiple images." },
+          { "name": "mask", "type": "file", "required": false, "description": "Optional mask image for inpainting." },
+          { "name": "n", "type": "integer", "required": false, "description": "Number of edited images to return when supported." },
+          { "name": "size", "type": "string", "required": false, "description": "Output dimensions supported by the model." },
+          { "name": "quality", "type": "string", "required": false, "description": "Output quality supported by the model." },
+          { "name": "background", "type": "string", "required": false, "description": "Output background setting." },
+          { "name": "input_fidelity", "type": "string", "required": false, "description": "How closely supported models should preserve source-image details." },
+          { "name": "output_format", "type": "string", "required": false, "description": "Output encoding such as png, webp, or jpeg." },
+          { "name": "output_compression", "type": "integer", "required": false, "description": "Output compression level from 0 to 100." },
+          { "name": "user", "type": "string", "required": false, "description": "Provider-compatible end-user identifier." }
+        ]
+      }
+    ],
     "examples": [
       {
         "label": "cURL",
@@ -1319,6 +1338,81 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       "status": "200 OK",
       "code": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"description\": \"Draft release notes with a concise changelog\",\n  \"categories\": [\"writing\", \"product\"],\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"skill_file_url\": \"https://media.sandbase.ai/_private/.../release-notes.zip\",\n  \"git_url\": \"\",\n  \"created_at\": \"2026-08-03T10:00:00Z\",\n  \"updated_at\": \"2026-08-03T10:05:00Z\"\n}"
     }
+  },
+  "images/generations": {
+    "title": "Generate Image",
+    "operation": "Images",
+    "method": "POST",
+    "path": "/v1/images/generations",
+    "description": "Generate images through SandBase's synchronous OpenAI Images-compatible endpoint. This endpoint is distinct from the general /v1/run model API.",
+    "signature": "client.images.generate(params)",
+    "groups": [
+      {
+        "title": "Request body",
+        "schema": "ImageGenerateParams",
+        "fields": [
+          { "name": "model", "type": "string", "required": true, "description": "Use gpt-image-2 on this endpoint." },
+          { "name": "prompt", "type": "string", "required": true, "description": "Text description of the image to generate." },
+          { "name": "n", "type": "integer", "required": false, "description": "Number of images to generate when supported." },
+          { "name": "size", "type": "string", "required": false, "description": "Output dimensions supported by the model." },
+          { "name": "quality", "type": "string", "required": false, "description": "Output quality such as low, medium, high, or auto." },
+          { "name": "background", "type": "string", "required": false, "description": "Background setting such as transparent, opaque, or auto." },
+          { "name": "output_format", "type": "string", "required": false, "description": "Output encoding such as png, webp, or jpeg." },
+          { "name": "output_compression", "type": "integer", "required": false, "description": "Output compression level from 0 to 100." },
+          { "name": "moderation", "type": "string", "required": false, "description": "Provider-compatible moderation setting." },
+          { "name": "user", "type": "string", "required": false, "description": "Provider-compatible end-user identifier." }
+        ]
+      }
+    ],
+    "examples": [
+      { "label": "cURL", "language": "bash", "code": "curl https://api.sandbase.ai/v1/images/generations \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"gpt-image-2\",\"prompt\":\"A paper-cut city floating above the clouds\",\"size\":\"1024x1024\"}'" },
+      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-...\", base_url=\"https://api.sandbase.ai/v1\")\nresult = client.images.generate(\n    model=\"gpt-image-2\",\n    prompt=\"A paper-cut city floating above the clouds\",\n    size=\"1024x1024\",\n)\nprint(result.data[0].b64_json or result.data[0].url)" }
+    ],
+    "response": { "status": "200 OK", "code": "{\n  \"created\": 1787529600,\n  \"data\": [{\"b64_json\": \"iVBORw0KGgo...\"}],\n  \"usage\": {\n    \"input_tokens\": 12,\n    \"output_tokens\": 4096,\n    \"total_tokens\": 4108,\n    \"input_tokens_details\": {\"text_tokens\": 12, \"image_tokens\": 0}\n  }\n}" },
+    "notes": [
+      { "title": "Synchronous only", "description": "stream=true, mode=stream, and mode=async are rejected. Use the returned data array directly." },
+      { "title": "Compatible fields", "description": "Additional JSON fields are forwarded unchanged, but support remains model- and provider-specific." }
+    ],
+    "errors": [
+      { "status": "400", "description": "Invalid JSON, unsupported model, streaming mode, or provider request." },
+      { "status": "401", "description": "Missing or invalid API key." },
+      { "status": "402", "description": "Organization or API Key spending limit reached." },
+      { "status": "403", "description": "API key scope does not authorize this endpoint." },
+      { "status": "404", "description": "The routed image model is unavailable." },
+      { "status": "429", "description": "Rate limit exceeded." },
+      { "status": "500", "description": "Request persistence or response processing failed." },
+      { "status": "502", "description": "The provider returned an invalid native response." },
+      { "status": "503", "description": "No provider route succeeded." }
+    ]
+  },
+  "images/edits": {
+    "title": "Edit Image",
+    "operation": "Images",
+    "method": "POST",
+    "path": "/v1/images/edits",
+    "description": "Edit one or more uploaded images through SandBase's synchronous OpenAI Images-compatible multipart endpoint.",
+    "signature": "client.images.edit(params)",
+    "groups": [],
+    "examples": [
+      { "label": "cURL", "language": "bash", "code": "curl https://api.sandbase.ai/v1/images/edits \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -F model=gpt-image-2 \\\n  -F 'prompt=Turn the daytime sky into a starry night' \\\n  -F image=@landscape.png" },
+      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-...\", base_url=\"https://api.sandbase.ai/v1\")\nwith open(\"landscape.png\", \"rb\") as image:\n    result = client.images.edit(\n        model=\"gpt-image-2\",\n        image=image,\n        prompt=\"Turn the daytime sky into a starry night\",\n    )\nprint(result.data[0].b64_json or result.data[0].url)" }
+    ],
+    "response": { "status": "200 OK", "code": "{\n  \"created\": 1787529600,\n  \"data\": [{\"b64_json\": \"iVBORw0KGgo...\"}],\n  \"usage\": {\n    \"input_tokens\": 1024,\n    \"output_tokens\": 4096,\n    \"total_tokens\": 5120,\n    \"input_tokens_details\": {\"text_tokens\": 12, \"image_tokens\": 1012}\n  }\n}" },
+    "notes": [
+      { "title": "Multipart uploads", "description": "Send model, prompt, and image as multipart/form-data. Repeating the image field preserves multiple source files." },
+      { "title": "Synchronous only", "description": "stream=true, mode=stream, and mode=async are rejected." }
+    ],
+    "errors": [
+      { "status": "400", "description": "Invalid multipart body, unsupported model, streaming mode, or provider request." },
+      { "status": "401", "description": "Missing or invalid API key." },
+      { "status": "402", "description": "Organization or API Key spending limit reached." },
+      { "status": "403", "description": "API key scope does not authorize this endpoint." },
+      { "status": "404", "description": "The routed image-edit model is unavailable." },
+      { "status": "429", "description": "Rate limit exceeded." },
+      { "status": "500", "description": "Request persistence or response processing failed." },
+      { "status": "502", "description": "The provider returned an invalid native response." },
+      { "status": "503", "description": "No provider route succeeded." }
+    ]
   },
   "inference/responses": {
     "title": "Create Response",

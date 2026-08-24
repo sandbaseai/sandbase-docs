@@ -120,7 +120,15 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Chat Completions', link: '/api-reference/llm-gateway' },
       { text: 'Responses', link: '/api-reference/responses' },
       { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
-      { text: 'Image Generation', link: '/api-reference/models/image' },
+      {
+        text: 'Images',
+        collapsed: false,
+        items: [
+          { text: 'Model Image Generation', link: '/api-reference/models/image' },
+          { text: 'Generate Image (OpenAI)', link: '/api-reference/images/generations' },
+          { text: 'Edit Image (OpenAI)', link: '/api-reference/images/edits' },
+        ],
+      },
       { text: 'Video Generation', link: '/api-reference/models/video' },
       { text: 'Audio', link: '/api-reference/models/audio' },
       { text: 'Embeddings', link: '/api-reference/models/embedding' },

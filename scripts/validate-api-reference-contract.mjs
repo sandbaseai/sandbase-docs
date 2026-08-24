@@ -114,6 +114,7 @@ for (const [key, spec] of referenceSpecs) {
 
   const parameters = operationParameters(operations, operation, openapi)
   const requestSchema = operation.requestBody?.content?.['application/json']?.schema
+    ?? operation.requestBody?.content?.['multipart/form-data']?.schema
   const requestFields = schemaFields(requestSchema, openapi)
 
   for (const group of spec.groups ?? []) {

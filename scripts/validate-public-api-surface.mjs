@@ -33,6 +33,8 @@ const requiredPublicPaths = [
   '/v1/embeds/{id}:',
   '/v1/embeds/{id}/usage:',
   '/v1/responses:',
+  '/v1/images/generations:',
+  '/v1/images/edits:',
   '/v1/assets:',
   '/v1/assets/{id}:',
   '/v1/skills/files:',
@@ -95,6 +97,20 @@ assert.match(embeddingRequestSchema, /items:\n\s+type: array\n\s+items:\n\s+type
 const embeddingResponseSchema = openapi.match(/^    EmbeddingResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(embeddingResponseSchema, /required: \[object, data, model, usage\]/, 'Embedding responses must require the OpenAI response envelope')
 assert.match(embeddingResponseSchema, /type: string\n\s+description: Base64-encoded vector/, 'Embedding responses must allow base64 vectors')
+const imageGenerationPath = openapi.match(/^  \/v1\/images\/generations:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(imageGenerationPath, /application\/json:/, 'Image generation must document its JSON request')
+const imageEditPath = openapi.match(/^  \/v1\/images\/edits:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(imageEditPath, /multipart\/form-data:/, 'Image edits must document multipart uploads')
+const imageGenerationRequest = openapi.match(/^    ImageGenerationRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(imageGenerationRequest, /const: gpt-image-2/, 'Image generation must publish the implemented public model alias')
+assert.match(imageGenerationRequest, /additionalProperties: true/, 'Image generation must preserve compatible JSON fields')
+assert.match(imageGenerationRequest, /stream:\n\s+type: boolean\n\s+const: false/, 'Image generation must not advertise unsupported streaming')
+const imageEditRequest = openapi.match(/^    ImageEditRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(imageEditRequest, /required: \[model, prompt, image\]/, 'Image edits must require model, prompt, and source image')
+assert.match(imageEditRequest, /type: array\n\s+items:\n\s+type: string\n\s+format: binary/, 'Image edits must allow repeated source image files')
+const imagesResponse = openapi.match(/^    ImagesResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(imagesResponse, /required: \[data, usage\]/, 'Images must document the validated success envelope')
+assert.match(imagesResponse, /required: \[input_tokens, output_tokens, total_tokens, input_tokens_details\]/, 'Images must document authoritative usage')
 assert.match(apiKeyGuide, /Only `POST \/v1\/messages` reads `x-api-key`/, 'API key guide must scope x-api-key to Anthropic Messages')
 assert.doesNotMatch(apiKeyGuide, /There is no per-model or per-resource restriction/, 'API key guide must not deny implemented credential restrictions')
 for (const content of [apiKeyGuide, authenticationReference]) {

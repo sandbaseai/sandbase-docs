@@ -11,6 +11,7 @@ info:
     ## SDK Compatibility
     - **LLM Gateway** (`/v1/chat/completions`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
     - **Embeddings** (`/v1/embeddings`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
+    - **Images** (`/v1/images/generations`, `/v1/images/edits`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
     - **Anthropic Messages** (`/v1/messages`): Use Anthropic SDK with `base_url="https://api.sandbase.ai"`
     - **Agents and Sessions** (`/v1/agents`, `/v1/sessions`): Use Anthropic SDK with `base_url="https://api.sandbase.ai"`
   version: 1.0.0
@@ -42,6 +43,8 @@ tags:
     description: OpenAI-compatible Responses API
   - name: Embeddings
     description: OpenAI-compatible text embeddings
+  - name: Images
+    description: OpenAI-compatible image generation and editing
   - name: Messages
     description: Anthropic-compatible Messages API
   - name: Agents
@@ -191,6 +194,84 @@ paths:
         '404': { description: Logical model not found, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
         '500': { description: Request persistence or organization lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
         '503': { description: No provider route succeeded, content: { application/json: { schema: { $ref: '#/components/schemas/EmbeddingError' } } } }
+
+  /v1/images/generations:
+    post:
+      operationId: createImage
+      tags: [Images]
+      summary: Generate an image
+      description: >-
+        Generate images through the synchronous OpenAI Images-compatible endpoint. The public model name is
+        gpt-image-2. Additional compatible JSON fields are forwarded unchanged. Streaming and asynchronous mode
+        are not supported on this endpoint.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageGenerationRequest'
+      responses:
+        '200':
+          description: Generated images and authoritative token usage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImagesResponse'
+        '400': { description: "Invalid body, unsupported model, streaming request, or provider request", content: { application/json: { schema: { $ref: '#/components/schemas/OpenAIImagesError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402':
+          description: Organization or API Key spending limit reached
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/OpenAIImagesError'
+                  - $ref: '#/components/schemas/TaskCostError'
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Routed image model is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/OpenAIImagesError' } } } }
+        '429': { description: Rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '500': { description: Request persistence or response processing failed, content: { application/json: { schema: { oneOf: [{ $ref: '#/components/schemas/OpenAIImagesError' }, { $ref: '#/components/schemas/TaskCostError' }] } } } }
+        '502': { description: Provider returned an invalid native response, content: { application/json: { schema: { $ref: '#/components/schemas/OpenAIImagesError' } } } }
+        '503': { description: No provider route succeeded, content: { application/json: { schema: { $ref: '#/components/schemas/OpenAIImagesError' } } } }
+
+  /v1/images/edits:
+    post:
+      operationId: createImageEdit
+      tags: [Images]
+      summary: Edit an image
+      description: >-
+        Edit one or more uploaded images through the synchronous OpenAI Images-compatible multipart endpoint.
+        Repeating the image field is supported. Additional compatible multipart fields are forwarded unchanged.
+        Streaming and asynchronous mode are not supported on this endpoint.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImageEditRequest'
+      responses:
+        '200':
+          description: Edited images and authoritative token usage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImagesResponse'
+        '400': { description: "Invalid multipart body, unsupported model, streaming request, or provider request", content: { application/json: { schema: { $ref: '#/components/schemas/OpenAIImagesError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402':
+          description: Organization or API Key spending limit reached
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/OpenAIImagesError'
+                  - $ref: '#/components/schemas/TaskCostError'
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Routed image-edit model is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/OpenAIImagesError' } } } }
+        '429': { description: Rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '500': { description: Request persistence or response processing failed, content: { application/json: { schema: { oneOf: [{ $ref: '#/components/schemas/OpenAIImagesError' }, { $ref: '#/components/schemas/TaskCostError' }] } } } }
+        '502': { description: Provider returned an invalid native response, content: { application/json: { schema: { $ref: '#/components/schemas/OpenAIImagesError' } } } }
+        '503': { description: No provider route succeeded, content: { application/json: { schema: { $ref: '#/components/schemas/OpenAIImagesError' } } } }
 
   /v1/messages:
     post:
@@ -2893,6 +2974,178 @@ components:
             type: { type: string }
             code: { type: ['null', string] }
             param: { type: ['null', string] }
+
+    # --- OpenAI-compatible Images --------------------------------
+    ImageGenerationRequest:
+      type: object
+      required: [model, prompt]
+      additionalProperties: true
+      properties:
+        model:
+          type: string
+          const: gpt-image-2
+        prompt:
+          type: string
+          minLength: 1
+        n:
+          type: integer
+          minimum: 1
+        size:
+          type: string
+          description: Output size supported by gpt-image-2, such as 1024x1024, 1024x1536, 1536x1024, or auto.
+        quality:
+          type: string
+          description: Output quality supported by gpt-image-2, such as low, medium, high, or auto.
+        background:
+          type: string
+          description: Background setting such as transparent, opaque, or auto.
+        output_format:
+          type: string
+          description: Output encoding such as png, webp, or jpeg.
+        output_compression:
+          type: integer
+          minimum: 0
+          maximum: 100
+        moderation:
+          type: string
+        user:
+          type: string
+        stream:
+          type: boolean
+          const: false
+          default: false
+          description: Streaming is not supported by this SandBase endpoint.
+        mode:
+          type: string
+          const: sync
+          default: sync
+
+    ImageEditRequest:
+      type: object
+      required: [model, prompt, image]
+      additionalProperties: true
+      properties:
+        model:
+          type: string
+          const: gpt-image-2
+        prompt:
+          type: string
+          minLength: 1
+        image:
+          oneOf:
+            - type: string
+              format: binary
+            - type: array
+              items:
+                type: string
+                format: binary
+          description: Source image file. Repeat the multipart field to provide multiple images.
+        mask:
+          type: string
+          format: binary
+        n:
+          type: integer
+          minimum: 1
+        size:
+          type: string
+        quality:
+          type: string
+        background:
+          type: string
+        input_fidelity:
+          type: string
+        output_format:
+          type: string
+        output_compression:
+          type: integer
+          minimum: 0
+          maximum: 100
+        user:
+          type: string
+        stream:
+          type: boolean
+          const: false
+          default: false
+          description: Streaming is not supported by this SandBase endpoint.
+        mode:
+          type: string
+          const: sync
+          default: sync
+
+    ImagesResponse:
+      type: object
+      required: [data, usage]
+      additionalProperties: true
+      properties:
+        created:
+          type: integer
+        data:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            additionalProperties: true
+            anyOf:
+              - required: [b64_json]
+              - required: [url]
+            properties:
+              b64_json:
+                type: string
+                description: Base64-encoded image data.
+              url:
+                type: string
+                format: uri
+              revised_prompt:
+                type: string
+        usage:
+          type: object
+          required: [input_tokens, output_tokens, total_tokens, input_tokens_details]
+          additionalProperties: true
+          properties:
+            input_tokens:
+              type: integer
+              minimum: 0
+            output_tokens:
+              type: integer
+              minimum: 0
+            total_tokens:
+              type: integer
+              minimum: 0
+            input_tokens_details:
+              type: object
+              required: [text_tokens, image_tokens]
+              additionalProperties: true
+              properties:
+                text_tokens: { type: integer, minimum: 0 }
+                image_tokens: { type: integer, minimum: 0 }
+                cached_text_tokens: { type: integer, minimum: 0 }
+                cached_image_tokens: { type: integer, minimum: 0 }
+                cached_tokens: { type: integer, minimum: 0 }
+
+    OpenAIImagesError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [message, type, code, param]
+          properties:
+            message: { type: string }
+            type: { type: string }
+            code: { type: ['null', string] }
+            param: { type: ['null', string] }
+
+    APIKeyScopeError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, request_id]
+          properties:
+            code: { type: string, const: insufficient_scope }
+            message: { type: string }
+            request_id: { type: string }
 
     # --- Services (Endpoint resources) -----------------------------
     CreateDeclarativeEndpointRequest:

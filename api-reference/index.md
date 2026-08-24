@@ -18,7 +18,7 @@ The Agent execution APIs use four related resources:
 
 | Area | Use it for | Start here |
 |---|---|---|
-| **Models** | Call LLM, image, audio, video, and embedding models | [Chat Completions](/api-reference/llm-gateway) or [Responses](/api-reference/responses) |
+| **Models** | Call LLM, image, audio, video, and embedding models | [Chat Completions](/api-reference/llm-gateway), [Responses](/api-reference/responses), or [OpenAI Images](/api-reference/images/generations) |
 | **Task costs** | Poll recent async model task settlement, final cost, estimates, and usage | [Get Task Cost](/api-reference/tasks/cost) |
 | **Account** | Inspect organization balance and recent API execution history | [Account API](/api-reference/account/) |
 | **Embed Configs** | Configure an embeddable web chat widget for an Agent | [Embed Configs API](/api-reference/embeds/) |
