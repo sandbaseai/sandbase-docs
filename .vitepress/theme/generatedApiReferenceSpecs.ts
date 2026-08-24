@@ -1513,9 +1513,17 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Inference",
     "method": "POST",
     "path": "/v1/messages",
-    "description": "Create a message through SandBase's Anthropic-compatible Messages endpoint.",
+    "description": "Create a message through SandBase's Anthropic-compatible Messages endpoint. SandBase maps the model for the selected provider and preserves compatible request and response fields.",
     "signature": "client.messages.create(params)",
     "groups": [
+      {
+        "title": "Request headers",
+        "fields": [
+          { "name": "x-api-key", "type": "string", "required": false, "description": "SandBase API key. Authorization: Bearer is also accepted; x-api-key takes precedence when both are present." },
+          { "name": "anthropic-version", "type": "string", "required": false, "default": "2023-06-01", "description": "Anthropic API version forwarded upstream. SandBase supplies 2023-06-01 when omitted." },
+          { "name": "anthropic-beta", "type": "string", "required": false, "description": "Comma-separated beta feature identifiers, subject to provider compatibility." }
+        ]
+      },
       {
         "title": "Request body",
         "schema": "MessageCreateParams",
@@ -1544,13 +1552,20 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "response": { "status": "200 OK", "code": "{\n  \"id\": \"msg_01...\",\n  \"type\": \"message\",\n  \"role\": \"assistant\",\n  \"model\": \"anthropic/claude-sonnet-4\",\n  \"content\": [{ \"type\": \"text\", \"text\": \"Hello! How can I help?\" }],\n  \"stop_reason\": \"end_turn\",\n  \"usage\": { \"input_tokens\": 8, \"output_tokens\": 7 }\n}" },
     "notes": [
       { "title": "Authentication", "description": "Use x-api-key or Authorization: Bearer. When both are provided, x-api-key takes precedence." },
-      { "title": "Compatibility", "description": "Content blocks, tool use, thinking, and streaming follow the Anthropic-compatible schema. Availability depends on the selected model." }
+      { "title": "Transparent protocol", "description": "Except for model mapping and configured provider compatibility rules, SandBase forwards compatible request fields, non-stream responses, and SSE events without protocol translation." },
+      { "title": "Beta features", "description": "anthropic-beta is forwarded when present. A candidate's compatibility rules may remove unsupported beta fields or skip that candidate." }
     ],
     "errors": [
       { "status": "400", "description": "Invalid request body or unsupported feature." },
       { "status": "401", "description": "Missing or invalid API key." },
+      { "status": "402", "description": "Organization spending limit reached." },
+      { "status": "403", "description": "API Key spending limit or organization permission failure." },
       { "status": "404", "description": "Model not found or unavailable." },
-      { "status": "429", "description": "Rate limit exceeded." }
+      { "status": "413", "description": "The provider rejected the request as too large." },
+      { "status": "429", "description": "Provider rate limit exceeded." },
+      { "status": "500", "description": "Prediction lifecycle or provider error." },
+      { "status": "502", "description": "Upstream stream ended before usable content." },
+      { "status": "503", "description": "Routing failed or all provider candidates were unavailable." }
     ]
   },
   "tasks/cost": {

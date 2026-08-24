@@ -18,7 +18,7 @@ client = Anthropic(
 
 ## Authentication and version headers
 
-Use `x-api-key` or `Authorization: Bearer …`. When both are supplied, `x-api-key` takes precedence. The optional `anthropic-version` header is accepted for SDK compatibility.
+Use `x-api-key` or `Authorization: Bearer …`. When both are supplied, `x-api-key` takes precedence. The optional `anthropic-version` header is forwarded upstream and defaults to `2023-06-01` when omitted. Optional `anthropic-beta` values are also forwarded, subject to provider compatibility.
 
 ## Messages and content blocks
 
@@ -30,8 +30,8 @@ Add tool definitions in `tools` and control selection through `tool_choice`. Whe
 
 ## Streaming
 
-Set `stream: true` to receive Anthropic-style SSE events, including `message_start`, content-block events, `message_delta`, and `message_stop`. Consumers should ignore unknown event types for forward compatibility.
+Set `stream: true` to receive Anthropic-style SSE events, including `message_start`, content-block events, `message_delta`, and `message_stop`. SandBase also forwards keepalive and provider-defined beta events. Consumers should ignore unknown event types for forward compatibility and handle protocol-level `error` events.
 
 ## Compatibility
 
-SandBase normalizes requests across multiple providers. Provider-specific beta features may not be available on every model. For the complete request and response schema, see [Create Anthropic Message](/api-reference/anthropic-compat).
+SandBase maps the public model name to the selected provider. Other compatible request fields and response bytes are preserved unless that provider has an explicit compatibility rule that removes an unsupported field or rejects the candidate. Provider-specific beta features may not be available on every model. For the complete request and response schema, see [Create Anthropic Message](/api-reference/anthropic-compat).

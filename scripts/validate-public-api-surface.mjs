@@ -87,6 +87,15 @@ assert.match(chatResponseSchema, /required: \[prompt_tokens, completion_tokens, 
 assert.match(chatResponseSchema, /reasoning_content:/, 'Chat responses must document reasoning content')
 const messagesPath = openapi.match(/^  \/v1\/messages:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(messagesPath, /security:\n\s+- BearerAuth: \[\]\n\s+- AnthropicApiKey: \[\]/, 'Messages must support Bearer or x-api-key authentication')
+assert.match(messagesPath, /name: anthropic-version\n\s+in: header\n\s+required: false/, 'Messages anthropic-version header must remain optional')
+assert.match(messagesPath, /default: "2023-06-01"/, 'Messages must document the default Anthropic version')
+assert.match(messagesPath, /name: anthropic-beta\n\s+in: header\n\s+required: false/, 'Messages must document the forwarded anthropic-beta header')
+assert.match(messagesPath, /additionalProperties: true/, 'Messages must preserve additional Anthropic-compatible request fields')
+assert.match(messagesPath, /text\/event-stream:/, 'Messages must document Anthropic SSE output')
+for (const status of ['402', '403', '413', '500', '502', '503']) {
+  assert.match(messagesPath, new RegExp(`'${status}':`), `Messages must document ${status} responses`)
+}
+assert.match(messagesPath, /AnthropicError/, 'Messages must document the Anthropic error envelope')
 assert.equal((openapi.match(/AnthropicApiKey:/g) ?? []).length, 2, 'Anthropic x-api-key authentication must be scoped only to Messages')
 assert.match(openapi, /AnthropicApiKey:\n\s+type: apiKey\n\s+in: header\n\s+name: x-api-key/, 'AnthropicApiKey must describe the x-api-key header')
 const embeddingRequestSchema = openapi.match(/^    EmbeddingRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''

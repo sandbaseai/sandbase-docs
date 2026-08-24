@@ -278,17 +278,28 @@ paths:
       operationId: createMessage
       tags: [Messages]
       summary: Create message (Anthropic compatible)
-      description: Anthropic Messages API compatible endpoint.
+      description: >-
+        Anthropic Messages-compatible endpoint. SandBase uses model and stream for routing, maps the public model
+        name to the selected provider, and otherwise preserves the compatible request and response protocol.
+        Provider compatibility rules may remove or reject unsupported beta fields before an upstream attempt.
       security:
         - BearerAuth: []
         - AnthropicApiKey: []
       parameters:
         - name: anthropic-version
           in: header
-          required: true
+          required: false
+          description: Anthropic API version. Defaults to 2023-06-01 when omitted.
           schema:
             type: string
+            default: "2023-06-01"
             example: "2023-06-01"
+        - name: anthropic-beta
+          in: header
+          required: false
+          description: Comma-separated Anthropic beta feature identifiers. Availability is provider-specific.
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -296,6 +307,8 @@ paths:
             schema:
               type: object
               required: [model, max_tokens, messages]
+              additionalProperties: true
+              description: Anthropic-compatible request. Additional fields are preserved unless a selected provider's compatibility rules remove or reject them.
               properties:
                 model:
                   type: string
@@ -307,6 +320,8 @@ paths:
                   type: array
                   items:
                     type: object
+                    required: [role, content]
+                    additionalProperties: true
                     properties:
                       role:
                         type: string
@@ -359,7 +374,25 @@ paths:
                   additionalProperties: true
       responses:
         '200':
-          description: Message response
+          description: Anthropic message response or event stream from the selected provider
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnthropicMessageResponse'
+            text/event-stream:
+              schema:
+                type: string
+                description: Anthropic SSE events, including provider-defined beta events and possible in-stream error events.
+        '400': { description: "Invalid JSON, missing model, unsupported feature, or invalid provider request", content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '401': { description: "Missing, invalid, revoked, or expired API key", content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '402': { description: Organization spending limit reached, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '403': { description: API Key spending limit or organization permission failure, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '404': { description: Model or upstream resource not found, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '413': { description: Provider rejected the request as too large, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '429': { description: Provider rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '500': { description: Prediction lifecycle or provider error, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '502': { description: Upstream stream ended before usable content, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
+        '503': { description: Routing failed or all provider candidates were unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/AnthropicError' } } } }
 
   # --- Embed Configs ---------------------------------------------
   /v1/embeds:
@@ -2879,6 +2912,54 @@ components:
             type: { type: string }
             code: { type: ['null', string] }
             param: { type: ['null', string] }
+
+    AnthropicMessageResponse:
+      type: object
+      additionalProperties: true
+      description: Anthropic-compatible response forwarded from the selected provider. Fields can vary with beta features.
+      properties:
+        id: { type: string }
+        type: { type: string, const: message }
+        role: { type: string, const: assistant }
+        model: { type: string }
+        content:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        stop_reason:
+          type: [string, 'null']
+        stop_sequence:
+          type: [string, 'null']
+        usage:
+          type: object
+          additionalProperties: true
+          properties:
+            input_tokens: { type: integer, minimum: 0 }
+            output_tokens: { type: integer, minimum: 0 }
+            cache_read_input_tokens: { type: integer, minimum: 0 }
+            cache_creation_input_tokens: { type: integer, minimum: 0 }
+            cache_creation:
+              type: object
+              additionalProperties: true
+              properties:
+                ephemeral_5m_input_tokens: { type: integer, minimum: 0 }
+                ephemeral_1h_input_tokens: { type: integer, minimum: 0 }
+
+    AnthropicError:
+      type: object
+      required: [type, error]
+      properties:
+        type: { type: string, const: error }
+        error:
+          type: object
+          required: [type, message]
+          additionalProperties: true
+          properties:
+            type:
+              type: string
+              description: Anthropic error type, such as invalid_request_error, authentication_error, permission_error, request_too_large, rate_limit_error, or api_error.
+            message: { type: string }
 
     # --- Embeddings -----------------------------------------------
     EmbeddingRequest:
