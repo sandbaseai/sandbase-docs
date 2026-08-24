@@ -65,6 +65,12 @@ for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
     const operation = pathItem[method]
     if (!operation) continue
     for (const [status, response] of Object.entries(operation.responses)) {
+      if (Number(status) >= 200 && Number(status) < 300 && status !== '204') {
+        assert.ok(
+          Object.values(response.content ?? {}).some((media) => media.schema),
+          `${method.toUpperCase()} ${publicPath} ${status} must document its implemented success envelope`,
+        )
+      }
       if (Number(status) < 400) continue
       assert.ok(
         response.content?.['application/json']?.schema,
@@ -88,6 +94,15 @@ for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
 
 const jsonErrorSchema = (method, publicPath, status) =>
   openapiDocument.paths[publicPath]?.[method]?.responses?.[status]?.content?.['application/json']?.schema
+const jsonSuccessSchema = (method, publicPath, status = '200') =>
+  openapiDocument.paths[publicPath]?.[method]?.responses?.[status]?.content?.['application/json']?.schema
+
+for (const publicPath of ['/v1/sessions', '/v1/sessions/{id}/events', '/v1/deployments']) {
+  assert.ok(
+    jsonSuccessSchema('get', publicPath)?.required?.includes('data'),
+    `GET ${publicPath} must require the always-emitted data collection`,
+  )
+}
 
 for (const status of ['400', '500', '503']) {
   assert.equal(
