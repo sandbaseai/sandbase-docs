@@ -125,6 +125,16 @@ assert.match(skillUploadPath, /preview image[\s\S]*?10 MB/, 'Skill uploads must 
 const skillReferences = generatedReferenceSpecs.match(/"skills\/create": \{[\s\S]*?(?=\n  "inference\/responses")/)?.[0] ?? ''
 assert.doesNotMatch(skillReferences, /skill_01/, 'Skill reference examples must not invent a skill_ ID prefix')
 assert.match(skillReferences, /550e8400-e29b-41d4-a716-446655440000/, 'Skill reference examples must use a UUID')
+const modelDetailSchema = openapi.match(/^    ModelDetail:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(modelDetailSchema, /id:\n\s+type: string\n\s+format: uuid/, 'Model detail IDs must document the implemented UUID identity')
+assert.match(modelDetailSchema, /required: \[[^\]]*run_count[^\]]*sort_order[^\]]*created_at[^\]]*examples[^\]]*\]/, 'Model details must require fields always emitted by the serializer')
+assert.doesNotMatch(modelDetailSchema, /^        (?:context_length|base_price|price_formula):/m, 'Model details must not advertise fields absent from the top-level serializer')
+const modelCardSchema = openapi.match(/^    ModelCard:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(modelCardSchema, /cache_write_1h_multiplier:/, 'Model cards must include the implemented one-hour cache multiplier')
+assert.match(modelCardSchema, /required: \[[^\]]*cache_write_1h_multiplier[^\]]*cover_url[^\]]*\]/, 'Present model cards must require every serializer field')
+const modelGetReference = generatedReferenceSpecs.match(/"models\/get": \{[\s\S]*?(?=\n  "models\/image")/)?.[0] ?? ''
+assert.match(modelGetReference, /"required": true/, 'Get Model must require its path parameter')
+assert.doesNotMatch(modelGetReference, /model_01/, 'Get Model examples must not invent a model_ ID prefix')
 const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(environmentSchema, /config:\n[\s\S]*?- type: 'null'/, 'Environment config must allow the serializer\'s null output')
 assert.match(environmentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Environment metadata must allow the serializer\'s null output')

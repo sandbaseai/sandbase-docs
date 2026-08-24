@@ -1230,13 +1230,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModelListResponse'
+        '500':
+          description: Model catalog lookup failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
 
   /v1/models/{id_or_name}:
     get:
       operationId: getModel
       tags: [Models]
       summary: Get model details
-      description: Get model details by model ID or full model name. Model names containing slashes are supported, for example /v1/models/openai/gpt-4o.
+      description: Get model details by UUID or full logical model name. Model names containing slashes are supported, for example /v1/models/openai/gpt-4o. Name lookup returns enabled catalog models; UUID lookup can return a disabled catalog record with enabled set to false. Protocol-ingress-only models are never returned.
       parameters:
         - name: id_or_name
           in: path
@@ -1251,6 +1257,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModelDetail'
+        '400':
+          description: Missing model ID or name
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+        '404':
+          description: Model not found or not publicly discoverable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
 
   /v1/deployments:
     post:
@@ -2107,12 +2125,15 @@ components:
         created: { type: integer, description: Unix creation timestamp. }
         owned_by: { type: string, description: Representative enabled provider or sandbase. }
 
-    ModelCatalogItem:
+    ModelDetail:
       type: object
-      description: Lightweight model catalog item. Detailed token/cache/reasoning price fields are intentionally omitted from list responses.
+      description: Detailed model response. Pricing is returned only in the optional model_card object.
+      required: [id, name, display_name, vendor, description, type, capability_tags, skills, unified_schema, execution_mode, supported_modes, run_count, sort_order, published_at, vendor_slug, model_slug, enabled, featured, created_at, examples]
       properties:
         id:
           type: string
+          format: uuid
+          description: Internal model resource ID. Use name in inference requests.
         name:
           type: string
           example: openai/gpt-4o
@@ -2121,17 +2142,31 @@ components:
           example: GPT-4o
         vendor:
           type: string
-        type:
-          type: string
         description:
           type: string
+        type:
+          type: string
         capability_tags:
-          type: array
+          type: [array, 'null']
           items:
             type: string
+        skills:
+          type: array
+          description: String capability tags derived from capability_tags; empty when tags are absent or invalid.
+          items:
+            type: string
+        unified_schema:
+          type: [object, 'null']
+          additionalProperties: true
         execution_mode:
           type: string
-        context_length:
+        supported_modes:
+          type: [array, 'null']
+          items:
+            type: string
+        run_count:
+          type: integer
+        sort_order:
           type: integer
         published_at:
           type: [string, 'null']
@@ -2144,49 +2179,32 @@ components:
           type: boolean
         featured:
           type: boolean
-        base_price:
-          oneOf:
-            - type: string
-            - type: number
-            - type: 'null'
-        price_formula:
-          type: [string, 'null']
+        created_at:
+          type: string
+          format: date-time
+        model_card:
+          $ref: '#/components/schemas/ModelCard'
+        examples:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelExample'
 
-    ModelDetail:
-      allOf:
-        - $ref: '#/components/schemas/ModelCatalogItem'
-        - type: object
-          description: Detailed model response. Full pricing fields are returned in model_card; there is no top-level pricing object.
-          properties:
-            skills:
-              type: array
-              description: Capability-derived skill tags for the model.
-              items:
-                type: string
-            unified_schema:
-              type: object
-              additionalProperties: true
-            supported_modes:
-              type: array
-              items:
-                type: string
-            run_count:
-              type: integer
-            sort_order:
-              type: integer
-            created_at:
-              type: string
-              format: date-time
-            model_card:
-              $ref: '#/components/schemas/ModelCard'
-            examples:
-              type: array
-              items:
-                type: object
+    ModelExample:
+      type: object
+      required: [id, is_default, created_at]
+      properties:
+        id: { type: string }
+        is_default: { type: boolean }
+        created_at: { type: string, format: date-time }
+        input_snapshot:
+          description: Parsed JSON input snapshot. Omitted when absent or invalid.
+        output_snapshot:
+          description: Parsed JSON output snapshot. Omitted when absent or invalid.
 
     ModelCard:
       type: object
       description: Model pricing and presentation data.
+      required: [base_price, prompt_token_price, completion_token_price, cache_read_multiplier, cache_write_multiplier, cache_write_1h_multiplier, reasoning_price, price_formula, markup_ratio, readme, cover_url]
       properties:
         base_price:
           oneOf:
@@ -2213,22 +2231,27 @@ components:
             - type: string
             - type: number
             - type: 'null'
+        cache_write_1h_multiplier:
+          oneOf:
+            - type: string
+            - type: number
+            - type: 'null'
         reasoning_price:
           oneOf:
             - type: string
             - type: number
             - type: 'null'
         price_formula:
-          type: [string, 'null']
+          type: string
         markup_ratio:
           oneOf:
             - type: string
             - type: number
             - type: 'null'
         readme:
-          type: [string, 'null']
+          type: string
         cover_url:
-          type: [string, 'null']
+          type: string
 
     # --- Chat Completions -----------------------------------------
     ChatCompletionRequest:

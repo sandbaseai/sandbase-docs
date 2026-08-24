@@ -477,7 +477,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Models",
     "method": "GET",
     "path": "/v1/models/{id_or_name}",
-    "description": "Get detailed information about a model. This endpoint accepts either a model ID or the full model name, and returns the model card, unified schema, and skills in one response.",
+    "description": "Get model details by UUID or full logical name. Name lookup returns enabled catalog models; UUID lookup can return a disabled record with enabled set to false. Protocol-ingress-only models are never returned.",
     "groups": [
       {
         "title": "Path parameters",
@@ -485,8 +485,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
           {
             "name": "id_or_name",
             "type": "string",
-            "required": false,
-            "description": "Model ID, for example model01abc..., or model name, for example openai/gpt-4o."
+            "required": true,
+            "description": "Model UUID or full logical model name, for example openai/gpt-4o. Names may contain slashes."
           }
         ]
       }
@@ -495,12 +495,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/models/{id_or_name}\" \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl \"https://api.sandbase.ai/v1/models/openai/gpt-4o\" \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
       }
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"id\": \"model_01abc...\",\n  \"name\": \"openai/gpt-4o\",\n  \"display_name\": \"GPT-4o\",\n  \"vendor\": \"OpenAI\",\n  \"description\": \"Most capable GPT-4 model with vision...\",\n  \"type\": \"llm\",\n  \"capability_tags\": [\"chat\", \"streaming\", \"vision\", \"tools\", \"json_mode\", \"cache\"],\n  \"skills\": [\"chat\", \"streaming\", \"vision\", \"tools\", \"json_mode\", \"cache\"],\n  \"unified_schema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"prompt\": {\n        \"type\": \"string\"\n      }\n    }\n  },\n  \"execution_mode\": \"chat\",\n  \"supported_modes\": [\"chat\"],\n  \"published_at\": \"2026-07-07T00:00:00Z\",\n  \"vendor_slug\": \"openai\",\n  \"model_slug\": \"gpt-4o\",\n  \"enabled\": true,\n  \"featured\": true,\n  \"model_card\": {\n    \"base_price\": \"0.000000\",\n    \"prompt_token_price\": \"0.0000025\",\n    \"completion_token_price\": \"0.000010\",\n    \"cache_read_multiplier\": \"0.5\",\n    \"cache_write_multiplier\": \"1.0\",\n    \"reasoning_price\": null,\n    \"price_formula\": \"$input_tokens * 0.0000025 + $output_tokens * 0.000010\",\n    \"markup_ratio\": \"1.0000\",\n    \"readme\": \"Model usage notes...\",\n    \"cover_url\": \"https://...\"\n  },\n  \"examples\": []\n}"
+      "code": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"openai/gpt-4o\",\n  \"display_name\": \"GPT-4o\",\n  \"vendor\": \"OpenAI\",\n  \"description\": \"Most capable GPT-4 model with vision...\",\n  \"type\": \"llm\",\n  \"capability_tags\": [\"chat\", \"streaming\", \"vision\", \"tools\", \"json_mode\", \"cache\"],\n  \"skills\": [\"chat\", \"streaming\", \"vision\", \"tools\", \"json_mode\", \"cache\"],\n  \"unified_schema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"prompt\": {\n        \"type\": \"string\"\n      }\n    }\n  },\n  \"execution_mode\": \"chat\",\n  \"supported_modes\": [\"chat\"],\n  \"run_count\": 12500,\n  \"sort_order\": 10,\n  \"published_at\": \"2026-07-07T00:00:00Z\",\n  \"vendor_slug\": \"openai\",\n  \"model_slug\": \"gpt-4o\",\n  \"enabled\": true,\n  \"featured\": true,\n  \"created_at\": \"2026-07-07T00:00:00Z\",\n  \"model_card\": {\n    \"base_price\": \"0.000000\",\n    \"prompt_token_price\": \"0.0000025\",\n    \"completion_token_price\": \"0.000010\",\n    \"cache_read_multiplier\": \"0.5\",\n    \"cache_write_multiplier\": \"1.0\",\n    \"cache_write_1h_multiplier\": null,\n    \"reasoning_price\": null,\n    \"price_formula\": \"$input_tokens * 0.0000025 + $output_tokens * 0.000010\",\n    \"markup_ratio\": \"1.0000\",\n    \"readme\": \"Model usage notes...\",\n    \"cover_url\": \"https://...\"\n  },\n  \"examples\": []\n}"
     }
   },
   "models/image": {

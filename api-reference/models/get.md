@@ -1,6 +1,6 @@
 ---
 title: "Get Model"
-description: "Get detailed information about a model. This endpoint accepts either a model ID or the full model name, and returns the model card, unified schema, and skills in one response."
+description: "Get model details by UUID or full logical name. Name lookup returns enabled catalog models; UUID lookup can return a disabled record with enabled set to false."
 aside: false
 outline: false
 apiReferenceKey: "models/get"
