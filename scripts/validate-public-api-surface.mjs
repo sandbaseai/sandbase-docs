@@ -349,6 +349,22 @@ assert.doesNotMatch(modelGetReference, /model_01/, 'Get Model examples must not 
 const accountBalanceSchema = openapi.match(/^    AccountBalance:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(accountBalanceSchema, /required: \[org_id, balance, credit_limit, alert_threshold\]/, 'Account balance must require every emitted field')
 assert.match(accountBalanceSchema, /credit_limit:\n\s+oneOf:[\s\S]*?- type: 'null'/, 'Account credit limit must allow null')
+const accountBalancePath = openapi.match(/^  \/v1\/account\/balance:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '401', '404']) {
+  assert.match(accountBalancePath, new RegExp(`'${status}':`), `Account balance must document ${status} responses`)
+}
+assert.doesNotMatch(accountBalancePath, /components\/schemas\/APIError/, 'Account balance uses the Open API string error shape')
+assert.doesNotMatch(accountBalancePath, /'500':/, 'Account balance collapses organization lookup failures to not found')
+const accountHistoryPath = openapi.match(/^  \/v1\/account\/history:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(accountHistoryPath, /name: timezone/, 'Account history must document the validated timezone compatibility parameter')
+assert.match(accountHistoryPath, /raw response timestamps remain unchanged/, 'Account history must not imply timezone transforms raw timestamps')
+assert.match(accountHistoryPath, /Exact request_id mode ignores it/, 'Account history must document request-ID timezone bypass')
+assert.match(accountHistoryPath, /any other value applies no type filter/, 'Account history must document unknown type filter behavior')
+assert.match(accountHistoryPath, /every other value falls back to 7d/, 'Account history must document unsupported rolling range fallback')
+for (const status of ['200', '400', '401', '500']) {
+  assert.match(accountHistoryPath, new RegExp(`'${status}':`), `Account history must document ${status} responses`)
+}
+assert.doesNotMatch(accountHistoryPath, /components\/schemas\/APIError/, 'Account history uses the Open API string error shape')
 const accountHistorySchema = openapi.match(/^    AccountHistoryItem:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 for (const field of ['latency_ms', 'user_cost', 'cache_creation_tokens', 'api_key_prefix']) {
   assert.match(accountHistorySchema, new RegExp(`required: \\[[^\\]]*${field}`), `Account history must require emitted ${field}`)

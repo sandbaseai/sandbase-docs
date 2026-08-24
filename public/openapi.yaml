@@ -518,13 +518,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIError'
+                $ref: '#/components/schemas/TaskCostError'
         '404':
           description: Organization not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIError'
+                $ref: '#/components/schemas/TaskCostError'
 
   /v1/account/history:
     get:
@@ -535,10 +535,10 @@ paths:
       parameters:
         - { name: model, in: query, schema: { type: string }, description: Exact logical model name. }
         - { name: api_key_id, in: query, schema: { type: string }, description: Exact API Key resource ID within the organization. }
-        - { name: type, in: query, schema: { type: string, enum: [multimodal, llm, api] }, description: "Execution category. multimodal includes image, video, and audio." }
+        - { name: type, in: query, schema: { type: string }, description: 'Execution category. Supported filters are multimodal (image, video, and audio), llm, and api; any other value applies no type filter.' }
         - { name: status, in: query, schema: { type: string, enum: [completed, failure, in_progress] }, description: Status group. failure includes failed and timeout; in_progress includes pending and running. }
         - { name: error_type, in: query, schema: { type: string, maxLength: 50 }, description: Exact error type. Use unknown for records without an error type. }
-        - { name: range, in: query, schema: { type: string, enum: [1h, 24h, 7d, 30d], default: 7d }, description: Rolling created-at range when an explicit analytics window is not used. Unsupported values fall back to 7d. }
+        - { name: range, in: query, schema: { type: string, default: 7d }, description: 'Rolling created-at range when an explicit analytics window is not used. Supported values are 1h, 24h, 7d, and 30d; every other value falls back to 7d.' }
         - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
         - { name: page_size, in: query, schema: { type: integer, minimum: 1, maximum: 100, default: 20 } }
         - { name: request_id, in: query, schema: { type: string, maxLength: 64 }, description: "Exact organization-scoped execution ID lookup. When set, other filters are ignored and the response is forced to page 1 with page_size 1." }
@@ -548,6 +548,7 @@ paths:
         - { name: end_at, in: query, schema: { type: string, format: date-time }, description: Exclusive RFC 3339 window end. Must be paired with start_at. }
         - { name: latency_sample, in: query, schema: { type: string, enum: [positive, terminal_positive] }, description: "Restrict latency samples to positive values, optionally only for terminal executions." }
         - { name: min_latency_ms, in: query, schema: { type: integer, minimum: 0 }, description: Minimum recorded latency in milliseconds. }
+        - { name: timezone, in: query, schema: { type: string, maxLength: 64 }, description: 'Compatibility parameter. Without request_id, a valid IANA time-zone name is required when supplied, but raw response timestamps remain unchanged. Exact request_id mode ignores it.' }
       responses:
         '200':
           description: Paginated execution history
@@ -560,19 +561,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIError'
+                $ref: '#/components/schemas/TaskCostError'
         '401':
           description: The API key did not resolve an organization
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIError'
+                $ref: '#/components/schemas/TaskCostError'
         '500':
           description: History lookup failed
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIError'
+                $ref: '#/components/schemas/TaskCostError'
 
   # --- Tasks ------------------------------------------------------
   /v1/tasks/{task_id}/cost:
