@@ -631,6 +631,8 @@ paths:
       summary: Get task cost and usage
       description: |
         Returns the settlement status, final user cost, estimated cost, and token usage for a recent task.
+        Public API keys can retrieve only tasks originally created by that same API key, even when another key belongs to the same organization.
+        This lookup remains available after the key reaches its spending limit, but expired, revoked, or scoped keys are still rejected.
         When `settled` is false, `cost` is not final and must not be used for billing or reconciliation.
         Use `estimated_cost` only as a display estimate until final settlement completes.
         Older task execution records may be archived after the retention window and then return 404.
@@ -655,6 +657,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskCostError'
+        '403':
+          description: API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyScopeError'
         '404':
           description: Task does not exist or is not accessible with the current API key
           content:

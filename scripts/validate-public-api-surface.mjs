@@ -414,6 +414,14 @@ for (const status of ['200', '401', '404']) {
   assert.match(embedUsagePath, new RegExp(`'${status}':`), `Embed usage must document ${status} responses`)
 }
 assert.doesNotMatch(embedUsagePath, /'500':/, 'Embed usage aggregation currently returns counts without propagating query failures')
+const taskCostPath = openapi.match(/^  \/v1\/tasks\/\{task_id\}\/cost:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(taskCostPath, /same API key/, 'Task cost lookup must document its API-key ownership boundary')
+assert.match(taskCostPath, /spending limit/, 'Task cost lookup must document its spending-limit exception')
+for (const status of ['200', '401', '403', '404']) {
+  assert.match(taskCostPath, new RegExp(`'${status}':`), `Task cost lookup must document ${status} responses`)
+}
+assert.match(taskCostPath, /'403':[\s\S]*APIKeyScopeError/, 'Task cost scope failures must use their implemented nested error shape')
+assert.doesNotMatch(taskCostPath, /'500':/, 'Task cost lookup does not expose an internal-error branch')
 const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(environmentSchema, /required: \[id, type, agent_id, name, description, config, metadata, credential_bindings, archived_at, created_at, updated_at\]/, 'Environment responses must require every serializer field')
 assert.match(environmentSchema, /id:\n\s+type: string\n\s+pattern: '\^env_'/, 'Environment IDs must document their public prefix')
