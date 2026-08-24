@@ -79,6 +79,9 @@ assert.doesNotMatch(openapi, /^  \/events\/webhooks(?:\/\{[^}]+\})?:$/m, 'Sandbo
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
 const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.doesNotMatch(getRunPath, /pattern:/, 'Run result lookup IDs must not inherit another resource prefix')
+for (const status of ['200', '401', '403', '404']) {
+  assert.match(getRunPath, new RegExp(`'${status}':`), `Run result lookup must document ${status} responses`)
+}
 const runPath = openapi.match(/^  \/v1\/run:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(runPath, /text\/event-stream:/, 'Run must document supported streaming output')
 for (const status of ['400', '401', '402', '403', '404', '500', '502', '503']) {
@@ -90,6 +93,10 @@ assert.match(runRequestSchema, /^        stream:\n\s+type: boolean/m, 'Run must 
 assert.match(runRequestSchema, /public HTTPS callback URL for asynchronous image, video, audio, or API tasks/, 'Run must scope webhook callbacks to implemented async capability types')
 const runResponseSchema = openapi.match(/^    RunResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(runResponseSchema, /required: \[id, status, model\]/, 'Run responses must require the always-emitted model field')
+assert.match(runResponseSchema, /completed task can temporarily be reported as running while output transfer is still pending/, 'Run status must document transfer-pending downgrade behavior')
+assert.match(runResponseSchema, /completed responses whose output is empty, malformed, unsupported, or not yet transferred/, 'Run outputs must document every implemented omission case')
+assert.doesNotMatch(runResponseSchema, /url: \{[^\n]*format: uri/, 'Run output strings are not URI-validated by the response projection')
+assert.match(runResponseSchema, /stored error message is non-empty; otherwise omitted/, 'Run errors must document implemented omission behavior')
 const apiPassthroughPath = openapi.match(/^  \/v1\/api\/\{vendor\}\/\{upstream_path\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(apiPassthroughPath, /multiple literal slash-separated segments/, 'API passthrough must document Gin wildcard path behavior')
 for (const method of ['get', 'post']) {

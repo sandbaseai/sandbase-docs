@@ -781,6 +781,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskCostError'
+        '403':
+          description: API key scope does not authorize this endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyScopeError'
 
   /v1/api/{vendor}/{upstream_path}:
     parameters:
@@ -3177,18 +3183,19 @@ components:
         status:
           type: string
           enum: [pending, running, completed, failed, timeout]
+          description: A stored completed task can temporarily be reported as running while output transfer is still pending.
         outputs:
           type: array
-          description: Generated outputs, present when a run completes successfully and omitted from non-terminal responses.
+          description: Extracted generated outputs when available. Omitted from non-terminal responses and also from completed responses whose output is empty, malformed, unsupported, or not yet transferred.
           items:
             type: object
             properties:
-              url: { type: string, format: uri }
+              url: { type: string, description: 'Provider output string, commonly an HTTP URL or data URI; syntax is not revalidated by this projection.' }
               content_type: { type: string }
             additionalProperties: true
         error:
           type: object
-          description: Structured public error present for failed or timed-out runs.
+          description: Structured sanitized error for failed or timed-out runs when the stored error message is non-empty; otherwise omitted.
           required: [type, message]
           properties:
             type: { type: string }
