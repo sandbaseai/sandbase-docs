@@ -3632,7 +3632,7 @@ components:
     CreateDeclarativeEndpointRequest:
       type: object
       additionalProperties: false
-      required: [name, runtime]
+      required: [name, runtime, protocols]
       properties:
         name:
           type: string
@@ -3666,15 +3666,17 @@ components:
             $ref: '#/components/schemas/EndpointToolset'
         protocols:
           type: array
+          minItems: 1
+          uniqueItems: true
+          description: Explicit public invocation transports. Always send this field; public clients may enable REST, experimental ACP, or both.
           items:
             type: string
             enum: [rest, acp]
-          default: [rest]
 
     CreateAdvancedEndpointRequest:
       type: object
       additionalProperties: false
-      required: [name, agent_id]
+      required: [name, agent_id, protocols]
       properties:
         name:
           type: string
@@ -3691,6 +3693,9 @@ components:
           description: Optional compatibility assertion; the Agent runtime Environment is resolved automatically.
         protocols:
           type: array
+          minItems: 1
+          uniqueItems: true
+          description: Explicit public invocation transports. Always send this field; public clients may enable REST, experimental ACP, or both.
           items:
             type: string
             enum: [rest, acp]
@@ -3747,6 +3752,8 @@ components:
           enum: [active, disabled]
         protocols:
           type: array
+          minItems: 1
+          uniqueItems: true
           items:
             type: string
             enum: [rest, acp]
@@ -3790,9 +3797,9 @@ components:
           type: string
         protocols:
           type: array
+          description: Enabled transport identifiers. The documented public request values are rest and acp; other returned values are reserved.
           items:
             type: string
-            enum: [rest, acp]
         session_metadata:
           type: [object, 'null']
           additionalProperties: true

@@ -258,6 +258,14 @@ for (const field of ['session_metadata', 'memory_config', 'resource_config', 'va
   assert.match(endpointSchema, new RegExp(`${field}:\\n\\s+type: \\[object, 'null'\\]`), `Endpoint ${field} must allow the serializer's null output`)
 }
 assert.match(endpointSchema, /store_status:\n\s+type: string\n\s+enum: \[private, pending_review, public, suspended\]/, 'Endpoint responses must document the serializer\'s store status')
+assert.doesNotMatch(endpointSchema, /protocols:[\s\S]*?enum: \[rest, acp\]/, 'Endpoint responses must not claim internal transport values are normalized to the public request enum')
+for (const schemaName of ['CreateDeclarativeEndpointRequest', 'CreateAdvancedEndpointRequest']) {
+  const schema = openapi.match(new RegExp(`^    ${schemaName}:\\n[\\s\\S]*?(?=^    [A-Za-z])`, 'm'))?.[0] ?? ''
+  assert.match(schema, /required: \[[^\]]*protocols[^\]]*\]/, `${schemaName} must require explicit public protocols to avoid hidden transport defaults`)
+  assert.match(schema, /protocols:\n\s+type: array\n\s+minItems: 1\n\s+uniqueItems: true/, `${schemaName} must require a non-empty unique protocol list`)
+  assert.match(schema, /enum: \[rest, acp\]/, `${schemaName} must expose only public invocation transports`)
+  assert.doesNotMatch(schema, /default: \[rest\]/, `${schemaName} must not claim an unimplemented REST-only server default`)
+}
 const endpointACPPath = openapi.match(/^  \/v1\/endpoints\/\{id\}\/acp:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(endpointACPPath, /ACPRequest/, 'Endpoint ACP must document its JSON-RPC request envelope')
 assert.match(endpointACPPath, /application\/x-ndjson:/, 'Endpoint ACP must document prompt streaming as NDJSON')
