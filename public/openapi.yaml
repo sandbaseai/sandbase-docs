@@ -1934,6 +1934,9 @@ paths:
                     items:
                       $ref: '#/components/schemas/Deployment'
                   next_page: { type: string, description: Opaque cursor included only when another page is available. }
+        '400': { description: Invalid status filter or page cursor }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Deployment list could not be loaded }
 
   /v1/deployments/{id}:
     get:
@@ -1949,6 +1952,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Deployment'
+        '401': { description: Missing or invalid API key }
+        '404': { description: Deployment not found }
+        '500': { description: Deployment detail could not be loaded }
     patch:
       operationId: updateDeployment
       tags: [Deployments]
@@ -1968,6 +1974,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Deployment'
+        '400': { description: 'Invalid field, events, schedule, timeout, binding, Agent config, or notification target' }
+        '401': { description: Missing or invalid API key }
+        '404': { description: 'Deployment, Skill, or Environment not found' }
+        '409': { description: 'Archived, active, running, or version-conflicted Deployment' }
+        '422': { description: Reserved field supplied or Runtime/Skill is incompatible }
+        '500': { description: Deployment update or detail reload failed }
     post:
       operationId: updateDeploymentClaude
       tags: [Deployments]
@@ -1987,6 +1999,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Deployment'
+        '400': { description: 'Invalid field, events, schedule, timeout, binding, Agent config, or notification target' }
+        '401': { description: Missing or invalid API key }
+        '404': { description: 'Deployment, Skill, or Environment not found' }
+        '409': { description: 'Archived, active, running, or version-conflicted Deployment' }
+        '422': { description: Reserved field supplied or Runtime/Skill is incompatible }
+        '500': { description: Deployment update or detail reload failed }
     delete:
       operationId: deleteDeployment
       tags: [Deployments]
@@ -2007,6 +2025,8 @@ paths:
                   deleted: { type: boolean, const: true }
         '404': { description: Deployment not found }
         '409': { description: Deployment cannot be deleted from its current state }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Deployment deletion failed }
 
   /v1/deployments/{id}/run:
     post:
@@ -2042,6 +2062,8 @@ paths:
               schema: { $ref: '#/components/schemas/Deployment' }
         '404': { description: Deployment not found }
         '409': { description: Deployment cannot be paused from its current state }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Deployment pause failed }
 
   /v1/deployments/{id}/unpause:
     post:
@@ -2058,6 +2080,8 @@ paths:
               schema: { $ref: '#/components/schemas/Deployment' }
         '404': { description: Deployment not found }
         '409': { description: Deployment cannot be resumed from its current state }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Deployment resume failed }
 
   /v1/deployments/{id}/archive:
     post:
@@ -2074,6 +2098,8 @@ paths:
               schema: { $ref: '#/components/schemas/Deployment' }
         '404': { description: Deployment not found }
         '409': { description: Deployment cannot be archived from its current state }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Deployment archive or reload failed }
 
   /v1/deployments/{id}/notifications/feishu/test:
     post:
@@ -4786,16 +4812,10 @@ components:
         environment_id: { type: string }
         initial_events:
           type: array
+          minItems: 1
+          description: Must contain at least one user.message event.
           items: { $ref: '#/components/schemas/SessionEventInput' }
         schedule: { type: [object, 'null'] }
-        resources:
-          type: array
-          description: Reserved for Claude compatibility; rejected until resource attachment is supported.
-          items: { type: object, additionalProperties: true }
-        vault_ids:
-          type: array
-          description: Reserved for Claude compatibility; rejected until vault attachment is supported.
-          items: { type: string }
         timeout_policy:
           type: object
           additionalProperties: false
@@ -4828,7 +4848,7 @@ components:
     Deployment:
       type: object
       description: Deployment resource. List responses omit initial_events and config; detail responses may add resolved binding fields.
-      required: [id, type, name, agent, agent_id, environment_id, resources, vault_ids, status, version, creation_mode, created_at, updated_at]
+      required: [id, type, name, description, metadata, resources, vault_ids, agent, agent_id, agent_version, environment_id, schedule, timeout_policy, status, version, next_run_at, creation_mode, created_at, updated_at]
       properties:
         id: { type: string, pattern: '^depl_' }
         type: { type: string, enum: [deployment] }

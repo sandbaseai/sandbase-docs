@@ -197,11 +197,27 @@ for (const status of ['200', '400', '401', '404', '409', '502']) {
   assert.match(feishuTestPath, new RegExp(`'${status}':`), `Feishu notification test must document ${status} responses`)
 }
 const updateDeploymentSchema = openapi.match(/^    UpdateDeploymentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+for (const field of ['resources', 'vault_ids']) {
+  assert.doesNotMatch(updateDeploymentSchema, new RegExp(`^        ${field}:`, 'm'), `Deployment updates must not advertise always-rejected ${field}`)
+}
+assert.match(updateDeploymentSchema, /initial_events:\n\s+type: array\n\s+minItems: 1/, 'Deployment updates must require non-empty initial events')
 assert.match(updateDeploymentSchema, /notification_settings:\n\s+type: \[object, 'null'\]/, 'Deployment notifications must allow null to clear the saved target')
 assert.match(updateDeploymentSchema, /required: \[feishu_webhook_url\]/, 'A non-null notification_settings object must contain only its implemented webhook field')
 assert.match(updateDeploymentSchema, /pattern: '\^https:\/\/open\\\.feishu\\\.cn\/open-apis\/bot\/v2\/hook\//, 'Deployment notifications must publish the enforced Feishu webhook origin and path')
 assert.match(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Sidebar must link to the Feishu notification test reference')
 assert.match(sidebar, /\/api-reference\/endpoints\/acp/, 'Sidebar must link to the Endpoint ACP reference')
+const deploymentSchema = openapi.match(/^    Deployment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(deploymentSchema, /required: \[id, type, name, description, metadata, resources, vault_ids, agent, agent_id, agent_version, environment_id, schedule, timeout_policy, status, version, next_run_at, creation_mode, created_at, updated_at\]/, 'Deployment responses must require fields emitted by every list and detail projection')
+const deploymentResourcePath = openapi.match(/^  \/v1\/deployments\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['400', '401', '404', '409', '422', '500']) {
+  assert.match(deploymentResourcePath, new RegExp(`'${status}':`), `Deployment resource operations must collectively document ${status}`)
+}
+for (const suffix of ['pause', 'unpause', 'archive']) {
+  const lifecyclePath = openapi.match(new RegExp(`^  /v1/deployments/\\{id\\}/${suffix}:\\n[\\s\\S]*?(?=^  /)`, 'm'))?.[0] ?? ''
+  for (const status of ['200', '401', '404', '409', '500']) {
+    assert.match(lifecyclePath, new RegExp(`'${status}':`), `Deployment ${suffix} must document ${status}`)
+  }
+}
 const agentSchema = openapi.match(/^    Agent:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 for (const field of ['tools', 'mcp_servers', 'skills', 'handoffs']) {
   assert.match(agentSchema, new RegExp(`${field}:\\n\\s+type: \\[array, 'null'\\]`), `Agent ${field} must allow the serializer's null output`)
