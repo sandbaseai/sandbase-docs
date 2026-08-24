@@ -1079,6 +1079,8 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/TaskCostError' }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404':
           description: Referenced Skill, Agent version, or Environment was not found
           content:
@@ -1147,6 +1149,8 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/TaskCostError' }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500':
           description: Endpoint list could not be loaded
           content:
@@ -1177,6 +1181,8 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/TaskCostError' }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
     patch:
       operationId: updateEndpoint
       tags: [Services]
@@ -1204,6 +1210,8 @@ paths:
               schema: { $ref: '#/components/schemas/APIError' }
         '400': { description: 'Invalid request, status, protocols, Agent binding, or required expected version' }
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: 'Service, Agent version, or Environment not found' }
         '422': { description: Runtime provider is unsupported }
         '500': { description: Service update failed }
@@ -1234,6 +1242,8 @@ paths:
               schema: { $ref: '#/components/schemas/APIError' }
         '400': { description: 'Invalid request, status, protocols, Agent binding, or required expected version' }
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: 'Service, Agent version, or Environment not found' }
         '422': { description: Runtime provider is unsupported }
         '500': { description: Service update failed }
@@ -1256,6 +1266,8 @@ paths:
                   deleted: { type: boolean, const: true }
         '404': { description: Service not found }
         '401': { description: Missing or invalid API key }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Service deletion failed }
 
   /v1/endpoints/{id}/run:
@@ -1294,11 +1306,15 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/TaskCostError' }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403':
-          description: Service is disabled or REST is not enabled
+          description: Service is disabled, REST is not enabled, or the API key scope does not authorize this endpoint
           content:
             application/json:
-              schema: { $ref: '#/components/schemas/APIError' }
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/APIError'
+                  - $ref: '#/components/schemas/APIKeyScopeError'
         '404':
           description: Service or supplied Session not found
           content:
@@ -1360,6 +1376,8 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/TaskCostError' }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404':
           description: Service or ACP session not found
           content:

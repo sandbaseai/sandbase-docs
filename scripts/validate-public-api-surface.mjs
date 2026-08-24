@@ -637,36 +637,39 @@ const endpointsPath = openapi.match(/^  \/v1\/endpoints:\n[\s\S]*?(?=^  \/)/m)?.
 const createEndpointOperation = endpointsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
 assert.match(createEndpointOperation, /responses:\n\s+'201':/, 'Endpoint creation must document its implemented 201 response')
 assert.doesNotMatch(createEndpointOperation, /responses:\n\s+'200':/, 'Endpoint creation must not document an unimplemented 200 response')
-for (const status of ['400', '401', '404', '409', '415', '422', '500']) {
+for (const status of ['400', '401', '402', '403', '404', '409', '415', '422', '500']) {
   assert.match(createEndpointOperation, new RegExp(`'${status}':`), `Endpoint creation must document ${status} responses`)
 }
 const listEndpointOperation = endpointsPath.match(/^    get:\n[\s\S]*$/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '500']) {
   assert.match(listEndpointOperation, new RegExp(`'${status}':`), `Endpoint listing must document ${status} responses`)
 }
 const endpointResourcePath = openapi.match(/^  \/v1\/endpoints\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 const getEndpointOperation = endpointResourcePath.match(/^    get:\n[\s\S]*?(?=^    patch:)/m)?.[0] ?? ''
 assert.match(getEndpointOperation, /EndpointId/, 'Endpoint reads must use the Endpoint path parameter')
 assert.doesNotMatch(getEndpointOperation, /EnvironmentId|Environment updated/, 'Endpoint reads must not inherit Environment contracts')
+for (const status of ['200', '401', '402', '403', '404']) {
+  assert.match(getEndpointOperation, new RegExp(`'${status}':`), `Endpoint reads must document ${status} responses`)
+}
 for (const method of ['patch', 'post']) {
   const next = method === 'patch' ? 'post' : 'delete'
   const operation = endpointResourcePath.match(new RegExp(`^    ${method}:\\n[\\s\\S]*?(?=^    ${next}:)`, 'm'))?.[0] ?? ''
   assert.match(operation, /UpdateEndpointRequest/, `${method.toUpperCase()} Endpoint updates must use the implemented request schema`)
   assert.doesNotMatch(operation, /UpdateEnvironmentRequest|Environment updated/, `${method.toUpperCase()} Endpoint updates must not inherit Environment contracts`)
-  for (const status of ['200', '400', '401', '404', '409', '422', '500']) {
+  for (const status of ['200', '400', '401', '402', '403', '404', '409', '422', '500']) {
     assert.match(operation, new RegExp(`'${status}':`), `${method.toUpperCase()} Endpoint updates must document ${status} responses`)
   }
 }
 const deleteEndpointOperation = endpointResourcePath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
 assert.match(deleteEndpointOperation, /required: \[id, deleted\]/, 'Endpoint deletion must use its implemented response projection')
 assert.doesNotMatch(deleteEndpointOperation, /environment_deleted|EnvironmentId/, 'Endpoint deletion must not inherit Environment contracts')
-for (const status of ['200', '401', '404', '500']) {
+for (const status of ['200', '401', '402', '403', '404', '500']) {
   assert.match(deleteEndpointOperation, new RegExp(`'${status}':`), `Endpoint deletion must document ${status} responses`)
 }
 const endpointACPPath = openapi.match(/^  \/v1\/endpoints\/\{id\}\/acp:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(endpointACPPath, /ACPRequest/, 'Endpoint ACP must document its JSON-RPC request envelope')
 assert.match(endpointACPPath, /application\/x-ndjson:/, 'Endpoint ACP must document prompt streaming as NDJSON')
-for (const status of ['200', '400', '401', '404', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
   assert.match(endpointACPPath, new RegExp(`'${status}':`), `Endpoint ACP must document ${status} responses`)
 }
 const acpRequestSchema = openapi.match(/^    ACPRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
@@ -674,7 +677,7 @@ assert.match(acpRequestSchema, /enum: \[initialize, session\/new, session\/promp
 const acpResponseSchema = openapi.match(/^    ACPResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(acpResponseSchema, /oneOf:\n\s+- required: \[result\]\n\s+- required: \[error\]/, 'Endpoint ACP must distinguish JSON-RPC success and error responses')
 const endpointRunPath = openapi.match(/^  \/v1\/endpoints\/\{id\}\/run:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['202', '400', '401', '403', '404', '409', '500', '503']) {
+for (const status of ['202', '400', '401', '402', '403', '404', '409', '500', '503']) {
   assert.match(endpointRunPath, new RegExp(`'${status}':`), `Endpoint REST invocation must document ${status} responses`)
 }
 for (const status of ['422', '502']) {
