@@ -2355,11 +2355,11 @@ paths:
                     items:
                       $ref: '#/components/schemas/Deployment'
                   next_page: { type: string, description: Opaque cursor included only when another page is available. }
-        '400': { description: Invalid status filter or page cursor }
+        '400': { description: Invalid status filter or page cursor, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Deployment list could not be loaded }
+        '500': { description: Deployment list could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/deployments/{id}:
     get:
@@ -2378,8 +2378,8 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: Deployment not found }
-        '500': { description: Deployment detail could not be loaded }
+        '404': { description: Deployment not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Deployment detail could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     patch:
       operationId: updateDeployment
       tags: [Deployments]
@@ -2399,14 +2399,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Deployment'
-        '400': { description: 'Invalid field, events, schedule, timeout, binding, Agent config, or notification target' }
+        '400': { description: 'Invalid field, events, schedule, timeout, binding, Agent config, or notification target', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: 'Deployment, Skill, or Environment not found' }
-        '409': { description: 'Archived, active, running, or version-conflicted Deployment' }
-        '422': { description: Reserved field supplied or Runtime/Skill is incompatible }
-        '500': { description: Deployment update or detail reload failed }
+        '404': { description: 'Deployment, Skill, or Environment not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: 'Archived, active, running, or version-conflicted Deployment', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '422': { description: Reserved field supplied or Runtime/Skill is incompatible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Deployment update or detail reload failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     post:
       operationId: updateDeploymentClaude
       tags: [Deployments]
@@ -2426,14 +2426,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Deployment'
-        '400': { description: 'Invalid field, events, schedule, timeout, binding, Agent config, or notification target' }
+        '400': { description: 'Invalid field, events, schedule, timeout, binding, Agent config, or notification target', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: 'Deployment, Skill, or Environment not found' }
-        '409': { description: 'Archived, active, running, or version-conflicted Deployment' }
-        '422': { description: Reserved field supplied or Runtime/Skill is incompatible }
-        '500': { description: Deployment update or detail reload failed }
+        '404': { description: 'Deployment, Skill, or Environment not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: 'Archived, active, running, or version-conflicted Deployment', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '422': { description: Reserved field supplied or Runtime/Skill is incompatible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Deployment update or detail reload failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     delete:
       operationId: deleteDeployment
       tags: [Deployments]
@@ -2452,12 +2452,12 @@ paths:
                 properties:
                   id: { type: string }
                   deleted: { type: boolean, const: true }
-        '404': { description: Deployment not found }
-        '409': { description: Deployment cannot be deleted from its current state }
+        '404': { description: Deployment not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: Deployment cannot be deleted from its current state, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Deployment deletion failed }
+        '500': { description: Deployment deletion failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/deployments/{id}/run:
     post:

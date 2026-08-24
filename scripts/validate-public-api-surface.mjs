@@ -148,6 +148,22 @@ for (const method of ['patch', 'post']) {
     `${method.toUpperCase()} Environment update must document both archived-resource and scoped-key rejections`,
   )
 }
+for (const [method, publicPath, statuses] of [
+  ['post', '/v1/deployments', ['400', '404', '415', '422', '500']],
+  ['get', '/v1/deployments', ['400', '500']],
+  ['get', '/v1/deployments/{id}', ['404', '500']],
+  ['patch', '/v1/deployments/{id}', ['400', '404', '409', '422', '500']],
+  ['post', '/v1/deployments/{id}', ['400', '404', '409', '422', '500']],
+  ['delete', '/v1/deployments/{id}', ['404', '409', '500']],
+]) {
+  for (const status of statuses) {
+    assert.equal(
+      jsonErrorSchema(method, publicPath, status)?.$ref,
+      '#/components/schemas/APIError',
+      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
+    )
+  }
+}
 
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
 assert.match(config, /'guides\/site-agent-integration\.md'/, 'Legacy Site Agent guide must stay excluded from the public build')
