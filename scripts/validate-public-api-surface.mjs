@@ -995,6 +995,7 @@ function inspectPublishedSources(directory) {
     assert.doesNotMatch(content, /\/(?:v1\/)?sandboxes?(?:\/|\{|:|\b)/i, `${relative} must not expose sandbox API paths`)
     assert.doesNotMatch(content, /\/v1\/endpoints\/[^\s`"']+\/mcp\b/i, `${relative} must not expose Endpoint MCP transport`)
     assert.doesNotMatch(content, /\/v1\/endpoint_runtime_profiles\b/i, `${relative} must not expose Endpoint runtime profiles that reveal MCP transport`)
+    assert.doesNotMatch(content, /\/v1\/mcp(?:\/|\b)/i, `${relative} must not expose the generic MCP transport or its discovery routes`)
     assert.doesNotMatch(content, /\/v1\/mcp\/(?:servers|[^\s/]+\/config)\b/i, `${relative} must not expose MCP discovery or runtime config routes`)
     assert.doesNotMatch(content, /\/mcp\/[^\s/]+\/sse\b/i, `${relative} must not expose the MCP SSE proxy`)
     assert.doesNotMatch(content, /\/v1\/skills\/[^\s/]+\/mcp-publications\b/i, `${relative} must not expose Skill MCP publication creation`)
