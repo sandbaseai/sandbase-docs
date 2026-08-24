@@ -782,6 +782,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/TaskCostError'
 
+  /v1/api/{vendor}/{upstream_path}:
+    parameters:
+      - name: vendor
+        in: path
+        required: true
+        schema: { type: string, minLength: 1 }
+        description: First segment of the enabled catalog capability name.
+      - name: upstream_path
+        in: path
+        required: true
+        schema: { type: string, minLength: 1 }
+        description: Remaining capability-name path. It may contain multiple literal slash-separated segments; do not percent-encode those slashes.
+    get:
+      operationId: getAPICapability
+      tags: [Models]
+      summary: Invoke a catalog API capability with GET
+      description: Resolves the enabled catalog model named vendor/upstream_path and executes it through the unified pipeline. The request body is empty; capability-specific query parameters remain on the incoming request and are available only when supported by that capability.
+      responses:
+        '200': { description: Capability-specific synchronous response, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughResponse' } } } }
+        '202': { description: Capability accepted for asynchronous execution, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughResponse' } } } }
+        '400': { description: Capability input is invalid, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: Insufficient balance or spending limit reached, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key or capability access is forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+        '404': { description: No enabled catalog capability matches the vendor and path, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+        '500': { description: Internal execution error, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+        '502': { description: Upstream provider returned an invalid response, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+        '503': { description: No provider is currently available, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+    post:
+      operationId: postAPICapability
+      tags: [Models]
+      summary: Invoke a catalog API capability with POST
+      description: Resolves the enabled catalog model named vendor/upstream_path and executes a JSON object through the unified pipeline. When model is omitted, the URL-derived capability name is injected. A supplied model field is preserved and remains authoritative.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200': { description: Capability-specific synchronous response, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughResponse' } } } }
+        '202': { description: Capability accepted for asynchronous execution, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughResponse' } } } }
+        '400': { description: Body is not a JSON object or capability input is invalid, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: Insufficient balance or spending limit reached, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key or capability access is forbidden, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+        '404': { description: No enabled catalog capability matches the vendor and path, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+        '500': { description: Internal execution error, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+        '502': { description: Upstream provider returned an invalid response, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+        '503': { description: No provider is currently available, content: { application/json: { schema: { $ref: '#/components/schemas/APIPassthroughError' } } } }
+
   /v1/upload:
     post:
       operationId: uploadMedia
@@ -3286,6 +3338,20 @@ components:
       properties:
         error:
           type: string
+
+    APIPassthroughResponse:
+      description: Capability-specific response. Its shape is defined by the selected live catalog capability and may be an object, array, or scalar.
+
+    APIPassthroughError:
+      description: Route-resolution, authentication, admission, or unified-pipeline error.
+      anyOf:
+        - $ref: '#/components/schemas/TaskCostError'
+        - $ref: '#/components/schemas/APIKeyScopeError'
+        - type: object
+          required: [error, message]
+          properties:
+            error: { type: string }
+            message: { type: string }
 
     # --- Models ---------------------------------------------------
     ModelListResponse:

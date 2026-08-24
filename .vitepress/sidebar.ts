@@ -132,6 +132,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Video Generation', link: '/api-reference/models/video' },
       { text: 'Audio', link: '/api-reference/models/audio' },
       { text: 'Embeddings', link: '/api-reference/models/embedding' },
+      { text: 'API Passthrough', link: '/api-reference/models/api-passthrough' },
       {
         text: 'Assets',
         collapsed: false,

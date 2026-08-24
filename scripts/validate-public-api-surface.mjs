@@ -29,6 +29,7 @@ for (const [pattern, label] of forbiddenOpenApiPatterns) {
 const requiredPublicPaths = [
   '/v1/run:',
   '/v1/run/{id}:',
+  '/v1/api/{vendor}/{upstream_path}:',
   '/v1/upload:',
   '/v1/account/balance:',
   '/v1/account/history:',
@@ -68,6 +69,8 @@ assert.doesNotMatch(openapi, /^\s+mcp_url:$/m, 'Endpoint MCP transport URL must 
 assert.doesNotMatch(openapi, /^  \/v1\/generations(?:\/\{[^}]+\})?:$/m, 'Withdrawn generation paths must not be public')
 assert.doesNotMatch(openapi, /https:\/\/api\.sandbase\.ai\/v1\/generations(?:\/|\b)/, 'Public OpenAPI examples must not call withdrawn generation paths')
 assert.doesNotMatch(openapi, /^  \/v1\/blog\/assets:$/m, 'Blog publishing storage must not be exposed as a general developer API')
+assert.doesNotMatch(openapi, /^  \/v1\/mcp\/(?:servers|\{[^}]+\}\/config):$/m, 'MCP discovery and runtime config routes must not be public')
+assert.doesNotMatch(openapi, /^  \/mcp\/\{[^}]+\}\/sse:$/m, 'MCP SSE proxy must not be public')
 assert.doesNotMatch(openapi, /^  \/events\/webhooks(?:\/\{[^}]+\})?:$/m, 'Sandbox event webhook paths must not be public')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
 const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
@@ -83,6 +86,19 @@ assert.match(runRequestSchema, /^        stream:\n\s+type: boolean/m, 'Run must 
 assert.match(runRequestSchema, /public HTTPS callback URL for asynchronous image, video, audio, or API tasks/, 'Run must scope webhook callbacks to implemented async capability types')
 const runResponseSchema = openapi.match(/^    RunResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(runResponseSchema, /required: \[id, status, model\]/, 'Run responses must require the always-emitted model field')
+const apiPassthroughPath = openapi.match(/^  \/v1\/api\/\{vendor\}\/\{upstream_path\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(apiPassthroughPath, /multiple literal slash-separated segments/, 'API passthrough must document Gin wildcard path behavior')
+for (const method of ['get', 'post']) {
+  const operation = method === 'get'
+    ? apiPassthroughPath.match(/^    get:\n[\s\S]*?(?=^    post:)/m)?.[0] ?? ''
+    : apiPassthroughPath.match(/^    post:\n[\s\S]*/m)?.[0] ?? ''
+  for (const status of ['200', '202', '400', '401', '402', '403', '404', '500', '502', '503']) {
+    assert.match(operation, new RegExp(`'${status}':`), `API passthrough ${method.toUpperCase()} must document ${status} responses`)
+  }
+}
+const postAPIPassthrough = apiPassthroughPath.match(/^    post:\n[\s\S]*/m)?.[0] ?? ''
+assert.match(postAPIPassthrough, /A supplied model field is preserved and remains authoritative/, 'API passthrough must document implemented model precedence')
+assert.match(postAPIPassthrough, /required: false/, 'API passthrough POST must allow its implemented empty body')
 assert.doesNotMatch(openapi, /next_page:\s*(?:\{[^\n]*type:\s*\[string, 'null'\]|\n\s+type:\s*\[string, 'null'\])/, 'List cursors must be omitted rather than returned as null')
 const responsesPath = openapi.match(/^  \/v1\/responses:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(responsesPath, /ResponsesRequest/, 'Responses must use the governed request schema')
@@ -710,6 +726,8 @@ function inspectPublishedSources(directory) {
     assert.doesNotMatch(content, /\/(?:v1\/)?sandboxes?(?:\/|\{|:|\b)/i, `${relative} must not expose sandbox API paths`)
     assert.doesNotMatch(content, /\/v1\/endpoints\/[^\s`"']+\/mcp\b/i, `${relative} must not expose Endpoint MCP transport`)
     assert.doesNotMatch(content, /\/v1\/endpoint_runtime_profiles\b/i, `${relative} must not expose Endpoint runtime profiles that reveal MCP transport`)
+    assert.doesNotMatch(content, /\/v1\/mcp\/(?:servers|[^\s/]+\/config)\b/i, `${relative} must not expose MCP discovery or runtime config routes`)
+    assert.doesNotMatch(content, /\/mcp\/[^\s/]+\/sse\b/i, `${relative} must not expose the MCP SSE proxy`)
   }
 }
 
