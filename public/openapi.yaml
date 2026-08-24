@@ -2039,6 +2039,11 @@ paths:
           in: header
           required: false
           schema: { type: string }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/EmptyObjectRequest' }
       responses:
         '200':
           description: Existing or newly created DeploymentRun result
@@ -2046,6 +2051,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeploymentRun'
+        '400': { description: 'Request body is not absent or an empty JSON object, or stored initial events are invalid' }
+        '401': { description: Missing or invalid API key }
+        '404': { description: Deployment or a required resolved binding was not found }
+        '409': { description: Deployment is archived or Idempotency-Key conflicts with a different trigger }
+        '500': { description: 'Trigger, Session, or execution binding could not be created' }
+        '503': { description: DeploymentRun or execution runtime service is unavailable }
 
   /v1/deployments/{id}/pause:
     post:
@@ -2167,6 +2178,11 @@ paths:
           in: header
           required: false
           schema: { type: string }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/EmptyObjectRequest' }
       responses:
         '200':
           description: Existing or newly created DeploymentRun result
@@ -2180,6 +2196,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIError'
+        '400': { description: 'Request body is not absent or an empty JSON object, or stored initial events are invalid' }
+        '401': { description: Missing or invalid API key }
+        '404': { description: Deployment or a required resolved binding was not found }
+        '500': { description: 'Trigger, Session, or execution binding could not be created' }
+        '503': { description: DeploymentRun or execution runtime service is unavailable }
     get:
       operationId: listDeploymentRuns
       tags: [Deployments]
@@ -2201,6 +2222,7 @@ paths:
             application/json:
               schema:
                 type: object
+                required: [data]
                 properties:
                   data:
                     type: array
@@ -2209,6 +2231,10 @@ paths:
                   next_page:
                     type: string
                     description: Opaque cursor included when the current page reaches the requested limit.
+        '400': { description: Invalid page cursor }
+        '401': { description: Missing or invalid API key }
+        '500': { description: DeploymentRun list could not be loaded }
+        '503': { description: DeploymentRun service is unavailable }
 
   /v1/deployments/{id}/runs/{drun_id}:
     get:
@@ -2234,6 +2260,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIError'
+        '401': { description: Missing or invalid API key }
+        '404': { description: DeploymentRun not found or belongs to another Deployment }
+        '503': { description: DeploymentRun service is unavailable }
 
   /v1/deployment_runs:
     get:
@@ -2251,6 +2280,10 @@ paths:
         - { name: 'created_at[gte]', in: query, schema: { type: string, format: date-time } }
         - { name: 'created_at[lt]', in: query, schema: { type: string, format: date-time } }
         - { name: 'created_at[lte]', in: query, schema: { type: string, format: date-time } }
+        - { name: created_at_gt, in: query, deprecated: true, description: 'Compatibility alias for created_at[gt].', schema: { type: string, format: date-time } }
+        - { name: created_at_gte, in: query, deprecated: true, description: 'Compatibility alias for created_at[gte].', schema: { type: string, format: date-time } }
+        - { name: created_at_lt, in: query, deprecated: true, description: 'Compatibility alias for created_at[lt].', schema: { type: string, format: date-time } }
+        - { name: created_at_lte, in: query, deprecated: true, description: 'Compatibility alias for created_at[lte].', schema: { type: string, format: date-time } }
         - { name: has_error, in: query, schema: { type: boolean } }
         - name: trigger_type
           in: query
@@ -2287,6 +2320,10 @@ paths:
                     type: array
                     items: { $ref: '#/components/schemas/DeploymentRun' }
                   next_page: { type: string, description: Opaque cursor included when the current page reaches the requested limit. }
+        '400': { description: 'Invalid filter, limit, timestamp, boolean, status, trigger type, or page cursor' }
+        '401': { description: Missing or invalid API key }
+        '500': { description: DeploymentRun list could not be loaded }
+        '503': { description: DeploymentRun service is unavailable }
 
   /v1/deployment_runs/{id}:
     get:
@@ -2305,6 +2342,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeploymentRun'
+        '401': { description: Missing or invalid API key }
+        '404': { description: DeploymentRun not found }
+        '503': { description: DeploymentRun service is unavailable }
 
   # --- Skills -----------------------------------------------------
   /v1/skills/files:
@@ -4883,6 +4923,11 @@ components:
         created_at: { type: string, format: date-time }
         updated_at: { type: string, format: date-time }
 
+    EmptyObjectRequest:
+      type: object
+      maxProperties: 0
+      additionalProperties: false
+
     DeploymentRun:
       type: object
       description: Durable result of one Deployment trigger's Session creation attempt; it never mirrors later Session state.
@@ -4902,6 +4947,7 @@ components:
             message: { type: string }
         trigger_context:
           oneOf:
+            - type: 'null'
             - type: object
               required: [type]
               properties: { type: { type: string, enum: [manual] } }

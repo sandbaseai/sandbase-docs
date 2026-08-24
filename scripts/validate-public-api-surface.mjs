@@ -163,12 +163,48 @@ assert.doesNotMatch(agentListPage, /required: \[[^\]]*next_page/, 'Agent list ne
 const nestedDeploymentRuns = openapi.match(/^  \/v1\/deployments\/\{id\}\/runs:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(nestedDeploymentRuns, /name: limit[\s\S]*?name: page/, 'Nested DeploymentRun lists must document implemented cursor pagination')
 assert.match(nestedDeploymentRuns, /next_page:\n\s+type: string/, 'Nested DeploymentRun lists must document their emitted cursor')
+const triggerDeploymentRun = nestedDeploymentRuns.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
+assert.match(triggerDeploymentRun, /EmptyObjectRequest/, 'Deployment triggers must document their empty-object-only request body')
+for (const status of ['200', '400', '401', '404', '409', '500', '503']) {
+  assert.match(triggerDeploymentRun, new RegExp(`'${status}':`), `Deployment triggers must document ${status} responses`)
+}
+const listNestedDeploymentRuns = nestedDeploymentRuns.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
+assert.match(listNestedDeploymentRuns, /required: \[data\]/, 'Nested DeploymentRun lists must require data')
+for (const status of ['200', '400', '401', '500', '503']) {
+  assert.match(listNestedDeploymentRuns, new RegExp(`'${status}':`), `Nested DeploymentRun lists must document ${status} responses`)
+}
+assert.doesNotMatch(listNestedDeploymentRuns, /'404':/, 'Nested DeploymentRun lists return an empty page for an unknown Deployment')
+const triggerDeploymentRunAlias = openapi.match(/^  \/v1\/deployments\/\{id\}\/run:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.match(triggerDeploymentRunAlias, /EmptyObjectRequest/, 'The Deployment trigger alias must preserve the empty-object-only request body')
+for (const status of ['200', '400', '401', '404', '409', '500', '503']) {
+  assert.match(triggerDeploymentRunAlias, new RegExp(`'${status}':`), `The Deployment trigger alias must document ${status} responses`)
+}
+const nestedDeploymentRun = openapi.match(/^  \/v1\/deployments\/\{id\}\/runs\/\{drun_id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '401', '404', '409', '503']) {
+  assert.match(nestedDeploymentRun, new RegExp(`'${status}':`), `Nested DeploymentRun reads must document ${status} responses`)
+}
 const deploymentsPath = openapi.match(/^  \/v1\/deployments:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(deploymentsPath, /name: status\n\s+in: query\n\s+style: form\n\s+explode: true\n\s+schema:\n\s+type: array/, 'Deployment status filters must be repeatable')
 const deploymentRunsPath = openapi.match(/^  \/v1\/deployment_runs:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 for (const field of ['trigger_type', 'status']) {
   assert.match(deploymentRunsPath, new RegExp(`name: ${field}\\n\\s+in: query[\\s\\S]*?type: array`), `DeploymentRun ${field} filters must be repeatable`)
 }
+for (const field of ['created_at_gt', 'created_at_gte', 'created_at_lt', 'created_at_lte']) {
+  assert.match(deploymentRunsPath, new RegExp(`name: ${field}, in: query, deprecated: true`), `DeploymentRun lists must document the ${field} compatibility filter`)
+}
+for (const status of ['200', '400', '401', '500', '503']) {
+  assert.match(deploymentRunsPath, new RegExp(`'${status}':`), `Global DeploymentRun lists must document ${status} responses`)
+}
+const globalDeploymentRun = openapi.match(/^  \/v1\/deployment_runs\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['200', '401', '404', '503']) {
+  assert.match(globalDeploymentRun, new RegExp(`'${status}':`), `Global DeploymentRun reads must document ${status} responses`)
+}
+assert.doesNotMatch(globalDeploymentRun, /'409':/, 'Global DeploymentRun reads return pending records instead of a conflict')
+const emptyObjectRequest = openapi.match(/^    EmptyObjectRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(emptyObjectRequest, /maxProperties: 0/, 'Deployment triggers must reject request fields')
+const deploymentRunSchema = openapi.match(/^    DeploymentRun:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(deploymentRunSchema, /trigger_context:\n\s+oneOf:\n\s+- type: 'null'/, 'DeploymentRun trigger context must tolerate invalid legacy JSON projected as null')
+assert.doesNotMatch(deploymentRunSchema, /^        status:/m, 'DeploymentRun responses must not expose internal creation status')
 const deploymentsPathForCreate = openapi.match(/^  \/v1\/deployments:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 const createDeploymentOperation = deploymentsPathForCreate.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
 for (const mediaType of ['application/json', 'application/yaml', 'application/x-yaml']) {
