@@ -1600,6 +1600,7 @@ paths:
                 $ref: '#/components/schemas/Session'
         '400': { description: 'Invalid body, Agent reference, initial Event, or initial Event batch', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403':
           description: The Agent is archived or the API key scope does not authorize this endpoint
           content:
@@ -1707,6 +1708,7 @@ paths:
                   next_page: { type: string, description: Opaque cursor included only when another page is available. }
         '400': { description: Invalid created-at filter or page cursor, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Sessions could not be listed, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
 
@@ -1725,6 +1727,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Session'
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Session not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '500': { description: Session could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
@@ -1763,6 +1766,7 @@ paths:
                 $ref: '#/components/schemas/Session'
         '400': { description: 'Invalid JSON, metadata, Agent override, or reserved vault_ids', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Session not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '500': { description: Session could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
@@ -1787,6 +1791,7 @@ paths:
         '404': { description: Session not found }
         '409': { description: Running or rescheduling Session cannot be deleted }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500': { description: Session could not be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
   /v1/sessions/{id}/archive:
@@ -1804,6 +1809,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Session'
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Session not found or already archived, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '500': { description: Session could not be archived, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
@@ -1830,6 +1836,7 @@ paths:
                 $ref: '#/components/schemas/AcceptedSessionEvents'
         '400': { description: 'Invalid body, Event type, payload, or server-owned field', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Session not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '409': { description: Event conflicts with Session state or the Session is archived or terminated, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
@@ -1900,6 +1907,7 @@ paths:
                     description: Opaque cursor present when another page is available.
         '400': { description: 'Invalid order, limit, page cursor, or created-at filter', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Session not found or no longer stream-accessible, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '500': { description: Events could not be listed, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
@@ -1932,6 +1940,7 @@ paths:
                 type: string
         '400': { description: Invalid event_delta or stream cursor, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404': { description: Session not found, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '500': { description: Event history could not be loaded before streaming, content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
