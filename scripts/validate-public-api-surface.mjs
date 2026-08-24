@@ -29,6 +29,9 @@ const requiredPublicPaths = [
   '/v1/run/{id}:',
   '/v1/account/balance:',
   '/v1/account/history:',
+  '/v1/embeds:',
+  '/v1/embeds/{id}:',
+  '/v1/embeds/{id}/usage:',
   '/v1/responses:',
   '/v1/assets:',
   '/v1/assets/{id}:',
@@ -146,6 +149,15 @@ const accountHistorySchema = openapi.match(/^    AccountHistoryItem:\n[\s\S]*?(?
 for (const field of ['latency_ms', 'user_cost', 'cache_creation_tokens', 'api_key_prefix']) {
   assert.match(accountHistorySchema, new RegExp(`required: \\[[^\\]]*${field}`), `Account history must require emitted ${field}`)
 }
+const embedConfigSchema = openapi.match(/^    EmbedConfig:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(embedConfigSchema, /required: \[[^\]]*allowed_origins[^\]]*embed_code[^\]]*updated_at[^\]]*\]/, 'Embed Configs must require every serializer field')
+assert.match(embedConfigSchema, /allowed_origins:\n\s+type: \[array, 'null'\]/, 'Embed Config origins must allow stored null output')
+assert.doesNotMatch(embedConfigSchema, /identity_secret|key_hash/, 'Embed Config responses must not expose authentication internals')
+const createEmbedSchema = openapi.match(/^    CreateEmbedConfigRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(createEmbedSchema, /required: \[agent_id, environment_id\]/, 'Embed creation must require both implemented bindings')
+const updateEmbedSchema = openapi.match(/^    UpdateEmbedConfigRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.doesNotMatch(updateEmbedSchema, /^        (?:agent_id|environment_id):/m, 'Embed updates must not advertise immutable bindings')
+assert.match(updateEmbedSchema, /null values preserve the current value/, 'Embed updates must document implemented null semantics')
 const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(environmentSchema, /config:\n[\s\S]*?- type: 'null'/, 'Environment config must allow the serializer\'s null output')
 assert.match(environmentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Environment metadata must allow the serializer\'s null output')

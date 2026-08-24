@@ -146,6 +146,19 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
+    text: 'Embed Configs',
+    collapsed: true,
+    items: [
+      { text: 'Overview', link: '/api-reference/embeds/' },
+      { text: 'Create', link: '/api-reference/embeds/create' },
+      { text: 'List', link: '/api-reference/embeds/list' },
+      { text: 'Get', link: '/api-reference/embeds/get' },
+      { text: 'Update', link: '/api-reference/embeds/update' },
+      { text: 'Delete', link: '/api-reference/embeds/delete' },
+      { text: 'Usage', link: '/api-reference/embeds/usage' },
+    ],
+  },
+  {
     text: 'Agent APIs',
     collapsed: false,
     items: [

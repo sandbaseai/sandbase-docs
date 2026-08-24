@@ -60,6 +60,8 @@ tags:
     description: Asynchronous model task status, settlement, and usage
   - name: Account
     description: Organization balance and API execution history
+  - name: Embed Configs
+    description: Embeddable web chat widget configuration and usage
   - name: Skills
     description: Reusable Agent instruction and resource bundles
   - name: Credentials
@@ -246,6 +248,99 @@ paths:
       responses:
         '200':
           description: Message response
+
+  # --- Embed Configs ---------------------------------------------
+  /v1/embeds:
+    post:
+      operationId: createEmbedConfig
+      tags: [Embed Configs]
+      summary: Create an Embed Config
+      description: Creates an organization-scoped web chat configuration bound to an eligible Agent and Environment. An Agent can have at most 10 Embed Configs.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEmbedConfigRequest'
+      responses:
+        '201':
+          description: Embed Config created; includes its publishable browser key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEmbedConfigResponse'
+        '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '403': { description: Agent Embed Config limit reached, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '404': { description: Agent or Environment binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+    get:
+      operationId: listEmbedConfigs
+      tags: [Embed Configs]
+      summary: List Embed Configs
+      parameters:
+        - name: agent_id
+          in: query
+          schema: { type: string, pattern: '^agent_' }
+          description: Exact Agent ID filter.
+      responses:
+        '200':
+          description: Embed Config list, newest first
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbedConfigList'
+        '500': { description: List failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+
+  /v1/embeds/{id}:
+    get:
+      operationId: getEmbedConfig
+      tags: [Embed Configs]
+      summary: Get an Embed Config
+      parameters:
+        - $ref: '#/components/parameters/EmbedConfigId'
+      responses:
+        '200': { description: Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
+        '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+    patch:
+      operationId: updateEmbedConfig
+      tags: [Embed Configs]
+      summary: Update an Embed Config
+      description: Partially updates presentation, origin, or enabled settings. To clear allowed_origins, send an empty array; null is treated as omitted. The Agent and Environment binding cannot be changed.
+      parameters:
+        - $ref: '#/components/parameters/EmbedConfigId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmbedConfigRequest'
+      responses:
+        '200': { description: Updated Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
+        '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '404': { description: Embed Config or binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+    delete:
+      operationId: deleteEmbedConfig
+      tags: [Embed Configs]
+      summary: Delete an Embed Config
+      description: Permanently deletes the configuration and invalidates its derived publishable key.
+      parameters:
+        - $ref: '#/components/parameters/EmbedConfigId'
+      responses:
+        '200': { description: Embed Config deleted, content: { application/json: { schema: { $ref: '#/components/schemas/DeleteEmbedConfigResponse' } } } }
+        '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+
+  /v1/embeds/{id}/usage:
+    get:
+      operationId: getEmbedConfigUsage
+      tags: [Embed Configs]
+      summary: Get Embed Config usage
+      description: Returns all-time aggregate Session, message, and unique visitor record counts for the configuration.
+      parameters:
+        - $ref: '#/components/parameters/EmbedConfigId'
+      responses:
+        '200': { description: Aggregate usage, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfigUsage' } } } }
+        '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   # --- Account ----------------------------------------------------
   /v1/account/balance:
@@ -1919,6 +2014,12 @@ components:
       description: "Supported only by `POST /v1/messages` for Anthropic SDK compatibility"
 
   parameters:
+    EmbedConfigId:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, pattern: '^emb_[0-9a-f]{8}-[0-9a-f]{3}$' }
+      description: Embed Config ID.
     EndpointId:
       name: id
       in: path
@@ -2020,6 +2121,101 @@ components:
         git_url: { type: string }
         created_at: { type: string, format: date-time }
         updated_at: { type: string, format: date-time }
+
+    # --- Embed Configs -------------------------------------------
+    EmbedConfig:
+      type: object
+      required: [id, org_id, agent_id, environment_id, name, key_prefix, allowed_origins, title, welcome_message, theme_color, avatar_url, placeholder_text, enabled, embed_code, created_at, updated_at]
+      properties:
+        id: { type: string, pattern: '^emb_[0-9a-f]{8}-[0-9a-f]{3}$' }
+        org_id: { type: string, format: uuid }
+        agent_id: { type: string, pattern: '^agent_' }
+        environment_id: { type: string, pattern: '^env_' }
+        name: { type: string }
+        key_prefix: { type: string, description: Display-only prefix of the publishable key. }
+        allowed_origins:
+          type: [array, 'null']
+          description: Browser origins allowed to use the widget. Empty or null permits every origin.
+          items: { type: string }
+        title: { type: string }
+        welcome_message: { type: string }
+        theme_color: { type: string }
+        avatar_url: { type: string }
+        placeholder_text: { type: string }
+        enabled: { type: boolean }
+        embed_code:
+          type: string
+          description: Script tag containing the derived publishable browser key.
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+
+    CreateEmbedConfigResponse:
+      allOf:
+        - $ref: '#/components/schemas/EmbedConfig'
+        - type: object
+          required: [publishable_key]
+          properties:
+            publishable_key:
+              type: string
+              pattern: '^pk-sb-emb_'
+              description: Publishable browser key. This is not a secret and is also embedded in embed_code.
+
+    EmbedConfigList:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/EmbedConfig' }
+
+    CreateEmbedConfigRequest:
+      type: object
+      additionalProperties: false
+      required: [agent_id, environment_id]
+      properties:
+        agent_id: { type: string, pattern: '^agent_' }
+        environment_id: { type: string, pattern: '^env_' }
+        name: { type: string }
+        allowed_origins:
+          type: array
+          description: Exact origins or hostnames. Omit or send an empty array to allow every origin.
+          items: { type: string }
+        title: { type: string }
+        welcome_message: { type: string }
+        theme_color: { type: string }
+        avatar_url: { type: string }
+        placeholder_text: { type: string }
+
+    UpdateEmbedConfigRequest:
+      type: object
+      additionalProperties: false
+      description: Omitted fields and explicit null values preserve the current value. Send an empty allowed_origins array to clear the origin allowlist.
+      properties:
+        name: { type: string }
+        allowed_origins:
+          type: array
+          items: { type: string }
+        title: { type: string }
+        welcome_message: { type: string }
+        theme_color: { type: string }
+        avatar_url: { type: string }
+        placeholder_text: { type: string }
+        enabled: { type: boolean }
+
+    DeleteEmbedConfigResponse:
+      type: object
+      required: [id, deleted]
+      properties:
+        id: { type: string, pattern: '^emb_' }
+        deleted: { type: boolean, const: true }
+
+    EmbedConfigUsage:
+      type: object
+      required: [session_count, message_count, visitor_count]
+      properties:
+        session_count: { type: integer, minimum: 0 }
+        message_count: { type: integer, minimum: 0 }
+        visitor_count: { type: integer, minimum: 0 }
 
     # --- Account --------------------------------------------------
     AccountBalance:
