@@ -21,6 +21,8 @@ Credential endpoints require a secret SandBase API key. Never call them from bro
 | `PATCH` | `/v1/credentials/{credential_id}` | Update `status`, `strategy`, or `weight`. |
 | `POST` | `/v1/credentials/{credential_id}/rotate` | Replace the stored secret value. |
 
+Credentials do not currently have a delete endpoint. Set `status` to `disabled` with `PATCH` when a value must no longer be selected. Disabled records remain visible to list and get operations.
+
 ## Create a credential
 
 ```bash
@@ -40,6 +42,8 @@ Credential IDs use the `sec_` prefix. The plaintext `value` is accepted only on 
 
 The only supported selection strategy is `round_robin`, and `weight` must be a positive integer.
 
+`scope`, `scope_name`, and `secret_key` are caller-defined identifiers. SandBase trims their surrounding whitespace and rejects control characters. If `group_key` is omitted, it defaults to `scope_name:secret_key`.
+
 ## Rotate a credential
 
 ```bash
@@ -48,5 +52,7 @@ curl -X POST https://api.sandbase.ai/v1/credentials/sec_01.../rotate \
   -H "Content-Type: application/json" \
   -d '{"value":"YOUR_NEW_SECRET_VALUE"}'
 ```
+
+Rotation replaces the encrypted value and `value_hint`, resets `failure_count` to `0`, and clears `cooldown_until`. Other metadata is preserved.
 
 For product-level guidance, see [API Credentials](/agents/api-credentials).

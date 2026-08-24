@@ -2528,6 +2528,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CredentialResponse'
+        '400': { description: 'Missing, blank, oversized, unsupported, or otherwise invalid credential field' }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Credential could not be encrypted or created }
     get:
       operationId: listCredentials
       tags: [Credentials]
@@ -2539,6 +2542,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CredentialListResponse'
+        '401': { description: Missing or invalid API key }
+        '500': { description: Credential list could not be loaded }
   /v1/credentials/{id}:
     get:
       operationId: getCredential
@@ -2556,6 +2561,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CredentialResponse'
+        '401': { description: Missing or invalid API key }
+        '404': { description: Credential not found or belongs to another organization }
+        '500': { description: Credential could not be loaded }
     patch:
       operationId: updateCredential
       tags: [Credentials]
@@ -2578,16 +2586,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CredentialResponse'
+        '400': { description: 'Invalid JSON body, unsupported status or strategy, non-positive weight, or no mutable fields' }
+        '401': { description: Missing or invalid API key }
+        '404': { description: Credential not found or belongs to another organization }
+        '500': { description: Credential could not be updated }
   /v1/credentials/{id}/rotate:
     post:
       operationId: rotateCredential
       tags: [Credentials]
       summary: Rotate credential value
+      description: Replace the encrypted value and masked hint, then reset failure_count to 0 and clear cooldown_until.
       parameters:
         - name: id
           in: path
           required: true
-          schema: { type: string }
+          schema: { type: string, pattern: '^sec_' }
       requestBody:
         required: true
         content:
@@ -2609,6 +2622,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CredentialResponse'
+        '400': { description: 'Missing, blank, oversized, or invalid replacement value' }
+        '401': { description: Missing or invalid API key }
+        '404': { description: Credential not found or belongs to another organization }
+        '500': { description: Credential value could not be encrypted or stored }
 components:
   securitySchemes:
     BearerAuth:
@@ -4770,11 +4787,11 @@ components:
       required: [scope, scope_name, secret_key, value]
       properties:
         agent_id: { type: string }
-        scope: { type: string, minLength: 1, maxLength: 40 }
-        scope_name: { type: string, minLength: 1, maxLength: 100 }
-        secret_key: { type: string, minLength: 1, maxLength: 200 }
+        scope: { type: string, minLength: 1, maxLength: 40, description: 'Caller-defined scope. Leading and trailing whitespace is removed; control characters are rejected.' }
+        scope_name: { type: string, minLength: 1, maxLength: 100, description: 'Caller-defined name within the scope. Leading and trailing whitespace is removed; control characters are rejected.' }
+        secret_key: { type: string, minLength: 1, maxLength: 200, description: 'Caller-defined key. Leading and trailing whitespace is removed; control characters are rejected.' }
         value: { type: string, minLength: 1, maxLength: 8192, writeOnly: true, description: Plaintext value encrypted at rest and never returned. Blank or whitespace-only values are rejected. }
-        group_key: { type: string }
+        group_key: { type: string, description: Defaults to the submitted scope_name and secret_key joined by a colon. }
         strategy: { type: string, enum: [round_robin], default: round_robin }
         weight: { type: integer, minimum: 1, default: 1 }
 

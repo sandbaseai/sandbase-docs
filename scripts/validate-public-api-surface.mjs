@@ -288,6 +288,32 @@ assert.doesNotMatch(credentialSchema, /^        (?:value|value_encrypted):/m, 'C
 const createCredentialSchema = openapi.match(/^    CreateCredentialRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(createCredentialSchema, /strategy: \{ type: string, enum: \[round_robin\]/, 'Credential creation must document the only implemented strategy')
 assert.match(createCredentialSchema, /weight: \{ type: integer, minimum: 1/, 'Credential creation must require a positive weight')
+assert.match(createCredentialSchema, /Defaults to the submitted scope_name and secret_key joined by a colon/, 'Credential creation must document its derived group key')
+const credentialsPath = openapi.match(/^  \/v1\/credentials:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+const createCredential = credentialsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
+for (const status of ['201', '400', '401', '500']) {
+  assert.match(createCredential, new RegExp(`'${status}':`), `Credential creation must document ${status} responses`)
+}
+const listCredentials = credentialsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
+for (const status of ['200', '401', '500']) {
+  assert.match(listCredentials, new RegExp(`'${status}':`), `Credential listing must document ${status} responses`)
+}
+const credentialPath = openapi.match(/^  \/v1\/credentials\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+assert.doesNotMatch(credentialPath, /^    delete:/m, 'Credentials do not implement deletion')
+const getCredential = credentialPath.match(/^    get:\n[\s\S]*?(?=^    patch:)/m)?.[0] ?? ''
+for (const status of ['200', '401', '404', '500']) {
+  assert.match(getCredential, new RegExp(`'${status}':`), `Credential reads must document ${status} responses`)
+}
+const updateCredential = credentialPath.match(/^    patch:\n[\s\S]*/m)?.[0] ?? ''
+for (const status of ['200', '400', '401', '404', '500']) {
+  assert.match(updateCredential, new RegExp(`'${status}':`), `Credential updates must document ${status} responses`)
+}
+const rotateCredential = openapi.match(/^  \/v1\/credentials\/\{id\}\/rotate:\n[\s\S]*?(?=^  \/|^components:)/m)?.[0] ?? ''
+assert.match(rotateCredential, /pattern: '\^sec_'/, 'Credential rotation IDs must use the implemented sec_ prefix')
+assert.match(rotateCredential, /reset failure_count to 0 and clear cooldown_until/, 'Credential rotation must document health-state reset semantics')
+for (const status of ['200', '400', '401', '404', '500']) {
+  assert.match(rotateCredential, new RegExp(`'${status}':`), `Credential rotation must document ${status} responses`)
+}
 const skillSchema = openapi.match(/^    Skill:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(skillSchema, /id: \{ type: string, format: uuid \}/, 'Skill resources must document their UUID identity')
 assert.match(skillSchema, /required: \[[^\]]*icon_url[^\]]*preview_urls[^\]]*\]/, 'Skill responses must require fields always emitted by every projection')
