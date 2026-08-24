@@ -2823,12 +2823,12 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/SkillFile' }
-        '400': { description: "Missing file, unsupported file type, or file over its category limit" }
+        '400': { description: "Missing file, unsupported file type, or file over its category limit", content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '401': { description: Missing API identity or organization context, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: File could not be read or stored }
-        '503': { description: Persistent file storage is unavailable }
+        '500': { description: File could not be read or stored, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '503': { description: Persistent file storage is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
 
   /v1/skills:
     post:
@@ -2846,11 +2846,11 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/SkillCreated' }
-        '400': { description: Invalid Skill source or metadata }
-        '401': { description: Missing API identity or organization context, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '400': { description: Invalid Skill source or metadata, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
+        '401': { description: Missing API identity or organization context, content: { application/json: { schema: { oneOf: [{ $ref: '#/components/schemas/TaskCostError' }, { $ref: '#/components/schemas/BetaResourceError' }] } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Skill could not be created }
+        '500': { description: Skill could not be created, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
     get:
       operationId: listSkills
       tags: [Skills]
@@ -2874,7 +2874,7 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Skill list could not be loaded }
+        '500': { description: Skill list could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
 
   /v1/skills/{id}:
     get:
@@ -2889,11 +2889,11 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Skill' }
-        '404': { description: Skill not found }
+        '404': { description: Skill not found, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Skill could not be loaded }
+        '500': { description: Skill could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
     put:
       operationId: updateSkill
       tags: [Skills]
@@ -2912,12 +2912,12 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Skill' }
-        '404': { description: Skill not found }
-        '400': { description: 'Invalid JSON body, field length, or unified schema' }
+        '404': { description: Skill not found, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
+        '400': { description: 'Invalid JSON body, field length, or unified schema', content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Skill could not be updated }
+        '500': { description: Skill could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
     delete:
       operationId: deleteSkill
       tags: [Skills]
@@ -2935,11 +2935,11 @@ paths:
                 properties:
                   id: { type: string, format: uuid }
                   deleted: { type: boolean, const: true }
-        '404': { description: Skill not found }
+        '404': { description: Skill not found, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Skill could not be deleted }
+        '500': { description: Skill could not be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/BetaResourceError' } } } }
 
   # --- Credentials -----------------------------------------------
   /v1/credentials:
@@ -2960,11 +2960,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CredentialResponse'
-        '400': { description: 'Missing, blank, oversized, unsupported, or otherwise invalid credential field' }
+        '400': { description: 'Missing, blank, oversized, unsupported, or otherwise invalid credential field', content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Credential could not be encrypted or created }
+        '500': { description: Credential could not be encrypted or created, content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
     get:
       operationId: listCredentials
       tags: [Credentials]
@@ -2979,7 +2979,7 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Credential list could not be loaded }
+        '500': { description: Credential list could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
   /v1/credentials/{id}:
     get:
       operationId: getCredential
@@ -3000,8 +3000,8 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: Credential not found or belongs to another organization }
-        '500': { description: Credential could not be loaded }
+        '404': { description: Credential not found or belongs to another organization, content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
+        '500': { description: Credential could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
     patch:
       operationId: updateCredential
       tags: [Credentials]
@@ -3024,12 +3024,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CredentialResponse'
-        '400': { description: 'Invalid JSON body, unsupported status or strategy, non-positive weight, or no mutable fields' }
+        '400': { description: 'Invalid JSON body, unsupported status or strategy, non-positive weight, or no mutable fields', content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: Credential not found or belongs to another organization }
-        '500': { description: Credential could not be updated }
+        '404': { description: Credential not found or belongs to another organization, content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
+        '500': { description: Credential could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
   /v1/credentials/{id}/rotate:
     post:
       operationId: rotateCredential
@@ -3062,12 +3062,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CredentialResponse'
-        '400': { description: 'Missing, blank, oversized, or invalid replacement value' }
+        '400': { description: 'Missing, blank, oversized, or invalid replacement value', content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: Credential not found or belongs to another organization }
-        '500': { description: Credential value could not be encrypted or stored }
+        '404': { description: Credential not found or belongs to another organization, content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
+        '500': { description: Credential value could not be encrypted or stored, content: { application/json: { schema: { $ref: '#/components/schemas/LegacyResourceError' } } } }
 components:
   securitySchemes:
     BearerAuth:
@@ -4372,6 +4372,24 @@ components:
             code: { type: string, const: insufficient_scope }
             message: { type: string }
             request_id: { type: string }
+
+    BetaResourceError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [type, message]
+          properties:
+            type: { type: string }
+            message: { type: string }
+
+    LegacyResourceError:
+      type: object
+      required: [code, message]
+      properties:
+        code: { type: integer }
+        message: { type: string }
 
     # --- Services (Endpoint resources) -----------------------------
     CreateDeclarativeEndpointRequest:

@@ -79,6 +79,52 @@ for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
   }
 }
 
+const jsonErrorSchema = (method, publicPath, status) =>
+  openapiDocument.paths[publicPath]?.[method]?.responses?.[status]?.content?.['application/json']?.schema
+
+for (const status of ['400', '500', '503']) {
+  assert.equal(
+    jsonErrorSchema('post', '/v1/skills/files', status)?.$ref,
+    '#/components/schemas/TaskCostError',
+    `Skill file upload ${status} must document its implemented flat error envelope`,
+  )
+}
+for (const [method, publicPath, statuses] of [
+  ['post', '/v1/skills', ['400', '500']],
+  ['get', '/v1/skills', ['500']],
+  ['get', '/v1/skills/{id}', ['404', '500']],
+  ['put', '/v1/skills/{id}', ['400', '404', '500']],
+  ['delete', '/v1/skills/{id}', ['404', '500']],
+]) {
+  for (const status of statuses) {
+    assert.equal(
+      jsonErrorSchema(method, publicPath, status)?.$ref,
+      '#/components/schemas/BetaResourceError',
+      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
+    )
+  }
+}
+assert.deepEqual(
+  jsonErrorSchema('post', '/v1/skills', '401')?.oneOf?.map((schema) => schema.$ref),
+  ['#/components/schemas/TaskCostError', '#/components/schemas/BetaResourceError'],
+  'Skill creation must document both middleware and creator-context authentication envelopes',
+)
+for (const [method, publicPath, statuses] of [
+  ['post', '/v1/credentials', ['400', '500']],
+  ['get', '/v1/credentials', ['500']],
+  ['get', '/v1/credentials/{id}', ['404', '500']],
+  ['patch', '/v1/credentials/{id}', ['400', '404', '500']],
+  ['post', '/v1/credentials/{id}/rotate', ['400', '404', '500']],
+]) {
+  for (const status of statuses) {
+    assert.equal(
+      jsonErrorSchema(method, publicPath, status)?.$ref,
+      '#/components/schemas/LegacyResourceError',
+      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented legacy error envelope`,
+    )
+  }
+}
+
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
 assert.match(config, /'guides\/site-agent-integration\.md'/, 'Legacy Site Agent guide must stay excluded from the public build')
 assert.match(config, /'use-cases\/site-agent-copilot\.md'/, 'Legacy Site Agent use case must stay excluded from the public build')
