@@ -8,7 +8,7 @@ apiReference:
   operation: Embed Configs
   method: PATCH
   path: /v1/embeds/{id}
-  description: Update mutable widget settings. Omitted fields and null preserve their current values; an empty allowed_origins array clears the allowlist.
+  description: Update mutable widget settings. Omitted fields and null preserve their current values; an empty allowed_origins array clears the allowlist. POST and PUT are compatibility aliases. An ineligible binding may only be disabled with enabled=false by itself.
   groups:
     - title: Path parameters
       fields:

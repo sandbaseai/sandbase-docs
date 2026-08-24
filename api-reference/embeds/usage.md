@@ -8,7 +8,7 @@ apiReference:
   operation: Embed Configs
   method: GET
   path: /v1/embeds/{id}/usage
-  description: Return all-time aggregate counts for one organization-owned Embed Config.
+  description: Return all-time aggregate Session, Session Event record, and visitor counts for one organization-owned Embed Config. The Event count field is historically named message_count.
   groups:
     - title: Path parameters
       fields:

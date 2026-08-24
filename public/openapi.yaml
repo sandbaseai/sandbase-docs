@@ -412,7 +412,7 @@ paths:
       operationId: createEmbedConfig
       tags: [Embed Configs]
       summary: Create an Embed Config
-      description: Creates an organization-scoped web chat configuration bound to an eligible Agent and Environment. An Agent can have at most 10 Embed Configs.
+      description: Creates an organization-scoped web chat configuration bound to an eligible Agent and Environment. An Agent can have at most 10 Embed Configs, including disabled configurations. Unknown request fields are accepted and ignored.
       requestBody:
         required: true
         content:
@@ -430,6 +430,8 @@ paths:
         '403': { description: Agent Embed Config limit reached, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '404': { description: Agent or Environment binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '500': { description: Embed Config could not be created, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     get:
       operationId: listEmbedConfigs
       tags: [Embed Configs]
@@ -447,6 +449,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/EmbedConfigList'
         '500': { description: List failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
 
   /v1/embeds/{id}:
     get:
@@ -458,11 +461,13 @@ paths:
       responses:
         '200': { description: Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
         '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '500': { description: Embed Config could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     patch:
       operationId: updateEmbedConfig
       tags: [Embed Configs]
       summary: Update an Embed Config
-      description: Partially updates presentation, origin, or enabled settings. To clear allowed_origins, send an empty array; null is treated as omitted. The Agent and Environment binding cannot be changed.
+      description: Partially updates presentation, origin, or enabled settings. To clear allowed_origins, send an empty array; null is treated as omitted. The Agent and Environment binding cannot be changed. If an existing binding becomes ineligible, the only permitted update is enabled=false by itself.
       parameters:
         - $ref: '#/components/parameters/EmbedConfigId'
       requestBody:
@@ -476,6 +481,46 @@ paths:
         '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '404': { description: Embed Config or binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '500': { description: Embed Config could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+    post:
+      operationId: updateEmbedConfigPost
+      tags: [Embed Configs]
+      summary: Update an Embed Config (compatibility alias)
+      description: Compatibility alias for PATCH with identical partial-update and binding-validation semantics.
+      parameters:
+        - $ref: '#/components/parameters/EmbedConfigId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateEmbedConfigRequest' }
+      responses:
+        '200': { description: Updated Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
+        '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '404': { description: Embed Config or binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Embed Config could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+    put:
+      operationId: updateEmbedConfigPut
+      tags: [Embed Configs]
+      summary: Update an Embed Config (compatibility alias)
+      description: Compatibility alias for PATCH with identical partial-update and binding-validation semantics.
+      parameters:
+        - $ref: '#/components/parameters/EmbedConfigId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateEmbedConfigRequest' }
+      responses:
+        '200': { description: Updated Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
+        '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '404': { description: Embed Config or binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: Embed Config could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     delete:
       operationId: deleteEmbedConfig
       tags: [Embed Configs]
@@ -486,18 +531,21 @@ paths:
       responses:
         '200': { description: Embed Config deleted, content: { application/json: { schema: { $ref: '#/components/schemas/DeleteEmbedConfigResponse' } } } }
         '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '500': { description: Embed Config could not be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/embeds/{id}/usage:
     get:
       operationId: getEmbedConfigUsage
       tags: [Embed Configs]
       summary: Get Embed Config usage
-      description: Returns all-time aggregate Session, message, and unique visitor record counts for the configuration.
+      description: Returns all-time aggregate Session, Session Event record, and unique visitor counts for the configuration. The historical response field for Event records is named message_count.
       parameters:
         - $ref: '#/components/parameters/EmbedConfigId'
       responses:
         '200': { description: Aggregate usage, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfigUsage' } } } }
         '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
 
   # --- Account ----------------------------------------------------
   /v1/account/balance:
@@ -2837,37 +2885,38 @@ components:
 
     CreateEmbedConfigRequest:
       type: object
-      additionalProperties: false
+      additionalProperties: true
+      description: Unknown properties are accepted and ignored.
       required: [agent_id, environment_id]
       properties:
         agent_id: { type: string, pattern: '^agent_' }
         environment_id: { type: string, pattern: '^env_' }
-        name: { type: string }
+        name: { type: [string, 'null'] }
         allowed_origins:
-          type: array
+          type: [array, 'null']
           description: Exact origins or hostnames. Omit or send an empty array to allow every origin.
           items: { type: string }
-        title: { type: string }
-        welcome_message: { type: string }
-        theme_color: { type: string }
-        avatar_url: { type: string }
-        placeholder_text: { type: string }
+        title: { type: [string, 'null'] }
+        welcome_message: { type: [string, 'null'] }
+        theme_color: { type: [string, 'null'] }
+        avatar_url: { type: [string, 'null'] }
+        placeholder_text: { type: [string, 'null'] }
 
     UpdateEmbedConfigRequest:
       type: object
-      additionalProperties: false
-      description: Omitted fields and explicit null values preserve the current value. Send an empty allowed_origins array to clear the origin allowlist.
+      additionalProperties: true
+      description: Omitted fields and explicit null values preserve the current value. Send an empty allowed_origins array to clear the origin allowlist. Unknown properties are accepted and ignored.
       properties:
-        name: { type: string }
+        name: { type: [string, 'null'] }
         allowed_origins:
-          type: array
+          type: [array, 'null']
           items: { type: string }
-        title: { type: string }
-        welcome_message: { type: string }
-        theme_color: { type: string }
-        avatar_url: { type: string }
-        placeholder_text: { type: string }
-        enabled: { type: boolean }
+        title: { type: [string, 'null'] }
+        welcome_message: { type: [string, 'null'] }
+        theme_color: { type: [string, 'null'] }
+        avatar_url: { type: [string, 'null'] }
+        placeholder_text: { type: [string, 'null'] }
+        enabled: { type: [boolean, 'null'] }
 
     DeleteEmbedConfigResponse:
       type: object
