@@ -1109,6 +1109,7 @@ function inspectPublishedSources(directory) {
     const content = readFileSync(filename, 'utf8')
     assert.doesNotMatch(content, /\/default\/v1(?:\/|\b)/, `${relative} must not expose internal Console API paths`)
     assert.doesNotMatch(content, /\/v1\/generations(?:\/|\b)/, `${relative} must not expose the withdrawn generation path`)
+    assert.doesNotMatch(content, /\/v1\/blog\/assets(?:\/|\b)/, `${relative} must not expose the internal Blog publishing storage API`)
     assert.doesNotMatch(content, /\/events\/webhooks(?:\/|\b)/, `${relative} must not expose Sandbox event webhook paths`)
     assert.doesNotMatch(content, /\brun_abc123\b/, `${relative} must not assume a run ID prefix`)
     assert.doesNotMatch(content, /\btask_abc123\b/, `${relative} must not assume a task ID prefix`)

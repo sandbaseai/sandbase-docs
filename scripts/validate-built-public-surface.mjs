@@ -10,6 +10,7 @@ assert.ok(existsSync(dist), 'Built docs directory is missing; run npm run build 
 
 const forbidden = [
   [/\/v1\/generations(?:\/|\b)/i, 'withdrawn generation API'],
+  [/\/v1\/blog\/assets(?:\/|\b)/i, 'internal Blog publishing storage API'],
   [/\/(?:v1\/)?sandboxes?(?:\/|%7b|\{|:|\b)/i, 'Sandbox API'],
   [/\/events\/webhooks(?:\/|\b)/i, 'Sandbox event webhook API'],
   [/\/v1\/endpoints\/[A-Za-z0-9_{}%.-]+\/mcp\b/i, 'Endpoint MCP transport'],
