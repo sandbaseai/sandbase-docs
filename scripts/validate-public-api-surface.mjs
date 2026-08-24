@@ -2,8 +2,10 @@ import assert from 'node:assert/strict'
 import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { parse } from 'yaml'
 
 const openapi = readFileSync(new URL('../public/openapi.yaml', import.meta.url), 'utf8')
+const openapiDocument = parse(openapi)
 const config = readFileSync(new URL('../.vitepress/config.ts', import.meta.url), 'utf8')
 const sidebar = readFileSync(new URL('../.vitepress/sidebar.ts', import.meta.url), 'utf8')
 const generatedReferenceSpecs = readFileSync(new URL('../.vitepress/theme/generatedApiReferenceSpecs.ts', import.meta.url), 'utf8')
@@ -55,6 +57,22 @@ const requiredPublicPaths = [
 
 for (const requiredPath of requiredPublicPaths) {
   assert.match(openapi, new RegExp(`^  ${requiredPath.replace(/[{}\/]/g, '\\$&')}$`, 'm'), `Missing ${requiredPath}`)
+}
+
+const publicMethods = ['get', 'post', 'put', 'patch', 'delete']
+for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
+  for (const method of publicMethods) {
+    const operation = pathItem[method]
+    if (!operation) continue
+    if (publicPath === '/v1/messages') continue
+    if (publicPath === '/v1/tasks/{task_id}/cost') {
+      assert.ok(!operation.responses['402'], 'Task cost lookup must preserve its implemented spending-limit exception')
+      assert.ok(operation.responses['403'], 'Task cost lookup must document scoped-key rejection')
+      continue
+    }
+    assert.ok(operation.responses['402'], `${method.toUpperCase()} ${publicPath} must document API-key spending-limit rejection`)
+    assert.ok(operation.responses['403'], `${method.toUpperCase()} ${publicPath} must document scoped-key rejection`)
+  }
 }
 
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
@@ -196,22 +214,22 @@ assert.match(nestedDeploymentRuns, /name: limit[\s\S]*?name: page/, 'Nested Depl
 assert.match(nestedDeploymentRuns, /next_page:\n\s+type: string/, 'Nested DeploymentRun lists must document their emitted cursor')
 const triggerDeploymentRun = nestedDeploymentRuns.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
 assert.match(triggerDeploymentRun, /EmptyObjectRequest/, 'Deployment triggers must document their empty-object-only request body')
-for (const status of ['200', '400', '401', '404', '409', '500', '503']) {
+for (const status of ['200', '400', '401', '402', '403', '404', '409', '500', '503']) {
   assert.match(triggerDeploymentRun, new RegExp(`'${status}':`), `Deployment triggers must document ${status} responses`)
 }
 const listNestedDeploymentRuns = nestedDeploymentRuns.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
 assert.match(listNestedDeploymentRuns, /required: \[data\]/, 'Nested DeploymentRun lists must require data')
-for (const status of ['200', '400', '401', '500', '503']) {
+for (const status of ['200', '400', '401', '402', '403', '500', '503']) {
   assert.match(listNestedDeploymentRuns, new RegExp(`'${status}':`), `Nested DeploymentRun lists must document ${status} responses`)
 }
 assert.doesNotMatch(listNestedDeploymentRuns, /'404':/, 'Nested DeploymentRun lists return an empty page for an unknown Deployment')
 const triggerDeploymentRunAlias = openapi.match(/^  \/v1\/deployments\/\{id\}\/run:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(triggerDeploymentRunAlias, /EmptyObjectRequest/, 'The Deployment trigger alias must preserve the empty-object-only request body')
-for (const status of ['200', '400', '401', '404', '409', '500', '503']) {
+for (const status of ['200', '400', '401', '402', '403', '404', '409', '500', '503']) {
   assert.match(triggerDeploymentRunAlias, new RegExp(`'${status}':`), `The Deployment trigger alias must document ${status} responses`)
 }
 const nestedDeploymentRun = openapi.match(/^  \/v1\/deployments\/\{id\}\/runs\/\{drun_id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '404', '409', '503']) {
+for (const status of ['200', '401', '402', '403', '404', '409', '503']) {
   assert.match(nestedDeploymentRun, new RegExp(`'${status}':`), `Nested DeploymentRun reads must document ${status} responses`)
 }
 const deploymentsPath = openapi.match(/^  \/v1\/deployments:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
@@ -223,11 +241,11 @@ for (const field of ['trigger_type', 'status']) {
 for (const field of ['created_at_gt', 'created_at_gte', 'created_at_lt', 'created_at_lte']) {
   assert.match(deploymentRunsPath, new RegExp(`name: ${field}, in: query, deprecated: true`), `DeploymentRun lists must document the ${field} compatibility filter`)
 }
-for (const status of ['200', '400', '401', '500', '503']) {
+for (const status of ['200', '400', '401', '402', '403', '500', '503']) {
   assert.match(deploymentRunsPath, new RegExp(`'${status}':`), `Global DeploymentRun lists must document ${status} responses`)
 }
 const globalDeploymentRun = openapi.match(/^  \/v1\/deployment_runs\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '404', '503']) {
+for (const status of ['200', '401', '402', '403', '404', '503']) {
   assert.match(globalDeploymentRun, new RegExp(`'${status}':`), `Global DeploymentRun reads must document ${status} responses`)
 }
 assert.doesNotMatch(globalDeploymentRun, /'409':/, 'Global DeploymentRun reads return pending records instead of a conflict')
@@ -241,7 +259,7 @@ const createDeploymentOperation = deploymentsPathForCreate.match(/^    post:\n[\
 for (const mediaType of ['application/json', 'application/yaml', 'application/x-yaml']) {
   assert.match(createDeploymentOperation, new RegExp(mediaType.replace('/', '\\/') + ':'), `Deployment creation must document ${mediaType}`)
 }
-for (const status of ['200', '400', '401', '404', '415', '422', '500']) {
+for (const status of ['200', '400', '401', '402', '403', '404', '415', '422', '500']) {
   assert.match(createDeploymentOperation, new RegExp(`'${status}':`), `Deployment creation must document ${status} responses`)
 }
 assert.match(createDeploymentOperation, /CreateDeclarativeDeploymentRequest/, 'Deployment creation must document declarative runtime definitions')
@@ -260,7 +278,7 @@ for (const field of ['resources', 'vault_ids']) {
 const feishuTestPath = openapi.match(/^  \/v1\/deployments\/\{id\}\/notifications\/feishu\/test:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(feishuTestPath, /maxProperties: 0/, 'Feishu notification tests must reject custom request fields')
 assert.match(feishuTestPath, /This endpoint never accepts a webhook URL or custom message/, 'Feishu notification tests must document the saved-target-only boundary')
-for (const status of ['200', '400', '401', '404', '409', '502']) {
+for (const status of ['200', '400', '401', '402', '403', '404', '409', '502']) {
   assert.match(feishuTestPath, new RegExp(`'${status}':`), `Feishu notification test must document ${status} responses`)
 }
 const updateDeploymentSchema = openapi.match(/^    UpdateDeploymentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
@@ -276,12 +294,12 @@ assert.match(sidebar, /\/api-reference\/endpoints\/acp/, 'Sidebar must link to t
 const deploymentSchema = openapi.match(/^    Deployment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(deploymentSchema, /required: \[id, type, name, description, metadata, resources, vault_ids, agent, agent_id, agent_version, environment_id, schedule, timeout_policy, status, version, next_run_at, creation_mode, created_at, updated_at\]/, 'Deployment responses must require fields emitted by every list and detail projection')
 const deploymentResourcePath = openapi.match(/^  \/v1\/deployments\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['400', '401', '404', '409', '422', '500']) {
+for (const status of ['400', '401', '402', '403', '404', '409', '422', '500']) {
   assert.match(deploymentResourcePath, new RegExp(`'${status}':`), `Deployment resource operations must collectively document ${status}`)
 }
 for (const suffix of ['pause', 'unpause', 'archive']) {
   const lifecyclePath = openapi.match(new RegExp(`^  /v1/deployments/\\{id\\}/${suffix}:\\n[\\s\\S]*?(?=^  /)`, 'm'))?.[0] ?? ''
-  for (const status of ['200', '401', '404', '409', '500']) {
+  for (const status of ['200', '401', '402', '403', '404', '409', '500']) {
     assert.match(lifecyclePath, new RegExp(`'${status}':`), `Deployment ${suffix} must document ${status}`)
   }
 }
