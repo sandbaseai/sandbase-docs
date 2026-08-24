@@ -164,6 +164,26 @@ for (const [method, publicPath, statuses] of [
     )
   }
 }
+for (const [method, publicPath, statuses] of [
+  ['post', '/v1/deployments/{id}/run', ['400', '404', '409', '500', '503']],
+  ['post', '/v1/deployments/{id}/pause', ['404', '409', '500']],
+  ['post', '/v1/deployments/{id}/unpause', ['404', '409', '500']],
+  ['post', '/v1/deployments/{id}/archive', ['404', '409', '500']],
+  ['post', '/v1/deployments/{id}/notifications/feishu/test', ['400', '404', '409', '502']],
+  ['post', '/v1/deployments/{id}/runs', ['400', '404', '409', '500', '503']],
+  ['get', '/v1/deployments/{id}/runs', ['400', '500', '503']],
+  ['get', '/v1/deployments/{id}/runs/{drun_id}', ['404', '409', '503']],
+  ['get', '/v1/deployment_runs', ['400', '500', '503']],
+  ['get', '/v1/deployment_runs/{id}', ['404', '503']],
+]) {
+  for (const status of statuses) {
+    assert.equal(
+      jsonErrorSchema(method, publicPath, status)?.$ref,
+      '#/components/schemas/APIError',
+      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
+    )
+  }
+}
 
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
 assert.match(config, /'guides\/site-agent-integration\.md'/, 'Legacy Site Agent guide must stay excluded from the public build')

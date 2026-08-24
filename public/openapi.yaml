@@ -2482,14 +2482,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeploymentRun'
-        '400': { description: 'Request body is not absent or an empty JSON object, or stored initial events are invalid' }
+        '400': { description: 'Request body is not absent or an empty JSON object, or stored initial events are invalid', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: Deployment or a required resolved binding was not found }
-        '409': { description: Deployment is archived or Idempotency-Key conflicts with a different trigger }
-        '500': { description: 'Trigger, Session, or execution binding could not be created' }
-        '503': { description: DeploymentRun or execution runtime service is unavailable }
+        '404': { description: Deployment or a required resolved binding was not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: Deployment is archived or Idempotency-Key conflicts with a different trigger, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: 'Trigger, Session, or execution binding could not be created', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '503': { description: DeploymentRun or execution runtime service is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/deployments/{id}/pause:
     post:
@@ -2504,12 +2504,12 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Deployment' }
-        '404': { description: Deployment not found }
-        '409': { description: Deployment cannot be paused from its current state }
+        '404': { description: Deployment not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: Deployment cannot be paused from its current state, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Deployment pause failed }
+        '500': { description: Deployment pause failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/deployments/{id}/unpause:
     post:
@@ -2524,12 +2524,12 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Deployment' }
-        '404': { description: Deployment not found }
-        '409': { description: Deployment cannot be resumed from its current state }
+        '404': { description: Deployment not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: Deployment cannot be resumed from its current state, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Deployment resume failed }
+        '500': { description: Deployment resume failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/deployments/{id}/archive:
     post:
@@ -2544,12 +2544,12 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Deployment' }
-        '404': { description: Deployment not found }
-        '409': { description: Deployment cannot be archived from its current state }
+        '404': { description: Deployment not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '409': { description: Deployment cannot be archived from its current state, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Deployment archive or reload failed }
+        '500': { description: Deployment archive or reload failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/deployments/{id}/notifications/feishu/test:
     post:
@@ -2637,13 +2637,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIError'
-        '400': { description: 'Request body is not absent or an empty JSON object, or stored initial events are invalid' }
+        '400': { description: 'Request body is not absent or an empty JSON object, or stored initial events are invalid', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: Deployment or a required resolved binding was not found }
-        '500': { description: 'Trigger, Session, or execution binding could not be created' }
-        '503': { description: DeploymentRun or execution runtime service is unavailable }
+        '404': { description: Deployment or a required resolved binding was not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: 'Trigger, Session, or execution binding could not be created', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '503': { description: DeploymentRun or execution runtime service is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     get:
       operationId: listDeploymentRuns
       tags: [Deployments]
@@ -2674,12 +2674,12 @@ paths:
                   next_page:
                     type: string
                     description: Opaque cursor included when the current page reaches the requested limit.
-        '400': { description: Invalid page cursor }
+        '400': { description: Invalid page cursor, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: DeploymentRun list could not be loaded }
-        '503': { description: DeploymentRun service is unavailable }
+        '500': { description: DeploymentRun list could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '503': { description: DeploymentRun service is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/deployments/{id}/runs/{drun_id}:
     get:
@@ -2708,8 +2708,8 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: DeploymentRun not found or belongs to another Deployment }
-        '503': { description: DeploymentRun service is unavailable }
+        '404': { description: DeploymentRun not found or belongs to another Deployment, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '503': { description: DeploymentRun service is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/deployment_runs:
     get:
@@ -2767,12 +2767,12 @@ paths:
                     type: array
                     items: { $ref: '#/components/schemas/DeploymentRun' }
                   next_page: { type: string, description: Opaque cursor included when the current page reaches the requested limit. }
-        '400': { description: 'Invalid filter, limit, timestamp, boolean, status, trigger type, or page cursor' }
+        '400': { description: 'Invalid filter, limit, timestamp, boolean, status, trigger type, or page cursor', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: DeploymentRun list could not be loaded }
-        '503': { description: DeploymentRun service is unavailable }
+        '500': { description: DeploymentRun list could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '503': { description: DeploymentRun service is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   /v1/deployment_runs/{id}:
     get:
@@ -2794,8 +2794,8 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: DeploymentRun not found }
-        '503': { description: DeploymentRun service is unavailable }
+        '404': { description: DeploymentRun not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '503': { description: DeploymentRun service is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   # --- Skills -----------------------------------------------------
   /v1/skills/files:
