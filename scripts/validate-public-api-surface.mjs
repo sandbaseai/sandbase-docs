@@ -366,6 +366,48 @@ const updateEnvironmentSchema = openapi.match(/^    UpdateEnvironmentRequest:\n[
 assert.doesNotMatch(updateEnvironmentSchema, /minProperties:/, 'Empty Environment updates are implemented no-ops')
 assert.match(updateEnvironmentSchema, /name:\n\s+type: \[string, 'null'\]/, 'Null Environment names must preserve the current value')
 assert.match(updateEnvironmentSchema, /credential_bindings:\n\s+type: \[array, 'null'\]/, 'Null Environment credential bindings must clear the field')
+assert.doesNotMatch(openapi, /^  \/v1\/skills\/\{id\}\/mcp-publications:$/m, 'Skill MCP publication management must not be public')
+assert.doesNotMatch(openapi, /^  \/v1\/skill-mcp(?:-publications)?(?:\/|:)/m, 'Skill MCP transports and publications must not be public')
+const skillFilesPath = openapi.match(/^  \/v1\/skills\/files:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['201', '400', '401', '500', '503']) {
+  assert.match(skillFilesPath, new RegExp(`'${status}':`), `Skill file uploads must document ${status} responses`)
+}
+const skillsPath = openapi.match(/^  \/v1\/skills:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+const createSkill = skillsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
+assert.match(createSkill, /SkillCreated/, 'Skill creation must use its compact response projection')
+for (const status of ['201', '400', '401', '500']) {
+  assert.match(createSkill, new RegExp(`'${status}':`), `Skill creation must document ${status} responses`)
+}
+const listSkills = skillsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
+assert.match(listSkills, /SkillListItem/, 'Skill lists must use their list-item response projection')
+for (const status of ['200', '401', '500']) {
+  assert.match(listSkills, new RegExp(`'${status}':`), `Skill lists must document ${status} responses`)
+}
+const skillPath = openapi.match(/^  \/v1\/skills\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+const getSkill = skillPath.match(/^    get:\n[\s\S]*?(?=^    put:)/m)?.[0] ?? ''
+for (const status of ['200', '401', '404', '500']) {
+  assert.match(getSkill, new RegExp(`'${status}':`), `Skill reads must document ${status} responses`)
+}
+const updateSkill = skillPath.match(/^    put:\n[\s\S]*?(?=^    delete:)/m)?.[0] ?? ''
+assert.match(updateSkill, /Omitted name, description, and categories are cleared/, 'Skill PUT must document its replacement-style display fields')
+for (const status of ['200', '400', '401', '404', '500']) {
+  assert.match(updateSkill, new RegExp(`'${status}':`), `Skill updates must document ${status} responses`)
+}
+const deleteSkill = skillPath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
+for (const status of ['200', '401', '404', '500']) {
+  assert.match(deleteSkill, new RegExp(`'${status}':`), `Skill deletion must document ${status} responses`)
+}
+const skillCreatedSchema = openapi.match(/^    SkillCreated:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(skillCreatedSchema, /required: \[id, name, display_name, vendor_slug, plugin_slug, icon_url, preview_urls, created_at\]/, 'Skill creation responses must require exactly their emitted fields')
+const skillListItemSchema = openapi.match(/^    SkillListItem:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(skillListItemSchema, /required: \[id, name, display_name, vendor_slug, plugin_slug, description, icon_url, preview_urls, created_at, updated_at\]/, 'Skill list items must require every emitted field')
+const publicSkillSchema = openapi.match(/^    Skill:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(publicSkillSchema, /required: \[id, name, display_name, vendor_slug, plugin_slug, description, categories, icon_url, preview_urls, skill_file_url, git_url, created_at, updated_at\]/, 'Skill detail responses must require every emitted field')
+const createSkillSchema = openapi.match(/^    CreateSkillRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.doesNotMatch(createSkillSchema, /format: uri/, 'Skill registration does not validate submitted source strings as URLs')
+const updateSkillSchema = openapi.match(/^    UpdateSkillRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(updateSkillSchema, /Omitted name, description, and categories are cleared/, 'Skill update schemas must document mixed replacement semantics')
+assert.doesNotMatch(updateSkillSchema, /^        git_url:/m, 'Skill updates must not advertise the ignored git_url field')
 const endpointSchema = openapi.match(/^    Endpoint:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 for (const field of ['session_metadata', 'memory_config', 'resource_config', 'vault_config']) {
   assert.match(endpointSchema, new RegExp(`${field}:\\n\\s+type: \\[object, 'null'\\]`), `Endpoint ${field} must allow the serializer's null output`)

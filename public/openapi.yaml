@@ -2404,6 +2404,9 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/SkillFile' }
         '400': { description: "Missing file, unsupported file type, or file over its category limit" }
+        '401': { description: Missing API identity or organization context }
+        '500': { description: File could not be read or stored }
+        '503': { description: Persistent file storage is unavailable }
 
   /v1/skills:
     post:
@@ -2420,8 +2423,10 @@ paths:
           description: Skill created
           content:
             application/json:
-              schema: { $ref: '#/components/schemas/Skill' }
+              schema: { $ref: '#/components/schemas/SkillCreated' }
         '400': { description: Invalid Skill source or metadata }
+        '401': { description: Missing API identity or organization context }
+        '500': { description: Skill could not be created }
     get:
       operationId: listSkills
       tags: [Skills]
@@ -2438,10 +2443,12 @@ paths:
                 type: object
                 required: [data, total, page, page_size]
                 properties:
-                  data: { type: array, items: { $ref: '#/components/schemas/Skill' } }
+                  data: { type: array, items: { $ref: '#/components/schemas/SkillListItem' } }
                   total: { type: integer }
                   page: { type: integer }
                   page_size: { type: integer }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Skill list could not be loaded }
 
   /v1/skills/{id}:
     get:
@@ -2457,10 +2464,13 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Skill' }
         '404': { description: Skill not found }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Skill could not be loaded }
     put:
       operationId: updateSkill
       tags: [Skills]
       summary: Update a Skill
+      description: Replacement-style update for display fields. Omitted name, description, and categories are cleared; omitted source URL, preview URLs, metadata, and unified schema are preserved.
       parameters:
         - $ref: '#/components/parameters/SkillId'
       requestBody:
@@ -2475,6 +2485,9 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Skill' }
         '404': { description: Skill not found }
+        '400': { description: 'Invalid JSON body, field length, or unified schema' }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Skill could not be updated }
     delete:
       operationId: deleteSkill
       tags: [Skills]
@@ -2493,6 +2506,8 @@ paths:
                   id: { type: string, format: uuid }
                   deleted: { type: boolean, const: true }
         '404': { description: Skill not found }
+        '401': { description: Missing or invalid API key }
+        '500': { description: Skill could not be deleted }
 
   # --- Credentials -----------------------------------------------
   /v1/credentials:
@@ -2675,31 +2690,45 @@ components:
       required: [name]
       properties:
         name: { type: string, minLength: 1, maxLength: 100, pattern: '.*\S.*' }
-        description: { type: string, maxLength: 1000 }
-        categories: { type: array, items: { type: string } }
-        skill_file_url: { type: string, format: uri, minLength: 1 }
-        git_url: { type: string, format: uri, minLength: 1 }
-        preview_image_urls: { type: array, items: { type: string, format: uri } }
-        metadata: { type: object, additionalProperties: true }
-        unified_schema: { type: object, additionalProperties: true }
+        description: { type: [string, 'null'], maxLength: 1000 }
+        categories: { type: [array, 'null'], items: { type: string } }
+        skill_file_url: { type: string, minLength: 1, pattern: '.*\S.*' }
+        git_url: { type: string, minLength: 1, pattern: '.*\S.*' }
+        preview_image_urls: { type: [array, 'null'], items: { type: string } }
+        metadata: { type: [object, 'null'], additionalProperties: true }
+        unified_schema: { type: [object, 'null'], additionalProperties: true }
       anyOf:
         - required: [skill_file_url]
         - required: [git_url]
 
     UpdateSkillRequest:
       type: object
+      description: Omitted name, description, and categories are cleared. Omitted preview_image_urls, skill_file_url, metadata, and unified_schema preserve their stored values.
       properties:
-        name: { type: string, maxLength: 100 }
-        description: { type: string, maxLength: 1000 }
-        categories: { type: array, items: { type: string } }
-        skill_file_url: { type: string, format: uri }
-        preview_image_urls: { type: array, items: { type: string, format: uri } }
-        metadata: { type: object, additionalProperties: true }
-        unified_schema: { type: object, additionalProperties: true }
+        name: { type: [string, 'null'], maxLength: 100, description: 'New display name. Omitted, null, or blank clears display_name; the immutable full Skill ref in name is unchanged.' }
+        description: { type: [string, 'null'], maxLength: 1000, description: Omitted or null clears the description. }
+        categories: { type: [array, 'null'], items: { type: string }, description: 'Omitted or null clears categories; the detail response normalizes the result to an empty array.' }
+        skill_file_url: { type: [string, 'null'], description: 'A non-blank value replaces the bundle URL; omitted, null, or blank preserves it.' }
+        preview_image_urls: { type: [array, 'null'], items: { type: string }, description: 'Omitted or null preserves previews; an empty array clears them.' }
+        metadata: { type: [object, 'null'], additionalProperties: true, description: 'Supplied non-reserved keys merge into stored metadata; omitted or null preserves them.' }
+        unified_schema: { type: [object, 'null'], additionalProperties: true, description: 'Supplied value replaces the stored schema after validation; omitted or null preserves it.' }
+
+    SkillCreated:
+      type: object
+      required: [id, name, display_name, vendor_slug, plugin_slug, icon_url, preview_urls, created_at]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string, description: Full vendor_slug/plugin_slug reference. }
+        display_name: { type: string }
+        vendor_slug: { type: string }
+        plugin_slug: { type: string }
+        icon_url: { type: string }
+        preview_urls: { type: array, items: { type: string } }
+        created_at: { type: string, format: date-time }
 
     Skill:
       type: object
-      required: [id, name, display_name, vendor_slug, plugin_slug, icon_url, preview_urls, created_at]
+      required: [id, name, display_name, vendor_slug, plugin_slug, description, categories, icon_url, preview_urls, skill_file_url, git_url, created_at, updated_at]
       properties:
         id: { type: string, format: uuid }
         name: { type: string, description: Full vendor_slug/plugin_slug reference. }
@@ -2712,6 +2741,21 @@ components:
         preview_urls: { type: array, items: { type: string } }
         skill_file_url: { type: string }
         git_url: { type: string }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+
+    SkillListItem:
+      type: object
+      required: [id, name, display_name, vendor_slug, plugin_slug, description, icon_url, preview_urls, created_at, updated_at]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string, description: Full vendor_slug/plugin_slug reference. }
+        display_name: { type: string }
+        vendor_slug: { type: string }
+        plugin_slug: { type: string }
+        description: { type: string }
+        icon_url: { type: string }
+        preview_urls: { type: array, items: { type: string } }
         created_at: { type: string, format: date-time }
         updated_at: { type: string, format: date-time }
 

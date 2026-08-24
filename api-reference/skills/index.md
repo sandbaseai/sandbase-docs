@@ -5,7 +5,7 @@ description: Upload, create, and manage reusable Skills for SandBase Agents.
 
 # Skills API
 
-Skills are reusable instruction and resource bundles for Build Agent. Create a Skill once, then use its full `vendor_slug/plugin_slug` reference in an Agent or Service configuration.
+Skills are reusable instruction and resource bundles for Agents. Create a Skill once, then use its full `vendor_slug/plugin_slug` reference in an Agent or Service configuration.
 
 ## Create a Skill in 5 minutes
 
@@ -179,6 +179,8 @@ Skill resource IDs are UUIDs. Agent and Service definitions use the separate `ve
 | `GET` | `/v1/skills/{skill_id}` | [Get a Skill](./get) and its source metadata. |
 | `PUT` | `/v1/skills/{skill_id}` | [Update Skill metadata](./update) or replace its uploaded bundle URL. |
 | `DELETE` | `/v1/skills/{skill_id}` | [Soft-delete a Skill](./delete). |
+
+`PUT` has mixed replacement semantics. Always send the display fields you want to keep: omitted `name`, `description`, and `categories` are cleared. By contrast, omitted `skill_file_url`, `preview_image_urls`, `metadata`, and `unified_schema` preserve their stored values. A blank bundle URL also preserves the current bundle; an explicit empty preview array clears previews. The generated full Skill reference in the response's `name` field never changes.
 
 Delete the Quickstart Skill when you no longer need it:
 
