@@ -291,6 +291,20 @@ const acpRequestSchema = openapi.match(/^    ACPRequest:\n[\s\S]*?(?=^    [A-Za-
 assert.match(acpRequestSchema, /enum: \[initialize, session\/new, session\/prompt, session\/cancel\]/, 'Endpoint ACP must document every implemented method')
 const acpResponseSchema = openapi.match(/^    ACPResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(acpResponseSchema, /oneOf:\n\s+- required: \[result\]\n\s+- required: \[error\]/, 'Endpoint ACP must distinguish JSON-RPC success and error responses')
+const endpointRunPath = openapi.match(/^  \/v1\/endpoints\/\{id\}\/run:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
+for (const status of ['202', '400', '401', '403', '404', '409', '500', '503']) {
+  assert.match(endpointRunPath, new RegExp(`'${status}':`), `Endpoint REST invocation must document ${status} responses`)
+}
+for (const status of ['422', '502']) {
+  assert.doesNotMatch(endpointRunPath, new RegExp(`'${status}':`), `Endpoint REST invocation must not document unimplemented direct ${status} responses`)
+}
+assert.match(endpointRunPath, /When both input and content are supplied, content takes precedence/, 'Endpoint REST invocation must document implemented input precedence')
+const endpointInvokeRequest = openapi.match(/^    EndpointInvokeRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(endpointInvokeRequest, /- type: object\n\s+additionalProperties: true/, 'Endpoint REST invocation must allow a single content block object')
+const endpointInvokeAccepted = openapi.match(/^    EndpointInvokeAccepted:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(endpointInvokeAccepted, /EndpointAcceptedEvent/, 'Endpoint REST acceptance must use its emitted compact event projection')
+const endpointAcceptedEvent = openapi.match(/^    EndpointAcceptedEvent:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(endpointAcceptedEvent, /required: \[id, type, processed_at\]/, 'Endpoint REST accepted events must require exactly their emitted identity fields')
 for (const field of ['memory_config', 'resource_config', 'vault_config']) {
   assert.match(endpointSchema, new RegExp(`${field}:[\\s\\S]*?not currently applied to Session execution`), `Endpoint ${field} must be documented as reserved`)
 }

@@ -1076,7 +1076,7 @@ paths:
         Creates or continues a persistent Session and sends one standard event. Omit `session_id` to create a
         Session fixed to the Endpoint's Agent version and Runtime Environment snapshot. Provide `session_id` to
         continue that Session. Returns the persistent Session ID and accepted events; no public execution Run or
-        internal Runtime Session identity is exposed.
+        internal Runtime Session identity is exposed. When both input and content are supplied, content takes precedence.
       parameters:
         - $ref: '#/components/parameters/EndpointId'
       requestBody:
@@ -1092,18 +1092,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EndpointInvokeAccepted'
-        '502':
-          description: Agent runtime or Skill materialization failed
+        '400':
+          description: Invalid JSON or missing usable input/content
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIError'
-        '422':
-          description: Runtime provider is unsupported; no turn was delivered
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCostError' }
+        '403':
+          description: Service is disabled or REST is not enabled
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '404':
+          description: Service or supplied Session not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
+        '409':
+          description: Session is busy, archived, terminal, or bound to another Service, Agent, version, or Environment
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIError'
+        '500':
+          description: Session creation or turn acceptance failed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/APIError' }
         '503':
           description: Stateful persistence or recovery is unavailable
           content:
@@ -3928,11 +3948,16 @@ components:
               items:
                 type: object
                 additionalProperties: true
+            - type: object
+              additionalProperties: true
         content:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
+          oneOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: object
+              additionalProperties: true
         session_id:
           type: string
           description: Persistent Session to continue. Omit to create a new Session.
@@ -3951,7 +3976,18 @@ components:
         events:
           type: array
           items:
-            $ref: '#/components/schemas/SessionEvent'
+            $ref: '#/components/schemas/EndpointAcceptedEvent'
+
+    EndpointAcceptedEvent:
+      type: object
+      required: [id, type, processed_at]
+      properties:
+        id: { type: string }
+        type: { type: string, const: user.message }
+        processed_at:
+          type: [string, 'null']
+          format: date-time
+          description: Acceptance time, or null while a native delivery outcome is still unknown.
 
     APIError:
       type: object
