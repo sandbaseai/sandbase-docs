@@ -25,6 +25,10 @@ Generate, edit, animate, upscale, and transform videos through SandBase. Browse 
 
 Generate, transform, clone, transcribe, and synthesize audio through SandBase. Browse audio models by provider and copy the exact async request format for each model.
 
+### [Seedance Native API](/model-api-reference/seedance-native-api)
+
+Submit Seedance video tasks with the Volcengine Ark Contents Generations task protocol, so existing Ark client code keeps working. Covers the supported models, request rules, task status, and error contract.
+
 ## Get started
 
 All LLM models use the OpenAI-compatible [Chat Completions API](/api-reference/llm-gateway). Claude models can also use the [Anthropic Messages API](/api-reference/anthropic-compat).

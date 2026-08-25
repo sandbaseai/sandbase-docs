@@ -6,6 +6,19 @@ import {
 
 // ─── Model API Reference ─────────────────────────────────────
 
+// Hand-written modules that live under /model-api-reference but are not produced
+// by scripts/generate-llm-model-api-reference.mjs. They are appended here rather
+// than in modelApiReferenceSidebar.generated.ts, which the generator overwrites.
+const handWrittenModelApiReferenceItems: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Seedance Native API',
+    collapsed: true,
+    items: [
+      { text: 'Overview', link: '/model-api-reference/seedance-native-api' },
+    ],
+  },
+]
+
 function modelApiReferenceSidebar(items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] {
   return [
     { text: 'Status', link: 'https://status.sandbase.ai' },
@@ -13,7 +26,7 @@ function modelApiReferenceSidebar(items: DefaultTheme.SidebarItem[]): DefaultThe
     { text: 'Blog', link: 'https://www.sandbase.ai/blog' },
     {
       text: 'Model API Reference',
-      items,
+      items: [...items, ...handWrittenModelApiReferenceItems],
     },
   ]
 }
