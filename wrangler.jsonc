@@ -4,6 +4,14 @@
   "main": "./worker/index.js",
   "routes": [
     {
+      "pattern": "sandbase.ai/docs",
+      "zone_name": "sandbase.ai"
+    },
+    {
+      "pattern": "sandbase.ai/docs/*",
+      "zone_name": "sandbase.ai"
+    },
+    {
       "pattern": "www.sandbase.ai/docs",
       "zone_name": "sandbase.ai"
     },
