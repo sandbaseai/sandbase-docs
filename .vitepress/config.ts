@@ -204,6 +204,7 @@ export default defineConfig({
     'guides/site-agent-integration.md',
     'use-cases/site-agent-copilot.md',
     'api-reference/webhooks.md',
+    'api-reference/embeds/**',
   ],
   title: 'SandBase Docs',
   description: 'SandBase docs for connecting Agents to models, APIs, tools, Setup, Services, Schedules, and Sessions.',

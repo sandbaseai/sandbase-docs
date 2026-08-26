@@ -11,6 +11,30 @@ import {
 // than in modelApiReferenceSidebar.generated.ts, which the generator overwrites.
 const handWrittenModelApiReferenceItems: DefaultTheme.SidebarItem[] = [
   {
+    text: 'Inference APIs',
+    collapsed: true,
+    items: [
+      { text: 'Chat Completions', link: '/api-reference/llm-gateway' },
+      { text: 'Responses', link: '/api-reference/responses' },
+      { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
+      { text: 'Google Gemini', link: '/api-reference/gemini-generate-content' },
+      { text: 'Gemini Interactions', link: '/api-reference/gemini-interactions' },
+      { text: 'Volcengine Ark Video', link: '/api-reference/volcengine-contents-generations' },
+      { text: 'Generate Image (OpenAI)', link: '/api-reference/images/generations' },
+      { text: 'Edit Image (OpenAI)', link: '/api-reference/images/edits' },
+      { text: 'Model Image Generation', link: '/api-reference/models/image' },
+      { text: 'Video Generation', link: '/api-reference/models/video' },
+      { text: 'Audio', link: '/api-reference/models/audio' },
+      { text: 'Embeddings', link: '/api-reference/models/embedding' },
+      { text: 'API Passthrough', link: '/api-reference/models/api-passthrough' },
+      { text: 'Media Assets', link: '/api-reference/models/assets' },
+      { text: 'Upload Media', link: '/api-reference/models/upload' },
+      { text: 'Register Asset', link: '/api-reference/models/assets-create' },
+      { text: 'Get Asset', link: '/api-reference/models/assets-get' },
+      { text: 'Get Task Cost', link: '/api-reference/tasks/cost' },
+    ],
+  },
+  {
     text: 'Seedance Native API',
     collapsed: true,
     items: [
@@ -127,61 +151,12 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
-    text: 'Inference APIs',
-    collapsed: false,
-    items: [
-      { text: 'Chat Completions', link: '/api-reference/llm-gateway' },
-      { text: 'Responses', link: '/api-reference/responses' },
-      { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
-      { text: 'Google Gemini', link: '/api-reference/gemini-generate-content' },
-      { text: 'Gemini Interactions', link: '/api-reference/gemini-interactions' },
-      { text: 'Volcengine Ark Video', link: '/api-reference/volcengine-contents-generations' },
-      {
-        text: 'Images',
-        collapsed: false,
-        items: [
-          { text: 'Model Image Generation', link: '/api-reference/models/image' },
-          { text: 'Generate Image (OpenAI)', link: '/api-reference/images/generations' },
-          { text: 'Edit Image (OpenAI)', link: '/api-reference/images/edits' },
-        ],
-      },
-      { text: 'Video Generation', link: '/api-reference/models/video' },
-      { text: 'Audio', link: '/api-reference/models/audio' },
-      { text: 'Embeddings', link: '/api-reference/models/embedding' },
-      { text: 'API Passthrough', link: '/api-reference/models/api-passthrough' },
-      {
-        text: 'Assets',
-        collapsed: false,
-        items: [
-          { text: 'Overview', link: '/api-reference/models/assets' },
-          { text: 'Upload Media', link: '/api-reference/models/upload' },
-          { text: 'Register Asset', link: '/api-reference/models/assets-create' },
-          { text: 'Get Asset', link: '/api-reference/models/assets-get' },
-        ],
-      },
-      { text: 'Get Task Cost', link: '/api-reference/tasks/cost' },
-    ],
-  },
-  {
     text: 'Account',
     collapsed: false,
     items: [
       { text: 'Overview', link: '/api-reference/account/' },
       { text: 'Get Balance', link: '/api-reference/account/balance' },
       { text: 'List History', link: '/api-reference/account/history' },
-    ],
-  },
-  {
-    text: 'Embed Configs',
-    collapsed: true,
-    items: [
-      { text: 'Overview', link: '/api-reference/embeds/' },
-      { text: 'Create', link: '/api-reference/embeds/create' },
-      { text: 'List', link: '/api-reference/embeds/list' },
-      { text: 'Get', link: '/api-reference/embeds/get' },
-      { text: 'Update', link: '/api-reference/embeds/update' },
-      { text: 'Delete', link: '/api-reference/embeds/delete' },
-      { text: 'Usage', link: '/api-reference/embeds/usage' },
     ],
   },
   {

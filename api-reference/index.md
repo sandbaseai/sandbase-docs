@@ -1,9 +1,9 @@
 ---
-title: API Reference
-description: SandBase API reference for Models, inference, Agents, Sessions, Endpoints, and Deployments.
+title: Platform API Reference
+description: SandBase Platform API reference for Agents, Sessions, Endpoints, Deployments, Skills, credentials, and account resources.
 ---
 
-# API Reference
+# Platform API Reference
 
 Use the API when you need code-level control.
 
@@ -18,18 +18,13 @@ The Agent execution APIs use four related resources:
 
 | Area | Use it for | Start here |
 |---|---|---|
-| **Models** | Call LLM, image, audio, video, and embedding models | [Chat Completions](/api-reference/llm-gateway), [Responses](/api-reference/responses), or [OpenAI Images](/api-reference/images/generations) |
-| **Task costs** | Poll recent async model task settlement, final cost, estimates, and usage | [Get Task Cost](/api-reference/tasks/cost) |
 | **Account** | Inspect organization balance and recent API execution history | [Account API](/api-reference/account/) |
-| **Embed Configs** | Configure an embeddable web chat widget for an Agent | [Embed Configs API](/api-reference/embeds/) |
 | **Agents** | Create and version reusable Agent definitions | [Agents API](/api-reference/agents/) |
 | **Sessions** | Run an Agent statefully and exchange events | [Sessions API](/api-reference/sessions/) |
 | **Endpoints** | Publish and invoke an Agent over REST | [Endpoints API](/api-reference/endpoints/) |
 | **Deployments** | Schedule or manually trigger repeatable Agent work | [Deployments API](/api-reference/deployments/) |
 | **DeploymentRuns** | Inspect each Deployment trigger and its nullable Session result | [DeploymentRuns](/api-reference/deployments/list-runs) |
 | **Skills** | Create and manage reusable Agent instruction bundles | [Skills API](/api-reference/skills/) |
-
-Task cost lookup is intended for recent task-level settlement polling. Older task execution records may be archived and become unavailable from this endpoint; use billing records or billing exports for long-term reconciliation.
 
 ## Authentication
 
@@ -59,5 +54,4 @@ Learn more: [Authentication](/api-reference/authentication).
 - [Getting Started](/getting-started/)
 - [Store](/store/)
 - [Setup](/setup/)
-- [Get Task Cost](/api-reference/tasks/cost)
 - [Build Agent](/agents/)
