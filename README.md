@@ -59,6 +59,31 @@ npm run dev
 
 For a production-equivalent check, run `npm run validate`; it validates the OpenAPI document, checks that withdrawn sandbox APIs are not exposed, and writes the generated site to `.vitepress/dist`. Keep model IDs, request fields, and pricing tied to the linked live reference pages, and open an issue when the source of truth is unclear. See the repository's [open issues](https://github.com/sandbaseai/sandbase-docs/issues) for current deployment and content work.
 
+## Production deployment
+
+Production is deployed independently from the main website with Cloudflare
+Workers Static Assets. The Worker owns only `www.sandbase.ai/docs` and
+`www.sandbase.ai/docs/*`; every other route on `www.sandbase.ai` continues to
+use the existing main-site origin.
+
+```bash
+npm ci
+npm run build:cloudflare
+npx --yes wrangler@4.126.0 deploy
+```
+
+The VitePress build keeps `/docs/` as its public base URL. A small Worker strips
+that prefix before reading the generated files from `.vitepress/dist`, while
+the configured routes ensure it never receives non-docs traffic. GitHub Actions
+deploys from tags matching `docs-v*` or a manual dispatch from `main`, using the
+protected `production` environment and these secrets:
+
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_API_TOKEN`, scoped to deploy the Worker and manage its routes in
+  the `sandbase.ai` zone
+
+The health check remains available at `https://www.sandbase.ai/docs/health`.
+
 ## First LLM call
 
 Create an API key in the [Console](https://www.sandbase.ai/console/keys), export it, and select a current model ID from [Supported Models](https://www.sandbase.ai/docs/models/supported).

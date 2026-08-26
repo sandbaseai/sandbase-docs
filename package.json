@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
+    "build:cloudflare": "npm run build",
     "preview": "vitepress preview",
     "lint:openapi": "redocly lint public/openapi.yaml --extends=minimal",
     "test:public-api": "node scripts/validate-public-api-surface.mjs",

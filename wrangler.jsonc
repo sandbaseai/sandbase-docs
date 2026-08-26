@@ -1,0 +1,21 @@
+{
+  "name": "sandbase-docs",
+  "compatibility_date": "2026-08-26",
+  "main": "./worker/index.js",
+  "routes": [
+    {
+      "pattern": "www.sandbase.ai/docs",
+      "zone_name": "sandbase.ai"
+    },
+    {
+      "pattern": "www.sandbase.ai/docs/*",
+      "zone_name": "sandbase.ai"
+    }
+  ],
+  "assets": {
+    "directory": "./.vitepress/dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
+  }
+}
