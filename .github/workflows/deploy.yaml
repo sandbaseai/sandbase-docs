@@ -42,7 +42,7 @@ jobs:
 
   build-and-deploy:
     needs: validate
-    runs-on: self-hosted
+    runs-on: [self-hosted, sandbase-docs]
     environment: production
     env:
       REGISTRY: sgccr.ccs.tencentyun.com/sandbase
