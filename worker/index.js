@@ -13,7 +13,12 @@ export default {
       return new Response('Not Found', { status: 404 })
     }
 
-    url.pathname = url.pathname.slice(DOCS_PREFIX.length) || '/'
+    // The former origin permanently redirected /docs/ to /docs/index. Some
+    // browsers still cache that redirect, so serve the homepage internally
+    // instead of redirecting /docs/index back to /docs/ and creating a loop.
+    url.pathname = url.pathname === `${DOCS_PREFIX}/index`
+      ? '/'
+      : url.pathname.slice(DOCS_PREFIX.length) || '/'
     return env.ASSETS.fetch(new Request(url, request))
   },
 }
