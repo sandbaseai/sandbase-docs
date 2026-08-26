@@ -92,7 +92,7 @@ The health check remains available at `https://www.sandbase.ai/docs/health`.
 Create an API key in the [Console](https://www.sandbase.ai/console/keys), export it, and select a current model ID from [Supported Models](https://www.sandbase.ai/docs/models/supported).
 
 ```bash
-export SANDBASE_API_KEY="sk-sb-YOUR_API_KEY"
+export SANDBASE_API_KEY="sk-YOUR_API_KEY"
 
 curl https://api.sandbase.ai/v1/chat/completions \
   -H "Authorization: Bearer $SANDBASE_API_KEY" \

@@ -31,7 +31,7 @@ curl 'https://api.sandbase.ai/v1/models?q=gpt' \
 Then request its full model card:
 
 ```bash
-curl https://api.sandbase.ai/v1/models/openai/gpt-4o \
+curl https://api.sandbase.ai/v1/models/deepseek/deepseek-v4-flash \
   -H "Authorization: Bearer $SANDBASE_API_KEY"
 ```
 

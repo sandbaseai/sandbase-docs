@@ -31,7 +31,7 @@ Use Models for language, image, video, audio, and embedding workloads. Use APIs 
 - [Browse the Store](/store/)
 - [Supported Models](/models/supported)
 - [Make your first API call](/getting-started/first-call)
-- [Open the API Reference](/api-reference/)
+- [Open the Model API Reference](/model-api-reference/)
 
 ### Agents
 
@@ -78,6 +78,7 @@ Schedules execute an Agent later or repeatedly. Their API resource is a Deployme
 ## Next steps
 
 - New to SandBase: [Getting started](/getting-started/)
-- Calling an interface: [API Reference](/api-reference/)
+- Calling a Model or API: [Model API Reference](/model-api-reference/)
+- Managing Agents and workloads: [Platform API Reference](/api-reference/)
 - Building reusable work: [Build Agent](/agents/)
 - Connecting an AI tool: [Setup](/setup/)

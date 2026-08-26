@@ -27,7 +27,7 @@ It intentionally omits SandBase capability, schema, and pricing metadata.
 
 ```bash
 curl 'https://api.sandbase.ai/v1/models?type=llm' \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 The list endpoint supports `q`, `vendor`, `type`, and `order`; it is not paginated and defaults to `type=llm`.
@@ -43,7 +43,7 @@ Model names are vendor-qualified and may contain `/`:
 
 ```bash
 curl https://api.sandbase.ai/v1/models/openai/gpt-4o \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 Before execution, inspect:
@@ -59,7 +59,7 @@ For a completed or in-progress task, query the recorded cost instead of recomput
 
 ```bash
 curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 See the [Models API reference](/api-reference/models/) for the response contracts and the

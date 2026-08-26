@@ -43,7 +43,7 @@ Use the standard `Authorization: Bearer` header. This is compatible with the Ope
 curl https://api.sandbase.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"model": "deepseek/deepseek-v3", "messages": [{"role": "user", "content": "Hi"}]}'
+  -d '{"model": "deepseek/deepseek-v4-flash", "messages": [{"role": "user", "content": "Hi"}]}'
 ```
 
 ### Anthropic Messages: x-api-key header
@@ -54,7 +54,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 curl https://api.sandbase.ai/v1/messages \
   -H "x-api-key: sk-YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"model": "anthropic/claude-sonnet-4-20250514", "max_tokens": 1024, "messages": [{"role": "user", "content": "Hi"}]}'
+  -d '{"model": "anthropic/claude-sonnet-5", "max_tokens": 1024, "messages": [{"role": "user", "content": "Hi"}]}'
 ```
 
 ::: tip

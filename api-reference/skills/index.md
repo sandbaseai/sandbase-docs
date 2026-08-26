@@ -16,7 +16,7 @@ This example requires `curl`, `jq`, and `zip`. Keep API keys in environment vari
 A Hermes Skill ZIP must contain exactly one `SKILL.md`. Its YAML frontmatter must include a normalized runtime `name`.
 
 ```bash
-export SANDBASE_API_KEY='sk-sb-YOUR_KEY'
+export SANDBASE_API_KEY='sk-YOUR_KEY'
 export SANDBASE_API_BASE='https://api.sandbase.ai'
 
 : "${SANDBASE_API_KEY:?SANDBASE_API_KEY is required}"

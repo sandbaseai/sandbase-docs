@@ -32,7 +32,7 @@ OpenAI- and Anthropic-compatible gateways retain their protocol-specific error e
 
 | Response message/type | HTTP | Description | Fix |
 |------|------|-------------|-----|
-| `missing API key in Authorization header` | 401 | Standard endpoint received no Bearer key | Add `Authorization: Bearer sk-sb-YOUR_KEY`; only `/v1/messages` also accepts `x-api-key` |
+| `missing API key in Authorization header` | 401 | Standard endpoint received no Bearer key | Add `Authorization: Bearer sk-YOUR_KEY`; only `/v1/messages` also accepts `x-api-key` |
 | `invalid API key` | 401 | Key is unknown | Verify or rotate the key in Console |
 | `API key has been revoked` | 401 | Key is disabled | Create or enable a valid key |
 | `API key has expired` | 401 | Key is past its expiration | Create a new key |

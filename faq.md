@@ -91,7 +91,7 @@ Open the Console and go to API Keys.
 Use the key as:
 
 ```http
-Authorization: Bearer sk-sb-YOUR_KEY
+Authorization: Bearer sk-YOUR_KEY
 ```
 
 ## How does billing work?

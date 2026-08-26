@@ -12,7 +12,7 @@ This example requires `curl` and `jq`.
 ## Publish and run an Agent
 
 ```bash
-export SANDBASE_API_KEY='sk-sb-YOUR_KEY'
+export SANDBASE_API_KEY='sk-YOUR_KEY'
 export SANDBASE_API_BASE='https://api.sandbase.ai'
 
 : "${SANDBASE_API_KEY:?SANDBASE_API_KEY is required}"

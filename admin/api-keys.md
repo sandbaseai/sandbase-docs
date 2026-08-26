@@ -9,11 +9,13 @@ API keys authenticate your requests to the SandBase API. Each key belongs to an 
 
 ## Key Format
 
-SandBase API keys use the prefix `sk-sb-`:
+New SandBase API keys use the prefix `sk-` followed by 64 hexadecimal characters:
 
 ```
-sk-sb-abc123def456...
+sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
+
+Legacy `sk-sb-...` keys remain valid until they expire or are revoked. Treat the complete key as an opaque secret instead of validating it by prefix or length.
 
 ## Create a Key
 

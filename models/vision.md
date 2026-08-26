@@ -1,43 +1,53 @@
 ---
 title: Vision
+description: Send image inputs to currently available SandBase vision models.
 ---
 
 # Vision
 
-Vision capabilities are built into LLM models that support multimodal input. Send images alongside text in the Chat Completions API.
+Vision models accept images together with text. Availability, image limits, accepted formats, context limits, and pricing are model-specific, so select a current model from the live catalog before sending a request.
 
-## How to Use
+## Choose a vision model
 
-Pass images as content parts in the messages array:
+- Browse [Models](https://www.sandbase.ai/models) and filter for the required image-input capability.
+- Verify the exact model ID and request fields in the [Model API Reference](/model-api-reference/llm-models).
+- Use [`GET /v1/models`](/api-reference/models/list) and the detailed model endpoint when selecting a model programmatically.
 
-```python
-response = client.chat.completions.create(
-    model="gpt-4o",
-    messages=[{
-        "role": "user",
-        "content": [
-            {"type": "text", "text": "What's in this image?"},
-            {"type": "image_url", "image_url": {"url": "https://example.com/photo.jpg"}}
-        ]
+Do not maintain a fixed list of vision models in application code. A model can be renamed, disabled, rerouted, or updated independently of this guide.
+
+## Send an image
+
+For an OpenAI-compatible vision model, send text and image content parts in the same message. Replace `$MODEL_ID` with an enabled model ID whose model card declares image-input support.
+
+```bash
+curl https://api.sandbase.ai/v1/chat/completions \
+  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "'"$MODEL_ID"'",
+    "messages": [{
+      "role": "user",
+      "content": [
+        {"type": "text", "text": "What is shown in this image?"},
+        {"type": "image_url", "image_url": {"url": "https://example.com/photo.jpg"}}
+      ]
     }]
-)
-print(response.choices[0].message.content)
+  }'
 ```
 
-## Image Input Formats
+Depending on the selected model, image inputs may accept an HTTPS URL, a data URL, or an uploaded media asset. Follow that model's generated reference rather than assuming every vision model accepts the same transport.
 
-| Format | Example |
-|--------|---------|
-| URL | `{"type": "image_url", "image_url": {"url": "https://..."}}` |
-| Base64 | `{"type": "image_url", "image_url": {"url": "data:image/png;base64,..."}}` |
+## Production guidance
 
-## Models with Vision
+- Validate media type, size, count, and accessibility before sending the request.
+- Avoid placing private images at publicly accessible URLs; use the supported upload or asset flow when appropriate.
+- Set request timeouts that account for image download and processing.
+- Treat image and prompt contents as sensitive application data.
+- Handle unsupported-input and unavailable-model errors explicitly.
 
-| Model | Max Images | Notes |
-|-------|-----------|-------|
-| `gpt-4o` | 20 | Best overall vision |
-| `claude-sonnet-4` | 20 | Strong document understanding |
-| `gemini-2.5-pro` | 16 | 1M context for long documents |
-| `meta/llama-4-maverick` | 8 | Open-weight alternative |
+## Next steps
 
-→ [Full capability matrix](/models/capabilities)
+- [Capabilities](/models/capabilities)
+- [Supported Models](/models/supported)
+- [Upload Media](/api-reference/models/upload)
+- [Model API Reference](/model-api-reference/)

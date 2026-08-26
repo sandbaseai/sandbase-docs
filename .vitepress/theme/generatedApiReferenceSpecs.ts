@@ -670,12 +670,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "Python",
         "language": "python",
-        "code": "from openai import OpenAI\n\nclient = OpenAI(\n    api_key=\"sk-sb-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai/v1\",\n)\n\nresponse = client.embeddings.create(\n    model=\"alibaba/text-embedding-v4\",\n    input=\"SandBase provides a unified API for AI models, agents, and developer tools.\",\n    dimensions=1024,\n    encoding_format=\"float\",\n)\n\nembedding = response.data[0].embedding\nprint(f\"Dimensions: {len(embedding)}\")"
+        "code": "from openai import OpenAI\n\nclient = OpenAI(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai/v1\",\n)\n\nresponse = client.embeddings.create(\n    model=\"alibaba/text-embedding-v4\",\n    input=\"SandBase provides a unified API for AI models, agents, and developer tools.\",\n    dimensions=1024,\n    encoding_format=\"float\",\n)\n\nembedding = response.data[0].embedding\nprint(f\"Dimensions: {len(embedding)}\")"
       },
       {
         "label": "TypeScript",
         "language": "typescript",
-        "code": "import OpenAI from 'openai';\n\nconst client = new OpenAI({\n  apiKey: 'sk-sb-YOUR_KEY',\n  baseURL: 'https://api.sandbase.ai/v1',\n});\n\nconst response = await client.embeddings.create({\n  model: 'alibaba/text-embedding-v4',\n  input: 'SandBase provides a unified API for AI models, agents, and developer tools.',\n  dimensions: 1024,\n  encoding_format: 'float',\n});\n\nconsole.log(response.data[0].embedding.length);"
+        "code": "import OpenAI from 'openai';\n\nconst client = new OpenAI({\n  apiKey: 'sk-YOUR_KEY',\n  baseURL: 'https://api.sandbase.ai/v1',\n});\n\nconst response = await client.embeddings.create({\n  model: 'alibaba/text-embedding-v4',\n  input: 'SandBase provides a unified API for AI models, agents, and developer tools.',\n  dimensions: 1024,\n  encoding_format: 'float',\n});\n\nconsole.log(response.data[0].embedding.length);"
       }
     ],
     "response": {
@@ -988,7 +988,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "Python",
         "language": "python",
-        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-sb-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\nsession = client.beta.sessions.retrieve(\n    session_id=\"sess_01abc...\"\n)\nprint(f\"Status: {session.status}\")"
+        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\nsession = client.beta.sessions.retrieve(\n    session_id=\"sess_01abc...\"\n)\nprint(f\"Status: {session.status}\")"
       },
       {
         "label": "TypeScript",
@@ -998,7 +998,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl https://api.sandbase.ai/v1/sessions/sess_01abc... \\\n  -H \"Authorization: Bearer sk-sb-YOUR_KEY\""
+        "code": "curl https://api.sandbase.ai/v1/sessions/sess_01abc... \\\n  -H \"Authorization: Bearer sk-YOUR_KEY\""
       }
     ],
     "response": {
@@ -1094,12 +1094,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "Python",
         "language": "python",
-        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-sb-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\npage = client.beta.sessions.events.list(session_id=\"sess_01abc...\")\nfor event in page.data:\n    print(f\"{event.type}: {event.id}\")"
+        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\npage = client.beta.sessions.events.list(session_id=\"sess_01abc...\")\nfor event in page.data:\n    print(f\"{event.type}: {event.id}\")"
       },
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/sessions/sess_01abc.../events\" \\\n  -H \"Authorization: Bearer sk-sb-YOUR_KEY\""
+        "code": "curl \"https://api.sandbase.ai/v1/sessions/sess_01abc.../events\" \\\n  -H \"Authorization: Bearer sk-YOUR_KEY\""
       }
     ],
     "response": {
@@ -1166,12 +1166,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "Python",
         "language": "python",
-        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-sb-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\npage = client.beta.sessions.list(agent_id=\"agent_01HqR2k7...\", limit=20)\nfor session in page.data:\n    print(f\"{session.id} — {session.status} — {session.title}\")"
+        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\npage = client.beta.sessions.list(agent_id=\"agent_01HqR2k7...\", limit=20)\nfor session in page.data:\n    print(f\"{session.id} — {session.status} — {session.title}\")"
       },
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/sessions?agent_id=agent_01HqR2k7...&created_at%5Bgte%5D=2026-05-01T00%3A00%3A00Z&limit=20\" \\\n  -H \"Authorization: Bearer sk-sb-YOUR_KEY\""
+        "code": "curl \"https://api.sandbase.ai/v1/sessions?agent_id=agent_01HqR2k7...&created_at%5Bgte%5D=2026-05-01T00%3A00%3A00Z&limit=20\" \\\n  -H \"Authorization: Bearer sk-YOUR_KEY\""
       }
     ],
     "response": {
@@ -1234,12 +1234,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "Python",
         "language": "python",
-        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-sb-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\nfor event in client.beta.sessions.events.stream(session_id=\"sess_01abc...\"):\n    if event.type == \"agent.message\":\n        for block in event.content:\n            print(block.text, end=\"\")\n    elif event.type == \"session.status_idle\":\n        print(f\"\\n[done: {event.stop_reason.type}]\")\n        break"
+        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\nfor event in client.beta.sessions.events.stream(session_id=\"sess_01abc...\"):\n    if event.type == \"agent.message\":\n        for block in event.content:\n            print(block.text, end=\"\")\n    elif event.type == \"session.status_idle\":\n        print(f\"\\n[done: {event.stop_reason.type}]\")\n        break"
       },
       {
         "label": "Raw SSE",
         "language": "python",
-        "code": "import json, httpx\n\nwith httpx.stream(\"GET\",\n    \"https://api.sandbase.ai/v1/sessions/sess_01abc.../events/stream\",\n    headers={\"Authorization\": \"Bearer sk-sb-YOUR_KEY\"}\n) as response:\n    for line in response.iter_lines():\n        if line.startswith(\"data: \"):\n            event = json.loads(line[6:])\n            if \"type\" in event:\n                print(event[\"type\"])"
+        "code": "import json, httpx\n\nwith httpx.stream(\"GET\",\n    \"https://api.sandbase.ai/v1/sessions/sess_01abc.../events/stream\",\n    headers={\"Authorization\": \"Bearer sk-YOUR_KEY\"}\n) as response:\n    for line in response.iter_lines():\n        if line.startswith(\"data: \"):\n            event = json.loads(line[6:])\n            if \"type\" in event:\n                print(event[\"type\"])"
       }
     ],
     "response": {
@@ -1741,7 +1741,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "HTTP",
         "language": "http",
-        "code": "Authorization: Bearer sk-sb-YOUR_API_KEY"
+        "code": "Authorization: Bearer sk-YOUR_API_KEY"
       },
       {
         "label": "cURL",

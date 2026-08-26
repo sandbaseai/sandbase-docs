@@ -11,7 +11,7 @@ SandBase provides an Anthropic-compatible endpoint at `POST /v1/messages`. Anthr
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="sk-sb-your-api-key",
+    api_key="sk-your-api-key",
     base_url="https://api.sandbase.ai",
 )
 ```

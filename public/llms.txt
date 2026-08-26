@@ -8,7 +8,7 @@ https://api.sandbase.ai/v1
 
 ## Authentication
 
-Bearer token: `Authorization: Bearer sk-sb-YOUR_KEY`
+Bearer token: `Authorization: Bearer sk-YOUR_KEY`
 
 ## SandBase CLI and MCP Bridge
 

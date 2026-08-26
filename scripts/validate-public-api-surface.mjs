@@ -12,6 +12,8 @@ const generatedReferenceSpecs = readFileSync(new URL('../.vitepress/theme/genera
 const apiKeyGuide = readFileSync(new URL('../getting-started/api-keys.md', import.meta.url), 'utf8')
 const authenticationReference = readFileSync(new URL('../api-reference/authentication.md', import.meta.url), 'utf8')
 const supportedModelsPage = readFileSync(new URL('../models/supported.md', import.meta.url), 'utf8')
+const capabilitiesPage = readFileSync(new URL('../models/capabilities.md', import.meta.url), 'utf8')
+const visionPage = readFileSync(new URL('../models/vision.md', import.meta.url), 'utf8')
 const root = fileURLToPath(new URL('..', import.meta.url))
 
 assert.match(supportedModelsPage, /https:\/\/www\.sandbase\.ai\/models/, 'Supported Models must point to the live catalog')
@@ -21,6 +23,11 @@ for (const category of ['llm-models', 'image-generation', 'video-generation', 'a
 }
 assert.doesNotMatch(supportedModelsPage, /^\| `[^`]+` \|/m, 'Supported Models must not maintain a hand-written model snapshot')
 assert.doesNotMatch(supportedModelsPage, /Model Comparison Table|Typical Cost per 1K requests/, 'Supported Models must not publish static comparison pricing')
+for (const [label, content] of [['Capabilities', capabilitiesPage], ['Vision', visionPage]]) {
+  assert.match(content, /GET \/v1\/models/, `${label} must point integrations to live model discovery`)
+  assert.doesNotMatch(content, /^\| `[^`]+` \|/m, `${label} must not maintain a hand-written model snapshot`)
+  assert.doesNotMatch(content, /gpt-4o|gemini-2\.5|deepseek-v3/i, `${label} must not publish stale model recommendations`)
+}
 
 const forbiddenOpenApiPatterns = [
   [/^  \/sandboxes(?:[/{:]|$)/m, 'sandbox path'],
@@ -265,7 +272,7 @@ assert.deepEqual(
 
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
 assert.match(config, /'guides\/site-agent-integration\.md'/, 'Legacy Site Agent guide must stay excluded from the public build')
-assert.match(config, /'use-cases\/site-agent-copilot\.md'/, 'Legacy Site Agent use case must stay excluded from the public build')
+assert.match(config, /'use-cases\/\*\*'/, 'Legacy Site Agent use cases must stay excluded from the public build')
 assert.match(config, /'api-reference\/webhooks\.md'/, 'Sandbox event webhook reference must stay excluded from the public build')
 assert.match(config, /'api-reference\/embeds\/\*\*'/, 'Unmaintained Embed Config pages must stay excluded from the public build')
 assert.doesNotMatch(sidebar, /\/api-reference\/sandboxes?\b/i, 'Sidebar must not link to sandbox API pages')
@@ -1104,7 +1111,6 @@ assert.doesNotMatch(openapi, /^  \/default\/v1(?:\/|:)/m, 'Internal Console path
 const unpublishedFiles = new Set([
   'api-reference/webhooks.md',
   'guides/site-agent-integration.md',
-  'use-cases/site-agent-copilot.md',
 ])
 
 function inspectPublishedSources(directory) {
@@ -1117,8 +1123,9 @@ function inspectPublishedSources(directory) {
     }
     if (!/\.(?:md|mdx|txt)$/.test(entry.name)) continue
     const relative = path.relative(root, filename)
-    if (unpublishedFiles.has(relative)) continue
+    if (unpublishedFiles.has(relative) || relative.startsWith('use-cases/') || relative.startsWith('api-reference/embeds/')) continue
     const content = readFileSync(filename, 'utf8')
+    assert.doesNotMatch(content, /sk-sb-(?:YOUR|your|xxx)/, `${relative} must use the current sk- placeholder for new API keys`)
     assert.doesNotMatch(content, /\/default\/v1(?:\/|\b)/, `${relative} must not expose internal Console API paths`)
     assert.doesNotMatch(content, /\/v1\/generations(?:\/|\b)/, `${relative} must not expose the withdrawn generation path`)
     assert.doesNotMatch(content, /\/v1\/blog\/assets(?:\/|\b)/, `${relative} must not expose the internal Blog publishing storage API`)

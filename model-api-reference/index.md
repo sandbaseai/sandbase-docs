@@ -35,16 +35,16 @@ All LLM models use the OpenAI-compatible [Chat Completions API](/api-reference/l
 
 ```bash
 curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"model":"openai/gpt-4o","messages":[{"role":"user","content":"Hello"}]}'
+  -d '{"model":"deepseek/deepseek-v4-flash","messages":[{"role":"user","content":"Hello"}]}'
 ```
 
 Image, video, and audio generation models use the async `/v1/run` flow:
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/run \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model":"openai/gpt-image-2","prompt":"A studio product photo on a clean white background"}'
 ```
@@ -53,5 +53,5 @@ Poll the returned task id until the result is ready:
 
 ```bash
 curl https://api.sandbase.ai/v1/run/f3d2e8a1-7c4b-4a12-9d2e-123456789abc \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```

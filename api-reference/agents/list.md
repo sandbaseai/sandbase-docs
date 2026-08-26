@@ -44,7 +44,7 @@ apiReference:
         from anthropic import Anthropic
 
         client = Anthropic(
-            api_key="sk-sb-YOUR_KEY",
+            api_key="sk-YOUR_KEY",
             base_url="https://api.sandbase.ai",
         )
 

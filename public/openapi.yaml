@@ -6,7 +6,7 @@ info:
     Use one account and one key to call Models, ready-made APIs, and Agent Services.
 
     ## Authentication
-    All API requests require an API key passed via `Authorization: Bearer sk-sb-YOUR_KEY` header.
+    All API requests require an API key passed via `Authorization: Bearer sk-YOUR_KEY` header.
 
     ## SDK Compatibility
     - **LLM Gateway** (`/v1/chat/completions`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`

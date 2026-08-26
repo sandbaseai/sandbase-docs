@@ -37,7 +37,7 @@ from openai import OpenAI, RateLimitError
 
 client = OpenAI(
     base_url="https://api.sandbase.ai/v1",
-    api_key="sk-sb-your-key",
+    api_key="sk-your-key",
     max_retries=3  # SDK handles 429 automatically
 )
 
@@ -60,7 +60,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   baseURL: 'https://api.sandbase.ai/v1',
-  apiKey: 'sk-sb-your-key',
+  apiKey: 'sk-your-key',
   maxRetries: 3, // SDK handles 429 automatically
 });
 
@@ -116,7 +116,7 @@ limiter = RateLimiter(max_rpm=120)
 def make_request(messages):
     limiter.acquire()
     return client.chat.completions.create(
-        model="gpt-4o",
+        model="deepseek/deepseek-v4-flash",
         messages=messages
     )
 ```
@@ -138,7 +138,7 @@ async def process_batch(prompts, max_concurrent=10):
     async def process_one(prompt):
         async with semaphore:
             response = await async_client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="deepseek/deepseek-v4-flash",
                 messages=[{"role": "user", "content": prompt}]
             )
             return response.choices[0].message.content
@@ -147,66 +147,15 @@ async def process_batch(prompts, max_concurrent=10):
     return await asyncio.gather(*tasks, return_exceptions=True)
 ```
 
-### 2. Use Smaller Models for Simple Tasks
+### 2. Keep Requests Purposeful
 
-Rate limits are per-token. Using `gpt-4o-mini` or `claude-3.5-haiku` for simple tasks consumes fewer tokens and stays within limits:
+Request limits count calls, not the model's token price. Avoid duplicate work, collapse equivalent application requests when safe, and cache reusable results according to your data-freshness and privacy requirements. Choose smaller models to reduce latency and cost when they satisfy the task, but do not expect that choice to increase the documented request limit.
 
-```python
-# Use mini models for classification, extraction, simple Q&A
-simple_response = client.chat.completions.create(
-    model="gpt-4o-mini",  # 10x cheaper, faster, uses fewer tokens
-    messages=[{"role": "user", "content": "Classify this as positive/negative: 'Great product!'"}]
-)
+### 3. Plan Capacity Explicitly
 
-# Reserve powerful models for complex reasoning
-complex_response = client.chat.completions.create(
-    model="o3",
-    messages=[{"role": "user", "content": "Analyze this complex legal document..."}]
-)
-```
+Multiple API keys do not bypass the platform-wide limit and add credential-management risk. Smooth bursts with a queue, bound concurrency and retries, and contact SandBase support when a workload needs a guaranteed or higher limit. Use separate keys to isolate applications and spending controls, not to multiply throughput.
 
-### 3. Implement Token Estimation
-
-Estimate token usage before sending requests to avoid hitting token limits:
-
-```python
-import tiktoken
-
-def estimate_tokens(messages, model="gpt-4o"):
-    """Estimate token count for a message list."""
-    encoding = tiktoken.encoding_for_model(model)
-    num_tokens = 0
-    for message in messages:
-        num_tokens += 4  # message overhead
-        for key, value in message.items():
-            if isinstance(value, str):
-                num_tokens += len(encoding.encode(value))
-    num_tokens += 2  # reply priming
-    return num_tokens
-
-# Check before sending
-estimated = estimate_tokens(messages)
-# Pace requests so a large prompt doesn't burst past your allocated rate
-limiter.acquire()
-```
-
-### 4. Distribute Across Multiple API Keys
-
-For very high throughput, use multiple API keys and distribute requests:
-
-```python
-import itertools
-
-keys = ["sk-sb-key-1", "sk-sb-key-2", "sk-sb-key-3"]
-key_cycle = itertools.cycle(keys)
-
-def get_client():
-    """Round-robin across API keys."""
-    key = next(key_cycle)
-    return OpenAI(base_url="https://api.sandbase.ai/v1", api_key=key)
-```
-
-### 5. Cache Repeated Requests
+### 4. Cache Repeated Requests
 
 Avoid hitting rate limits by caching responses for identical prompts:
 
@@ -220,7 +169,7 @@ def cache_key(messages):
 
 response_cache = {}
 
-def cached_completion(messages, model="gpt-4o"):
+def cached_completion(messages, model="deepseek/deepseek-v4-flash"):
     key = cache_key(messages)
     if key in response_cache:
         return response_cache[key]
@@ -237,7 +186,7 @@ Rate limits can also affect streaming requests. If you're rate limited mid-strea
 ```python
 try:
     stream = client.chat.completions.create(
-        model="gpt-4o",
+        model="deepseek/deepseek-v4-flash",
         messages=messages,
         stream=True
     )

@@ -26,7 +26,7 @@ https://api.sandbase.ai/v1
 All requests require a Bearer token:
 
 ```
-Authorization: Bearer sk-sb-YOUR_KEY
+Authorization: Bearer sk-YOUR_KEY
 ```
 
 Get your key at [Console → API Keys](https://www.sandbase.ai/console/keys).
@@ -35,7 +35,7 @@ Get your key at [Console → API Keys](https://www.sandbase.ai/console/keys).
 
 ```bash
 curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "openai/gpt-4o",
@@ -80,7 +80,7 @@ Check cost after any generation:
 
 ```bash
 curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 ## Rate Limits

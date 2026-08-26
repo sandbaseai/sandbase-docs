@@ -31,13 +31,13 @@ The Agent execution APIs use four related resources:
 Most API requests use a SandBase API key:
 
 ```http
-Authorization: Bearer sk-sb-YOUR_KEY
+Authorization: Bearer sk-YOUR_KEY
 ```
 
 Some Anthropic-compatible clients use:
 
 ```http
-x-api-key: sk-sb-YOUR_KEY
+x-api-key: sk-YOUR_KEY
 ```
 
 Learn more: [Authentication](/api-reference/authentication).

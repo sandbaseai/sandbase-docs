@@ -29,11 +29,11 @@ from openai import OpenAI
 
 client = OpenAI(
     base_url="https://api.sandbase.ai/v1",
-    api_key="sk-sb-your-key"
+    api_key="sk-your-key"
 )
 
 stream = client.chat.completions.create(
-    model="gpt-4o",
+    model="deepseek/deepseek-v4-flash",
     messages=[{"role": "user", "content": "Explain quantum computing"}],
     stream=True
 )
@@ -48,11 +48,11 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   baseURL: 'https://api.sandbase.ai/v1',
-  apiKey: 'sk-sb-your-key',
+  apiKey: 'sk-your-key',
 });
 
 const stream = await client.chat.completions.create({
-  model: 'gpt-4o',
+  model: 'deepseek/deepseek-v4-flash',
   messages: [{ role: 'user', content: 'Explain quantum computing' }],
   stream: true,
 });
@@ -67,10 +67,10 @@ for await (const chunk of stream) {
 
 ```bash [cURL]
 curl -N https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-sb-your-key" \
+  -H "Authorization: Bearer sk-your-key" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gpt-4o",
+    "model": "deepseek/deepseek-v4-flash",
     "messages": [{"role": "user", "content": "Explain quantum computing"}],
     "stream": true
   }'
@@ -83,11 +83,11 @@ curl -N https://api.sandbase.ai/v1/chat/completions \
 Each event in the stream looks like:
 
 ```
-data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"gpt-4o","choices":[{"index":0,"delta":{"content":"Hello"},"finish_reason":null}]}
+data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v4-flash","choices":[{"index":0,"delta":{"content":"Hello"},"finish_reason":null}]}
 
-data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"gpt-4o","choices":[{"index":0,"delta":{"content":" world"},"finish_reason":null}]}
+data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v4-flash","choices":[{"index":0,"delta":{"content":" world"},"finish_reason":null}]}
 
-data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"gpt-4o","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}
+data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v4-flash","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}
 
 data: [DONE]
 ```
@@ -104,7 +104,7 @@ To receive token usage in the final chunk, include `stream_options`:
 
 ```python
 stream = client.chat.completions.create(
-    model="gpt-4o",
+    model="deepseek/deepseek-v4-flash",
     messages=[{"role": "user", "content": "Hello"}],
     stream=True,
     stream_options={"include_usage": True}
@@ -126,11 +126,11 @@ import anthropic
 
 client = anthropic.Anthropic(
     base_url="https://api.sandbase.ai",
-    api_key="sk-sb-your-key"
+    api_key="sk-your-key"
 )
 
 with client.messages.stream(
-    model="claude-sonnet-4",
+    model="anthropic/claude-sonnet-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Explain quantum computing"}]
 ) as stream:
@@ -143,11 +143,11 @@ import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
   baseURL: 'https://api.sandbase.ai',
-  apiKey: 'sk-sb-your-key',
+  apiKey: 'sk-your-key',
 });
 
 const stream = client.messages.stream({
-  model: 'claude-sonnet-4',
+  model: 'anthropic/claude-sonnet-5',
   max_tokens: 1024,
   messages: [{ role: 'user', content: 'Explain quantum computing' }],
 });
@@ -167,7 +167,7 @@ Anthropic uses a richer event-driven protocol with 6 event types:
 
 ```
 event: message_start
-data: {"type":"message_start","message":{"id":"msg_abc","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4","usage":{"input_tokens":25,"output_tokens":0}}}
+data: {"type":"message_start","message":{"id":"msg_abc","type":"message","role":"assistant","content":[],"model":"anthropic/claude-sonnet-5","usage":{"input_tokens":25,"output_tokens":0}}}
 
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
@@ -208,7 +208,7 @@ Tool call arguments arrive as incremental string fragments:
 
 ```python
 stream = client.chat.completions.create(
-    model="gpt-4o",
+    model="deepseek/deepseek-v4-flash",
     messages=[{"role": "user", "content": "What's the weather in Tokyo?"}],
     tools=[{
         "type": "function",
@@ -245,7 +245,7 @@ Tool calls arrive as `tool_use` content blocks with `input_json_delta`:
 
 ```python
 with client.messages.stream(
-    model="claude-sonnet-4",
+    model="anthropic/claude-sonnet-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "What's the weather in Tokyo?"}],
     tools=[{
@@ -295,11 +295,11 @@ Using `httpx` for low-level streaming with manual SSE parsing:
 import httpx
 import json
 
-def stream_chat_raw(messages: list[dict], model: str = "gpt-4o"):
+def stream_chat_raw(messages: list[dict], model: str = "deepseek/deepseek-v4-flash"):
     """Stream chat completions using raw HTTP + SSE parsing."""
     url = "https://api.sandbase.ai/v1/chat/completions"
     headers = {
-        "Authorization": "Bearer sk-sb-your-key",
+        "Authorization": "Bearer sk-your-key",
         "Content-Type": "application/json",
     }
     payload = {
@@ -344,11 +344,11 @@ Using `requests` with streaming:
 import requests
 import json
 
-def stream_chat_requests(messages: list[dict], model: str = "gpt-4o"):
+def stream_chat_requests(messages: list[dict], model: str = "deepseek/deepseek-v4-flash"):
     """Stream using the requests library."""
     url = "https://api.sandbase.ai/v1/chat/completions"
     headers = {
-        "Authorization": "Bearer sk-sb-your-key",
+        "Authorization": "Bearer sk-your-key",
         "Content-Type": "application/json",
     }
     payload = {
@@ -383,11 +383,11 @@ async function streamChatRaw(messages: Array<{role: string; content: string}>) {
   const response = await fetch('https://api.sandbase.ai/v1/chat/completions', {
     method: 'POST',
     headers: {
-      'Authorization': 'Bearer sk-sb-your-key',
+      'Authorization': 'Bearer sk-your-key',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'gpt-4o',
+      model: 'deepseek/deepseek-v4-flash',
       messages,
       stream: true,
     }),
@@ -440,10 +440,10 @@ async function streamToElement(messages: Array<{role: string; content: string}>,
   const response = await fetch('https://api.sandbase.ai/v1/chat/completions', {
     method: 'POST',
     headers: {
-      'Authorization': 'Bearer sk-sb-your-key',
+      'Authorization': 'Bearer sk-your-key',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ model: 'gpt-4o', messages, stream: true }),
+    body: JSON.stringify({ model: 'deepseek/deepseek-v4-flash', messages, stream: true }),
   });
 
   const reader = response.body!.getReader();
@@ -516,10 +516,10 @@ from openai import OpenAI
 
 client = OpenAI(
     base_url="https://api.sandbase.ai/v1",
-    api_key="sk-sb-your-key"
+    api_key="sk-your-key"
 )
 
-def stream_with_error_handling(messages: list[dict], model: str = "gpt-4o"):
+def stream_with_error_handling(messages: list[dict], model: str = "deepseek/deepseek-v4-flash"):
     """Stream with comprehensive error detection and handling."""
     collected_content = ""
 
@@ -587,12 +587,12 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   baseURL: 'https://api.sandbase.ai/v1',
-  apiKey: 'sk-sb-your-key',
+  apiKey: 'sk-your-key',
 });
 
 async function streamWithErrorHandling(
   messages: Array<{role: string; content: string}>,
-  model = 'gpt-4o'
+  model = 'deepseek/deepseek-v4-flash'
 ): Promise<string> {
   let collectedContent = '';
 
@@ -652,10 +652,10 @@ async function streamWithMidStreamErrorDetection(messages: Array<{role: string; 
   const response = await fetch('https://api.sandbase.ai/v1/chat/completions', {
     method: 'POST',
     headers: {
-      'Authorization': 'Bearer sk-sb-your-key',
+      'Authorization': 'Bearer sk-your-key',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ model: 'gpt-4o', messages, stream: true }),
+    body: JSON.stringify({ model: 'deepseek/deepseek-v4-flash', messages, stream: true }),
   });
 
   if (!response.ok) {
@@ -726,12 +726,12 @@ from openai import OpenAI
 
 client = OpenAI(
     base_url="https://api.sandbase.ai/v1",
-    api_key="sk-sb-your-key"
+    api_key="sk-your-key"
 )
 
 def stream_with_retry(
     messages: list[dict],
-    model: str = "gpt-4o",
+    model: str = "deepseek/deepseek-v4-flash",
     max_retries: int = 3,
     base_delay: float = 1.0,
 ):
@@ -785,12 +785,12 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   baseURL: 'https://api.sandbase.ai/v1',
-  apiKey: 'sk-sb-your-key',
+  apiKey: 'sk-your-key',
 });
 
 async function* streamWithRetry(
   messages: Array<{role: string; content: string}>,
-  model = 'gpt-4o',
+  model = 'deepseek/deepseek-v4-flash',
   maxRetries = 3,
   baseDelay = 1000
 ) {
@@ -838,7 +838,7 @@ When a stream disconnects mid-generation, you can resume by including the partia
 ```python
 def stream_with_resume(
     messages: list[dict],
-    model: str = "gpt-4o",
+    model: str = "deepseek/deepseek-v4-flash",
     max_retries: int = 2,
 ):
     """Resume generation after mid-stream disconnection."""
@@ -906,7 +906,7 @@ SandBase terminates streams after 60 seconds of no data from the upstream provid
 # Python — set per-request timeout
 client = OpenAI(
     base_url="https://api.sandbase.ai/v1",
-    api_key="sk-sb-your-key",
+    api_key="sk-your-key",
     timeout=httpx.Timeout(connect=5.0, read=120.0, write=10.0, pool=10.0),
 )
 ```
@@ -915,7 +915,7 @@ client = OpenAI(
 // JavaScript — set per-request timeout
 const client = new OpenAI({
   baseURL: 'https://api.sandbase.ai/v1',
-  apiKey: 'sk-sb-your-key',
+  apiKey: 'sk-your-key',
   timeout: 120_000, // 120 seconds
 });
 ```
@@ -945,7 +945,7 @@ Track metrics to detect degradation early:
 ```python
 import time
 
-def stream_with_metrics(messages, model="gpt-4o"):
+def stream_with_metrics(messages, model="deepseek/deepseek-v4-flash"):
     """Stream with timing and health metrics."""
     start = time.monotonic()
     first_token_time = None
@@ -989,7 +989,7 @@ cancelButton.onclick = () => controller.abort();
 
 try {
   const stream = await client.chat.completions.create(
-    { model: 'gpt-4o', messages, stream: true },
+    { model: 'deepseek/deepseek-v4-flash', messages, stream: true },
     { signal: controller.signal }
   );
 
@@ -1016,13 +1016,13 @@ from openai import AsyncOpenAI
 
 client = AsyncOpenAI(
     base_url="https://api.sandbase.ai/v1",
-    api_key="sk-sb-your-key"
+    api_key="sk-your-key"
 )
 
 async def stream_with_backpressure(messages, queue: asyncio.Queue):
     """Stream tokens into a bounded queue for consumer processing."""
     stream = await client.chat.completions.create(
-        model="gpt-4o",
+        model="deepseek/deepseek-v4-flash",
         messages=messages,
         stream=True,
     )

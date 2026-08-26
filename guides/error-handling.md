@@ -58,7 +58,7 @@ from openai import OpenAI, RateLimitError, APIStatusError
 
 client = OpenAI(
     base_url="https://api.sandbase.ai/v1",
-    api_key="sk-sb-your-key"
+    api_key="sk-your-key"
 )
 
 def chat_with_retry(messages, max_retries=5, base_delay=1.0):
@@ -66,7 +66,7 @@ def chat_with_retry(messages, max_retries=5, base_delay=1.0):
     for attempt in range(max_retries):
         try:
             return client.chat.completions.create(
-                model="gpt-4o",
+                model="deepseek/deepseek-v4-flash",
                 messages=messages
             )
         except RateLimitError as e:
@@ -91,14 +91,14 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   baseURL: 'https://api.sandbase.ai/v1',
-  apiKey: 'sk-sb-your-key',
+  apiKey: 'sk-your-key',
 });
 
 async function chatWithRetry(messages, maxRetries = 5, baseDelay = 1000) {
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
       return await client.chat.completions.create({
-        model: 'gpt-4o',
+        model: 'deepseek/deepseek-v4-flash',
         messages,
       });
     } catch (error) {
@@ -199,7 +199,7 @@ def make_request(messages):
     
     try:
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="deepseek/deepseek-v4-flash",
             messages=messages
         )
         breaker.record_success()
@@ -241,7 +241,7 @@ def safe_retry_with_tools(messages, max_retries=3):
     for attempt in range(max_retries):
         try:
             response = client.chat.completions.create(
-                model="gpt-4o",
+                model="deepseek/deepseek-v4-flash",
                 messages=messages,
                 tools=my_tools
             )
@@ -270,7 +270,7 @@ Set appropriate timeouts for different use cases:
 # Short timeout for simple queries
 client = OpenAI(
     base_url="https://api.sandbase.ai/v1",
-    api_key="sk-sb-your-key",
+    api_key="sk-your-key",
     timeout=30.0  # 30 seconds
 )
 
@@ -304,7 +304,7 @@ response = client.chat.completions.create(
 # OpenAI SDK has built-in retries
 client = OpenAI(
     base_url="https://api.sandbase.ai/v1",
-    api_key="sk-sb-your-key",
+    api_key="sk-your-key",
     max_retries=3  # Built-in exponential backoff
 )
 ```

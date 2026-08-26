@@ -20,7 +20,7 @@ description: Full SandBase API reference for AI agents — all endpoints, schema
 All requests require:
 
 ```
-Authorization: Bearer sk-sb-YOUR_KEY
+Authorization: Bearer sk-YOUR_KEY
 ```
 
 Base URL: `https://api.sandbase.ai/v1`
@@ -54,7 +54,7 @@ OpenAI-compatible. Supports streaming, function calling, vision, JSON mode.
 
 ```bash
 curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "openai/gpt-4o",
@@ -106,7 +106,7 @@ Anthropic-compatible messages API with caching support.
 
 ```bash
 curl https://api.sandbase.ai/v1/messages \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "anthropic/claude-sonnet-4-20250514",
@@ -141,7 +141,7 @@ Generate text embeddings. OpenAI-compatible interface.
 
 ```bash
 curl https://api.sandbase.ai/v1/embeddings \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "openai/text-embedding-3-small",
@@ -182,7 +182,7 @@ The `/v1/run` endpoint is a **unified generation endpoint** — the `model` fiel
 
 ```bash
 curl https://api.sandbase.ai/v1/run \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "bfl/flux-1/schnell",
@@ -218,7 +218,7 @@ Video models are typically async — poll with `GET /v1/run/{id}` until complete
 
 ```bash
 curl https://api.sandbase.ai/v1/run \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "kwaivgi/kling-video/3.0/turbo/standard/text-to-video",
@@ -260,7 +260,7 @@ curl https://api.sandbase.ai/v1/run \
 
 ```bash
 curl https://api.sandbase.ai/v1/run \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "bytedance/seed-speech/tts/2.0",
@@ -299,7 +299,7 @@ defaults to `type=llm`. Detailed capabilities and pricing are intentionally omit
 
 ```bash
 curl https://api.sandbase.ai/v1/models \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 The response contains `object: "list"` and a `data` array. Each item contains `id`, `object`, `created`, and
@@ -313,7 +313,7 @@ The response contains `object: "list"` and a `data` array. Each item contains `i
 
 ```bash
 curl https://api.sandbase.ai/v1/models/openai/gpt-4o \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 The detail response adds `unified_schema`, `supported_modes`, and `model_card`. Detailed prices live inside
@@ -329,7 +329,7 @@ Check the recorded cost of a task using the task ID returned by the API operatio
 
 ```bash
 curl https://api.sandbase.ai/v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 **Response:**
@@ -365,7 +365,7 @@ curl https://api.sandbase.ai/v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost 
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/agents \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Research Assistant",
@@ -395,21 +395,21 @@ curl -X POST https://api.sandbase.ai/v1/agents \
 
 ```bash
 curl https://api.sandbase.ai/v1/agents \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 ### GET /v1/agents/{id} — Get Agent
 
 ```bash
 curl https://api.sandbase.ai/v1/agents/agent_abc123 \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 ### POST /v1/agents/{id} — Update Agent
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123 \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "anthropic/claude-sonnet-4-20250514"}'
 ```
@@ -418,14 +418,14 @@ curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123 \
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123/archive \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 ### GET /v1/agents/{id}/versions — List Versions
 
 ```bash
 curl https://api.sandbase.ai/v1/agents/agent_abc123/versions \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 ---
@@ -438,7 +438,7 @@ Creates or continues a Session and sends one message. Omit `session_id` to creat
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"input": "Summarize the latest news about AI agents"}'
 ```
@@ -466,7 +466,7 @@ Create a version-pinned Agent Session. SandBase resolves the Agent-owned Environ
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/sessions \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "agent": "agent_abc123",
@@ -503,7 +503,7 @@ Send `user.message` to start or continue an idle Session, or `user.interrupt` to
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"events":[{"type":"user.message","content":[{"type":"text","text":"Focus on AI coding assistants specifically"}]}]}'
 ```
@@ -524,7 +524,7 @@ curl -X POST https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
 
 ```bash
 curl https://api.sandbase.ai/v1/sessions \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 **Response:**
@@ -547,14 +547,14 @@ curl https://api.sandbase.ai/v1/sessions \
 
 ```bash
 curl https://api.sandbase.ai/v1/sessions/sess_xyz789 \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 ### GET /v1/sessions/{id}/events — List Events
 
 ```bash
 curl https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 **Response:**
@@ -584,7 +584,7 @@ Replays persisted events, then continues streaming newly persisted events. While
 
 ```bash
 curl -N https://api.sandbase.ai/v1/sessions/sess_xyz789/events/stream \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 **Event format:**
@@ -605,7 +605,7 @@ Create a Schedule through the Deployments API. Every manual or cron trigger crea
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/deployments \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY" \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Daily team summary",
@@ -639,7 +639,7 @@ curl -X POST https://api.sandbase.ai/v1/deployments \
 
 ```bash
 curl https://api.sandbase.ai/v1/deployments/depl_abc123/runs \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 Each returned object has `id` (`drun_*`), `type`, `deployment_id`, `agent`, `trigger_context`, nullable `session_id`, nullable `error`, and `created_at`. Use the linked Session for subsequent Agent events. A pending nested record returns `409 deployment_trigger_in_progress` from the get endpoint.
@@ -652,7 +652,7 @@ Each returned object has `id` (`drun_*`), `type`, `deployment_id`, `agent`, `tri
 
 ```bash
 curl https://api.sandbase.ai/v1/skills \
-  -H "Authorization: Bearer sk-sb-YOUR_KEY"
+  -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 **Response:**

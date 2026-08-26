@@ -11,7 +11,7 @@ SandBase provides an OpenAI-compatible Chat Completions endpoint at `POST /v1/ch
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="sk-sb-your-api-key",
+    api_key="sk-your-api-key",
     base_url="https://api.sandbase.ai/v1",
 )
 ```

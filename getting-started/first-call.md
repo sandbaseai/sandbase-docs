@@ -12,7 +12,7 @@ This guide walks through the anatomy of a SandBase API request and response in d
 You need an active SandBase organization, an [API key](/getting-started/api-keys), and a model ID from [Supported Models](/models/supported). Export the key so examples do not place secrets in source code:
 
 ```bash
-export SANDBASE_API_KEY="sk-sb-YOUR_API_KEY"
+export SANDBASE_API_KEY="sk-YOUR_API_KEY"
 ```
 
 Start with a non-streaming request. Once authentication and response handling work, add streaming and production retry behavior.
@@ -29,14 +29,14 @@ POST https://api.sandbase.ai/v1/chat/completions
 
 | Header | Value | Description |
 |--------|-------|-------------|
-| `Authorization` | `Bearer sk-sb-YOUR_API_KEY` | Your SandBase API key |
+| `Authorization` | `Bearer sk-YOUR_API_KEY` | Your SandBase API key |
 | `Content-Type` | `application/json` | Request body format |
 
 ### Request Body
 
 ```json
 {
-  "model": "deepseek/deepseek-v3",
+  "model": "deepseek/deepseek-v4-flash",
   "messages": [
     {"role": "system", "content": "You are a helpful assistant."},
     {"role": "user", "content": "What is the capital of France?"}
@@ -50,7 +50,7 @@ POST https://api.sandbase.ai/v1/chat/completions
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `model` | string | Yes | The model to use (e.g., `deepseek/deepseek-v3`, `openai/gpt-4o`, `anthropic/claude-sonnet-4-20250514`) |
+| `model` | string | Yes | An enabled model ID returned by `GET /v1/models` (for example, `deepseek/deepseek-v4-flash`) |
 | `messages` | array | Yes | Conversation history as an array of message objects |
 | `temperature` | number | No | Sampling temperature (0–2). Lower = more deterministic. Default varies by model. |
 | `max_tokens` | integer | No | Maximum tokens to generate in the response |
@@ -77,7 +77,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
   -H "Authorization: Bearer $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "deepseek/deepseek-v3",
+    "model": "deepseek/deepseek-v4-flash",
     "messages": [
       {"role": "system", "content": "You are a helpful assistant."},
       {"role": "user", "content": "What is the capital of France?"}
@@ -91,12 +91,12 @@ curl https://api.sandbase.ai/v1/chat/completions \
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="sk-sb-YOUR_API_KEY",
+    api_key="sk-YOUR_API_KEY",
     base_url="https://api.sandbase.ai/v1"
 )
 
 response = client.chat.completions.create(
-    model="deepseek/deepseek-v3",
+    model="deepseek/deepseek-v4-flash",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "What is the capital of France?"}
@@ -112,12 +112,12 @@ print(response.choices[0].message.content)
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: 'sk-sb-YOUR_API_KEY',
+  apiKey: 'sk-YOUR_API_KEY',
   baseURL: 'https://api.sandbase.ai/v1',
 });
 
 const response = await client.chat.completions.create({
-  model: 'deepseek/deepseek-v3',
+  model: 'deepseek/deepseek-v4-flash',
   messages: [
     { role: 'system', content: 'You are a helpful assistant.' },
     { role: 'user', content: 'What is the capital of France?' },
@@ -140,7 +140,7 @@ console.log(response.choices[0].message.content);
   "id": "chatcmpl-abc123def456",
   "object": "chat.completion",
   "created": 1719000000,
-  "model": "deepseek/deepseek-v3",
+  "model": "deepseek/deepseek-v4-flash",
   "choices": [
     {
       "index": 0,
@@ -194,12 +194,12 @@ For real-time output (like a chatbot typing), use streaming. The response arrive
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="sk-sb-YOUR_API_KEY",
+    api_key="sk-YOUR_API_KEY",
     base_url="https://api.sandbase.ai/v1"
 )
 
 stream = client.chat.completions.create(
-    model="deepseek/deepseek-v3",
+    model="deepseek/deepseek-v4-flash",
     messages=[{"role": "user", "content": "Write a haiku about coding."}],
     stream=True
 )
@@ -214,12 +214,12 @@ print()  # newline at the end
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: 'sk-sb-YOUR_API_KEY',
+  apiKey: 'sk-YOUR_API_KEY',
   baseURL: 'https://api.sandbase.ai/v1',
 });
 
 const stream = await client.chat.completions.create({
-  model: 'deepseek/deepseek-v3',
+  model: 'deepseek/deepseek-v4-flash',
   messages: [{ role: 'user', content: 'Write a haiku about coding.' }],
   stream: true,
 });
@@ -233,11 +233,11 @@ console.log();
 
 ```bash [cURL]
 curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-sb-YOUR_API_KEY" \
+  -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -N \
   -d '{
-    "model": "deepseek/deepseek-v3",
+    "model": "deepseek/deepseek-v4-flash",
     "messages": [{"role": "user", "content": "Write a haiku about coding."}],
     "stream": true
   }'
@@ -250,13 +250,13 @@ curl https://api.sandbase.ai/v1/chat/completions \
 Each chunk arrives as a Server-Sent Event:
 
 ```
-data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v3","choices":[{"index":0,"delta":{"role":"assistant"},"finish_reason":null}]}
+data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v4-flash","choices":[{"index":0,"delta":{"role":"assistant"},"finish_reason":null}]}
 
-data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v3","choices":[{"index":0,"delta":{"content":"The"},"finish_reason":null}]}
+data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v4-flash","choices":[{"index":0,"delta":{"content":"The"},"finish_reason":null}]}
 
-data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v3","choices":[{"index":0,"delta":{"content":" capital"},"finish_reason":null}]}
+data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v4-flash","choices":[{"index":0,"delta":{"content":" capital"},"finish_reason":null}]}
 
-data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v3","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}
+data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v4-flash","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}
 
 data: [DONE]
 ```
@@ -277,12 +277,12 @@ SandBase also exposes an Anthropic-compatible endpoint at `POST /v1/messages`. U
 import anthropic
 
 client = anthropic.Anthropic(
-    api_key="sk-sb-YOUR_API_KEY",
+    api_key="sk-YOUR_API_KEY",
     base_url="https://api.sandbase.ai"
 )
 
 message = client.messages.create(
-    model="anthropic/claude-sonnet-4-20250514",
+    model="anthropic/claude-sonnet-5",
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "What is the capital of France?"}
@@ -295,12 +295,12 @@ print(message.content[0].text)
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'sk-sb-YOUR_API_KEY',
+  apiKey: 'sk-YOUR_API_KEY',
   baseURL: 'https://api.sandbase.ai',
 });
 
 const message = await client.messages.create({
-  model: 'anthropic/claude-sonnet-4-20250514',
+  model: 'anthropic/claude-sonnet-5',
   max_tokens: 1024,
   messages: [{ role: 'user', content: 'What is the capital of France?' }],
 });
@@ -324,7 +324,7 @@ The Anthropic-compatible endpoint returns responses in Anthropic's format:
       "text": "The capital of France is Paris."
     }
   ],
-  "model": "anthropic/claude-sonnet-4-20250514",
+  "model": "anthropic/claude-sonnet-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -353,12 +353,12 @@ Streaming with the Anthropic SDK works the same way — just pass `stream=True`:
 import anthropic
 
 client = anthropic.Anthropic(
-    api_key="sk-sb-YOUR_API_KEY",
+    api_key="sk-YOUR_API_KEY",
     base_url="https://api.sandbase.ai"
 )
 
 with client.messages.stream(
-    model="anthropic/claude-sonnet-4-20250514",
+    model="anthropic/claude-sonnet-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Write a haiku about coding."}]
 ) as stream:
@@ -369,12 +369,11 @@ print()
 
 ## Choosing a Model
 
-When selecting a model, consider:
+When selecting a model, check its live model card for availability, pricing, context length, supported inputs, and capabilities. These values change independently, so do not rely on a copied model comparison.
 
-- **Speed**: DeepSeek V3 and GPT-4o Mini are fast and cheap for simple tasks
-- **Quality**: Claude Sonnet and GPT-4o excel at complex reasoning
-- **Cost**: Check the [Models](/models/) page for per-token pricing
-- **Context window**: Some models support up to 200K tokens of context
+- Browse the current [Supported Models](/models/supported).
+- Open the [Model API Reference](/model-api-reference/) for model-specific request fields.
+- Query `GET /v1/models` when an integration needs current model metadata programmatically.
 
 You can switch models by changing the `model` parameter — no other code changes needed.
 
@@ -382,7 +381,7 @@ You can switch models by changing the `model` parameter — no other code change
 
 Before production, set request timeouts, retry only transient failures with bounded exponential backoff, log request IDs when available, and monitor usage without logging prompts or API keys.
 
-- [**API Reference**](/api-reference/) — Full endpoint documentation with all parameters
+- [**Model API Reference**](/model-api-reference/) — Model endpoints, parameters, and model-specific references
 - [**Streaming Guide**](/guides/streaming) — Advanced streaming patterns and error handling
 - [**Models**](/models/) — Complete list of available models with pricing
 - [**Errors**](/guides/error-handling) — Handle failures and retries

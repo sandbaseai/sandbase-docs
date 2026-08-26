@@ -202,7 +202,7 @@ export default defineConfig({
     '_archived/**',
     // This legacy guide uses dashboard-only /default/v1 routes and an unpublished embed API.
     'guides/site-agent-integration.md',
-    'use-cases/site-agent-copilot.md',
+    'use-cases/**',
     'api-reference/webhooks.md',
     'api-reference/embeds/**',
   ],
