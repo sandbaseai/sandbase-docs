@@ -143,28 +143,10 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
-    text: 'Models',
-    collapsed: false,
+    text: 'Agents',
+    collapsed: true,
     items: [
-      { text: 'Overview', link: '/api-reference/models/' },
-      { text: 'List Models', link: '/api-reference/models/list' },
-      { text: 'Get Model', link: '/api-reference/models/get' },
-    ],
-  },
-  {
-    text: 'Account',
-    collapsed: false,
-    items: [
-      { text: 'Overview', link: '/api-reference/account/' },
-      { text: 'Get Balance', link: '/api-reference/account/balance' },
-      { text: 'List History', link: '/api-reference/account/history' },
-    ],
-  },
-  {
-    text: 'Agent APIs',
-    collapsed: false,
-    items: [
-      { text: 'Agents Overview', link: '/api-reference/agents/' },
+      { text: 'Overview', link: '/api-reference/agents/' },
       { text: 'Create Agent', link: '/api-reference/agents/create' },
       { text: 'List Agents', link: '/api-reference/agents/list' },
       { text: 'Get Agent', link: '/api-reference/agents/get' },
@@ -176,32 +158,32 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
+    text: 'Sessions',
+    collapsed: true,
+    items: [
+      { text: 'Overview', link: '/api-reference/sessions/' },
+      { text: 'Create Session', link: '/api-reference/sessions/create' },
+      { text: 'List Sessions', link: '/api-reference/sessions/list' },
+      { text: 'Get Session', link: '/api-reference/sessions/get' },
+      { text: 'Update Session', link: '/api-reference/sessions/update' },
+      { text: 'Delete Session', link: '/api-reference/sessions/delete' },
+      { text: 'Send Events', link: '/api-reference/sessions/send-events' },
+      { text: 'Stream Events', link: '/api-reference/sessions/stream' },
+      { text: 'List Events', link: '/api-reference/sessions/list-events' },
+      { text: 'Archive Session', link: '/api-reference/sessions/archive' },
+    ],
+  },
+  {
     text: 'Endpoints',
-    collapsed: false,
+    collapsed: true,
     items: [
       { text: 'Endpoints & Invoke', link: '/api-reference/endpoints/' },
       { text: 'Invoke with ACP', link: '/api-reference/endpoints/acp' },
-      {
-        text: 'Sessions',
-        collapsed: false,
-        items: [
-          { text: 'Overview', link: '/api-reference/sessions/' },
-          { text: 'Create Session', link: '/api-reference/sessions/create' },
-          { text: 'List Sessions', link: '/api-reference/sessions/list' },
-          { text: 'Get Session', link: '/api-reference/sessions/get' },
-          { text: 'Update Session', link: '/api-reference/sessions/update' },
-          { text: 'Delete Session', link: '/api-reference/sessions/delete' },
-          { text: 'Send Events', link: '/api-reference/sessions/send-events' },
-          { text: 'Stream Events', link: '/api-reference/sessions/stream' },
-          { text: 'List Events', link: '/api-reference/sessions/list-events' },
-          { text: 'Archive Session', link: '/api-reference/sessions/archive' },
-        ],
-      },
     ],
   },
   {
     text: 'Deployments',
-    collapsed: false,
+    collapsed: true,
     items: [
       { text: 'Overview', link: '/api-reference/deployments/' },
       { text: 'Create Deployment', link: '/api-reference/deployments/create' },
@@ -215,7 +197,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Test Feishu Notification', link: '/api-reference/deployments/test-feishu-notification' },
       {
         text: 'DeploymentRuns',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: 'Trigger Deployment', link: '/api-reference/deployments/run' },
           { text: 'List DeploymentRuns', link: '/api-reference/deployments/list-runs' },
@@ -226,7 +208,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
   },
   {
     text: 'Skills',
-    collapsed: false,
+    collapsed: true,
     items: [
       { text: 'Overview', link: '/api-reference/skills/' },
       { text: 'Create Skill', link: '/api-reference/skills/create' },
@@ -237,10 +219,19 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
-    text: 'Integrations',
-    collapsed: false,
+    text: 'Credentials',
+    collapsed: true,
     items: [
-      { text: 'Credentials', link: '/api-reference/credentials/' },
+      { text: 'Overview', link: '/api-reference/credentials/' },
+    ],
+  },
+  {
+    text: 'Account',
+    collapsed: true,
+    items: [
+      { text: 'Overview', link: '/api-reference/account/' },
+      { text: 'Get Balance', link: '/api-reference/account/balance' },
+      { text: 'List History', link: '/api-reference/account/history' },
     ],
   },
 ]

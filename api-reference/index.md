@@ -1,57 +1,65 @@
 ---
 title: Platform API Reference
-description: SandBase Platform API reference for Agents, Sessions, Endpoints, Deployments, Skills, credentials, and account resources.
+description: Manage SandBase Agents, Sessions, Endpoints, Deployments, Skills, credentials, and account resources.
 ---
 
 # Platform API Reference
 
-Use the API when you need code-level control.
+Use the Platform API to define reusable Agents, run stateful work, publish callable services, and schedule repeatable execution.
 
-The Agent execution APIs use four related resources:
+::: tip Looking for model inference?
+Chat, image, video, audio, embedding, and model-specific request schemas live in the [Model API Reference](/model-api-reference/). The Platform API covers managed Agent resources and operations.
+:::
 
-1. define versioned **Agents**
-2. create stateful **Sessions** and exchange events
-3. expose Agents through callable **Endpoints**
-4. create a **Schedule** through the Deployments API and inspect DeploymentRuns and linked Sessions
+## Choose a starting point
 
-## Common APIs
-
-| Area | Use it for | Start here |
+| Goal | Start with | What happens next |
 |---|---|---|
-| **Account** | Inspect organization balance and recent API execution history | [Account API](/api-reference/account/) |
-| **Agents** | Create and version reusable Agent definitions | [Agents API](/api-reference/agents/) |
-| **Sessions** | Run an Agent statefully and exchange events | [Sessions API](/api-reference/sessions/) |
-| **Endpoints** | Publish and invoke an Agent over REST | [Endpoints API](/api-reference/endpoints/) |
-| **Deployments** | Schedule or manually trigger repeatable Agent work | [Deployments API](/api-reference/deployments/) |
-| **DeploymentRuns** | Inspect each Deployment trigger and its nullable Session result | [DeploymentRuns](/api-reference/deployments/list-runs) |
-| **Skills** | Create and manage reusable Agent instruction bundles | [Skills API](/api-reference/skills/) |
+| Define reusable behavior | [Agents](/api-reference/agents/) | Create and version an Agent configuration |
+| Run stateful work directly | [Sessions](/api-reference/sessions/) | Exchange persisted input, output, and tool events |
+| Expose an Agent to an application | [Endpoints](/api-reference/endpoints/) | Invoke a stable REST service that creates or continues a Session |
+| Run work later or repeatedly | [Deployments](/api-reference/deployments/) | Trigger a DeploymentRun and inspect its linked Session |
+| Reuse instruction bundles | [Skills](/api-reference/skills/) | Create and attach versioned Skills to Agents |
+| Supply private integration values | [Credentials](/api-reference/credentials/) | Keep secrets out of Agent instructions and request bodies |
+
+## Resource lifecycle
+
+```text
+Agent + version
+├── direct execution ────────────────→ Session ─→ events
+├── Endpoint (callable service) ─────→ Session ─→ events
+└── Deployment (schedule/manual run) → DeploymentRun ─→ Session ─→ events
+```
+
+- An **Agent** is reusable configuration; creating one does not execute it.
+- A **Session** is the durable execution and event history for one interaction.
+- An **Endpoint** publishes an Agent behind a stable invocation surface. Calling it creates a new Session or continues an authorized existing Session.
+- A **Deployment** stores repeatable input and optional scheduling configuration. Every trigger creates a distinct **DeploymentRun** and, after successful Session creation, links that run to a Session.
+- A **Skill** packages reusable instructions and supporting files. A **Credential** stores a private value required by an Agent capability.
 
 ## Authentication
 
-Most API requests use a SandBase API key:
+Send a SandBase API key as a Bearer token:
 
 ```http
 Authorization: Bearer sk-YOUR_KEY
 ```
 
-Some Anthropic-compatible clients use:
+Treat the key as an opaque secret, keep it on the server, and never include it in browser code or logs. See [Authentication](/api-reference/authentication) for compatibility details and [Errors](/api-reference/errors) for public error envelopes.
 
-```http
-x-api-key: sk-YOUR_KEY
-```
+## Organization and usage
 
-Learn more: [Authentication](/api-reference/authentication).
+Platform resources belong to the organization associated with the API key. Use the [Account API](/api-reference/account/) to inspect the supported balance and recent execution-history views. Organization administration and billing management remain Console workflows unless a public endpoint is documented here.
 
-## Resource relationships
+## Reference formats
 
-- An **Agent** is configuration and does not execute by itself.
-- A **Session** is a stateful Agent execution. Input and output are persisted as Session events.
-- A **Service** is backed by an Endpoint resource. Calling `POST /v1/endpoints/{id}/run` creates or continues a Session.
-- A **Schedule** is managed through a Deployment resource and stores repeatable input with an optional cron expression. Every trigger creates a `drun_*` DeploymentRun and, on success, a new linked Session.
+- Browse operations from the sidebar for examples and response details.
+- Download the machine-readable [OpenAPI specification](/docs/openapi.yaml).
+- Use the [Model API Reference](/model-api-reference/) for inference endpoints and model-specific schemas.
 
 ## Next steps
 
-- [Getting Started](/getting-started/)
-- [Store](/store/)
-- [Setup](/setup/)
-- [Build Agent](/agents/)
+- New to managed Agents: [Build Agent](/agents/)
+- Publish an application service: [Service quickstart](/agents/endpoint-quickstart)
+- Schedule repeatable work: [Schedules guide](/agents/schedules)
+- Call a model directly: [Model API Reference](/model-api-reference/)
