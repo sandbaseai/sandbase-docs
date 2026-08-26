@@ -11,7 +11,16 @@ const sidebar = readFileSync(new URL('../.vitepress/sidebar.ts', import.meta.url
 const generatedReferenceSpecs = readFileSync(new URL('../.vitepress/theme/generatedApiReferenceSpecs.ts', import.meta.url), 'utf8')
 const apiKeyGuide = readFileSync(new URL('../getting-started/api-keys.md', import.meta.url), 'utf8')
 const authenticationReference = readFileSync(new URL('../api-reference/authentication.md', import.meta.url), 'utf8')
+const supportedModelsPage = readFileSync(new URL('../models/supported.md', import.meta.url), 'utf8')
 const root = fileURLToPath(new URL('..', import.meta.url))
+
+assert.match(supportedModelsPage, /https:\/\/www\.sandbase\.ai\/models/, 'Supported Models must point to the live catalog')
+assert.match(supportedModelsPage, /GET \/v1\/models/, 'Supported Models must identify the runtime catalog API')
+for (const category of ['llm-models', 'image-generation', 'video-generation', 'audio-generation']) {
+  assert.match(supportedModelsPage, new RegExp(`/model-api-reference/${category}`), `Supported Models must link the generated ${category} reference`)
+}
+assert.doesNotMatch(supportedModelsPage, /^\| `[^`]+` \|/m, 'Supported Models must not maintain a hand-written model snapshot')
+assert.doesNotMatch(supportedModelsPage, /Model Comparison Table|Typical Cost per 1K requests/, 'Supported Models must not publish static comparison pricing')
 
 const forbiddenOpenApiPatterns = [
   [/^  \/sandboxes(?:[/{:]|$)/m, 'sandbox path'],
