@@ -78,9 +78,12 @@ the configured routes ensure it never receives non-docs traffic. GitHub Actions
 deploys from tags matching `docs-v*` or a manual dispatch from `main`, using the
 protected `production` environment and these secrets:
 
-- `CLOUDFLARE_ACCOUNT_ID`
 - `CLOUDFLARE_API_TOKEN`, scoped to deploy the Worker and manage its routes in
   the `sandbase.ai` zone
+
+The non-secret Cloudflare account ID is kept in the workflow so contributors
+do not need organization dashboard access merely to identify the deployment
+account.
 
 The health check remains available at `https://www.sandbase.ai/docs/health`.
 
