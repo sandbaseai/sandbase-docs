@@ -34,13 +34,6 @@ const handWrittenModelApiReferenceItems: DefaultTheme.SidebarItem[] = [
       { text: 'Get Task Cost', link: '/api-reference/tasks/cost' },
     ],
   },
-  {
-    text: 'Seedance Native API',
-    collapsed: true,
-    items: [
-      { text: 'Overview', link: '/model-api-reference/seedance-native-api' },
-    ],
-  },
 ]
 
 function modelApiReferenceSidebar(items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] {

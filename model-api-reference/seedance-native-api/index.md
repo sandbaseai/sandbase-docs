@@ -1,9 +1,19 @@
 ---
-title: Seedance Native API
-description: Generate Seedance video with multimodal text, image, video, and audio input using the Volcengine Ark Contents Generations task protocol.
+title: Official Native API
+description: Use official provider-native protocols through SandBase, organized by provider and model.
 ---
 
-# Seedance Native API
+# Official Native API
+
+Official Native APIs preserve a provider's request and response protocol for easier migration of existing integrations.
+Browse by provider, then choose the exact model. The currently supported provider is ByteDance.
+
+## ByteDance
+
+- [Seedance 2.5 Official](/model-api-reference/seedance-native-api/bytedance/seedance-2.5-official)
+- [Seedance 2.0 Official](/model-api-reference/seedance-native-api/bytedance/seedance-2.0-official)
+
+## Seedance protocol
 
 Seedance generates video from text, opening and closing frames, and multimodal references such as images, video, and
 audio. Use it for anything from a simple text-to-video clip to a directed shot that follows a visual subject, camera

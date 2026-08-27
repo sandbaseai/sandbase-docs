@@ -4,6 +4,7 @@ import HomePage from './HomePage.vue'
 import ApiReferencePage from './ApiReferencePage.vue'
 import ContactFooter from './ContactFooter.vue'
 import PlatformApiSidebar from './PlatformApiSidebar.vue'
+import OfficialNativeApiSidebar from './OfficialNativeApiSidebar.vue'
 import PlatformApiLanding from './PlatformApiLanding.vue'
 import './custom.css'
 
@@ -11,7 +12,7 @@ export default {
   ...DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'sidebar-nav-after': () => h(PlatformApiSidebar),
+      'sidebar-nav-after': () => [h(PlatformApiSidebar), h(OfficialNativeApiSidebar)],
       'doc-footer-after': () => h(ContactFooter),
     })
   },
