@@ -63,6 +63,16 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
+    text: 'AI-Friendly Docs',
+    collapsed: true,
+    items: [
+      { text: 'AI-Readable Overview', link: '/for-agents/' },
+      { text: 'Complete API Reference', link: '/for-agents/full' },
+      { text: 'Models & Pricing', link: '/for-agents/models' },
+      { text: 'Error Codes', link: '/for-agents/errors' },
+    ],
+  },
+  {
     text: 'Models & APIs',
     collapsed: false,
     items: [
@@ -109,16 +119,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Billing', link: '/admin/billing' },
       { text: 'Rate Limits', link: '/admin/rate-limits' },
       { text: 'FAQ', link: '/faq' },
-    ],
-  },
-  {
-    text: 'AI Resources',
-    collapsed: true,
-    items: [
-      { text: 'AI-Readable Overview', link: '/for-agents/' },
-      { text: 'Complete API Reference', link: '/for-agents/full' },
-      { text: 'Models & Pricing', link: '/for-agents/models' },
-      { text: 'Error Codes', link: '/for-agents/errors' },
     ],
   },
 ]
