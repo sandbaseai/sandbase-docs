@@ -39,6 +39,10 @@ const forbiddenOpenApiPatterns = [
   [/^    CreateSandboxRequest:$/m, 'CreateSandboxRequest schema'],
   [/^    Sandbox:$/m, 'Sandbox schema'],
   [/resourceType[^\n]*enum[^\n]*sandbox/i, 'sandbox webhook resource type'],
+  [/^  \/v1\/environments(?:[/{:]|$)/m, 'Environment management path'],
+  [/^  - name: Environments$/m, 'Environments tag'],
+  [/^    (?:Create|Update)?Environment(?:Config)?:$/m, 'Environment management schema'],
+  [/^    EnvironmentId:$/m, 'EnvironmentId parameter'],
 ]
 
 for (const [pattern, label] of forbiddenOpenApiPatterns) {
@@ -168,30 +172,6 @@ for (const [method, publicPath, statuses] of [
   }
 }
 for (const [method, publicPath, statuses] of [
-  ['post', '/v1/environments', ['400', '422', '500']],
-  ['get', '/v1/environments', ['400', '500']],
-  ['get', '/v1/environments/{id}', ['404', '500']],
-  ['patch', '/v1/environments/{id}', ['400', '404', '409', '422', '500']],
-  ['post', '/v1/environments/{id}', ['400', '404', '409', '422', '500']],
-  ['delete', '/v1/environments/{id}', ['404', '409', '500']],
-  ['post', '/v1/environments/{id}/archive', ['404', '409', '500']],
-]) {
-  for (const status of statuses) {
-    assert.equal(
-      jsonErrorSchema(method, publicPath, status)?.$ref,
-      '#/components/schemas/APIError',
-      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
-    )
-  }
-}
-for (const method of ['patch', 'post']) {
-  assert.deepEqual(
-    jsonErrorSchema(method, '/v1/environments/{id}', '403')?.oneOf?.map((schema) => schema.$ref),
-    ['#/components/schemas/APIError', '#/components/schemas/APIKeyScopeError'],
-    `${method.toUpperCase()} Environment update must document both archived-resource and scoped-key rejections`,
-  )
-}
-for (const [method, publicPath, statuses] of [
   ['post', '/v1/deployments', ['400', '404', '415', '422', '500']],
   ['get', '/v1/deployments', ['400', '500']],
   ['get', '/v1/deployments/{id}', ['404', '500']],
@@ -276,6 +256,7 @@ assert.match(config, /'guides\/site-agent-integration\.md'/, 'Legacy Site Agent 
 assert.match(config, /'use-cases\/\*\*'/, 'Legacy Site Agent use cases must stay excluded from the public build')
 assert.match(config, /'api-reference\/webhooks\.md'/, 'Sandbox event webhook reference must stay excluded from the public build')
 assert.match(config, /'api-reference\/embeds\/\*\*'/, 'Unmaintained Embed Config pages must stay excluded from the public build')
+assert.match(config, /'api-reference\/environments\/\*\*'/, 'Internal Environment API pages must stay excluded from the public build')
 assert.doesNotMatch(sidebar, /\/api-reference\/sandboxes?\b/i, 'Sidebar must not link to sandbox API pages')
 assert.doesNotMatch(sidebar, /\/api-reference\/webhooks\b/i, 'Sidebar must not link to Sandbox event webhook APIs')
 assert.equal((sidebar.match(/text: 'Inference APIs'/g) ?? []).length, 1, 'Inference APIs must have exactly one standalone sidebar chapter')
@@ -918,62 +899,6 @@ assert.match(publicSessionSchema, /SessionAgentProjection/, 'Session responses m
 const sessionAgentProjection = openapi.match(/^    SessionAgentProjection:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(sessionAgentProjection, /legacy or unavailable snapshots fall back/, 'Session Agent projection must document its fallback behavior')
 assert.match(sessionAgentProjection, /required: \[id, type, version\]/, 'Session Agent fallback must require every serializer field')
-const environmentSchema = openapi.match(/^    Environment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
-  if (!publicPath.startsWith('/v1/environments')) continue
-  for (const method of publicMethods) {
-    const operation = pathItem[method]
-    if (!operation) continue
-    assert.equal(
-      operation.responses['401'].content?.['application/json']?.schema?.$ref,
-      '#/components/schemas/TaskCostError',
-      `${method.toUpperCase()} ${publicPath} must document the implemented string-error authentication envelope`,
-    )
-  }
-}
-assert.match(environmentSchema, /required: \[id, type, agent_id, name, description, config, metadata, credential_bindings, archived_at, created_at, updated_at\]/, 'Environment responses must require every serializer field')
-assert.match(environmentSchema, /id:\n\s+type: string\n\s+pattern: '\^env_'/, 'Environment IDs must document their public prefix')
-assert.match(environmentSchema, /config:\n[\s\S]*?- type: 'null'/, 'Environment config must allow the serializer\'s null output')
-assert.match(environmentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Environment metadata must allow the serializer\'s null output')
-assert.match(environmentSchema, /credential_bindings:\n\s+type: \[array, 'null'\]/, 'Environment credential bindings must allow the serializer\'s null output')
-const environmentsPath = openapi.match(/^  \/v1\/environments:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const createEnvironment = environmentsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '402', '403', '422', '500']) {
-  assert.match(createEnvironment, new RegExp(`'${status}':`), `Environment creation must document ${status} responses`)
-}
-const listEnvironments = environmentsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
-assert.match(listEnvironments, /name: include_archived/, 'Environment lists must document the implemented archive filter')
-assert.match(listEnvironments, /required: \[data\]/, 'Environment lists must require data')
-for (const status of ['200', '400', '401', '402', '403', '500']) {
-  assert.match(listEnvironments, new RegExp(`'${status}':`), `Environment lists must document ${status} responses`)
-}
-const environmentPath = openapi.match(/^  \/v1\/environments\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(environmentPath.match(/^    get:\n[\s\S]*?(?=^    patch:)/m)?.[0] ?? '', new RegExp(`'${status}':`), `Environment reads must document ${status} responses`)
-}
-for (const method of ['patch', 'post']) {
-  const terminator = method === 'patch' ? 'post' : 'delete'
-  const operation = environmentPath.match(new RegExp(`^    ${method}:\\n[\\s\\S]*?(?=^    ${terminator}:)`, 'm'))?.[0] ?? ''
-  assert.match(operation, /UpdateEnvironmentRequest/, `${method.toUpperCase()} Environment updates must use the partial update schema`)
-  for (const status of ['200', '400', '401', '402', '403', '404', '409', '422', '500']) {
-    assert.match(operation, new RegExp(`'${status}':`), `${method.toUpperCase()} Environment updates must document ${status} responses`)
-  }
-}
-const deleteEnvironment = environmentPath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '409', '500']) {
-  assert.match(deleteEnvironment, new RegExp(`'${status}':`), `Environment deletion must document ${status} responses`)
-}
-const archiveEnvironment = openapi.match(/^  \/v1\/environments\/\{id\}\/archive:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '409', '500']) {
-  assert.match(archiveEnvironment, new RegExp(`'${status}':`), `Environment archival must document ${status} responses`)
-}
-const createEnvironmentSchema = openapi.match(/^    CreateEnvironmentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(createEnvironmentSchema, /required: \[name, config\]/, 'Environment creation must require name and config')
-assert.match(createEnvironmentSchema, /credential_bindings:\n\s+type: \[array, 'null'\]/, 'Environment creation must allow null credential bindings')
-const updateEnvironmentSchema = openapi.match(/^    UpdateEnvironmentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.doesNotMatch(updateEnvironmentSchema, /minProperties:/, 'Empty Environment updates are implemented no-ops')
-assert.match(updateEnvironmentSchema, /name:\n\s+type: \[string, 'null'\]/, 'Null Environment names must preserve the current value')
-assert.match(updateEnvironmentSchema, /credential_bindings:\n\s+type: \[array, 'null'\]/, 'Null Environment credential bindings must clear the field')
 assert.doesNotMatch(openapi, /^  \/v1\/skills\/\{id\}\/mcp-publications:$/m, 'Skill MCP publication management must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/skill-mcp(?:-publications)?(?:\/|:)/m, 'Skill MCP transports and publications must not be public')
 const skillFilesPath = openapi.match(/^  \/v1\/skills\/files:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
@@ -1124,7 +1049,6 @@ assert.match(uploadMediaRequest, /Image \(up to 20 MB\), audio \(up to 50 MB\), 
 const uploadMediaResponse = openapi.match(/^    UploadMediaResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(uploadMediaResponse, /required: \[url, filename, size, type, content_type\]/, 'Media upload must require every emitted success field')
 assert.match(sidebar, /\/api-reference\/models\/upload/, 'Sidebar must link to the media upload reference')
-assert.match(openapi, /type:\s*\{ type: string, const: environment_deleted \}/, 'Environment deletion must document its response discriminator')
 assert.doesNotMatch(openapi, /^  \/default\/v1(?:\/|:)/m, 'Internal Console paths must not be public')
 
 const unpublishedFiles = new Set([
@@ -1142,7 +1066,7 @@ function inspectPublishedSources(directory) {
     }
     if (!/\.(?:md|mdx|txt)$/.test(entry.name)) continue
     const relative = path.relative(root, filename)
-    if (unpublishedFiles.has(relative) || relative.startsWith('use-cases/') || relative.startsWith('api-reference/embeds/')) continue
+    if (unpublishedFiles.has(relative) || relative.startsWith('use-cases/') || relative.startsWith('api-reference/embeds/') || relative.startsWith('api-reference/environments/')) continue
     const content = readFileSync(filename, 'utf8')
     assert.doesNotMatch(content, /sk-sb-(?:YOUR|your|xxx)/, `${relative} must use the current sk- placeholder for new API keys`)
     assert.doesNotMatch(content, /\/default\/v1(?:\/|\b)/, `${relative} must not expose internal Console API paths`)

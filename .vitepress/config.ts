@@ -205,6 +205,7 @@ export default defineConfig({
     'use-cases/**',
     'api-reference/webhooks.md',
     'api-reference/embeds/**',
+    'api-reference/environments/**',
   ],
   title: 'SandBase Docs',
   description: 'SandBase docs for connecting Agents to models, APIs, tools, Setup, Services, Schedules, and Sessions.',

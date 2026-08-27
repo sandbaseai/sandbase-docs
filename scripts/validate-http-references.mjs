@@ -25,6 +25,8 @@ const roots = ['agents', 'api-reference', 'for-agents', 'getting-started', 'guid
 const references = []
 
 function walk(directory) {
+  const relativeDirectory = path.relative(root, directory)
+  if (relativeDirectory === 'api-reference/environments' || relativeDirectory.startsWith('api-reference/environments/')) return
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     if (entry.name === '_archived') continue
     const filename = path.join(directory, entry.name)

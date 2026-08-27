@@ -154,7 +154,6 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Archive Agent', link: '/api-reference/agents/archive' },
       { text: 'Agent Versions', link: '/api-reference/agents/versions' },
       { text: 'Get Agent Version', link: '/api-reference/agents/get-version' },
-      { text: 'Environments', link: '/api-reference/environments/' },
     ],
   },
   {

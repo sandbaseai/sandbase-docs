@@ -150,7 +150,6 @@
         <div class="journey-step">
           <div><span class="step-num">4</span><h4>Operate</h4></div>
           <div class="step-links">
-            <a href="https://www.sandbase.ai/console/environments" target="_self">Environments</a>
             <a href="https://www.sandbase.ai/console/webhooks" target="_self">Webhooks</a>
             <a href="https://www.sandbase.ai/console/activities" target="_self">Activities</a>
           </div>
