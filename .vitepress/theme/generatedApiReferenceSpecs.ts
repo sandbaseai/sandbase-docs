@@ -103,8 +103,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ]
   },
   "deployments/archive": {
-    "title": "Archive Deployment",
-    "operation": "Deployments",
+    "title": "Archive Schedule",
+    "operation": "Schedules",
     "method": "POST",
     "path": "/v1/deployments/{deployment_id}/archive",
     "description": "Archive a Deployment that should no longer be triggered.",
@@ -130,8 +130,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ]
   },
   "deployments/create": {
-    "title": "Create Deployment",
-    "operation": "Deployments",
+    "title": "Create Schedule",
+    "operation": "Schedules",
     "method": "POST",
     "path": "/v1/deployments",
     "description": "Create a manually triggered or scheduled Deployment from an existing Agent or a declarative runtime definition. JSON and YAML are supported.",
@@ -193,8 +193,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ]
   },
   "deployments/get": {
-    "title": "Get Deployment",
-    "operation": "Deployments",
+    "title": "Get Schedule",
+    "operation": "Schedules",
     "method": "GET",
     "path": "/v1/deployments/{deployment_id}",
     "description": "Retrieve one Deployment and its resolved Agent and Environment bindings.",
@@ -220,8 +220,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ]
   },
   "deployments/get-run": {
-    "title": "Get DeploymentRun",
-    "operation": "Deployments",
+    "title": "Get Schedule Run",
+    "operation": "Schedules",
     "method": "GET",
     "path": "/v1/deployments/{deployment_id}/runs/{drun_id}",
     "description": "Retrieve one durable DeploymentRun owned by the requested Deployment.",
@@ -269,8 +269,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ]
   },
   "deployments/list-runs": {
-    "title": "List DeploymentRuns",
-    "operation": "Deployments",
+    "title": "List Schedule Runs",
+    "operation": "Schedules",
     "method": "GET",
     "path": "/v1/deployments/{deployment_id}/runs",
     "description": "List durable DeploymentRun records for one Deployment.",
@@ -320,8 +320,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ]
   },
   "deployments/list": {
-    "title": "List Deployments",
-    "operation": "Deployments",
+    "title": "List Schedules",
+    "operation": "Schedules",
     "method": "GET",
     "path": "/v1/deployments",
     "description": "List Deployments in the current organization.",
@@ -348,8 +348,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ]
   },
   "deployments/pause": {
-    "title": "Pause Deployment",
-    "operation": "Deployments",
+    "title": "Pause Schedule",
+    "operation": "Schedules",
     "method": "POST",
     "path": "/v1/deployments/{deployment_id}/pause",
     "description": "Pause scheduled triggers for a Deployment.",
@@ -375,8 +375,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ]
   },
   "deployments/run": {
-    "title": "Trigger Deployment",
-    "operation": "Deployments",
+    "title": "Trigger Schedule",
+    "operation": "Schedules",
     "method": "POST",
     "path": "/v1/deployments/{deployment_id}/runs",
     "description": "Create a durable DeploymentRun and attempt to create exactly one new Session.",
@@ -402,8 +402,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ]
   },
   "deployments/unpause": {
-    "title": "Unpause Deployment",
-    "operation": "Deployments",
+    "title": "Resume Schedule",
+    "operation": "Schedules",
     "method": "POST",
     "path": "/v1/deployments/{deployment_id}/unpause",
     "description": "Resume scheduled triggers for a paused Deployment.",
@@ -430,7 +430,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
   },
   "deployments/test-feishu-notification": {
     "title": "Test Feishu Notification",
-    "operation": "Deployments",
+    "operation": "Schedules",
     "method": "POST",
     "path": "/v1/deployments/{deployment_id}/notifications/feishu/test",
     "description": "Send a fixed SandBase test message to the Feishu webhook already saved on a Deployment. No URL or custom message is accepted.",
@@ -463,8 +463,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ]
   },
   "deployments/update": {
-    "title": "Update Deployment",
-    "operation": "Deployments",
+    "title": "Update Schedule",
+    "operation": "Schedules",
     "method": "PATCH",
     "path": "/v1/deployments/{deployment_id}",
     "description": "Update mutable Deployment settings and bindings.",

@@ -1,6 +1,6 @@
 ---
-title: "Pause Deployment"
-description: "Pause scheduled triggers for a Deployment."
+title: "Pause Schedule"
+description: "Pause cron triggers for a Schedule's Deployment resource."
 aside: false
 outline: false
 apiReferenceKey: "deployments/pause"

@@ -1,11 +1,11 @@
 ---
-title: Delete Deployment
-description: Permanently delete an eligible Deployment.
+title: Delete Schedule
+description: Permanently delete an eligible Schedule's Deployment resource.
 aside: false
 outline: false
 apiReference:
-  title: Delete Deployment
-  operation: Deployments
+  title: Delete Schedule
+  operation: Schedules
   method: DELETE
   path: /v1/deployments/{deployment_id}
   description: Permanently delete a Deployment when its current lifecycle state allows deletion.

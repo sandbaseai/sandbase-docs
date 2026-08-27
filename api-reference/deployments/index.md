@@ -1,37 +1,38 @@
 ---
-title: Deployments API
-description: Create, manage, trigger, and inspect SandBase Deployments.
+title: Schedules API
+description: Create, manage, trigger, and inspect SandBase Schedules through the Deployments API.
 ---
 
-# Deployments API
+# Schedules API
 
-A Deployment binds an Agent to repeatable `initial_events`, Runtime Environment settings, timeout policy, and an optional cron schedule. In the product, a Deployment is presented as a **Schedule**.
+A **Schedule** binds an Agent to repeatable `initial_events`, Runtime Environment settings, timeout policy, and an optional cron expression. For API compatibility, Schedule resources use the `/v1/deployments` path, `depl_*` IDs, and `Deployment` schema name.
 
-::: info Deployment execution identity
-Every trigger creates a durable `drun_*` DeploymentRun. A successful trigger associates that record with exactly one newly created `sess_*` Session; a failed trigger has no Session. DeploymentRun and Session are separate resources and neither ID substitutes for the other.
+::: info Schedule execution identity
+Every trigger creates a durable `drun_*` `DeploymentRun`. A successful trigger associates that record with exactly one newly created `sess_*` Session; a failed trigger has no Session. `DeploymentRun` and Session are separate resources and neither ID substitutes for the other.
 :::
 
 ## Management endpoints
 
 | Method | Path | Purpose |
 |---|---|---|
-| `POST` | `/v1/deployments` | Create a Deployment. |
-| `GET` | `/v1/deployments` | List Deployments. |
-| `GET` | `/v1/deployments/{deployment_id}` | Get a Deployment and resolved bindings. |
+| `POST` | `/v1/deployments` | Create a Schedule (`Deployment`). |
+| `GET` | `/v1/deployments` | List Schedules. |
+| `GET` | `/v1/deployments/{deployment_id}` | Get a Schedule and resolved bindings. |
 | `PATCH` or `POST` | `/v1/deployments/{deployment_id}` | Update supported fields. |
-| `DELETE` | `/v1/deployments/{deployment_id}` | [Permanently delete](./delete) an eligible Deployment. |
+| `DELETE` | `/v1/deployments/{deployment_id}` | [Permanently delete](./delete) an eligible Schedule. |
 | `POST` | `/v1/deployments/{deployment_id}/pause` | Pause scheduled triggers. |
 | `POST` | `/v1/deployments/{deployment_id}/unpause` | Resume scheduled triggers. |
-| `POST` | `/v1/deployments/{deployment_id}/archive` | Archive a Deployment. |
+| `POST` | `/v1/deployments/{deployment_id}/archive` | Archive a Schedule. |
 | `POST` | `/v1/deployments/{deployment_id}/notifications/feishu/test` | Test the saved Feishu notification target. |
 
 ## Next steps
 
-- [Create a Deployment](./create)
-- [List Deployments](./list)
-- [Update a Deployment](./update)
-- [Trigger a Deployment](./run)
-- [List DeploymentRuns](./list-runs)
+- [Create a Schedule](./create)
+- [List Schedules](./list)
+- [Update a Schedule](./update)
+- [Trigger a Schedule](./run)
+- [List runs for one Schedule](./list-runs)
+- [List runs across all Schedules](./list-all-runs)
 
 ## Create example
 
@@ -57,15 +58,15 @@ curl -X POST https://api.sandbase.ai/v1/deployments \
   }'
 ```
 
-The schedule object requires `type: "cron"`, a valid cron `expression`, and an IANA `timezone`. Omit `schedule` only when the Deployment will be triggered manually.
+The schedule object requires `type: "cron"`, a valid cron `expression`, and an IANA `timezone`. Omit `schedule` only when the Schedule will be triggered manually.
 
 Alternatively, create a declarative Deployment with `name`, `runtime`, and `initial_events` in JSON or YAML. Declarative Deployments generate their Agent and Environment from the runtime definition and use the public REST invocation transport. This release supports the `hermes` runtime. Do not combine `runtime` with `agent_id` or `environment_id`.
 
-## DeploymentRun records
+## Schedule run records
 
 Use `POST /v1/deployments/{deployment_id}/runs` to trigger manually. The request body must be empty or `{}`; input overrides are rejected. The response is a DeploymentRun object with `id`, `type`, `deployment_id`, `agent`, `trigger_context`, nullable `session_id`, nullable `error`, and `created_at`.
 
-List one Deployment's records at `/v1/deployments/{deployment_id}/runs`, or query `/v1/deployment_runs` across Deployments. The global list accepts `trigger_type=manual|schedule`, status filters `pending|succeeded|failed`, `has_error`, Agent/Deployment IDs, time bounds, and cursor pagination. These filters select trigger outcomes; the current public DeploymentRun object does not include a `status` field. A nested get returns `409 deployment_trigger_in_progress` while the record is pending.
+List one Schedule's records at `/v1/deployments/{deployment_id}/runs`, or query `/v1/deployment_runs` across all Schedules. Retrieve a known run directly with `/v1/deployment_runs/{drun_id}`. The global list accepts `trigger_type=manual|schedule`, status filters `pending|succeeded|failed`, `has_error`, Agent/Deployment IDs, time bounds, and cursor pagination. These filters select trigger outcomes; the current public `DeploymentRun` object does not include a `status` field. A nested get returns `409 deployment_trigger_in_progress` while the record is pending.
 
 Updates support `name`, `initial_events`, `schedule`, `timeout_policy`, `expected_version`, `agent_binding`, `agent_config`, and `notification_settings`. Changing the Agent binding requires a paused Deployment and the current `expected_version` when applicable.
 

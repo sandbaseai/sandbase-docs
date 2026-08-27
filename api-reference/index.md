@@ -1,6 +1,6 @@
 ---
 title: Platform API Reference
-description: Manage SandBase Agents, Sessions, Services, Deployments, Skills, credentials, and account resources.
+description: Manage SandBase Agents, Sessions, Services, Schedules, Skills, credentials, and account resources.
 ---
 
 # Platform API Reference
@@ -18,7 +18,7 @@ Chat, image, video, audio, embedding, and model-specific request schemas live in
 | Define reusable behavior | [Agents](/api-reference/agents/) | Create and version an Agent configuration |
 | Run stateful work directly | [Sessions](/api-reference/sessions/) | Exchange persisted input, output, and tool events |
 | Expose an Agent to an application | [Services](/api-reference/endpoints/) | Invoke a stable REST service that creates or continues a Session |
-| Run work later or repeatedly | [Deployments](/api-reference/deployments/) | Trigger a DeploymentRun and inspect its linked Session |
+| Run work later or repeatedly | [Schedules](/api-reference/deployments/) | Trigger a Schedule run and inspect its linked Session |
 | Reuse instruction bundles | [Skills](/api-reference/skills/) | Create and attach versioned Skills to Agents |
 | Supply private integration values | [Credentials](/api-reference/credentials/) | Keep secrets out of Agent instructions and request bodies |
 
@@ -28,13 +28,13 @@ Chat, image, video, audio, embedding, and model-specific request schemas live in
 Agent + version
 ├── direct execution ────────────────→ Session ─→ events
 ├── Service (API path: endpoints) ───→ Session ─→ events
-└── Deployment (schedule/manual run) → DeploymentRun ─→ Session ─→ events
+└── Schedule (API resource: Deployment) → DeploymentRun ─→ Session ─→ events
 ```
 
 - An **Agent** is reusable configuration; creating one does not execute it.
 - A **Session** is the durable execution and event history for one interaction.
 - A **Service** publishes an Agent behind a stable invocation surface. Calling it creates a new Session or continues an authorized existing Session. Its API path remains `/v1/endpoints` for compatibility.
-- A **Deployment** stores repeatable input and optional scheduling configuration. Every trigger creates a distinct **DeploymentRun** and, after successful Session creation, links that run to a Session.
+- A **Schedule** stores repeatable input and optional cron configuration. Its API resource remains `Deployment` at `/v1/deployments` for compatibility. Every trigger creates a distinct `DeploymentRun` and, after successful Session creation, links that run to a Session.
 - A **Skill** packages reusable instructions and supporting files. A **Credential** stores a private value required by an Agent capability.
 
 ## Authentication

@@ -17,6 +17,23 @@ const capabilitiesPage = readFileSync(new URL('../models/capabilities.md', impor
 const visionPage = readFileSync(new URL('../models/vision.md', import.meta.url), 'utf8')
 const root = fileURLToPath(new URL('..', import.meta.url))
 
+const declaredOpenApiTags = new Set((openapiDocument.tags ?? []).map((tag) => tag.name))
+const usedOpenApiTags = new Set(
+  Object.values(openapiDocument.paths).flatMap((pathItem) =>
+    ['get', 'post', 'put', 'patch', 'delete'].flatMap((method) => pathItem[method]?.tags ?? []),
+  ),
+)
+assert.deepEqual(
+  [...usedOpenApiTags].filter((tag) => !declaredOpenApiTags.has(tag)),
+  [],
+  'Every operation tag must be declared at the top level of the public OpenAPI document',
+)
+assert.deepEqual(
+  [...declaredOpenApiTags].filter((tag) => !usedOpenApiTags.has(tag)),
+  [],
+  'The public OpenAPI document must not declare empty navigation groups',
+)
+
 assert.match(supportedModelsPage, /https:\/\/www\.sandbase\.ai\/models/, 'Supported Models must point to the live catalog')
 assert.match(supportedModelsPage, /GET \/v1\/models/, 'Supported Models must identify the runtime catalog API')
 for (const category of ['llm-models', 'image-generation', 'video-generation', 'audio-generation']) {
@@ -43,6 +60,10 @@ const forbiddenOpenApiPatterns = [
   [/^  - name: Environments$/m, 'Environments tag'],
   [/^    (?:Create|Update)?Environment(?:Config)?:$/m, 'Environment management schema'],
   [/^    EnvironmentId:$/m, 'EnvironmentId parameter'],
+  [/^  \/v1\/embeds(?:[/{:]|$)/m, 'unmaintained Embed Config path'],
+  [/^  - name: Embed Configs$/m, 'Embed Configs tag'],
+  [/^    (?:Create|Update|Delete)?EmbedConfig(?:Request|Response|List|Usage)?:$/m, 'Embed Config schema'],
+  [/^    EmbedConfigId:$/m, 'Embed Config parameter'],
 ]
 
 for (const [pattern, label] of forbiddenOpenApiPatterns) {
@@ -56,9 +77,6 @@ const requiredPublicPaths = [
   '/v1/upload:',
   '/v1/account/balance:',
   '/v1/account/history:',
-  '/v1/embeds:',
-  '/v1/embeds/{id}:',
-  '/v1/embeds/{id}/usage:',
   '/v1/responses:',
   '/v1beta/models/{model}:generateContent:',
   '/v1beta/models/{model}:streamGenerateContent:',
@@ -227,30 +245,6 @@ for (const status of ['404', '409', '500']) {
     `DELETE /v1/sessions/{id} ${status} must document its implemented typed error envelope`,
   )
 }
-for (const [method, publicPath, statuses] of [
-  ['post', '/v1/embeds', ['400', '404', '422', '500']],
-  ['get', '/v1/embeds', ['500']],
-  ['get', '/v1/embeds/{id}', ['404', '500']],
-  ['patch', '/v1/embeds/{id}', ['400', '404', '422', '500']],
-  ['post', '/v1/embeds/{id}', ['400', '404', '422', '500']],
-  ['put', '/v1/embeds/{id}', ['400', '404', '422', '500']],
-  ['delete', '/v1/embeds/{id}', ['404', '500']],
-  ['get', '/v1/embeds/{id}/usage', ['404', '500']],
-]) {
-  for (const status of statuses) {
-    assert.equal(
-      jsonErrorSchema(method, publicPath, status)?.$ref,
-      '#/components/schemas/APIError',
-      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
-    )
-  }
-}
-assert.deepEqual(
-  jsonErrorSchema('post', '/v1/embeds', '403')?.oneOf?.map((schema) => schema.$ref),
-  ['#/components/schemas/APIError', '#/components/schemas/APIKeyScopeError'],
-  'Embed Config creation must document both resource-limit and scoped-key rejections',
-)
-
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
 assert.match(config, /'guides\/site-agent-integration\.md'/, 'Legacy Site Agent guide must stay excluded from the public build')
 assert.match(config, /'use-cases\/\*\*'/, 'Legacy Site Agent use cases must stay excluded from the public build')
@@ -266,6 +260,8 @@ assert.doesNotMatch(platformSidebar, /text: 'Agent APIs'/, 'Platform API sidebar
 assert.equal((platformSidebar.match(/text: 'Sessions'/g) ?? []).length, 1, 'Sessions must be one top-level Platform API resource group')
 assert.match(platformSidebar, /text: 'Services'/, 'Platform API sidebar must use the Services product name')
 assert.doesNotMatch(platformSidebar, /text: 'Endpoints'/, 'Platform API sidebar must not expose the legacy Endpoints product name')
+assert.match(platformSidebar, /text: 'Schedules'/, 'Platform API sidebar must use the Schedules product name')
+assert.doesNotMatch(platformSidebar, /text: 'Deployments'/, 'Platform API sidebar must not expose the compatibility Deployment resource as the product name')
 for (const anchor of [
   'create-a-credential',
   'list-credentials',
@@ -799,51 +795,6 @@ const accountHistorySchema = openapi.match(/^    AccountHistoryItem:\n[\s\S]*?(?
 for (const field of ['latency_ms', 'user_cost', 'cache_creation_tokens', 'api_key_prefix']) {
   assert.match(accountHistorySchema, new RegExp(`required: \\[[^\\]]*${field}`), `Account history must require emitted ${field}`)
 }
-const embedConfigSchema = openapi.match(/^    EmbedConfig:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(embedConfigSchema, /required: \[[^\]]*allowed_origins[^\]]*embed_code[^\]]*updated_at[^\]]*\]/, 'Embed Configs must require every serializer field')
-assert.match(embedConfigSchema, /allowed_origins:\n\s+type: \[array, 'null'\]/, 'Embed Config origins must allow stored null output')
-assert.doesNotMatch(embedConfigSchema, /identity_secret|key_hash/, 'Embed Config responses must not expose authentication internals')
-const createEmbedSchema = openapi.match(/^    CreateEmbedConfigRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(createEmbedSchema, /required: \[agent_id, environment_id\]/, 'Embed creation must require both implemented bindings')
-assert.match(createEmbedSchema, /additionalProperties: true/, 'Embed creation must allow ignored compatibility fields')
-assert.match(createEmbedSchema, /name: \{ type: \[string, 'null'\]/, 'Embed creation must allow null optional strings')
-const updateEmbedSchema = openapi.match(/^    UpdateEmbedConfigRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.doesNotMatch(updateEmbedSchema, /^        (?:agent_id|environment_id):/m, 'Embed updates must not advertise immutable bindings')
-assert.match(updateEmbedSchema, /null values preserve the current value/, 'Embed updates must document implemented null semantics')
-assert.match(updateEmbedSchema, /additionalProperties: true/, 'Embed updates must allow ignored compatibility fields')
-assert.match(updateEmbedSchema, /enabled: \{ type: \[boolean, 'null'\]/, 'Null Embed enabled values must preserve the current state')
-const embedsPath = openapi.match(/^  \/v1\/embeds:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const createEmbed = embedsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-for (const status of ['201', '400', '401', '402', '403', '404', '422', '500']) {
-  assert.match(createEmbed, new RegExp(`'${status}':`), `Embed creation must document ${status} responses`)
-}
-const listEmbeds = embedsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '500']) {
-  assert.match(listEmbeds, new RegExp(`'${status}':`), `Embed listing must document ${status} responses`)
-}
-const embedPath = openapi.match(/^  \/v1\/embeds\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const getEmbed = embedPath.match(/^    get:\n[\s\S]*?(?=^    patch:)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(getEmbed, new RegExp(`'${status}':`), `Embed reads must document ${status} responses`)
-}
-for (const method of ['patch', 'post', 'put']) {
-  const next = method === 'patch' ? 'post' : method === 'post' ? 'put' : 'delete'
-  const operation = embedPath.match(new RegExp(`^    ${method}:\\n[\\s\\S]*?(?=^    ${next}:)`, 'm'))?.[0] ?? ''
-  assert.match(operation, /UpdateEmbedConfigRequest/, `${method.toUpperCase()} Embed updates must use the implemented request schema`)
-  for (const status of ['200', '400', '401', '402', '403', '404', '422', '500']) {
-    assert.match(operation, new RegExp(`'${status}':`), `${method.toUpperCase()} Embed updates must document ${status} responses`)
-  }
-}
-const deleteEmbed = embedPath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(deleteEmbed, new RegExp(`'${status}':`), `Embed deletion must document ${status} responses`)
-}
-const embedUsagePath = openapi.match(/^  \/v1\/embeds\/\{id\}\/usage:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-assert.match(embedUsagePath, /Session Event record/, 'Embed usage must describe what message_count actually counts')
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(embedUsagePath, new RegExp(`'${status}':`), `Embed usage must document ${status} responses`)
-}
-assert.match(embedUsagePath, /'500': \{ description: Usage statistics could not be loaded/, 'Embed usage must document configuration lookup failures without implying that aggregation count errors propagate')
 const taskCostPath = openapi.match(/^  \/v1\/tasks\/\{task_id\}\/cost:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(taskCostPath, /same API key/, 'Task cost lookup must document its API-key ownership boundary')
 assert.match(taskCostPath, /spending limit/, 'Task cost lookup must document its spending-limit exception')

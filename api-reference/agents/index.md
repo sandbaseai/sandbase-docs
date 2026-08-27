@@ -27,5 +27,5 @@ All endpoints are organization-scoped and require a SandBase API key.
 
 1. Create an Agent and save its `id`.
 2. Update it with the current `version` to prevent concurrent overwrites.
-3. Pin a Session, Service, or Deployment to a version when reproducibility matters.
+3. Pin a Session, Service, or Schedule to a version when reproducibility matters.
 4. Archive the Agent when it should no longer be used for new Sessions.

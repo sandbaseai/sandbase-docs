@@ -54,10 +54,12 @@ tags:
     description: Volcengine Ark-compatible asynchronous video generation tasks
   - name: Agents
     description: Build and manage Agent definitions
+  - name: Sessions
+    description: Create stateful Agent executions and exchange events
   - name: Services
     description: Publish and invoke tested Agents as Services
-  - name: Runs
-    description: Agent run management
+  - name: Schedules
+    description: Create and manage Schedules through Deployment resources
   - name: Events
     description: Run event streaming
   - name: Models
@@ -66,8 +68,6 @@ tags:
     description: Asynchronous model task status, settlement, and usage
   - name: Account
     description: Organization balance and API execution history
-  - name: Embed Configs
-    description: Embeddable web chat widget configuration and usage
   - name: Skills
     description: Reusable Agent instruction and resource bundles
   - name: Credentials
@@ -676,170 +676,6 @@ paths:
         '403': { description: API Key spending limit reached or organization disabled, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
         '404': { description: 'Task is unknown, deleted, not native, or not owned by the current API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
         '500': { description: Task update failed, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-
-  # --- Embed Configs ---------------------------------------------
-  /v1/embeds:
-    post:
-      operationId: createEmbedConfig
-      tags: [Embed Configs]
-      summary: Create an Embed Config
-      description: Creates an organization-scoped web chat configuration bound to an eligible Agent and Environment. An Agent can have at most 10 Embed Configs, including disabled configurations. Unknown request fields are accepted and ignored.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateEmbedConfigRequest'
-      responses:
-        '201':
-          description: Embed Config created; includes its publishable browser key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEmbedConfigResponse'
-        '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '403':
-          description: Agent Embed Config limit reached, or the API key scope does not authorize this endpoint
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - $ref: '#/components/schemas/APIError'
-                  - $ref: '#/components/schemas/APIKeyScopeError'
-        '404': { description: Agent or Environment binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '500': { description: Embed Config could not be created, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-    get:
-      operationId: listEmbedConfigs
-      tags: [Embed Configs]
-      summary: List Embed Configs
-      parameters:
-        - name: agent_id
-          in: query
-          schema: { type: string, pattern: '^agent_' }
-          description: Exact Agent ID filter.
-      responses:
-        '200':
-          description: Embed Config list, newest first
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EmbedConfigList'
-        '500': { description: List failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-
-  /v1/embeds/{id}:
-    get:
-      operationId: getEmbedConfig
-      tags: [Embed Configs]
-      summary: Get an Embed Config
-      parameters:
-        - $ref: '#/components/parameters/EmbedConfigId'
-      responses:
-        '200': { description: Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
-        '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Embed Config could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-    patch:
-      operationId: updateEmbedConfig
-      tags: [Embed Configs]
-      summary: Update an Embed Config
-      description: Partially updates presentation, origin, or enabled settings. To clear allowed_origins, send an empty array; null is treated as omitted. The Agent and Environment binding cannot be changed. If an existing binding becomes ineligible, the only permitted update is enabled=false by itself.
-      parameters:
-        - $ref: '#/components/parameters/EmbedConfigId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateEmbedConfigRequest'
-      responses:
-        '200': { description: Updated Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
-        '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '404': { description: Embed Config or binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Embed Config could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-    post:
-      operationId: updateEmbedConfigPost
-      tags: [Embed Configs]
-      summary: Update an Embed Config (compatibility alias)
-      description: Compatibility alias for PATCH with identical partial-update and binding-validation semantics.
-      parameters:
-        - $ref: '#/components/parameters/EmbedConfigId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { $ref: '#/components/schemas/UpdateEmbedConfigRequest' }
-      responses:
-        '200': { description: Updated Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
-        '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: Embed Config or binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '500': { description: Embed Config could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-    put:
-      operationId: updateEmbedConfigPut
-      tags: [Embed Configs]
-      summary: Update an Embed Config (compatibility alias)
-      description: Compatibility alias for PATCH with identical partial-update and binding-validation semantics.
-      parameters:
-        - $ref: '#/components/parameters/EmbedConfigId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { $ref: '#/components/schemas/UpdateEmbedConfigRequest' }
-      responses:
-        '200': { description: Updated Embed Config, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfig' } } } }
-        '400': { description: Invalid request, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: Embed Config or binding not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '422': { description: Agent and Environment binding is not eligible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '500': { description: Embed Config could not be updated, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-    delete:
-      operationId: deleteEmbedConfig
-      tags: [Embed Configs]
-      summary: Delete an Embed Config
-      description: Permanently deletes the configuration and invalidates its derived publishable key.
-      parameters:
-        - $ref: '#/components/parameters/EmbedConfigId'
-      responses:
-        '200': { description: Embed Config deleted, content: { application/json: { schema: { $ref: '#/components/schemas/DeleteEmbedConfigResponse' } } } }
-        '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Embed Config could not be deleted, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-
-  /v1/embeds/{id}/usage:
-    get:
-      operationId: getEmbedConfigUsage
-      tags: [Embed Configs]
-      summary: Get Embed Config usage
-      description: Returns all-time aggregate Session, Session Event record, and unique visitor counts for the configuration. The historical response field for Event records is named message_count.
-      parameters:
-        - $ref: '#/components/parameters/EmbedConfigId'
-      responses:
-        '200': { description: Aggregate usage, content: { application/json: { schema: { $ref: '#/components/schemas/EmbedConfigUsage' } } } }
-        '404': { description: Embed Config not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
-        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
-        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '500': { description: Usage statistics could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
 
   # --- Account ----------------------------------------------------
   /v1/account/balance:
@@ -2343,8 +2179,8 @@ paths:
   /v1/deployments:
     post:
       operationId: createDeployment
-      tags: [Deployments]
-      summary: Create deployment
+      tags: [Schedules]
+      summary: Create a Schedule
       description: Create either a declarative REST Deployment from a runtime definition or an advanced Deployment bound to an existing Agent.
       requestBody:
         required: true
@@ -2405,8 +2241,8 @@ paths:
               schema: { $ref: '#/components/schemas/APIError' }
     get:
       operationId: listDeployments
-      tags: [Deployments]
-      summary: List deployments
+      tags: [Schedules]
+      summary: List Schedules
       parameters:
         - { name: agent_id, in: query, schema: { type: string } }
         - { name: 'created_at[gte]', in: query, schema: { type: string, format: date-time } }
@@ -2445,8 +2281,8 @@ paths:
   /v1/deployments/{id}:
     get:
       operationId: getDeployment
-      tags: [Deployments]
-      summary: Get deployment
+      tags: [Schedules]
+      summary: Get a Schedule
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
       responses:
@@ -2463,8 +2299,8 @@ paths:
         '500': { description: Deployment detail could not be loaded, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     patch:
       operationId: updateDeployment
-      tags: [Deployments]
-      summary: Update deployment
+      tags: [Schedules]
+      summary: Update a Schedule
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
       requestBody:
@@ -2490,8 +2326,8 @@ paths:
         '500': { description: Deployment update or detail reload failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     post:
       operationId: updateDeploymentClaude
-      tags: [Deployments]
-      summary: Update deployment (Claude-compatible alias)
+      tags: [Schedules]
+      summary: Update a Schedule (compatibility alias)
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
       requestBody:
@@ -2517,8 +2353,8 @@ paths:
         '500': { description: Deployment update or detail reload failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     delete:
       operationId: deleteDeployment
-      tags: [Deployments]
-      summary: Delete deployment
+      tags: [Schedules]
+      summary: Delete a Schedule
       description: Permanently delete an eligible Deployment.
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
@@ -2543,8 +2379,8 @@ paths:
   /v1/deployments/{id}/run:
     post:
       operationId: runDeployment
-      tags: [Deployments]
-      summary: Run deployment now (Claude-compatible alias)
+      tags: [Schedules]
+      summary: Trigger a Schedule (compatibility alias)
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
         - name: Idempotency-Key
@@ -2575,7 +2411,7 @@ paths:
   /v1/deployments/{id}/pause:
     post:
       operationId: pauseDeployment
-      tags: [Deployments]
+      tags: [Schedules]
       summary: Pause scheduled triggers
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
@@ -2595,7 +2431,7 @@ paths:
   /v1/deployments/{id}/unpause:
     post:
       operationId: unpauseDeployment
-      tags: [Deployments]
+      tags: [Schedules]
       summary: Resume scheduled triggers
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
@@ -2615,8 +2451,8 @@ paths:
   /v1/deployments/{id}/archive:
     post:
       operationId: archiveDeployment
-      tags: [Deployments]
-      summary: Archive a Deployment
+      tags: [Schedules]
+      summary: Archive a Schedule
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
       responses:
@@ -2635,7 +2471,7 @@ paths:
   /v1/deployments/{id}/notifications/feishu/test:
     post:
       operationId: testDeploymentFeishuNotification
-      tags: [Deployments]
+      tags: [Schedules]
       summary: Test the saved Feishu notification target
       description: |
         Sends a fixed SandBase test notification to the Feishu webhook already saved on this Deployment.
@@ -2691,8 +2527,8 @@ paths:
   /v1/deployments/{id}/runs:
     post:
       operationId: triggerDeploymentRun
-      tags: [Deployments]
-      summary: Trigger a DeploymentRun
+      tags: [Schedules]
+      summary: Trigger a Schedule
       description: Creates one durable trigger record and attempts to create exactly one new Session.
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
@@ -2727,8 +2563,8 @@ paths:
         '503': { description: DeploymentRun or execution runtime service is unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     get:
       operationId: listDeploymentRuns
-      tags: [Deployments]
-      summary: List DeploymentRuns, including succeeded and failed records
+      tags: [Schedules]
+      summary: List runs for a Schedule
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
         - name: limit
@@ -2765,8 +2601,8 @@ paths:
   /v1/deployments/{id}/runs/{drun_id}:
     get:
       operationId: getDeploymentRun
-      tags: [Deployments]
-      summary: Get a DeploymentRun creation result
+      tags: [Schedules]
+      summary: Get a run for a Schedule
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
         - name: drun_id
@@ -2795,8 +2631,8 @@ paths:
   /v1/deployment_runs:
     get:
       operationId: listAllDeploymentRuns
-      tags: [Deployments]
-      summary: List DeploymentRuns across deployments
+      tags: [Schedules]
+      summary: List runs across all Schedules
       parameters:
         - name: deployment_id
           in: query
@@ -2858,8 +2694,8 @@ paths:
   /v1/deployment_runs/{id}:
     get:
       operationId: getGlobalDeploymentRun
-      tags: [Deployments]
-      summary: Get DeploymentRun by ID
+      tags: [Schedules]
+      summary: Get a Schedule run by ID
       parameters:
         - name: id
           in: path
@@ -3178,12 +3014,6 @@ components:
       required: true
       schema: { type: string, minLength: 1 }
       description: Bare Gemini model name, such as gemini-2.5-flash. SandBase adds the google/ catalog prefix.
-    EmbedConfigId:
-      name: id
-      in: path
-      required: true
-      schema: { type: string, pattern: '^emb_[0-9a-f]{8}-[0-9a-f]{3}$' }
-      description: Embed Config ID.
     EndpointId:
       name: id
       in: path
@@ -3307,102 +3137,6 @@ components:
         preview_urls: { type: array, items: { type: string } }
         created_at: { type: string, format: date-time }
         updated_at: { type: string, format: date-time }
-
-    # --- Embed Configs -------------------------------------------
-    EmbedConfig:
-      type: object
-      required: [id, org_id, agent_id, environment_id, name, key_prefix, allowed_origins, title, welcome_message, theme_color, avatar_url, placeholder_text, enabled, embed_code, created_at, updated_at]
-      properties:
-        id: { type: string, pattern: '^emb_[0-9a-f]{8}-[0-9a-f]{3}$' }
-        org_id: { type: string, format: uuid }
-        agent_id: { type: string, pattern: '^agent_' }
-        environment_id: { type: string, pattern: '^env_' }
-        name: { type: string }
-        key_prefix: { type: string, description: Display-only prefix of the publishable key. }
-        allowed_origins:
-          type: [array, 'null']
-          description: Browser origins allowed to use the widget. Empty or null permits every origin.
-          items: { type: string }
-        title: { type: string }
-        welcome_message: { type: string }
-        theme_color: { type: string }
-        avatar_url: { type: string }
-        placeholder_text: { type: string }
-        enabled: { type: boolean }
-        embed_code:
-          type: string
-          description: Script tag containing the derived publishable browser key.
-        created_at: { type: string, format: date-time }
-        updated_at: { type: string, format: date-time }
-
-    CreateEmbedConfigResponse:
-      allOf:
-        - $ref: '#/components/schemas/EmbedConfig'
-        - type: object
-          required: [publishable_key]
-          properties:
-            publishable_key:
-              type: string
-              pattern: '^pk-sb-emb_'
-              description: Publishable browser key. This is not a secret and is also embedded in embed_code.
-
-    EmbedConfigList:
-      type: object
-      required: [data]
-      properties:
-        data:
-          type: array
-          items: { $ref: '#/components/schemas/EmbedConfig' }
-
-    CreateEmbedConfigRequest:
-      type: object
-      additionalProperties: true
-      description: Unknown properties are accepted and ignored.
-      required: [agent_id, environment_id]
-      properties:
-        agent_id: { type: string, pattern: '^agent_' }
-        environment_id: { type: string, pattern: '^env_' }
-        name: { type: [string, 'null'] }
-        allowed_origins:
-          type: [array, 'null']
-          description: Exact origins or hostnames. Omit or send an empty array to allow every origin.
-          items: { type: string }
-        title: { type: [string, 'null'] }
-        welcome_message: { type: [string, 'null'] }
-        theme_color: { type: [string, 'null'] }
-        avatar_url: { type: [string, 'null'] }
-        placeholder_text: { type: [string, 'null'] }
-
-    UpdateEmbedConfigRequest:
-      type: object
-      additionalProperties: true
-      description: Omitted fields and explicit null values preserve the current value. Send an empty allowed_origins array to clear the origin allowlist. Unknown properties are accepted and ignored.
-      properties:
-        name: { type: [string, 'null'] }
-        allowed_origins:
-          type: [array, 'null']
-          items: { type: string }
-        title: { type: [string, 'null'] }
-        welcome_message: { type: [string, 'null'] }
-        theme_color: { type: [string, 'null'] }
-        avatar_url: { type: [string, 'null'] }
-        placeholder_text: { type: [string, 'null'] }
-        enabled: { type: [boolean, 'null'] }
-
-    DeleteEmbedConfigResponse:
-      type: object
-      required: [id, deleted]
-      properties:
-        id: { type: string, pattern: '^emb_' }
-        deleted: { type: boolean, const: true }
-
-    EmbedConfigUsage:
-      type: object
-      required: [session_count, message_count, visitor_count]
-      properties:
-        session_count: { type: integer, minimum: 0 }
-        message_count: { type: integer, minimum: 0 }
-        visitor_count: { type: integer, minimum: 0 }
 
     # --- Account --------------------------------------------------
     AccountBalance:

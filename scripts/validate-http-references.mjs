@@ -26,7 +26,12 @@ const references = []
 
 function walk(directory) {
   const relativeDirectory = path.relative(root, directory)
-  if (relativeDirectory === 'api-reference/environments' || relativeDirectory.startsWith('api-reference/environments/')) return
+  const hiddenApiReferenceRoots = ['api-reference/embeds', 'api-reference/environments']
+  if (
+    hiddenApiReferenceRoots.some(
+      (hiddenRoot) => relativeDirectory === hiddenRoot || relativeDirectory.startsWith(`${hiddenRoot}/`),
+    )
+  ) return
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     if (entry.name === '_archived') continue
     const filename = path.join(directory, entry.name)
