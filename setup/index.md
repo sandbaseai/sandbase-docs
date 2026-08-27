@@ -1,27 +1,67 @@
 ---
-title: Setup
-description: Connect an AI client to your SandBase workspace toolkit.
+title: Connect AI tools
+description: Connect Codex, Claude Code, Cursor, and other supported AI clients to SandBase.
 ---
 
-# Setup
+# Connect AI tools
 
-Setup connects Codex, Claude Code, Cursor, and other supported clients to SandBase's remote MCP gateway. Your workspace toolkit determines which Models, APIs, and Services those clients can discover.
+[SandBase CLI](https://github.com/sandbaseai/cli) is the open-source onboarding tool and local MCP bridge for SandBase. It connects Codex, Claude Code, Cursor, Gemini CLI, Windsurf, OpenCode, and other supported clients to the Models, APIs, and Services enabled in your workspace toolkit.
 
-For a terminal-first setup, follow the [SandBase CLI guide](./cli) or run:
+## Quick start
+
+Connect every supported client detected on your computer:
 
 ```sh
 npx -y @sandbaseai/cli connect
 ```
 
-## Connect a client
+The command opens browser authorization, stores the resulting credential locally with restricted file permissions, and adds a SandBase-owned MCP configuration to each selected client.
 
-1. Open **Setup** in the Console and choose a supported client.
-2. Run the displayed install command.
-3. Complete browser authorization when prompted.
-4. Restart the client if it was already open.
-5. Ask it to discover SandBase tools and make a small test call.
+To configure one client only:
 
-The JavaScript CLI manages authorization, the local client configuration, and the remote capability bridge. Transport endpoints are managed by the CLI and are not part of the public API contract.
+```sh
+# OpenAI Codex
+npx -y @sandbaseai/cli connect --client codex
+
+# Claude Code
+npx -y @sandbaseai/cli connect --client claude-code
+
+# Cursor
+npx -y @sandbaseai/cli connect --client cursor
+```
+
+You can also open **Setup** in the SandBase Console, choose a supported client, and run the command shown there. Restart a client if it was already open.
+
+## Verify the connection
+
+Run the health check after reconnecting or changing a client configuration:
+
+```sh
+npx -y @sandbaseai/cli doctor --client codex
+```
+
+Preview the complete compatibility catalog without signing in or changing local files:
+
+```sh
+npx -y @sandbaseai/cli catalog --json
+```
+
+## What your agent receives
+
+The local bridge exposes six progressively disclosed MCP tools:
+
+| Tool | Purpose |
+| --- | --- |
+| `sandbase_discover` | Search the model and API catalog |
+| `sandbase_inspect` | Read the selected capability's schema and pricing |
+| `sandbase_run` | Start a model or API request |
+| `sandbase_run_get` | Poll an asynchronous request |
+| `sandbase_runs` | Review recent requests and costs |
+| `sandbase_account` | Check the current account balance |
+
+The normal agent workflow is `discover → inspect → run`. The bridge starts on demand over stdio; it does not install a background daemon.
+
+Transport endpoints are managed by the CLI and are not part of the public API contract.
 
 ## Manage the workspace toolkit
 
@@ -37,9 +77,25 @@ SandBase may provide curated platform groups. A workspace can enable or disable 
 | Authorization is missing | Run `sandbase connect --client <client>` and complete the browser flow. |
 | Tool is unavailable | Confirm it is enabled in the workspace toolkit and any required credential is configured. |
 
+## Remove the managed configuration
+
+Remove only the SandBase-owned entry for one client:
+
+```sh
+npx -y @sandbaseai/cli unregister --client codex
+```
+
+SandBase leaves unrelated and user-managed MCP entries unchanged. Revoke the corresponding credential in the SandBase Console when it is no longer needed.
+
+## Source and support
+
+- [Source code](https://github.com/sandbaseai/cli)
+- [npm package](https://www.npmjs.com/package/@sandbaseai/cli)
+- [Questions and examples](https://github.com/sandbaseai/cli/discussions)
+- [Bug reports](https://github.com/sandbaseai/cli/issues/new/choose)
+
 ## Next steps
 
-- [SandBase CLI guide](/setup/cli)
 - [Installed Tools](/setup/installed)
 - [Platform groups](/setup/groups)
 - [Store](/store/)

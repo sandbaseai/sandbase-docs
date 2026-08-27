@@ -30,7 +30,7 @@ Use the smallest surface that fits the job:
 | Image, video, audio, or embedding jobs | [Model API Reference](https://www.sandbase.ai/docs/model-api-reference/llm-models) |
 | Search, scrape, social, business, or other external data | [Store](https://www.sandbase.ai/docs/store/) |
 | Reusable, versioned Agent workflows | [Agents](https://www.sandbase.ai/docs/agents/) |
-| Codex, Claude Code, Cursor, and other AI clients | [CLI setup](https://www.sandbase.ai/docs/setup/cli) |
+| Codex, Claude Code, Cursor, and other AI clients | [Connect AI tools](https://www.sandbase.ai/docs/setup/) |
 
 The catalog, schemas, prices, and availability can change. Use the live Store and API reference as the source of truth instead of guessing model or API identifiers.
 
@@ -144,7 +144,7 @@ Do not force unlike workloads into one response lifecycle: an LLM may stream tok
 
 ## Connect an AI client
 
-The open-source [SandBase CLI](https://github.com/sandbaseai/cli) provides a local MCP bridge for supported AI clients. Use the versioned installation command from the [CLI setup guide](https://www.sandbase.ai/docs/setup/cli), then connect the exact client target listed there.
+The open-source [SandBase CLI](https://github.com/sandbaseai/cli) provides a local MCP bridge for supported AI clients. Use the versioned installation command from the [Connect AI tools guide](https://www.sandbase.ai/docs/setup/), then connect the exact client target listed there.
 
 Skills and execution remain separate:
 
