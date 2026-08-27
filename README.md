@@ -200,7 +200,7 @@ The site is built with [VitePress](https://vitepress.dev). Production deployment
 
 ## Contributing
 
-Found a missing capability, broken link, unclear schema, or outdated example? Open an [issue](https://github.com/sandbaseai/sandbase-docs/issues) or submit a focused pull request. Do not include API keys, customer data, or provider credentials in examples.
+Found a missing capability, broken link, unclear schema, or outdated example? Read the [contributor guide](CONTRIBUTING.md), then open an [issue](https://github.com/sandbaseai/sandbase-docs/issues) or submit a focused pull request. Do not include API keys, customer data, or provider credentials in examples.
 
 ## License
 
