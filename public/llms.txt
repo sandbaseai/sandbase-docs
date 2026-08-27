@@ -16,15 +16,15 @@ Open-source repository: https://github.com/sandbaseai/cli
 
 Preview supported clients without signing in or changing configuration:
 
-`npx -y @sandbaseai/cli catalog --json`
+`npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz catalog --json`
 
 Connect detected coding agents such as Codex, Claude Code, Cursor, Gemini CLI, Windsurf, OpenCode, Kiro, Warp, Amp, and Hermes:
 
-`npx -y @sandbaseai/cli connect`
+`npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect`
 
 Diagnose an installation:
 
-`npx -y @sandbaseai/cli doctor`
+`npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz doctor`
 
 The installed MCP bridge exposes six tools: `sandbase_discover`, `sandbase_inspect`, `sandbase_run`, `sandbase_run_get`, `sandbase_runs`, and `sandbase_account`. The standard agent workflow is `discover -> inspect -> run`.
 

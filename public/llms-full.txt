@@ -25,20 +25,20 @@ Use the open-source CLI to connect supported coding agents to SandBase without m
 Read-only compatibility preview:
 
 ```sh
-npx -y @sandbaseai/cli catalog --json
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz catalog --json
 ```
 
 Connect all detected supported clients:
 
 ```sh
-npx -y @sandbaseai/cli connect
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect
 ```
 
 Connect or diagnose a specific client:
 
 ```sh
-npx -y @sandbaseai/cli connect --client codex
-npx -y @sandbaseai/cli doctor --client codex
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect --client codex
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz doctor --client codex
 ```
 
 The local stdio bridge exposes:

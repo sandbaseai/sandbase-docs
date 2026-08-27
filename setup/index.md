@@ -12,7 +12,7 @@ description: Connect Codex, Claude Code, Cursor, and other supported AI clients 
 Connect every supported client detected on your computer:
 
 ```sh
-npx -y @sandbaseai/cli connect
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect
 ```
 
 The command opens browser authorization, stores the resulting credential locally with restricted file permissions, and adds a SandBase-owned MCP configuration to each selected client.
@@ -21,13 +21,13 @@ To configure one client only:
 
 ```sh
 # OpenAI Codex
-npx -y @sandbaseai/cli connect --client codex
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect --client codex
 
 # Claude Code
-npx -y @sandbaseai/cli connect --client claude-code
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect --client claude-code
 
 # Cursor
-npx -y @sandbaseai/cli connect --client cursor
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect --client cursor
 ```
 
 You can also open **Setup** in the SandBase Console, choose a supported client, and run the command shown there. Restart a client if it was already open.
@@ -37,13 +37,13 @@ You can also open **Setup** in the SandBase Console, choose a supported client, 
 Run the health check after reconnecting or changing a client configuration:
 
 ```sh
-npx -y @sandbaseai/cli doctor --client codex
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz doctor --client codex
 ```
 
 Preview the complete compatibility catalog without signing in or changing local files:
 
 ```sh
-npx -y @sandbaseai/cli catalog --json
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz catalog --json
 ```
 
 ## What your agent receives
@@ -82,7 +82,7 @@ SandBase may provide curated platform groups. A workspace can enable or disable 
 Remove only the SandBase-owned entry for one client:
 
 ```sh
-npx -y @sandbaseai/cli unregister --client codex
+npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz unregister --client codex
 ```
 
 SandBase leaves unrelated and user-managed MCP entries unchanged. Revoke the corresponding credential in the SandBase Console when it is no longer needed.
