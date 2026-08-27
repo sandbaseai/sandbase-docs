@@ -283,6 +283,19 @@ assert.doesNotMatch(sidebar, /text: 'Embed Configs'/, 'Platform API sidebar must
 assert.doesNotMatch(platformSidebar, /text: 'Models'/, 'Platform API sidebar must direct model discovery to the standalone Model API Reference')
 assert.doesNotMatch(platformSidebar, /text: 'Agent APIs'/, 'Platform API sidebar must use resource names without redundant API suffixes')
 assert.equal((platformSidebar.match(/text: 'Sessions'/g) ?? []).length, 1, 'Sessions must be one top-level Platform API resource group')
+for (const anchor of [
+  'create-a-credential',
+  'list-credentials',
+  'get-a-credential',
+  'update-a-credential',
+  'rotate-a-credential',
+]) {
+  assert.match(
+    platformSidebar,
+    new RegExp(`/api-reference/credentials/#${anchor}`),
+    `Credentials sidebar must expose the ${anchor} operation`,
+  )
+}
 assert.doesNotMatch(openapi, /^  \/v1\/endpoints\/\{[^}]+\}\/mcp:$/m, 'Endpoint MCP transport must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/endpoint_runtime_profiles:$/m, 'Endpoint runtime profiles that reveal MCP transport must not be public')
 assert.doesNotMatch(openapi, /^\s+mcp_url:$/m, 'Endpoint MCP transport URL must not be public')

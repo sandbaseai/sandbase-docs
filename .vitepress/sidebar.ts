@@ -223,6 +223,11 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     collapsed: true,
     items: [
       { text: 'Overview', link: '/api-reference/credentials/' },
+      { text: 'Create', link: '/api-reference/credentials/#create-a-credential' },
+      { text: 'List', link: '/api-reference/credentials/#list-credentials' },
+      { text: 'Get', link: '/api-reference/credentials/#get-a-credential' },
+      { text: 'Update', link: '/api-reference/credentials/#update-a-credential' },
+      { text: 'Rotate', link: '/api-reference/credentials/#rotate-a-credential' },
     ],
   },
   {

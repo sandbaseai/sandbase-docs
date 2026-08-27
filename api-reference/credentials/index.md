@@ -44,6 +44,35 @@ The only supported selection strategy is `round_robin`, and `weight` must be a p
 
 `scope`, `scope_name`, and `secret_key` are caller-defined identifiers. SandBase trims their surrounding whitespace and rejects control characters. If `group_key` is omitted, it defaults to `scope_name:secret_key`.
 
+## List credentials
+
+```bash
+curl https://api.sandbase.ai/v1/credentials \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+```
+
+The response lists credentials in your organization. Secret values are never returned; each record contains masked metadata such as `value_hint` instead.
+
+## Get a credential
+
+```bash
+curl https://api.sandbase.ai/v1/credentials/sec_01... \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+```
+
+Use the `sec_` credential ID returned by create or list. The response contains the credential's masked metadata and current selection status, but not its stored value.
+
+## Update a credential
+
+```bash
+curl -X PATCH https://api.sandbase.ai/v1/credentials/sec_01... \
+  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"status":"disabled"}'
+```
+
+Use update to change `status`, `strategy`, or `weight`. To stop a credential from being selected, set `status` to `disabled`; credentials do not currently have a delete endpoint.
+
 ## Rotate a credential
 
 ```bash
