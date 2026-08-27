@@ -32,6 +32,39 @@ curl -X POST https://api.sandbase.ai/api/v3/contents/generations/tasks \
   }'
 ```
 
-The response contains a task `id`. Poll `GET /api/v3/contents/generations/tasks/{task_id}` until it reaches a terminal
-status. See [Official Native API](/model-api-reference/seedance-native-api) for every input workflow, parameter, response,
+The create response contains the task identifier:
+
+```json
+{ "id": "158d2649-e01d-45b9-b88a-ef3c450c601c" }
+```
+
+## Query the task result
+
+Poll the task every 5 to 10 seconds with the same API key:
+
+```bash
+curl https://api.sandbase.ai/api/v3/contents/generations/tasks/158d2649-e01d-45b9-b88a-ef3c450c601c \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+```
+
+While generation is in progress, `status` is `queued` or `running`. A completed task returns the generated video in
+`content.video_url`:
+
+```json
+{
+  "id": "158d2649-e01d-45b9-b88a-ef3c450c601c",
+  "model": "bytedance/seedance/2.0-official",
+  "status": "succeeded",
+  "content": {
+    "video_url": "https://media.sandbase.ai/files/158d2649.../0.mp4"
+  },
+  "usage": {
+    "completion_tokens": 72600,
+    "total_tokens": 72600
+  }
+}
+```
+
+Stop polling when `status` is `succeeded`, `failed`, `expired`, or `cancelled`. See
+[Official Native API](/model-api-reference/seedance-native-api) for every input workflow, parameter, response field,
 status, and error.
