@@ -42,7 +42,7 @@ curl -N https://api.sandbase.ai/v1/sessions/sess_01.../events/stream \
 | Resource | ID | Meaning |
 |---|---|---|
 | Agent | `agent_*` | Versioned workflow definition |
-| Service (Endpoint API) | `ep_*` | Stable callable surface |
+| Service | `ep_*` | Stable callable surface |
 | Schedule (Deployment API) | `depl_*` | Repeatable trigger configuration |
 | DeploymentRun | `drun_*` | One Schedule trigger and its Session-creation result |
 | Session | `sess_*` | Persistent Agent interaction and event history |

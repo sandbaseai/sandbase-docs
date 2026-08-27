@@ -20,7 +20,7 @@ info:
     status: active
     feature: persistent public Session identity
     description: >-
-      Public session_id identifies persistent Agent interaction across Direct Session, Service (Endpoint), and Schedule
+      Public session_id identifies persistent Agent interaction across Direct Session, Service, and Schedule
       (Deployment) entry points. Service invocation creates or continues a Session and sends one event. Every manual or
       scheduled Deployment trigger creates a public drun_* DeploymentRun and attempts to create one new Session.
       Internal Runtime Session identities are never exposed.
@@ -55,7 +55,7 @@ tags:
   - name: Agents
     description: Build and manage Agent definitions
   - name: Services
-    description: Publish and invoke tested Agents through Endpoint resources
+    description: Publish and invoke tested Agents as Services
   - name: Runs
     description: Agent run management
   - name: Events
@@ -1324,7 +1324,7 @@ paths:
       tags: [Services]
       summary: Create a Service
       description: |
-        Creates a Service (Endpoint resource) from either a declarative runtime definition or an existing Agent and Environment.
+        Creates a Service from either a declarative runtime definition or an existing Agent and Environment.
         The two creation modes are mutually exclusive. Declarative YAML uses the same schema as JSON.
         The bound Agent and Environment must use the same runtime provider, and that provider must be enabled for the organization.
       requestBody:
@@ -1343,7 +1343,7 @@ paths:
               $ref: '#/components/schemas/CreateDeclarativeEndpointRequest'
       responses:
         '201':
-          description: Endpoint created
+          description: Service created
           content:
             application/json:
               schema:
@@ -1383,7 +1383,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIError'
         '500':
-          description: Endpoint creation or declarative compilation failed
+          description: Service creation or declarative compilation failed
           content:
             application/json:
               schema: { $ref: '#/components/schemas/APIError' }
@@ -1432,7 +1432,7 @@ paths:
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '500':
-          description: Endpoint list could not be loaded
+          description: Service list could not be loaded
           content:
             application/json:
               schema: { $ref: '#/components/schemas/APIError' }
@@ -1557,7 +1557,7 @@ paths:
       summary: Invoke a Service over REST
       description: |
         Creates or continues a persistent Session and sends one standard event. Omit `session_id` to create a
-        Session fixed to the Endpoint's Agent version and Runtime Environment snapshot. Provide `session_id` to
+        Session fixed to the Service's Agent version and Runtime Environment snapshot. Provide `session_id` to
         continue that Session. Returns the persistent Session ID and accepted events; no public execution Run or
         internal Runtime Session identity is exposed. When both input and content are supplied, content takes precedence.
       parameters:
@@ -3374,7 +3374,7 @@ components:
       required: true
       schema:
         type: string
-      description: Service Endpoint ID
+      description: Service ID (`ep_` prefix)
     AgentId:
       name: id
       in: path
@@ -5036,15 +5036,15 @@ components:
         memory_config:
           type: object
           additionalProperties: true
-          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
+          description: Reserved configuration that is stored with the Service but is not currently applied to Session execution.
         resource_config:
           type: object
           additionalProperties: true
-          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
+          description: Reserved configuration that is stored with the Service but is not currently applied to Session execution.
         vault_config:
           type: object
           additionalProperties: true
-          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
+          description: Reserved configuration that is stored with the Service but is not currently applied to Session execution.
 
     EndpointToolset:
       type: object
@@ -5092,15 +5092,15 @@ components:
         memory_config:
           type: object
           additionalProperties: true
-          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
+          description: Reserved configuration that is stored with the Service but is not currently applied to Session execution.
         resource_config:
           type: object
           additionalProperties: true
-          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
+          description: Reserved configuration that is stored with the Service but is not currently applied to Session execution.
         vault_config:
           type: object
           additionalProperties: true
-          description: Reserved configuration that is stored with the Endpoint but is not currently applied to Session execution.
+          description: Reserved configuration that is stored with the Service but is not currently applied to Session execution.
 
     Endpoint:
       type: object
@@ -5130,7 +5130,7 @@ components:
         config:
           type: [object, 'null']
           additionalProperties: true
-          description: Advanced Endpoint configuration. Declarative Endpoint responses always return null here.
+          description: Advanced Service configuration. Declarative Service responses always return null here.
         session_metadata:
           type: [object, 'null']
           additionalProperties: true
@@ -5138,31 +5138,31 @@ components:
         memory_config:
           type: [object, 'null']
           additionalProperties: true
-          description: Reserved configuration stored with the Endpoint; it is not currently applied to Session execution.
+          description: Reserved configuration stored with the Service; it is not currently applied to Session execution.
         resource_config:
           type: [object, 'null']
           additionalProperties: true
-          description: Reserved configuration stored with the Endpoint; it is not currently applied to Session execution.
+          description: Reserved configuration stored with the Service; it is not currently applied to Session execution.
         vault_config:
           type: [object, 'null']
           additionalProperties: true
-          description: Reserved configuration stored with the Endpoint; it is not currently applied to Session execution.
+          description: Reserved configuration stored with the Service; it is not currently applied to Session execution.
         status:
           type: string
           enum: [active, disabled]
         store_status:
           type: string
           enum: [private, pending_review, public, suspended]
-          description: Publication and review state of the Endpoint in the Service store.
+          description: Publication and review state of the Service in the Service store.
         creation_mode:
           type: string
           enum: [declarative, advanced]
         runtime:
           type: string
-          description: Present for declarative Endpoints.
+          description: Present for declarative Services.
         skills:
           type: array
-          description: Present for declarative Endpoints.
+          description: Present for declarative Services.
           items:
             type: string
         run_url:

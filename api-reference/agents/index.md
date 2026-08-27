@@ -5,7 +5,7 @@ description: Create and manage versioned Agent definitions.
 
 # Agents API
 
-An Agent is a reusable, versioned definition containing a model, instructions, tools, and Skills. Creating or updating an Agent does not run it. Use a [Session](/api-reference/sessions/) for an interactive execution, a [Service backed by an Endpoint](/api-reference/endpoints/) for a stable callable surface, or a [Schedule](/api-reference/deployments/) for recurring work. Schedules are managed through the Deployments API.
+An Agent is a reusable, versioned definition containing a model, instructions, tools, and Skills. Creating or updating an Agent does not run it. Use a [Session](/api-reference/sessions/) for an interactive execution, a [Service](/api-reference/endpoints/) for a stable callable surface, or a [Schedule](/api-reference/deployments/) for recurring work. Schedules are managed through the Deployments API.
 
 Agent model IDs use the public `vendor/model` identity returned by the [Models API](/api-reference/models/). Effective updates create immutable versions; no-op updates keep the current version number.
 
@@ -27,5 +27,5 @@ All endpoints are organization-scoped and require a SandBase API key.
 
 1. Create an Agent and save its `id`.
 2. Update it with the current `version` to prevent concurrent overwrites.
-3. Pin a Session, Endpoint, or Deployment to a version when reproducibility matters.
+3. Pin a Session, Service, or Deployment to a version when reproducibility matters.
 4. Archive the Agent when it should no longer be used for new Sessions.

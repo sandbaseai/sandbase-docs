@@ -283,6 +283,8 @@ assert.doesNotMatch(sidebar, /text: 'Embed Configs'/, 'Platform API sidebar must
 assert.doesNotMatch(platformSidebar, /text: 'Models'/, 'Platform API sidebar must direct model discovery to the standalone Model API Reference')
 assert.doesNotMatch(platformSidebar, /text: 'Agent APIs'/, 'Platform API sidebar must use resource names without redundant API suffixes')
 assert.equal((platformSidebar.match(/text: 'Sessions'/g) ?? []).length, 1, 'Sessions must be one top-level Platform API resource group')
+assert.match(platformSidebar, /text: 'Services'/, 'Platform API sidebar must use the Services product name')
+assert.doesNotMatch(platformSidebar, /text: 'Endpoints'/, 'Platform API sidebar must not expose the legacy Endpoints product name')
 for (const anchor of [
   'create-a-credential',
   'list-credentials',

@@ -1,33 +1,33 @@
 ---
-title: Endpoints API
+title: Services API
 description: Publish an Agent as a reusable REST or experimental ACP Service.
 ---
 
-# Endpoints API
+# Services API
 
-An Endpoint is the API resource behind a SandBase **Service**. Public invocation uses REST or the experimental ACP protocol.
+A **Service** publishes a tested Agent behind a stable callable interface. Service URLs and IDs retain the existing `/v1/endpoints` path and `ep_` prefix for API compatibility. Public invocation uses REST or the experimental ACP protocol.
 
 ::: info Session identity
-Endpoint invocation accepts an optional `session_id`. When omitted, SandBase creates a persistent Session. When supplied, the message is appended to that Session. No public Run or Runtime Session identity is created.
+Service invocation accepts an optional `session_id`. When omitted, SandBase creates a persistent Session. When supplied, the message is appended to that Session. No public Run or Runtime Session identity is created.
 :::
 
 ## Management endpoints
 
 | Method | Path | Purpose |
 |---|---|---|
-| `POST` | `/v1/endpoints` | Create an Endpoint from an existing Agent and Environment, or from a declarative runtime definition. |
-| `GET` | `/v1/endpoints` | List Endpoints with cursor pagination. |
-| `GET` | `/v1/endpoints/{endpoint_id}` | Get an Endpoint. |
-| `PATCH` or `POST` | `/v1/endpoints/{endpoint_id}` | Update an advanced Endpoint. Declarative definitions are immutable. |
-| `DELETE` | `/v1/endpoints/{endpoint_id}` | Delete an Endpoint. |
+| `POST` | `/v1/endpoints` | Create a Service from an existing Agent and Environment, or from a declarative runtime definition. |
+| `GET` | `/v1/endpoints` | List Services with cursor pagination. |
+| `GET` | `/v1/endpoints/{endpoint_id}` | Get a Service. |
+| `PATCH` or `POST` | `/v1/endpoints/{endpoint_id}` | Update an advanced Service. Declarative definitions are immutable. |
+| `DELETE` | `/v1/endpoints/{endpoint_id}` | Delete a Service. |
 
 For the advanced creation mode, `name`, `agent_id`, and an explicit non-empty `protocols` array are required by the public contract. A declarative definition similarly requires `name`, `runtime`, and `protocols`; it cannot be mixed with `agent_id` or `environment_id`. Public protocol values are `rest` and experimental `acp`. Always send the intended values instead of relying on server defaults. Optional advanced fields include `agent_version`, `environment_id`, `slug`, and Session configuration. `session_metadata` is copied to each newly created Session. `memory_config`, `resource_config`, and `vault_config` are reserved fields: SandBase stores and returns them, but does not currently apply them to Session execution. When `environment_id` is omitted, SandBase resolves or creates the Agent-owned Environment.
 
 List requests support cursor pagination and `q` search across IDs, names, slugs, runtimes, Agent IDs, and Environment IDs. `search` is retained as an alias for `q`.
 
-For advanced Endpoints, update requests can change the name, slug, bound Agent or Environment, protocols, status, and Session configuration. When changing `agent_version`, include the currently bound version as `expected_agent_version` to protect against concurrent upgrades. Declarative Endpoint definitions remain immutable.
+For advanced Services, update requests can change the name, slug, bound Agent or Environment, protocols, status, and Session configuration. When changing `agent_version`, include the currently bound version as `expected_agent_version` to protect against concurrent upgrades. Declarative Service definitions remain immutable.
 
-## Invoke an Endpoint
+## Invoke a Service
 
 `POST /v1/endpoints/{endpoint_id}/run`
 
@@ -40,7 +40,7 @@ curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../run \
 
 The body accepts `input` or `content`, plus an optional `session_id`.
 
-Each invocation sends a standard Session event. If `session_id` is omitted, SandBase first creates a Session fixed to the Endpoint's Agent version and Runtime Environment snapshot.
+Each invocation sends a standard Session event. If `session_id` is omitted, SandBase first creates a Session fixed to the Service's Agent version and Runtime Environment snapshot.
 
 The response is `202 Accepted`:
 
@@ -55,16 +55,16 @@ The response is `202 Accepted`:
 }
 ```
 
-The Endpoint must be active and include the `rest` protocol.
+The Service must be active and include the `rest` protocol.
 
 Read history or stream results through the Session Events APIs using the returned `session_id`.
 
 ## Connect through ACP
 
-`POST /v1/endpoints/{endpoint_id}/acp` handles the experimental ACP JSON-RPC transport for Endpoints with the `acp` protocol.
+`POST /v1/endpoints/{endpoint_id}/acp` handles the experimental ACP JSON-RPC transport for Services with the `acp` protocol.
 
 The implemented methods are `initialize`, `session/new`, `session/prompt`, and `session/cancel`. `session/new` returns a canonical `sess_*` Session ID. `session/prompt` returns `application/x-ndjson`: zero or more `session/update` notifications followed by the final JSON-RPC result. See [Invoke with ACP](./acp) for the request envelopes.
 
-REST and ACP are invocation protocols on the same Endpoint. They do not create separate Service resources.
+REST and ACP are invocation protocols on the same Service.
 
 See the [Service quickstart](/agents/endpoint-quickstart) for a complete create-and-invoke example.

@@ -174,10 +174,10 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
-    text: 'Endpoints',
+    text: 'Services',
     collapsed: true,
     items: [
-      { text: 'Endpoints & Invoke', link: '/api-reference/endpoints/' },
+      { text: 'Overview & REST', link: '/api-reference/endpoints/' },
       { text: 'Invoke with ACP', link: '/api-reference/endpoints/acp' },
     ],
   },

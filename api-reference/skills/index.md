@@ -208,4 +208,4 @@ curl -fsS -X DELETE "$SANDBASE_API_BASE/v1/skills/$SKILL_ID" \
 | 404 | `not_found` | Skill does not exist or is not visible to the caller. |
 | 500 | `internal_error` | Skill creation or storage failed. |
 
-For Service validation and runtime errors, see [Endpoint errors](/api-reference/endpoints/#errors).
+For Service validation and runtime errors, see [Service errors](/api-reference/endpoints/#errors).

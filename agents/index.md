@@ -49,7 +49,7 @@ Do not publish a draft just because one happy-path test succeeded. Test missing 
 
 ### 3. Publish
 
-Publish a tested version as a Service when an application, teammate, or Setup needs a stable callable Agent. A Service is backed by an Endpoint API resource and preserves the editable draft.
+Publish a tested version as a Service when an application, teammate, or Setup needs a stable callable Agent. A Service preserves the editable draft and exposes a stable callable interface.
 
 ### 4. Schedule
 

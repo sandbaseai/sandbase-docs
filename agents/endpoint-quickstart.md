@@ -5,7 +5,7 @@ description: Publish a tested Agent as a Service and call it from an app over RE
 
 # Service API Quickstart
 
-Services let another app, AI tool, or user call an Agent you already built and tested. The underlying API resource is called an `endpoint`, so this page uses `/v1/endpoints` in the code examples.
+Services let another app, AI tool, or user call an Agent you already built and tested. The API keeps the compatibility path `/v1/endpoints`, so the code examples use that path and `ep_` IDs.
 
 This example requires `curl` and `jq`.
 
@@ -43,7 +43,7 @@ curl -fsS --max-time 240 -X POST "$RUN_URL" \
   | jq .
 ```
 
-The `202 Accepted` response contains `session_id` and an `events` array. Each accepted event has a server-assigned `sevt_*` ID and `processed_at`; no Run or request resource is created. Use the Session Events APIs to read history or stream results. Pass the returned `session_id` in a later Endpoint call to continue the same Session; omit it to create another Session.
+The `202 Accepted` response contains `session_id` and an `events` array. Each accepted event has a server-assigned `sevt_*` ID and `processed_at`; no Run or request resource is created. Use the Session Events APIs to read history or stream results. Pass the returned `session_id` in a later Service call to continue the same Session; omit it to create another Session.
 
 ## Add capabilities
 
@@ -60,6 +60,6 @@ curl -fsS -X DELETE "$SANDBASE_API_BASE/v1/endpoints/$ENDPOINT_ID" \
 ## Next steps
 
 - [Services guide](/agents/services) — product concepts and lifecycle
-- [Endpoints API](/api-reference/endpoints/) — REST invocation, state, and error reference
+- [Services API](/api-reference/endpoints/) — REST invocation, state, and error reference
 - [Build Agent](/agents/) — define and test the Agent before publishing
 - [Skills API](/api-reference/skills/) — package, upload, register, and attach a Skill

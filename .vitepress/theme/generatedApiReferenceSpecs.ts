@@ -60,7 +60,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
   },
   "endpoints/acp": {
     "title": "Invoke Service with ACP",
-    "operation": "Endpoints",
+    "operation": "Services",
     "method": "POST",
     "path": "/v1/endpoints/{endpoint_id}/acp",
     "description": "Experimental ACP-over-HTTP transport. initialize, session/new, and session/cancel return JSON-RPC JSON; session/prompt streams newline-delimited JSON-RPC messages.",
@@ -68,7 +68,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "title": "Path parameters",
         "fields": [
-          { "name": "endpoint_id", "type": "string", "required": true, "description": "Active Endpoint configured with the acp protocol." }
+          { "name": "endpoint_id", "type": "string", "required": true, "description": "Active Service configured with the acp protocol." }
         ]
       },
       {

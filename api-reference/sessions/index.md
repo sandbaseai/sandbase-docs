@@ -8,7 +8,7 @@ description: Create an Agent Session, send input, and inspect its event history.
 A Session is a stateful execution of an [Agent](/api-reference/agents/). You can include the first event in Create Session, then send later events to continue the Session.
 
 ::: info Session identity contract
-The public `session_id` identifies one persistent Session across Direct Session and Service (Endpoint) entry points. Every Schedule (Deployment) trigger creates a separate `drun_*` DeploymentRun and, when Session creation succeeds, links it to one new Session. Runtime replacement and migration are internal and never change the public Session identity.
+The public `session_id` identifies one persistent Session across Direct Session and Service entry points. Every Schedule (Deployment) trigger creates a separate `drun_*` DeploymentRun and, when Session creation succeeds, links it to one new Session. Runtime replacement and migration are internal and never change the public Session identity.
 :::
 
 ## Endpoints

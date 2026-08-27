@@ -5,7 +5,7 @@ description: Publish a tested Agent as a stable callable Service.
 
 # Services
 
-A **Service** makes a tested Agent callable from an application or AI tool. The underlying API resource is an **Endpoint**, so Service management and invocation use `/v1/endpoints`. Public invocation uses REST or experimental ACP according to its `protocols` setting.
+A **Service** makes a tested Agent callable from an application or AI tool. Service management and invocation use the compatibility path `/v1/endpoints` and `ep_` IDs. Public invocation uses REST or experimental ACP according to its `protocols` setting.
 
 ## When to create a Service
 
@@ -22,16 +22,16 @@ curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../run \
 
 Omit `session_id` to create a Session, or provide an existing authorized `session_id` to continue it. The response contains the persistent `session_id` and accepted Session events; it does not create a DeploymentRun.
 
-## Product and API names
+## API compatibility names
 
-| Product | API resource | API prefix |
+| Product | API path name | API prefix |
 |---|---|---|
-| Service | Endpoint | `/v1/endpoints` |
+| Service | `endpoint` | `/v1/endpoints` |
 | Schedule | Deployment | `/v1/deployments` |
 
 ## Next steps
 
 - [Service quickstart](/agents/endpoint-quickstart)
-- [Endpoints API](/api-reference/endpoints/)
+- [Services API](/api-reference/endpoints/)
 - [Sessions](/agents/sessions)
 - [Schedules](/agents/schedules)
