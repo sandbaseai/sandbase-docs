@@ -46,7 +46,6 @@ An Agent is a reusable, versioned configuration containing a Model, instructions
 A Service exposes a tested Agent to applications. Its API resource is an Endpoint. Invoking it creates or continues a Session whose `session_id` identifies the durable interaction.
 
 - [Services guide](/agents/services)
-- [Service quickstart](/agents/endpoint-quickstart)
 - [Endpoints API](/api-reference/endpoints/)
 - [Sessions API](/api-reference/sessions/)
 

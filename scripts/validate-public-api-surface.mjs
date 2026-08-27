@@ -251,6 +251,8 @@ assert.match(config, /'use-cases\/\*\*'/, 'Legacy Site Agent use cases must stay
 assert.match(config, /'api-reference\/webhooks\.md'/, 'Sandbox event webhook reference must stay excluded from the public build')
 assert.match(config, /'api-reference\/embeds\/\*\*'/, 'Unmaintained Embed Config pages must stay excluded from the public build')
 assert.match(config, /'api-reference\/environments\/\*\*'/, 'Internal Environment API pages must stay excluded from the public build')
+assert.match(config, /'agents\/endpoint-quickstart\.md'/, 'Retired Service quickstart must stay excluded from the public build')
+assert.doesNotMatch(platformSidebar, /Service quickstart/, 'Retired Service quickstart must not appear in the docs sidebar')
 assert.doesNotMatch(sidebar, /\/api-reference\/sandboxes?\b/i, 'Sidebar must not link to sandbox API pages')
 assert.doesNotMatch(sidebar, /\/api-reference\/webhooks\b/i, 'Sidebar must not link to Sandbox event webhook APIs')
 assert.equal((sidebar.match(/text: 'Inference APIs'/g) ?? []).length, 1, 'Inference APIs must have exactly one standalone sidebar chapter')

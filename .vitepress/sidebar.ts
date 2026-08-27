@@ -95,7 +95,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
     collapsed: false,
     items: [
       { text: 'Services', link: '/agents/services' },
-      { text: 'Service quickstart', link: '/agents/endpoint-quickstart' },
       { text: 'Schedules', link: '/agents/schedules' },
       { text: 'Sessions', link: '/agents/sessions' },
     ],

@@ -31,7 +31,6 @@ Omit `session_id` to create a Session, or provide an existing authorized `sessio
 
 ## Next steps
 
-- [Service quickstart](/agents/endpoint-quickstart)
 - [Services API](/api-reference/endpoints/)
 - [Sessions](/agents/sessions)
 - [Schedules](/agents/schedules)

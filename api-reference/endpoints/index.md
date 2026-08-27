@@ -67,4 +67,4 @@ The implemented methods are `initialize`, `session/new`, `session/prompt`, and `
 
 REST and ACP are invocation protocols on the same Service.
 
-See the [Service quickstart](/agents/endpoint-quickstart) for a complete create-and-invoke example.
+See the [Services guide](/agents/services) for product guidance, or use the management and invocation examples on this page.

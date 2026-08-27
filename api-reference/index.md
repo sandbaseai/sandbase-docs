@@ -60,6 +60,6 @@ Platform resources belong to the organization associated with the API key. Use t
 ## Next steps
 
 - New to managed Agents: [Build Agent](/agents/)
-- Publish an application service: [Service quickstart](/agents/endpoint-quickstart)
+- Publish an application service: [Services guide](/agents/services)
 - Schedule repeatable work: [Schedules guide](/agents/schedules)
 - Call a model directly: [Model API Reference](/model-api-reference/)
