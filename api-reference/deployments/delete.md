@@ -1,6 +1,6 @@
 ---
 title: Delete Schedule
-description: Permanently delete an eligible Schedule's Deployment resource.
+description: Permanently delete an eligible Schedule through the compatible Deployment resource.
 aside: false
 outline: false
 apiReference:

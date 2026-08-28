@@ -1,6 +1,6 @@
 ---
 title: "Get Schedule"
-description: "Retrieve one Schedule's Deployment resource and its resolved Agent and runtime bindings."
+description: "Retrieve one Schedule and its resolved Agent and runtime bindings through the compatible Deployment resource."
 aside: false
 outline: false
 apiReferenceKey: "deployments/get"

@@ -1,6 +1,6 @@
 ---
 title: "List Schedules"
-description: "List Schedule Deployment resources in the current organization."
+description: "List Schedules in the current organization through the compatible Deployment resource."
 aside: false
 outline: false
 apiReferenceKey: "deployments/list"
