@@ -54,6 +54,15 @@ type ApiReference = {
 // Environment API.
 function sanitizePublicReference(reference: ApiReference): ApiReference {
   const clone = JSON.parse(JSON.stringify(reference)) as ApiReference
+  const stripInternalFields = (value: unknown): unknown => {
+    if (Array.isArray(value)) return value.map(stripInternalFields)
+    if (!value || typeof value !== 'object') return value
+    return Object.fromEntries(
+      Object.entries(value)
+        .filter(([key]) => key !== 'environment_id' && key !== 'environment_binding')
+        .map(([key, entry]) => [key, stripInternalFields(entry)]),
+    )
+  }
   clone.groups = clone.groups?.map((group) => ({
     ...group,
     fields: group.fields.filter((field) => field.name !== 'environment_id'),
@@ -67,10 +76,7 @@ function sanitizePublicReference(reference: ApiReference): ApiReference {
   if (clone.response?.code) {
     try {
       const body = JSON.parse(clone.response.code)
-      if (body && typeof body === 'object' && !Array.isArray(body)) {
-        delete body.environment_id
-        clone.response.code = JSON.stringify(body, null, 2)
-      }
+      clone.response.code = JSON.stringify(stripInternalFields(body), null, 2)
     } catch {
       clone.response.code = clone.response.code.replace(/\s*\\n\s*\\?\s*"environment_id"\s*:\s*"[^"]+",?/g, '')
     }
