@@ -12,6 +12,7 @@ import {
   classifyPlatformModel,
   cleanLegacyPlatformOverview,
   cleanManagedPlatformPages,
+  isPubliclyDocumented,
   normalizePlatformClassifierText,
   platformGeneratedMarker,
   platformFields,
@@ -27,7 +28,12 @@ import {
 
 const docsRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const repoRoot = path.resolve(docsRoot, '..')
-const apiRegistryRoot = path.join(repoRoot, 'sandbase-registry', 'data', 'api')
+const registryDataRoot = process.env.SANDBASE_REGISTRY_DATA_ROOT
+  ? path.resolve(process.env.SANDBASE_REGISTRY_DATA_ROOT)
+  : fs.existsSync(path.join(repoRoot, 'sandbase-registry', 'data'))
+    ? path.join(repoRoot, 'sandbase-registry', 'data')
+    : path.join(repoRoot, 'sandbase-monorepo', 'sandbase-registry', 'data')
+const apiRegistryRoot = path.join(registryDataRoot, 'api')
 const platformRoot = path.join(docsRoot, 'model-api-reference', 'platform-apis')
 const platformOverview = path.join(platformRoot, 'index.md')
 const legacyPlatformOverview = path.join(docsRoot, 'model-api-reference', 'platform-apis.md')
@@ -96,7 +102,7 @@ function generatedPlatformList() {
 describe('Platform API reference generator', () => {
   test('publishes exactly enabled type=api models with unique pages and sidebar links', () => {
     const registryModels = walk(apiRegistryRoot, 'model.json').map((file) => JSON.parse(fs.readFileSync(file, 'utf8')))
-    const published = registryModels.filter((model) => model.type === 'api' && model.enabled !== false)
+    const published = registryModels.filter((model) => model.type === 'api' && model.enabled !== false && isPubliclyDocumented(model))
     const pages = walk(platformRoot, '.md')
     const expectedPages = new Set([
       path.relative(platformRoot, platformOverview),
@@ -197,7 +203,7 @@ describe('Platform API reference generator', () => {
   test('writes one grouped lazy sidebar chunk per platform with complete operation conservation', () => {
     const published = walk(apiRegistryRoot, 'model.json')
       .map((file) => JSON.parse(fs.readFileSync(file, 'utf8')))
-      .filter((model) => model.type === 'api' && model.enabled !== false)
+      .filter((model) => model.type === 'api' && model.enabled !== false && isPubliclyDocumented(model))
     const platforms = [...new Set(published.map((model) => model.vendor_slug))]
     assert.equal(fs.readdirSync(platformSidebarDataRoot).filter((file) => file.endsWith('.ts')).length, platforms.length)
 
@@ -246,7 +252,7 @@ describe('Platform API reference generator', () => {
     assert.doesNotMatch(component, /\.platform-api-sidebar\s*\{[^}]*border-top/)
     assert.doesNotMatch(component, /class="overview-link"|class="category-button"/)
     assert.doesNotMatch(component, /pushState|replaceState|router\.(?:go|push|replace)/)
-    assert.match(themeIndex, /'sidebar-nav-after': \(\) => h\(PlatformApiSidebar\)/)
+    assert.match(themeIndex, /'sidebar-nav-after': \(\) => \[?h\(PlatformApiSidebar\)/)
     assert.doesNotMatch(themeIndex, /'sidebar-nav-before': \(\) => h\(PlatformApiSidebar\)/)
   })
 
@@ -291,7 +297,7 @@ describe('Platform API reference generator', () => {
       generatedPlatformData(platform).groups.map((group) => [group.label, group.operations.length]),
     ]))
     assert.deepEqual(snapshot, {
-      tiktok: [['Ads', 12], ['Creator Analytics', 14], ['Search & Discovery', 34], ['Comments & Engagement', 7], ['Live', 16], ['Commerce', 14], ['Messaging', 1], ['Content & Video', 22], ['Users & Accounts', 18], ['Utilities', 21], ['Other', 2]],
+      tiktok: [['Ads', 12], ['Creator Analytics', 14], ['Search & Discovery', 34], ['Comments & Engagement', 7], ['Live', 15], ['Commerce', 14], ['Messaging', 1], ['Content & Video', 22], ['Users & Accounts', 18], ['Utilities', 21], ['Other', 2]],
       youtube: [['Search & Discovery', 11], ['Comments & Community', 5], ['Videos & Media', 15], ['Channels & Users', 7]],
       dataforseo: [['SERP', 26], ['Keywords', 8], ['Backlinks', 8], ['Business Data', 6], ['App Data', 5], ['Merchant', 4], ['On-Page', 6], ['Domain Analytics', 6], ['Content Analysis', 4], ['Labs', 12]],
       firecrawl: [['Crawl', 1], ['Scrape', 2], ['Search', 1], ['Map', 1]],
@@ -310,7 +316,7 @@ describe('Platform API reference generator', () => {
       name: 'keyword',
       type: 'string | null',
       required: false,
-      description: '搜索关键词（首次请求必填）/Search keyword (required for first request)',
+      description: 'Search keyword (required for first request)',
     })
     assert.equal(duration.type, 'string | null')
     assert.equal(duration.constraints, 'Allowed values: short, medium, long')
@@ -474,7 +480,7 @@ describe('Platform API reference generator', () => {
   test('constructs schema-valid request examples for every enabled API model', () => {
     const models = walk(apiRegistryRoot, 'model.json')
       .map((file) => ({ ...JSON.parse(fs.readFileSync(file, 'utf8')), __category: 'api', __file: file }))
-      .filter((model) => model.type === 'api' && model.enabled !== false)
+      .filter((model) => model.type === 'api' && model.enabled !== false && isPubliclyDocumented(model))
 
     assert.ok(models.length > 0)
     for (const model of models) {
@@ -530,7 +536,7 @@ describe('Platform API reference generator', () => {
   test('uses the B-098 public response matrix for every enabled operation', () => {
     const models = walk(apiRegistryRoot, 'model.json')
       .map((file) => JSON.parse(fs.readFileSync(file, 'utf8')))
-      .filter((model) => model.type === 'api' && model.enabled !== false)
+      .filter((model) => model.type === 'api' && model.enabled !== false && isPubliclyDocumented(model))
     const counts = { sync: 0, async: 0 }
 
     for (const model of models) {

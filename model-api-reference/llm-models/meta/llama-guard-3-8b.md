@@ -13,7 +13,7 @@ seo:
   modelSlug: "llama-guard-3-8b"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2024-07-23T00:00:00Z"
   capabilities: ["chat"]
   category: "LLM Models"
 ---

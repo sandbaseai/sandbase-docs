@@ -13,7 +13,7 @@ seo:
   modelSlug: "qwen-turbo"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2024-11-15T00:00:00Z"
   capabilities: ["chat","structured_output","function_calling"]
   category: "LLM Models"
 ---

@@ -13,7 +13,7 @@ seo:
   modelSlug: "laguna-m.1"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2026-04-28T00:00:00Z"
   capabilities: ["chat","reasoning","function_calling"]
   category: "LLM Models"
 ---

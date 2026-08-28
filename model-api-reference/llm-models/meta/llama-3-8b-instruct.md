@@ -13,7 +13,7 @@ seo:
   modelSlug: "llama-3-8b-instruct"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2024-04-18T00:00:00Z"
   capabilities: ["chat"]
   category: "LLM Models"
 ---

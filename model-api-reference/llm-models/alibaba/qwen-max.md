@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen-Max  API Reference"
-description: "Qwen: Qwen-Max API reference for SandBase. Use model alibaba/qwen-max with /v1/chat/completions; see request and response examples."
+description: "Qwen: Qwen-Max  API reference for SandBase. Use model alibaba/qwen-max with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen-max"
@@ -13,7 +13,7 @@ seo:
   modelSlug: "qwen-max"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2024-10-15T00:00:00Z"
   capabilities: ["chat","structured_output","function_calling"]
   category: "LLM Models"
 ---

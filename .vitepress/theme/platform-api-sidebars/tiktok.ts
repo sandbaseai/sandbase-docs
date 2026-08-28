@@ -2,7 +2,7 @@
 export default {
   "platform": "TikTok",
   "slug": "tiktok",
-  "operationCount": 161,
+  "operationCount": 160,
   "groups": [
     {
       "key": "ads",

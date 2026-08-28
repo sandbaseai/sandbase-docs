@@ -5,7 +5,7 @@ description: Browse SandBase Image Generation APIs by provider and open a model 
 
 # Image Generation
 
-Browse enabled image generation models by provider in the left navigation. Open a model page for its exact API identifier, supported capabilities, and a working request. The catalog is generated from the current SandBase model registry; confirm availability before integrating.
+Browse enabled image generation models by provider in the left navigation. Open an entry for its exact model identifier, supported capabilities, and a working request.
 
 Image Generation models use the async SandBase generation protocol declared in each model registry file. Submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out.
 
@@ -13,6 +13,8 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ### OpenAI
 
+- [GPT Image 2 Official API](/model-api-reference/image-generation/openai/gpt-image-2-official) — GPT Image 2 through the OpenAI Images API contract.
+- [GPT Image 2 Official Edit API](/model-api-reference/image-generation/openai/gpt-image-2-official/edit) — GPT Image 2 editing through the OpenAI Images API contract.
 - [GPT Image 2](/model-api-reference/image-generation/openai/gpt-image-2) — GPT Image 2, OpenAI's latest image model, is capable of making fine-grained, detailed edits to images.
 - [GPT Image 2 Editing](/model-api-reference/image-generation/openai/gpt-image-2/edit) — GPT Image 2 Editing supports image editing and multi-image synthesis with high-quality results.
 - [GPT-Image 1.5](/model-api-reference/image-generation/openai/gpt-image-1.5/edit) — Gpt Image 1.5 Edit by OpenAI - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
@@ -403,4 +405,4 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ## Capability coverage
 
-`3d-to-3d`, `audio-to-audio`, `audio-to-text`, `audio-to-video`, `commercial`, `image-editing`, `image-to-3d`, `image-to-image`, `image-to-text`, `llm`, `mcp_exposable`, `speech-to-text`, `text-to-3d`, `text-to-image`, `training`, `video-to-audio`, `video-to-text`, `video-to-video`, `vision`
+`3d-to-3d`, `audio-to-audio`, `audio-to-text`, `audio-to-video`, `commercial`, `image-editing`, `image-to-3d`, `image-to-image`, `image-to-text`, `llm`, `mcp_exposable`, `protocol-ingress-only`, `speech-to-text`, `text-to-3d`, `text-to-image`, `training`, `video-to-audio`, `video-to-text`, `video-to-video`, `vision`

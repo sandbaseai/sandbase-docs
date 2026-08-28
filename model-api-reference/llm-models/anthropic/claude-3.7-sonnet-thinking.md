@@ -13,7 +13,7 @@ seo:
   modelSlug: "claude-3.7-sonnet-thinking"
   protocol: "Messages API"
   endpoint: "/v1/messages"
-  publishedAt: ""
+  publishedAt: "2025-02-24T00:00:00Z"
   capabilities: ["chat","vision","reasoning","function_calling"]
   category: "LLM Models"
 ---

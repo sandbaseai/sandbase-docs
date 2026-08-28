@@ -268,6 +268,13 @@ function isEnabled(model) {
   return model.enabled !== false
 }
 
+// Some registry entries remain enabled for runtime compatibility after their
+// upstream operation has been withdrawn. Keep those entries out of public
+// pages and navigation when the registry explicitly marks them unavailable.
+function isPubliclyDocumented(model) {
+  return !/no longer available online/i.test(String(model.description ?? ''))
+}
+
 function slugPath(model) {
   return path.posix.join(model.vendor_slug, model.model_slug)
 }
@@ -291,10 +298,16 @@ function seoTitle(model, disambiguator = '') {
   // enough to distinguish duplicate operation names and keeps search snippets
   // from ending in a literal ellipsis.
   if (disambiguator) {
-    const vendor = String(model.vendor ?? disambiguator).replace(/[-_]+/g, ' ').trim()
-    const vendorSuffix = ` — ${vendor}`
-    const compact = `${cleanTitle(model)} API Reference${vendorSuffix}`
-    if (compact.length <= 65) return compact
+    const parts = String(disambiguator).split(/\s+/).filter(Boolean)
+    const vendor = parts.shift() ?? ''
+    for (let start = 0; start < parts.length; start += 1) {
+      const suffix = ` — ${[vendor, ...parts.slice(start)].filter(Boolean).join(' ')}`
+      const compact = `${cleanTitle(model)} API Reference${suffix}`
+      if (compact.length <= 65) return compact
+    }
+    const uniqueSuffix = ` — ${modelIdentityHash(model)} API`
+    const uniqueAvailable = 65 - uniqueSuffix.length
+    return `${cleanTitle(model).slice(0, uniqueAvailable).trimEnd()}${uniqueSuffix}`
   }
   const compactSuffix = ' API Ref'
   const available = 65 - compactSuffix.length
@@ -302,10 +315,18 @@ function seoTitle(model, disambiguator = '') {
   return `${base}${compactSuffix}`
 }
 
+function modelIdentityHash(model) {
+  const identity = String(model.name ?? model.model_slug ?? '')
+  let hash = 0
+  for (const character of identity) hash = ((hash << 5) - hash + character.codePointAt(0)) | 0
+  return Math.abs(hash).toString(36).slice(0, 6)
+}
+
 function seoDisambiguator(model) {
   const parts = String(model.model_slug ?? '').split('/').filter(Boolean)
-  const labels = [model.vendor, ...parts.slice(-1)].filter(Boolean).map((part) => String(part).replace(/[-_]+/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase()))
-  return labels.join(' ')
+  const vendor = model.vendor ? String(model.vendor).replace(/[-_]+/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase()) : ''
+  const path = parts.map((part) => String(part).replace(/[-_]+/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())).join(' / ')
+  return [vendor, path].filter(Boolean).join(' ')
 }
 
 function cleanDescription(model) {
@@ -330,12 +351,12 @@ function openApiPaths(model) {
 
 function submitPathFor(model) {
   const paths = openApiPaths(model)
-  return Object.keys(paths).find((apiPath) => paths[apiPath]?.post) ?? '/v1/run'
+  return Object.keys(paths).find((apiPath) => paths[apiPath]?.post && !/^\/v1\/generations(?:\/|$)/.test(apiPath)) ?? '/v1/run'
 }
 
 function pollPathFor(model) {
   const paths = openApiPaths(model)
-  return Object.keys(paths).find((apiPath) => paths[apiPath]?.get && apiPath.includes('{id}')) ?? `${submitPathFor(model)}/{id}`
+  return Object.keys(paths).find((apiPath) => paths[apiPath]?.get && apiPath.includes('{id}') && !/^\/v1\/generations(?:\/|$)/.test(apiPath)) ?? `${submitPathFor(model)}/{id}`
 }
 
 function endpointFor(model, category) {
@@ -411,7 +432,7 @@ function loadModels(root, filter, category) {
         __category: category.key,
       }
     })
-    .filter((model) => isEnabled(model) && filter(model))
+    .filter((model) => isEnabled(model) && isPubliclyDocumented(model) && filter(model))
 }
 
 const fieldDescriptions = {
@@ -1407,6 +1428,8 @@ for (const category of categoryData) {
   }
 }
 
+const usedSeoTitles = new Set()
+
 for (const category of categoryData) {
 for (const model of category.models) {
   if (requestedModelNames.size && !requestedModelNames.has(model.name)) continue
@@ -1425,7 +1448,15 @@ for (const model of category.models) {
     pagePath,
     [
       '---',
-      `title: ${yamlString(seoTitle(model, seoTitleCounts.get(seoTitle(model)) > 1 ? seoDisambiguator(model) : ''))}`,
+      `title: ${yamlString((() => {
+        let title = seoTitle(model, seoTitleCounts.get(seoTitle(model)) > 1 ? seoDisambiguator(model) : '')
+        if (usedSeoTitles.has(title)) {
+          const suffix = ` — ${modelIdentityHash(model)} API`
+          title = `${cleanTitle(model).slice(0, 65 - suffix.length).trimEnd()}${suffix}`
+        }
+        usedSeoTitles.add(title)
+        return title
+      })())}`,
       `description: ${yamlString(seoDescription(model, protocol, category))}`,
       'aside: false',
       'outline: false',
@@ -1642,6 +1673,7 @@ export {
   loadModels,
   modelSort,
   normalizePlatformClassifierText,
+  isPubliclyDocumented,
   platformGeneratedMarker,
   platformFields,
   platformReference,

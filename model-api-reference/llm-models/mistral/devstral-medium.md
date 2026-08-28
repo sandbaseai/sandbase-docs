@@ -13,7 +13,7 @@ seo:
   modelSlug: "devstral-medium"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2025-07-10T00:00:00Z"
   capabilities: ["chat","structured_output","function_calling"]
   category: "LLM Models"
 ---

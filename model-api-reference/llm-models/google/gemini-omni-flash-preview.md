@@ -13,7 +13,7 @@ seo:
   modelSlug: "gemini-omni-flash-preview"
   protocol: "Chat Completions API"
   endpoint: "/v1/chat/completions"
-  publishedAt: ""
+  publishedAt: "2026-06-30T00:00:00Z"
   capabilities: ["chat"]
   category: "LLM Models"
 ---

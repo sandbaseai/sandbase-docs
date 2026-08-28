@@ -2,7 +2,7 @@
 export default {
   "platform": "Douyin",
   "slug": "douyin",
-  "operationCount": 310,
+  "operationCount": 309,
   "groups": [
     {
       "key": "search",

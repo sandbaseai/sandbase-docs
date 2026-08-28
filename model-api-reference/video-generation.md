@@ -5,7 +5,7 @@ description: Browse SandBase Video Generation APIs by provider and open a model 
 
 # Video Generation
 
-Browse enabled video generation models by provider in the left navigation. Open a model page for its exact API identifier, supported capabilities, and a working request. The catalog is generated from the current SandBase model registry; confirm availability before integrating.
+Browse enabled video generation models by provider in the left navigation. Open an entry for its exact model identifier, supported capabilities, and a working request.
 
 Video Generation models use the async SandBase generation protocol declared in each model registry file. Submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out.
 
@@ -25,16 +25,16 @@ Video Generation models use the async SandBase generation protocol declared in e
 - [Seedance 2.5 Image to Video](/model-api-reference/video-generation/bytedance/seedance/2.5/image-to-video) — ByteDance's next-generation image-to-video model, animating a single still into a native clip up to 30 seconds at 720p with continuous, coherent motion, native audio, and director-level camera control.
 - [Seedance 2.5 Reference to Video](/model-api-reference/video-generation/bytedance/seedance/2.5/reference-to-video) — ByteDance's next-generation reference-to-video model, generating video from multimodal references (images, videos, audio) and locking a character, set, and palette across a full take up to 30 seconds for production-grade consistency.
 - [Seedance 2.5 Text to Video](/model-api-reference/video-generation/bytedance/seedance/2.5/text-to-video) — ByteDance's next-generation text-to-video model, generating native single-shot clips up to 30 seconds at 720p with coherent motion, native audio, and director-level camera control for professional-grade video creation.
-- [Seedance 2.0 Mini](/model-api-reference/video-generation/bytedance/seedance/2.0/mini/reference-to-video) — Seedance 2.0 Mini by Bytedance - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
-- [Seedance 2.0 Mini Image to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/mini/image-to-video) — Seedance 2.0 Mini by Bytedance - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
-- [Seedance 2.0 Mini Text to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/mini/text-to-video) — Seedance 2.0 Mini is Bytedance's text-to-video AI model. Turn written scripts and prompts into professional-quality video clips with realistic motion, lighting, and scene composition.
 - [Seedance 2.0 Text to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/text-to-video) — ByteDance's most advanced text-to-video model delivering cinematic output, native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
 - [Seedance 2.0 Reference to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/reference-to-video) — ByteDance's most advanced reference-to-video model generating cinematic video guided by reference content, with native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
 - [Seedance 2.0 Fast Text to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/fast/text-to-video) — ByteDance's most advanced text-to-video model in its fast tier delivering lower latency and cost without compromising on cinematic output, native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
 - [Seedance 2.0 Image to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/image-to-video) — ByteDance's most advanced image-to-video model transforming still images into cinematic video with native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
 - [Seedance 2.0 Fast Reference to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/fast/reference-to-video) — ByteDance's most advanced reference-to-video model in its fast tier delivering lower latency and cost without compromising on cinematic output, native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
 - [Seedance 2.0 Fast Image to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/fast/image-to-video) — ByteDance's most advanced image-to-video model in its fast tier delivering lower latency and cost without compromising on cinematic output, native audio, multi-shot editing, and director-level camera control for professional-grade video creation.
-- …and 12 more models in the sidebar.
+- [DreamActor 2.0](/model-api-reference/video-generation/bytedance/dreamactor/2.0) — DreamActor M2.0 by ByteDance generates videos by animating a reference image using motion from a driving video. It replicates motion, facial expressions, and lip movements from the template video while preserving the subject and background features of the input image.
+- [Seedance v1.5 Pro Text to Video](/model-api-reference/video-generation/bytedance/seedance/1.5/pro/text-to-video) — ByteDance Seedance v1.5 Pro text-to-video model generating cinematic video from text prompts with native audio generation, camera control, and professional-grade output quality.
+- [Seedance v1.5 Pro Image to Video](/model-api-reference/video-generation/bytedance/seedance/1.5/pro/image-to-video) — ByteDance Seedance v1.5 Pro image-to-video model transforming still images into cinematic video with native audio generation, camera control, and professional-grade output quality.
+- …and 9 more models in the sidebar.
 
 ### Google
 
