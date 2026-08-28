@@ -135,5 +135,9 @@ const modelReference = readFileSync('model-api-reference/index.md', 'utf8')
 assert.match(modelReference, /Most LLM models use the OpenAI-compatible/, 'Model reference must not claim every LLM uses one protocol')
 assert.match(modelReference, /Anthropic models use the .*Anthropic Messages API/, 'Model reference must identify the Anthropic protocol')
 
+const nativeReference = readFileSync('model-api-reference/seedance-native-api/index.md', 'utf8')
+assert.match(nativeReference, /`DELETE`\s*\|\s*`\/api\/v3\/contents\/generations\/tasks\/\{task_id\}`/, 'Official Native API must document task deletion')
+assert.match(nativeReference, /Cancel or remove a task/, 'Official Native API must explain task cancellation semantics')
+
 assert.ok(inspected > 0, 'content validation did not inspect any public hand-written pages')
 console.log(`public hand-written content: ok (${inspected} pages)`)

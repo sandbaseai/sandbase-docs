@@ -54,3 +54,6 @@ Quick orientation:
 - Supported `model` values are `bytedance/seedance/2.0-official` and `bytedance/seedance/2.5-official`. Matching is exact.
 - Retrieve a task with `GET /api/v3/contents/generations/tasks/{task_id}` and poll until `status` leaves `queued` and
   `running`.
+- Cancel a queued task, or remove a terminal task from subsequent lookups, with
+  `DELETE /api/v3/contents/generations/tasks/{task_id}`. The operation returns `204 No Content`; running and
+  already-cancelled tasks cannot be deleted.
