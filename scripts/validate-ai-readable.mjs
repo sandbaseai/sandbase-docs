@@ -30,6 +30,11 @@ for (const [needle, label] of forbidden) {
 }
 
 assert.ok(!/Anthropic 90%|OpenAI 50%|Google 75%|up to 90% discount/i.test(combined), 'fixed cache discount claims must not appear')
+assert.ok(!/\b\d[\d,]*\+\s+(?:AI\s+)?models and APIs\b/i.test(combined), 'time-sensitive catalog counts must not appear')
+assert.ok(!/flat `?base_price`? per generation/i.test(combined), 'AI-readable docs must not generalize one media pricing formula')
+assert.ok(!/spend alerts|budget alerts|Console → Usage/i.test(combined), 'AI-readable docs must use current spending controls and Activities navigation')
+assert.ok(!/Supports streaming, function calling, vision, JSON mode/i.test(combined), 'AI-readable docs must keep optional chat capabilities model-specific')
+assert.ok(!/provide it to continue that Session/.test(combined), 'AI-readable docs must not omit Service and version checks for Session continuation')
 
 for (const required of [
   'https://www.sandbase.ai/docs/openapi.yaml',

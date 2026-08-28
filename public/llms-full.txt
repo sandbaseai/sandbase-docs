@@ -9,7 +9,7 @@ All requests require: Authorization: Bearer sk-YOUR_KEY
 ## Terminology
 
 - Task: A billable execution record. Not every API operation creates one.
-- Run: A model or API capability request via POST /v1/run. May be synchronous or asynchronous.
+- Run: A model generation request via POST /v1/run. May be synchronous or asynchronous.
 - Session: An agent execution via POST /v1/sessions. Stateful multi-turn workflow.
 
 Some billable operations return an x-task-id response header. Not every API operation creates a task.
@@ -50,7 +50,7 @@ Connect AI tools: https://www.sandbase.ai/docs/setup/
 
 ## POST /v1/chat/completions
 
-OpenAI-compatible chat. Supports streaming, function calling, vision, JSON mode.
+OpenAI-compatible chat. Streaming, tools, vision, reasoning, and structured-output support depend on the selected model.
 
 Request:
 ```
@@ -83,7 +83,7 @@ Response:
 
 ## POST /v1/messages
 
-Anthropic-compatible messages API with caching support.
+Anthropic-compatible Messages API. Caching and other optional features depend on the selected model.
 
 Request:
 ```
@@ -273,7 +273,7 @@ Response:
 
 Invoke a Service by creating or continuing a Session and sending one message.
 
-Endpoint invocation accepts an optional session_id. When omitted, SandBase creates a new persistent Session. It does not create a separate public Run identity.
+Endpoint invocation accepts an optional session_id. When omitted, SandBase creates a new persistent Session. A supplied Session must come from the same Service and match its current Agent-version binding. Invocation does not create a separate public Run identity.
 
 Request:
 ```
@@ -396,11 +396,13 @@ Do not retry unchanged 400, 401, 402, 403, or 404 requests. Check idempotency be
 
 ## Billing
 
-- LLM: input_tokens * prompt_price + output_tokens * completion_price
-- Cached tokens: read cache pricing and multipliers from the selected model's current model_card
-- Image/Video/Audio: flat base_price per generation
+- Read each model's current pricing formula and units from its model_card
+- Token-priced models can include input, output, cache, or reasoning components when declared
+- Media and other models can use per-request, duration, resolution, or other model-specific units
 - Check cost: GET /v1/tasks/{task_id}/cost
-- Budget alerts: https://www.sandbase.ai/console/billing
+- API key spending controls: https://www.sandbase.ai/console/keys
+- Usage and cost: https://www.sandbase.ai/console/activities?tab=usage
+- Balance and credit transactions: https://www.sandbase.ai/console/billing
 
 ---
 

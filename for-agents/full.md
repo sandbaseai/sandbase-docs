@@ -46,7 +46,7 @@ Base URL: `https://api.sandbase.ai/v1`
 
 ### POST /v1/chat/completions
 
-OpenAI-compatible. Supports streaming, function calling, vision, JSON mode.
+OpenAI-compatible. Streaming, tools, vision, reasoning, and structured-output support depend on the selected model and its declared schema.
 
 ```bash
 curl https://api.sandbase.ai/v1/chat/completions \
@@ -98,7 +98,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 ### POST /v1/messages
 
-Anthropic-compatible messages API with caching support.
+Anthropic-compatible Messages API. Caching and other optional features depend on the selected model and request schema.
 
 ```bash
 curl https://api.sandbase.ai/v1/messages \
@@ -162,7 +162,7 @@ curl https://api.sandbase.ai/v1/embeddings \
 }
 ```
 
-> The `embedding` array is truncated. Actual length depends on the model (e.g., 1536 dimensions for `text-embedding-3-small`).
+> The `embedding` array is truncated. Its actual length depends on the selected model and any supported dimensions parameter.
 
 ---
 
@@ -210,7 +210,7 @@ curl https://api.sandbase.ai/v1/run \
 
 ### POST /v1/run
 
-Video models are typically async — poll with `GET /v1/run/{id}` until complete.
+Check the selected model's `execution_mode`. When submission returns `pending` or `running`, poll `GET /v1/run/{id}` until a terminal status.
 
 ```bash
 curl https://api.sandbase.ai/v1/run \
@@ -430,7 +430,7 @@ curl https://api.sandbase.ai/v1/agents/agent_abc123/versions \
 
 ### POST /v1/endpoints/{id}/run — Invoke Service
 
-Creates or continues a Session and sends one message. Omit `session_id` to create a Session, or provide it to continue an existing Session.
+Creates or continues a Session and sends one message. Omit `session_id` to create a Session. A supplied Session must have been created by the same Service and still match its Agent-version binding.
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
@@ -675,16 +675,17 @@ curl https://api.sandbase.ai/v1/skills \
 
 ### How costs are calculated
 
-- **LLM**: `input_tokens × prompt_price + output_tokens × completion_price`
-- **Cached tokens**: read cache pricing and multipliers from the selected model's current `model_card`
-- **Image/Video/Audio**: flat `base_price` per generation
+- Read the selected model's current pricing formula and units from its `model_card`.
+- Token-priced models can include input, output, cache, or reasoning components when declared.
+- Media and other models can use per-request, duration, resolution, or other model-specific units.
 - Check cost after generation: `GET /v1/tasks/{id}/cost`
 - When a billable operation returns a task ID, use it with `GET /v1/tasks/{id}/cost`
 
 ### Budget control
 
-- Set spend alerts in [Console → Billing](https://www.sandbase.ai/console/billing)
-- Monitor usage in [Console → Usage](https://www.sandbase.ai/console/usage)
+- Set an optional spending limit when creating or editing a standard key under [Developer → API Keys](https://www.sandbase.ai/console/keys).
+- Monitor requests and cost under **Console → Activities → Usage**.
+- Review balance and credit transactions on the [Console Credits](https://www.sandbase.ai/console/billing) page.
 
 ---
 

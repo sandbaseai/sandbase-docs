@@ -13,7 +13,7 @@ description: Everything an AI agent needs to discover and use SandBase API — o
 
 ## What is SandBase?
 
-SandBase is an AI agent infrastructure platform. One API key gives you access to **2,000+ models and APIs** across LLM, image, video, audio, embedding, search, and data, plus agent workflows.
+SandBase is an AI agent infrastructure platform. One API key can access enabled Models and APIs across language, image, video, audio, embeddings, search, and data, plus Agent workflows. Discover the current catalog instead of relying on a fixed count.
 
 ## API Base URL
 
@@ -47,12 +47,12 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `POST` | `/v1/chat/completions` | OpenAI-compatible chat (LLM, vision, tools, streaming) |
+| `POST` | `/v1/chat/completions` | OpenAI-compatible chat; optional capabilities depend on the selected model |
 | `POST` | `/v1/messages` | Anthropic-compatible messages API |
 | `POST` | `/v1/embeddings` | Generate text embeddings |
-| `POST` | `/v1/run` | Unified generation (image, video, audio, any async task) |
+| `POST` | `/v1/run` | Submit a model generation using its model-specific schema |
 | `GET` | `/v1/run/{id}` | Poll async generation status and retrieve results |
-| `GET` | `/v1/models` | List all available models |
+| `GET` | `/v1/models` | List enabled logical models; defaults to the LLM type |
 | `GET` | `/v1/models/{id_or_name}` | Get model details, schema, capabilities, and pricing |
 | `GET` | `/v1/tasks/{id}/cost` | Get task cost and usage |
 
@@ -72,13 +72,13 @@ Beyond the core generation endpoints, SandBase provides APIs for agent lifecycle
 
 Pay per use. Pricing is model-specific and may change independently of this page:
 
-- **LLM**: `input_tokens × prompt_price + output_tokens × completion_price`
-- **Image/Video/Audio**: flat `base_price` per generation
-- **Cached tokens**: use the selected model's current `model_card` for cache pricing and multipliers
+- **Model pricing**: read the selected model's current formula and units from `model_card`
+- **Token pricing**: can include input, output, cache, or reasoning components when declared by that model
+- **Media and other operations**: can use per-request, duration, resolution, or other model-specific units
 
 Discover the current model ID with `GET /v1/models`, then inspect `GET /v1/models/{id_or_name}` before sending a request. Do not assume that pricing or cache discounts are shared across providers.
 
-Check cost after any generation:
+When an operation returns a task ID, inspect its recorded cost:
 
 ```bash
 curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
