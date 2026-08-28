@@ -13,8 +13,8 @@ apiReference:
     - title: Request body
       fields:
         - { name: model, type: string, required: true, description: Enabled logical model or API capability identifier. }
-        - { name: input, type: object, required: false, description: Capability-specific input fields. Send the fields documented by the selected capability. }
-        - { name: mode, type: string, required: false, description: Optional execution mode hint when supported by the selected capability. }
+        - { name: mode, type: 'auto | sync | async | stream', required: false, description: 'Execution mode hint. `auto` uses the selected capability''s configured default; other values require capability support.' }
+        - { name: stream, type: boolean, required: false, description: 'Request streaming output when the selected capability supports it. Equivalent to `mode: stream`.' }
         - { name: webhook_url, type: string, required: false, description: Optional HTTPS callback for supported asynchronous image, video, audio, or API tasks. }
   examples:
     - label: cURL
@@ -40,4 +40,4 @@ apiReference:
 
 Synchronous capabilities return a completed response in the original request. Asynchronous capabilities return `202 Accepted` with an opaque `id`; poll [Get an asynchronous run](./run-get) until the status is terminal.
 
-Capability-specific request fields and output shapes are defined on the selected model or API operation page. Do not assume that every capability accepts the same parameters.
+Capability-specific request fields and output shapes are defined on the selected model or API operation page. Send those fields at the top level of the JSON body; do not wrap them in an `input` object. Do not assume that every capability accepts the same parameters.
