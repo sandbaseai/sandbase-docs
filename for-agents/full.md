@@ -34,7 +34,7 @@ Base URL: `https://api.sandbase.ai/v1`
 > **run vs session**: "Run" (`/v1/run`) is for model generation tasks. "Session" (`/v1/sessions`) is for persistent Agent interactions. Run IDs are opaque and must not be parsed. A Schedule trigger additionally creates a `drun_*` DeploymentRun.
 >
 > **task vs run**: A "run" or "session" is the request you make; a "task" is a billable execution record. Use
-> `GET /v1/tasks/{id}/cost` when an operation returns a task ID. Not every API operation creates a task.
+> `GET /v1/tasks/{task_id}/cost` when an operation returns a task ID. Not every API operation creates a task.
 
 ---
 
@@ -675,8 +675,8 @@ curl https://api.sandbase.ai/v1/skills \
 - Read the selected model's current pricing formula and units from its `model_card`.
 - Token-priced models can include input, output, cache, or reasoning components when declared.
 - Media and other models can use per-request, duration, resolution, or other model-specific units.
-- Check cost after generation: `GET /v1/tasks/{id}/cost`
-- When a billable operation returns a task ID, use it with `GET /v1/tasks/{id}/cost`
+- Check cost after generation: `GET /v1/tasks/{task_id}/cost`
+- When a billable operation returns a task ID, use it with `GET /v1/tasks/{task_id}/cost`
 
 ### Budget control
 
