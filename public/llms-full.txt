@@ -273,7 +273,7 @@ Response:
 
 Invoke a Service by creating or continuing a Session and sending one message.
 
-Endpoint invocation accepts an optional session_id. When omitted, SandBase creates a new persistent Session. A supplied Session must come from the same Service and match its current Agent-version binding. Invocation does not create a separate public Run identity.
+Service invocation accepts an optional session_id. When omitted, SandBase creates a new persistent Session. A supplied Session must come from the same Service and match its current Agent-version binding. Invocation does not create a separate public Run identity.
 
 Request:
 ```
