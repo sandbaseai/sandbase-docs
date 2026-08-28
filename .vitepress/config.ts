@@ -162,7 +162,12 @@ function modelPageHead(pageData: any) {
 
 function genericPageHead(pageData: any) {
   if (!pageData.relativePath || pageData.isNotFound) return []
-  const canonicalUrl = absoluteDocsUrl(pageData.relativePath)
+  const configuredCanonical = pageData.frontmatter?.canonical
+  const canonicalUrl = configuredCanonical
+    ? new URL(String(configuredCanonical), siteOrigin).toString()
+    : absoluteDocsUrl(pageData.relativePath)
+  const robots = pageData.frontmatter?.robots
+    || 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1'
   const title = pageData.title ? `${pageData.title} | SandBase Docs` : 'SandBase Docs'
   const description = pageData.description || 'SandBase documentation for Models, APIs, Agents, Setup, Services, Schedules, and Sessions.'
   const techArticleJsonLd = {
@@ -183,7 +188,7 @@ function genericPageHead(pageData: any) {
     ['link', { rel: 'canonical', href: canonicalUrl }],
     ['link', { rel: 'alternate', hreflang: 'en', href: canonicalUrl }],
     ['link', { rel: 'alternate', hreflang: 'x-default', href: canonicalUrl }],
-    ['meta', { name: 'robots', content: 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1' }],
+    ['meta', { name: 'robots', content: robots }],
     ['meta', { property: 'og:title', content: title }],
     ['meta', { property: 'og:description', content: description }],
     ['meta', { property: 'og:url', content: canonicalUrl }],
@@ -199,6 +204,9 @@ export default defineConfig({
   base: docsBase,
   // Keep internal/withdrawn API material in the repository without publishing it.
   srcExclude: [
+    'README.md',
+    'CONTRIBUTING.md',
+    'DEPLOYMENT.md',
     '_archived/**',
     // This legacy guide uses dashboard-only /default/v1 routes and an unpublished embed API.
     'guides/site-agent-integration.md',
@@ -216,10 +224,12 @@ export default defineConfig({
 
   sitemap: {
     hostname: siteOrigin,
-    transformItems: (items) => items.map((item) => ({
-      ...item,
-      url: `${docsBase}${item.url.replace(/^\//, '')}`,
-    })),
+    transformItems: (items) => items
+      .filter((item) => !['agents/deployments', 'setup/cli'].includes(item.url.replace(/^\//, '')))
+      .map((item) => ({
+        ...item,
+        url: `${docsBase}${item.url.replace(/^\//, '')}`,
+      })),
   },
 
   head: [

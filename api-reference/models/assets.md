@@ -1,4 +1,9 @@
-# Assets API
+---
+title: Media Assets API
+description: Register reusable media Assets and retrieve their current metadata and download URLs.
+---
+
+# Media Assets API
 
 Register media file URLs into the platform asset library and get an `asset_url` for use in video generation requests.
 
@@ -6,8 +11,8 @@ Register media file URLs into the platform asset library and get an `asset_url` 
 
 | Method | Path | Description |
 |--------|------|-------------|
-| POST | /v1/assets | Register an asset |
-| GET | /v1/assets/:id | Get a signed download URL for an asset |
+| `POST` | `/v1/assets` | Register an Asset |
+| `GET` | `/v1/assets/{id}` | Get Asset metadata and a current download URL |
 
 ## POST /v1/assets
 
@@ -17,7 +22,7 @@ Registers a publicly accessible file URL into the asset library and returns an `
 
 ```http
 POST /v1/assets
-Authorization: Bearer sk-xxx
+Authorization: Bearer $SANDBASE_API_KEY
 Content-Type: application/json
 ```
 
@@ -77,7 +82,7 @@ Once registered, pass the `asset_url` to an input field that accepts an Asset re
 
 ---
 
-## GET /v1/assets/:id
+## GET /v1/assets/{id}
 
 Retrieves a signed download URL for a registered asset by its external ID. Used for previewing or downloading the underlying file.
 
@@ -85,7 +90,7 @@ Retrieves a signed download URL for a registered asset by its external ID. Used 
 
 ```http
 GET /v1/assets/asset-20260710150403-hx4hf
-Authorization: Bearer sk-xxx
+Authorization: Bearer $SANDBASE_API_KEY
 ```
 
 | Parameter | Location | Description |
@@ -110,7 +115,7 @@ Authorization: Bearer sk-xxx
 | Field | Description |
 |-------|--------------|
 | `asset_url` | Reference address for video generation (permanent) |
-| `status` | Asset status: `Active` / `Processing` / `Failed` |
+| `status` | Provider-reported Asset lifecycle status. Treat it as an open string. |
 | `download_url` | Provider-returned download URL; it can be empty while the Asset is not ready |
 
 ### Errors

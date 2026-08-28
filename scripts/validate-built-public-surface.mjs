@@ -8,6 +8,22 @@ const dist = path.join(root, '.vitepress', 'dist')
 
 assert.ok(existsSync(dist), 'Built docs directory is missing; run npm run build first')
 
+for (const retiredPage of ['README.html', 'CONTRIBUTING.html', 'DEPLOYMENT.html', 'agents/endpoint-quickstart.html']) {
+  assert.ok(!existsSync(path.join(dist, retiredPage)), `${retiredPage} must not be included in the public docs build`)
+}
+
+const sitemap = readFileSync(path.join(dist, 'sitemap.xml'), 'utf8')
+for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/setup/cli', '/docs/agents/deployments']) {
+  assert.ok(!sitemap.includes(`<loc>https://www.sandbase.ai${excludedUrl}</loc>`), `${excludedUrl} must not be indexed in the sitemap`)
+}
+
+const setupAlias = readFileSync(path.join(dist, 'setup', 'cli.html'), 'utf8')
+assert.match(setupAlias, /<meta name="robots" content="noindex,follow">/, 'Legacy CLI setup alias must be noindex')
+assert.match(setupAlias, /<link rel="canonical" href="https:\/\/www\.sandbase\.ai\/docs\/setup\/">/, 'Legacy CLI setup alias must canonicalize to the unified setup page')
+
+const deploymentAlias = readFileSync(path.join(dist, 'agents', 'deployments.html'), 'utf8')
+assert.match(deploymentAlias, /<meta name="robots" content="noindex,follow">/, 'Legacy deployment guide must be noindex')
+
 const forbidden = [
   [/\/v1\/generations(?:\/|\b)/i, 'withdrawn generation API'],
   [/\/v1\/blog\/assets(?:\/|\b)/i, 'internal Blog publishing storage API'],
@@ -25,6 +41,7 @@ const forbidden = [
 ]
 
 let inspected = 0
+let htmlPages = 0
 
 function inspect(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -37,6 +54,19 @@ function inspect(directory) {
     const content = readFileSync(filename, 'utf8')
     const relative = path.relative(dist, filename)
     inspected += 1
+    if (entry.name.endsWith('.html') && relative !== '404.html') {
+      htmlPages += 1
+      for (const [pattern, label] of [
+        [/<title>[^<]+<\/title>/g, 'document title'],
+        [/<meta name="description" content="[^"]+">/g, 'meta description'],
+        [/<link rel="canonical" href="[^"]+">/g, 'canonical URL'],
+        [/<meta name="robots" content="[^"]+">/g, 'robots directive'],
+        [/<meta property="og:title" content="[^"]+">/g, 'Open Graph title'],
+        [/<meta property="og:description" content="[^"]+">/g, 'Open Graph description'],
+      ]) {
+        assert.equal(content.match(pattern)?.length ?? 0, 1, `${relative} must contain exactly one ${label}`)
+      }
+    }
     for (const [pattern, label] of forbidden) {
       assert.doesNotMatch(content, pattern, `${relative} must not publish the hidden ${label}`)
     }
@@ -45,4 +75,5 @@ function inspect(directory) {
 
 inspect(dist)
 assert.ok(inspected > 0, 'Built docs directory did not contain inspectable output')
-console.log(`built public surface: ok (${inspected} files)`)
+assert.ok(htmlPages > 0, 'Built docs directory did not contain indexable HTML pages')
+console.log(`built public surface: ok (${inspected} files, ${htmlPages} HTML pages)`)

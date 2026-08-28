@@ -1,10 +1,8 @@
 ---
 title: Connect AI tools
 description: This guide has moved to the unified Connect AI tools page.
-head:
-  - - link
-    - rel: canonical
-      href: https://www.sandbase.ai/docs/setup/
+canonical: /docs/setup/
+robots: noindex,follow
 ---
 
 # This guide has moved

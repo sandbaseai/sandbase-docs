@@ -1,6 +1,7 @@
 ---
 title: Services and Schedules
 description: Compatibility guide linking the current Services and Schedules documentation.
+robots: noindex,follow
 ---
 
 # Services and Schedules
