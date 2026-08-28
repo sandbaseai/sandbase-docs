@@ -22,6 +22,7 @@ const catalogOverviews = [
   readFileSync(new URL('../model-api-reference/image-generation.md', import.meta.url), 'utf8'),
   readFileSync(new URL('../model-api-reference/video-generation.md', import.meta.url), 'utf8'),
   readFileSync(new URL('../model-api-reference/audio-generation.md', import.meta.url), 'utf8'),
+  readFileSync(new URL('../model-api-reference/platform-apis/index.md', import.meta.url), 'utf8'),
 ]
 const root = fileURLToPath(new URL('..', import.meta.url))
 
@@ -60,6 +61,7 @@ assert.doesNotMatch(readme, /deepseek\/deepseek-v3\b/i, 'README must not recomme
 assert.doesNotMatch(readme, /API Reference[^\n]*webhooks/i, 'README must not advertise the hidden Webhooks page')
 for (const overview of catalogOverviews) {
   assert.doesNotMatch(overview, /currently publishes API reference pages for \d/i, 'Catalog overviews must not hard-code time-sensitive counts')
+  assert.doesNotMatch(overview, /Browse \d[\d,]* SandBase API operations across \d+ platforms/i, 'Catalog overviews must not hard-code platform operation counts')
 }
 assert.match(sidebar, /text: 'Models'[\s\S]*?List Models[\s\S]*?Get Model/, 'Model API navigation must expose model discovery operations')
 

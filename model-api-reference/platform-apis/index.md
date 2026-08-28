@@ -1,6 +1,6 @@
 ---
 title: APIs
-description: Browse 1091 SandBase API operations across 31 platforms.
+description: Browse SandBase API operations by platform and open an operation page for its exact request format.
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"
