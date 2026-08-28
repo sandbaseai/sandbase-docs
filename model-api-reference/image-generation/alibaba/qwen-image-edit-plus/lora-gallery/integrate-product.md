@@ -1,5 +1,5 @@
 ---
-title: "Qwen Image Edit Plus Lora Gallery API Reference"
+title: "Qwen Image Edit Plus Lora… — Alibaba Integrate Product API"
 description: "Qwen Image Edit Plus Lora Gallery API reference for SandBase. Use model alibaba/qwen-image-edit-plus/lora-gallery/integrate-product with /v1/run; view request fields,..."
 aside: false
 outline: false

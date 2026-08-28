@@ -1,5 +1,5 @@
 ---
-title: "VEED Lipsync API Reference"
+title: "VEED… — Veed Lipsync API"
 description: "VEED Lipsync API reference for SandBase. Use model veed/lipsync with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Veo 3.1 Fast API Reference"
+title: "Veo 3.1… — Google Fast API"
 description: "Veo 3.1 Fast API reference for SandBase. Use model google/veo3.1/fast with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

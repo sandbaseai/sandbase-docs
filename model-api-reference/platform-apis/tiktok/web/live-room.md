@@ -1,5 +1,5 @@
 ---
-title: "Extract live room danmaku API Reference"
+title: "Extract live room… — Tiktok Live Room API"
 description: "Extract live room danmaku API reference for SandBase. Use model tiktok/web/live-room with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

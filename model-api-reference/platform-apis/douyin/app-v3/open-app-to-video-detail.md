@@ -1,5 +1,5 @@
 ---
-title: "Generate Douyin share link, call Douyin APP, and jump to… API Ref"
+title: "Generate Douyin share… — Douyin Open App To Video Detail API"
 description: "Generate Douyin share link, call Douyin APP, and jump to the specified video details page API reference for SandBase. Use model douyin/app-v3/open-app-to-video-detail..."
 aside: false
 outline: false

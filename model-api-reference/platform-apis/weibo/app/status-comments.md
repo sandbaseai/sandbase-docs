@@ -1,5 +1,5 @@
 ---
-title: "Get post comments API Reference"
+title: "Get post… — Weibo Status Comments API"
 description: "Get post comments API reference for SandBase. Use model weibo/app/status-comments with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "FLUX.1 Kontext [max] API Reference"
+title: "FLUX.1 Kontext — Bfl Multi API"
 description: "FLUX.1 Kontext [max] API reference for SandBase. Use model bfl/flux-2/kontext/max/multi with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

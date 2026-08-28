@@ -1,5 +1,5 @@
 ---
-title: "Get user followers API Reference"
+title: "Get user… — Tiktok User Fans API"
 description: "Get user followers API reference for SandBase. Use model tiktok/web/user-fans with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

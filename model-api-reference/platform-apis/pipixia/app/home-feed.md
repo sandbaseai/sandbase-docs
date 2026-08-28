@@ -1,5 +1,5 @@
 ---
-title: "Get home feed API Reference"
+title: "Get home… — Pipixia Home Feed API"
 description: "Get home feed API reference for SandBase. Use model pipixia/app/home-feed with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

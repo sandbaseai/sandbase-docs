@@ -1,5 +1,5 @@
 ---
-title: "Flux 2 Lora Gallery API Reference"
+title: "Flux 2 Lora… — Bfl Satellite View Style API"
 description: "Flux 2 Lora Gallery API reference for SandBase. Use model bfl/flux-2/lora-gallery/satellite-view-style with /v1/run; view request fields, examples, capabilities, and r..."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Generate ttwid API Reference"
+title: "Generate… — Douyin Generate Ttwid API"
 description: "Generate ttwid API reference for SandBase. Use model douyin/web/generate-ttwid with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

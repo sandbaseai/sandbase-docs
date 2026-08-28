@@ -1,5 +1,5 @@
 ---
-title: "Get user fans list API Reference"
+title: "Get user fans… — Douyin Web User Fans List API"
 description: "Get user fans list API reference for SandBase. Use model douyin/web/user-fans-list with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

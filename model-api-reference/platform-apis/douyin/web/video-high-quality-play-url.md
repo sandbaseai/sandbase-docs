@@ -1,5 +1,5 @@
 ---
-title: "Get the highest quality play URL of the video API Reference"
+title: "Get the highest… — Douyin Web Video High Quality Play Url API"
 description: "Get the highest quality play URL of the video API reference for SandBase. Use model douyin/web/video-high-quality-play-url with /v1/run; view request fields, examples,..."
 aside: false
 outline: false

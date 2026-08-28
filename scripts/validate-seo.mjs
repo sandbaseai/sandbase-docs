@@ -16,6 +16,8 @@ const excluded = [
 let inspected = 0
 const publicTitles = new Map()
 const publicDescriptions = new Map()
+const generatedTitles = new Map()
+const generatedDescriptions = new Map()
 
 function registerUnique(map, value, filename, label) {
   const previous = map.get(value)
@@ -50,9 +52,21 @@ function inspect(directory) {
       if (frontmatter.canonical != null) {
         assert.ok(String(frontmatter.canonical).startsWith('/docs/'), `${filename} canonical URL must start with /docs/`)
       }
-    } else if (!filename.startsWith('model-api-reference/')) {
-      registerUnique(publicTitles, String(frontmatter.title).trim(), filename, 'an indexable title')
-      registerUnique(publicDescriptions, String(frontmatter.description).trim(), filename, 'an indexable description')
+    } else {
+      // Generated model pages intentionally use compact, model-specific descriptions;
+      // require those to remain unique as well so duplicate operation pages do not
+      // collapse into indistinguishable search results.
+      const titleMap = filename.startsWith('model-api-reference/') ? generatedTitles : publicTitles
+      const descriptionMap = filename.startsWith('model-api-reference/') ? generatedDescriptions : publicDescriptions
+      // Keep generated model pages distinct from one another, while allowing a
+      // category landing page to share its concise heading with the hand-written
+      // API guide (for example, "Image Generation").
+      if (filename.startsWith('model-api-reference/')) {
+        registerUnique(titleMap, String(frontmatter.title).trim(), filename, 'an indexable generated title')
+      } else {
+        registerUnique(titleMap, String(frontmatter.title).trim(), filename, 'an indexable title')
+      }
+      registerUnique(descriptionMap, String(frontmatter.description).trim(), filename, 'an indexable description')
     }
     inspected += 1
   }

@@ -1,5 +1,5 @@
 ---
-title: "Trellis 2 API Reference"
+title: "Trellis… — Trellis Trellis 2 API"
 description: "Trellis 2 API reference for SandBase. Use model trellis/trellis-2 with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

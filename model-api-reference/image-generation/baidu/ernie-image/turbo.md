@@ -1,5 +1,5 @@
 ---
-title: "Ernie Image API Reference"
+title: "Ernie… — Baidu Turbo API"
 description: "Ernie Image API reference for SandBase. Use model baidu/ernie-image/turbo with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

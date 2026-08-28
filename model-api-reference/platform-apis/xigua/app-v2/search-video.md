@@ -1,5 +1,5 @@
 ---
-title: "Search video API Reference"
+title: "Search… — Xigua Search Video API"
 description: "Search video API reference for SandBase. Use model xigua/app-v2/search-video with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

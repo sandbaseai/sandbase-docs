@@ -1,5 +1,5 @@
 ---
-title: "Sam 3 1 API Reference"
+title: "Sam 3… — Meta Image Rle API"
 description: "Sam 3 1 API reference for SandBase. Use model meta/sam-3-1/image-rle with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

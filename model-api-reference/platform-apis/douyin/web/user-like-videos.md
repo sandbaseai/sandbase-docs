@@ -1,5 +1,5 @@
 ---
-title: "Get user like video data API Reference"
+title: "Get user like video… — Douyin Web User Like Videos API"
 description: "Get user like video data API reference for SandBase. Use model douyin/web/user-like-videos with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

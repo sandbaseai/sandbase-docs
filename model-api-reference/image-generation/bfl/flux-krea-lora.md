@@ -1,5 +1,5 @@
 ---
-title: "FLUX.1 Krea [dev] with LoRAs API Reference"
+title: "FLUX.1 Krea [dev] with… — Bfl Flux Krea Lora API"
 description: "FLUX.1 Krea [dev] with LoRAs API reference for SandBase. Use model bfl/flux-krea-lora with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

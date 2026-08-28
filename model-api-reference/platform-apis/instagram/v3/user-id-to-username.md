@@ -1,5 +1,5 @@
 ---
-title: "Get user info by user ID API Reference"
+title: "Get user info by user… — Instagram V3 User Id To Username API"
 description: "Get user info by user ID API reference for SandBase. Use model instagram/v3/user-id-to-username with /v1/run; view request fields, examples, capabilities, and response..."
 aside: false
 outline: false

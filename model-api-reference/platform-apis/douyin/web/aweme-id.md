@@ -1,5 +1,5 @@
 ---
-title: "Extract single video id API Reference"
+title: "Extract single video… — Douyin Aweme Id API"
 description: "Extract single video id API reference for SandBase. Use model douyin/web/aweme-id with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

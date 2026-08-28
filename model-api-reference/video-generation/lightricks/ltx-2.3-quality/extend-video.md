@@ -1,5 +1,5 @@
 ---
-title: "Ltx 2.3 Quality API Reference"
+title: "Ltx 2.3… — Lightricks Extend Video API"
 description: "Ltx 2.3 Quality API reference for SandBase. Use model lightricks/ltx-2.3-quality/extend-video with /v1/run; view request fields, examples, capabilities, and response f..."
 aside: false
 outline: false

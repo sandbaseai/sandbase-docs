@@ -1,5 +1,5 @@
 ---
-title: "Get user reposts API Reference"
+title: "Get user… — Tiktok User Repost API"
 description: "Get user reposts API reference for SandBase. Use model tiktok/web/user-repost with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

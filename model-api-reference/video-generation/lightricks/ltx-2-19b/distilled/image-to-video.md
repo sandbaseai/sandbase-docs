@@ -1,5 +1,5 @@
 ---
-title: "LTX-2 19B Distilled API Reference"
+title: "LTX-2 19B… — Lightricks Image To Video API"
 description: "LTX-2 19B Distilled API reference for SandBase. Use model lightricks/ltx-2-19b/distilled/image-to-video with /v1/run; view request fields, examples, capabilities, and..."
 aside: false
 outline: false

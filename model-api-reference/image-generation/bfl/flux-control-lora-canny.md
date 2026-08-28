@@ -1,5 +1,5 @@
 ---
-title: "FLUX.1 [dev] Control LoRA Canny API Reference"
+title: "FLUX.1 [dev] Control LoRA… — Bfl Flux Control Lora Canny API"
 description: "FLUX.1 [dev] Control LoRA Canny API reference for SandBase. Use model bfl/flux-control-lora-canny with /v1/run; view request fields, examples, capabilities, and respon..."
 aside: false
 outline: false

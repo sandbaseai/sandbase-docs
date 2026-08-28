@@ -1,5 +1,5 @@
 ---
-title: "Z-Image Turbo Seamless Tiling API Reference"
+title: "Z-Image Turbo Seamless… — Alibaba Lora API"
 description: "Z-Image Turbo Seamless Tiling API reference for SandBase. Use model alibaba/z-image/turbo/tiling/lora with /v1/run; view request fields, examples, capabilities, and re..."
 aside: false
 outline: false

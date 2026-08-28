@@ -1,5 +1,5 @@
 ---
-title: "LTX-2 19B API Reference"
+title: "LTX-2… — Lightricks Extend Video API"
 description: "LTX-2 19B API reference for SandBase. Use model lightricks/ltx-2-19b/extend-video with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Get the statistical data of the Post according to the vi… API Ref"
+title: "Get the statistical data… — Douyin Multi Video Statistics API"
 description: "Get multi-video statistics by ID in SandBase. Use douyin/app-v3/multi-video-statistics with /v1/run; view fields, examples, capabilities, and response format."
 aside: false
 outline: false

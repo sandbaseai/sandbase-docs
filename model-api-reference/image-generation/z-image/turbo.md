@@ -1,5 +1,5 @@
 ---
-title: "Z-Image Turbo API Reference"
+title: "Z-Image… — Z Image Turbo API"
 description: "Z-Image Turbo API reference for SandBase. Use model z-image/turbo with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

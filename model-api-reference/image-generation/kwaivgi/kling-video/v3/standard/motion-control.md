@@ -1,5 +1,5 @@
 ---
-title: "Kling Video V3 Standard API Reference"
+title: "Kling Video V3 — V3 Standard Motion Control API"
 description: "Kling Video V3 Standard API reference for SandBase. Use model kwaivgi/kling-video/v3/standard/motion-control with /v1/run; view request fields, examples, capabilities,..."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Get post detail API Reference"
+title: "Get post… — Youtube Post Detail API"
 description: "Get post detail API reference for SandBase. Use model youtube/web-v2/post-detail with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

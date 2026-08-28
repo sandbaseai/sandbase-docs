@@ -1,5 +1,5 @@
 ---
-title: "Get information of specified user API Reference"
+title: "Get information of specified… — Tiktok User Profile API"
 description: "Get information of specified user API reference for SandBase. Use model tiktok/app-v3/user-profile with /v1/run; view request fields, examples, capabilities, and respo..."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Kling Video O3 Standard API Reference"
+title: "Kling Video O3 — O3 Standard Video To Video API"
 description: "Kling Video O3 Standard API reference for SandBase. Use model kwaivgi/kling-video/o3/standard/video-to-video with /v1/run; view request fields, examples, capabilities,..."
 aside: false
 outline: false

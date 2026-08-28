@@ -1,5 +1,5 @@
 ---
-title: "Get information of specified video API Reference"
+title: "Get information of specified… — Toutiao Web Video Info API"
 description: "Get information of specified video API reference for SandBase. Use model toutiao/web/video-info with /v1/run; view request fields, examples, capabilities, and response..."
 aside: false
 outline: false

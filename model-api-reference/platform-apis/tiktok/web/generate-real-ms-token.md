@@ -1,5 +1,5 @@
 ---
-title: "Generate real msToken API Reference"
+title: "Generate real… — Tiktok Generate Real Ms Token API"
 description: "Generate real msToken API reference for SandBase. Use model tiktok/web/generate-real-ms-token with /v1/run; view request fields, examples, capabilities, and response f..."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Get single video data by sharing link API Reference"
+title: "Get single video data… — Douyin Web One Video By Share Url API"
 description: "Get single video data by sharing link API reference for SandBase. Use model douyin/web/one-video-by-share-url with /v1/run; view request fields, examples, capabilities..."
 aside: false
 outline: false

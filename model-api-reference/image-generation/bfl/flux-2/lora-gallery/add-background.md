@@ -1,5 +1,5 @@
 ---
-title: "Flux 2 Lora Gallery API Reference"
+title: "Flux 2 Lora… — Bfl Add Background API"
 description: "Flux 2 Lora Gallery API reference for SandBase. Use model bfl/flux-2/lora-gallery/add-background with /v1/run; view request fields, examples, capabilities, and respons..."
 aside: false
 outline: false

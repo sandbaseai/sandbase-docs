@@ -1,5 +1,5 @@
 ---
-title: "LTX Video (preview) API Reference"
+title: "LTX Video… — Lightricks Ltx Video API"
 description: "LTX Video (preview) API reference for SandBase. Use model lightricks/ltx-video with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

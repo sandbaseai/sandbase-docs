@@ -1,5 +1,5 @@
 ---
-title: "Get user videos API Reference"
+title: "Get user… — Weibo User Videos API"
 description: "Get user videos API reference for SandBase. Use model weibo/app/user-videos with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Get home feed API Reference"
+title: "Get home… — Bilibili Home Feed API"
 description: "Get home feed API reference for SandBase. Use model bilibili/app/home-feed with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

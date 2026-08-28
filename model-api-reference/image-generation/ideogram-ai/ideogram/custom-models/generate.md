@@ -1,5 +1,5 @@
 ---
-title: "Ideogram API Reference"
+title: "Ideogram… — Ideogram Ai Generate API"
 description: "Ideogram API reference for SandBase. Use model ideogram-ai/ideogram/custom-models/generate with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

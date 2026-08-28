@@ -1,5 +1,5 @@
 ---
-title: "Glm Image API Reference"
+title: "Glm… — Zhipu Edit API"
 description: "Glm Image API reference for SandBase. Use model zhipu/glm-image/edit with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

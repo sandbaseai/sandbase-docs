@@ -1,5 +1,5 @@
 ---
-title: "PATINA API Reference"
+title: "PATINA… — Patina Material API"
 description: "PATINA API reference for SandBase. Use model patina/material with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

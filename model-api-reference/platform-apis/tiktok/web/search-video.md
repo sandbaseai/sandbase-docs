@@ -1,5 +1,5 @@
 ---
-title: "Search video API Reference"
+title: "Search… — Tiktok Search Video API"
 description: "Search video API reference for SandBase. Use model tiktok/web/search-video with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

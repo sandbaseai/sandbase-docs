@@ -1,5 +1,5 @@
 ---
-title: "Grok Imagine Video API Reference"
+title: "Grok Imagine… — Xai Text To Video API"
 description: "Grok Imagine Video API reference for SandBase. Use model xai/grok-imagine-video/text-to-video with /v1/run; view request fields, examples, capabilities, and response f..."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Get channel URL from channel ID API Reference"
+title: "Get channel URL from channel… — Youtube Channel Url API"
 description: "Get channel URL from channel ID API reference for SandBase. Use model youtube/web/channel-url with /v1/run; view request fields, examples, capabilities, and response f..."
 aside: false
 outline: false

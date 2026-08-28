@@ -1,5 +1,5 @@
 ---
-title: "Get user homepage video data API Reference"
+title: "Get user homepage video… — Douyin User Post Videos API"
 description: "Get user homepage video data API reference for SandBase. Use model douyin/app-v3/user-post-videos with /v1/run; view request fields, examples, capabilities, and respon..."
 aside: false
 outline: false

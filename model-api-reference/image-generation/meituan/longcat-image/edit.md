@@ -1,5 +1,5 @@
 ---
-title: "Longcat Image API Reference"
+title: "Longcat… — Meituan Edit API"
 description: "Longcat Image API reference for SandBase. Use model meituan/longcat-image/edit with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

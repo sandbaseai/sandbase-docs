@@ -1,5 +1,5 @@
 ---
-title: "Hunyuan3D API Reference"
+title: "Hunyuan3D… — Tencent Turbo API"
 description: "Hunyuan3D API reference for SandBase. Use model tencent/hunyuan3d/v2/turbo with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

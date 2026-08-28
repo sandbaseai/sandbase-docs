@@ -1,5 +1,5 @@
 ---
-title: "Comprehensive search API Reference"
+title: "Comprehensive… — Kuaishou Search Comprehensive API"
 description: "Comprehensive search API reference for SandBase. Use model kuaishou/app/search-comprehensive with /v1/run; view request fields, examples, capabilities, and response fo..."
 aside: false
 outline: false

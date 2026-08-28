@@ -1,5 +1,5 @@
 ---
-title: "Mirelo SFX1.6 API Reference"
+title: "Mirelo… — Mirelo Extend Audio API"
 description: "Mirelo SFX1.6 API reference for SandBase. Use model mirelo/sfx1.6/extend-audio with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

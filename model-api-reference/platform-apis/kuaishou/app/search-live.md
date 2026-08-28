@@ -1,5 +1,5 @@
 ---
-title: "Search live API Reference"
+title: "Search… — Kuaishou Search Live API"
 description: "Search live API reference for SandBase. Use model kuaishou/app/search-live with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

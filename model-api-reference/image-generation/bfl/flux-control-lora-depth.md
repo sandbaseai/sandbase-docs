@@ -1,5 +1,5 @@
 ---
-title: "FLUX.1 [dev] Control LoRA Depth API Reference"
+title: "FLUX.1 [dev] Control LoRA… — Bfl Flux Control Lora Depth API"
 description: "FLUX.1 [dev] Control LoRA Depth API reference for SandBase. Use model bfl/flux-control-lora-depth with /v1/run; view request fields, examples, capabilities, and respon..."
 aside: false
 outline: false

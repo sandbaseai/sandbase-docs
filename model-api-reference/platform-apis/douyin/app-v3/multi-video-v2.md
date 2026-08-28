@@ -1,5 +1,5 @@
 ---
-title: "Batch Get Video Information V2 API Reference"
+title: "Batch Get Video Information… — Douyin Multi Video V2 API"
 description: "Batch Get Video Information V2 API reference for SandBase. Use model douyin/app-v3/multi-video-v2 with /v1/run; view request fields, examples, capabilities, and respon..."
 aside: false
 outline: false

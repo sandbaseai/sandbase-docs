@@ -1,5 +1,5 @@
 ---
-title: "Get details of specified music API Reference"
+title: "Get details of specified… — Tiktok Music Detail API"
 description: "Get details of specified music API reference for SandBase. Use model tiktok/app-v3/music-detail with /v1/run; view request fields, examples, capabilities, and response..."
 aside: false
 outline: false

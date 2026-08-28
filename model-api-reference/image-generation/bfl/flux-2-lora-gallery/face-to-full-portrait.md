@@ -1,5 +1,5 @@
 ---
-title: "Flux 2 Lora Gallery API Reference"
+title: "Flux 2 Lora… — Bfl Face To Full Portrait API"
 description: "Flux 2 Lora Gallery API reference for SandBase. Use model bfl/flux-2-lora-gallery/face-to-full-portrait with /v1/run; view request fields, examples, capabilities, and..."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Get video information V2 API Reference"
+title: "Get video information… — Youtube Video Info V2 API"
 description: "Get video information V2 API reference for SandBase. Use model youtube/web/video-info-v2 with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

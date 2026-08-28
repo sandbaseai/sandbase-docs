@@ -1,5 +1,5 @@
 ---
-title: "Flux Kontext Lora API Reference"
+title: "Flux Kontext… — Bfl Text To Image API"
 description: "Flux Kontext Lora API reference for SandBase. Use model bfl/flux-kontext-lora/text-to-image with /v1/run; view request fields, examples, capabilities, and response for..."
 aside: false
 outline: false

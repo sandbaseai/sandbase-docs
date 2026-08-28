@@ -1,5 +1,5 @@
 ---
-title: "SeedVR2 API Reference"
+title: "SeedVR2… — Bytedance Video API"
 description: "SeedVR2 API reference for SandBase. Use model bytedance/seedvr/upscale/video with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

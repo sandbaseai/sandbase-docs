@@ -1,5 +1,5 @@
 ---
-title: "Get user fans list API Reference"
+title: "Get user fans… — Weibo User Fans API"
 description: "Get user fans list API reference for SandBase. Use model weibo/web-v2/user-fans with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

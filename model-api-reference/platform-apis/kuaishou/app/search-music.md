@@ -1,5 +1,5 @@
 ---
-title: "Search music API Reference"
+title: "Search… — Kuaishou Search Music API"
 description: "Search music API reference for SandBase. Use model kuaishou/app/search-music with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

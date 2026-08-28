@@ -1,5 +1,5 @@
 ---
-title: "Search users API Reference"
+title: "Search… — Instagram Search Users API"
 description: "Search users API reference for SandBase. Use model instagram/v2/search-users with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

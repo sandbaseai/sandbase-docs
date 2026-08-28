@@ -1,5 +1,5 @@
 ---
-title: "Get comment replies data of specified video API Reference"
+title: "Get comment replies… — Douyin Web Video Comment Replies API"
 description: "Get comment replies data of specified video API reference for SandBase. Use model douyin/web/video-comment-replies with /v1/run; view request fields, examples, capabil..."
 aside: false
 outline: false

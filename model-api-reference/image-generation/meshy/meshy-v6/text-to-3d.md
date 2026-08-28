@@ -1,5 +1,5 @@
 ---
-title: "Meshy 6 API Reference"
+title: "Meshy… — Meshy Text To 3d API"
 description: "Meshy 6 API reference for SandBase. Use model meshy/meshy-v6/text-to-3d with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

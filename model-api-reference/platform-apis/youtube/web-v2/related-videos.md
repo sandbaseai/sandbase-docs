@@ -1,5 +1,5 @@
 ---
-title: "Get related videos API Reference"
+title: "Get related… — Youtube Related Videos API"
 description: "Get related videos API reference for SandBase. Use model youtube/web-v2/related-videos with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

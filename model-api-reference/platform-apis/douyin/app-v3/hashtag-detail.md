@@ -1,5 +1,5 @@
 ---
-title: "Get details of specified hashtag API Reference"
+title: "Get details of specified… — Douyin Hashtag Detail API"
 description: "Get details of specified hashtag API reference for SandBase. Use model douyin/app-v3/hashtag-detail with /v1/run; view request fields, examples, capabilities, and resp..."
 aside: false
 outline: false

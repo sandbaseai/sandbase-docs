@@ -1,5 +1,5 @@
 ---
-title: "Meshy 6 Preview API Reference"
+title: "Meshy 6… — Meshy Meshy V6 Preview API"
 description: "Meshy 6 Preview API reference for SandBase. Use model meshy/meshy-v6-preview with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

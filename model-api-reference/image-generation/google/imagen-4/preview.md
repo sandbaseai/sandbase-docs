@@ -1,5 +1,5 @@
 ---
-title: "Imagen 4 API Reference"
+title: "Imagen… — Google Preview API"
 description: "Imagen 4 API reference for SandBase. Use model google/imagen-4/preview with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

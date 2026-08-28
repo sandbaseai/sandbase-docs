@@ -1,5 +1,5 @@
 ---
-title: "LTX-2.3 22B API Reference"
+title: "LTX-2.3… — Lightricks Text To Video Lora API"
 description: "LTX-2.3 22B API reference for SandBase. Use model lightricks/ltx-2.3-22b/text-to-video/lora with /v1/run; view request fields, examples, capabilities, and response for..."
 aside: false
 outline: false

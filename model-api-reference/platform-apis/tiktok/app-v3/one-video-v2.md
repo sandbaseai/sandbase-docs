@@ -1,5 +1,5 @@
 ---
-title: "Get single video data V2 API Reference"
+title: "Get single video data… — Tiktok One Video V2 API"
 description: "Get single video data V2 API reference for SandBase. Use model tiktok/app-v3/one-video-v2 with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

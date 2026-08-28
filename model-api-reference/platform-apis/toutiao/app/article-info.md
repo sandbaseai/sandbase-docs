@@ -1,5 +1,5 @@
 ---
-title: "Get information of specified article API Reference"
+title: "Get information of specified… — Toutiao Article Info API"
 description: "Get information of specified article API reference for SandBase. Use model toutiao/app/article-info with /v1/run; view request fields, examples, capabilities, and resp..."
 aside: false
 outline: false

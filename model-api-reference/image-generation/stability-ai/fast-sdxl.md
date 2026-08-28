@@ -1,5 +1,5 @@
 ---
-title: "Stable Diffusion XL API Reference"
+title: "Stable Diffusion… — Stability Ai Fast Sdxl API"
 description: "Stable Diffusion XL API reference for SandBase. Use model stability-ai/fast-sdxl with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

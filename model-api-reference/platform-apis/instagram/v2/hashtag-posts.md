@@ -1,5 +1,5 @@
 ---
-title: "Get hashtag posts API Reference"
+title: "Get hashtag… — Instagram Hashtag Posts API"
 description: "Get hashtag posts API reference for SandBase. Use model instagram/v2/hashtag-posts with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

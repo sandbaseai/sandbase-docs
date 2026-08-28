@@ -1,5 +1,5 @@
 ---
-title: "Gemini Omni Flash API Reference"
+title: "Gemini Omni… — Google Gemini Omni Flash API"
 description: "Gemini Omni Flash API reference for SandBase. Use model google/gemini-omni-flash with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

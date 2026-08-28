@@ -1,5 +1,5 @@
 ---
-title: "Kling Video V2.5 Turbo Pro API Reference"
+title: "Kling Video V2.5 Turbo… — Kwaivgi Image To Video API"
 description: "Kling Video V2.5 Turbo Pro API reference for SandBase. Use model kwaivgi/kling-video/v2.5-turbo/pro/image-to-video with /v1/run; view request fields, examples, capabil..."
 aside: false
 outline: false

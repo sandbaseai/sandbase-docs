@@ -1,5 +1,5 @@
 ---
-title: "FLUX.2 [klein] 9B LoRA API Reference"
+title: "FLUX.2 [klein] 9B… — Bfl Lora API"
 description: "FLUX.2 [klein] 9B LoRA API reference for SandBase. Use model bfl/flux-2/klein/9b/edit/lora with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Flux Kontext Lora API Reference"
+title: "Flux Kontext… — Bfl Inpaint API"
 description: "Flux Kontext Lora API reference for SandBase. Use model bfl/flux-kontext-lora/inpaint with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "FLUX.1 SRPO [dev] API Reference"
+title: "FLUX.1 SRPO… — Bfl Srpo API"
 description: "FLUX.1 SRPO [dev] API reference for SandBase. Use model bfl/flux-1/srpo with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

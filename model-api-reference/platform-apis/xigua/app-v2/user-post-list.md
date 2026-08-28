@@ -1,5 +1,5 @@
 ---
-title: "Get user post list API Reference"
+title: "Get user post… — Xigua User Post List API"
 description: "Get user post list API reference for SandBase. Use model xigua/app-v2/user-post-list with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

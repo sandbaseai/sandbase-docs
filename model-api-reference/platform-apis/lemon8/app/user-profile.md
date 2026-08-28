@@ -1,5 +1,5 @@
 ---
-title: "Get information of specified user API Reference"
+title: "Get information of specified… — Lemon8 User Profile API"
 description: "Get information of specified user API reference for SandBase. Use model lemon8/app/user-profile with /v1/run; view request fields, examples, capabilities, and response..."
 aside: false
 outline: false

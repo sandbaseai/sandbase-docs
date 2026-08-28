@@ -1,5 +1,5 @@
 ---
-title: "Get single video data by sharing link API Reference"
+title: "Get single video data… — Tiktok One Video By Share Url V2 API"
 description: "Get single video data by sharing link API reference for SandBase. Use model tiktok/app-v3/one-video-by-share-url-v2 with /v1/run; view request fields, examples, capabi..."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Seedance 1.0 Pro API Reference"
+title: "Seedance 1.0… — Bytedance Text To Video API"
 description: "Seedance 1.0 Pro API reference for SandBase. Use model bytedance/seedance/1.0/pro/text-to-video with /v1/run; view request fields, examples, capabilities, and response..."
 aside: false
 outline: false

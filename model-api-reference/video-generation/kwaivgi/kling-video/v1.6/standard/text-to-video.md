@@ -1,5 +1,5 @@
 ---
-title: "Kling Video V1.6 Standard API Reference"
+title: "Kling Video V1.6 — V1.6 Standard Text To Video API"
 description: "Kling Video V1.6 Standard API reference for SandBase. Use model kwaivgi/kling-video/v1.6/standard/text-to-video with /v1/run; view request fields, examples, capabiliti..."
 aside: false
 outline: false

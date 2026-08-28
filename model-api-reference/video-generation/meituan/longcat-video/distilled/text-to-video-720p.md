@@ -1,5 +1,5 @@
 ---
-title: "LongCat Video Distilled API Reference"
+title: "LongCat Video… — Meituan Text To Video 720p API"
 description: "LongCat Video Distilled API reference for SandBase. Use model meituan/longcat-video/distilled/text-to-video-720p with /v1/run; view request fields, examples, capabilit..."
 aside: false
 outline: false

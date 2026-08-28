@@ -1,5 +1,5 @@
 ---
-title: "Flux 2 Klein 4b API Reference"
+title: "Flux 2 Klein… — Bfl 4b Edit API"
 description: "Flux 2 Klein 4b API reference for SandBase. Use model bfl/flux-2/klein/4b/edit with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

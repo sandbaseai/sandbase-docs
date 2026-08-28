@@ -1,5 +1,5 @@
 ---
-title: "Get comment replies data of specified video API Reference"
+title: "Get comment replies data of… — Tiktok Video Comment Replies API"
 description: "Get comment replies data of specified video API reference for SandBase. Use model tiktok/app-v3/video-comment-replies with /v1/run; view request fields, examples, capa..."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Get post likes API Reference"
+title: "Get post… — Instagram V3 Post Likes API"
 description: "Get post likes API reference for SandBase. Use model instagram/v3/post-likes with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

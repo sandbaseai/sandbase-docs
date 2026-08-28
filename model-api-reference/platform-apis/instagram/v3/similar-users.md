@@ -1,5 +1,5 @@
 ---
-title: "Get similar users API Reference"
+title: "Get similar… — Instagram V3 Similar Users API"
 description: "Get similar users API reference for SandBase. Use model instagram/v3/similar-users with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

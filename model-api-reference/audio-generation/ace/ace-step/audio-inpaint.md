@@ -1,5 +1,5 @@
 ---
-title: "ACE-Step API Reference"
+title: "ACE-Step… — Ace Audio Inpaint API"
 description: "ACE-Step API reference for SandBase. Use model ace/ace-step/audio-inpaint with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

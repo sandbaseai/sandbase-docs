@@ -1,5 +1,5 @@
 ---
-title: "Qwen Image 2 API Reference"
+title: "Qwen Image… — Alibaba Qwen Image 2 API"
 description: "Qwen Image 2 API reference for SandBase. Use model alibaba/qwen-image-2 with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

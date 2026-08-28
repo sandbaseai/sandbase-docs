@@ -1,5 +1,5 @@
 ---
-title: "Get user profile API Reference"
+title: "Get user… — Linkedin User Profile API"
 description: "Get user profile API reference for SandBase. Use model linkedin/web-v2/user-profile with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

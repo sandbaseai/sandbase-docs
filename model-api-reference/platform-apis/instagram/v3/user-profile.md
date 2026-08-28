@@ -1,5 +1,5 @@
 ---
-title: "Get user profile API Reference"
+title: "Get user… — Instagram User Profile API"
 description: "Get user profile API reference for SandBase. Use model instagram/v3/user-profile with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

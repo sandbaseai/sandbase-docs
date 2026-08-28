@@ -1,5 +1,5 @@
 ---
-title: "Get video comments API Reference"
+title: "Get video… — Youtube Video Comments API"
 description: "Get video comments API reference for SandBase. Use model youtube/web-v2/video-comments with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

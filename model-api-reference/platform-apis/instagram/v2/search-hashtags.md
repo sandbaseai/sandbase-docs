@@ -1,5 +1,5 @@
 ---
-title: "Search hashtags API Reference"
+title: "Search… — Instagram Search Hashtags API"
 description: "Search hashtags API reference for SandBase. Use model instagram/v2/search-hashtags with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

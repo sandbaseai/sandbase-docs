@@ -1,5 +1,5 @@
 ---
-title: "ControlNet SDXL API Reference"
+title: "ControlNet… — Stability Ai Fast Sdxl Controlnet Canny API"
 description: "ControlNet SDXL API reference for SandBase. Use model stability-ai/fast-sdxl-controlnet-canny with /v1/run; view request fields, examples, capabilities, and response f..."
 aside: false
 outline: false

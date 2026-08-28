@@ -1,5 +1,5 @@
 ---
-title: "Get user followers API Reference"
+title: "Get user… — Instagram User Followers API"
 description: "Get user followers API reference for SandBase. Use model instagram/v2/user-followers with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

@@ -1,5 +1,5 @@
 ---
-title: "Search locations by coordinates API Reference"
+title: "Search locations by… — Instagram Search By Coordinates API"
 description: "Search locations by coordinates API reference for SandBase. Use model instagram/v2/search-by-coordinates with /v1/run; view request fields, examples, capabilities, and..."
 aside: false
 outline: false

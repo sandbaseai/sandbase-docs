@@ -1,5 +1,5 @@
 ---
-title: "Get user stories API Reference"
+title: "Get user… — Instagram User Stories API"
 description: "Get user stories API reference for SandBase. Use model instagram/v2/user-stories with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

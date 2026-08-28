@@ -1,5 +1,5 @@
 ---
-title: "Hunyuan3d V3 API Reference"
+title: "Hunyuan3d… — Tencent Sketch To 3d API"
 description: "Hunyuan3d V3 API reference for SandBase. Use model tencent/hunyuan-3d/v3/sketch-to-3d with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

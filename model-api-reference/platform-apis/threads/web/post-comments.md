@@ -1,5 +1,5 @@
 ---
-title: "Get post comments API Reference"
+title: "Get post… — Threads Post Comments API"
 description: "Get post comments API reference for SandBase. Use model threads/web/post-comments with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

@@ -283,11 +283,20 @@ function cleanTitle(model) {
     : model.display_name
 }
 
-function seoTitle(model) {
-  const title = `${cleanTitle(model)} API Reference`
+function seoTitle(model, disambiguator = '') {
+  const suffix = disambiguator ? ` — ${disambiguator} API` : ''
+  const title = `${cleanTitle(model)} API Reference${disambiguator ? suffix : ''}`
   if (title.length <= 65) return title
-  const suffix = '… API Ref'
-  return `${cleanTitle(model).slice(0, 65 - suffix.length).trimEnd()}${suffix}`
+  const compactSuffix = disambiguator ? suffix : '… API Ref'
+  const available = 65 - compactSuffix.length - (disambiguator ? 1 : 0)
+  const base = cleanTitle(model).slice(0, Math.max(10, available)).trimEnd().replace(/\s+\S*$/, '')
+  return `${base}${disambiguator ? '…' : ''}${compactSuffix}`
+}
+
+function seoDisambiguator(model) {
+  const parts = String(model.model_slug ?? '').split('/').filter(Boolean)
+  const labels = [model.vendor, ...parts.slice(-1)].filter(Boolean).map((part) => String(part).replace(/[-_]+/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase()))
+  return labels.join(' ')
 }
 
 function cleanDescription(model) {
@@ -1381,6 +1390,14 @@ const removedPlatformPages = requestedModelNames.size
   ? 0
   : cleanLegacyPlatformOverview() + cleanManagedPlatformPages(expectedPlatformPages)
 
+const seoTitleCounts = new Map()
+for (const category of categoryData) {
+  for (const model of category.models) {
+    const title = seoTitle(model)
+    seoTitleCounts.set(title, (seoTitleCounts.get(title) ?? 0) + 1)
+  }
+}
+
 for (const category of categoryData) {
 for (const model of category.models) {
   if (requestedModelNames.size && !requestedModelNames.has(model.name)) continue
@@ -1399,7 +1416,7 @@ for (const model of category.models) {
     pagePath,
     [
       '---',
-      `title: ${yamlString(seoTitle(model))}`,
+      `title: ${yamlString(seoTitle(model, seoTitleCounts.get(seoTitle(model)) > 1 ? seoDisambiguator(model) : ''))}`,
       `description: ${yamlString(seoDescription(model, protocol, category))}`,
       'aside: false',
       'outline: false',

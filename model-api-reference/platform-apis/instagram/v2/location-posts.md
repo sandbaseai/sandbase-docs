@@ -1,5 +1,5 @@
 ---
-title: "Get location posts API Reference"
+title: "Get location… — Instagram Location Posts API"
 description: "Get location posts API reference for SandBase. Use model instagram/v2/location-posts with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

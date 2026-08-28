@@ -1,5 +1,5 @@
 ---
-title: "Kling Video O1 Pro API Reference"
+title: "Kling Video O1 — Kwaivgi Edit API"
 description: "Kling Video O1 Pro API reference for SandBase. Use model kwaivgi/kling-video/o1/pro/edit with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

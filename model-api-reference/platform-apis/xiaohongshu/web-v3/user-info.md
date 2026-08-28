@@ -1,5 +1,5 @@
 ---
-title: "Fetch user info API Reference"
+title: "Fetch user… — Xiaohongshu User Info API"
 description: "Fetch user info API reference for SandBase. Use model xiaohongshu/web-v3/user-info with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

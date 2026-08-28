@@ -1,5 +1,5 @@
 ---
-title: "Qwen Image Edit API Reference"
+title: "Qwen Image… — Alibaba Image To Image API"
 description: "Qwen Image Edit API reference for SandBase. Use model alibaba/qwen-image-edit/image-to-image with /v1/run; view request fields, examples, capabilities, and response fo..."
 aside: false
 outline: false

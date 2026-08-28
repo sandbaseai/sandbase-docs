@@ -1,5 +1,5 @@
 ---
-title: "Get user posts API Reference"
+title: "Get user… — Threads User Posts API"
 description: "Get user posts API reference for SandBase. Use model threads/web/user-posts with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

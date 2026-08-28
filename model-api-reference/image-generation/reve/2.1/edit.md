@@ -1,5 +1,5 @@
 ---
-title: "Reve 2.1 API Reference"
+title: "Reve… — Reve Edit API"
 description: "Reve 2.1 API reference for SandBase. Use model reve/2.1/edit with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false

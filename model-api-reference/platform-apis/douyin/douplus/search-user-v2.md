@@ -1,5 +1,5 @@
 ---
-title: "Search user V2 API Reference"
+title: "Search user… — Douyin Search User V2 API"
 description: "Search user V2 API reference for SandBase. Use model douyin/douplus/search-user-v2 with /v1/run; view request fields, examples, capabilities, and response format."
 aside: false
 outline: false
