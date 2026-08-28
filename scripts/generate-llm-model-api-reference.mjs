@@ -327,7 +327,10 @@ function endpointFor(model, category) {
 function seoDescription(model, protocol, category) {
   const endpoint = endpointFor(model, category)
   const base = `${cleanTitle(model)} API reference for SandBase. Use model ${model.name} with ${endpoint}; view request fields, examples, capabilities, and response format.`
-  return base.length > 170 ? `${base.slice(0, 167).trimEnd()}...` : base
+  if (base.length <= 170) return base
+  const suffix = ` (${model.name}) API reference for SandBase.`
+  const available = Math.max(0, 170 - suffix.length)
+  return `${cleanTitle(model).slice(0, available).trimEnd()}${suffix}`
 }
 
 function yamlString(value) {
