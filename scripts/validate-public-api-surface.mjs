@@ -619,6 +619,9 @@ assert.match(updateDeploymentSchema, /required: \[feishu_webhook_url\]/, 'A non-
 assert.match(updateDeploymentSchema, /pattern: '\^https:\/\/open\\\.feishu\\\.cn\/open-apis\/bot\/v2\/hook\//, 'Deployment notifications must publish the enforced Feishu webhook origin and path')
 assert.match(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Sidebar must link to the Feishu notification test reference')
 assert.match(sidebar, /\/api-reference\/endpoints\/acp/, 'Sidebar must link to the Endpoint ACP reference')
+const scheduleOverview = readFileSync(new URL('../api-reference/deployments/index.md', import.meta.url), 'utf8')
+assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/runs/, 'Schedule overview must document the preferred plural trigger path')
+assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/run` remains a compatibility alias/, 'Schedule overview must label the singular trigger path as compatibility-only')
 for (const anchor of ['create-a-service', 'list-services', 'get-a-service', 'update-a-service', 'delete-a-service', 'invoke-with-rest']) {
   assert.match(sidebar, new RegExp(`/api-reference/endpoints/#${anchor}`), `Sidebar must expose the Service ${anchor} operation`)
 }

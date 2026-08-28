@@ -11,7 +11,7 @@ A **Schedule** binds an Agent to repeatable `initial_events`, Runtime Environmen
 Every trigger creates a durable `drun_*` `DeploymentRun`. A successful trigger associates that record with exactly one newly created `sess_*` Session; a failed trigger has no Session. `DeploymentRun` and Session are separate resources and neither ID substitutes for the other.
 :::
 
-## Management endpoints
+## Schedule operations
 
 | Method | Path | Purpose |
 |---|---|---|
@@ -64,7 +64,7 @@ Alternatively, create a declarative Deployment with `name`, `runtime`, and `init
 
 ## Schedule run records
 
-Use `POST /v1/deployments/{deployment_id}/runs` to trigger manually. The request body must be empty or `{}`; input overrides are rejected. The response is a DeploymentRun object with `id`, `type`, `deployment_id`, `agent`, `trigger_context`, nullable `session_id`, nullable `error`, and `created_at`.
+Use `POST /v1/deployments/{deployment_id}/runs` to trigger manually. This is the preferred trigger path. `POST /v1/deployments/{deployment_id}/run` remains a compatibility alias for clients using the older singular path. The request body must be empty or `{}`; input overrides are rejected. The response is a DeploymentRun object with `id`, `type`, `deployment_id`, `agent`, `trigger_context`, nullable `session_id`, nullable `error`, and `created_at`.
 
 List one Schedule's records at `/v1/deployments/{deployment_id}/runs`, or query `/v1/deployment_runs` across all Schedules. Retrieve a known run directly with `/v1/deployment_runs/{drun_id}`. The global list accepts `trigger_type=manual|schedule`, status filters `pending|succeeded|failed`, `has_error`, Agent/Deployment IDs, time bounds, and cursor pagination. These filters select trigger outcomes; the current public `DeploymentRun` object does not include a `status` field. A nested get returns `409 deployment_trigger_in_progress` while the record is pending.
 
