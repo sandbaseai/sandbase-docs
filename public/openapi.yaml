@@ -51,8 +51,8 @@ tags:
     description: Anthropic-compatible Messages API
   - name: Gemini
     description: Google Gemini-compatible GenerateContent and Interactions APIs
-  - name: Volcengine Contents Generations
-    description: Volcengine Ark-compatible asynchronous video generation tasks
+  - name: Official Native API
+    description: Provider-native model protocols, currently ByteDance Seedance content-generation tasks
   - name: Agents
     description: Build and manage Agent definitions
   - name: Sessions
@@ -598,7 +598,7 @@ paths:
   /api/v3/contents/generations/tasks:
     post:
       operationId: createVolcengineContentsGenerationTask
-      tags: [Volcengine Contents Generations]
+      tags: [Official Native API]
       summary: Create a content generation task
       description: Creates an asynchronous Seedance video generation task using the Volcengine Ark native request shape.
       security:
@@ -619,7 +619,7 @@ paths:
         '500': { description: Prediction lifecycle or provider error, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
     get:
       operationId: listVolcengineContentsGenerationTasks
-      tags: [Volcengine Contents Generations]
+      tags: [Official Native API]
       summary: List content generation tasks
       description: Lists non-deleted native video tasks created by the same organization and API key, newest first.
       security:
@@ -651,7 +651,7 @@ paths:
         description: Task ID returned by the create operation.
     get:
       operationId: getVolcengineContentsGenerationTask
-      tags: [Volcengine Contents Generations]
+      tags: [Official Native API]
       summary: Get a content generation task
       security:
         - BearerAuth: []
@@ -664,7 +664,7 @@ paths:
         '500': { description: Task lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
     delete:
       operationId: deleteVolcengineContentsGenerationTask
-      tags: [Volcengine Contents Generations]
+      tags: [Official Native API]
       summary: Cancel or delete a content generation task
       description: Cancels a queued task or hides a terminal task. Running and already-cancelled tasks cannot be deleted.
       security:

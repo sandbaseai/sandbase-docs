@@ -135,8 +135,7 @@
           <div><span class="step-num">2</span><h4>Publish Agent</h4></div>
           <div class="step-links">
             <a href="https://www.sandbase.ai/console/endpoints" target="_self">Published Agents</a>
-            <a href="/docs/api-reference/endpoints/">Published Agent API</a>
-            <a href="/docs/api-reference/endpoints/">Endpoint API</a>
+            <a href="/docs/api-reference/endpoints/">Services API</a>
           </div>
         </div>
         <div class="journey-step">
@@ -171,10 +170,10 @@
           <p>List models, inspect pricing and capabilities, and call them directly.</p>
         </a>
         <a href="/docs/api-reference/endpoints/" class="model-card">
-          <span class="model-badge">AGENTS</span>
-          <h3>Published Agents</h3>
+          <span class="model-badge">SERVICES</span>
+          <h3>Services</h3>
           <code>/v1/endpoints</code>
-          <p>Publish a tested Agent so apps, API clients, or Setup can use it.</p>
+          <p>Publish a tested Agent so apps and API clients can invoke it.</p>
         </a>
         <a href="/docs/api-reference/deployments/" class="model-card">
           <span class="model-badge">SCHEDULES</span>

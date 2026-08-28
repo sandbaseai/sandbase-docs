@@ -30,7 +30,7 @@ Installation and authorization are not proof of connectivity. Verify the SandBas
 
 Open-source CLI: https://github.com/sandbaseai/cli
 
-## Core Endpoints
+## Core APIs
 
 - POST /v1/chat/completions - OpenAI-compatible chat; optional capabilities depend on the selected model
 - POST /v1/messages - Anthropic-compatible messages API
@@ -46,7 +46,7 @@ Open-source CLI: https://github.com/sandbaseai/cli
 - POST /v1/agents - Create an agent
 - POST /v1/agents/{id} - Update an agent and create a version
 - POST /v1/agents/{id}/archive - Archive an agent
-- POST /v1/endpoints/{id}/run - Invoke a Service (Endpoint) and create or continue a Session
+- POST /v1/endpoints/{id}/run - Invoke a Service through its compatibility route and create or continue a Session
 - POST /v1/sessions - Create agent session directly
 - POST /v1/sessions/{id}/events - Send messages to running session
 - GET /v1/sessions/{id}/events/stream - Replay persisted session events (SSE)
@@ -57,10 +57,10 @@ Open-source CLI: https://github.com/sandbaseai/cli
 ## Session Contract
 
 - session_id is the only public identity for persistent Agent interaction.
-- Endpoint invocation accepts an optional session_id. Omit it to create a Session; a supplied Session must come from the same Service and match its current Agent-version binding.
+- Service invocation accepts an optional session_id. Omit it to create a Session; a supplied Session must come from the same Service and match its current Agent-version binding.
 - Every manual or scheduled Deployment trigger creates a distinct drun_* DeploymentRun and attempts to create exactly one new Session.
 - A DeploymentRun links to session_id when Session creation succeeds; failed trigger records have no Session.
-- Endpoint acceptance returns session_id and an events array. It does not create a DeploymentRun or expose an internal Runtime Session identity.
+- Service acceptance returns session_id and an events array. It does not create a DeploymentRun or expose an internal Runtime Session identity.
 
 ## Pricing
 

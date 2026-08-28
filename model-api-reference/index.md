@@ -29,6 +29,18 @@ Generate, transform, clone, transcribe, and synthesize audio through SandBase. B
 
 Use provider-native protocols without rewriting an existing integration. Browse by provider and model; ByteDance Seedance is currently supported through the Volcengine Ark Contents Generations task protocol.
 
+## Inference API contracts
+
+The normalized request contracts are maintained in the [Inference API guides](/api-reference/), while this section stays focused on choosing a model and its provider-specific schema:
+
+- [Models API](/api-reference/models/) — discover enabled model IDs, capabilities, and pricing
+- [Chat Completions](/api-reference/llm-gateway) — OpenAI-compatible text and vision requests
+- [Responses](/api-reference/responses) — OpenAI Responses-compatible requests
+- [Anthropic Messages](/api-reference/anthropic-compat) — Anthropic-compatible requests
+- [Google Gemini](/api-reference/gemini-generate-content) — Gemini-compatible requests
+- [Gemini Interactions](/api-reference/gemini-interactions) — asynchronous Gemini interactions
+- [Media assets](/api-reference/models/assets) — upload and retrieve media used by model requests
+
 ## Get started
 
 All LLM models use the OpenAI-compatible [Chat Completions API](/api-reference/llm-gateway). Claude models can also use the [Anthropic Messages API](/api-reference/anthropic-compat).

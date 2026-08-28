@@ -8,6 +8,7 @@ const openapi = readFileSync(new URL('../public/openapi.yaml', import.meta.url),
 const openapiDocument = parse(openapi)
 const config = readFileSync(new URL('../.vitepress/config.ts', import.meta.url), 'utf8')
 const sidebar = readFileSync(new URL('../.vitepress/sidebar.ts', import.meta.url), 'utf8')
+const modelSidebar = sidebar.slice(0, sidebar.indexOf('export const docsSidebar'))
 const platformSidebar = sidebar.slice(sidebar.indexOf('export const apiReferenceSidebar'))
 const generatedReferenceSpecs = readFileSync(new URL('../.vitepress/theme/generatedApiReferenceSpecs.ts', import.meta.url), 'utf8')
 const apiKeyGuide = readFileSync(new URL('../getting-started/api-keys.md', import.meta.url), 'utf8')
@@ -15,6 +16,8 @@ const authenticationReference = readFileSync(new URL('../api-reference/authentic
 const supportedModelsPage = readFileSync(new URL('../models/supported.md', import.meta.url), 'utf8')
 const capabilitiesPage = readFileSync(new URL('../models/capabilities.md', import.meta.url), 'utf8')
 const visionPage = readFileSync(new URL('../models/vision.md', import.meta.url), 'utf8')
+const modelApiOverview = readFileSync(new URL('../model-api-reference/index.md', import.meta.url), 'utf8')
+const homePage = readFileSync(new URL('../.vitepress/theme/HomePage.vue', import.meta.url), 'utf8')
 const legacySeedanceReference = readFileSync(new URL('../api-reference/volcengine-contents-generations.md', import.meta.url), 'utf8')
 const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8')
 const catalogOverviews = [
@@ -64,7 +67,12 @@ for (const overview of catalogOverviews) {
   assert.doesNotMatch(overview, /currently publishes API reference pages for \d/i, 'Catalog overviews must not hard-code time-sensitive counts')
   assert.doesNotMatch(overview, /Browse \d[\d,]* SandBase API operations across \d+ platforms/i, 'Catalog overviews must not hard-code platform operation counts')
 }
-assert.match(sidebar, /text: 'Models'[\s\S]*?List Models[\s\S]*?Get Model/, 'Model API navigation must expose model discovery operations')
+assert.doesNotMatch(modelSidebar, /text: 'Models'[\s\S]*?List Models[\s\S]*?Get Model/, 'Model API navigation must not duplicate the Models API module')
+assert.doesNotMatch(modelSidebar, /text: 'Inference APIs'/, 'Model API navigation must not duplicate the normalized Inference API module')
+assert.match(modelApiOverview, /\[Models API\]\(\/api-reference\/models\//, 'Model API overview must link to the Models API contract')
+assert.match(modelApiOverview, /\[Chat Completions\]\(\/api-reference\/llm-gateway\)/, 'Model API overview must link to the normalized inference contracts')
+assert.match(homePage, /Services API/, 'Home page must use the Services product name')
+assert.doesNotMatch(homePage, /Endpoint API|Published Agent API/, 'Home page must not expose retired Endpoint product labels')
 
 const forbiddenOpenApiPatterns = [
   [/^  \/sandboxes(?:[/{:]|$)/m, 'sandbox path'],
@@ -277,7 +285,7 @@ assert.match(config, /'setup\/groups\.md'/, 'Retired Platform Groups page must s
 assert.doesNotMatch(platformSidebar, /Service quickstart/, 'Retired Service quickstart must not appear in the docs sidebar')
 assert.doesNotMatch(sidebar, /\/api-reference\/sandboxes?\b/i, 'Sidebar must not link to sandbox API pages')
 assert.doesNotMatch(sidebar, /\/api-reference\/webhooks\b/i, 'Sidebar must not link to Sandbox event webhook APIs')
-assert.equal((sidebar.match(/text: 'Inference APIs'/g) ?? []).length, 1, 'Inference APIs must have exactly one standalone sidebar chapter')
+assert.equal((modelSidebar.match(/text: 'Inference APIs'/g) ?? []).length, 0, 'Model API navigation must keep normalized Inference APIs in the concept/API reference docs')
 assert.doesNotMatch(sidebar, /text: 'Embed Configs'/, 'Platform API sidebar must not expose the unmaintained Embed Config module')
 assert.doesNotMatch(platformSidebar, /text: 'Models'/, 'Platform API sidebar must direct model discovery to the standalone Model API Reference')
 assert.doesNotMatch(platformSidebar, /text: 'Agent APIs'/, 'Platform API sidebar must use resource names without redundant API suffixes')
@@ -345,7 +353,7 @@ assert.ok(
   geminiStreamPath.responses['200']?.content?.['application/json']?.schema?.items?.$ref === '#/components/schemas/GeminiGenerateContentResponse',
   'Gemini streaming must document the default JSON-array carrier',
 )
-assert.match(sidebar, /\/api-reference\/gemini-generate-content/, 'Sidebar must link to the Gemini native protocol reference')
+assert.match(modelApiOverview, /\/api-reference\/gemini-generate-content/, 'Model API overview must link to the Gemini native protocol reference')
 const geminiInteractionsCreate = openapiDocument.paths['/v1beta/interactions']?.post
 const geminiInteractionsGet = openapiDocument.paths['/v1beta/interactions/{id}']?.get
 assert.ok(geminiInteractionsCreate, 'Public OpenAPI must expose the implemented Gemini Interactions create endpoint')
@@ -382,7 +390,7 @@ assert.ok(
   geminiInteractionsCreate.responses['200']?.headers?.Location,
   'Gemini Interactions create must document the pollable Location header',
 )
-assert.match(sidebar, /\/api-reference\/gemini-interactions/, 'Sidebar must link to the Gemini Interactions reference')
+assert.match(modelApiOverview, /\/api-reference\/gemini-interactions/, 'Model API overview must link to the Gemini Interactions reference')
 const volcengineCollection = openapiDocument.paths['/api/v3/contents/generations/tasks']
 const volcengineTask = openapiDocument.paths['/api/v3/contents/generations/tasks/{task_id}']
 assert.ok(volcengineCollection?.post, 'Public OpenAPI must expose Volcengine task creation')
@@ -1047,7 +1055,7 @@ assert.match(uploadMediaRequest, /required: \[file\]/, 'Media upload must requir
 assert.match(uploadMediaRequest, /Image \(up to 20 MB\), audio \(up to 50 MB\), or video \(up to 500 MB\)/, 'Media upload must publish implemented category size limits')
 const uploadMediaResponse = openapi.match(/^    UploadMediaResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(uploadMediaResponse, /required: \[url, filename, size, type, content_type\]/, 'Media upload must require every emitted success field')
-assert.match(sidebar, /\/api-reference\/models\/upload/, 'Sidebar must link to the media upload reference')
+assert.match(modelApiOverview, /\/api-reference\/models\/(?:assets|upload)/, 'Model API overview must link to the media asset references')
 assert.doesNotMatch(openapi, /^  \/default\/v1(?:\/|:)/m, 'Internal Console paths must not be public')
 
 const unpublishedFiles = new Set([

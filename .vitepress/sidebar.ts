@@ -6,46 +6,6 @@ import {
 
 // ─── Model API Reference ─────────────────────────────────────
 
-// Hand-written modules that live under /model-api-reference but are not produced
-// by scripts/generate-llm-model-api-reference.mjs. They are appended here rather
-// than in modelApiReferenceSidebar.generated.ts, which the generator overwrites.
-const handWrittenModelApiReferenceItems: DefaultTheme.SidebarItem[] = [
-  {
-    text: 'Models',
-    collapsed: true,
-    items: [
-      { text: 'Overview', link: '/api-reference/models/' },
-      { text: 'List Models', link: '/api-reference/models/list' },
-      { text: 'Get Model', link: '/api-reference/models/get' },
-    ],
-  },
-  {
-    text: 'Inference APIs',
-    collapsed: true,
-    items: [
-      { text: 'Chat Completions', link: '/api-reference/llm-gateway' },
-      { text: 'Responses', link: '/api-reference/responses' },
-      { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
-      { text: 'Google Gemini', link: '/api-reference/gemini-generate-content' },
-      { text: 'Gemini Interactions', link: '/api-reference/gemini-interactions' },
-      { text: 'Generate Image (OpenAI)', link: '/api-reference/images/generations' },
-      { text: 'Edit Image (OpenAI)', link: '/api-reference/images/edits' },
-      { text: 'Model Image Generation', link: '/api-reference/models/image' },
-      { text: 'Video Generation', link: '/api-reference/models/video' },
-      { text: 'Audio', link: '/api-reference/models/audio' },
-      { text: 'Embeddings', link: '/api-reference/models/embedding' },
-      { text: 'API Passthrough', link: '/api-reference/models/api-passthrough' },
-      { text: 'Run Capability', link: '/api-reference/models/run' },
-      { text: 'Get Run Result', link: '/api-reference/models/run-get' },
-      { text: 'Media Assets', link: '/api-reference/models/assets' },
-      { text: 'Upload Media', link: '/api-reference/models/upload' },
-      { text: 'Register Asset', link: '/api-reference/models/assets-create' },
-      { text: 'Get Asset', link: '/api-reference/models/assets-get' },
-      { text: 'Get Task Cost', link: '/api-reference/tasks/cost' },
-    ],
-  },
-]
-
 // Official provider-native protocols are hand-written and intentionally live
 // after the generated model categories so the primary catalog stays focused on
 // normalized Model API calls.
@@ -72,7 +32,7 @@ function modelApiReferenceSidebar(items: DefaultTheme.SidebarItem[]): DefaultThe
     { text: 'Blog', link: 'https://www.sandbase.ai/blog' },
     {
       text: 'Model API Reference',
-      items: [...items, ...handWrittenModelApiReferenceItems, officialNativeApiItems],
+      items: [...items, officialNativeApiItems],
     },
   ]
 }

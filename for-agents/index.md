@@ -43,9 +43,9 @@ curl https://api.sandbase.ai/v1/chat/completions \
   }'
 ```
 
-## Core Endpoints
+## Core APIs
 
-| Method | Endpoint | Description |
+| Method | Route | Description |
 |--------|----------|-------------|
 | `POST` | `/v1/chat/completions` | OpenAI-compatible chat; optional capabilities depend on the selected model |
 | `POST` | `/v1/messages` | Anthropic-compatible messages API |
@@ -56,16 +56,16 @@ curl https://api.sandbase.ai/v1/chat/completions \
 | `GET` | `/v1/models/{id_or_name}` | Get model details, schema, capabilities, and pricing |
 | `GET` | `/v1/tasks/{id}/cost` | Get task cost and usage |
 
-## Additional Endpoint Groups
+## Additional API Groups
 
-Beyond the core generation endpoints, SandBase provides APIs for agent lifecycle management. See the [AI API Guide](./full) for common workflows and the [OpenAPI specification](https://www.sandbase.ai/docs/openapi.yaml) for the complete contract.
+Beyond the core generation APIs, SandBase provides APIs for agent lifecycle management. See the [AI API Guide](./full) for common workflows and the [OpenAPI specification](https://www.sandbase.ai/docs/openapi.yaml) for the complete contract.
 
-| Group | Key Endpoints | Purpose |
+| Group | Key routes | Purpose |
 |-------|---------------|---------|
 | **Agents** | `POST /v1/agents`, `GET /v1/agents`, `POST /v1/agents/{id}` | Create and manage agent definitions |
 | **Services** | `POST /v1/endpoints/{id}/run` | Invoke a Service and create or continue a Session |
 | **Sessions** | `POST /v1/sessions`, `POST /v1/sessions/{id}/events` | Create persistent Agent Sessions and send messages |
-| **Schedules (Deployments)** | `POST /v1/deployments` | Define manual or cron triggers; each creates a DeploymentRun |
+| **Schedules** | `POST /v1/deployments` | Define manual or cron triggers; each creates a DeploymentRun compatibility record |
 | **Skills** | `GET /v1/skills` | Extend agent capabilities with reusable instruction and resource bundles |
 
 ## Pricing Model
