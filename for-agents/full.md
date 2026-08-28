@@ -319,7 +319,7 @@ The detail response adds `unified_schema`, `supported_modes`, and `model_card`. 
 
 ## Get Task Cost
 
-### GET /v1/tasks/{id}/cost
+### GET /v1/tasks/{task_id}/cost
 
 Check the recorded cost of a task using the task ID returned by the API operation.
 
