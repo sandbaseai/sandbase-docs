@@ -1,33 +1,27 @@
 ---
-title: Error Codes
-description: SandBase error codes reference. Standard error format, HTTP status codes, common error messages, and retry recommendations.
+title: API Errors
+description: Handle SandBase API errors by HTTP status, endpoint family, documented response shape, and retry safety.
 ---
 
-# Error Codes
+# API Errors
 
-SandBase uses standard HTTP status codes. Error bodies vary by endpoint family, so clients should branch on HTTP
-status first and then parse the documented protocol-specific shape.
+SandBase uses standard HTTP status codes, but it does not expose one universal error body. Branch on the HTTP status first, then parse the response schema documented for the endpoint you called. Do not require every error to contain `code`, `param`, `message`, or `request_id`.
 
-## Error Response Format
+## Response shapes
 
-Core `/v1/*` middleware and several model/resource endpoints return a flat error message:
+Core middleware and several `/v1/*` endpoints return a flat error:
 
 ```json
 {"error":"API key rate limit exceeded"}
 ```
 
-Agent resource APIs instead return a typed object such as:
+Agent resource APIs can return a typed error object:
 
 ```json
 {"error":{"type":"invalid_request","message":"invalid request body"}}
 ```
 
-OpenAI-compatible gateways retain their OpenAI-compatible error envelope. Do not require a universal `code`,
-`message`, `param`, or `request_id` field across every endpoint.
-
-### Anthropic-Compatible Errors
-
-The `/v1/messages` endpoint returns errors in Anthropic's format:
+OpenAI-compatible endpoints retain an OpenAI-compatible envelope. `POST /v1/messages` retains an Anthropic-compatible envelope:
 
 ```json
 {
@@ -39,193 +33,73 @@ The `/v1/messages` endpoint returns errors in Anthropic's format:
 }
 ```
 
-## HTTP Status Codes
+Use the [OpenAPI specification](/openapi.yaml) for the exact status codes and schemas of a public operation.
 
-### Client Errors (4xx)
+## HTTP status handling
 
-| Status | Name | Description |
-|--------|------|-------------|
-| 400 | Bad Request | Invalid request body, missing required fields, or unsupported parameters |
-| 401 | Unauthorized | Missing, invalid, revoked, or expired API key |
-| 402 | Payment Required | Insufficient account balance to process the request |
-| 403 | Forbidden | API key lacks permission for the requested resource |
-| 404 | Not Found | Requested resource (model, Agent, Session, or webhook) does not exist |
-| 409 | Conflict | Resource state conflict |
-| 429 | Too Many Requests | Rate limit exceeded |
+| Status | Typical meaning | Client action |
+|---|---|---|
+| `400` | Invalid input or unsupported parameter | Fix the request using the endpoint and selected model schema. |
+| `401` | Missing, invalid, revoked, or expired credential | Replace or rotate the credential; do not retry unchanged. |
+| `402` | The request cannot be funded or a spending limit was reached | Resolve the balance or key limit before retrying. |
+| `403` | The credential lacks permission, or a compatibility endpoint maps a spending failure to 403 | Inspect the endpoint-specific envelope and use an authorized key. |
+| `404` | Model or resource is unavailable to the caller | Verify the current model ID or resource ID. |
+| `409` | Resource state conflict | Read the latest state before deciding whether a retry is safe. |
+| `422` | Semantically invalid resource input | Correct the documented field values. |
+| `429` | Per-key or platform-wide request protection | Retry with bounded backoff and jitter when the operation is safe to repeat. |
+| `500`, `502`, `503`, `504` | SandBase or upstream failure | Retry only when the operation is safe to repeat. |
 
-### Server Errors (5xx)
+Not every endpoint documents every status in this table. The operation's OpenAPI response map is authoritative.
 
-| Status | Name | Description |
-|--------|------|-------------|
-| 500 | Internal Server Error | Unexpected server-side error |
-| 502 | Bad Gateway | Upstream provider returned an error or is unreachable |
-| 503 | Service Unavailable | Service temporarily unavailable (maintenance or overload) |
-| 504 | Gateway Timeout | Upstream provider did not respond in time |
+## Authentication errors
 
-## Common Errors and Solutions
+Documented authentication messages include:
 
-### 400 — Bad Request
+- `missing API key in Authorization header`
+- `invalid API key`
+- `API key has been revoked`
+- `API key has expired`
+- `insufficient_scope`
 
-| Message | Cause | Solution |
-|---------|-------|----------|
-| `invalid request body` | Malformed JSON or missing required fields | Check your JSON syntax and include all required fields |
-| `model field is required` | Missing `model` in request body | Add a valid model identifier |
-| `max_tokens is required` | Missing `max_tokens` (Anthropic endpoint) | Include `max_tokens` in the request |
+Use `Authorization: Bearer $SANDBASE_API_KEY` for standard endpoints. `POST /v1/messages` also accepts `x-api-key`; protocol-compatible Google endpoints document their own supported key headers.
 
-### 401 — Unauthorized
+A revoked key cannot be re-enabled. Create a replacement, update the consuming application, verify it, and then remove any remaining references to the old key.
 
-| Message | Cause | Solution |
-|---------|-------|----------|
-| `missing API key in Authorization header` | Standard endpoint has no Bearer token | Add `Authorization: Bearer sk-sb-...`; only `/v1/messages` also accepts `x-api-key` |
-| `invalid API key` | Key not found in database | Verify the key is correct and hasn't been deleted |
-| `API key has been revoked` | Key was disabled in the Console | Create a new key or re-enable the existing one |
-| `API key has expired` | Key past its expiration date | Create a new key with a later expiration |
+## Rate limits
 
-### 402 — Payment Required
+Documented flat messages include `API key rate limit exceeded` and `global rate limit exceeded`. SandBase does not publish one universal numeric limit because the effective limit can vary by key and platform capacity.
 
-| Message | Cause | Solution |
-|---------|-------|----------|
-| `API key spending limit exceeded` | API key reached its configured spending limit | Raise the key limit or use another authorized key; Task Cost lookup remains available |
+If a response includes `Retry-After`, respect it. Otherwise use bounded exponential backoff with jitter. See [Rate limits](/guides/rate-limiting) for request-smoothing patterns.
 
-### 404 — Not Found
+## Retry safety
 
-| Message | Cause | Solution |
-|---------|-------|----------|
-| `model not found` | Requested model doesn't exist or isn't enabled | Check the [Models](/models/) page for available models |
+Use this decision order:
 
-### 429 — Too Many Requests
+1. Determine whether the operation has already produced an externally visible effect.
+2. Do not retry an unchanged `400`, `401`, `402`, `403`, `404`, or `422` request.
+3. For `409`, read the current resource state before retrying.
+4. Retry `429` and transient `5xx` responses only a small, bounded number of times.
+5. Before repeating a create, trigger, upload, or external-action request, confirm that the operation is idempotent or that your application can reconcile duplicates.
 
-| Message | Cause | Solution |
-|---------|-------|----------|
-| `rate limit exceeded` | Too many requests in the current window | Wait and retry with exponential backoff |
+A suitable delay is:
 
-::: warning
-429 responses do **not** include `Retry-After` or `X-RateLimit-*` headers. Use client-side exponential backoff to pace retries — see [Rate Limiting](/guides/rate-limiting).
-:::
-
-### 500 — Internal Server Error
-
-| Message | Cause | Solution |
-|---------|-------|----------|
-| `internal error` | Unexpected server failure | Retry after a brief delay. If persistent, contact support |
-
-### 502 — Bad Gateway
-
-| Message | Cause | Solution |
-|---------|-------|----------|
-| `upstream provider error` | LLM provider returned an error | Retry; SandBase may automatically failover |
-
-## Retry Strategies
-
-### When to Retry
-
-| Status Code | Retry? | Strategy |
-|-------------|--------|----------|
-| 400 | No | Fix the request — retrying won't help |
-| 401 | No | Fix authentication — retrying won't help |
-| 402 | No | Top up balance — retrying won't help |
-| 403 | No | Check permissions — retrying won't help |
-| 404 | No | Resource doesn't exist — retrying won't help |
-| 409 | Maybe | Check resource state, then retry if appropriate |
-| 429 | Yes | Back off (exponential) and retry — no `Retry-After` header is sent |
-| 500 | Yes | Retry with exponential backoff |
-| 502 | Yes | Retry with exponential backoff |
-| 503 | Yes | Retry with exponential backoff |
-| 504 | Yes | Retry with exponential backoff |
-
-### Exponential Backoff
-
-For retryable errors, use exponential backoff with jitter:
-
-::: code-group
-
-```python [Python]
-import time
-import random
-import requests
-
-def request_with_retry(url, headers, json_body, max_retries=5):
-    """Make a request with exponential backoff retry."""
-    for attempt in range(max_retries):
-        response = requests.post(url, headers=headers, json=json_body)
-
-        if response.status_code in (429, 500, 502, 503, 504):
-            # No Retry-After header is sent — use exponential backoff with jitter
-            delay = min(2 ** attempt + random.random(), 60)
-            time.sleep(delay)
-            continue
-
-        return response
-
-    raise Exception(f"Max retries ({max_retries}) exceeded")
+```text
+delay = min(base_delay * 2^attempt, max_delay) + random_jitter
 ```
 
-```javascript [JavaScript]
-async function requestWithRetry(url, options, maxRetries = 5) {
-  for (let attempt = 0; attempt < maxRetries; attempt++) {
-    const response = await fetch(url, options);
+## Streaming failures
 
-    if ([429, 500, 502, 503, 504].includes(response.status)) {
-      // No Retry-After header is sent — use exponential backoff with jitter
-      const delay = Math.min(2 ** attempt + Math.random(), 60);
-      await new Promise(r => setTimeout(r, delay * 1000));
-      continue;
-    }
+After a stream starts, an error may arrive in that protocol's stream format instead of as a new HTTP response. Treat the stream as incomplete, retain any partial output your application needs, and retry only when regenerating the request is safe. Do not assume every provider emits the same terminal event or finish reason.
 
-    return response;
-  }
+## Operational debugging
 
-  throw new Error(`Max retries (${maxRetries}) exceeded`);
-}
-```
+Record the endpoint, HTTP status, selected model or resource ID, timestamp, and any safe request identifier returned by the server. Never log authorization headers, API keys, credential values, or sensitive prompt content.
 
-:::
+Use [Console → Activities](https://www.sandbase.ai/console/activities) to inspect organization request history. When reporting a persistent failure, include sanitized request metadata and the smallest reproducible request.
 
-### Recommended Backoff Parameters
+## See also
 
-| Parameter | Value | Description |
-|-----------|-------|-------------|
-| Base delay | 1 second | Initial wait time |
-| Multiplier | 2x | Double the delay each attempt |
-| Max delay | 60 seconds | Cap the maximum wait time |
-| Jitter | 0–1 second | Random addition to prevent thundering herd |
-| Max retries | 5 | Maximum number of attempts |
-
-## Streaming Errors
-
-When using streaming (`stream: true`), errors can occur mid-stream. These are delivered as SSE events:
-
-### OpenAI Format (Chat Completions)
-
-```
-data: {"error":{"message":"upstream timeout","type":"server_error","code":"stream_timeout"}}
-
-data: [DONE]
-```
-
-### Anthropic Format (Messages)
-
-```
-event: error
-data: {"type":"error","error":{"type":"api_error","message":"upstream timeout"}}
-
-event: message_stop
-data: {"type":"message_stop"}
-```
-
-### Stream-Specific Errors
-
-| Error | Description | Handling |
-|-------|-------------|----------|
-| `stream_timeout` | No data received from upstream for 60s | Retry the full request |
-| `upstream_disconnect` | Provider connection dropped | Retry the full request |
-| `content_filter` | Content was filtered mid-generation | Check your prompt content |
-
-## Error Monitoring
-
-Monitor error rates in the [SandBase Console](https://www.sandbase.ai/console) under **Usage → Errors**. You can:
-
-- View error rates by status code over time
-- Filter by endpoint, model, or API key
-- Set up alerts for elevated error rates
-- Export error logs for debugging
+- [Authentication](/api-reference/authentication)
+- [Errors and retries](/guides/error-handling)
+- [Rate limits](/guides/rate-limiting)
+- [AI-readable Error Guide](/for-agents/errors)

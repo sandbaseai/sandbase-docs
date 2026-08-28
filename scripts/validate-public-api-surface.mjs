@@ -252,6 +252,7 @@ assert.match(config, /'api-reference\/webhooks\.md'/, 'Sandbox event webhook ref
 assert.match(config, /'api-reference\/embeds\/\*\*'/, 'Unmaintained Embed Config pages must stay excluded from the public build')
 assert.match(config, /'api-reference\/environments\/\*\*'/, 'Internal Environment API pages must stay excluded from the public build')
 assert.match(config, /'agents\/endpoint-quickstart\.md'/, 'Retired Service quickstart must stay excluded from the public build')
+assert.match(config, /'admin\/api-keys\.md'/, 'Duplicate API Keys guide must stay excluded from the public build')
 assert.match(config, /'setup\/cli\.md'/, 'Duplicate CLI setup page must stay excluded from the public build')
 assert.match(config, /'setup\/groups\.md'/, 'Retired Platform Groups page must stay excluded from the public build')
 assert.doesNotMatch(platformSidebar, /Service quickstart/, 'Retired Service quickstart must not appear in the docs sidebar')

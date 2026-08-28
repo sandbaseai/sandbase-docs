@@ -12,7 +12,7 @@ Workspace settings control who owns usage, how applications authenticate, and ho
 | Area | Use it for |
 |---|---|
 | [Organizations](/admin/organizations) | Manage the workspace boundary, members, and ownership |
-| [API Keys](/admin/api-keys) | Create and revoke application credentials |
+| [API Keys](/getting-started/api-keys) | Create, rotate, and revoke application credentials |
 | [Billing](/admin/billing) | Review credits, usage, and payment activity |
 | [Rate Limits](/admin/rate-limits) | Understand request limits and safe retry behavior |
 

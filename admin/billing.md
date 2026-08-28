@@ -32,7 +32,7 @@ internal network requests.
 | Key spending limit | Per API key | Optional per-key cap, bounded by the org balance |
 | Alert threshold | Whole org | Notification behavior shown in the current Console |
 
-To set a per-key spending limit, see [API Keys](/admin/api-keys).
+To set a per-key spending limit, see [API Keys](/getting-started/api-keys).
 
 ## Activities and invoices
 

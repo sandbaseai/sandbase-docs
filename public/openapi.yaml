@@ -6,7 +6,8 @@ info:
     Use one account and one key to call Models, ready-made APIs, and Agent Services.
 
     ## Authentication
-    All API requests require an API key passed via `Authorization: Bearer sk-YOUR_KEY` header.
+    Public API requests require a SandBase API key. Use `Authorization: Bearer sk-YOUR_KEY` by default.
+    Anthropic Messages and Google Gemini-compatible operations also document their native SDK-compatible key locations.
 
     ## SDK Compatibility
     - **LLM Gateway** (`/v1/chat/completions`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
@@ -14,7 +15,7 @@ info:
     - **Images** (`/v1/images/generations`, `/v1/images/edits`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
     - **Anthropic Messages** (`/v1/messages`): Use Anthropic SDK with `base_url="https://api.sandbase.ai"`
     - **Google Gemini GenerateContent** (`/v1beta/models/{model}:generateContent`): Configure the Google Gen AI SDK to use `https://api.sandbase.ai`
-    - **Agents and Sessions** (`/v1/agents`, `/v1/sessions`): Use Anthropic SDK with `base_url="https://api.sandbase.ai"`
+    - **Agents and Sessions** (`/v1/agents`, `/v1/sessions`): Use the documented SandBase HTTP resource APIs
   version: 1.0.0
   x-sandbase-session-contract:
     status: active
@@ -2990,7 +2991,7 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-      description: "API key with `sk-sb-` prefix"
+      description: SandBase API key. Treat the complete credential as an opaque secret.
     AnthropicApiKey:
       type: apiKey
       in: header
@@ -3716,7 +3717,7 @@ components:
         model:
           type: string
           description: Model identifier
-          example: "gpt-4o"
+          example: "openai/gpt-5.4"
         messages:
           type: array
           items:

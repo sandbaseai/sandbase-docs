@@ -7,14 +7,15 @@ description: How to create, manage, and secure your SandBase API keys for authen
 
 API keys authenticate your requests to SandBase. This guide covers how to create keys, use them in requests, and keep them secure.
 
-## Creating an API Key
+## Create an API key
 
 1. Log in to the [SandBase Console](https://www.sandbase.ai/console)
-2. Navigate to **API Keys** in the sidebar (or go to [console/keys](https://www.sandbase.ai/console/keys) directly)
-3. Click **Create API Key**
+2. Open **Developer → API Keys** (or go directly to [Console → API Keys](https://www.sandbase.ai/console/keys))
+3. Click **New key**
 4. Enter a descriptive name (e.g., "Production Server", "Local Development")
-5. Click **Create**
-6. Copy the key immediately — it will only be displayed once
+5. Optionally set a spending limit and expiration
+6. Click **Create key**
+7. Copy the key immediately — it will only be displayed once
 
 ::: danger Important
 Your API key is shown only once at creation time. If you lose it, you'll need to create a new one. Store it securely before closing the dialog.
@@ -31,7 +32,7 @@ sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Existing `sk-sb-...` keys remain valid until they expire or are revoked. Do not use the prefix alone to validate a
 credential; always treat the complete value as an opaque secret.
 
-## Authentication Methods
+## Authentication methods
 
 SandBase supports two ways to pass your API key in requests:
 
@@ -62,14 +63,16 @@ Only `POST /v1/messages` reads `x-api-key`, and it takes priority when both supp
 Bearer header for every other public endpoint.
 :::
 
-## Key Permissions
+## Key permissions
 
 SandBase API keys are scoped at the **organization level**:
 
-- A standard key can call public API resources available to the organization
+- A standard Console-created key can call public API resources available to the organization
 - Usage is billed to the organization that owns the key
 - A key can have an optional expiration and spending limit
-- SandBase-issued credentials can be restricted to a specific scope; a scoped credential returns `403` outside that scope
+- SandBase-issued credentials, such as CLI Login keys, can carry a restricted scope and return `403` outside that scope
+
+The Console does not currently expose user-selected scopes for a standard key. CLI Login keys are created by the guided authorization flow, appear separately in the API Keys page, and cannot be edited like standard keys.
 
 Treat each key as an application credential rather than a personal password. Use organization membership for human access and API keys for workloads.
 
@@ -86,7 +89,7 @@ Create a different key for every application and environment:
 
 Record the owner and deployment that consumes each key. During rotation, deploy the new key, verify successful requests, and only then revoke the old key.
 
-## Key Expiration and Revocation
+## Key expiration and revocation
 
 ### Expiration
 
@@ -100,12 +103,12 @@ To revoke (disable) a key:
 
 1. Go to [Console → API Keys](https://www.sandbase.ai/console/keys)
 2. Find the key you want to revoke
-3. Click the **Revoke** button
+3. Click **Revoke**
 4. Confirm the action
 
 Revoked keys cannot authenticate new requests. Revocation cannot be undone — create a new key if you revoke one by mistake.
 
-## Security Best Practices
+## Security best practices
 
 ### Never commit keys to version control
 
@@ -159,12 +162,13 @@ For temporary access (CI/CD pipelines, contractor access, demos), set an expirat
 |-------|-------|-----|
 | `401 - missing API key` | No key provided in request | Add an `Authorization: Bearer <key>` header |
 | `401 - invalid API key` | Key doesn't exist | Check for typos and ensure the full key is included |
-| `401 - API key has been revoked` | Key was disabled in the console | Create a new key |
+| `401 - API key has been revoked` | Key was permanently revoked in the Console | Create a replacement key |
 | `401 - API key has expired` | Key passed its expiration date | Create a new key or extend expiration |
 | `402 - API key spending limit exceeded` | Key reached its configured spending limit | Raise the limit or use another authorized key |
 | `403 - insufficient_scope` | A scoped credential cannot call this endpoint | Use a key authorized for the endpoint |
 
-## Next Steps
+## Next steps
 
 - [**First API Call**](/getting-started/first-call) — Make a detailed API call with full request/response walkthrough
+- [**Authentication**](/api-reference/authentication) — Supported headers, lifecycle, and protocol-specific errors
 - [**API Reference**](/api-reference/) — Complete endpoint documentation

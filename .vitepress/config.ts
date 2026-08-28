@@ -215,6 +215,7 @@ export default defineConfig({
     'api-reference/embeds/**',
     'api-reference/environments/**',
     'agents/endpoint-quickstart.md',
+    'admin/api-keys.md',
     'setup/cli.md',
     'setup/groups.md',
   ],

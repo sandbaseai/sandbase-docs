@@ -13,6 +13,7 @@ for (const retiredPage of [
   'CONTRIBUTING.html',
   'DEPLOYMENT.html',
   'agents/endpoint-quickstart.html',
+  'admin/api-keys.html',
   'setup/cli.html',
   'setup/groups.html',
 ]) {
@@ -20,7 +21,7 @@ for (const retiredPage of [
 }
 
 const sitemap = readFileSync(path.join(dist, 'sitemap.xml'), 'utf8')
-for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/setup/cli', '/docs/setup/groups', '/docs/agents/deployments', '/docs/store/models']) {
+for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/admin/api-keys', '/docs/setup/cli', '/docs/setup/groups', '/docs/agents/deployments', '/docs/store/models']) {
   assert.ok(!sitemap.includes(`<loc>https://www.sandbase.ai${excludedUrl}</loc>`), `${excludedUrl} must not be indexed in the sitemap`)
 }
 

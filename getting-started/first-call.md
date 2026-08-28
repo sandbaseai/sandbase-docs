@@ -52,13 +52,13 @@ POST https://api.sandbase.ai/v1/chat/completions
 |-----------|------|----------|-------------|
 | `model` | string | Yes | An enabled model ID returned by `GET /v1/models` (for example, `deepseek/deepseek-v4-flash`) |
 | `messages` | array | Yes | Conversation history as an array of message objects |
-| `temperature` | number | No | Sampling temperature (0–2). Lower = more deterministic. Default varies by model. |
+| `temperature` | number | No | Sampling temperature (0–2). Support and defaults can vary by model. |
 | `max_tokens` | integer | No | Maximum tokens to generate in the response |
 | `top_p` | number | No | Nucleus sampling parameter (0–1) |
 | `stream` | boolean | No | Whether to stream the response. Default: `false` |
 | `stop` | string or array | No | Stop sequences — generation stops when these are encountered |
-| `frequency_penalty` | number | No | Penalize repeated tokens (-2 to 2) |
-| `presence_penalty` | number | No | Penalize tokens already in the conversation (-2 to 2) |
+| `frequency_penalty` | number | No | Provider-compatible repetition penalty when supported |
+| `presence_penalty` | number | No | Provider-compatible presence penalty when supported |
 
 ### Message Roles
 
@@ -67,6 +67,7 @@ POST https://api.sandbase.ai/v1/chat/completions
 | `system` | Sets the assistant's behavior and personality |
 | `user` | The human's input |
 | `assistant` | Previous assistant responses (for multi-turn conversations) |
+| `developer`, `tool` | Additional OpenAI-compatible roles when supported by the selected model and route |
 
 ## Full Request Example
 
@@ -88,10 +89,11 @@ curl https://api.sandbase.ai/v1/chat/completions \
 ```
 
 ```python [Python]
+import os
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="sk-YOUR_API_KEY",
+    api_key=os.environ["SANDBASE_API_KEY"],
     base_url="https://api.sandbase.ai/v1"
 )
 
@@ -112,7 +114,7 @@ print(response.choices[0].message.content)
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: 'sk-YOUR_API_KEY',
+  apiKey: process.env.SANDBASE_API_KEY,
   baseURL: 'https://api.sandbase.ai/v1',
 });
 
@@ -176,13 +178,16 @@ console.log(response.choices[0].message.content);
 | `usage.completion_tokens` | Tokens in the generated output |
 | `usage.total_tokens` | Sum of prompt + completion tokens |
 
-### Finish Reasons
+### Finish reasons
 
-| Value | Meaning |
+Finish reasons are provider-dependent. Common OpenAI-compatible values include:
+
+| Value | Typical meaning |
 |-------|---------|
 | `stop` | Natural end of response or hit a stop sequence |
 | `length` | Hit `max_tokens` limit — response was truncated |
-| `content_filter` | Content was filtered by safety systems |
+
+Treat unknown values as valid provider output rather than rejecting the response.
 
 ## Streaming Responses
 
@@ -191,10 +196,11 @@ For real-time output (like a chatbot typing), use streaming. The response arrive
 ::: code-group
 
 ```python [Python]
+import os
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="sk-YOUR_API_KEY",
+    api_key=os.environ["SANDBASE_API_KEY"],
     base_url="https://api.sandbase.ai/v1"
 )
 
@@ -214,7 +220,7 @@ print()  # newline at the end
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: 'sk-YOUR_API_KEY',
+  apiKey: process.env.SANDBASE_API_KEY,
   baseURL: 'https://api.sandbase.ai/v1',
 });
 
@@ -233,7 +239,7 @@ console.log();
 
 ```bash [cURL]
 curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-YOUR_API_KEY" \
+  -H "Authorization: Bearer $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -N \
   -d '{
@@ -274,10 +280,11 @@ SandBase also exposes an Anthropic-compatible endpoint at `POST /v1/messages`. U
 ::: code-group
 
 ```python [Python]
+import os
 import anthropic
 
 client = anthropic.Anthropic(
-    api_key="sk-YOUR_API_KEY",
+    api_key=os.environ["SANDBASE_API_KEY"],
     base_url="https://api.sandbase.ai"
 )
 
@@ -295,7 +302,7 @@ print(message.content[0].text)
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'sk-YOUR_API_KEY',
+  apiKey: process.env.SANDBASE_API_KEY,
   baseURL: 'https://api.sandbase.ai',
 });
 
@@ -350,10 +357,11 @@ The Anthropic-compatible endpoint returns responses in Anthropic's format:
 Streaming with the Anthropic SDK works the same way — just pass `stream=True`:
 
 ```python
+import os
 import anthropic
 
 client = anthropic.Anthropic(
-    api_key="sk-YOUR_API_KEY",
+    api_key=os.environ["SANDBASE_API_KEY"],
     base_url="https://api.sandbase.ai"
 )
 
@@ -375,7 +383,7 @@ When selecting a model, check its live model card for availability, pricing, con
 - Open the [Model API Reference](/model-api-reference/) for model-specific request fields.
 - Query `GET /v1/models` when an integration needs current model metadata programmatically.
 
-You can switch models by changing the `model` parameter — no other code changes needed.
+For models that share the same compatible interface, switching usually starts with the `model` parameter. Recheck the selected model's capabilities and schema before carrying over optional fields, tools, media inputs, or structured-output settings.
 
 ## Next Steps
 

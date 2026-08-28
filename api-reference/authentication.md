@@ -1,6 +1,6 @@
 ---
-title: Authentication
-description: Authenticate SandBase APIs with Bearer tokens, or use x-api-key specifically with Anthropic Messages.
+title: API Authentication
+description: Authenticate SandBase APIs with Bearer tokens and supported protocol-compatible API key headers.
 ---
 
 # Authentication
@@ -10,10 +10,9 @@ key-management practices. Console authentication and its internal APIs are not p
 
 ## Authentication Methods
 
-Standard SandBase `/v1/*` endpoints require a Bearer token. The Anthropic-compatible `/v1/messages` endpoint also
-accepts `x-api-key` for Anthropic SDK compatibility.
+Standard SandBase `/v1/*` endpoints require a Bearer token. Anthropic Messages and Google Gemini-compatible operations also accept their native SDK-compatible API key locations.
 
-### Method 1: Bearer Token
+### Bearer token
 
 Include the key in the `Authorization` header:
 
@@ -23,7 +22,7 @@ Authorization: Bearer sk-your-api-key
 
 This is the standard method used by OpenAI-compatible SDKs.
 
-### Anthropic Messages: x-api-key Header
+### Anthropic Messages: x-api-key header
 
 Include the key in the `x-api-key` header:
 
@@ -38,12 +37,16 @@ authentication for Chat Completions, Embeddings, `/v1/run`, and resource APIs.
 
 For `POST /v1/messages` only, `x-api-key` takes priority when both headers are present.
 
+### Google Gemini-compatible API keys
+
+Gemini GenerateContent and Interactions operations accept `x-goog-api-key`, `Authorization: Bearer …`, or the `key` query parameter, in that priority order. Prefer a header because query-string credentials can appear in logs and browser history. See [Google Gemini](/api-reference/gemini-generate-content) and [Gemini Interactions](/api-reference/gemini-interactions) for the supported paths.
+
 ### Extraction Logic
 
 Standard endpoints read `Authorization: Bearer <key>` only. The Anthropic Messages middleware reads `x-api-key`
 first and then falls back to the Bearer header. A missing supported credential returns `401 Unauthorized`.
 
-## API Key Format
+## API key format
 
 New Console-created API keys have this format:
 
@@ -63,13 +66,13 @@ instead of rejecting a credential based on its prefix or length.
 Never expose your API key in client-side code, public repositories, or logs. Treat it like a password.
 :::
 
-## Creating API Keys
+## Create API keys
 
 ### Via Console
 
 1. Log in to the [SandBase Console](https://www.sandbase.ai/console)
-2. Navigate to **Settings → API Keys**
-3. Click **Create New Key**
+2. Open **Developer → API Keys**
+3. Click **New key**
 4. Give the key a descriptive name (e.g., "Production Backend", "Development")
 5. Copy the key immediately — it won't be shown again
 
@@ -78,13 +81,15 @@ Never expose your API key in client-side code, public repositories, or logs. Tre
 | Property | Description |
 |----------|-------------|
 | Name | Human-readable label for identification |
-| Key Hash | Stored hash (the plaintext key is never stored) |
 | Organization | The org this key belongs to |
 | Enabled | Whether the key is active |
+| Spending Limit | Optional per-key spending cap |
 | Expires At | Optional expiration date |
 | Created At | When the key was created |
 
-## Key Lifecycle
+Standard Console-created keys use organization-level access to the documented public API. SandBase-issued credentials, such as CLI Login keys, can carry a restricted scope. The Console does not expose user-selected scopes for standard keys.
+
+## Key lifecycle
 
 ### Rotation
 
@@ -123,6 +128,8 @@ Keys can optionally have an expiration date. Expired keys return `401 Unauthoriz
 | `POST /v1/responses` | API Key (Bearer) | OpenAI-compatible Responses API |
 | `POST /v1/embeddings` | API Key (Bearer) | Text embeddings |
 | `POST /v1/messages` | API Key (Bearer or x-api-key) | Anthropic Messages |
+| `/v1beta/models/*` | API Key (x-goog-api-key, Bearer, or query key) | Gemini GenerateContent |
+| `/v1beta/interactions*` | API Key (x-goog-api-key, Bearer, or query key) | Gemini Interactions |
 
 The SandBase Console uses a separate browser authentication flow. Its internal requests are not supported public
 endpoints and must not be used by integrations.
@@ -142,7 +149,7 @@ API keys are scoped to an organization. When you authenticate with a key:
 | 401 | `invalid API key` | Key not found in database |
 | 401 | `API key has been revoked` | Key was disabled |
 | 401 | `API key has expired` | Key past expiration date |
-| 402 | `API key spending limit exceeded` | Key-level spending limit reached; Task Cost lookup remains available |
+| 402 or protocol-specific 403 | `API key spending limit exceeded` | Key-level spending limit reached; inspect the endpoint's documented error contract |
 | 403 | `insufficient_scope` | Scoped key is not authorized for this endpoint |
 
 ## Security Best Practices
@@ -153,12 +160,12 @@ API keys are scoped to an organization. When you authenticate with a key:
 - **Use separate keys per environment** — Different keys for dev, staging, production
 - **Set expiration dates** — Choose a rotation interval appropriate for your security policy
 - **Monitor usage** — Check the Console for unexpected activity
-- **Use the minimum scope needed** — Create keys with appropriate permissions
+- **Use standard keys only for workloads that need public API access** — Keep scoped CLI Login credentials in their managed flow
 
 ### Don't
 
 - **Don't commit keys to version control** — Add `.env` to `.gitignore`
-- **Don't share keys between team members** — Each developer should have their own key
+- **Don't share one key across unrelated applications** — Separate keys make rotation and incident response safer
 - **Don't expose keys in client-side code** — Always proxy through your backend
 - **Don't log API keys** — Redact keys in application logs
 
