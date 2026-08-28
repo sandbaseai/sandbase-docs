@@ -47,6 +47,8 @@ function inspect(directory) {
     assert.ok(String(frontmatter.description ?? '').trim(), `${filename} must declare a non-empty description`)
     assert.ok(String(frontmatter.title).length <= 65, `${filename} title must be 65 characters or fewer`)
     assert.ok(String(frontmatter.description).length <= 170, `${filename} description must be 170 characters or fewer`)
+    assert.ok(!/\bAPI API\b/i.test(String(frontmatter.title)), `${filename} title must not repeat API`)
+    assert.ok(!/\bAPI API\b/i.test(String(frontmatter.description)), `${filename} description must not repeat API`)
     if (filename.startsWith('model-api-reference/')) {
       assert.ok(!/(?:\.\.\.|…)\s*$/.test(String(frontmatter.title)), `${filename} title must not end with a truncation ellipsis`)
       assert.ok(!/(?:\.\.\.|…)\s*$/.test(String(frontmatter.description)), `${filename} description must not end with a truncation ellipsis`)

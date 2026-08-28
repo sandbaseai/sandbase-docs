@@ -1,5 +1,5 @@
 ---
-title: "Search API Reference"
+title: "Search API Reference — Twitter Web / Search Timeline API"
 description: "Search API reference for SandBase. Use model twitter/web/search-timeline with /v1/run; see request and response examples."
 aside: false
 outline: false

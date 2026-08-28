@@ -1,6 +1,6 @@
 ---
-title: "GPT Image 2 Official API API Reference"
-description: "GPT Image 2 Official API API reference for SandBase. Use model openai/gpt-image-2-official with /v1/run; see request and response examples."
+title: "GPT Image 2 Official API Reference"
+description: "GPT Image 2 Official API reference for SandBase. Use model openai/gpt-image-2-official with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/openai/gpt-image-2-official"

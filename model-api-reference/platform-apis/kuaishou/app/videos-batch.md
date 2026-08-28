@@ -1,6 +1,6 @@
 ---
-title: "Kuaishou batch video query API API Reference"
-description: "Kuaishou batch video query API API reference for SandBase. Use model kuaishou/app/videos-batch with /v1/run; see request and response examples."
+title: "Kuaishou batch video query API Reference"
+description: "Kuaishou batch video query API reference for SandBase. Use model kuaishou/app/videos-batch with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

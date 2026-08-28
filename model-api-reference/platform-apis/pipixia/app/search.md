@@ -1,6 +1,6 @@
 ---
-title: "Search API API Reference — Pipixia App / Search API"
-description: "Search API API reference for SandBase. Use model pipixia/app/search with /v1/run; see request and response examples."
+title: "Search API Reference — Pipixia App / Search API"
+description: "Search API reference for SandBase. Use model pipixia/app/search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
-title: "Search API API Reference — Lemon8 App / Search API"
-description: "Search API API reference for SandBase. Use model lemon8/app/search with /v1/run; see request and response examples."
+title: "Search API Reference — Lemon8 App / Search API"
+description: "Search API reference for SandBase. Use model lemon8/app/search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

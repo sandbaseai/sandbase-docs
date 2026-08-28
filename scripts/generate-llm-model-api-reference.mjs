@@ -292,7 +292,11 @@ function cleanTitle(model) {
 
 function seoTitle(model, disambiguator = '') {
   const suffix = disambiguator ? ` — ${disambiguator} API` : ''
-  const title = `${cleanTitle(model)} API Reference${disambiguator ? suffix : ''}`
+  const modelTitle = cleanTitle(model)
+  // Registry display names for platform operations often already end in
+  // “API”. Avoid producing the low-quality “API API Reference” title while
+  // retaining the protocol wording for all other model names.
+  const title = `${modelTitle}${/\bAPI$/i.test(modelTitle) ? ' Reference' : ' API Reference'}${disambiguator ? suffix : ''}`
   if (title.length <= 65) return title
   // Prefer a readable, non-truncated title. A short vendor disambiguator is
   // enough to distinguish duplicate operation names and keeps search snippets
@@ -302,7 +306,7 @@ function seoTitle(model, disambiguator = '') {
     const vendor = parts.shift() ?? ''
     for (let start = 0; start < parts.length; start += 1) {
       const suffix = ` — ${[vendor, ...parts.slice(start)].filter(Boolean).join(' ')}`
-      const compact = `${cleanTitle(model)} API Reference${suffix}`
+      const compact = `${modelTitle}${/\bAPI$/i.test(modelTitle) ? ' Reference' : ' API Reference'}${suffix}`
       if (compact.length <= 65) return compact
     }
     const uniqueSuffix = ` — ${modelIdentityHash(model)} API`
@@ -366,7 +370,9 @@ function endpointFor(model, category) {
 
 function seoDescription(model, protocol, category) {
   const endpoint = endpointFor(model, category)
-  const base = `${cleanTitle(model)} API reference for SandBase. Use model ${model.name} with ${endpoint}; see request and response examples.`
+  const modelTitle = cleanTitle(model)
+  const apiLabel = /\bAPI$/i.test(modelTitle) ? modelTitle : `${modelTitle} API`
+  const base = `${apiLabel} reference for SandBase. Use model ${model.name} with ${endpoint}; see request and response examples.`
   if (base.length <= 170) return base
   const concise = `SandBase API reference for model ${model.name}. Call ${endpoint}; see request and response examples.`
   if (concise.length <= 170) return concise
