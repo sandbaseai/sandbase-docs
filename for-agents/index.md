@@ -6,7 +6,7 @@ description: Everything an AI agent needs to discover and use SandBase API — o
 # AI-Friendly API Overview
 
 ::: info Session contract
-`session_id` is the public identity for persistent Agent interaction. Direct Session creation and Service (Endpoint) invocation create or continue that Session. Every Schedule (Deployment) trigger creates a separate public `drun_*` DeploymentRun and attempts to create one new Session. Runtime instances remain internal and are never returned.
+`session_id` is the public identity for persistent Agent interaction. Direct Session creation and Service invocation create or continue that Session. Every Schedule (Deployment) trigger creates a separate public `drun_*` DeploymentRun and attempts to create one new Session. Runtime instances remain internal and are never returned.
 :::
 
 > A concise reference for both humans and AI agents. For plain-text versions optimized for LLM ingestion, see [`llms.txt`](https://www.sandbase.ai/docs/llms.txt).
@@ -63,7 +63,7 @@ Beyond the core generation endpoints, SandBase provides APIs for agent lifecycle
 | Group | Key Endpoints | Purpose |
 |-------|---------------|---------|
 | **Agents** | `POST /v1/agents`, `GET /v1/agents`, `POST /v1/agents/{id}` | Create and manage agent definitions |
-| **Services (Endpoints)** | `POST /v1/endpoints/{id}/run` | Invoke a Service and create or continue a Session |
+| **Services** | `POST /v1/endpoints/{id}/run` | Invoke a Service and create or continue a Session |
 | **Sessions** | `POST /v1/sessions`, `POST /v1/sessions/{id}/events` | Create persistent Agent Sessions and send messages |
 | **Schedules (Deployments)** | `POST /v1/deployments` | Define manual or cron triggers; each creates a DeploymentRun |
 | **Skills** | `GET /v1/skills` | Extend agent capabilities with reusable instruction and resource bundles |

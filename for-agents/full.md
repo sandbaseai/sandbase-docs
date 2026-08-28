@@ -6,7 +6,7 @@ description: Expanded SandBase API guide for AI agents, with core workflows, req
 # AI API Guide
 
 ::: info Session contract
-`session_id` is the persistent public identity for Agent interaction. Service (Endpoint) invocation creates or continues a Session. Every Schedule (Deployment) trigger creates a public `drun_*` DeploymentRun and attempts to create one new Session. Internal Runtime Session IDs are not exposed.
+`session_id` is the persistent public identity for Agent interaction. Service invocation creates or continues a Session. Every Schedule (Deployment) trigger creates a public `drun_*` DeploymentRun and attempts to create one new Session. Internal Runtime Session IDs are not exposed.
 :::
 
 > A single-page guide to the most common API workflows. For the complete machine-readable contract, use the [OpenAPI specification](https://www.sandbase.ai/docs/openapi.yaml). Plain-text version: [`llms-full.txt`](https://www.sandbase.ai/docs/llms-full.txt).
@@ -426,7 +426,7 @@ curl https://api.sandbase.ai/v1/agents/agent_abc123/versions \
 
 ---
 
-## Services (Endpoints)
+## Services
 
 ### POST /v1/endpoints/{id}/run — Invoke Service
 
