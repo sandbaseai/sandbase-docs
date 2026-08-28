@@ -5,7 +5,7 @@ description: Browse SandBase LLM Models APIs by provider and open a model page f
 
 # LLM Models
 
-Browse enabled llm models models by provider in the left navigation. Open an entry for its exact model identifier, supported capabilities, and a working request.
+Browse enabled LLM models by provider in the left navigation. Open an entry for its exact model identifier, supported capabilities, and a working request.
 
 Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. Other LLM models use `/v1/chat/completions` unless a model-specific protocol is added later.
 

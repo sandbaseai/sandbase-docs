@@ -1546,7 +1546,13 @@ function writeCategoryOverview(category) {
   }
   const totalCapabilities = [...new Set(category.models.flatMap((model) => model.capability_tags ?? []))].sort()
   const categoryApiLabel = category.key === 'api' ? category.title : category.title.endsWith('API') ? category.title : `${category.title} APIs`
-  const categoryModelLabel = category.key === 'api' ? 'operations' : category.title.endsWith('API') ? `${category.title} entries` : `${category.title.toLowerCase()} models`
+  const categoryModelLabel = category.key === 'api'
+    ? 'operations'
+    : category.title.endsWith('API')
+      ? `${category.title} entries`
+      : category.title.endsWith('Models')
+        ? (category.title === 'LLM Models' ? 'LLM models' : category.title.toLowerCase())
+        : `${category.title.toLowerCase()} models`
   const protocolNote = category.key === 'api'
     ? 'Platform operations use `POST /v1/run` with the model name shown on each page. Synchronous operations return their result directly; asynchronous operations return a run id that can be queried with `GET /v1/run/{id}`.'
     : ['image', 'video', 'audio'].includes(category.key)
