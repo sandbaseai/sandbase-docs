@@ -54,7 +54,7 @@ Platform resources belong to the organization associated with the API key. Use t
 ## Reference formats
 
 - Browse operations from the sidebar for examples and response details.
-- Download the machine-readable [OpenAPI specification](/docs/openapi.yaml).
+- Download the machine-readable [OpenAPI specification](/openapi.yaml).
 - Use the [Model API Reference](/model-api-reference/) for inference endpoints and model-specific schemas.
 
 ## Next steps

@@ -17,7 +17,7 @@ so there is no single error JSON shape shared by every endpoint.
 
 Use the response's HTTP status and documented body. Do not require optional fields such as `code`, `param`, or
 `request_id` unless the selected endpoint guarantees them. See the [API error reference](/api-reference/errors) for
-examples and the [OpenAPI specification](/docs/openapi.yaml) for operation-specific responses.
+examples and the [OpenAPI specification](/openapi.yaml) for operation-specific responses.
 
 ## Decide what to do by status
 
