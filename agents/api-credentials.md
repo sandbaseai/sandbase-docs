@@ -1,21 +1,31 @@
 ---
-title: API Credentials
-description: Store API keys and other secrets your Agents need when using external tools.
+title: Credentials for Agent tools
+description: Securely store and scope API keys, tokens, and other credentials used by SandBase Agents and Services.
 ---
 
-# API Credentials
+# Credentials for Agent tools
 
 Credentials are the API keys, tokens, connection strings, and other private values an Agent needs to use external services.
 
 ## How credentials work
 
-When an Agent executes, SandBase injects its credentials as environment variables. The variables are available to selected APIs and tools but are never written into prompts, logs, or Session history.
+SandBase stores each credential as an encrypted, write-only value. The Console and public API expose its name, scope, status, and a masked hint—not the saved value. At execution time, the runtime resolves active credentials that match the Agent or Service configuration.
 
 ## Managing credentials
 
 ### In the Console
 
-Navigate to **Agents → [Your Agent] → Credentials** to add, edit, or remove private values.
+Navigate to **Developer → Credentials**.
+
+When adding a credential, choose the narrowest useful scope:
+
+| Scope | Use it for |
+|---|---|
+| Workspace | A value available to eligible Agents in the current workspace |
+| Agent | A value associated with one Agent ID |
+| Published Agent | A value associated with a published Service workflow |
+
+Saved values cannot be read back. To replace one, use the credential's **Manage** action and rotate it. A credential can be disabled; disabled records remain visible as metadata.
 
 ### Common Variables
 
@@ -28,10 +38,10 @@ Navigate to **Agents → [Your Agent] → Credentials** to add, edit, or remove 
 
 ## Security
 
-- Variables are encrypted at rest
-- Only accessible during Agent execution
-- Not visible in run logs or event streams
-- Scoped to a specific Agent (not shared across agents)
+- Values are encrypted before storage and omitted from credential responses
+- The Console shows only masked metadata after creation
+- Scopes control where a credential can be selected; use Agent scope when a workspace-wide value is unnecessary
+- Keep secrets out of prompts, instructions, test input, and manually authored event payloads
 
 ## Next steps
 

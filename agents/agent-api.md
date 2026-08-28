@@ -37,11 +37,11 @@ The exact UI can change, but the idea stays the same:
 
 Run the Agent from the Console first.
 
-Each run keeps the input, output, tool calls, errors, and trace together so you can debug it.
+Each test creates a Session. Use its event history to inspect accepted input, Agent responses, errors, and tool activity emitted during the run.
 
 ## Publish only when it works
 
-When the Agent is tested, publish it as a callable Service, or create a Schedule for recurring work.
+When the Agent is tested, publish a selected version as a callable Service, or create a Schedule for manual or recurring runs.
 
 ## Next steps
 

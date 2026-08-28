@@ -25,7 +25,7 @@ Add tools when your Agent needs to:
 1. Browse **APIs** or **Skills** in Store.
 2. Open the Agent draft.
 3. Add only the capabilities required by its instructions.
-4. Add the required API credentials. SandBase injects them securely as environment variables when the Agent runs.
+4. Add the required values under **Developer → Credentials**. SandBase resolves matching credentials when the Agent runs.
 5. Test the Agent and inspect its Session events and tool activity.
 
 Protocol-level integration details are documented in the [API Reference](/api-reference/), not required for the normal Agent-building flow.
@@ -49,8 +49,8 @@ Credentials are private values used to authenticate an API, such as `GITHUB_TOKE
 
 - call them **credentials** in the Console and documentation
 - store them outside prompts and Agent instructions
-- inject them as environment variables only at runtime
-- never expose their values in Session events or logs
+- treat the value as write-only after saving; the Console and public API return masked metadata rather than the stored value
+- do not paste secret values into prompts, Agent instructions, or test input
 
 ## Next steps
 

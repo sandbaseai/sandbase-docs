@@ -1,11 +1,11 @@
 ---
 title: Schedules
-description: Run an Agent manually or on a cron schedule and inspect every trigger.
+description: Configure manual or cron-based Agent runs and inspect each Schedule trigger through SandBase Sessions.
 ---
 
 # Schedules
 
-A **Schedule** stores repeatable Agent input and optionally a cron expression. The underlying API resource is a **Deployment**, so Schedule operations use `/v1/deployments`.
+A **Schedule** stores a pinned Agent version, starting events, and optionally a cron expression. The underlying public API resource keeps the compatibility name **Deployment**, so Schedule operations use `/v1/deployments` and `depl_` IDs.
 
 ## Trigger lifecycle
 
@@ -15,7 +15,7 @@ Every manual or cron trigger:
 2. attempts to create exactly one new `sess_*` Session;
 3. resolves the DeploymentRun to `succeeded` with `session_id`, or `failed` with an error.
 
-DeploymentRun may briefly be `pending`. Its terminal status describes the Session-creation attempt; inspect the linked Session for Agent execution and events.
+A DeploymentRun may briefly be `pending`. Its terminal status describes whether the trigger resolved to a Session; it is not the Agent's final execution status. Inspect the linked Session for subsequent Agent events and errors.
 
 ## Trigger manually
 

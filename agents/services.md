@@ -5,11 +5,11 @@ description: Publish a tested Agent as a stable callable Service.
 
 # Services
 
-A **Service** makes a tested Agent callable from an application or AI tool. Service management and invocation use the compatibility path `/v1/endpoints` and `ep_` IDs. Public invocation uses REST or experimental ACP according to its `protocols` setting.
+A **Service** makes a tested Agent version callable from an application or another supported client. In the public API, the underlying resource keeps the compatibility name `endpoint`: Service management and invocation use `/v1/endpoints` and `ep_` IDs. Public invocation uses REST or experimental ACP according to the Service's `protocols` setting.
 
 ## When to create a Service
 
-Create one when the Agent and its input contract are tested and an external caller needs a stable invocation URL. Keep editing and testing the Agent separately, then update the Service deliberately.
+Create one when the Agent and its input contract are tested and an external caller needs a stable invocation URL. A Service is pinned to a selected Agent version. Publishing a newer Agent version does not silently change the Service; upgrade its binding deliberately.
 
 ## Invoke a Service
 
@@ -20,7 +20,7 @@ curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../run \
   -d '{"input":"Prepare a sourced customer brief."}'
 ```
 
-Omit `session_id` to create a Session, or provide an existing authorized `session_id` to continue it. The response contains the persistent `session_id` and accepted Session events; it does not create a DeploymentRun.
+Omit `session_id` to create a Session. To continue one, provide a Session previously created by the same Service and still bound to the same Agent version. A successful request returns `202 Accepted` with the persistent `session_id` and accepted event metadata; it does not create a DeploymentRun.
 
 ## API compatibility names
 

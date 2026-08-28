@@ -5,7 +5,7 @@ description: Understand persistent Agent interactions, events, and the Sessions 
 
 # Sessions
 
-A **Session** is one persistent interaction with an Agent. Its public ID begins with `sess_` and remains stable while messages, tool results, status events, and Agent responses are appended to its event history.
+A **Session** is one persistent interaction with an Agent. Its public ID begins with `sess_` and remains stable while accepted messages and subsequent Agent events are appended to its event history.
 
 ## How Sessions start
 
@@ -13,7 +13,7 @@ A **Session** is one persistent interaction with an Agent. Its public ID begins 
 - Invoke a [Service](/agents/services) without `session_id`.
 - Trigger a [Schedule](/agents/schedules); every successful trigger creates a new Session.
 
-A Service can continue an existing Session when its invocation includes `session_id`. A Schedule never reuses a Session.
+A Service can continue only a Session created by that same Service and still matching its Agent-version binding. A Schedule never reuses a Session.
 
 ## Sessions and DeploymentRuns
 

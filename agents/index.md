@@ -20,14 +20,14 @@ It is a saved configuration that answers four questions:
 | What should it do? | Research a company and return a sourced report |
 | How should it think? | Use a reasoning Model with clear instructions |
 | What can it use? | Search API, scrape API, internal Skills |
-| How does it run? | Manual test, published endpoint, or schedule |
+| How does it run? | Manual test, Service, or Schedule |
 
 ## Build first, connect later
 
 SandBase separates building from delivery:
 
 1. **Build Agent** — define and test the Agent.
-2. **Services** — expose a tested Agent to your app, users, or Setup.
+2. **Services** — expose a tested Agent to an application or another supported client.
 3. **Schedules** — run a tested Agent on a timer.
 4. **Sessions** — inspect persistent Agent interaction and event history.
 
@@ -49,7 +49,7 @@ Do not publish a draft just because one happy-path test succeeded. Test missing 
 
 ### 3. Publish
 
-Publish a tested version as a Service when an application, teammate, or Setup needs a stable callable Agent. A Service preserves the editable draft and exposes a stable callable interface.
+Publish a tested Agent version as a Service when an application or another supported client needs a stable callable interface. The Service stays pinned to that version until you deliberately upgrade it, while the Agent can continue to evolve separately.
 
 ### 4. Schedule
 
@@ -63,7 +63,7 @@ A direct or Service interaction is represented by a Session. Every Schedule trig
 
 - instructions define the expected result and failure behavior
 - only necessary APIs and Skills are enabled
-- API credentials are stored securely and injected as environment variables only at runtime, never placed in prompts
+- required credentials are configured in **Developer → Credentials**, rather than copied into prompts or Agent instructions
 - representative inputs and failure cases have been tested
 - a stable version is published before external use
 - scheduled work has an owner and a clear destination

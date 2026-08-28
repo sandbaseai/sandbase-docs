@@ -91,5 +91,18 @@ const billingAdmin = readFileSync('admin/billing.md', 'utf8')
 assert.doesNotMatch(billingAdmin, /\| Alert threshold \|/, 'Billing docs must not expose a Console control that is not currently rendered')
 assert.match(billingAdmin, /Request History[\s\S]+Usage/, 'Billing docs must describe the current Activities tabs')
 
+const agentOverview = readFileSync('agents/index.md', 'utf8')
+assert.doesNotMatch(agentOverview, /published endpoint/i, 'Agent guide must use the Services product name')
+assert.match(agentOverview, /pinned to that version/, 'Agent guide must explain that Services pin an Agent version')
+
+const credentialGuide = readFileSync('agents/api-credentials.md', 'utf8')
+assert.match(credentialGuide, /Developer → Credentials/, 'Credential guide must use current Console navigation')
+assert.doesNotMatch(credentialGuide, /Agents → \[Your Agent\] → Credentials/, 'Credential guide must not use retired Agent-level navigation')
+assert.match(credentialGuide, /Workspace[\s\S]+Agent[\s\S]+Published Agent/, 'Credential guide must describe the current scope choices')
+
+const servicesGuide = readFileSync('agents/services.md', 'utf8')
+assert.match(servicesGuide, /202 Accepted/, 'Services guide must document asynchronous REST acceptance')
+assert.match(servicesGuide, /same Service/, 'Services guide must explain Session continuation binding')
+
 assert.ok(inspected > 0, 'content validation did not inspect any public hand-written pages')
 console.log(`public hand-written content: ok (${inspected} pages)`)
