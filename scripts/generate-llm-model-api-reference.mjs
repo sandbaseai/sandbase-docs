@@ -1554,7 +1554,7 @@ function writeCategoryOverview(category) {
         ? (category.title === 'LLM Models' ? 'LLM models' : category.title.toLowerCase())
         : `${category.title.toLowerCase()} models`
   const protocolNote = category.key === 'api'
-    ? 'Platform operations use `POST /v1/run` with the model name shown on each page. Synchronous operations return their result directly; asynchronous operations return a run id that can be queried with `GET /v1/run/{id}`.'
+    ? 'Platform operations use `POST /v1/run` with the model name shown on each page. Synchronous operations return their result directly; asynchronous operations return a run id that can be queried with `GET /v1/run/{id}`. The live Store is the availability source of truth; a newly enabled operation can appear there before its generated reference page is published.'
     : ['image', 'video', 'audio'].includes(category.key)
     ? `${category.title} models use the SandBase generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.`
     : 'Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. Other LLM models use `/v1/chat/completions` unless a model-specific protocol is added later.'
