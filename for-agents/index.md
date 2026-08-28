@@ -38,7 +38,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "openai/gpt-5.4",
+    "model": "openai/gpt-5.6-luna",
     "messages": [{"role": "user", "content": "Hello!"}]
   }'
 ```

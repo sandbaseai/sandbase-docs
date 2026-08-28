@@ -41,6 +41,7 @@ const forbidden = [
   [/\bPublished Agents?\b/, 'legacy product label; use Services'],
   [/\bSeedance Native API\b/, 'legacy provider-native API label; use Official Native API'],
   [/openai\/gpt-4o\b/, 'stale hand-written example model'],
+  [/openai\/gpt-5\.4\b/, 'stale hand-written example model'],
   [/anthropic\/claude-sonnet-4(?:-|\b)/, 'stale hand-written example model'],
   [/deepseek\/deepseek-v3\b/, 'stale hand-written example model'],
   [/gemini-2\.5-flash\b/, 'stale hand-written example model'],

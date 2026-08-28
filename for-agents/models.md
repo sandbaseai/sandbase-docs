@@ -42,7 +42,7 @@ infer its format or construct a different polling path from an ID prefix or comp
 Model names are vendor-qualified and may contain `/`:
 
 ```bash
-curl https://api.sandbase.ai/v1/models/openai/gpt-5.4 \
+curl https://api.sandbase.ai/v1/models/openai/gpt-5.6-luna \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
