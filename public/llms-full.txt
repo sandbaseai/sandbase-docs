@@ -335,7 +335,7 @@ data: {"id":"sevt_002","type":"session.status_idle","stop_reason":{"type":"end_t
 
 ## POST /v1/deployments
 
-Create a Schedule through the Deployments API. Each trigger creates a distinct drun_* DeploymentRun and attempts to create exactly one new sess_* Session.
+Create a Schedule through the `/v1/deployments` compatibility resource. Each trigger creates a distinct drun_* DeploymentRun and attempts to create exactly one new sess_* Session.
 
 Request:
 ```
