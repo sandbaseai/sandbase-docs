@@ -227,6 +227,10 @@ export default defineConfig({
     'admin/api-keys.md',
     'setup/cli.md',
     'setup/groups.md',
+    // These provider operations explicitly state that the upstream service is
+    // unavailable; do not publish dead model pages or index them.
+    'model-api-reference/platform-apis/douyin/web/live-room.md',
+    'model-api-reference/platform-apis/tiktok/web/live-room.md',
   ],
   title: 'SandBase Docs',
   description: 'SandBase docs for connecting Agents to models, APIs, tools, Setup, Services, Schedules, and Sessions.',

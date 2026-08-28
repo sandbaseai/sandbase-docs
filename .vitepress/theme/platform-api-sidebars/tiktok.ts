@@ -313,10 +313,6 @@ export default {
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/check-live-room-online"
         },
         {
-          "text": "Extract live room danmaku",
-          "link": "/model-api-reference/platform-apis/tiktok/web/live-room"
-        },
-        {
           "text": "Extract live room ID from live room link",
           "link": "/model-api-reference/platform-apis/tiktok/web/live-room-id"
         },

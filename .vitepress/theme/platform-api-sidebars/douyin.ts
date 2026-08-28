@@ -325,10 +325,6 @@ export default {
           "link": "/model-api-reference/platform-apis/douyin/web/all-webcast-id"
         },
         {
-          "text": "Extract live room danmaku",
-          "link": "/model-api-reference/platform-apis/douyin/web/live-room"
-        },
-        {
           "text": "Extract webcast id",
           "link": "/model-api-reference/platform-apis/douyin/web/webcast-id"
         },

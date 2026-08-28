@@ -16,6 +16,8 @@ for (const retiredPage of [
   'admin/api-keys.html',
   'setup/cli.html',
   'setup/groups.html',
+  'model-api-reference/platform-apis/douyin/web/live-room.html',
+  'model-api-reference/platform-apis/tiktok/web/live-room.html',
 ]) {
   assert.ok(!existsSync(path.join(dist, retiredPage)), `${retiredPage} must not be included in the public docs build`)
 }

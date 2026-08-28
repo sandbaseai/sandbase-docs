@@ -416,6 +416,7 @@ assert.deepEqual(
 )
 assert.match(sidebar, /\/model-api-reference\/seedance-native-api\//, 'Sidebar must link to the Official Native API reference')
 assert.doesNotMatch(sidebar, /\/api-reference\/volcengine-contents-generations/, 'Inference navigation must not duplicate the Official Native API reference')
+assert.doesNotMatch(sidebar, /platform-apis\/(?:douyin|tiktok)\/web\/live-room/, 'Provider sidebars must not link operations that are unavailable online')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
 const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.doesNotMatch(getRunPath, /pattern:/, 'Run result lookup IDs must not inherit another resource prefix')
