@@ -663,7 +663,8 @@ for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
     )
   }
 }
-assert.match(deploymentSchema, /required: \[id, type, name, description, metadata, resources, vault_ids, agent, agent_id, agent_version, environment_id, schedule, timeout_policy, status, version, next_run_at, creation_mode, created_at, updated_at\]/, 'Deployment responses must require fields emitted by every list and detail projection')
+assert.match(deploymentSchema, /required: \[id, type, name, description, metadata, resources, vault_ids, agent, agent_id, agent_version, schedule, timeout_policy, status, version, next_run_at, creation_mode, created_at, updated_at\]/, 'Deployment responses must require fields emitted by every list and detail projection')
+assert.doesNotMatch(deploymentSchema, /environment_id|environment_binding/, 'Public Schedule responses must not expose internal Environment bindings')
 const deploymentResourcePath = openapi.match(/^  \/v1\/deployments\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 for (const status of ['400', '401', '402', '403', '404', '409', '422', '500']) {
   assert.match(deploymentResourcePath, new RegExp(`'${status}':`), `Deployment resource operations must collectively document ${status}`)
@@ -937,7 +938,8 @@ for (const field of ['session_metadata', 'memory_config', 'resource_config', 'va
   assert.match(endpointSchema, new RegExp(`${field}:\\n\\s+type: \\[object, 'null'\\]`), `Endpoint ${field} must allow the serializer's null output`)
 }
 assert.match(endpointSchema, /store_status:\n\s+type: string\n\s+enum: \[private, pending_review, public, suspended\]/, 'Endpoint responses must document the serializer\'s store status')
-assert.match(endpointSchema, /required: \[id, type, name, slug, agent_id, agent_version, environment_id, protocols, config, session_metadata, memory_config, resource_config, vault_config, status, store_status, creation_mode, run_url, acp_url, created_at, updated_at\]/, 'Endpoint responses must require every field always emitted by the serializer')
+assert.match(endpointSchema, /required: \[id, type, name, slug, agent_id, agent_version, protocols, config, session_metadata, memory_config, resource_config, vault_config, status, store_status, creation_mode, run_url, acp_url, created_at, updated_at\]/, 'Endpoint responses must require every field always emitted by the serializer')
+assert.doesNotMatch(endpointSchema, /environment_id|environment_binding/, 'Public Service responses must not expose internal Environment bindings')
 assert.match(endpointSchema, /config:\n\s+type: \[object, 'null'\]/, 'Endpoint responses must document advanced config and declarative null output')
 assert.match(endpointSchema, /acp_url:[\s\S]*?presence does not mean ACP is enabled/, 'Endpoint ACP URLs must not imply the protocol is enabled')
 assert.doesNotMatch(endpointSchema, /^        mcp_url:/m, 'Endpoint responses must not document the hidden MCP transport URL')
@@ -948,6 +950,11 @@ for (const schemaName of ['CreateDeclarativeEndpointRequest', 'CreateAdvancedEnd
   assert.match(schema, /protocols:\n\s+type: array\n\s+minItems: 1\n\s+uniqueItems: true/, `${schemaName} must require a non-empty unique protocol list`)
   assert.match(schema, /enum: \[rest, mcp, acp\]/, `${schemaName} must expose only public invocation transports`)
   assert.doesNotMatch(schema, /default: \[rest\]/, `${schemaName} must not claim an unimplemented REST-only server default`)
+  assert.doesNotMatch(schema, /environment_id/, `${schemaName} must not expose the withdrawn Environment field`)
+}
+for (const schemaName of ['UpdateEndpointRequest', 'CreateSessionRequest', 'UpdateDeploymentRequest', 'CreateDeploymentRequest']) {
+  const schema = openapi.match(new RegExp(`^    ${schemaName}:\\n[\\s\\S]*?(?=^    [A-Za-z])`, 'm'))?.[0] ?? ''
+  assert.doesNotMatch(schema, /environment_id/, `${schemaName} must not expose the withdrawn Environment field`)
 }
 const endpointsPath = openapi.match(/^  \/v1\/endpoints:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 const createEndpointOperation = endpointsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''

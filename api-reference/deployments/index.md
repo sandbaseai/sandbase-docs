@@ -5,7 +5,7 @@ description: Create, manage, trigger, and inspect SandBase Schedules through the
 
 # Schedules API
 
-A **Schedule** binds an Agent to repeatable `initial_events`, Runtime Environment settings, timeout policy, and an optional cron expression. For API compatibility, Schedule resources use the `/v1/deployments` path, `depl_*` IDs, and `Deployment` schema name.
+A **Schedule** binds an Agent to repeatable `initial_events`, runtime settings, timeout policy, and an optional cron expression. For API compatibility, Schedule resources use the `/v1/deployments` path, `depl_*` IDs, and `Deployment` schema name.
 
 ::: info Schedule execution identity
 Every trigger creates a durable `drun_*` `DeploymentRun`. A successful trigger associates that record with exactly one newly created `sess_*` Session; a failed trigger has no Session. `DeploymentRun` and Session are separate resources and neither ID substitutes for the other.
@@ -36,7 +36,7 @@ Every trigger creates a durable `drun_*` `DeploymentRun`. A successful trigger a
 
 ## Create example
 
-`name`, `agent_id`, and valid `initial_events` are required. `initial_events` must contain at least one `user.message` event. `environment_id` is optional; omit it to resolve the Agent-owned Environment.
+`name`, `agent_id`, and valid `initial_events` are required. `initial_events` must contain at least one `user.message` event. Runtime binding is resolved by SandBase and is not a public request field.
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/deployments \
@@ -45,7 +45,6 @@ curl -X POST https://api.sandbase.ai/v1/deployments \
   -d '{
     "name": "Daily customer research",
     "agent_id": "agent_01...",
-    "environment_id": "env_01...",
     "initial_events": [{
       "type": "user.message",
       "content": [{"type":"text","text":"Prepare the daily customer brief."}]
@@ -60,7 +59,7 @@ curl -X POST https://api.sandbase.ai/v1/deployments \
 
 The schedule object requires `type: "cron"`, a valid cron `expression`, and an IANA `timezone`. Omit `schedule` only when the Schedule will be triggered manually.
 
-Alternatively, create a declarative Deployment with `name`, `runtime`, and `initial_events` in JSON or YAML. Declarative Deployments generate their Agent and Environment from the runtime definition and use the public REST invocation transport. This release supports the `hermes` runtime. Do not combine `runtime` with `agent_id` or `environment_id`.
+Alternatively, create a declarative Deployment with `name`, `runtime`, and `initial_events` in JSON or YAML. Declarative Deployments resolve their runtime binding from the runtime definition and use the public REST invocation transport. This release supports the `hermes` runtime. Do not combine `runtime` with `agent_id`.
 
 ## Schedule run records
 

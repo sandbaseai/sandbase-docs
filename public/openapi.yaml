@@ -1159,9 +1159,9 @@ paths:
       tags: [Services]
       summary: Create a Service
       description: |
-        Creates a Service from either a declarative runtime definition or an existing Agent and Environment.
+        Creates a Service from either a declarative runtime definition or an existing Agent.
         The two creation modes are mutually exclusive. Declarative YAML uses the same schema as JSON.
-        The bound Agent and Environment must use the same runtime provider, and that provider must be enabled for the organization.
+        The Agent runtime binding must use an enabled provider for the organization.
       requestBody:
         required: true
         content:
@@ -1197,7 +1197,7 @@ paths:
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404':
-          description: Referenced Skill, Agent version, or Environment was not found
+          description: Referenced Skill or Agent version was not found
           content:
             application/json:
               schema: { $ref: '#/components/schemas/APIError' }
@@ -1230,7 +1230,7 @@ paths:
         - name: q
           in: query
           schema: { type: string }
-          description: Search by ID, name, slug, runtime, Agent ID, or Environment ID. `search` is accepted as a compatibility alias.
+          description: Search by ID, name, slug, runtime, or Agent ID. `search` is accepted as a compatibility alias.
         - name: limit
           in: query
           schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
@@ -1327,7 +1327,7 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: 'Service, Agent version, or Environment not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '404': { description: 'Service or Agent version not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '422': { description: Runtime provider is unsupported, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '500': { description: Service update failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     post:
@@ -1359,7 +1359,7 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: 'Service, Agent version, or Environment not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '404': { description: 'Service or Agent version not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '422': { description: Runtime provider is unsupported, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '500': { description: Service update failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
     delete:
@@ -1392,7 +1392,7 @@ paths:
       summary: Invoke a Service over REST
       description: |
         Creates or continues a persistent Session and sends one standard event. Omit `session_id` to create a
-        Session fixed to the Service's Agent version and Runtime Environment snapshot. Provide `session_id` to
+        Session fixed to the Service's Agent version and runtime binding. Provide `session_id` to
         continue that Session. Returns the persistent Session ID and accepted events; no public execution Run or
         internal Runtime Session identity is exposed. When both input and content are supplied, content takes precedence.
       parameters:
@@ -1436,7 +1436,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/APIError' }
         '409':
-          description: Session is busy, archived, terminal, or bound to another Service, Agent, version, or Environment
+          description: Session is busy, archived, terminal, or bound to another Service, Agent, or version
           content:
             application/json:
               schema:
@@ -1766,9 +1766,9 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/SessionAPIError'
                   - $ref: '#/components/schemas/APIKeyScopeError'
-        '404': { description: 'Agent, Agent version, or Environment not found', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
+        '404': { description: 'Agent or Agent version not found', content: { application/json: { schema: { $ref: '#/components/schemas/SessionAPIError' } } } }
         '422':
-          description: The Agent and Environment runtime profiles do not match; a reserved resources or vault_ids value was supplied; or initial_events used unsupported multi-Agent or runtime-resume behavior. When rejection occurs after Session creation, Events are not persisted and Session cleanup follows the documented best-effort compensation path.
+          description: A reserved resources or vault_ids value was supplied, or initial_events used unsupported multi-Agent or runtime-resume behavior. When rejection occurs after Session creation, Events are not persisted and Session cleanup follows the documented best-effort compensation path.
           content:
             application/json:
               schema:
@@ -2263,7 +2263,7 @@ paths:
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
         '404':
-          description: Referenced Skill or Environment not found
+          description: Referenced Skill not found
           content:
             application/json:
               schema: { $ref: '#/components/schemas/APIError' }
@@ -2363,7 +2363,7 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: 'Deployment, Skill, or Environment not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '404': { description: 'Deployment or Skill not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '409': { description: 'Archived, active, running, or version-conflicted Deployment', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '422': { description: Reserved field supplied or Runtime/Skill is incompatible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '500': { description: Deployment update or detail reload failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
@@ -2390,7 +2390,7 @@ paths:
         '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
         '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
-        '404': { description: 'Deployment, Skill, or Environment not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '404': { description: 'Deployment or Skill not found', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '409': { description: 'Archived, active, running, or version-conflicted Deployment', content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '422': { description: Reserved field supplied or Runtime/Skill is incompatible, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
         '500': { description: Deployment update or detail reload failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
@@ -4600,10 +4600,6 @@ components:
         agent_version:
           type: integer
           minimum: 1
-        environment_id:
-          type: string
-          deprecated: true
-          description: Optional compatibility assertion; the Agent runtime Environment is resolved automatically.
         protocols:
           type: array
           minItems: 1
@@ -4658,8 +4654,6 @@ components:
           type: integer
           minimum: 1
           description: Current bound version required when upgrading agent_version.
-        environment_id:
-          type: string
         status:
           type: string
           enum: [active, disabled]
@@ -4690,7 +4684,7 @@ components:
 
     Endpoint:
       type: object
-      required: [id, type, name, slug, agent_id, agent_version, environment_id, protocols, config, session_metadata, memory_config, resource_config, vault_config, status, store_status, creation_mode, run_url, acp_url, created_at, updated_at]
+      required: [id, type, name, slug, agent_id, agent_version, protocols, config, session_metadata, memory_config, resource_config, vault_config, status, store_status, creation_mode, run_url, acp_url, created_at, updated_at]
       properties:
         id:
           type: string
@@ -4706,8 +4700,6 @@ components:
           type: string
         agent_version:
           type: [integer, 'null']
-        environment_id:
-          type: string
         protocols:
           type: array
           description: Enabled transport identifiers. Public values are rest, mcp, and experimental acp; other returned values are reserved.
@@ -5098,9 +5090,6 @@ components:
         agent_version_id:
           type: string
           description: Immutable AgentVersion resource ID. Takes precedence over agent.version when supplied.
-        environment_id:
-          type: string
-          description: Optional authorized per-Session override. Omit to use the Agent-owned default Environment.
         initial_events:
           type: array
           maxItems: 50
@@ -5128,7 +5117,7 @@ components:
 
     Session:
       type: object
-      required: [id, type, status, agent, agent_id, agent_version, agent_version_id, environment_id, source, title, metadata, archived_at, created_at, updated_at]
+      required: [id, type, status, agent, agent_id, agent_version, agent_version_id, source, title, metadata, archived_at, created_at, updated_at]
       properties:
         id:
           type: string
@@ -5144,8 +5133,6 @@ components:
         agent_version:
           type: [integer, 'null']
         agent_version_id:
-          type: string
-        environment_id:
           type: string
         title:
           type: string
@@ -5577,8 +5564,6 @@ components:
             - type: string
             - $ref: '#/components/schemas/AgentReference'
         agent_version: { type: integer, minimum: 1 }
-        environment_id:
-          type: string
         initial_events:
           type: array
           minItems: 1
@@ -5608,7 +5593,6 @@ components:
           oneOf:
             - type: string
             - $ref: '#/components/schemas/AgentReference'
-        environment_id: { type: string }
         initial_events:
           type: array
           minItems: 1
@@ -5629,7 +5613,6 @@ components:
           properties:
             agent_id: { type: string }
             agent_version: { type: integer, minimum: 1 }
-            environment_id: { type: string }
         agent_config: { type: object, additionalProperties: true }
         notification_settings:
           type: [object, 'null']
@@ -5647,7 +5630,7 @@ components:
     Deployment:
       type: object
       description: Deployment resource. List responses omit initial_events and config; detail responses may add resolved binding fields.
-      required: [id, type, name, description, metadata, resources, vault_ids, agent, agent_id, agent_version, environment_id, schedule, timeout_policy, status, version, next_run_at, creation_mode, created_at, updated_at]
+      required: [id, type, name, description, metadata, resources, vault_ids, agent, agent_id, agent_version, schedule, timeout_policy, status, version, next_run_at, creation_mode, created_at, updated_at]
       properties:
         id: { type: string, pattern: '^depl_' }
         type: { type: string, enum: [deployment] }
@@ -5659,7 +5642,6 @@ components:
         agent: { $ref: '#/components/schemas/AgentReference' }
         agent_id: { type: string }
         agent_version: { type: [integer, 'null'] }
-        environment_id: { type: string }
         initial_events:
           type: [array, 'null']
           items: { $ref: '#/components/schemas/SessionEventInput' }
@@ -5673,7 +5655,6 @@ components:
         runtime: { type: string, description: Present for declarative Deployments. }
         skills: { type: array, items: { type: string }, description: Present for declarative Deployments. }
         agent_binding: { type: object, additionalProperties: true }
-        environment_binding: { type: object, additionalProperties: true }
         agent_config: { type: object, additionalProperties: true }
         notification_settings:
           type: object

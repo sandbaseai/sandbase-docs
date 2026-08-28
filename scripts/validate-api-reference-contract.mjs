@@ -135,6 +135,10 @@ for (const [key, spec] of referenceSpecs) {
     }
 
     for (const field of group.fields ?? []) {
+      // Older generated specs can retain the internal Environment field. It is
+      // intentionally omitted from the public OpenAPI contract and stripped by
+      // ApiReferencePage before rendering.
+      if (field.name === 'environment_id') continue
       if (!allowed.has(field.name) && !allowsAdditional) {
         contractMismatches.push(`${key}: ${group.title} field ${field.name} is missing from OpenAPI`)
       }
@@ -157,6 +161,7 @@ for (const [key, spec] of referenceSpecs) {
       const responseFields = schemaFields(responseSchema, openapi)
       if (responseSchema) {
         for (const field of Object.keys(exampleResponse)) {
+          if (field === 'environment_id') continue
           if (!responseFields.names.has(field) && !responseFields.allowsAdditional) {
             contractMismatches.push(`${key}: response field ${field} is missing from OpenAPI`)
           }

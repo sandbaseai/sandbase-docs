@@ -292,7 +292,7 @@ Default response (`202 Accepted`):
 
 ## POST /v1/sessions
 
-Create an Agent Session. `agent` is required; `environment_id` is an optional authorized override and otherwise resolves from the Agent. Use `initial_events` to send the first message during creation.
+Create an Agent Session. `agent` is required; runtime binding is resolved internally from the Agent. Use `initial_events` to send the first message during creation.
 
 POST /v1/sessions creates the persistent public Session and returns session_id. Events, SSE, archive, and delete all address that same Session. Archived history remains readable but rejects new events; deleted Sessions return 404.
 
@@ -306,7 +306,7 @@ curl -X POST https://api.sandbase.ai/v1/sessions \
 
 Response:
 ```
-{"id":"sess_xyz789","type":"session","agent_id":"agent_abc123","environment_id":"env_abc123","status":"idle"}
+{"id":"sess_xyz789","type":"session","agent_id":"agent_abc123","status":"idle"}
 ```
 
 ## POST /v1/sessions/{id}/events
@@ -339,7 +339,7 @@ Create a Schedule through the Deployments API. Each trigger creates a distinct d
 
 Request:
 ```
-{"name":"Daily summary","agent_id":"agent_abc123","environment_id":"env_abc123","initial_events":[{"type":"user.message","content":[{"type":"text","text":"Generate the daily summary"}]}],"schedule":{"type":"cron","expression":"0 9 * * *","timezone":"America/New_York"}}
+{"name":"Daily summary","agent_id":"agent_abc123","initial_events":[{"type":"user.message","content":[{"type":"text","text":"Generate the daily summary"}]}],"schedule":{"type":"cron","expression":"0 9 * * *","timezone":"America/New_York"}}
 ```
 
 Response:

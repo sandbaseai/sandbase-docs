@@ -458,7 +458,7 @@ curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
 
 ### POST /v1/sessions — Create Session
 
-Create a version-pinned Agent Session. SandBase resolves the Agent-owned Environment by default; an authorized `environment_id` is an optional one-Session override. Use singular `initial_events` to submit the first message with creation.
+Create a version-pinned Agent Session. SandBase resolves the Agent's runtime binding internally. Use singular `initial_events` to submit the first message with creation.
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/sessions \
@@ -485,7 +485,6 @@ curl -X POST https://api.sandbase.ai/v1/sessions \
     "type": "agent",
     "version": 3
   },
-  "environment_id": "env_abc123",
   "status": "idle",
   "created_at": "2026-08-03T12:00:00Z"
 }
@@ -532,7 +531,6 @@ curl https://api.sandbase.ai/v1/sessions \
       "id": "sess_xyz789",
       "agent_id": "agent_abc123",
       "status": "idle",
-      "environment_id": "env_abc123",
       "created_at": "2026-08-03T12:00:00Z"
     }
   ]
@@ -606,7 +604,6 @@ curl -X POST https://api.sandbase.ai/v1/deployments \
   -d '{
     "name": "Daily team summary",
     "agent_id": "agent_abc123",
-    "environment_id": "env_abc123",
     "initial_events": [{
       "type": "user.message",
       "content": [{"type":"text","text":"Generate daily summary of team activity"}]

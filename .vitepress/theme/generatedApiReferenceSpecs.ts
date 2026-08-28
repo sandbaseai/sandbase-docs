@@ -153,12 +153,6 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "description": "Agent to run."
           },
           {
-            "name": "environment_id",
-            "type": "string",
-            "required": false,
-            "description": "Optional Environment override. Omit to resolve the Agent-owned Environment."
-          },
-          {
             "name": "initial_events",
             "type": "array",
             "required": true,
@@ -198,7 +192,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Schedules",
     "method": "GET",
     "path": "/v1/deployments/{deployment_id}",
-    "description": "Retrieve one Deployment and its resolved Agent and Environment bindings.",
+    "description": "Retrieve one Deployment and its resolved Agent and runtime binding.",
     "groups": [
       {
         "title": "Path parameters",
@@ -922,7 +916,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Sessions",
     "method": "POST",
     "path": "/v1/sessions",
-    "description": "Create a stateful execution of an Agent in an Environment.",
+    "description": "Create a stateful execution of an Agent. SandBase resolves runtime binding internally.",
     "groups": [
       {
         "title": "Request body",
@@ -932,12 +926,6 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "type": "string",
             "required": true,
             "description": "Agent ID used by this Session."
-          },
-          {
-            "name": "environment_id",
-            "type": "string",
-            "required": false,
-            "description": "Optional authorized Session override. Omit to use the Agent-owned Environment."
           },
           {
             "name": "title",

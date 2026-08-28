@@ -27,12 +27,12 @@ The public `session_id` identifies one persistent Session across Direct Session 
 
 ## Basic flow
 
-1. Create a Session with an Agent; SandBase resolves its Agent-owned Environment. Optionally pass an authorized `environment_id` override.
+1. Create a Session with an Agent; SandBase resolves the runtime binding internally.
 2. Include the first `user.message` in `initial_events`, or send it later through the events endpoint.
 3. Poll the event list, or replay persisted events through the SSE endpoint.
 4. Archive the Session when it should no longer accept new events. History remains readable.
 
-Session updates shallow-merge `metadata`: a null property value removes that key. Agent `tools` and `mcp_servers` overrides are full-array replacements, while the pinned Agent version and Environment remain immutable.
+Session updates shallow-merge `metadata`: a null property value removes that key. Agent `tools` and `mcp_servers` overrides are full-array replacements, while the pinned Agent version and runtime binding remain immutable.
 
 ::: warning Recover an uncertain initial delivery
 If native runtime delivery returns `502` with a top-level `session_id`, the delivery outcome is unknown. Open that Session and inspect or stream its Events before taking another action. Do not blindly create a new Session and resend the message.

@@ -48,11 +48,41 @@ type ApiReference = {
   errors?: ApiError[]
 }
 
+// Environment resources are internal implementation details. Older generated
+// references may still contain environment_id in examples or response samples;
+// strip those fields at render time so public docs never advertise the retired
+// Environment API.
+function sanitizePublicReference(reference: ApiReference): ApiReference {
+  const clone = JSON.parse(JSON.stringify(reference)) as ApiReference
+  clone.groups = clone.groups?.map((group) => ({
+    ...group,
+    fields: group.fields.filter((field) => field.name !== 'environment_id'),
+  }))
+  clone.examples = (clone.examples ?? []).map((example) => ({
+    ...example,
+    code: example.code
+      .replace(/\s*\\n\s*\\?\s*"environment_id"\s*:\s*"[^"]+",?/g, '')
+      .replace(/\s*"environment_id"\s*:\s*"[^"]+",?/g, ''),
+  }))
+  if (clone.response?.code) {
+    try {
+      const body = JSON.parse(clone.response.code)
+      if (body && typeof body === 'object' && !Array.isArray(body)) {
+        delete body.environment_id
+        clone.response.code = JSON.stringify(body, null, 2)
+      }
+    } catch {
+      clone.response.code = clone.response.code.replace(/\s*\\n\s*\\?\s*"environment_id"\s*:\s*"[^"]+",?/g, '')
+    }
+  }
+  return clone
+}
+
 const { frontmatter } = useData()
 const spec = computed<ApiReference>(() => {
-  if (frontmatter.value.apiReference) return frontmatter.value.apiReference
-  if (frontmatter.value.apiReferenceJson) return JSON.parse(frontmatter.value.apiReferenceJson)
-  return generatedApiReferenceSpecs[frontmatter.value.apiReferenceKey]
+  if (frontmatter.value.apiReference) return sanitizePublicReference(frontmatter.value.apiReference)
+  if (frontmatter.value.apiReferenceJson) return sanitizePublicReference(JSON.parse(frontmatter.value.apiReferenceJson))
+  return sanitizePublicReference(generatedApiReferenceSpecs[frontmatter.value.apiReferenceKey])
 })
 const activeLanguage = ref(0)
 const copied = ref(false)
