@@ -15,6 +15,7 @@ const authenticationReference = readFileSync(new URL('../api-reference/authentic
 const supportedModelsPage = readFileSync(new URL('../models/supported.md', import.meta.url), 'utf8')
 const capabilitiesPage = readFileSync(new URL('../models/capabilities.md', import.meta.url), 'utf8')
 const visionPage = readFileSync(new URL('../models/vision.md', import.meta.url), 'utf8')
+const legacySeedanceReference = readFileSync(new URL('../api-reference/volcengine-contents-generations.md', import.meta.url), 'utf8')
 const root = fileURLToPath(new URL('..', import.meta.url))
 
 const declaredOpenApiTags = new Set((openapiDocument.tags ?? []).map((tag) => tag.name))
@@ -46,6 +47,8 @@ for (const [label, content] of [['Capabilities', capabilitiesPage], ['Vision', v
   assert.doesNotMatch(content, /^\| `[^`]+` \|/m, `${label} must not maintain a hand-written model snapshot`)
   assert.doesNotMatch(content, /gpt-4o|gemini-2\.5|deepseek-v3/i, `${label} must not publish stale model recommendations`)
 }
+assert.match(legacySeedanceReference, /^canonical:\s*\/docs\/model-api-reference\/seedance-native-api\/$/m, 'Legacy Seedance reference must canonicalize to Official Native API')
+assert.match(legacySeedanceReference, /^robots:\s*noindex,follow$/m, 'Legacy Seedance reference must not compete in search results')
 
 const forbiddenOpenApiPatterns = [
   [/^  \/sandboxes(?:[/{:]|$)/m, 'sandbox path'],
@@ -393,7 +396,8 @@ assert.deepEqual(
   ['queued', 'running', 'cancelled', 'succeeded', 'failed', 'expired'],
   'Volcengine task listing must document every implemented native status',
 )
-assert.match(sidebar, /\/api-reference\/volcengine-contents-generations/, 'Sidebar must link to the Volcengine native protocol reference')
+assert.match(sidebar, /\/model-api-reference\/seedance-native-api\//, 'Sidebar must link to the Official Native API reference')
+assert.doesNotMatch(sidebar, /\/api-reference\/volcengine-contents-generations/, 'Inference navigation must not duplicate the Official Native API reference')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
 const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.doesNotMatch(getRunPath, /pattern:/, 'Run result lookup IDs must not inherit another resource prefix')

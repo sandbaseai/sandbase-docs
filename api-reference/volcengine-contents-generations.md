@@ -1,6 +1,8 @@
 ---
 title: Volcengine Ark Contents Generations
 description: Create and manage asynchronous Seedance video tasks with the Volcengine Ark native protocol.
+canonical: /docs/model-api-reference/seedance-native-api/
+robots: noindex,follow
 aside: false
 outline: false
 apiReference:

@@ -19,7 +19,6 @@ const handWrittenModelApiReferenceItems: DefaultTheme.SidebarItem[] = [
       { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
       { text: 'Google Gemini', link: '/api-reference/gemini-generate-content' },
       { text: 'Gemini Interactions', link: '/api-reference/gemini-interactions' },
-      { text: 'Volcengine Ark Video', link: '/api-reference/volcengine-contents-generations' },
       { text: 'Generate Image (OpenAI)', link: '/api-reference/images/generations' },
       { text: 'Edit Image (OpenAI)', link: '/api-reference/images/edits' },
       { text: 'Model Image Generation', link: '/api-reference/models/image' },
