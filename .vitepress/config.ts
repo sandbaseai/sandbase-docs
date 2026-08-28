@@ -228,7 +228,14 @@ export default defineConfig({
   sitemap: {
     hostname: siteOrigin,
     transformItems: (items) => items
-      .filter((item) => !['agents/deployments', 'store/models'].includes(item.url.replace(/^\//, '')))
+      // Do not advertise compatibility redirects or withdrawn pages to crawlers.
+      // The legacy Seedance page remains reachable for existing links but is
+      // canonicalized/noindexed in favor of Official Native API.
+      .filter((item) => ![
+        'agents/deployments',
+        'store/models',
+        'api-reference/volcengine-contents-generations',
+      ].includes(item.url.replace(/^\//, '')))
       .map((item) => ({
         ...item,
         url: `${docsBase}${item.url.replace(/^\//, '')}`,
