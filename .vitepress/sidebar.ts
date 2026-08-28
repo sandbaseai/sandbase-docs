@@ -203,6 +203,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Update Service', link: '/api-reference/endpoints/#update-a-service' },
       { text: 'Delete Service', link: '/api-reference/endpoints/#delete-a-service' },
       { text: 'Invoke with REST', link: '/api-reference/endpoints/#invoke-with-rest' },
+      { text: 'Invoke through MCP', link: '/api-reference/endpoints/mcp' },
       { text: 'Invoke with ACP', link: '/api-reference/endpoints/acp' },
     ],
   },

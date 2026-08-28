@@ -79,6 +79,7 @@ function inspect(directory) {
       }
     }
     for (const [pattern, label] of forbidden) {
+      if (label === 'Endpoint MCP transport' && (/^api-reference\/endpoints\/(?:index|mcp)\.html$/.test(relative) || /api-reference_endpoints_(?:index|mcp)\.md\./.test(relative))) continue
       assert.doesNotMatch(content, pattern, `${relative} must not publish the hidden ${label}`)
     }
   }

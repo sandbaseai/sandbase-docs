@@ -58,6 +58,7 @@ let inspected = 0
 for (const filename of files) {
   const source = readFileSync(filename, 'utf8')
   for (const [pattern, label] of forbidden) {
+    if (label === 'non-public Endpoint MCP transport' && (filename === 'api-reference/endpoints/index.md' || filename === 'api-reference/endpoints/mcp.md')) continue
     assert.ok(!pattern.test(source), `${filename} exposes ${label}: ${pattern}`)
   }
   inspected += 1

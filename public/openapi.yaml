@@ -1504,6 +1504,48 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/ACPResponse' }
 
+  /v1/endpoints/{id}/mcp:
+    post:
+      operationId: callEndpointMcp
+      tags: [Services]
+      summary: Invoke a Service over MCP
+      description: Handle MCP JSON-RPC for a Service whose protocols include mcp. Responses may be newline-delimited when the transport emits a stream.
+      parameters:
+        - $ref: '#/components/parameters/EndpointId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MCPRequest' }
+      responses:
+        '200':
+          description: MCP JSON-RPC response or newline-delimited stream
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MCPResponse' }
+            application/x-ndjson:
+              schema: { type: string, description: Newline-delimited MCP JSON-RPC messages. }
+        '400': { description: Invalid MCP JSON-RPC request, content: { application/json: { schema: { $ref: '#/components/schemas/MCPResponse' } } } }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: 'Service is disabled, MCP is not enabled, or the API key scope does not authorize this endpoint', content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Service not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: MCP transport failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+    delete:
+      operationId: closeEndpointMcp
+      tags: [Services]
+      summary: Close a Service MCP transport
+      description: Close and clean up MCP transport state without deleting or disabling the Service.
+      parameters:
+        - $ref: '#/components/parameters/EndpointId'
+      responses:
+        '204': { description: MCP transport state closed }
+        '401': { description: Missing or invalid API key, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '402': { description: API key spending limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/TaskCostError' } } } }
+        '403': { description: API key scope does not authorize this endpoint, content: { application/json: { schema: { $ref: '#/components/schemas/APIKeyScopeError' } } } }
+        '404': { description: Service not found, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+        '500': { description: MCP transport cleanup failed, content: { application/json: { schema: { $ref: '#/components/schemas/APIError' } } } }
+
   # --- Agents -----------------------------------------------------
   /v1/agents:
     post:
@@ -4539,10 +4581,10 @@ components:
           type: array
           minItems: 1
           uniqueItems: true
-          description: Explicit public invocation transports. Always send this field; public clients may enable REST, experimental ACP, or both.
+          description: Explicit public invocation transports. Always send this field; public clients may enable REST, MCP, experimental ACP, or any supported combination.
           items:
             type: string
-            enum: [rest, acp]
+            enum: [rest, mcp, acp]
 
     CreateAdvancedEndpointRequest:
       type: object
@@ -4569,7 +4611,7 @@ components:
           description: Explicit public invocation transports. Always send this field; public clients may enable REST, experimental ACP, or both.
           items:
             type: string
-            enum: [rest, acp]
+            enum: [rest, mcp, acp]
         config:
           type: object
           additionalProperties: true
@@ -4627,7 +4669,7 @@ components:
           uniqueItems: true
           items:
             type: string
-            enum: [rest, acp]
+            enum: [rest, mcp, acp]
         config: { type: object, additionalProperties: true }
         session_metadata:
           type: object
@@ -4668,7 +4710,7 @@ components:
           type: string
         protocols:
           type: array
-          description: Enabled transport identifiers. The documented public request values are rest and acp; other returned values are reserved.
+          description: Enabled transport identifiers. Public values are rest, mcp, and experimental acp; other returned values are reserved.
           items:
             type: string
         config:
@@ -4834,6 +4876,42 @@ components:
               type: object
               additionalProperties: true
           description: JSON-RPC error, present when the method cannot be completed.
+      oneOf:
+        - required: [result]
+        - required: [error]
+
+    MCPRequest:
+      type: object
+      required: [method]
+      properties:
+        jsonrpc: { type: string, const: '2.0' }
+        id:
+          oneOf:
+            - type: string
+            - type: number
+            - type: 'null'
+        method: { type: string, description: MCP method name. }
+        params: { type: object, additionalProperties: true }
+      additionalProperties: true
+
+    MCPResponse:
+      type: object
+      required: [jsonrpc]
+      properties:
+        jsonrpc: { type: string, const: '2.0' }
+        id:
+          oneOf:
+            - type: string
+            - type: number
+            - type: 'null'
+        result: { type: object, additionalProperties: true }
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code: { type: integer }
+            message: { type: string }
+            data: { type: object, additionalProperties: true }
       oneOf:
         - required: [result]
         - required: [error]

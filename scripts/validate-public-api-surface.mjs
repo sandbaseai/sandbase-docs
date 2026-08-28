@@ -299,7 +299,9 @@ for (const anchor of [
     `Credentials sidebar must expose the ${anchor} operation`,
   )
 }
-assert.doesNotMatch(openapi, /^  \/v1\/endpoints\/\{[^}]+\}\/mcp:$/m, 'Endpoint MCP transport must not be public')
+assert.match(openapi, /^  \/v1\/endpoints\/\{[^}]+\}\/mcp:$/m, 'Endpoint MCP transport must be documented')
+assert.match(openapi, /^    post:/m, 'Endpoint MCP transport must support POST')
+assert.match(openapi, /^    delete:/m, 'Endpoint MCP transport must support DELETE')
 assert.doesNotMatch(openapi, /^  \/v1\/endpoint_runtime_profiles:$/m, 'Endpoint runtime profiles that reveal MCP transport must not be public')
 assert.doesNotMatch(openapi, /^\s+mcp_url:$/m, 'Endpoint MCP transport URL must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/generations(?:\/\{[^}]+\})?:$/m, 'Withdrawn generation paths must not be public')
@@ -944,7 +946,7 @@ for (const schemaName of ['CreateDeclarativeEndpointRequest', 'CreateAdvancedEnd
   const schema = openapi.match(new RegExp(`^    ${schemaName}:\\n[\\s\\S]*?(?=^    [A-Za-z])`, 'm'))?.[0] ?? ''
   assert.match(schema, /required: \[[^\]]*protocols[^\]]*\]/, `${schemaName} must require explicit public protocols to avoid hidden transport defaults`)
   assert.match(schema, /protocols:\n\s+type: array\n\s+minItems: 1\n\s+uniqueItems: true/, `${schemaName} must require a non-empty unique protocol list`)
-  assert.match(schema, /enum: \[rest, acp\]/, `${schemaName} must expose only public invocation transports`)
+  assert.match(schema, /enum: \[rest, mcp, acp\]/, `${schemaName} must expose only public invocation transports`)
   assert.doesNotMatch(schema, /default: \[rest\]/, `${schemaName} must not claim an unimplemented REST-only server default`)
 }
 const endpointsPath = openapi.match(/^  \/v1\/endpoints:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
@@ -1078,7 +1080,9 @@ function inspectPublishedSources(directory) {
       }
     }
     assert.doesNotMatch(content, /\/(?:v1\/)?sandboxes?(?:\/|\{|:|\b)/i, `${relative} must not expose sandbox API paths`)
-    assert.doesNotMatch(content, /\/v1\/endpoints\/[^\s`"']+\/mcp\b/i, `${relative} must not expose Endpoint MCP transport`)
+    if (!['api-reference/endpoints/index.md', 'api-reference/endpoints/mcp.md'].includes(relative)) {
+      assert.doesNotMatch(content, /\/v1\/endpoints\/[^\s`"']+\/mcp\b/i, `${relative} must not expose Endpoint MCP transport`)
+    }
     assert.doesNotMatch(content, /\/v1\/endpoint_runtime_profiles\b/i, `${relative} must not expose Endpoint runtime profiles that reveal MCP transport`)
     assert.doesNotMatch(content, /\/v1\/mcp(?:\/|\b)/i, `${relative} must not expose the generic MCP transport or its discovery routes`)
     assert.doesNotMatch(content, /\/v1\/mcp\/(?:servers|[^\s/]+\/config)\b/i, `${relative} must not expose MCP discovery or runtime config routes`)
