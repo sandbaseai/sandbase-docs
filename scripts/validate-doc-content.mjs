@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
+import { parse as parseYaml } from 'yaml'
 
 const roots = ['admin', 'agents', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'setup', 'store']
 const excluded = [
@@ -63,6 +64,28 @@ for (const filename of files) {
     assert.ok(!pattern.test(source), `${filename} exposes ${label}: ${pattern}`)
   }
   inspected += 1
+}
+
+// Generated model pages must present each request field exactly once. Some
+// provider schemas repeat the canonical `model` selector; the generator
+// normalizes that field, and this check prevents regressions from publishing
+// contradictory request forms.
+function collectModelPages(directory) {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const filename = path.join(directory, entry.name)
+    return entry.isDirectory() ? collectModelPages(filename) : entry.name.endsWith('.md') ? [filename] : []
+  })
+}
+for (const filename of collectModelPages('model-api-reference')) {
+  const source = readFileSync(filename, 'utf8')
+  const frontmatter = source.split(/^---$/m)[1] ?? ''
+  const metadata = parseYaml(frontmatter)
+  if (!metadata?.apiReferenceJson) continue
+  const reference = JSON.parse(metadata.apiReferenceJson)
+  for (const group of reference.groups ?? []) {
+    const names = (group.fields ?? []).map((field) => field.name)
+    assert.equal(new Set(names).size, names.length, `${filename} repeats a field in ${group.title}`)
+  }
 }
 
 for (const filename of [
