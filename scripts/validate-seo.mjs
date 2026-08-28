@@ -3,7 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import YAML from 'yaml'
 
-const roots = ['admin', 'agents', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'setup', 'store']
+const roots = ['admin', 'agents', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'setup', 'store', 'model-api-reference']
 const excluded = [
   'agents/endpoint-quickstart.md',
   'api-reference/embeds/',
@@ -50,7 +50,7 @@ function inspect(directory) {
       if (frontmatter.canonical != null) {
         assert.ok(String(frontmatter.canonical).startsWith('/docs/'), `${filename} canonical URL must start with /docs/`)
       }
-    } else {
+    } else if (!filename.startsWith('model-api-reference/')) {
       registerUnique(publicTitles, String(frontmatter.title).trim(), filename, 'an indexable title')
       registerUnique(publicDescriptions, String(frontmatter.description).trim(), filename, 'an indexable description')
     }
