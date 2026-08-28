@@ -12,7 +12,7 @@ apiReference:
   groups:
     - title: Path parameters
       fields:
-        - { name: model, type: string, required: true, description: "Bare Google model name, such as gemini-2.5-flash. SandBase resolves it as google/{model}." }
+        - { name: model, type: string, required: true, description: "Bare Google model name, such as gemini-3.5-flash. SandBase resolves it as google/{model}." }
     - title: Request body
       fields:
         - { name: contents, type: array, required: false, description: Gemini conversation contents made of role and parts. }
@@ -27,7 +27,7 @@ apiReference:
       language: bash
       code: |-
         curl -X POST \
-          "https://api.sandbase.ai/v1beta/models/gemini-2.5-flash:generateContent" \
+          "https://api.sandbase.ai/v1beta/models/gemini-3.5-flash:generateContent" \
           -H "x-goog-api-key: $SANDBASE_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"contents":[{"role":"user","parts":[{"text":"Explain immutable infrastructure in one sentence."}]}]}'
@@ -65,7 +65,7 @@ Replace the method suffix with `:streamGenerateContent`. Without a query paramet
 
 ```bash
 curl -N -X POST \
-  "https://api.sandbase.ai/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse" \
+  "https://api.sandbase.ai/v1beta/models/gemini-3.5-flash:streamGenerateContent?alt=sse" \
   -H "x-goog-api-key: $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"contents":[{"role":"user","parts":[{"text":"Write a short greeting."}]}]}'

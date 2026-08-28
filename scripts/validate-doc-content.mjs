@@ -39,6 +39,8 @@ const forbidden = [
   [/\bDeployments API\b/, 'legacy product label; use Schedules API'],
   [/openai\/gpt-4o\b/, 'stale hand-written example model'],
   [/anthropic\/claude-sonnet-4(?:-|\b)/, 'stale hand-written example model'],
+  [/deepseek\/deepseek-v3\b/, 'stale hand-written example model'],
+  [/gemini-2\.5-flash\b/, 'stale hand-written example model'],
   [/GET \/v1\/models\/\{name\}/, 'incorrect model detail path parameter'],
   [/\/docs\/setup\/cli\b/, 'retired setup alias'],
   [/sandbaseai-cli-\d+\.\d+\.\d+\.tgz/, 'version-pinned CLI archive; use the guided installer'],

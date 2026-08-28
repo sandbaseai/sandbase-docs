@@ -16,6 +16,7 @@ const supportedModelsPage = readFileSync(new URL('../models/supported.md', impor
 const capabilitiesPage = readFileSync(new URL('../models/capabilities.md', import.meta.url), 'utf8')
 const visionPage = readFileSync(new URL('../models/vision.md', import.meta.url), 'utf8')
 const legacySeedanceReference = readFileSync(new URL('../api-reference/volcengine-contents-generations.md', import.meta.url), 'utf8')
+const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8')
 const root = fileURLToPath(new URL('..', import.meta.url))
 
 const declaredOpenApiTags = new Set((openapiDocument.tags ?? []).map((tag) => tag.name))
@@ -49,6 +50,7 @@ for (const [label, content] of [['Capabilities', capabilitiesPage], ['Vision', v
 }
 assert.match(legacySeedanceReference, /^canonical:\s*\/docs\/model-api-reference\/seedance-native-api\/$/m, 'Legacy Seedance reference must canonicalize to Official Native API')
 assert.match(legacySeedanceReference, /^robots:\s*noindex,follow$/m, 'Legacy Seedance reference must not compete in search results')
+assert.doesNotMatch(readme, /deepseek\/deepseek-v3\b/i, 'README must not recommend the retired DeepSeek V3 model')
 
 const forbiddenOpenApiPatterns = [
   [/^  \/sandboxes(?:[/{:]|$)/m, 'sandbox path'],

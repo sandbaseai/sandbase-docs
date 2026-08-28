@@ -102,7 +102,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
   -H "Authorization: Bearer $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "deepseek/deepseek-v3",
+    "model": "deepseek/deepseek-v4-flash",
     "messages": [
       {"role": "user", "content": "Explain this API response."}
     ]
@@ -121,7 +121,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="deepseek/deepseek-v3",
+    model="deepseek/deepseek-v4-flash",
     messages=[{"role": "user", "content": "Explain this API response."}],
 )
 
