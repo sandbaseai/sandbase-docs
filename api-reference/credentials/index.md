@@ -11,7 +11,7 @@ Credentials store API keys, tokens, and other private values used by an Agent at
 Credential endpoints require a secret SandBase API key. Never call them from browser code or expose credential values in prompts, logs, or source control.
 :::
 
-## Endpoints
+## Credential operations
 
 | Method | Path | Purpose |
 |---|---|---|

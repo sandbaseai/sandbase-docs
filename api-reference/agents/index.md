@@ -9,7 +9,7 @@ An Agent is a reusable, versioned definition containing a model, instructions, t
 
 Agent model IDs use the public `vendor/model` identity returned by the [Models API](/api-reference/models/). Effective updates create immutable versions; no-op updates keep the current version number.
 
-## Endpoints
+## Agent operations
 
 | Method | Path | Purpose |
 |---|---|---|
