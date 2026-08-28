@@ -19,6 +19,22 @@ export default {
     url.pathname = url.pathname === `${DOCS_PREFIX}/index`
       ? '/'
       : url.pathname.slice(DOCS_PREFIX.length) || '/'
-    return env.ASSETS.fetch(new Request(url, request))
+    const response = await env.ASSETS.fetch(new Request(url, request))
+
+    // Static asset clean-URL redirects are generated against the stripped
+    // pathname (for example `/models/supported`). Re-attach the docs mount
+    // point so trailing-slash links never escape to the main site and 404.
+    const location = response.headers.get('Location')
+    if (location?.startsWith('/') && !location.startsWith(`${DOCS_PREFIX}/`)) {
+      const headers = new Headers(response.headers)
+      headers.set('Location', `${DOCS_PREFIX}${location}`)
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      })
+    }
+
+    return response
   },
 }
