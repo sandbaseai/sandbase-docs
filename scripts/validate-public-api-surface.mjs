@@ -75,6 +75,8 @@ assert.match(homePage, /Services API/, 'Home page must use the Services product 
 assert.doesNotMatch(homePage, /Endpoint API|Published Agent API/, 'Home page must not expose retired Endpoint product labels')
 assert.match(homePage, /href="\/docs\/getting-started\/api-keys"/, 'Home page must link to the published API key guide')
 assert.doesNotMatch(homePage, /href="\/docs\/admin\/api-keys"/, 'Home page must not link to the hidden legacy API key page')
+assert.match(homePage, /href="\/docs\/guides\/chat-completions"/, 'Home page must link to the published SDK-compatible chat guide')
+assert.doesNotMatch(homePage, /href="\/docs\/sdks\/?"/, 'Home page must not link to the retired SDK landing page')
 
 const forbiddenOpenApiPatterns = [
   [/^  \/sandboxes(?:[/{:]|$)/m, 'sandbox path'],

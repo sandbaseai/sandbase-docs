@@ -195,10 +195,10 @@
           <h4>Quickstart</h4>
           <p>Make the first API call and confirm your key works.</p>
         </a>
-        <a href="/docs/sdks/" class="resource-card">
+        <a href="/docs/guides/chat-completions" class="resource-card">
           <span class="resource-icon">02</span>
-          <h4>SDKs</h4>
-          <p>Use SandBase with Python and JavaScript clients.</p>
+          <h4>Use an SDK</h4>
+          <p>Connect OpenAI-compatible clients to SandBase.</p>
         </a>
         <a href="/docs/getting-started/api-keys" class="resource-card">
           <span class="resource-icon">03</span>
