@@ -12,6 +12,8 @@ Use the Models API to discover models before choosing an inference endpoint. The
 | List models | `GET /v1/models` | [List Models](./list) |
 | Get one model | `GET /v1/models/{id_or_name}` | [Get Model](./get) |
 | Invoke an API capability by path | `GET/POST /v1/api/{vendor}/{upstream_path}` | [API Passthrough](./api-passthrough) |
+| Run a model or API capability | `POST /v1/run` | [Run Capability](./run) |
+| Get an asynchronous result | `GET /v1/run/{id}` | [Get Run Result](./run-get) |
 | Browse supported models | — | [Supported Models](/models/supported) |
 | Compare capabilities | — | [Capabilities](/models/capabilities) |
 

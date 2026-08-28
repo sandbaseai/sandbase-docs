@@ -35,6 +35,8 @@ const handWrittenModelApiReferenceItems: DefaultTheme.SidebarItem[] = [
       { text: 'Audio', link: '/api-reference/models/audio' },
       { text: 'Embeddings', link: '/api-reference/models/embedding' },
       { text: 'API Passthrough', link: '/api-reference/models/api-passthrough' },
+      { text: 'Run Capability', link: '/api-reference/models/run' },
+      { text: 'Get Run Result', link: '/api-reference/models/run-get' },
       { text: 'Media Assets', link: '/api-reference/models/assets' },
       { text: 'Upload Media', link: '/api-reference/models/upload' },
       { text: 'Register Asset', link: '/api-reference/models/assets-create' },
