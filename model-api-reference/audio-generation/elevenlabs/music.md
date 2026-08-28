@@ -1,6 +1,6 @@
 ---
 title: "Music API Reference"
-description: "Music API reference for SandBase. Use model elevenlabs/music with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Music API reference for SandBase. Use model elevenlabs/music with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/elevenlabs/music"

@@ -1,6 +1,6 @@
 ---
 title: "Video detailsV1 API Reference"
-description: "Video detailsV1 API reference for SandBase. Use model kuaishou/app/one-video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Video detailsV1 API reference for SandBase. Use model kuaishou/app/one-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

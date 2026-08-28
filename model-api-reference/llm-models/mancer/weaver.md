@@ -1,6 +1,6 @@
 ---
 title: "Weaver (alpha) API Reference"
-description: "Weaver (alpha) API reference for SandBase. Use model mancer/weaver with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Weaver (alpha) API reference for SandBase. Use model mancer/weaver with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/mancer/weaver"

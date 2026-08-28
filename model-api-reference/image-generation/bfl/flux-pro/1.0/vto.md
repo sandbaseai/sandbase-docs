@@ -1,6 +1,6 @@
 ---
 title: "FLUX Virtual Try-On  API Reference"
-description: "FLUX Virtual Try-On  API reference for SandBase. Use model bfl/flux-pro/1.0/vto with /v1/run; view request fields, examples, capabilities, and response format."
+description: "FLUX Virtual Try-On API reference for SandBase. Use model bfl/flux-pro/1.0/vto with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-pro/1.0/vto"

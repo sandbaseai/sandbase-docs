@@ -1,6 +1,6 @@
 ---
 title: "Generate TikTok WSS X-Bogus signature API Reference"
-description: "Generate TikTok WSS X-Bogus signature API reference for SandBase. Use model tiktok/web/generate-wss-xb-signature with /v1/run; view request fields, examples, capabilit."
+description: "Generate TikTok WSS X-Bogus signature API reference for SandBase. Use model tiktok/web/generate-wss-xb-signature with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

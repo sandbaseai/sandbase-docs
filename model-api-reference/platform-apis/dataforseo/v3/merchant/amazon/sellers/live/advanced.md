@@ -1,6 +1,6 @@
 ---
 title: "Merchant Amazon Sellers API Reference"
-description: "Merchant Amazon Sellers API reference for SandBase. Use model dataforseo/v3/merchant/amazon/sellers/live/advanced with /v1/run; view request fields, examples, capabili."
+description: "Merchant Amazon Sellers API reference for SandBase. Use model dataforseo/v3/merchant/amazon/sellers/live/advanced with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

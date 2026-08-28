@@ -1,6 +1,6 @@
 ---
 title: "Get post… — Threads Post Detail API"
-description: "Get post detail API reference for SandBase. Use model threads/web/post-detail with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get post… — Threads Post Detail API API reference for SandBase. Use model threads/web/post-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

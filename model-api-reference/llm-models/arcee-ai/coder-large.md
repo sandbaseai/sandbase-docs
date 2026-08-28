@@ -1,6 +1,6 @@
 ---
 title: "Arcee AI: Coder Large API Reference"
-description: "Arcee AI: Coder Large API reference for SandBase. Use model arcee-ai/coder-large with /v1/chat/completions; see request fields, examples, and response details."
+description: "Arcee AI: Coder Large API reference for SandBase. Use model arcee-ai/coder-large with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/arcee-ai/coder-large"

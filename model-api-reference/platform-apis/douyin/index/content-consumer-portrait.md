@@ -1,6 +1,6 @@
 ---
 title: "Content consumer portrait API Reference"
-description: "Content consumer portrait API reference for SandBase. Use model douyin/index/content-consumer-portrait with /v1/run; view request fields, examples, capabilities, and r."
+description: "Content consumer portrait API reference for SandBase. Use model douyin/index/content-consumer-portrait with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

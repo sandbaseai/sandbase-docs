@@ -1,6 +1,6 @@
 ---
 title: "Generate barrage xb signature API Reference"
-description: "Generate barrage xb signature API reference for SandBase. Use model douyin/web/generate-wss-xb-signature with /v1/run; view request fields, examples, capabilities, and."
+description: "Generate barrage xb signature API reference for SandBase. Use model douyin/web/generate-wss-xb-signature with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

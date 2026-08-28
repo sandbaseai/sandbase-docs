@@ -1,6 +1,6 @@
 ---
 title: "SERP Google Knowledge Graph Live API Reference"
-description: "SERP Google Knowledge Graph Live API reference for SandBase. Use model dataforseo/v3/serp/google/knowledge_graph/live/advanced with /v1/run; view request fields, examp."
+description: "SandBase API reference for model dataforseo/v3/serp/google/knowledge_graph/live/advanced. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

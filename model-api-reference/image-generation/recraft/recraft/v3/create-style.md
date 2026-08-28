@@ -1,6 +1,6 @@
 ---
 title: "Recraft V3 Create Style API Reference"
-description: "Recraft V3 Create Style API reference for SandBase. Use model recraft/recraft/v3/create-style with /v1/run; see request fields, examples, and response details."
+description: "Recraft V3 Create Style API reference for SandBase. Use model recraft/recraft/v3/create-style with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/recraft/recraft/v3/create-style"

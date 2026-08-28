@@ -1,6 +1,6 @@
 ---
 title: "Generate… — Tiktok Generate Ttwid API"
-description: "Generate ttwid API reference for SandBase. Use model tiktok/web/generate-ttwid with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Generate… — Tiktok Generate Ttwid API API reference for SandBase. Use model tiktok/web/generate-ttwid with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

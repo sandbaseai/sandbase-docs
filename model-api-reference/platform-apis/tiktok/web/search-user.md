@@ -1,6 +1,6 @@
 ---
 title: "Search user API Reference"
-description: "Search user API reference for SandBase. Use model tiktok/web/search-user with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search user API reference for SandBase. Use model tiktok/web/search-user with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Z.ai: GLM 5 Turbo API Reference"
-description: "Z.ai: GLM 5 Turbo API reference for SandBase. Use model z-ai/glm-5-turbo with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Z.ai: GLM 5 Turbo API reference for SandBase. Use model z-ai/glm-5-turbo with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/z-ai/glm-5-turbo"

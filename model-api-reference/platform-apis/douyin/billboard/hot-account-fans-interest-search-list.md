@@ -1,6 +1,6 @@
 ---
 title: "Fetch fan interest search term in the last 3 days 10 sea… API Ref"
-description: "Fetch fan interest search term in the last 3 days 10 search terms API reference for SandBase. Use model douyin/billboard/hot-account-fans-interest-search-list with /v1."
+description: "SandBase API reference for model douyin/billboard/hot-account-fans-interest-search-list. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

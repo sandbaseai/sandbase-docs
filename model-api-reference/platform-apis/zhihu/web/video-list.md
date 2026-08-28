@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Video List API Reference"
-description: "Get Zhihu Video List API reference for SandBase. Use model zhihu/web/video-list with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get Zhihu Video List API reference for SandBase. Use model zhihu/web/video-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

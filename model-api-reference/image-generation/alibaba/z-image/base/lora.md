@@ -1,6 +1,6 @@
 ---
 title: "Z Image Base (LoRA) API Reference"
-description: "Z Image Base (LoRA) API reference for SandBase. Use model alibaba/z-image/base/lora with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Z Image Base (LoRA) API reference for SandBase. Use model alibaba/z-image/base/lora with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/z-image/base/lora"

@@ -1,6 +1,6 @@
 ---
 title: "Get shop information data API Reference"
-description: "Get shop information data API reference for SandBase. Use model tiktok/app-v3/shop-info with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get shop information data API reference for SandBase. Use model tiktok/app-v3/shop-info with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

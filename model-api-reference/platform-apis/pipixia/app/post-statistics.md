@@ -1,6 +1,6 @@
 ---
 title: "Get post statistics API Reference"
-description: "Get post statistics API reference for SandBase. Use model pipixia/app/post-statistics with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get post statistics API reference for SandBase. Use model pipixia/app/post-statistics with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

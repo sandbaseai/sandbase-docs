@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 [dev] Differential Diffusion API Reference"
-description: "FLUX.1 [dev] Differential Diffusion API reference for SandBase. Use model bfl/flux-differential-diffusion with /v1/run; view request fields, examples, capabilities, an."
+description: "FLUX.1 [dev] Differential Diffusion API reference for SandBase. Use model bfl/flux-differential-diffusion with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-differential-diffusion"

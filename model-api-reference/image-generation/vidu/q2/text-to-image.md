@@ -1,6 +1,6 @@
 ---
 title: "Vidu Q2 Text to Image API Reference"
-description: "Vidu Q2 Text to Image API reference for SandBase. Use model vidu/q2/text-to-image with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Vidu Q2 Text to Image API reference for SandBase. Use model vidu/q2/text-to-image with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/vidu/q2/text-to-image"

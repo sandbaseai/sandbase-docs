@@ -1,6 +1,6 @@
 ---
 title: "Search videos (by title) API Reference"
-description: "Search videos (by title) API reference for SandBase. Use model douyin/douplus/search-video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search videos (by title) API reference for SandBase. Use model douyin/douplus/search-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

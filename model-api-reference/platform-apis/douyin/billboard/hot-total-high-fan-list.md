@@ -1,6 +1,6 @@
 ---
 title: "Fetch high fan rate list API Reference"
-description: "Fetch high fan rate list API reference for SandBase. Use model douyin/billboard/hot-total-high-fan-list with /v1/run; view request fields, examples, capabilities, and;."
+description: "Fetch high fan rate list API reference for SandBase. Use model douyin/billboard/hot-total-high-fan-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

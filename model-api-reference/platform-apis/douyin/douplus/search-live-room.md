@@ -1,6 +1,6 @@
 ---
 title: "Search live rooms (by Douyin ID or nickname) API Reference"
-description: "Search live rooms (by Douyin ID or nickname) API reference for SandBase. Use model douyin/douplus/search-live-room with /v1/run; view request fields, examples, capabil."
+description: "Search live rooms (by Douyin ID or nickname) API reference for SandBase. Use model douyin/douplus/search-live-room with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

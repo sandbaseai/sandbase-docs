@@ -1,6 +1,6 @@
 ---
 title: "ACE-Step Audio Outpaint API Reference"
-description: "ACE-Step Audio Outpaint API reference for SandBase. Use model ace/ace-step/audio-outpaint with /v1/run; view request fields, examples, capabilities, and response format."
+description: "ACE-Step Audio Outpaint API reference for SandBase. Use model ace/ace-step/audio-outpaint with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/ace/ace-step/audio-outpaint"

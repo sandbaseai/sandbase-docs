@@ -1,6 +1,6 @@
 ---
 title: "NousResearch: Hermes 2 Pro - Llama-3 8B API Reference"
-description: "NousResearch: Hermes 2 Pro - Llama-3 8B API reference for SandBase. Use model nousresearch/hermes-2-pro-llama-3-8b with /v1/chat/completions; view request fields, exam."
+description: "SandBase API reference for model nousresearch/hermes-2-pro-llama-3-8b. Call /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/nousresearch/hermes-2-pro-llama-3-8b"

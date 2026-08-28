@@ -1,6 +1,6 @@
 ---
 title: "Nex AGI: Nex-N2-Pro API Reference"
-description: "Nex AGI: Nex-N2-Pro API reference for SandBase. Use model nex-agi/nex-n2-pro with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Nex AGI: Nex-N2-Pro API reference for SandBase. Use model nex-agi/nex-n2-pro with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/nex-agi/nex-n2-pro"

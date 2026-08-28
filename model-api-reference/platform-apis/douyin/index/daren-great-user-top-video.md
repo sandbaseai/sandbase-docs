@@ -1,6 +1,6 @@
 ---
 title: "Get daren top videos API Reference"
-description: "Get daren top videos API reference for SandBase. Use model douyin/index/daren-great-user-top-video with /v1/run; view request fields, examples, capabilities, and respo."
+description: "Get daren top videos API reference for SandBase. Use model douyin/index/daren-great-user-top-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

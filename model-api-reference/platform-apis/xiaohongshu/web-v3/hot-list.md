@@ -1,6 +1,6 @@
 ---
 title: "Fetch Xiaohongshu hot list API Reference"
-description: "Fetch Xiaohongshu hot list API reference for SandBase. Use model xiaohongshu/web-v3/hot-list with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Fetch Xiaohongshu hot list API reference for SandBase. Use model xiaohongshu/web-v3/hot-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

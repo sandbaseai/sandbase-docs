@@ -1,6 +1,6 @@
 ---
 title: "GPT-4o-mini Search Preview API Reference"
-description: "GPT-4o-mini Search Preview API reference for SandBase. Use model openai/gpt-4o-mini-search-preview with /v1/chat/completions; view request fields, examples, capabiliti."
+description: "GPT-4o-mini Search Preview API reference for SandBase. Use model openai/gpt-4o-mini-search-preview with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-4o-mini-search-preview"

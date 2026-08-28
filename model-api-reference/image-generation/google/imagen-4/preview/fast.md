@@ -1,6 +1,6 @@
 ---
 title: "Imagen… — Google Fast API"
-description: "Imagen 4 API reference for SandBase. Use model google/imagen-4/preview/fast with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Imagen… — Google Fast API API reference for SandBase. Use model google/imagen-4/preview/fast with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/google/imagen-4/preview/fast"

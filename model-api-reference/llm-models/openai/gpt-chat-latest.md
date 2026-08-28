@@ -1,6 +1,6 @@
 ---
 title: "GPT Chat Latest API Reference"
-description: "GPT Chat Latest API reference for SandBase. Use model openai/gpt-chat-latest with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "GPT Chat Latest API reference for SandBase. Use model openai/gpt-chat-latest with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-chat-latest"

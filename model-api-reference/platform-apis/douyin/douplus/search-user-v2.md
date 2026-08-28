@@ -1,6 +1,6 @@
 ---
 title: "Search user… — Douyin Search User V2 API"
-description: "Search user V2 API reference for SandBase. Use model douyin/douplus/search-user-v2 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search user… — Douyin Search User V2 API API reference for SandBase. Use model douyin/douplus/search-user-v2 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

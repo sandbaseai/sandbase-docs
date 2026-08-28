@@ -1,6 +1,6 @@
 ---
 title: "Veo 3 API Reference"
-description: "Veo 3 API reference for SandBase. Use model google/veo-3 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Veo 3 API reference for SandBase. Use model google/veo-3 with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/google/veo-3"

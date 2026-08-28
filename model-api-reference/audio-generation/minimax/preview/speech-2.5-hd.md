@@ -1,6 +1,6 @@
 ---
 title: "Minimax API Reference"
-description: "Minimax API reference for SandBase. Use model minimax/preview/speech-2.5-hd with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Minimax API reference for SandBase. Use model minimax/preview/speech-2.5-hd with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/minimax/preview/speech-2.5-hd"

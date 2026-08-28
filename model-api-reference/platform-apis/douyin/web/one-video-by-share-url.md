@@ -1,6 +1,6 @@
 ---
 title: "Get single video data… — Douyin Web One Video By Share Url API"
-description: "Get single video data by sharing link API reference for SandBase. Use model douyin/web/one-video-by-share-url with /v1/run; view request fields, examples, capabilities."
+description: "SandBase API reference for model douyin/web/one-video-by-share-url. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

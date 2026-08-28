@@ -1,6 +1,6 @@
 ---
 title: "Daren compare users API Reference"
-description: "Daren compare users API reference for SandBase. Use model douyin/index/daren-compare-users-stable with /v1/run; see request fields, examples, and response details."
+description: "Daren compare users API reference for SandBase. Use model douyin/index/daren-compare-users-stable with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

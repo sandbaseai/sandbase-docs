@@ -1,6 +1,6 @@
 ---
 title: "o4 Mini Deep Research API Reference"
-description: "o4 Mini Deep Research API reference for SandBase. Use model openai/o4-mini-deep-research with /v1/chat/completions; view request fields, examples, capabilities, and re."
+description: "o4 Mini Deep Research API reference for SandBase. Use model openai/o4-mini-deep-research with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/o4-mini-deep-research"

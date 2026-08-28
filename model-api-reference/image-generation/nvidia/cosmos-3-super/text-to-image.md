@@ -1,6 +1,6 @@
 ---
 title: "Cosmos 3 Super API Reference"
-description: "Cosmos 3 Super API reference for SandBase. Use model nvidia/cosmos-3-super/text-to-image with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Cosmos 3 Super API reference for SandBase. Use model nvidia/cosmos-3-super/text-to-image with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/nvidia/cosmos-3-super/text-to-image"

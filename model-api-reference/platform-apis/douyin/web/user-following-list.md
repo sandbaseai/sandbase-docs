@@ -1,6 +1,6 @@
 ---
 title: "Get user following… — Douyin User Following List API"
-description: "Get user following list API reference for SandBase. Use model douyin/web/user-following-list with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Get user following… — Douyin User Following List API API reference for SandBase. Use model douyin/web/user-following-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

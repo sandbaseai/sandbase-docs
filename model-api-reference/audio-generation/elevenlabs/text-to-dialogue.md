@@ -1,6 +1,6 @@
 ---
 title: "Text To Dialogue API Reference"
-description: "Text To Dialogue API reference for SandBase. Use model elevenlabs/text-to-dialogue with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Text To Dialogue API reference for SandBase. Use model elevenlabs/text-to-dialogue with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/elevenlabs/text-to-dialogue"

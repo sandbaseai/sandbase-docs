@@ -1,6 +1,6 @@
 ---
 title: "Get WeChat MP Article Ads API Reference"
-description: "Get WeChat MP Article Ads API reference for SandBase. Use model wechat-mp/v2/article-ad with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get WeChat MP Article Ads API reference for SandBase. Use model wechat-mp/v2/article-ad with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

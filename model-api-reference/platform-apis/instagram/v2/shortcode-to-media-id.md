@@ -1,6 +1,6 @@
 ---
 title: "Convert shortcode to… — Instagram V2 Shortcode To Media Id API"
-description: "Convert shortcode to media ID API reference for SandBase. Use model instagram/v2/shortcode-to-media-id with /v1/run; view request fields, examples, capabilities, and r."
+description: "SandBase API reference for model instagram/v2/shortcode-to-media-id. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Weibo topic search API Reference"
-description: "Weibo topic search API reference for SandBase. Use model weibo/web-v2/topic-search with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Weibo topic search API reference for SandBase. Use model weibo/web-v2/topic-search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Creative Upscaler API Reference"
-description: "Creative Upscaler API reference for SandBase. Use model sandbase-ai/creative-upscaler with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Creative Upscaler API reference for SandBase. Use model sandbase-ai/creative-upscaler with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/sandbase-ai/creative-upscaler"

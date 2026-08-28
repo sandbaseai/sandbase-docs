@@ -1,6 +1,6 @@
 ---
 title: "TheDrummer: Skyfall 36B V2 API Reference"
-description: "TheDrummer: Skyfall 36B V2 API reference for SandBase. Use model thedrummer/skyfall-36b-v2 with /v1/chat/completions; view request fields, examples, capabilities, and;."
+description: "TheDrummer: Skyfall 36B V2 API reference for SandBase. Use model thedrummer/skyfall-36b-v2 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/thedrummer/skyfall-36b-v2"

@@ -1,6 +1,6 @@
 ---
 title: "Laguna M.1 API Reference"
-description: "Laguna M.1 API reference for SandBase. Use model poolside/laguna-m.1 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Laguna M.1 API reference for SandBase. Use model poolside/laguna-m.1 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/poolside/laguna-m.1"

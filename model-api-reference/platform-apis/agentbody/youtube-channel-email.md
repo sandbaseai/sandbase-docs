@@ -1,6 +1,6 @@
 ---
 title: "YouTube Channel Email API Reference"
-description: "YouTube Channel Email API reference for SandBase. Use model agentbody/youtube-channel-email with /v1/run; view request fields, examples, capabilities, and response for."
+description: "YouTube Channel Email API reference for SandBase. Use model agentbody/youtube-channel-email with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

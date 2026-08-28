@@ -1,6 +1,6 @@
 ---
 title: "GPT-5.1-Codex-Max API Reference"
-description: "GPT-5.1-Codex-Max API reference for SandBase. Use model openai/gpt-5.1-codex-max with /v1/chat/completions; see request fields, examples, and response details."
+description: "GPT-5.1-Codex-Max API reference for SandBase. Use model openai/gpt-5.1-codex-max with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-5.1-codex-max"

@@ -1,6 +1,6 @@
 ---
 title: "PixVerse Lipsync API Reference"
-description: "PixVerse Lipsync API reference for SandBase. Use model pixverse/lipsync with /v1/run; view request fields, examples, capabilities, and response format."
+description: "PixVerse Lipsync API reference for SandBase. Use model pixverse/lipsync with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/pixverse/lipsync"

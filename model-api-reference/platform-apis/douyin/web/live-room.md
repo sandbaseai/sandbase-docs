@@ -1,6 +1,6 @@
 ---
 title: "Extract live room… — Douyin Live Room API"
-description: "Extract live room danmaku API reference for SandBase. Use model douyin/web/live-room with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Extract live room… — Douyin Live Room API API reference for SandBase. Use model douyin/web/live-room with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Claude Opus 4 API Reference"
-description: "Claude Opus 4 API reference for SandBase. Use model anthropic/claude-opus-4 with /v1/messages; view request fields, examples, capabilities, and response format."
+description: "Claude Opus 4 API reference for SandBase. Use model anthropic/claude-opus-4 with /v1/messages; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/anthropic/claude-opus-4"

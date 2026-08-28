@@ -1,6 +1,6 @@
 ---
 title: "Stable Cascade API Reference"
-description: "Stable Cascade API reference for SandBase. Use model stability-ai/stable-cascade with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Stable Cascade API reference for SandBase. Use model stability-ai/stable-cascade with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/stability-ai/stable-cascade"

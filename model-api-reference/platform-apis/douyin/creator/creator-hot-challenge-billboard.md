@@ -1,6 +1,6 @@
 ---
 title: "Get creator hot challenge billboard API Reference"
-description: "Get creator hot challenge billboard API reference for SandBase. Use model douyin/creator/creator-hot-challenge-billboard with /v1/run; view request fields, examples, c."
+description: "Get creator hot challenge billboard API reference for SandBase. Use model douyin/creator/creator-hot-challenge-billboard with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

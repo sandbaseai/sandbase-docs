@@ -1,6 +1,6 @@
 ---
 title: "Bytedance Video Upscaler API Reference"
-description: "Bytedance Video Upscaler API reference for SandBase. Use model bytedance/upscaler/video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Bytedance Video Upscaler API reference for SandBase. Use model bytedance/upscaler/video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/bytedance/upscaler/video"

@@ -1,6 +1,6 @@
 ---
 title: "Get comment replies data of… — Tiktok Video Comment Replies API"
-description: "Get comment replies data of specified video API reference for SandBase. Use model tiktok/app-v3/video-comment-replies with /v1/run; view request fields, examples, capa."
+description: "SandBase API reference for model tiktok/app-v3/video-comment-replies. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

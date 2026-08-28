@@ -1,6 +1,6 @@
 ---
 title: "Shorts search (raw data, recommend V2) API Reference"
-description: "Shorts search (raw data, recommend V2) API reference for SandBase. Use model youtube/web-v2/shorts-search with /v1/run; view request fields, examples, capabilities, an."
+description: "Shorts search (raw data, recommend V2) API reference for SandBase. Use model youtube/web-v2/shorts-search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

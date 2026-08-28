@@ -1,6 +1,6 @@
 ---
 title: "Bulk translate comments API Reference"
-description: "Bulk translate comments API reference for SandBase. Use model instagram/v3/bulk-translate-comments with /v1/run; view request fields, examples, capabilities, and respo."
+description: "Bulk translate comments API reference for SandBase. Use model instagram/v3/bulk-translate-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

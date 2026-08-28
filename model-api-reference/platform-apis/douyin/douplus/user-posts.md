@@ -1,6 +1,6 @@
 ---
 title: "Get user homepage posts API Reference"
-description: "Get user homepage posts API reference for SandBase. Use model douyin/douplus/user-posts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user homepage posts API reference for SandBase. Use model douyin/douplus/user-posts with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

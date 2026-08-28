@@ -1,6 +1,6 @@
 ---
 title: "Pareto Code Router API Reference"
-description: "Pareto Code Router API reference for SandBase. Use model openrouter/pareto-code with /v1/chat/completions; view request fields, examples, capabilities, and response fo."
+description: "Pareto Code Router API reference for SandBase. Use model openrouter/pareto-code with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openrouter/pareto-code"

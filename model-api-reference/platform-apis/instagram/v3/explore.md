@@ -1,6 +1,6 @@
 ---
 title: "Get explore feed API Reference"
-description: "Get explore feed API reference for SandBase. Use model instagram/v3/explore with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get explore feed API reference for SandBase. Use model instagram/v3/explore with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

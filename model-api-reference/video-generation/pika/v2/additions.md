@@ -1,6 +1,6 @@
 ---
 title: "Pika V2 Additions API Reference"
-description: "Pika V2 Additions API reference for SandBase. Use model pika/v2/additions with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Pika V2 Additions API reference for SandBase. Use model pika/v2/additions with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/pika/v2/additions"

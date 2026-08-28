@@ -1,6 +1,6 @@
 ---
 title: "Meshy 6… — Meshy Text To 3d API"
-description: "Meshy 6 Preview API reference for SandBase. Use model meshy/meshy-v6-preview/text-to-3d with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Meshy 6… — Meshy Text To 3d API API reference for SandBase. Use model meshy/meshy-v6-preview/text-to-3d with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/meshy/meshy-v6-preview/text-to-3d"

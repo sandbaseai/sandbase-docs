@@ -1,6 +1,6 @@
 ---
 title: "WeChat Universal Search API Reference"
-description: "WeChat Universal Search API reference for SandBase. Use model wechat-search/v2/search with /v1/run; view request fields, examples, capabilities, and response format."
+description: "WeChat Universal Search API reference for SandBase. Use model wechat-search/v2/search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

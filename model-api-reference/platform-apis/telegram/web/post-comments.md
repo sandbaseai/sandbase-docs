@@ -1,6 +1,6 @@
 ---
 title: "Post comments API Reference"
-description: "Post comments API reference for SandBase. Use model telegram/web/post-comments with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Post comments API reference for SandBase. Use model telegram/web/post-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

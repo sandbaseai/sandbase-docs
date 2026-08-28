@@ -1,6 +1,6 @@
 ---
 title: "Stable Avatar API Reference"
-description: "Stable Avatar API reference for SandBase. Use model stability-ai/stable-avatar with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Stable Avatar API reference for SandBase. Use model stability-ai/stable-avatar with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/stability-ai/stable-avatar"

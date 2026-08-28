@@ -1,6 +1,6 @@
 ---
 title: "Fetch general search V2 API Reference"
-description: "Fetch general search V2 API reference for SandBase. Use model douyin/search/general-search-v2 with /v1/run; see request fields, examples, and response details."
+description: "Fetch general search V2 API reference for SandBase. Use model douyin/search/general-search-v2 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

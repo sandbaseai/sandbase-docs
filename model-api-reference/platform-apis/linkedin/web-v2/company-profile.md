@@ -1,6 +1,6 @@
 ---
 title: "Get company profile API Reference"
-description: "Get company profile API reference for SandBase. Use model linkedin/web-v2/company-profile with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get company profile API reference for SandBase. Use model linkedin/web-v2/company-profile with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

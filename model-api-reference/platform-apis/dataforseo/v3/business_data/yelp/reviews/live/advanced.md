@@ -1,6 +1,6 @@
 ---
 title: "Business Data Yelp Reviews API Reference"
-description: "Business Data Yelp Reviews API reference for SandBase. Use model dataforseo/v3/business_data/yelp/reviews/live/advanced with /v1/run; view request fields, examples, ca."
+description: "Business Data Yelp Reviews API reference for SandBase. Use model dataforseo/v3/business_data/yelp/reviews/live/advanced with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

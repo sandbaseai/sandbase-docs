@@ -1,6 +1,6 @@
 ---
 title: "Get user collection folders API Reference"
-description: "Get user collection folders API reference for SandBase. Use model bilibili/web/collect-folders with /v1/run; view request fields, examples, capabilities, and response;."
+description: "Get user collection folders API reference for SandBase. Use model bilibili/web/collect-folders with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

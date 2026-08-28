@@ -1,6 +1,6 @@
 ---
 title: "Get follower list of specified user API Reference"
-description: "Get follower list of specified user API reference for SandBase. Use model tiktok/app-v3/user-follower-list with /v1/run; view request fields, examples, capabilities, a."
+description: "Get follower list of specified user API reference for SandBase. Use model tiktok/app-v3/user-follower-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

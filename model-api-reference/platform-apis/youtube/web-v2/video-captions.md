@@ -1,6 +1,6 @@
 ---
 title: "Get video captions API Reference"
-description: "Get video captions API reference for SandBase. Use model youtube/web-v2/video-captions with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get video captions API reference for SandBase. Use model youtube/web-v2/video-captions with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

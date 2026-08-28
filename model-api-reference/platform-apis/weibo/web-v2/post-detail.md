@@ -1,6 +1,6 @@
 ---
 title: "Get single post data API Reference"
-description: "Get single post data API reference for SandBase. Use model weibo/web-v2/post-detail with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get single post data API reference for SandBase. Use model weibo/web-v2/post-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

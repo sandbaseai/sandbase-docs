@@ -1,6 +1,6 @@
 ---
 title: "Wan Ati API Reference"
-description: "Wan Ati API reference for SandBase. Use model alibaba/wan/ati with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Wan Ati API reference for SandBase. Use model alibaba/wan/ati with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/ati"

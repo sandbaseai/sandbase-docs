@@ -1,6 +1,6 @@
 ---
 title: "Nano Banana Pro (Gemini 3 Pro Image) API Reference"
-description: "Nano Banana Pro (Gemini 3 Pro Image) API reference for SandBase. Use model google/gemini-3-pro-image with /v1/chat/completions; view request fields, examples, capabili."
+description: "Nano Banana Pro (Gemini 3 Pro Image) API reference for SandBase. Use model google/gemini-3-pro-image with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/google/gemini-3-pro-image"

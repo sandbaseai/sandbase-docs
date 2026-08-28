@@ -1,6 +1,6 @@
 ---
 title: "MiniMax: MiniMax M2-her API Reference"
-description: "MiniMax: MiniMax M2-her API reference for SandBase. Use model minimax/minimax-m2-her with /v1/chat/completions; see request fields, examples, and response details."
+description: "MiniMax: MiniMax M2-her API reference for SandBase. Use model minimax/minimax-m2-her with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/minimax/minimax-m2-her"

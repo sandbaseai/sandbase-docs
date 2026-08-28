@@ -1,6 +1,6 @@
 ---
 title: "Sam… — Meta Video API"
-description: "Sam 3 API reference for SandBase. Use model meta/sam-3/video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Sam… — Meta Video API API reference for SandBase. Use model meta/sam-3/video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/meta/sam-3/video"

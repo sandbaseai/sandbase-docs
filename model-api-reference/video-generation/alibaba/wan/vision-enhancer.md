@@ -1,6 +1,6 @@
 ---
 title: "Wan Vision Enhancer API Reference"
-description: "Wan Vision Enhancer API reference for SandBase. Use model alibaba/wan/vision-enhancer with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Wan Vision Enhancer API reference for SandBase. Use model alibaba/wan/vision-enhancer with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/vision-enhancer"

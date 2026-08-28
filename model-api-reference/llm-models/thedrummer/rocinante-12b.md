@@ -1,6 +1,6 @@
 ---
 title: "TheDrummer: Rocinante 12B API Reference"
-description: "TheDrummer: Rocinante 12B API reference for SandBase. Use model thedrummer/rocinante-12b with /v1/chat/completions; view request fields, examples, capabilities, and re."
+description: "TheDrummer: Rocinante 12B API reference for SandBase. Use model thedrummer/rocinante-12b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/thedrummer/rocinante-12b"

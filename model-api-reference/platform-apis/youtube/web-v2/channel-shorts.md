@@ -1,6 +1,6 @@
 ---
 title: "Get channel shorts API Reference"
-description: "Get channel shorts API reference for SandBase. Use model youtube/web-v2/channel-shorts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get channel shorts API reference for SandBase. Use model youtube/web-v2/channel-shorts with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

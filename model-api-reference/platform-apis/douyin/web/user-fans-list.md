@@ -1,6 +1,6 @@
 ---
 title: "Get user fans… — Douyin Web User Fans List API"
-description: "Get user fans list API reference for SandBase. Use model douyin/web/user-fans-list with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user fans… — Douyin Web User Fans List API API reference for SandBase. Use model douyin/web/user-fans-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

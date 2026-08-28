@@ -1,6 +1,6 @@
 ---
 title: "Get gift name by gift ID API Reference"
-description: "Get gift name by gift ID API reference for SandBase. Use model tiktok/web/gift-name-by-id with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get gift name by gift ID API reference for SandBase. Use model tiktok/web/gift-name-by-id with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

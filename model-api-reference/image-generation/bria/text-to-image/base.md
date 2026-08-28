@@ -1,6 +1,6 @@
 ---
 title: "Bria Text-to-Image Base API Reference"
-description: "Bria Text-to-Image Base API reference for SandBase. Use model bria/text-to-image/base with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Bria Text-to-Image Base API reference for SandBase. Use model bria/text-to-image/base with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bria/text-to-image/base"

@@ -1,6 +1,6 @@
 ---
 title: "Domain Analytics Domains By Tech API Reference"
-description: "Domain Analytics Domains By Tech API reference for SandBase. Use model dataforseo/v3/domain_analytics/technologies/domains_by_technology/live with /v1/run; view reques."
+description: "SandBase API reference for model dataforseo/v3/domain_analytics/technologies/domains_by_technology/live. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Longcat Single Avatar API Reference"
-description: "Longcat Single Avatar API reference for SandBase. Use model meituan/longcat-single-avatar/audio-to-video with /v1/run; view request fields, examples, capabilities, and."
+description: "Longcat Single Avatar API reference for SandBase. Use model meituan/longcat-single-avatar/audio-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/meituan/longcat-single-avatar/audio-to-video"

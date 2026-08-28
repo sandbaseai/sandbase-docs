@@ -1,6 +1,6 @@
 ---
 title: "Saba API Reference"
-description: "Saba API reference for SandBase. Use model mistral/mistral-saba with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Saba API reference for SandBase. Use model mistral/mistral-saba with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/mistral-saba"

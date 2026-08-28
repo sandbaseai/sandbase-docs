@@ -1,6 +1,6 @@
 ---
 title: "Get user following… — Pipixia User Following List API"
-description: "Get user following list API reference for SandBase. Use model pipixia/app/user-following-list with /v1/run; see request fields, examples, and response details."
+description: "SandBase API reference for model pipixia/app/user-following-list. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

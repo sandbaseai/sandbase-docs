@@ -1,6 +1,6 @@
 ---
 title: "Wan 2.1 VACE Video Edit API Reference"
-description: "Wan 2.1 VACE Video Edit API reference for SandBase. Use model alibaba/wan/2.1/vace/video-edit with /v1/run; see request fields, examples, and response details."
+description: "Wan 2.1 VACE Video Edit API reference for SandBase. Use model alibaba/wan/2.1/vace/video-edit with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/2.1/vace/video-edit"

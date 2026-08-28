@@ -1,6 +1,6 @@
 ---
 title: "SERP Bing Organic Live API Reference"
-description: "SERP Bing Organic Live API reference for SandBase. Use model dataforseo/v3/serp/bing/organic/live/advanced with /v1/run; view request fields, examples, capabilities, a."
+description: "SERP Bing Organic Live API reference for SandBase. Use model dataforseo/v3/serp/bing/organic/live/advanced with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

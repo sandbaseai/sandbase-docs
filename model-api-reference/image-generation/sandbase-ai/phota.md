@@ -1,6 +1,6 @@
 ---
 title: "Phota Text to Image API Reference"
-description: "Phota Text to Image API reference for SandBase. Use model sandbase-ai/phota with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Phota Text to Image API reference for SandBase. Use model sandbase-ai/phota with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/sandbase-ai/phota"

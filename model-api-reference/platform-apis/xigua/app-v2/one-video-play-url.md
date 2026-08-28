@@ -1,6 +1,6 @@
 ---
 title: "Get single video play URL API Reference"
-description: "Get single video play URL API reference for SandBase. Use model xigua/app-v2/one-video-play-url with /v1/run; view request fields, examples, capabilities, and response."
+description: "Get single video play URL API reference for SandBase. Use model xigua/app-v2/one-video-play-url with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

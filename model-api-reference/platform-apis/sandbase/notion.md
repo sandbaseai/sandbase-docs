@@ -1,6 +1,6 @@
 ---
 title: "Notion API Reference"
-description: "Notion API reference for SandBase. Use model sandbase/notion with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Notion API reference for SandBase. Use model sandbase/notion with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

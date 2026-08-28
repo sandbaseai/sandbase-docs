@@ -1,6 +1,6 @@
 ---
 title: "Get creator content creation category API Reference"
-description: "Get creator content creation category API reference for SandBase. Use model douyin/creator/creator-content-category with /v1/run; view request fields, examples, capabi."
+description: "Get creator content creation category API reference for SandBase. Use model douyin/creator/creator-content-category with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

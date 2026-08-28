@@ -1,6 +1,6 @@
 ---
 title: "AlfredPros: CodeLLaMa 7B Instruct Solidity API Reference"
-description: "AlfredPros: CodeLLaMa 7B Instruct Solidity API reference for SandBase. Use model alfredpros/codellama-7b-instruct-solidity with /v1/chat/completions; view request fiel."
+description: "SandBase API reference for model alfredpros/codellama-7b-instruct-solidity. Call /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alfredpros/codellama-7b-instruct-solidity"

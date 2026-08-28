@@ -1,6 +1,6 @@
 ---
 title: "Get single video comment data API Reference"
-description: "Get single video comment data API reference for SandBase. Use model kuaishou/app/video-comment with /v1/run; view request fields, examples, capabilities, and response;."
+description: "Get single video comment data API reference for SandBase. Use model kuaishou/app/video-comment with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

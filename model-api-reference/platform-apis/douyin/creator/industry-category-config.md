@@ -1,6 +1,6 @@
 ---
 title: "Get industry category config API Reference"
-description: "Get industry category config API reference for SandBase. Use model douyin/creator/industry-category-config with /v1/run; view request fields, examples, capabilities, a."
+description: "Get industry category config API reference for SandBase. Use model douyin/creator/industry-category-config with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

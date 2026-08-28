@@ -1,6 +1,6 @@
 ---
 title: "Get ad interactive analysis API Reference"
-description: "Get ad interactive analysis API reference for SandBase. Use model tiktok/ads/ad-interactive-analysis with /v1/run; view request fields, examples, capabilities, and res."
+description: "Get ad interactive analysis API reference for SandBase. Use model tiktok/ads/ad-interactive-analysis with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Article Search V3 API Reference"
-description: "Get Zhihu Article Search V3 API reference for SandBase. Use model zhihu/web/article-search-v3 with /v1/run; see request fields, examples, and response details."
+description: "Get Zhihu Article Search V3 API reference for SandBase. Use model zhihu/web/article-search-v3 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

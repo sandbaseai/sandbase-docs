@@ -1,6 +1,6 @@
 ---
 title: "PixVerse Swap API Reference"
-description: "PixVerse Swap API reference for SandBase. Use model pixverse/swap with /v1/run; view request fields, examples, capabilities, and response format."
+description: "PixVerse Swap API reference for SandBase. Use model pixverse/swap with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/pixverse/swap"

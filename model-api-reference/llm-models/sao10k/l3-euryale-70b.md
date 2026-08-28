@@ -1,6 +1,6 @@
 ---
 title: "Llama 3 Euryale 70B v2.1 API Reference"
-description: "Llama 3 Euryale 70B v2.1 API reference for SandBase. Use model sao10k/l3-euryale-70b with /v1/chat/completions; see request fields, examples, and response details."
+description: "Llama 3 Euryale 70B v2.1 API reference for SandBase. Use model sao10k/l3-euryale-70b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/sao10k/l3-euryale-70b"

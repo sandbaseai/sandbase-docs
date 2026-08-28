@@ -1,6 +1,6 @@
 ---
 title: "Get user about… — Instagram User About Info API"
-description: "Get user about info API reference for SandBase. Use model instagram/v1/user-about-info with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user about… — Instagram User About Info API API reference for SandBase. Use model instagram/v1/user-about-info with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

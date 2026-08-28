@@ -1,6 +1,6 @@
 ---
 title: "Wan API Reference"
-description: "Wan API reference for SandBase. Use model alibaba/wan/2.2/5b/fast/text-to-video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Wan API reference for SandBase. Use model alibaba/wan/2.2/5b/fast/text-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/2.2/5b/fast/text-to-video"

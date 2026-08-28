@@ -1,6 +1,6 @@
 ---
 title: "BRIA RMBG 2.0 API Reference"
-description: "BRIA RMBG 2.0 API reference for SandBase. Use model bria/background/remove with /v1/run; view request fields, examples, capabilities, and response format."
+description: "BRIA RMBG 2.0 API reference for SandBase. Use model bria/background/remove with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bria/background/remove"

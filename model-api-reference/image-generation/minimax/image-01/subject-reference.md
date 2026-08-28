@@ -1,6 +1,6 @@
 ---
 title: "Minimax Image Subject Reference API Reference"
-description: "Minimax Image Subject Reference API reference for SandBase. Use model minimax/image-01/subject-reference with /v1/run; view request fields, examples, capabilities, and."
+description: "Minimax Image Subject Reference API reference for SandBase. Use model minimax/image-01/subject-reference with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/minimax/image-01/subject-reference"

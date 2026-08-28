@@ -1,6 +1,6 @@
 ---
 title: "Get hot ranking timeline API Reference"
-description: "Get hot ranking timeline API reference for SandBase. Use model weibo/web-v2/hot-ranking-timeline with /v1/run; see request fields, examples, and response details."
+description: "Get hot ranking timeline API reference for SandBase. Use model weibo/web-v2/hot-ranking-timeline with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

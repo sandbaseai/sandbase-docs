@@ -1,6 +1,6 @@
 ---
 title: "Search ads API Reference"
-description: "Search ads API reference for SandBase. Use model tiktok/ads/search-ads with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search ads API reference for SandBase. Use model tiktok/ads/search-ads with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

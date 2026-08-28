@@ -1,6 +1,6 @@
 ---
 title: "Meshy Rigging API Reference"
-description: "Meshy Rigging API reference for SandBase. Use model meshy/rigging with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Meshy Rigging API reference for SandBase. Use model meshy/rigging with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/meshy/rigging"

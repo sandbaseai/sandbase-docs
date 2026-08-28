@@ -1,6 +1,6 @@
 ---
 title: "Get Douyin brand hot search list detail data API Reference"
-description: "Get Douyin brand hot search list detail data API reference for SandBase. Use model douyin/app-v3/brand-hot-search-list-detail with /v1/run; view request fields, exampl."
+description: "SandBase API reference for model douyin/app-v3/brand-hot-search-list-detail. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get Weibo comments API Reference"
-description: "Get Weibo comments API reference for SandBase. Use model weibo/web-v2/post-comments with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get Weibo comments API reference for SandBase. Use model weibo/web-v2/post-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

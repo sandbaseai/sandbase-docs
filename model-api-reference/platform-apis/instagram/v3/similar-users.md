@@ -1,6 +1,6 @@
 ---
 title: "Get similar… — Instagram V3 Similar Users API"
-description: "Get similar users API reference for SandBase. Use model instagram/v3/similar-users with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get similar… — Instagram V3 Similar Users API API reference for SandBase. Use model instagram/v3/similar-users with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

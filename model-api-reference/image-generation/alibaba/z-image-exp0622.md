@@ -1,6 +1,6 @@
 ---
 title: "Z-Image Exp0622 API Reference"
-description: "Z-Image Exp0622 API reference for SandBase. Use model alibaba/z-image-exp0622 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Z-Image Exp0622 API reference for SandBase. Use model alibaba/z-image-exp0622 with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/z-image-exp0622"

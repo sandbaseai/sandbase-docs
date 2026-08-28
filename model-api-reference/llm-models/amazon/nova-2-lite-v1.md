@@ -1,6 +1,6 @@
 ---
 title: "Nova 2 Lite API Reference"
-description: "Nova 2 Lite API reference for SandBase. Use model amazon/nova-2-lite-v1 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Nova 2 Lite API reference for SandBase. Use model amazon/nova-2-lite-v1 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/amazon/nova-2-lite-v1"

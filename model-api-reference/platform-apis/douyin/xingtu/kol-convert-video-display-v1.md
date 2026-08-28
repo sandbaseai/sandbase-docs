@@ -1,6 +1,6 @@
 ---
 title: "Get kol Convert Video Display V1 API Reference"
-description: "Get kol Convert Video Display V1 API reference for SandBase. Use model douyin/xingtu/kol-convert-video-display-v1 with /v1/run; view request fields, examples, capabili."
+description: "Get kol Convert Video Display V1 API reference for SandBase. Use model douyin/xingtu/kol-convert-video-display-v1 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

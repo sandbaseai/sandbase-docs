@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP Search Typeahead Suggestions API Reference"
-description: "Fetch Reddit APP Search Typeahead Suggestions API reference for SandBase. Use model reddit/app/search-typeahead with /v1/run; view request fields, examples, capabiliti."
+description: "Fetch Reddit APP Search Typeahead Suggestions API reference for SandBase. Use model reddit/app/search-typeahead with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

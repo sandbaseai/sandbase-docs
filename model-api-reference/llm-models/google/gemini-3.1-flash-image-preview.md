@@ -1,6 +1,6 @@
 ---
 title: "Nano Banana 2 (Gemini 3.1 Flash Image Preview) API Reference"
-description: "Nano Banana 2 (Gemini 3.1 Flash Image Preview) API reference for SandBase. Use model google/gemini-3.1-flash-image-preview with /v1/chat/completions; view request fiel."
+description: "SandBase API reference for model google/gemini-3.1-flash-image-preview. Call /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/google/gemini-3.1-flash-image-preview"

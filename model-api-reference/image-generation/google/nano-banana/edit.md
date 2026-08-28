@@ -1,6 +1,6 @@
 ---
 title: "Nano Banana Image Editing API Reference"
-description: "Nano Banana Image Editing API reference for SandBase. Use model google/nano-banana/edit with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Nano Banana Image Editing API reference for SandBase. Use model google/nano-banana/edit with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/google/nano-banana/edit"

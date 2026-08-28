@@ -1,6 +1,6 @@
 ---
 title: "Generate aid by bvid API Reference"
-description: "Generate aid by bvid API reference for SandBase. Use model bilibili/web/bv-to-aid with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Generate aid by bvid API reference for SandBase. Use model bilibili/web/bv-to-aid with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

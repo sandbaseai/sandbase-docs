@@ -1,6 +1,6 @@
 ---
 title: "Backlinks Competitors API Reference"
-description: "Backlinks Competitors API reference for SandBase. Use model dataforseo/v3/backlinks/competitors/live with /v1/run; view request fields, examples, capabilities, and res."
+description: "Backlinks Competitors API reference for SandBase. Use model dataforseo/v3/backlinks/competitors/live with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get Douyin hot search results API Reference"
-description: "Get Douyin hot search results API reference for SandBase. Use model douyin/web/hot-search-result with /v1/run; see request fields, examples, and response details."
+description: "Get Douyin hot search results API reference for SandBase. Use model douyin/web/hot-search-result with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

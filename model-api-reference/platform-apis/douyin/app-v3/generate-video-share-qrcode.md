@@ -1,6 +1,6 @@
 ---
 title: "Generate Douyin video share QR code API Reference"
-description: "Generate Douyin video share QR code API reference for SandBase. Use model douyin/app-v3/generate-video-share-qrcode with /v1/run; view request fields, examples, capabi."
+description: "Generate Douyin video share QR code API reference for SandBase. Use model douyin/app-v3/generate-video-share-qrcode with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Video comment list API Reference"
-description: "Video comment list API reference for SandBase. Use model xigua/app-v2/video-comment-list with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Video comment list API reference for SandBase. Use model xigua/app-v2/video-comment-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

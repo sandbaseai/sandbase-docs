@@ -1,6 +1,6 @@
 ---
 title: "Fetch account fan data trend API Reference"
-description: "Fetch account fan data trend API reference for SandBase. Use model douyin/billboard/hot-account-trends-list with /v1/run; view request fields, examples, capabilities,;."
+description: "Fetch account fan data trend API reference for SandBase. Use model douyin/billboard/hot-account-trends-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

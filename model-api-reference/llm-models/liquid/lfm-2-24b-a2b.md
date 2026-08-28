@@ -1,6 +1,6 @@
 ---
 title: "LiquidAI: LFM2-24B-A2B API Reference"
-description: "LiquidAI: LFM2-24B-A2B API reference for SandBase. Use model liquid/lfm-2-24b-a2b with /v1/chat/completions; view request fields, examples, capabilities, and response;."
+description: "LiquidAI: LFM2-24B-A2B API reference for SandBase. Use model liquid/lfm-2-24b-a2b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/liquid/lfm-2-24b-a2b"

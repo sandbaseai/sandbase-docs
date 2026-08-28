@@ -1,6 +1,6 @@
 ---
 title: "Kling Video O3 — Kwaivgi Reference To Video API"
-description: "Kling Video O3 4k API reference for SandBase. Use model kwaivgi/kling-video/o3/4k/reference-to-video with /v1/run; view request fields, examples, capabilities, and res."
+description: "SandBase API reference for model kwaivgi/kling-video/o3/4k/reference-to-video. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/kwaivgi/kling-video/o3/4k/reference-to-video"

@@ -1,6 +1,6 @@
 ---
 title: "Qwen2.5 Coder 32B Instruct API Reference"
-description: "Qwen2.5 Coder 32B Instruct API reference for SandBase. Use model alibaba/qwen-2.5-coder-32b-instruct with /v1/chat/completions; view request fields, examples, capabili."
+description: "Qwen2.5 Coder 32B Instruct API reference for SandBase. Use model alibaba/qwen-2.5-coder-32b-instruct with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen-2.5-coder-32b-instruct"

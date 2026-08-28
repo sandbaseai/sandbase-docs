@@ -1,6 +1,6 @@
 ---
 title: "KAT-Coder-Pro V2 API Reference"
-description: "KAT-Coder-Pro V2 API reference for SandBase. Use model kwaipilot/kat-coder-pro-v2 with /v1/chat/completions; view request fields, examples, capabilities, and response;."
+description: "KAT-Coder-Pro V2 API reference for SandBase. Use model kwaipilot/kat-coder-pro-v2 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/kwaipilot/kat-coder-pro-v2"

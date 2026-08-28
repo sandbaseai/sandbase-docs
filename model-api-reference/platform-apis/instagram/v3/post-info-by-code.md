@@ -1,6 +1,6 @@
 ---
 title: "Get post info by shortcode API Reference"
-description: "Get post info by shortcode API reference for SandBase. Use model instagram/v3/post-info-by-code with /v1/run; view request fields, examples, capabilities, and response."
+description: "Get post info by shortcode API reference for SandBase. Use model instagram/v3/post-info-by-code with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

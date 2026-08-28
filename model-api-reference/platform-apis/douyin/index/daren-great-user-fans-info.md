@@ -1,6 +1,6 @@
 ---
 title: "Get daren fans analysis API Reference"
-description: "Get daren fans analysis API reference for SandBase. Use model douyin/index/daren-great-user-fans-info with /v1/run; view request fields, examples, capabilities, and re."
+description: "Get daren fans analysis API reference for SandBase. Use model douyin/index/daren-great-user-fans-info with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

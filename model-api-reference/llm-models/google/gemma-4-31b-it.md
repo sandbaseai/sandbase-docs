@@ -1,6 +1,6 @@
 ---
 title: "Gemma 4 31B API Reference"
-description: "Gemma 4 31B API reference for SandBase. Use model google/gemma-4-31b-it with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Gemma 4 31B API reference for SandBase. Use model google/gemma-4-31b-it with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/google/gemma-4-31b-it"

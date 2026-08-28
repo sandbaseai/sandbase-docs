@@ -1,6 +1,6 @@
 ---
 title: "Vace API Reference"
-description: "Vace API reference for SandBase. Use model alibaba/wan-vace with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Vace API reference for SandBase. Use model alibaba/wan-vace with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/wan-vace"

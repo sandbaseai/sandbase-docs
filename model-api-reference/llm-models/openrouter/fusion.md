@@ -1,6 +1,6 @@
 ---
 title: "OpenRouter: Fusion API Reference"
-description: "OpenRouter: Fusion API reference for SandBase. Use model openrouter/fusion with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "OpenRouter: Fusion API reference for SandBase. Use model openrouter/fusion with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openrouter/fusion"

@@ -1,6 +1,6 @@
 ---
 title: "Backlinks Anchors API Reference"
-description: "Backlinks Anchors API reference for SandBase. Use model dataforseo/v3/backlinks/anchors/live with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Backlinks Anchors API reference for SandBase. Use model dataforseo/v3/backlinks/anchors/live with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

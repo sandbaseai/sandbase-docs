@@ -1,6 +1,6 @@
 ---
 title: "Get comment replies… — Douyin Web Video Comment Replies API"
-description: "Get comment replies data of specified video API reference for SandBase. Use model douyin/web/video-comment-replies with /v1/run; view request fields, examples, capabil."
+description: "SandBase API reference for model douyin/web/video-comment-replies. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

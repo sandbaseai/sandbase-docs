@@ -1,6 +1,6 @@
 ---
 title: "Business Data Google My Business API Reference"
-description: "Business Data Google My Business API reference for SandBase. Use model dataforseo/v3/business_data/google/my_business_info/live/advanced with /v1/run; view request fie."
+description: "SandBase API reference for model dataforseo/v3/business_data/google/my_business_info/live/advanced. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

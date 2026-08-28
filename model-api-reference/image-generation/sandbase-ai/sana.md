@@ -1,6 +1,6 @@
 ---
 title: "Sana API Reference"
-description: "Sana API reference for SandBase. Use model sandbase-ai/sana with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Sana API reference for SandBase. Use model sandbase-ai/sana with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/sandbase-ai/sana"

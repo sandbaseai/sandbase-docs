@@ -1,6 +1,6 @@
 ---
 title: "Get related posts recommendation data API Reference"
-description: "Get related posts recommendation data API reference for SandBase. Use model douyin/web/related-posts with /v1/run; view request fields, examples, capabilities, and res."
+description: "Get related posts recommendation data API reference for SandBase. Use model douyin/web/related-posts with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

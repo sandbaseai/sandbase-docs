@@ -1,6 +1,6 @@
 ---
 title: "AionLabs: Aion-RP 1.0 (8B) API Reference"
-description: "AionLabs: Aion-RP 1.0 (8B) API reference for SandBase. Use model aion-labs/aion-rp-llama-3.1-8b with /v1/chat/completions; view request fields, examples, capabilities,."
+description: "AionLabs: Aion-RP 1.0 (8B) API reference for SandBase. Use model aion-labs/aion-rp-llama-3.1-8b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/aion-labs/aion-rp-llama-3.1-8b"

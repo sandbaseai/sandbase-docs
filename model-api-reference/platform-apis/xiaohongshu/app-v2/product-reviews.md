@@ -1,6 +1,6 @@
 ---
 title: "Get product reviews API Reference"
-description: "Get product reviews API reference for SandBase. Use model xiaohongshu/app-v2/product-reviews with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Get product reviews API reference for SandBase. Use model xiaohongshu/app-v2/product-reviews with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

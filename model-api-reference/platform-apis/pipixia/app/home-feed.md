@@ -1,6 +1,6 @@
 ---
 title: "Get home… — Pipixia Home Feed API"
-description: "Get home feed API reference for SandBase. Use model pipixia/app/home-feed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get home… — Pipixia Home Feed API API reference for SandBase. Use model pipixia/app/home-feed with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

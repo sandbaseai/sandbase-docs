@@ -1,6 +1,6 @@
 ---
 title: "IBM: Granite 4.1 8B API Reference"
-description: "IBM: Granite 4.1 8B API reference for SandBase. Use model ibm-granite/granite-4.1-8b with /v1/chat/completions; see request fields, examples, and response details."
+description: "IBM: Granite 4.1 8B API reference for SandBase. Use model ibm-granite/granite-4.1-8b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/ibm-granite/granite-4.1-8b"

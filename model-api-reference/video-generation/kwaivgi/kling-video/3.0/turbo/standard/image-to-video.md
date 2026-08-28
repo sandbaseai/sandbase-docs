@@ -1,6 +1,6 @@
 ---
 title: "Kling 3.0 Turbo Standard Image to Video API Reference"
-description: "Kling 3.0 Turbo Standard Image to Video API reference for SandBase. Use model kwaivgi/kling-video/3.0/turbo/standard/image-to-video with /v1/run; view request fields,;."
+description: "SandBase API reference for model kwaivgi/kling-video/3.0/turbo/standard/image-to-video. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/kwaivgi/kling-video/3.0/turbo/standard/image-to-video"

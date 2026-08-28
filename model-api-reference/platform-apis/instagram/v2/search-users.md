@@ -1,6 +1,6 @@
 ---
 title: "Search… — Instagram Search Users API"
-description: "Search users API reference for SandBase. Use model instagram/v2/search-users with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search… — Instagram Search Users API API reference for SandBase. Use model instagram/v2/search-users with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

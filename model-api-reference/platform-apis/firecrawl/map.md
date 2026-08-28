@@ -1,6 +1,6 @@
 ---
 title: "Firecrawl Map API Reference"
-description: "Firecrawl Map API reference for SandBase. Use model firecrawl/map with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Firecrawl Map API reference for SandBase. Use model firecrawl/map with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

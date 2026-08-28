@@ -1,6 +1,6 @@
 ---
 title: "Llama 4 Scout API Reference"
-description: "Llama 4 Scout API reference for SandBase. Use model meta/llama-4-scout with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Llama 4 Scout API reference for SandBase. Use model meta/llama-4-scout with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/meta/llama-4-scout"

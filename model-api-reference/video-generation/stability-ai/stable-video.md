@@ -1,6 +1,6 @@
 ---
 title: "High Quality Stable Video Diffusion API Reference"
-description: "High Quality Stable Video Diffusion API reference for SandBase. Use model stability-ai/stable-video with /v1/run; view request fields, examples, capabilities, and resp."
+description: "High Quality Stable Video Diffusion API reference for SandBase. Use model stability-ai/stable-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/stability-ai/stable-video"

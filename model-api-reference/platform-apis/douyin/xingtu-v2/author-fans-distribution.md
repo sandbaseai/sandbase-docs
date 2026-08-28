@@ -1,6 +1,6 @@
 ---
 title: "Get Author Fans Distribution API Reference"
-description: "Get Author Fans Distribution API reference for SandBase. Use model douyin/xingtu-v2/author-fans-distribution with /v1/run; view request fields, examples, capabilities,."
+description: "Get Author Fans Distribution API reference for SandBase. Use model douyin/xingtu-v2/author-fans-distribution with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

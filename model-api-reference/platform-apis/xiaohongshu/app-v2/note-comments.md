@@ -1,6 +1,6 @@
 ---
 title: "Get note comments API Reference"
-description: "Get note comments API reference for SandBase. Use model xiaohongshu/app-v2/note-comments with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get note comments API reference for SandBase. Use model xiaohongshu/app-v2/note-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Nano Banana 2 Lite API Reference"
-description: "Nano Banana 2 Lite API reference for SandBase. Use model google/nano-banana-2-lite with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Nano Banana 2 Lite API reference for SandBase. Use model google/nano-banana-2-lite with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/google/nano-banana-2-lite"

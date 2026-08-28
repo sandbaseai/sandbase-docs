@@ -1,6 +1,6 @@
 ---
 title: "Content Analysis Ratings API Reference"
-description: "Content Analysis Ratings API reference for SandBase. Use model dataforseo/v3/content_analysis/rating_distribution/live with /v1/run; view request fields, examples, cap."
+description: "Content Analysis Ratings API reference for SandBase. Use model dataforseo/v3/content_analysis/rating_distribution/live with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

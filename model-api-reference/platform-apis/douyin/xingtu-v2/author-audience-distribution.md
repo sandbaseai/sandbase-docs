@@ -1,6 +1,6 @@
 ---
 title: "Get Author Audience Distribution API Reference"
-description: "Get Author Audience Distribution API reference for SandBase. Use model douyin/xingtu-v2/author-audience-distribution with /v1/run; view request fields, examples, capab."
+description: "Get Author Audience Distribution API reference for SandBase. Use model douyin/xingtu-v2/author-audience-distribution with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

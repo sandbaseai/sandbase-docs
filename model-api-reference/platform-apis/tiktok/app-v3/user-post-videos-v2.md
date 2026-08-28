@@ -1,6 +1,6 @@
 ---
 title: "Get user homepage video data V2 API Reference"
-description: "Get user homepage video data V2 API reference for SandBase. Use model tiktok/app-v3/user-post-videos-v2 with /v1/run; view request fields, examples, capabilities, and;."
+description: "Get user homepage video data V2 API reference for SandBase. Use model tiktok/app-v3/user-post-videos-v2 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

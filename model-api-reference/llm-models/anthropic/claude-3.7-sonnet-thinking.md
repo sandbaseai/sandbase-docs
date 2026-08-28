@@ -1,6 +1,6 @@
 ---
 title: "Claude 3.7 Sonnet (thinking) API Reference"
-description: "Claude 3.7 Sonnet (thinking) API reference for SandBase. Use model anthropic/claude-3.7-sonnet:thinking with /v1/messages; view request fields, examples, capabilities,."
+description: "Claude 3.7 Sonnet (thinking) API reference for SandBase. Use model anthropic/claude-3.7-sonnet:thinking with /v1/messages; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/anthropic/claude-3.7-sonnet:thinking"

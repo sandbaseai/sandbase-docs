@@ -1,6 +1,6 @@
 ---
 title: "MiniMax Voice Design API Reference"
-description: "MiniMax Voice Design API reference for SandBase. Use model minimax/voice-design with /v1/run; view request fields, examples, capabilities, and response format."
+description: "MiniMax Voice Design API reference for SandBase. Use model minimax/voice-design with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/minimax/voice-design"

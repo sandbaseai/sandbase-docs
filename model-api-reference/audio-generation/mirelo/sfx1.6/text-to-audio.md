@@ -1,6 +1,6 @@
 ---
 title: "Mirelo… — Mirelo Text To Audio API"
-description: "Mirelo SFX1.6 API reference for SandBase. Use model mirelo/sfx1.6/text-to-audio with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Mirelo… — Mirelo Text To Audio API API reference for SandBase. Use model mirelo/sfx1.6/text-to-audio with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/mirelo/sfx1.6/text-to-audio"

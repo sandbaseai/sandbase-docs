@@ -1,6 +1,6 @@
 ---
 title: "Get Temp Email API Reference"
-description: "Get Temp Email API reference for SandBase. Use model temp-mail/v1/temp-email-address with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get Temp Email API reference for SandBase. Use model temp-mail/v1/temp-email-address with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

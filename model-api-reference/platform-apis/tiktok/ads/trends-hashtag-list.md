@@ -1,6 +1,6 @@
 ---
 title: "Get trending hashtag list API Reference"
-description: "Get trending hashtag list API reference for SandBase. Use model tiktok/ads/trends-hashtag-list with /v1/run; view request fields, examples, capabilities, and response;."
+description: "Get trending hashtag list API reference for SandBase. Use model tiktok/ads/trends-hashtag-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

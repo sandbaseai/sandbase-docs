@@ -1,6 +1,6 @@
 ---
 title: "Video sub comments API Reference"
-description: "Video sub comments API reference for SandBase. Use model kuaishou/app/video-sub-comments with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Video sub comments API reference for SandBase. Use model kuaishou/app/video-sub-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

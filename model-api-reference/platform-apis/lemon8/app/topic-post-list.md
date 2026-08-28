@@ -1,6 +1,6 @@
 ---
 title: "Get topic post list API Reference"
-description: "Get topic post list API reference for SandBase. Use model lemon8/app/topic-post-list with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get topic post list API reference for SandBase. Use model lemon8/app/topic-post-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

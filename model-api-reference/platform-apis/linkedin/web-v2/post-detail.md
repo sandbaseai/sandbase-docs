@@ -1,6 +1,6 @@
 ---
 title: "Get post or article detail API Reference"
-description: "Get post or article detail API reference for SandBase. Use model linkedin/web-v2/post-detail with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Get post or article detail API reference for SandBase. Use model linkedin/web-v2/post-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

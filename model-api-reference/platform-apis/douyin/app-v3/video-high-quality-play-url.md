@@ -1,6 +1,6 @@
 ---
 title: "Get the highest… — Douyin Video High Quality Play Url API"
-description: "Get the highest quality play URL of the video API reference for SandBase. Use model douyin/app-v3/video-high-quality-play-url with /v1/run; view request fields, exampl."
+description: "SandBase API reference for model douyin/app-v3/video-high-quality-play-url. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "MiniMax H3 (Text to Video) API Reference"
-description: "MiniMax H3 (Text to Video) API reference for SandBase. Use model minimax/h3/text-to-video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "MiniMax H3 (Text to Video) API reference for SandBase. Use model minimax/h3/text-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/minimax/h3/text-to-video"

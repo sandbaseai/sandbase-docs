@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 [dev] with Controlnets and… — Bfl Flux General API"
-description: "FLUX.1 [dev] with Controlnets and Loras API reference for SandBase. Use model bfl/flux-general with /v1/run; view request fields, examples, capabilities, and response;."
+description: "FLUX.1 [dev] with Controlnets and… — Bfl Flux General API API reference for SandBase. Use model bfl/flux-general with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-general"

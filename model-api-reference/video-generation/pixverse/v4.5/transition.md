@@ -1,6 +1,6 @@
 ---
 title: "PixVerse V4.5 Transition API Reference"
-description: "PixVerse V4.5 Transition API reference for SandBase. Use model pixverse/v4.5/transition with /v1/run; view request fields, examples, capabilities, and response format."
+description: "PixVerse V4.5 Transition API reference for SandBase. Use model pixverse/v4.5/transition with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/pixverse/v4.5/transition"

@@ -1,6 +1,6 @@
 ---
 title: "SDXL ControlNet… — Stability Ai Sdxl Controlnet Union API"
-description: "SDXL ControlNet Union API reference for SandBase. Use model stability-ai/sdxl-controlnet-union with /v1/run; view request fields, examples, capabilities, and response;."
+description: "SandBase API reference for model stability-ai/sdxl-controlnet-union. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/stability-ai/sdxl-controlnet-union"

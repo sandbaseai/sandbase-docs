@@ -1,6 +1,6 @@
 ---
 title: "Get highlight… — Instagram V3 Highlight Stories API"
-description: "Get highlight stories API reference for SandBase. Use model instagram/v3/highlight-stories with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get highlight… — Instagram V3 Highlight Stories API API reference for SandBase. Use model instagram/v3/highlight-stories with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

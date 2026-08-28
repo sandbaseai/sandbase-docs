@@ -1,6 +1,6 @@
 ---
 title: "Inflection 3 Productivity API Reference"
-description: "Inflection 3 Productivity API reference for SandBase. Use model inflection/inflection-3-productivity with /v1/chat/completions; view request fields, examples, capabili."
+description: "Inflection 3 Productivity API reference for SandBase. Use model inflection/inflection-3-productivity with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/inflection/inflection-3-productivity"

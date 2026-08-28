@@ -1,6 +1,6 @@
 ---
 title: "Veo 2 (Image to Video) API Reference"
-description: "Veo 2 (Image to Video) API reference for SandBase. Use model google/veo-2/image-to-video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Veo 2 (Image to Video) API reference for SandBase. Use model google/veo-2/image-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/google/veo-2/image-to-video"

@@ -1,6 +1,6 @@
 ---
 title: "Fetch fan interest topic in the last 3 days 10 topic… API Ref"
-description: "Fetch fan interest topic in the last 3 days 10 topics API reference for SandBase. Use model douyin/billboard/hot-account-fans-interest-topic-list with /v1/run; view re."
+description: "SandBase API reference for model douyin/billboard/hot-account-fans-interest-topic-list. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

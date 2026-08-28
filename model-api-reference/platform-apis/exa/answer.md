@@ -1,6 +1,6 @@
 ---
 title: "Exa Answer API Reference"
-description: "Exa Answer API reference for SandBase. Use model exa/answer with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Exa Answer API reference for SandBase. Use model exa/answer with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

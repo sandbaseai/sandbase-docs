@@ -1,6 +1,6 @@
 ---
 title: "OnPage Duplicate Tags API Reference"
-description: "OnPage Duplicate Tags API reference for SandBase. Use model dataforseo/v3/on_page/duplicate_tags with /v1/run; see request fields, examples, and response details."
+description: "OnPage Duplicate Tags API reference for SandBase. Use model dataforseo/v3/on_page/duplicate_tags with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

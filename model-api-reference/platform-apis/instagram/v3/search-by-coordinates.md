@@ -1,6 +1,6 @@
 ---
 title: "Search locations by… — Instagram V3 Search By Coordinates API"
-description: "Search locations by coordinates API reference for SandBase. Use model instagram/v3/search-by-coordinates with /v1/run; view request fields, examples, capabilities, and."
+description: "SandBase API reference for model instagram/v3/search-by-coordinates. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

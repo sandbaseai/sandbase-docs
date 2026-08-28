@@ -1,6 +1,6 @@
 ---
 title: "Mistral Large 2407 API Reference"
-description: "Mistral Large 2407 API reference for SandBase. Use model mistral/mistral-large-2407 with /v1/chat/completions; see request fields, examples, and response details."
+description: "Mistral Large 2407 API reference for SandBase. Use model mistral/mistral-large-2407 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/mistral-large-2407"

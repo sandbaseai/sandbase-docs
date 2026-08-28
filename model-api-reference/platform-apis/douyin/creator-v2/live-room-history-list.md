@@ -1,6 +1,6 @@
 ---
 title: "Fetch live room history list API Reference"
-description: "Fetch live room history list API reference for SandBase. Use model douyin/creator-v2/live-room-history-list with /v1/run; view request fields, examples, capabilities,;."
+description: "Fetch live room history list API reference for SandBase. Use model douyin/creator-v2/live-room-history-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get keyword valid date API Reference"
-description: "Get keyword valid date API reference for SandBase. Use model douyin/index/keyword-valid-date with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Get keyword valid date API reference for SandBase. Use model douyin/index/keyword-valid-date with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

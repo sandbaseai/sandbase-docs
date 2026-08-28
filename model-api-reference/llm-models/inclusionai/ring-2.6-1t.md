@@ -1,6 +1,6 @@
 ---
 title: "inclusionAI: Ring-2.6-1T API Reference"
-description: "inclusionAI: Ring-2.6-1T API reference for SandBase. Use model inclusionai/ring-2.6-1t with /v1/chat/completions; view request fields, examples, capabilities, and resp."
+description: "inclusionAI: Ring-2.6-1T API reference for SandBase. Use model inclusionai/ring-2.6-1t with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/inclusionai/ring-2.6-1t"

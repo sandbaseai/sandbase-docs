@@ -1,6 +1,6 @@
 ---
 title: "Reka Flash 3 API Reference"
-description: "Reka Flash 3 API reference for SandBase. Use model rekaai/reka-flash-3 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Reka Flash 3 API reference for SandBase. Use model rekaai/reka-flash-3 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/rekaai/reka-flash-3"

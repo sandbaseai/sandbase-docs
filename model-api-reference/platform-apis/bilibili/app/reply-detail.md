@@ -1,6 +1,6 @@
 ---
 title: "Get reply detail API Reference"
-description: "Get reply detail API reference for SandBase. Use model bilibili/app/reply-detail with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get reply detail API reference for SandBase. Use model bilibili/app/reply-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

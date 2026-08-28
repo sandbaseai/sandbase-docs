@@ -1,6 +1,6 @@
 ---
 title: "tiktok live room danmaku parameters API Reference"
-description: "tiktok live room danmaku parameters API reference for SandBase. Use model tiktok/web/live-im-fetch with /v1/run; view request fields, examples, capabilities, and respo."
+description: "tiktok live room danmaku parameters API reference for SandBase. Use model tiktok/web/live-im-fetch with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

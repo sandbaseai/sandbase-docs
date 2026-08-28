@@ -1,6 +1,6 @@
 ---
 title: "Goliath 120B API Reference"
-description: "Goliath 120B API reference for SandBase. Use model alpindale/goliath-120b with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Goliath 120B API reference for SandBase. Use model alpindale/goliath-120b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alpindale/goliath-120b"

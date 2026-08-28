@@ -1,6 +1,6 @@
 ---
 title: "Get channel description API Reference"
-description: "Get channel description API reference for SandBase. Use model youtube/web-v2/channel-description with /v1/run; see request fields, examples, and response details."
+description: "Get channel description API reference for SandBase. Use model youtube/web-v2/channel-description with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

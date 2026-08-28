@@ -1,6 +1,6 @@
 ---
 title: "Pika V2.2 Frames API Reference"
-description: "Pika V2.2 Frames API reference for SandBase. Use model pika/v2.2/frames with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Pika V2.2 Frames API reference for SandBase. Use model pika/v2.2/frames with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/pika/v2.2/frames"

@@ -1,6 +1,6 @@
 ---
 title: "Get user profile feed API Reference"
-description: "Get user profile feed API reference for SandBase. Use model weibo/app/user-profile-feed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user profile feed API reference for SandBase. Use model weibo/app/user-profile-feed with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

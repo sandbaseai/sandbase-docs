@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu User Following API Reference"
-description: "Get Zhihu User Following API reference for SandBase. Use model zhihu/web/user-followees with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get Zhihu User Following API reference for SandBase. Use model zhihu/web/user-followees with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

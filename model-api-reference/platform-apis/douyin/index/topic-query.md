@@ -1,6 +1,6 @@
 ---
 title: "Topic search results API Reference"
-description: "Topic search results API reference for SandBase. Use model douyin/index/topic-query with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Topic search results API reference for SandBase. Use model douyin/index/topic-query with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

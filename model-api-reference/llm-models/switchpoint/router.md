@@ -1,6 +1,6 @@
 ---
 title: "Switchpoint Router API Reference"
-description: "Switchpoint Router API reference for SandBase. Use model switchpoint/router with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Switchpoint Router API reference for SandBase. Use model switchpoint/router with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/switchpoint/router"

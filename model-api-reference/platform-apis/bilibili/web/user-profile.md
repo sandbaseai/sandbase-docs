@@ -1,6 +1,6 @@
 ---
 title: "Get information of specified… — Bilibili User Profile API"
-description: "Get information of specified user API reference for SandBase. Use model bilibili/web/user-profile with /v1/run; see request fields, examples, and response details."
+description: "Get information of specified… — Bilibili User Profile API API reference for SandBase. Use model bilibili/web/user-profile with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

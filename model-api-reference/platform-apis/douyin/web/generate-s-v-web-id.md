@@ -1,6 +1,6 @@
 ---
 title: "Generate s_v_web_id API Reference"
-description: "Generate s_v_web_id API reference for SandBase. Use model douyin/web/generate-s-v-web-id with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Generate s_v_web_id API reference for SandBase. Use model douyin/web/generate-s-v-web-id with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

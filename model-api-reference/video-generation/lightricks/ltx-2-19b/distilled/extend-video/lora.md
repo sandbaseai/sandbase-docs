@@ -1,6 +1,6 @@
 ---
 title: "LTX-2 19B… — Lightricks Lora API"
-description: "LTX-2 19B Distilled API reference for SandBase. Use model lightricks/ltx-2-19b/distilled/extend-video/lora with /v1/run; view request fields, examples, capabilities, a."
+description: "LTX-2 19B… — Lightricks Lora API API reference for SandBase. Use model lightricks/ltx-2-19b/distilled/extend-video/lora with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-2-19b/distilled/extend-video/lora"

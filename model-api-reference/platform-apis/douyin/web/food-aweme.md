@@ -1,6 +1,6 @@
 ---
 title: "Food Video API Reference"
-description: "Food Video API reference for SandBase. Use model douyin/web/food-aweme with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Food Video API reference for SandBase. Use model douyin/web/food-aweme with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "OnPage Content Parsing API Reference"
-description: "OnPage Content Parsing API reference for SandBase. Use model dataforseo/v3/on_page/content_parsing/live with /v1/run; view request fields, examples, capabilities, and;."
+description: "OnPage Content Parsing API reference for SandBase. Use model dataforseo/v3/on_page/content_parsing/live with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get single video data V3 API Reference"
-description: "Get single video data V3 API reference for SandBase. Use model bilibili/web/one-video-v3 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get single video data V3 API reference for SandBase. Use model bilibili/web/one-video-v3 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

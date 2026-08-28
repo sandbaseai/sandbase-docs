@@ -1,6 +1,6 @@
 ---
 title: "Fetch fan portrait API Reference"
-description: "Fetch fan portrait API reference for SandBase. Use model douyin/billboard/hot-account-fans-portrait-list with /v1/run; view request fields, examples, capabilities, and."
+description: "Fetch fan portrait API reference for SandBase. Use model douyin/billboard/hot-account-fans-portrait-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

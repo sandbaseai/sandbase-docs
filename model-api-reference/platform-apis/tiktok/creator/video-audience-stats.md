@@ -1,6 +1,6 @@
 ---
 title: "Get Video Audience Analysis Data API Reference"
-description: "Get Video Audience Analysis Data API reference for SandBase. Use model tiktok/creator/video-audience-stats with /v1/run; view request fields, examples, capabilities, a."
+description: "Get Video Audience Analysis Data API reference for SandBase. Use model tiktok/creator/video-audience-stats with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

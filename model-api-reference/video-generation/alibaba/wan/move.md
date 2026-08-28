@@ -1,6 +1,6 @@
 ---
 title: "Wan Move API Reference"
-description: "Wan Move API reference for SandBase. Use model alibaba/wan/move with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Wan Move API reference for SandBase. Use model alibaba/wan/move with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/move"

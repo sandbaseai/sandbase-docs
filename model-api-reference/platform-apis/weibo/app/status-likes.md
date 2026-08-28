@@ -1,6 +1,6 @@
 ---
 title: "Get post… — Weibo Status Likes API"
-description: "Get post likes API reference for SandBase. Use model weibo/app/status-likes with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get post… — Weibo Status Likes API API reference for SandBase. Use model weibo/app/status-likes with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Veo 3 Fast [Image to Video] API Reference"
-description: "Veo 3 Fast [Image to Video] API reference for SandBase. Use model google/veo-3/fast/image-to-video with /v1/run; view request fields, examples, capabilities, and respo."
+description: "Veo 3 Fast [Image to Video] API reference for SandBase. Use model google/veo-3/fast/image-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/google/veo-3/fast/image-to-video"

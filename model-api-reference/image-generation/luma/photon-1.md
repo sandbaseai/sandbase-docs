@@ -1,6 +1,6 @@
 ---
 title: "Luma Photon API Reference"
-description: "Luma Photon API reference for SandBase. Use model luma/photon-1 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Luma Photon API reference for SandBase. Use model luma/photon-1 with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/luma/photon-1"

@@ -1,6 +1,6 @@
 ---
 title: "Nemotron 3 Nano… — Nvidia Video API"
-description: "Nemotron 3 Nano Omni API reference for SandBase. Use model nvidia/nemotron-3-nano-omni/video with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Nemotron 3 Nano… — Nvidia Video API API reference for SandBase. Use model nvidia/nemotron-3-nano-omni/video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/nvidia/nemotron-3-nano-omni/video"

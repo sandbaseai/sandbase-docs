@@ -1,6 +1,6 @@
 ---
 title: "Get information of specified Webcast user API Reference"
-description: "Get information of specified Webcast user API reference for SandBase. Use model tiktok/app-v3/webcast-user-info with /v1/run; view request fields, examples, capabiliti."
+description: "Get information of specified Webcast user API reference for SandBase. Use model tiktok/app-v3/webcast-user-info with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

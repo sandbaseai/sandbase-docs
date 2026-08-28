@@ -1,6 +1,6 @@
 ---
 title: "Business Data Trustpilot Reviews API Reference"
-description: "Business Data Trustpilot Reviews API reference for SandBase. Use model dataforseo/v3/business_data/trustpilot/reviews/live/advanced with /v1/run; view request fields,;."
+description: "SandBase API reference for model dataforseo/v3/business_data/trustpilot/reviews/live/advanced. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "HiDream O1 Edit API Reference"
-description: "HiDream O1 Edit API reference for SandBase. Use model hidream-ai/hidream-o1/edit with /v1/run; view request fields, examples, capabilities, and response format."
+description: "HiDream O1 Edit API reference for SandBase. Use model hidream-ai/hidream-o1/edit with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/hidream-ai/hidream-o1/edit"

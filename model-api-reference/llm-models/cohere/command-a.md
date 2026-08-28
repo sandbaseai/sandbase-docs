@@ -1,6 +1,6 @@
 ---
 title: "Command A API Reference"
-description: "Command A API reference for SandBase. Use model cohere/command-a with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Command A API reference for SandBase. Use model cohere/command-a with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/cohere/command-a"

@@ -1,6 +1,6 @@
 ---
 title: "Z-Image Turbo Edit LoRA API Reference"
-description: "Z-Image Turbo Edit LoRA API reference for SandBase. Use model alibaba/z-image/turbo/edit/lora with /v1/run; see request fields, examples, and response details."
+description: "Z-Image Turbo Edit LoRA API reference for SandBase. Use model alibaba/z-image/turbo/edit/lora with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/z-image/turbo/edit/lora"

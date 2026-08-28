@@ -1,6 +1,6 @@
 ---
 title: "xAI Text to Speech API Reference"
-description: "xAI Text to Speech API reference for SandBase. Use model xai/grok-tts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "xAI Text to Speech API reference for SandBase. Use model xai/grok-tts with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/xai/grok-tts"

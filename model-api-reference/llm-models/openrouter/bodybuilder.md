@@ -1,6 +1,6 @@
 ---
 title: "Body Builder (beta) API Reference"
-description: "Body Builder (beta) API reference for SandBase. Use model openrouter/bodybuilder with /v1/chat/completions; see request fields, examples, and response details."
+description: "Body Builder (beta) API reference for SandBase. Use model openrouter/bodybuilder with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openrouter/bodybuilder"

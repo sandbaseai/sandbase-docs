@@ -1,6 +1,6 @@
 ---
 title: "ERNIE 4.5 VL 424B A47B API Reference"
-description: "ERNIE 4.5 VL 424B A47B API reference for SandBase. Use model baidu/ernie-4.5-vl-424b-a47b with /v1/chat/completions; view request fields, examples, capabilities, and r."
+description: "ERNIE 4.5 VL 424B A47B API reference for SandBase. Use model baidu/ernie-4.5-vl-424b-a47b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/baidu/ernie-4.5-vl-424b-a47b"

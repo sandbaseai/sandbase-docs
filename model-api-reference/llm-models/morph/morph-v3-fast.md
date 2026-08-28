@@ -1,6 +1,6 @@
 ---
 title: "Morph V3 Fast API Reference"
-description: "Morph V3 Fast API reference for SandBase. Use model morph/morph-v3-fast with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Morph V3 Fast API reference for SandBase. Use model morph/morph-v3-fast with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/morph/morph-v3-fast"

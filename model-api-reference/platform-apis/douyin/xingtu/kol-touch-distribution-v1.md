@@ -1,6 +1,6 @@
 ---
 title: "Get kol Touch Distribution V1 API Reference"
-description: "Get kol Touch Distribution V1 API reference for SandBase. Use model douyin/xingtu/kol-touch-distribution-v1 with /v1/run; view request fields, examples, capabilities,;."
+description: "Get kol Touch Distribution V1 API reference for SandBase. Use model douyin/xingtu/kol-touch-distribution-v1 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Flux 2 Max API Reference"
-description: "Flux 2 Max API reference for SandBase. Use model bfl/flux-2/max with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Flux 2 Max API reference for SandBase. Use model bfl/flux-2/max with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-2/max"

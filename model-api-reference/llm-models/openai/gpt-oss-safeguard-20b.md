@@ -1,6 +1,6 @@
 ---
 title: "gpt-oss-safeguard-20b API Reference"
-description: "gpt-oss-safeguard-20b API reference for SandBase. Use model openai/gpt-oss-safeguard-20b with /v1/chat/completions; view request fields, examples, capabilities, and re."
+description: "gpt-oss-safeguard-20b API reference for SandBase. Use model openai/gpt-oss-safeguard-20b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-oss-safeguard-20b"

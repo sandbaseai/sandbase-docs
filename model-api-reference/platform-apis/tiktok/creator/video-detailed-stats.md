@@ -1,6 +1,6 @@
 ---
 title: "Get Video Detailed Statistics API Reference"
-description: "Get Video Detailed Statistics API reference for SandBase. Use model tiktok/creator/video-detailed-stats with /v1/run; view request fields, examples, capabilities, and;."
+description: "Get Video Detailed Statistics API reference for SandBase. Use model tiktok/creator/video-detailed-stats with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

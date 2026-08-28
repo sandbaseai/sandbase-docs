@@ -1,6 +1,6 @@
 ---
 title: "Devstral 2 2512 API Reference"
-description: "Devstral 2 2512 API reference for SandBase. Use model mistral/devstral-2512 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Devstral 2 2512 API reference for SandBase. Use model mistral/devstral-2512 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/devstral-2512"

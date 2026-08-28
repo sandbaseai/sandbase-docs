@@ -1,6 +1,6 @@
 ---
 title: "Fetch User Comments API Reference"
-description: "Fetch User Comments API reference for SandBase. Use model reddit/app/user-comments with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch User Comments API reference for SandBase. Use model reddit/app/user-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

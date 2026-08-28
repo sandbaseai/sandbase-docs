@@ -1,6 +1,6 @@
 ---
 title: "Qwen Image… — Alibaba Edit API"
-description: "Qwen Image Edit API reference for SandBase. Use model alibaba/qwen-image/edit with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Qwen Image… — Alibaba Edit API API reference for SandBase. Use model alibaba/qwen-image/edit with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/qwen-image/edit"

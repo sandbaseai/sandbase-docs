@@ -1,6 +1,6 @@
 ---
 title: "Wan 2.1 VACE Depth API Reference"
-description: "Wan 2.1 VACE Depth API reference for SandBase. Use model alibaba/wan/2.1/vace/depth with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Wan 2.1 VACE Depth API reference for SandBase. Use model alibaba/wan/2.1/vace/depth with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/2.1/vace/depth"

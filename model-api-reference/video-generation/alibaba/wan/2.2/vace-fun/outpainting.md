@@ -1,6 +1,6 @@
 ---
 title: "Wan 2.2 VACE Fun Outpainting API Reference"
-description: "Wan 2.2 VACE Fun Outpainting API reference for SandBase. Use model alibaba/wan/2.2/vace-fun/outpainting with /v1/run; view request fields, examples, capabilities, and;."
+description: "Wan 2.2 VACE Fun Outpainting API reference for SandBase. Use model alibaba/wan/2.2/vace-fun/outpainting with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/2.2/vace-fun/outpainting"

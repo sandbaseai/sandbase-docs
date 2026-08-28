@@ -1,6 +1,6 @@
 ---
 title: "Gemini 3.1 Flash Image Preview API Reference"
-description: "Gemini 3.1 Flash Image Preview API reference for SandBase. Use model google/gemini-3.1-flash-image-preview/edit with /v1/run; view request fields, examples, capabiliti."
+description: "Gemini 3.1 Flash Image Preview API reference for SandBase. Use model google/gemini-3.1-flash-image-preview/edit with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/google/gemini-3.1-flash-image-preview/edit"

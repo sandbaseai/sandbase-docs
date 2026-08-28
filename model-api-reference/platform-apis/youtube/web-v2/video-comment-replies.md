@@ -1,6 +1,6 @@
 ---
 title: "Get video sub comments API Reference"
-description: "Get video sub comments API reference for SandBase. Use model youtube/web-v2/video-comment-replies with /v1/run; see request fields, examples, and response details."
+description: "Get video sub comments API reference for SandBase. Use model youtube/web-v2/video-comment-replies with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

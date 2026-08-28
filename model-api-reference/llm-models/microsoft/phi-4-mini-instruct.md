@@ -1,6 +1,6 @@
 ---
 title: "Phi 4 Mini Instruct API Reference"
-description: "Phi 4 Mini Instruct API reference for SandBase. Use model microsoft/phi-4-mini-instruct with /v1/chat/completions; view request fields, examples, capabilities, and res."
+description: "Phi 4 Mini Instruct API reference for SandBase. Use model microsoft/phi-4-mini-instruct with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/microsoft/phi-4-mini-instruct"

@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu User Pins API Reference"
-description: "Get Zhihu User Pins API reference for SandBase. Use model zhihu/web/user-pins with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get Zhihu User Pins API reference for SandBase. Use model zhihu/web/user-pins with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

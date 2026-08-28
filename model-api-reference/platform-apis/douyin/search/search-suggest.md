@@ -1,6 +1,6 @@
 ---
 title: "Fetch search keyword suggestions API Reference"
-description: "Fetch search keyword suggestions API reference for SandBase. Use model douyin/search/search-suggest with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Fetch search keyword suggestions API reference for SandBase. Use model douyin/search/search-suggest with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

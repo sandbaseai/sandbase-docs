@@ -1,6 +1,6 @@
 ---
 title: "Get cities by country API Reference"
-description: "Get cities by country API reference for SandBase. Use model instagram/v1/cities with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get cities by country API reference for SandBase. Use model instagram/v1/cities with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

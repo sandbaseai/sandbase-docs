@@ -1,6 +1,6 @@
 ---
 title: "Get PGY blogger notes rate API Reference"
-description: "Get PGY blogger notes rate API reference for SandBase. Use model xiaohongshu/pgy/blogger-notes-rate with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Get PGY blogger notes rate API reference for SandBase. Use model xiaohongshu/pgy/blogger-notes-rate with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

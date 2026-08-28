@@ -1,6 +1,6 @@
 ---
 title: "search all API Reference"
-description: "search all API reference for SandBase. Use model bilibili/app/search-all with /v1/run; view request fields, examples, capabilities, and response format."
+description: "search all API reference for SandBase. Use model bilibili/app/search-all with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get seller products list V1 API Reference"
-description: "Get seller products list V1 API reference for SandBase. Use model tiktok/shop-web/seller-products-list with /v1/run; view request fields, examples, capabilities, and r."
+description: "Get seller products list V1 API reference for SandBase. Use model tiktok/shop-web/seller-products-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get Playlet Actor Rank List API Reference"
-description: "Get Playlet Actor Rank List API reference for SandBase. Use model douyin/xingtu-v2/playlet-actor-rank-list with /v1/run; view request fields, examples, capabilities, a."
+description: "Get Playlet Actor Rank List API reference for SandBase. Use model douyin/xingtu-v2/playlet-actor-rank-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

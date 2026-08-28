@@ -1,6 +1,6 @@
 ---
 title: "Generate TikTok share… — Tiktok Open App To User Profile API"
-description: "Generate TikTok share link, call TikTok APP, and jump to the specified user profile API reference for SandBase. Use model tiktok/app-v3/open-app-to-user-profile with /."
+description: "SandBase API reference for model tiktok/app-v3/open-app-to-user-profile. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

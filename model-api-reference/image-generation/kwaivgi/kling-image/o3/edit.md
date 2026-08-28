@@ -1,6 +1,6 @@
 ---
 title: "Kling… — Kwaivgi Edit API"
-description: "Kling Image API reference for SandBase. Use model kwaivgi/kling-image/o3/edit with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Kling… — Kwaivgi Edit API API reference for SandBase. Use model kwaivgi/kling-image/o3/edit with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/kwaivgi/kling-image/o3/edit"

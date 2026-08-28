@@ -1,6 +1,6 @@
 ---
 title: "Fetch topic list with rising popularity API Reference"
-description: "Fetch topic list with rising popularity API reference for SandBase. Use model douyin/billboard/hot-total-high-topic-list with /v1/run; view request fields, examples, c."
+description: "Fetch topic list with rising popularity API reference for SandBase. Use model douyin/billboard/hot-total-high-topic-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

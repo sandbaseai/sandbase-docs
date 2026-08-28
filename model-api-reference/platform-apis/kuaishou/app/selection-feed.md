@@ -1,6 +1,6 @@
 ---
 title: "Selection feed API Reference"
-description: "Selection feed API reference for SandBase. Use model kuaishou/app/selection-feed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Selection feed API reference for SandBase. Use model kuaishou/app/selection-feed with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

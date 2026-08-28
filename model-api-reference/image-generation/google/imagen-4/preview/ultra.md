@@ -1,6 +1,6 @@
 ---
 title: "Imagen 4 Ultra API Reference"
-description: "Imagen 4 Ultra API reference for SandBase. Use model google/imagen-4/preview/ultra with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Imagen 4 Ultra API reference for SandBase. Use model google/imagen-4/preview/ultra with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/google/imagen-4/preview/ultra"

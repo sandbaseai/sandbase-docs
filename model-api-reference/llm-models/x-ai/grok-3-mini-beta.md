@@ -1,6 +1,6 @@
 ---
 title: "Grok 3 Mini Beta API Reference"
-description: "Grok 3 Mini Beta API reference for SandBase. Use model x-ai/grok-3-mini-beta with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Grok 3 Mini Beta API reference for SandBase. Use model x-ai/grok-3-mini-beta with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/x-ai/grok-3-mini-beta"

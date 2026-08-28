@@ -1,6 +1,6 @@
 ---
 title: "Generate Douyin short link API Reference"
-description: "Generate Douyin short link API reference for SandBase. Use model douyin/app-v3/generate-short-url with /v1/run; see request fields, examples, and response details."
+description: "Generate Douyin short link API reference for SandBase. Use model douyin/app-v3/generate-short-url with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

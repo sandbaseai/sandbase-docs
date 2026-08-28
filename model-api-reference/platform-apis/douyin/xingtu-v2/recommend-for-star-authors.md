@@ -1,6 +1,6 @@
 ---
 title: "Get Recommend Similar Star Authors API Reference"
-description: "Get Recommend Similar Star Authors API reference for SandBase. Use model douyin/xingtu-v2/recommend-for-star-authors with /v1/run; view request fields, examples, capab."
+description: "Get Recommend Similar Star Authors API reference for SandBase. Use model douyin/xingtu-v2/recommend-for-star-authors with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

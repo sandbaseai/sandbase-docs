@@ -1,6 +1,6 @@
 ---
 title: "GPT-5 Image Mini API Reference"
-description: "GPT-5 Image Mini API reference for SandBase. Use model openai/gpt-5-image-mini with /v1/chat/completions; view request fields, examples, capabilities, and response for."
+description: "GPT-5 Image Mini API reference for SandBase. Use model openai/gpt-5-image-mini with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-5-image-mini"

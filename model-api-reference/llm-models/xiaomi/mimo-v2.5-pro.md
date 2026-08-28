@@ -1,6 +1,6 @@
 ---
 title: "MiMo-V2.5-Pro API Reference"
-description: "MiMo-V2.5-Pro API reference for SandBase. Use model xiaomi/mimo-v2.5-pro with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "MiMo-V2.5-Pro API reference for SandBase. Use model xiaomi/mimo-v2.5-pro with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/xiaomi/mimo-v2.5-pro"

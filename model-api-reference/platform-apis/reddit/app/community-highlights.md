@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP Community Highlights API Reference"
-description: "Fetch Reddit APP Community Highlights API reference for SandBase. Use model reddit/app/community-highlights with /v1/run; view request fields, examples, capabilities,;."
+description: "Fetch Reddit APP Community Highlights API reference for SandBase. Use model reddit/app/community-highlights with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "PixVerse Sound-effects API Reference"
-description: "PixVerse Sound-effects API reference for SandBase. Use model pixverse/sound-effects with /v1/run; view request fields, examples, capabilities, and response format."
+description: "PixVerse Sound-effects API reference for SandBase. Use model pixverse/sound-effects with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/pixverse/sound-effects"

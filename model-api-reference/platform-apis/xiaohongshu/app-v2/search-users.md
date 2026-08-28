@@ -1,6 +1,6 @@
 ---
 title: "Search… — Xiaohongshu Search Users API"
-description: "Search users API reference for SandBase. Use model xiaohongshu/app-v2/search-users with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search… — Xiaohongshu Search Users API API reference for SandBase. Use model xiaohongshu/app-v2/search-users with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

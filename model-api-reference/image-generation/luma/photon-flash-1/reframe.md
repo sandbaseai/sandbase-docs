@@ -1,6 +1,6 @@
 ---
 title: "Luma Photon Flash Reframe API Reference"
-description: "Luma Photon Flash Reframe API reference for SandBase. Use model luma/photon-flash-1/reframe with /v1/run; view request fields, examples, capabilities, and response for."
+description: "Luma Photon Flash Reframe API reference for SandBase. Use model luma/photon-flash-1/reframe with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/luma/photon-flash-1/reframe"

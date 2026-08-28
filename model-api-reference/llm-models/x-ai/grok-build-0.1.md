@@ -1,6 +1,6 @@
 ---
 title: "Grok Build 0.1 API Reference"
-description: "Grok Build 0.1 API reference for SandBase. Use model x-ai/grok-build-0.1 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Grok Build 0.1 API reference for SandBase. Use model x-ai/grok-build-0.1 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/x-ai/grok-build-0.1"

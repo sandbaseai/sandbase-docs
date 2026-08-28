@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen3 Next 80B A3B Instruct API Reference"
-description: "Qwen: Qwen3 Next 80B A3B Instruct API reference for SandBase. Use model alibaba/qwen3-next-80b-a3b-instruct with /v1/chat/completions; view request fields, examples, c."
+description: "Qwen: Qwen3 Next 80B A3B Instruct API reference for SandBase. Use model alibaba/qwen3-next-80b-a3b-instruct with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen3-next-80b-a3b-instruct"

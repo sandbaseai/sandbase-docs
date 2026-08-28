@@ -1,6 +1,6 @@
 ---
 title: "Vidu Q3 Reference to Video Mix API Reference"
-description: "Vidu Q3 Reference to Video Mix API reference for SandBase. Use model vidu/q3/reference-to-video/mix with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Vidu Q3 Reference to Video Mix API reference for SandBase. Use model vidu/q3/reference-to-video/mix with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/vidu/q3/reference-to-video/mix"

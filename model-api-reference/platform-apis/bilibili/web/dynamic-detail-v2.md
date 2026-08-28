@@ -1,6 +1,6 @@
 ---
 title: "Get dynamic detail v2 API Reference"
-description: "Get dynamic detail v2 API reference for SandBase. Use model bilibili/web/dynamic-detail-v2 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get dynamic detail v2 API reference for SandBase. Use model bilibili/web/dynamic-detail-v2 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Recraft V4.1 Pro Vector API Reference"
-description: "Recraft V4.1 Pro Vector API reference for SandBase. Use model recraft/recraft/v4.1/pro/vector with /v1/run; see request fields, examples, and response details."
+description: "Recraft V4.1 Pro Vector API reference for SandBase. Use model recraft/recraft/v4.1/pro/vector with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/recraft/recraft/v4.1/pro/vector"

@@ -1,6 +1,6 @@
 ---
 title: "Command R7B (12-2024) API Reference"
-description: "Command R7B (12-2024) API reference for SandBase. Use model cohere/command-r7b-12-2024 with /v1/chat/completions; view request fields, examples, capabilities, and resp."
+description: "Command R7B (12-2024) API reference for SandBase. Use model cohere/command-r7b-12-2024 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/cohere/command-r7b-12-2024"

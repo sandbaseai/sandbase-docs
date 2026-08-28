@@ -1,6 +1,6 @@
 ---
 title: "Search… — Kuaishou Search Music API"
-description: "Search music API reference for SandBase. Use model kuaishou/app/search-music with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search… — Kuaishou Search Music API API reference for SandBase. Use model kuaishou/app/search-music with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

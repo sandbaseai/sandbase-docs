@@ -1,6 +1,6 @@
 ---
 title: "Get series detail API Reference"
-description: "Get series detail API reference for SandBase. Use model douyin/app-v3/series-detail with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get series detail API reference for SandBase. Use model douyin/app-v3/series-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

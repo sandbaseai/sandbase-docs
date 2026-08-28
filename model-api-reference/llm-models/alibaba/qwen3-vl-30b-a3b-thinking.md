@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen3 VL 30B A3B Thinking API Reference"
-description: "Qwen: Qwen3 VL 30B A3B Thinking API reference for SandBase. Use model alibaba/qwen3-vl-30b-a3b-thinking with /v1/chat/completions; view request fields, examples, capab."
+description: "Qwen: Qwen3 VL 30B A3B Thinking API reference for SandBase. Use model alibaba/qwen3-vl-30b-a3b-thinking with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen3-vl-30b-a3b-thinking"

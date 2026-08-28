@@ -1,6 +1,6 @@
 ---
 title: "Sam… — Meta 3d Objects API"
-description: "Sam 3 API reference for SandBase. Use model meta/sam-3/3d-objects with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Sam… — Meta 3d Objects API API reference for SandBase. Use model meta/sam-3/3d-objects with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/meta/sam-3/3d-objects"

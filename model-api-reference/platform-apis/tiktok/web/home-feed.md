@@ -1,6 +1,6 @@
 ---
 title: "Home Feed API Reference"
-description: "Home Feed API reference for SandBase. Use model tiktok/web/home-feed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Home Feed API reference for SandBase. Use model tiktok/web/home-feed with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

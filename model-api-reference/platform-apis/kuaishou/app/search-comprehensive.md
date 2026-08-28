@@ -1,6 +1,6 @@
 ---
 title: "Comprehensive… — Kuaishou Search Comprehensive API"
-description: "Comprehensive search API reference for SandBase. Use model kuaishou/app/search-comprehensive with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "SandBase API reference for model kuaishou/app/search-comprehensive. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

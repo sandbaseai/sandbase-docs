@@ -1,6 +1,6 @@
 ---
 title: "Stable Audio Open API Reference"
-description: "Stable Audio Open API reference for SandBase. Use model stability-ai/stable-audio/open with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Stable Audio Open API reference for SandBase. Use model stability-ai/stable-audio/open with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/stability-ai/stable-audio/open"

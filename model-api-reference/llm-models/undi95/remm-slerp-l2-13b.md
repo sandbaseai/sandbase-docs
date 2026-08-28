@@ -1,6 +1,6 @@
 ---
 title: "ReMM SLERP 13B API Reference"
-description: "ReMM SLERP 13B API reference for SandBase. Use model undi95/remm-slerp-l2-13b with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "ReMM SLERP 13B API reference for SandBase. Use model undi95/remm-slerp-l2-13b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/undi95/remm-slerp-l2-13b"

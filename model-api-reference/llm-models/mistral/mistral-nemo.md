@@ -1,6 +1,6 @@
 ---
 title: "Mistral Nemo API Reference"
-description: "Mistral Nemo API reference for SandBase. Use model mistral/mistral-nemo with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Mistral Nemo API reference for SandBase. Use model mistral/mistral-nemo with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/mistral-nemo"

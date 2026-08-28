@@ -1,6 +1,6 @@
 ---
 title: "Bria Background Replace API Reference"
-description: "Bria Background Replace API reference for SandBase. Use model bria/background/replace with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Bria Background Replace API reference for SandBase. Use model bria/background/replace with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bria/background/replace"

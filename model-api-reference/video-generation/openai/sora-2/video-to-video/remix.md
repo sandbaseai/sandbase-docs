@@ -1,6 +1,6 @@
 ---
 title: "Sora 2 Remix API Reference"
-description: "Sora 2 Remix API reference for SandBase. Use model openai/sora-2/video-to-video/remix with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Sora 2 Remix API reference for SandBase. Use model openai/sora-2/video-to-video/remix with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/openai/sora-2/video-to-video/remix"

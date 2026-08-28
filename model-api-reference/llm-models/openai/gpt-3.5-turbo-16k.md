@@ -1,6 +1,6 @@
 ---
 title: "GPT-3.5 Turbo 16k API Reference"
-description: "GPT-3.5 Turbo 16k API reference for SandBase. Use model openai/gpt-3.5-turbo-16k with /v1/chat/completions; see request fields, examples, and response details."
+description: "GPT-3.5 Turbo 16k API reference for SandBase. Use model openai/gpt-3.5-turbo-16k with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-3.5-turbo-16k"

@@ -1,6 +1,6 @@
 ---
 title: "Qwen Image Edit 2511 Multiple Angles API Reference"
-description: "Qwen Image Edit 2511 Multiple Angles API reference for SandBase. Use model alibaba/qwen-image-edit/2511/multiple-angles with /v1/run; view request fields, examples, ca."
+description: "Qwen Image Edit 2511 Multiple Angles API reference for SandBase. Use model alibaba/qwen-image-edit/2511/multiple-angles with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/qwen-image-edit/2511/multiple-angles"

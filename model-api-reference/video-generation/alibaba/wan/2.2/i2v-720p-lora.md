@@ -1,6 +1,6 @@
 ---
 title: "Wan 2.2 I2V 720p LoRA API Reference"
-description: "Wan 2.2 I2V 720p LoRA API reference for SandBase. Use model alibaba/wan/2.2/i2v-720p-lora with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Wan 2.2 I2V 720p LoRA API reference for SandBase. Use model alibaba/wan/2.2/i2v-720p-lora with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/2.2/i2v-720p-lora"

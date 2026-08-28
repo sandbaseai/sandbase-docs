@@ -1,6 +1,6 @@
 ---
 title: "Get WeChat Channels Live History API Reference"
-description: "Get WeChat Channels Live History API reference for SandBase. Use model wechat-channels/v2/live-history with /v1/run; view request fields, examples, capabilities, and r."
+description: "Get WeChat Channels Live History API reference for SandBase. Use model wechat-channels/v2/live-history with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

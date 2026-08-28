@@ -1,6 +1,6 @@
 ---
 title: "LTX-2.3 22B Video to Video Trainer API Reference"
-description: "LTX-2.3 22B Video to Video Trainer API reference for SandBase. Use model lightricks/ltx23-v2v-trainer with /v1/run; view request fields, examples, capabilities, and re."
+description: "LTX-2.3 22B Video to Video Trainer API reference for SandBase. Use model lightricks/ltx23-v2v-trainer with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/lightricks/ltx23-v2v-trainer"

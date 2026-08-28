@@ -1,6 +1,6 @@
 ---
 title: "Wan 2.2 Exp0622 API Reference"
-description: "Wan 2.2 Exp0622 API reference for SandBase. Use model alibaba/wan2.2-i2v-exp0622 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Wan 2.2 Exp0622 API reference for SandBase. Use model alibaba/wan2.2-i2v-exp0622 with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan2.2-i2v-exp0622"

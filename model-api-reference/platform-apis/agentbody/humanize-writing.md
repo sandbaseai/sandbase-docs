@@ -1,6 +1,6 @@
 ---
 title: "Humanize Writing API Reference"
-description: "Humanize Writing API reference for SandBase. Use model agentbody/humanize-writing with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Humanize Writing API reference for SandBase. Use model agentbody/humanize-writing with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

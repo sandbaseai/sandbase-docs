@@ -1,6 +1,6 @@
 ---
 title: "Content creative topic API Reference"
-description: "Content creative topic API reference for SandBase. Use model douyin/index/content-creative-topic with /v1/run; see request fields, examples, and response details."
+description: "Content creative topic API reference for SandBase. Use model douyin/index/content-creative-topic with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

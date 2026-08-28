@@ -1,6 +1,6 @@
 ---
 title: "ElevenLabs Dubbing API Reference"
-description: "ElevenLabs Dubbing API reference for SandBase. Use model elevenlabs/dubbing with /v1/run; view request fields, examples, capabilities, and response format."
+description: "ElevenLabs Dubbing API reference for SandBase. Use model elevenlabs/dubbing with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/elevenlabs/dubbing"

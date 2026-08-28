@@ -1,6 +1,6 @@
 ---
 title: "Get PGY blogger core data API Reference"
-description: "Get PGY blogger core data API reference for SandBase. Use model xiaohongshu/pgy/blogger-core-data with /v1/run; see request fields, examples, and response details."
+description: "Get PGY blogger core data API reference for SandBase. Use model xiaohongshu/pgy/blogger-core-data with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

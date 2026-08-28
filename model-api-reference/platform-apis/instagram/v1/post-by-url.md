@@ -1,6 +1,6 @@
 ---
 title: "Get post by URL API Reference"
-description: "Get post by URL API reference for SandBase. Use model instagram/v1/post-by-url with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get post by URL API reference for SandBase. Use model instagram/v1/post-by-url with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

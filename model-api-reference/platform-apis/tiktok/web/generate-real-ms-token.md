@@ -1,6 +1,6 @@
 ---
 title: "Generate real… — Tiktok Generate Real Ms Token API"
-description: "Generate real msToken API reference for SandBase. Use model tiktok/web/generate-real-ms-token with /v1/run; see request fields, examples, and response details."
+description: "SandBase API reference for model tiktok/web/generate-real-ms-token. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

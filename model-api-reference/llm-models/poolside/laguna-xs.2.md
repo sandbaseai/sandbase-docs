@@ -1,6 +1,6 @@
 ---
 title: "Laguna XS.2 API Reference"
-description: "Laguna XS.2 API reference for SandBase. Use model poolside/laguna-xs.2 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Laguna XS.2 API reference for SandBase. Use model poolside/laguna-xs.2 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/poolside/laguna-xs.2"

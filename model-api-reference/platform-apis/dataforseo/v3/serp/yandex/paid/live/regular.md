@@ -1,6 +1,6 @@
 ---
 title: "SERP Yandex Paid Live API Reference"
-description: "SERP Yandex Paid Live API reference for SandBase. Use model dataforseo/v3/serp/yandex/paid/live/regular with /v1/run; view request fields, examples, capabilities, and;."
+description: "SERP Yandex Paid Live API reference for SandBase. Use model dataforseo/v3/serp/yandex/paid/live/regular with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

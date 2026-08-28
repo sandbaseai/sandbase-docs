@@ -1,6 +1,6 @@
 ---
 title: "Get share short link API Reference"
-description: "Get share short link API reference for SandBase. Use model tiktok/app-v3/share-short-link with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get share short link API reference for SandBase. Use model tiktok/app-v3/share-short-link with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get multi-keyword interpretation API Reference"
-description: "Get multi-keyword interpretation API reference for SandBase. Use model douyin/index/multi-keyword-interpretation with /v1/run; view request fields, examples, capabilit."
+description: "Get multi-keyword interpretation API reference for SandBase. Use model douyin/index/multi-keyword-interpretation with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

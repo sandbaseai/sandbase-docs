@@ -1,6 +1,6 @@
 ---
 title: "Fetch User Public Trophies API Reference"
-description: "Fetch User Public Trophies API reference for SandBase. Use model reddit/app/user-trophies with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch User Public Trophies API reference for SandBase. Use model reddit/app/user-trophies with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

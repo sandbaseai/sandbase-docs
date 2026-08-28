@@ -1,6 +1,6 @@
 ---
 title: "LinkedIn Email API Reference"
-description: "LinkedIn Email API reference for SandBase. Use model agentbody/linkedin-email with /v1/run; view request fields, examples, capabilities, and response format."
+description: "LinkedIn Email API reference for SandBase. Use model agentbody/linkedin-email with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

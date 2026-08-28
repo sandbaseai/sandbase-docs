@@ -1,6 +1,6 @@
 ---
 title: "Extract list video… — Douyin All Aweme Id API"
-description: "Extract list video id API reference for SandBase. Use model douyin/web/all-aweme-id with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Extract list video… — Douyin All Aweme Id API API reference for SandBase. Use model douyin/web/all-aweme-id with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

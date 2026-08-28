@@ -1,6 +1,6 @@
 ---
 title: "Get talent categories API Reference"
-description: "Get talent categories API reference for SandBase. Use model douyin/douplus/talent-categories with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Get talent categories API reference for SandBase. Use model douyin/douplus/talent-categories with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

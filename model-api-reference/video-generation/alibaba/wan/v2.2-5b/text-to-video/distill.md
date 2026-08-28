@@ -1,6 +1,6 @@
 ---
 title: "Wan 2.2 5B Distilled API Reference"
-description: "Wan 2.2 5B Distilled API reference for SandBase. Use model alibaba/wan/v2.2-5b/text-to-video/distill with /v1/run; view request fields, examples, capabilities, and res."
+description: "Wan 2.2 5B Distilled API reference for SandBase. Use model alibaba/wan/v2.2-5b/text-to-video/distill with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/v2.2-5b/text-to-video/distill"

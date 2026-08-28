@@ -1,6 +1,6 @@
 ---
 title: "Get user info by user… — Instagram V2 User Id To Username API"
-description: "Get user info by user ID API reference for SandBase. Use model instagram/v2/user-id-to-username with /v1/run; view request fields, examples, capabilities, and response."
+description: "SandBase API reference for model instagram/v2/user-id-to-username. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

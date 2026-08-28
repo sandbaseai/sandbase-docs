@@ -1,6 +1,6 @@
 ---
 title: "Qwen Image Edit 2511 LoRA API Reference"
-description: "Qwen Image Edit 2511 LoRA API reference for SandBase. Use model alibaba/qwen-image-edit/2511/lora with /v1/run; see request fields, examples, and response details."
+description: "Qwen Image Edit 2511 LoRA API reference for SandBase. Use model alibaba/qwen-image-edit/2511/lora with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/qwen-image-edit/2511/lora"

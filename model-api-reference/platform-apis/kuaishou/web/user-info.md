@@ -1,6 +1,6 @@
 ---
 title: "Fetch user… — Kuaishou User Info API"
-description: "Fetch user info API reference for SandBase. Use model kuaishou/web/user-info with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch user… — Kuaishou User Info API API reference for SandBase. Use model kuaishou/web/user-info with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

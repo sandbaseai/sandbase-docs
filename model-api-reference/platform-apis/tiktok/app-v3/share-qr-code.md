@@ -1,6 +1,6 @@
 ---
 title: "Get share QR code API Reference"
-description: "Get share QR code API reference for SandBase. Use model tiktok/app-v3/share-qr-code with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get share QR code API reference for SandBase. Use model tiktok/app-v3/share-qr-code with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

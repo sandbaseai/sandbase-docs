@@ -1,6 +1,6 @@
 ---
 title: "Daren search suggest API Reference"
-description: "Daren search suggest API reference for SandBase. Use model douyin/index/daren-sug-great-user-list with /v1/run; see request fields, examples, and response details."
+description: "Daren search suggest API reference for SandBase. Use model douyin/index/daren-sug-great-user-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

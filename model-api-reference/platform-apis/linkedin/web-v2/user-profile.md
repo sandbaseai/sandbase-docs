@@ -1,6 +1,6 @@
 ---
 title: "Get user… — Linkedin User Profile API"
-description: "Get user profile API reference for SandBase. Use model linkedin/web-v2/user-profile with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user… — Linkedin User Profile API API reference for SandBase. Use model linkedin/web-v2/user-profile with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

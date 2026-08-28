@@ -1,6 +1,6 @@
 ---
 title: "Z.ai: GLM 4 32B  API Reference"
-description: "Z.ai: GLM 4 32B  API reference for SandBase. Use model z-ai/glm-4-32b with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Z.ai: GLM 4 32B API reference for SandBase. Use model z-ai/glm-4-32b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/z-ai/glm-4-32b"

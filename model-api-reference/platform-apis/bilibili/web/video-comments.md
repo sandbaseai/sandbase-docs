@@ -1,6 +1,6 @@
 ---
 title: "Get comments on the specified video API Reference"
-description: "Get comments on the specified video API reference for SandBase. Use model bilibili/web/video-comments with /v1/run; view request fields, examples, capabilities, and re."
+description: "Get comments on the specified video API reference for SandBase. Use model bilibili/web/video-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

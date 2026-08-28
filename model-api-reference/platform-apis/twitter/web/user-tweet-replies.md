@@ -1,6 +1,6 @@
 ---
 title: "Get user tweet replies API Reference"
-description: "Get user tweet replies API reference for SandBase. Use model twitter/web/user-tweet-replies with /v1/run; view request fields, examples, capabilities, and response for."
+description: "Get user tweet replies API reference for SandBase. Use model twitter/web/user-tweet-replies with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

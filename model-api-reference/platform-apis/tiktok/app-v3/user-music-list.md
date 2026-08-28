@@ -1,6 +1,6 @@
 ---
 title: "Get user music list data API Reference"
-description: "Get user music list data API reference for SandBase. Use model tiktok/app-v3/user-music-list with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Get user music list data API reference for SandBase. Use model tiktok/app-v3/user-music-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

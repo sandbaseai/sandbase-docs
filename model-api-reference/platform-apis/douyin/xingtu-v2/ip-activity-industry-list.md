@@ -1,6 +1,6 @@
 ---
 title: "Get IP Activity Industry List API Reference"
-description: "Get IP Activity Industry List API reference for SandBase. Use model douyin/xingtu-v2/ip-activity-industry-list with /v1/run; view request fields, examples, capabilitie."
+description: "Get IP Activity Industry List API reference for SandBase. Use model douyin/xingtu-v2/ip-activity-industry-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Multi Get Author Info API Reference"
-description: "Multi Get Author Info API reference for SandBase. Use model douyin/xingtu-v2/multi-get-author-info with /v1/run; view request fields, examples, capabilities, and respo."
+description: "Multi Get Author Info API reference for SandBase. Use model douyin/xingtu-v2/multi-get-author-info with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

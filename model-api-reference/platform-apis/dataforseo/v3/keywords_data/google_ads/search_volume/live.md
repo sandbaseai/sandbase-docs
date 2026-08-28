@@ -1,6 +1,6 @@
 ---
 title: "Keywords Google Ads Search Volume API Reference"
-description: "Keywords Google Ads Search Volume API reference for SandBase. Use model dataforseo/v3/keywords_data/google_ads/search_volume/live with /v1/run; view request fields, ex."
+description: "SandBase API reference for model dataforseo/v3/keywords_data/google_ads/search_volume/live. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

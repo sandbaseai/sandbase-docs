@@ -1,6 +1,6 @@
 ---
 title: "SERP Google Related Searches Live API Reference"
-description: "SERP Google Related Searches Live API reference for SandBase. Use model dataforseo/v3/serp/google/related_searches/live/advanced with /v1/run; view request fields, exa."
+description: "SandBase API reference for model dataforseo/v3/serp/google/related_searches/live/advanced. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

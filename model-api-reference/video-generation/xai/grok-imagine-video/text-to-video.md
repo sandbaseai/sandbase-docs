@@ -1,6 +1,6 @@
 ---
 title: "Grok Imagine… — Xai Text To Video API"
-description: "Grok Imagine Video API reference for SandBase. Use model xai/grok-imagine-video/text-to-video with /v1/run; see request fields, examples, and response details."
+description: "Grok Imagine… — Xai Text To Video API API reference for SandBase. Use model xai/grok-imagine-video/text-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/xai/grok-imagine-video/text-to-video"

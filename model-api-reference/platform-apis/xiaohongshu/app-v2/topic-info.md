@@ -1,6 +1,6 @@
 ---
 title: "Get topic info API Reference"
-description: "Get topic info API reference for SandBase. Use model xiaohongshu/app-v2/topic-info with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get topic info API reference for SandBase. Use model xiaohongshu/app-v2/topic-info with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

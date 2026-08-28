@@ -1,6 +1,6 @@
 ---
 title: "Phi 4 API Reference"
-description: "Phi 4 API reference for SandBase. Use model microsoft/phi-4 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Phi 4 API reference for SandBase. Use model microsoft/phi-4 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/microsoft/phi-4"

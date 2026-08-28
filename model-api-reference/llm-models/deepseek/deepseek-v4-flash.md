@@ -1,6 +1,6 @@
 ---
 title: "DeepSeek V4 Flash API Reference"
-description: "DeepSeek V4 Flash API reference for SandBase. Use model deepseek/deepseek-v4-flash with /v1/chat/completions; view request fields, examples, capabilities, and response."
+description: "DeepSeek V4 Flash API reference for SandBase. Use model deepseek/deepseek-v4-flash with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/deepseek/deepseek-v4-flash"

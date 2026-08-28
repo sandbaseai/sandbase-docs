@@ -1,6 +1,6 @@
 ---
 title: "Increase the number of plays of the work according to th… API Ref"
-description: "Increase the number of plays of the work according to the video ID API reference for SandBase. Use model douyin/app-v3/add-video-play-count with /v1/run; view request;."
+description: "SandBase API reference for model douyin/app-v3/add-video-play-count. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

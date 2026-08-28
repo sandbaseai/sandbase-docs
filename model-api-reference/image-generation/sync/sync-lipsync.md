@@ -1,6 +1,6 @@
 ---
 title: "sync.so -- lipsync 1.9.0-beta API Reference"
-description: "sync.so -- lipsync 1.9.0-beta API reference for SandBase. Use model sync/sync-lipsync with /v1/run; view request fields, examples, capabilities, and response format."
+description: "sync.so -- lipsync 1.9.0-beta API reference for SandBase. Use model sync/sync-lipsync with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/sync/sync-lipsync"

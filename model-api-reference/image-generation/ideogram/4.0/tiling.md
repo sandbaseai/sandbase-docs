@@ -1,6 +1,6 @@
 ---
 title: "Ideogram V4.0q Tiling API Reference"
-description: "Ideogram V4.0q Tiling API reference for SandBase. Use model ideogram/4.0/tiling with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Ideogram V4.0q Tiling API reference for SandBase. Use model ideogram/4.0/tiling with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram/4.0/tiling"

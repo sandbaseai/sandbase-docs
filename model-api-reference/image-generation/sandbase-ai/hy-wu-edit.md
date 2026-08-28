@@ -1,6 +1,6 @@
 ---
 title: "Hy Wu Edit API Reference"
-description: "Hy Wu Edit API reference for SandBase. Use model sandbase-ai/hy-wu-edit with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Hy Wu Edit API reference for SandBase. Use model sandbase-ai/hy-wu-edit with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/sandbase-ai/hy-wu-edit"

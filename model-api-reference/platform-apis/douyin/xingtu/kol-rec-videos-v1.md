@@ -1,6 +1,6 @@
 ---
 title: "Get kol Rec Videos V1 API Reference"
-description: "Get kol Rec Videos V1 API reference for SandBase. Use model douyin/xingtu/kol-rec-videos-v1 with /v1/run; view request fields, examples, capabilities, and response for."
+description: "Get kol Rec Videos V1 API reference for SandBase. Use model douyin/xingtu/kol-rec-videos-v1 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

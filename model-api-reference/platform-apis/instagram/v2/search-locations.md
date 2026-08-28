@@ -1,6 +1,6 @@
 ---
 title: "Search locations API Reference"
-description: "Search locations API reference for SandBase. Use model instagram/v2/search-locations with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search locations API reference for SandBase. Use model instagram/v2/search-locations with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

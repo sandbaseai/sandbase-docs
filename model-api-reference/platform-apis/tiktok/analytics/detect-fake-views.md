@@ -1,6 +1,6 @@
 ---
 title: "Detect fake views in video API Reference"
-description: "Detect fake views in video API reference for SandBase. Use model tiktok/analytics/detect-fake-views with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Detect fake views in video API reference for SandBase. Use model tiktok/analytics/detect-fake-views with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

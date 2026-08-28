@@ -1,6 +1,6 @@
 ---
 title: "Sora 2 Characters API Reference"
-description: "Sora 2 Characters API reference for SandBase. Use model openai/sora-2/characters with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Sora 2 Characters API reference for SandBase. Use model openai/sora-2/characters with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/openai/sora-2/characters"

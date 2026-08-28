@@ -1,6 +1,6 @@
 ---
 title: "Get Video Associated Product List API Reference"
-description: "Get Video Associated Product List API reference for SandBase. Use model tiktok/creator/video-associated-product-list with /v1/run; view request fields, examples, capab."
+description: "Get Video Associated Product List API reference for SandBase. Use model tiktok/creator/video-associated-product-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

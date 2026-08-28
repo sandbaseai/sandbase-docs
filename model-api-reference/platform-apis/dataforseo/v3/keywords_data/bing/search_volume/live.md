@@ -1,6 +1,6 @@
 ---
 title: "Keywords Bing Search Volume API Reference"
-description: "Keywords Bing Search Volume API reference for SandBase. Use model dataforseo/v3/keywords_data/bing/search_volume/live with /v1/run; view request fields, examples, capa."
+description: "Keywords Bing Search Volume API reference for SandBase. Use model dataforseo/v3/keywords_data/bing/search_volume/live with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

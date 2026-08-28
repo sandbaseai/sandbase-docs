@@ -1,6 +1,6 @@
 ---
 title: "Generate WeChat Channels Video Share URL API Reference"
-description: "Generate WeChat Channels Video Share URL API reference for SandBase. Use model wechat-channels/v2/video-share-url with /v1/run; view request fields, examples, capabili."
+description: "Generate WeChat Channels Video Share URL API reference for SandBase. Use model wechat-channels/v2/video-share-url with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

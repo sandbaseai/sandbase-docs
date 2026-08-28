@@ -1,6 +1,6 @@
 ---
 title: "Fetch User Posts API Reference"
-description: "Fetch User Posts API reference for SandBase. Use model reddit/app/user-posts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch User Posts API reference for SandBase. Use model reddit/app/user-posts with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

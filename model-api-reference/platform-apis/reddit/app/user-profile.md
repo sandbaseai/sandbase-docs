@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP User Profile API Reference"
-description: "Fetch Reddit APP User Profile API reference for SandBase. Use model reddit/app/user-profile with /v1/run; view request fields, examples, capabilities, and response for."
+description: "Fetch Reddit APP User Profile API reference for SandBase. Use model reddit/app/user-profile with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

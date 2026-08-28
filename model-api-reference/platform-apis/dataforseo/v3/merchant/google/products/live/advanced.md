@@ -1,6 +1,6 @@
 ---
 title: "Merchant Google Products API Reference"
-description: "Merchant Google Products API reference for SandBase. Use model dataforseo/v3/merchant/google/products/live/advanced with /v1/run; view request fields, examples, capabi."
+description: "Merchant Google Products API reference for SandBase. Use model dataforseo/v3/merchant/google/products/live/advanced with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

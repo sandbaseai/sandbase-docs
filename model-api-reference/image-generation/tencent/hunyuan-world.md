@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan… — Tencent Hunyuan World API"
-description: "Hunyuan World API reference for SandBase. Use model tencent/hunyuan-world with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Hunyuan… — Tencent Hunyuan World API API reference for SandBase. Use model tencent/hunyuan-world with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/tencent/hunyuan-world"

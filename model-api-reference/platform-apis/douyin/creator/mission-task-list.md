@@ -1,6 +1,6 @@
 ---
 title: "Get mission task list API Reference"
-description: "Get mission task list API reference for SandBase. Use model douyin/creator/mission-task-list with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Get mission task list API reference for SandBase. Use model douyin/creator/mission-task-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

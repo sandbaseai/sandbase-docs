@@ -1,6 +1,6 @@
 ---
 title: "Fetch account work analysis - last week API Reference"
-description: "Fetch account work analysis - last week API reference for SandBase. Use model douyin/billboard/hot-account-item-analysis-list with /v1/run; view request fields, exampl."
+description: "SandBase API reference for model douyin/billboard/hot-account-item-analysis-list. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

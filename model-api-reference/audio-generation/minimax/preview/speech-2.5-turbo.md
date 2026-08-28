@@ -1,6 +1,6 @@
 ---
 title: "MiniMax Speech 2.5 Turbo API Reference"
-description: "MiniMax Speech 2.5 Turbo API reference for SandBase. Use model minimax/preview/speech-2.5-turbo with /v1/run; view request fields, examples, capabilities, and response."
+description: "MiniMax Speech 2.5 Turbo API reference for SandBase. Use model minimax/preview/speech-2.5-turbo with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/minimax/preview/speech-2.5-turbo"

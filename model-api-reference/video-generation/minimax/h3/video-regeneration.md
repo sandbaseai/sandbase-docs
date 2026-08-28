@@ -1,6 +1,6 @@
 ---
 title: "MiniMax H3 Video Regeneration API Reference"
-description: "MiniMax H3 Video Regeneration API reference for SandBase. Use model minimax/h3/video-regeneration with /v1/run; see request fields, examples, and response details."
+description: "MiniMax H3 Video Regeneration API reference for SandBase. Use model minimax/h3/video-regeneration with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/minimax/h3/video-regeneration"

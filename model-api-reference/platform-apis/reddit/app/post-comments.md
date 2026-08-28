@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP Post Comments API Reference"
-description: "Fetch Reddit APP Post Comments API reference for SandBase. Use model reddit/app/post-comments with /v1/run; see request fields, examples, and response details."
+description: "Fetch Reddit APP Post Comments API reference for SandBase. Use model reddit/app/post-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

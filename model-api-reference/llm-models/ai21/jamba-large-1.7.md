@@ -1,6 +1,6 @@
 ---
 title: "AI21: Jamba Large 1.7 API Reference"
-description: "AI21: Jamba Large 1.7 API reference for SandBase. Use model ai21/jamba-large-1.7 with /v1/chat/completions; see request fields, examples, and response details."
+description: "AI21: Jamba Large 1.7 API reference for SandBase. Use model ai21/jamba-large-1.7 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/ai21/jamba-large-1.7"

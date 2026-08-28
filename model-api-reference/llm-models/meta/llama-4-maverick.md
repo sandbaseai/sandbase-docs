@@ -1,6 +1,6 @@
 ---
 title: "Llama 4 Maverick API Reference"
-description: "Llama 4 Maverick API reference for SandBase. Use model meta/llama-4-maverick with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Llama 4 Maverick API reference for SandBase. Use model meta/llama-4-maverick with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/meta/llama-4-maverick"

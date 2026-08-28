@@ -1,6 +1,6 @@
 ---
 title: "LTX 2.3 Pro Extend API Reference"
-description: "LTX 2.3 Pro Extend API reference for SandBase. Use model lightricks/ltx-2.3-pro/extend with /v1/run; view request fields, examples, capabilities, and response format."
+description: "LTX 2.3 Pro Extend API reference for SandBase. Use model lightricks/ltx-2.3-pro/extend with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-2.3-pro/extend"

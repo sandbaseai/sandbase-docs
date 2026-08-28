@@ -1,6 +1,6 @@
 ---
 title: "Labs Google Domain Intersection API Reference"
-description: "Labs Google Domain Intersection API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/domain_intersection/live with /v1/run; view request fields,;."
+description: "SandBase API reference for model dataforseo/v3/dataforseo_labs/google/domain_intersection/live. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

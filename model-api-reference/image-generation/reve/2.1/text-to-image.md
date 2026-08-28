@@ -1,6 +1,6 @@
 ---
 title: "Reve… — Reve Text To Image API"
-description: "Reve 2.1 API reference for SandBase. Use model reve/2.1/text-to-image with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Reve… — Reve Text To Image API API reference for SandBase. Use model reve/2.1/text-to-image with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/reve/2.1/text-to-image"

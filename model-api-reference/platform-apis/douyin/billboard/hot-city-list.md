@@ -1,6 +1,6 @@
 ---
 title: "Fetch city hot list API Reference"
-description: "Fetch city hot list API reference for SandBase. Use model douyin/billboard/hot-city-list with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch city hot list API reference for SandBase. Use model douyin/billboard/hot-city-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

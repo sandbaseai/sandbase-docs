@@ -1,6 +1,6 @@
 ---
 title: "Get PGY blogger fans summary API Reference"
-description: "Get PGY blogger fans summary API reference for SandBase. Use model xiaohongshu/pgy/blogger-fans-summary with /v1/run; view request fields, examples, capabilities, and;."
+description: "Get PGY blogger fans summary API reference for SandBase. Use model xiaohongshu/pgy/blogger-fans-summary with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Bria Reimagine API Reference"
-description: "Bria Reimagine API reference for SandBase. Use model bria/reimagine with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Bria Reimagine API reference for SandBase. Use model bria/reimagine with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bria/reimagine"

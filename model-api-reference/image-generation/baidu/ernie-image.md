@@ -1,6 +1,6 @@
 ---
 title: "Ernie… — Baidu Ernie Image API"
-description: "Ernie Image API reference for SandBase. Use model baidu/ernie-image with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Ernie… — Baidu Ernie Image API API reference for SandBase. Use model baidu/ernie-image with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/baidu/ernie-image"

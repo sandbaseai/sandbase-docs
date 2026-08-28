@@ -1,6 +1,6 @@
 ---
 title: "App Data Google App Searches API Reference"
-description: "App Data Google App Searches API reference for SandBase. Use model dataforseo/v3/app_data/google/app_searches/live/advanced with /v1/run; view request fields, examples."
+description: "SandBase API reference for model dataforseo/v3/app_data/google/app_searches/live/advanced. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

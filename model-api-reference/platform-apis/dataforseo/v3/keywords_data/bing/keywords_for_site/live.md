@@ -1,6 +1,6 @@
 ---
 title: "Keywords Bing for Site API Reference"
-description: "Keywords Bing for Site API reference for SandBase. Use model dataforseo/v3/keywords_data/bing/keywords_for_site/live with /v1/run; view request fields, examples, capab."
+description: "Keywords Bing for Site API reference for SandBase. Use model dataforseo/v3/keywords_data/bing/keywords_for_site/live with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get video information… — Youtube Web V2 Video Info V2 API"
-description: "Get video information V2 API reference for SandBase. Use model youtube/web-v2/video-info-v2 with /v1/run; view request fields, examples, capabilities, and response for."
+description: "SandBase API reference for model youtube/web-v2/video-info-v2. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

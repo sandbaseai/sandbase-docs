@@ -1,6 +1,6 @@
 ---
 title: "Flux 2 Turbo API Reference"
-description: "Flux 2 Turbo API reference for SandBase. Use model bfl/flux-2/turbo with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Flux 2 Turbo API reference for SandBase. Use model bfl/flux-2/turbo with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-2/turbo"

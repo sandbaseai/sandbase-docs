@@ -1,6 +1,6 @@
 ---
 title: "Qwen Image Edit Plus Lora… — Alibaba Remove Element API"
-description: "Qwen Image Edit Plus Lora Gallery API reference for SandBase. Use model alibaba/qwen-image-edit-plus-lora-gallery/remove-element with /v1/run; view request fields, exa."
+description: "SandBase API reference for model alibaba/qwen-image-edit-plus-lora-gallery/remove-element. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/qwen-image-edit-plus-lora-gallery/remove-element"

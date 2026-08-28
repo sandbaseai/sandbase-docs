@@ -1,6 +1,6 @@
 ---
 title: "DeepSeek V4 Pro API Reference"
-description: "DeepSeek V4 Pro API reference for SandBase. Use model deepseek/deepseek-v4-pro with /v1/chat/completions; view request fields, examples, capabilities, and response for."
+description: "DeepSeek V4 Pro API reference for SandBase. Use model deepseek/deepseek-v4-pro with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/deepseek/deepseek-v4-pro"

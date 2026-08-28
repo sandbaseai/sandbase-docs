@@ -1,6 +1,6 @@
 ---
 title: "Fetch live search V1 API Reference"
-description: "Fetch live search V1 API reference for SandBase. Use model douyin/search/live-search-v1 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch live search V1 API reference for SandBase. Use model douyin/search/live-search-v1 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get report detail API Reference"
-description: "Get report detail API reference for SandBase. Use model douyin/index/report-detail with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get report detail API reference for SandBase. Use model douyin/index/report-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

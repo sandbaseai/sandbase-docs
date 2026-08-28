@@ -1,6 +1,6 @@
 ---
 title: "Recraft 20b API Reference"
-description: "Recraft 20b API reference for SandBase. Use model recraft/recraft-20b with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Recraft 20b API reference for SandBase. Use model recraft/recraft-20b with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/recraft/recraft-20b"

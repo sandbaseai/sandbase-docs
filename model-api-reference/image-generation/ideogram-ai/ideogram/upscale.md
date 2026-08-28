@@ -1,6 +1,6 @@
 ---
 title: "Ideogram Upscale API Reference"
-description: "Ideogram Upscale API reference for SandBase. Use model ideogram-ai/ideogram/upscale with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Ideogram Upscale API reference for SandBase. Use model ideogram-ai/ideogram/upscale with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram-ai/ideogram/upscale"

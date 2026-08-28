@@ -1,6 +1,6 @@
 ---
 title: "Get product reviews V1 API Reference"
-description: "Get product reviews V1 API reference for SandBase. Use model tiktok/shop-web/product-reviews with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Get product reviews V1 API reference for SandBase. Use model tiktok/shop-web/product-reviews with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

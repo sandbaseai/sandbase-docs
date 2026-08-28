@@ -1,6 +1,6 @@
 ---
 title: "Labs Google Historical Search Volume API Reference"
-description: "Labs Google Historical Search Volume API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/historical_search_volume/live with /v1/run; view reques."
+description: "SandBase API reference for model dataforseo/v3/dataforseo_labs/google/historical_search_volume/live. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

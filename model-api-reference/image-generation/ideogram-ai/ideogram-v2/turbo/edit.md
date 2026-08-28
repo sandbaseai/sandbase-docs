@@ -1,6 +1,6 @@
 ---
 title: "Ideogram V2 Turbo Edit API Reference"
-description: "Ideogram V2 Turbo Edit API reference for SandBase. Use model ideogram-ai/ideogram-v2/turbo/edit with /v1/run; view request fields, examples, capabilities, and response."
+description: "Ideogram V2 Turbo Edit API reference for SandBase. Use model ideogram-ai/ideogram-v2/turbo/edit with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram-ai/ideogram-v2/turbo/edit"

@@ -1,6 +1,6 @@
 ---
 title: "Get user… — Instagram User Reels API"
-description: "Get user reels API reference for SandBase. Use model instagram/v2/user-reels with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user… — Instagram User Reels API API reference for SandBase. Use model instagram/v2/user-reels with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Gmail API Reference"
-description: "Gmail API reference for SandBase. Use model sandbase/gmail with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Gmail API reference for SandBase. Use model sandbase/gmail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

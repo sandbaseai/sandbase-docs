@@ -1,6 +1,6 @@
 ---
 title: "Topic search suggest API Reference"
-description: "Topic search suggest API reference for SandBase. Use model douyin/index/topic-suggest with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Topic search suggest API reference for SandBase. Use model douyin/index/topic-suggest with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

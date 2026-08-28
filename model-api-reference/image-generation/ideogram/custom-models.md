@@ -1,6 +1,6 @@
 ---
 title: "Ideogram… — Ideogram Custom Models API"
-description: "Ideogram API reference for SandBase. Use model ideogram/custom-models with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Ideogram… — Ideogram Custom Models API API reference for SandBase. Use model ideogram/custom-models with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram/custom-models"

@@ -1,6 +1,6 @@
 ---
 title: "Bria Fibo Edit API Reference"
-description: "Bria Fibo Edit API reference for SandBase. Use model bria/fibo/edit with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Bria Fibo Edit API reference for SandBase. Use model bria/fibo/edit with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bria/fibo/edit"

@@ -1,6 +1,6 @@
 ---
 title: "V1.1 Video to Sound Effects API Reference"
-description: "V1.1 Video to Sound Effects API reference for SandBase. Use model sonilo/1.1/video-to-sound-effects with /v1/run; view request fields, examples, capabilities, and resp."
+description: "V1.1 Video to Sound Effects API reference for SandBase. Use model sonilo/1.1/video-to-sound-effects with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/sonilo/1.1/video-to-sound-effects"

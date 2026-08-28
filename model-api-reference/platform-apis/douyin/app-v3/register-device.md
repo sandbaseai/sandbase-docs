@@ -1,6 +1,6 @@
 ---
 title: "Douyin APP register device API Reference"
-description: "Douyin APP register device API reference for SandBase. Use model douyin/app-v3/register-device with /v1/run; view request fields, examples, capabilities, and response;."
+description: "Douyin APP register device API reference for SandBase. Use model douyin/app-v3/register-device with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

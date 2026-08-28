@@ -1,6 +1,6 @@
 ---
 title: "Voice Changer API Reference"
-description: "Voice Changer API reference for SandBase. Use model elevenlabs/voice-changer with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Voice Changer API reference for SandBase. Use model elevenlabs/voice-changer with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/elevenlabs/voice-changer"

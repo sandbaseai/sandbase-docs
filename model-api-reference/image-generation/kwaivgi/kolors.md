@@ -1,6 +1,6 @@
 ---
 title: "Kolors API Reference"
-description: "Kolors API reference for SandBase. Use model kwaivgi/kolors with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Kolors API reference for SandBase. Use model kwaivgi/kolors with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/kwaivgi/kolors"

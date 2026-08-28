@@ -1,6 +1,6 @@
 ---
 title: "R1 API Reference"
-description: "R1 API reference for SandBase. Use model deepseek/deepseek-r1 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "R1 API reference for SandBase. Use model deepseek/deepseek-r1 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/deepseek/deepseek-r1"

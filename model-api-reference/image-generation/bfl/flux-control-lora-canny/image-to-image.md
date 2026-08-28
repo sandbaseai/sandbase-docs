@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 [dev] Control LoRA — Bfl Image To Image API"
-description: "FLUX.1 [dev] Control LoRA Canny API reference for SandBase. Use model bfl/flux-control-lora-canny/image-to-image with /v1/run; view request fields, examples, capabilit."
+description: "SandBase API reference for model bfl/flux-control-lora-canny/image-to-image. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-control-lora-canny/image-to-image"

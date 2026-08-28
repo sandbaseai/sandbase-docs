@@ -1,6 +1,6 @@
 ---
 title: "Get information of specified… — Tiktok User Profile API"
-description: "Get information of specified user API reference for SandBase. Use model tiktok/app-v3/user-profile with /v1/run; view request fields, examples, capabilities, and respo."
+description: "Get information of specified… — Tiktok User Profile API API reference for SandBase. Use model tiktok/app-v3/user-profile with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

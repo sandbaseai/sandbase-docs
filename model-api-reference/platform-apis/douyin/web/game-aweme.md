@@ -1,6 +1,6 @@
 ---
 title: "Game Video API Reference"
-description: "Game Video API reference for SandBase. Use model douyin/web/game-aweme with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Game Video API reference for SandBase. Use model douyin/web/game-aweme with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

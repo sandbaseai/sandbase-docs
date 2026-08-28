@@ -1,6 +1,6 @@
 ---
 title: "FlashVSR API Reference"
-description: "FlashVSR API reference for SandBase. Use model alibaba/flashvsr with /v1/run; view request fields, examples, capabilities, and response format."
+description: "FlashVSR API reference for SandBase. Use model alibaba/flashvsr with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/flashvsr"

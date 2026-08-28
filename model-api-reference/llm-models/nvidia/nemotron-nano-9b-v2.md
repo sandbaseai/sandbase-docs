@@ -1,6 +1,6 @@
 ---
 title: "Nemotron Nano 9B V2 API Reference"
-description: "Nemotron Nano 9B V2 API reference for SandBase. Use model nvidia/nemotron-nano-9b-v2 with /v1/chat/completions; see request fields, examples, and response details."
+description: "Nemotron Nano 9B V2 API reference for SandBase. Use model nvidia/nemotron-nano-9b-v2 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/nvidia/nemotron-nano-9b-v2"

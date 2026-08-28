@@ -1,6 +1,6 @@
 ---
 title: "Get hot search ranking API Reference"
-description: "Get hot search ranking API reference for SandBase. Use model weibo/web/hot-search with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get hot search ranking API reference for SandBase. Use model weibo/web/hot-search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Luma Ray 3.2 Reframe API Reference"
-description: "Luma Ray 3.2 Reframe API reference for SandBase. Use model luma/agent/ray/3.2/reframe with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Luma Ray 3.2 Reframe API reference for SandBase. Use model luma/agent/ray/3.2/reframe with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/luma/agent/ray/3.2/reframe"

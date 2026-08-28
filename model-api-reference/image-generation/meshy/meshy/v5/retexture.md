@@ -1,6 +1,6 @@
 ---
 title: "Meshy 5 Retexture API Reference"
-description: "Meshy 5 Retexture API reference for SandBase. Use model meshy/meshy/v5/retexture with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Meshy 5 Retexture API reference for SandBase. Use model meshy/meshy/v5/retexture with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/meshy/meshy/v5/retexture"

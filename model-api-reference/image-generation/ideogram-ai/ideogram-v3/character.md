@@ -1,6 +1,6 @@
 ---
 title: "Ideogram V3 Character API Reference"
-description: "Ideogram V3 Character API reference for SandBase. Use model ideogram-ai/ideogram-v3/character with /v1/run; see request fields, examples, and response details."
+description: "Ideogram V3 Character API reference for SandBase. Use model ideogram-ai/ideogram-v3/character with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram-ai/ideogram-v3/character"

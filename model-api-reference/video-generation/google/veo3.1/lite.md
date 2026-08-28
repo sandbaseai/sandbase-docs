@@ -1,6 +1,6 @@
 ---
 title: "Veo3.1 Lite Text to Video API Reference"
-description: "Veo3.1 Lite Text to Video API reference for SandBase. Use model google/veo3.1/lite with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Veo3.1 Lite Text to Video API reference for SandBase. Use model google/veo3.1/lite with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/google/veo3.1/lite"

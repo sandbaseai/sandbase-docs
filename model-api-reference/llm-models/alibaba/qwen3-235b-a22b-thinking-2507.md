@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen3 235B A22B Thinking 2507 API Reference"
-description: "Qwen: Qwen3 235B A22B Thinking 2507 API reference for SandBase. Use model alibaba/qwen3-235b-a22b-thinking-2507 with /v1/chat/completions; view request fields, example."
+description: "SandBase API reference for model alibaba/qwen3-235b-a22b-thinking-2507. Call /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen3-235b-a22b-thinking-2507"

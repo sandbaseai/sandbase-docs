@@ -1,6 +1,6 @@
 ---
 title: "LTX-2 19B… — Lightricks Audio To Video API"
-description: "LTX-2 19B Distilled API reference for SandBase. Use model lightricks/ltx-2-19b/distilled/audio-to-video with /v1/run; view request fields, examples, capabilities, and;."
+description: "SandBase API reference for model lightricks/ltx-2-19b/distilled/audio-to-video. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/lightricks/ltx-2-19b/distilled/audio-to-video"

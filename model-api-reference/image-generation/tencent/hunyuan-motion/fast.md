@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan Motion Fast API Reference"
-description: "Hunyuan Motion Fast API reference for SandBase. Use model tencent/hunyuan-motion/fast with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Hunyuan Motion Fast API reference for SandBase. Use model tencent/hunyuan-motion/fast with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/tencent/hunyuan-motion/fast"

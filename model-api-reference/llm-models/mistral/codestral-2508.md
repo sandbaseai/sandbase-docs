@@ -1,6 +1,6 @@
 ---
 title: "Codestral 2508 API Reference"
-description: "Codestral 2508 API reference for SandBase. Use model mistral/codestral-2508 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Codestral 2508 API reference for SandBase. Use model mistral/codestral-2508 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/codestral-2508"

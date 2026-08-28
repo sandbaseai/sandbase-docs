@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan Video Foley API Reference"
-description: "Hunyuan Video Foley API reference for SandBase. Use model tencent/hunyuan-video/foley with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Hunyuan Video Foley API reference for SandBase. Use model tencent/hunyuan-video/foley with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/tencent/hunyuan-video/foley"

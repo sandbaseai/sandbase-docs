@@ -1,6 +1,6 @@
 ---
 title: "Get user relation stat (following and followers) API Reference"
-description: "Get user relation stat (following and followers) API reference for SandBase. Use model bilibili/web/user-relation-stat with /v1/run; view request fields, examples, cap."
+description: "Get user relation stat (following and followers) API reference for SandBase. Use model bilibili/web/user-relation-stat with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

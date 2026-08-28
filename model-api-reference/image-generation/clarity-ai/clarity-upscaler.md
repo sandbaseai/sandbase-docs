@@ -1,6 +1,6 @@
 ---
 title: "Clarity Upscaler API Reference"
-description: "Clarity Upscaler API reference for SandBase. Use model clarity-ai/clarity-upscaler with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Clarity Upscaler API reference for SandBase. Use model clarity-ai/clarity-upscaler with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/clarity-ai/clarity-upscaler"

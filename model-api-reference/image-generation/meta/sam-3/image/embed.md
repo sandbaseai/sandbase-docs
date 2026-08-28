@@ -1,6 +1,6 @@
 ---
 title: "SAM 3 Embed API Reference"
-description: "SAM 3 Embed API reference for SandBase. Use model meta/sam-3/image/embed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "SAM 3 Embed API reference for SandBase. Use model meta/sam-3/image/embed with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/meta/sam-3/image/embed"

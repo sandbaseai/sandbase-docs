@@ -1,6 +1,6 @@
 ---
 title: "Cloudsway Search API Reference"
-description: "Cloudsway Search API reference for SandBase. Use model cloudsway/search with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Cloudsway Search API reference for SandBase. Use model cloudsway/search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

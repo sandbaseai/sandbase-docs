@@ -1,6 +1,6 @@
 ---
 title: "Get WeChat Channels User Profile & Stats API Reference"
-description: "Get WeChat Channels User Profile & Stats API reference for SandBase. Use model wechat-channels/v2/user-profile with /v1/run; view request fields, examples, capabilitie."
+description: "Get WeChat Channels User Profile & Stats API reference for SandBase. Use model wechat-channels/v2/user-profile with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

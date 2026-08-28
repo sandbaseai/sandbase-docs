@@ -1,6 +1,6 @@
 ---
 title: "SeedVR2… — Bytedance Seamless API"
-description: "SeedVR2 API reference for SandBase. Use model bytedance/seedvr/upscale/image/seamless with /v1/run; view request fields, examples, capabilities, and response format."
+description: "SeedVR2… — Bytedance Seamless API API reference for SandBase. Use model bytedance/seedvr/upscale/image/seamless with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bytedance/seedvr/upscale/image/seamless"

@@ -1,6 +1,6 @@
 ---
 title: "Arcee AI: Trinity Mini API Reference"
-description: "Arcee AI: Trinity Mini API reference for SandBase. Use model arcee-ai/trinity-mini with /v1/chat/completions; view request fields, examples, capabilities, and response."
+description: "Arcee AI: Trinity Mini API reference for SandBase. Use model arcee-ai/trinity-mini with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/arcee-ai/trinity-mini"

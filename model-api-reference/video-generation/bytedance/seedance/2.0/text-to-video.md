@@ -1,6 +1,6 @@
 ---
 title: "Seedance 2.0 Text to Video API Reference"
-description: "Seedance 2.0 Text to Video API reference for SandBase. Use model bytedance/seedance/2.0/text-to-video with /v1/run; view request fields, examples, capabilities, and re."
+description: "Seedance 2.0 Text to Video API reference for SandBase. Use model bytedance/seedance/2.0/text-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/bytedance/seedance/2.0/text-to-video"

@@ -1,6 +1,6 @@
 ---
 title: "Get post ID through sharing link API Reference"
-description: "Get post ID through sharing link API reference for SandBase. Use model lemon8/app/item-id with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get post ID through sharing link API reference for SandBase. Use model lemon8/app/item-id with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "MiniMax (Hailuo AI) Music API Reference"
-description: "MiniMax (Hailuo AI) Music API reference for SandBase. Use model minimax/minimax-music with /v1/run; view request fields, examples, capabilities, and response format."
+description: "MiniMax (Hailuo AI) Music API reference for SandBase. Use model minimax/minimax-music with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/minimax/minimax-music"

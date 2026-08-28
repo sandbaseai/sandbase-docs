@@ -1,6 +1,6 @@
 ---
 title: "Get available tags for live room homepage recommendatio… API Ref"
-description: "Get available tags for live room homepage recommendation API reference for SandBase. Use model tiktok/web/live-recommend-tabs with /v1/run; view request fields, exampl."
+description: "SandBase API reference for model tiktok/web/live-recommend-tabs. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

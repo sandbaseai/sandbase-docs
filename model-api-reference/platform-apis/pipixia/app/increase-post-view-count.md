@@ -1,6 +1,6 @@
 ---
 title: "Increase post view count API Reference"
-description: "Increase post view count API reference for SandBase. Use model pipixia/app/increase-post-view-count with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Increase post view count API reference for SandBase. Use model pipixia/app/increase-post-view-count with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

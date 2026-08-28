@@ -1,6 +1,6 @@
 ---
 title: "Z-Image Turbo Inpaint LoRA API Reference"
-description: "Z-Image Turbo Inpaint LoRA API reference for SandBase. Use model alibaba/z-image/turbo/inpaint/lora with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Z-Image Turbo Inpaint LoRA API reference for SandBase. Use model alibaba/z-image/turbo/inpaint/lora with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/z-image/turbo/inpaint/lora"

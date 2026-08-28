@@ -1,6 +1,6 @@
 ---
 title: "DeepSeek V3.1 Terminus API Reference"
-description: "DeepSeek V3.1 Terminus API reference for SandBase. Use model deepseek/deepseek-v3.1-terminus with /v1/chat/completions; view request fields, examples, capabilities, an."
+description: "DeepSeek V3.1 Terminus API reference for SandBase. Use model deepseek/deepseek-v3.1-terminus with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/deepseek/deepseek-v3.1-terminus"

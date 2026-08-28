@@ -1,6 +1,6 @@
 ---
 title: "App Data Apple App Reviews API Reference"
-description: "App Data Apple App Reviews API reference for SandBase. Use model dataforseo/v3/app_data/apple/app_reviews/live/advanced with /v1/run; view request fields, examples, ca."
+description: "App Data Apple App Reviews API reference for SandBase. Use model dataforseo/v3/app_data/apple/app_reviews/live/advanced with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

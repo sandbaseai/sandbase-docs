@@ -1,6 +1,6 @@
 ---
 title: "Labs Google Ranked Keywords API Reference"
-description: "Labs Google Ranked Keywords API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/ranked_keywords/live with /v1/run; view request fields, examples."
+description: "SandBase API reference for model dataforseo/v3/dataforseo_labs/google/ranked_keywords/live. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

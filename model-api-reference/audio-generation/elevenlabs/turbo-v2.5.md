@@ -1,6 +1,6 @@
 ---
 title: "Turbo V2.5 API Reference"
-description: "Turbo V2.5 API reference for SandBase. Use model elevenlabs/turbo-v2.5 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Turbo V2.5 API reference for SandBase. Use model elevenlabs/turbo-v2.5 with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/elevenlabs/turbo-v2.5"

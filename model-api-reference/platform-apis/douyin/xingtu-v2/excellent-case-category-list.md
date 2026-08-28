@@ -1,6 +1,6 @@
 ---
 title: "Get Excellent Case Category List API Reference"
-description: "Get Excellent Case Category List API reference for SandBase. Use model douyin/xingtu-v2/excellent-case-category-list with /v1/run; view request fields, examples, capab."
+description: "Get Excellent Case Category List API reference for SandBase. Use model douyin/xingtu-v2/excellent-case-category-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

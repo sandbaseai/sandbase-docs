@@ -1,6 +1,6 @@
 ---
 title: "Flux Vision Upscaler API Reference"
-description: "Flux Vision Upscaler API reference for SandBase. Use model bfl/flux-vision-upscaler with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Flux Vision Upscaler API reference for SandBase. Use model bfl/flux-vision-upscaler with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-vision-upscaler"

@@ -1,6 +1,6 @@
 ---
 title: "DOU+ cost estimation API Reference"
-description: "DOU+ cost estimation API reference for SandBase. Use model douyin/douplus/calculate-cost with /v1/run; view request fields, examples, capabilities, and response format."
+description: "DOU+ cost estimation API reference for SandBase. Use model douyin/douplus/calculate-cost with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

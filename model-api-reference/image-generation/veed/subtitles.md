@@ -1,6 +1,6 @@
 ---
 title: "Subtitles API Reference"
-description: "Subtitles API reference for SandBase. Use model veed/subtitles with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Subtitles API reference for SandBase. Use model veed/subtitles with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/veed/subtitles"

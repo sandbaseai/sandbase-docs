@@ -1,6 +1,6 @@
 ---
 title: "Batch get gift names by gift IDs ($0.025/call, suggest 5… API Ref"
-description: "Batch get gift names by gift IDs ($0.025/call, suggest 50) API reference for SandBase. Use model tiktok/web/gift-names-by-ids with /v1/run; view request fields, exampl."
+description: "SandBase API reference for model tiktok/web/gift-names-by-ids. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

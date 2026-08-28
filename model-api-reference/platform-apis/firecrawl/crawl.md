@@ -1,6 +1,6 @@
 ---
 title: "Firecrawl Crawl API Reference"
-description: "Firecrawl Crawl API reference for SandBase. Use model firecrawl/crawl with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Firecrawl Crawl API reference for SandBase. Use model firecrawl/crawl with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

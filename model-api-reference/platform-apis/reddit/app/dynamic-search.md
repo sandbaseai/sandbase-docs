@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP Dynamic Search Results API Reference"
-description: "Fetch Reddit APP Dynamic Search Results API reference for SandBase. Use model reddit/app/dynamic-search with /v1/run; view request fields, examples, capabilities, and;."
+description: "Fetch Reddit APP Dynamic Search Results API reference for SandBase. Use model reddit/app/dynamic-search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

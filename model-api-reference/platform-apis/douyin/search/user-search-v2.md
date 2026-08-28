@@ -1,6 +1,6 @@
 ---
 title: "Fetch user search V2 API Reference"
-description: "Fetch user search V2 API reference for SandBase. Use model douyin/search/user-search-v2 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch user search V2 API reference for SandBase. Use model douyin/search/user-search-v2 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get comment keywords analysis API Reference"
-description: "Get comment keywords analysis API reference for SandBase. Use model tiktok/analytics/comment-keywords with /v1/run; view request fields, examples, capabilities, and re."
+description: "Get comment keywords analysis API reference for SandBase. Use model tiktok/analytics/comment-keywords with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

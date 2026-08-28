@@ -1,6 +1,6 @@
 ---
 title: "Get WeChat MP Article Comments API Reference"
-description: "Get WeChat MP Article Comments API reference for SandBase. Use model wechat-mp/v2/article-comments with /v1/run; view request fields, examples, capabilities, and respo."
+description: "Get WeChat MP Article Comments API reference for SandBase. Use model wechat-mp/v2/article-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

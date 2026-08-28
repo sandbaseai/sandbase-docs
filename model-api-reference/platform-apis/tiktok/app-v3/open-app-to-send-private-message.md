@@ -1,6 +1,6 @@
 ---
 title: "Generate TikTok share link, call TikTok APP, and send pr… API Ref"
-description: "Generate TikTok share link, call TikTok APP, and send private messages to specified users API reference for SandBase. Use model tiktok/app-v3/open-app-to-send-private-."
+description: "SandBase API reference for model tiktok/app-v3/open-app-to-send-private-message. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

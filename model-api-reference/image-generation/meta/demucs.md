@@ -1,6 +1,6 @@
 ---
 title: "Demucs API Reference"
-description: "Demucs API reference for SandBase. Use model meta/demucs with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Demucs API reference for SandBase. Use model meta/demucs with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/meta/demucs"

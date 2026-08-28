@@ -1,6 +1,6 @@
 ---
 title: "Get the guest Cookie API Reference"
-description: "Get the guest Cookie API reference for SandBase. Use model tiktok/web/web-guest-cookie with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get the guest Cookie API reference for SandBase. Use model tiktok/web/web-guest-cookie with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

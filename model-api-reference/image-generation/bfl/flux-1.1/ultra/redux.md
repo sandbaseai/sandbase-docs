@@ -1,6 +1,6 @@
 ---
 title: "FLUX1.1 [pro] ultra Redux API Reference"
-description: "FLUX1.1 [pro] ultra Redux API reference for SandBase. Use model bfl/flux-1.1/ultra/redux with /v1/run; view request fields, examples, capabilities, and response format."
+description: "FLUX1.1 [pro] ultra Redux API reference for SandBase. Use model bfl/flux-1.1/ultra/redux with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-1.1/ultra/redux"

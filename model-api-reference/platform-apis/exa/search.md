@@ -1,6 +1,6 @@
 ---
 title: "Exa Search API Reference"
-description: "Exa Search API reference for SandBase. Use model exa/search with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Exa Search API reference for SandBase. Use model exa/search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

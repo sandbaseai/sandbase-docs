@@ -1,6 +1,6 @@
 ---
 title: "Get promotable item list (with like & comment counts… API Ref"
-description: "Get promotable item list (with like & comment counts) API reference for SandBase. Use model douyin/douplus/promotable-item-list with /v1/run; view request fields, exam."
+description: "SandBase API reference for model douyin/douplus/promotable-item-list. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get job detail API Reference"
-description: "Get job detail API reference for SandBase. Use model linkedin/web-v2/job-detail with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get job detail API reference for SandBase. Use model linkedin/web-v2/job-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

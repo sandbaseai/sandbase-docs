@@ -1,6 +1,6 @@
 ---
 title: "Gemini 3.7 Flash API Reference"
-description: "Gemini 3.7 Flash API reference for SandBase. Use model google/gemini-3.7-flash with /v1/chat/completions; view request fields, examples, capabilities, and response for."
+description: "Gemini 3.7 Flash API reference for SandBase. Use model google/gemini-3.7-flash with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/google/gemini-3.7-flash"

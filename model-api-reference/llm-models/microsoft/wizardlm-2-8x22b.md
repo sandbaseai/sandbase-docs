@@ -1,6 +1,6 @@
 ---
 title: "WizardLM-2 8x22B API Reference"
-description: "WizardLM-2 8x22B API reference for SandBase. Use model microsoft/wizardlm-2-8x22b with /v1/chat/completions; view request fields, examples, capabilities, and response;."
+description: "WizardLM-2 8x22B API reference for SandBase. Use model microsoft/wizardlm-2-8x22b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/microsoft/wizardlm-2-8x22b"

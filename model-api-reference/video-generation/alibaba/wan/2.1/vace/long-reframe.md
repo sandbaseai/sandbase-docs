@@ -1,6 +1,6 @@
 ---
 title: "Wan 2.1 VACE Long Reframe API Reference"
-description: "Wan 2.1 VACE Long Reframe API reference for SandBase. Use model alibaba/wan/2.1/vace/long-reframe with /v1/run; see request fields, examples, and response details."
+description: "Wan 2.1 VACE Long Reframe API reference for SandBase. Use model alibaba/wan/2.1/vace/long-reframe with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/2.1/vace/long-reframe"

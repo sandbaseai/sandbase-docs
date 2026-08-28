@@ -1,6 +1,6 @@
 ---
 title: "Get user… — Threads User Posts API"
-description: "Get user posts API reference for SandBase. Use model threads/web/user-posts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user… — Threads User Posts API API reference for SandBase. Use model threads/web/user-posts with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

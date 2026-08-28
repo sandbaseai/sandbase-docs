@@ -1,6 +1,6 @@
 ---
 title: "o1-pro API Reference"
-description: "o1-pro API reference for SandBase. Use model openai/o1-pro with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "o1-pro API reference for SandBase. Use model openai/o1-pro with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/o1-pro"

@@ -1,6 +1,6 @@
 ---
 title: "Vidu Q2 Video Extension Pro API Reference"
-description: "Vidu Q2 Video Extension Pro API reference for SandBase. Use model vidu/q2/video-extension/pro with /v1/run; see request fields, examples, and response details."
+description: "Vidu Q2 Video Extension Pro API reference for SandBase. Use model vidu/q2/video-extension/pro with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/vidu/q2/video-extension/pro"

@@ -1,6 +1,6 @@
 ---
 title: "MiniMax (Hailuo AI) Text to Image API Reference"
-description: "MiniMax (Hailuo AI) Text to Image API reference for SandBase. Use model minimax/image-01 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "MiniMax (Hailuo AI) Text to Image API reference for SandBase. Use model minimax/image-01 with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/minimax/image-01"

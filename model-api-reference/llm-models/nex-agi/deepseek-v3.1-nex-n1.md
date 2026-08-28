@@ -1,6 +1,6 @@
 ---
 title: "Nex AGI: DeepSeek V3.1 Nex N1 API Reference"
-description: "Nex AGI: DeepSeek V3.1 Nex N1 API reference for SandBase. Use model nex-agi/deepseek-v3.1-nex-n1 with /v1/chat/completions; view request fields, examples, capabilities."
+description: "Nex AGI: DeepSeek V3.1 Nex N1 API reference for SandBase. Use model nex-agi/deepseek-v3.1-nex-n1 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/nex-agi/deepseek-v3.1-nex-n1"

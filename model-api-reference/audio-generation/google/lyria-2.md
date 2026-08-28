@@ -1,6 +1,6 @@
 ---
 title: "Lyria2 API Reference"
-description: "Lyria2 API reference for SandBase. Use model google/lyria-2 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Lyria2 API reference for SandBase. Use model google/lyria-2 with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/google/lyria-2"

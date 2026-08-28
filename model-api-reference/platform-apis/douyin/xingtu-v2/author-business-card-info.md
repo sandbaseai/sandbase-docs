@@ -1,6 +1,6 @@
 ---
 title: "Get Author Business Card Info API Reference"
-description: "Get Author Business Card Info API reference for SandBase. Use model douyin/xingtu-v2/author-business-card-info with /v1/run; view request fields, examples, capabilitie."
+description: "Get Author Business Card Info API reference for SandBase. Use model douyin/xingtu-v2/author-business-card-info with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

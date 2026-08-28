@@ -1,6 +1,6 @@
 ---
 title: "Extract single user id API Reference"
-description: "Extract single user id API reference for SandBase. Use model douyin/web/sec-user-id with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Extract single user id API reference for SandBase. Use model douyin/web/sec-user-id with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

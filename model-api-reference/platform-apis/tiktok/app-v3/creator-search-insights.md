@@ -1,6 +1,6 @@
 ---
 title: "Creator Search Insights API Reference"
-description: "Creator Search Insights API reference for SandBase. Use model tiktok/app-v3/creator-search-insights with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Creator Search Insights API reference for SandBase. Use model tiktok/app-v3/creator-search-insights with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

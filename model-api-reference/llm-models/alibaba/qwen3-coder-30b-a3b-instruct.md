@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen3 Coder 30B A3B Instruct API Reference"
-description: "Qwen: Qwen3 Coder 30B A3B Instruct API reference for SandBase. Use model alibaba/qwen3-coder-30b-a3b-instruct with /v1/chat/completions; view request fields, examples,."
+description: "SandBase API reference for model alibaba/qwen3-coder-30b-a3b-instruct. Call /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen3-coder-30b-a3b-instruct"

@@ -1,6 +1,6 @@
 ---
 title: "Kolors Image to Image API Reference"
-description: "Kolors Image to Image API reference for SandBase. Use model kwaivgi/kolors/image-to-image with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Kolors Image to Image API reference for SandBase. Use model kwaivgi/kolors/image-to-image with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/kwaivgi/kolors/image-to-image"

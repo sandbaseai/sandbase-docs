@@ -1,6 +1,6 @@
 ---
 title: "ERNIE-Image Trainer API Reference"
-description: "ERNIE-Image Trainer API reference for SandBase. Use model baidu/ernie-image-trainer with /v1/run; view request fields, examples, capabilities, and response format."
+description: "ERNIE-Image Trainer API reference for SandBase. Use model baidu/ernie-image-trainer with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/baidu/ernie-image-trainer"

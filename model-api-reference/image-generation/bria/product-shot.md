@@ -1,6 +1,6 @@
 ---
 title: "Bria Product Shot API Reference"
-description: "Bria Product Shot API reference for SandBase. Use model bria/product-shot with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Bria Product Shot API reference for SandBase. Use model bria/product-shot with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bria/product-shot"

@@ -1,6 +1,6 @@
 ---
 title: "Generate Douyin share link, call Douyin APP, and send pr… API Ref"
-description: "Generate Douyin share link, call Douyin APP, and send private messages to specified users API reference for SandBase. Use model douyin/app-v3/open-app-to-send-private-."
+description: "SandBase API reference for model douyin/app-v3/open-app-to-send-private-message. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

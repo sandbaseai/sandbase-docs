@@ -1,6 +1,6 @@
 ---
 title: "Linear API Reference"
-description: "Linear API reference for SandBase. Use model sandbase/linear with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Linear API reference for SandBase. Use model sandbase/linear with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

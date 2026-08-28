@@ -1,6 +1,6 @@
 ---
 title: "Gemini 3.1 Flash Tts API Reference"
-description: "Gemini 3.1 Flash Tts API reference for SandBase. Use model google/gemini-3.1-flash-tts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Gemini 3.1 Flash Tts API reference for SandBase. Use model google/gemini-3.1-flash-tts with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/google/gemini-3.1-flash-tts"

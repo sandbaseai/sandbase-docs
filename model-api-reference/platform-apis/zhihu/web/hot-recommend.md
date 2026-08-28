@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Hot Recommend API Reference"
-description: "Get Zhihu Hot Recommend API reference for SandBase. Use model zhihu/web/hot-recommend with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get Zhihu Hot Recommend API reference for SandBase. Use model zhihu/web/hot-recommend with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

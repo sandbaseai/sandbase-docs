@@ -1,6 +1,6 @@
 ---
 title: "Fetch post data trend API Reference"
-description: "Fetch post data trend API reference for SandBase. Use model douyin/billboard/hot-item-trends-list with /v1/run; see request fields, examples, and response details."
+description: "Fetch post data trend API reference for SandBase. Use model douyin/billboard/hot-item-trends-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

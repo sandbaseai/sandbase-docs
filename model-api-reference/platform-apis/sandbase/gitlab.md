@@ -1,6 +1,6 @@
 ---
 title: "GitLab API Reference"
-description: "GitLab API reference for SandBase. Use model sandbase/gitlab with /v1/run; view request fields, examples, capabilities, and response format."
+description: "GitLab API reference for SandBase. Use model sandbase/gitlab with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen3.5-35B-A3B API Reference"
-description: "Qwen: Qwen3.5-35B-A3B API reference for SandBase. Use model alibaba/qwen3.5-35b-a3b with /v1/chat/completions; see request fields, examples, and response details."
+description: "Qwen: Qwen3.5-35B-A3B API reference for SandBase. Use model alibaba/qwen3.5-35b-a3b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen3.5-35b-a3b"

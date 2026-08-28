@@ -1,6 +1,6 @@
 ---
 title: "Get kol Fans Portrait V1 API Reference"
-description: "Get kol Fans Portrait V1 API reference for SandBase. Use model douyin/xingtu/kol-fans-portrait-v1 with /v1/run; see request fields, examples, and response details."
+description: "Get kol Fans Portrait V1 API reference for SandBase. Use model douyin/xingtu/kol-fans-portrait-v1 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

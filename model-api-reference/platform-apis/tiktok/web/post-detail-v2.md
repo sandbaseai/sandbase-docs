@@ -1,6 +1,6 @@
 ---
 title: "Get single video data… — Tiktok Post Detail V2 API"
-description: "Get single video data V2 API reference for SandBase. Use model tiktok/web/post-detail-v2 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get single video data… — Tiktok Post Detail V2 API API reference for SandBase. Use model tiktok/web/post-detail-v2 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

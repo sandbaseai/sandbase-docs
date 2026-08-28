@@ -1,6 +1,6 @@
 ---
 title: "Get recommended ads API Reference"
-description: "Get recommended ads API reference for SandBase. Use model tiktok/ads/recommended-ads with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get recommended ads API reference for SandBase. Use model tiktok/ads/recommended-ads with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

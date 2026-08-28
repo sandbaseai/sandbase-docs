@@ -1,6 +1,6 @@
 ---
 title: "Nous: Hermes 4 405B API Reference"
-description: "Nous: Hermes 4 405B API reference for SandBase. Use model nousresearch/hermes-4-405b with /v1/chat/completions; see request fields, examples, and response details."
+description: "Nous: Hermes 4 405B API reference for SandBase. Use model nousresearch/hermes-4-405b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/nousresearch/hermes-4-405b"

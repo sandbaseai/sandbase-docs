@@ -1,6 +1,6 @@
 ---
 title: "Wizper (Whisper v3) API Reference"
-description: "Wizper (Whisper v3) API reference for SandBase. Use model openai/wizper with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Wizper (Whisper v3) API reference for SandBase. Use model openai/wizper with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/openai/wizper"

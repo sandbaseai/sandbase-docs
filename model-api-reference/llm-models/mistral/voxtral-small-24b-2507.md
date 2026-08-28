@@ -1,6 +1,6 @@
 ---
 title: "Voxtral Small 24B 2507 API Reference"
-description: "Voxtral Small 24B 2507 API reference for SandBase. Use model mistral/voxtral-small-24b-2507 with /v1/chat/completions; view request fields, examples, capabilities, and."
+description: "Voxtral Small 24B 2507 API reference for SandBase. Use model mistral/voxtral-small-24b-2507 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/voxtral-small-24b-2507"

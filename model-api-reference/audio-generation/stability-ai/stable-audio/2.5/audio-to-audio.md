@@ -1,6 +1,6 @@
 ---
 title: "Stable Audio 2.5 Audio to Audio API Reference"
-description: "Stable Audio 2.5 Audio to Audio API reference for SandBase. Use model stability-ai/stable-audio/2.5/audio-to-audio with /v1/run; view request fields, examples, capabil."
+description: "Stable Audio 2.5 Audio to Audio API reference for SandBase. Use model stability-ai/stable-audio/2.5/audio-to-audio with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/stability-ai/stable-audio/2.5/audio-to-audio"

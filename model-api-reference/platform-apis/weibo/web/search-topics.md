@@ -1,6 +1,6 @@
 ---
 title: "Get search page hot topics API Reference"
-description: "Get search page hot topics API reference for SandBase. Use model weibo/web/search-topics with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get search page hot topics API reference for SandBase. Use model weibo/web/search-topics with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

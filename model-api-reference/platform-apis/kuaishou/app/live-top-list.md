@@ -1,6 +1,6 @@
 ---
 title: "Kuaishou live top list API Reference"
-description: "Kuaishou live top list API reference for SandBase. Use model kuaishou/app/live-top-list with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Kuaishou live top list API reference for SandBase. Use model kuaishou/app/live-top-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Wan Alpha API Reference"
-description: "Wan Alpha API reference for SandBase. Use model alibaba/wan/alpha with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Wan Alpha API reference for SandBase. Use model alibaba/wan/alpha with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/alpha"

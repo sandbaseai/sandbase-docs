@@ -1,6 +1,6 @@
 ---
 title: "Search API Reference"
-description: "Search API reference for SandBase. Use model twitter/web/search-timeline with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search API reference for SandBase. Use model twitter/web/search-timeline with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

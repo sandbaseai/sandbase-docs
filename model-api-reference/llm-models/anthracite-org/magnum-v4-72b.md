@@ -1,6 +1,6 @@
 ---
 title: "Magnum v4 72B API Reference"
-description: "Magnum v4 72B API reference for SandBase. Use model anthracite-org/magnum-v4-72b with /v1/chat/completions; see request fields, examples, and response details."
+description: "Magnum v4 72B API reference for SandBase. Use model anthracite-org/magnum-v4-72b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/anthracite-org/magnum-v4-72b"

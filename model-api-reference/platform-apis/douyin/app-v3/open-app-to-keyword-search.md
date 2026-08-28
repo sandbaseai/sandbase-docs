@@ -1,6 +1,6 @@
 ---
 title: "Generate Douyin share… — Douyin Open App To Keyword Search API"
-description: "Generate Douyin share link, call Douyin APP, and jump to the specified keyword search result API reference for SandBase. Use model douyin/app-v3/open-app-to-keyword-se."
+description: "SandBase API reference for model douyin/app-v3/open-app-to-keyword-search. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

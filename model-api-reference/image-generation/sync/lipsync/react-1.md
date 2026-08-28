@@ -1,6 +1,6 @@
 ---
 title: "Sync React-1 API Reference"
-description: "Sync React-1 API reference for SandBase. Use model sync/lipsync/react-1 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Sync React-1 API reference for SandBase. Use model sync/lipsync/react-1 with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/sync/lipsync/react-1"

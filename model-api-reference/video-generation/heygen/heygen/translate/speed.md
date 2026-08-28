@@ -1,6 +1,6 @@
 ---
 title: "HeyGen Translate Speed API Reference"
-description: "HeyGen Translate Speed API reference for SandBase. Use model heygen/heygen/translate/speed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "HeyGen Translate Speed API reference for SandBase. Use model heygen/heygen/translate/speed with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/heygen/heygen/translate/speed"

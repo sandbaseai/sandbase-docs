@@ -1,6 +1,6 @@
 ---
 title: "Fetch low fan explosion list API Reference"
-description: "Fetch low fan explosion list API reference for SandBase. Use model douyin/billboard/hot-total-low-fan-list with /v1/run; view request fields, examples, capabilities, a."
+description: "Fetch low fan explosion list API reference for SandBase. Use model douyin/billboard/hot-total-low-fan-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

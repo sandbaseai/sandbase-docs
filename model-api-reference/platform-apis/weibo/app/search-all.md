@@ -1,6 +1,6 @@
 ---
 title: "Comprehensive… — Weibo Search All API"
-description: "Comprehensive search API reference for SandBase. Use model weibo/app/search-all with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Comprehensive… — Weibo Search All API API reference for SandBase. Use model weibo/app/search-all with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

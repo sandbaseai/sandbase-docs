@@ -1,6 +1,6 @@
 ---
 title: "Fetch author diagnosis API Reference"
-description: "Fetch author diagnosis API reference for SandBase. Use model douyin/creator-v2/author-diagnosis with /v1/run; view request fields, examples, capabilities, and response."
+description: "Fetch author diagnosis API reference for SandBase. Use model douyin/creator-v2/author-diagnosis with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

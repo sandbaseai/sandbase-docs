@@ -1,6 +1,6 @@
 ---
 title: "Get content translation data API Reference"
-description: "Get content translation data API reference for SandBase. Use model tiktok/app-v3/content-translate with /v1/run; view request fields, examples, capabilities, and respo."
+description: "Get content translation data API reference for SandBase. Use model tiktok/app-v3/content-translate with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get user information by UID API Reference"
-description: "Get user information by UID API reference for SandBase. Use model douyin/web/user-profile-by-uid with /v1/run; see request fields, examples, and response details."
+description: "Get user information by UID API reference for SandBase. Use model douyin/web/user-profile-by-uid with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

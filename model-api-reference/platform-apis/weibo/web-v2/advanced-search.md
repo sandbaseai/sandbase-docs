@@ -1,6 +1,6 @@
 ---
 title: "Weibo Advanced Search API Reference"
-description: "Weibo Advanced Search API reference for SandBase. Use model weibo/web-v2/advanced-search with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Weibo Advanced Search API reference for SandBase. Use model weibo/web-v2/advanced-search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

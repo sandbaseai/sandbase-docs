@@ -1,6 +1,6 @@
 ---
 title: "LTX Video-0.9.5 API Reference"
-description: "LTX Video-0.9.5 API reference for SandBase. Use model lightricks/ltx-video-v095 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "LTX Video-0.9.5 API reference for SandBase. Use model lightricks/ltx-video-v095 with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-video-v095"

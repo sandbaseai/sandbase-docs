@@ -1,6 +1,6 @@
 ---
 title: "Luma Uni-1 Text to Image API Reference"
-description: "Luma Uni-1 Text to Image API reference for SandBase. Use model luma/agent/uni-1/1.0/text-to-image with /v1/run; see request fields, examples, and response details."
+description: "Luma Uni-1 Text to Image API reference for SandBase. Use model luma/agent/uni-1/1.0/text-to-image with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/luma/agent/uni-1/1.0/text-to-image"

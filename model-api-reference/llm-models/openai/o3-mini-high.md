@@ -1,6 +1,6 @@
 ---
 title: "o3 Mini High API Reference"
-description: "o3 Mini High API reference for SandBase. Use model openai/o3-mini-high with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "o3 Mini High API reference for SandBase. Use model openai/o3-mini-high with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/o3-mini-high"

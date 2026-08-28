@@ -1,6 +1,6 @@
 ---
 title: "Get channel ID from URL API Reference"
-description: "Get channel ID from URL API reference for SandBase. Use model youtube/web-v2/channel-id with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get channel ID from URL API reference for SandBase. Use model youtube/web-v2/channel-id with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

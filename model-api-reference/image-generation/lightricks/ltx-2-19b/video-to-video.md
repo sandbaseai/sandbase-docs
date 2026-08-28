@@ -1,6 +1,6 @@
 ---
 title: "LTX-2… — Lightricks Video To Video API"
-description: "LTX-2 19B API reference for SandBase. Use model lightricks/ltx-2-19b/video-to-video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "LTX-2… — Lightricks Video To Video API API reference for SandBase. Use model lightricks/ltx-2-19b/video-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/lightricks/ltx-2-19b/video-to-video"

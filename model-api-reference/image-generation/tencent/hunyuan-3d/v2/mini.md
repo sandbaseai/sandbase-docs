@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan3D… — Tencent Mini API"
-description: "Hunyuan3D API reference for SandBase. Use model tencent/hunyuan-3d/v2/mini with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Hunyuan3D… — Tencent Mini API API reference for SandBase. Use model tencent/hunyuan-3d/v2/mini with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/tencent/hunyuan-3d/v2/mini"

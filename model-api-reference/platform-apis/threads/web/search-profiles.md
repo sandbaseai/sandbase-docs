@@ -1,6 +1,6 @@
 ---
 title: "Search profiles API Reference"
-description: "Search profiles API reference for SandBase. Use model threads/web/search-profiles with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search profiles API reference for SandBase. Use model threads/web/search-profiles with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

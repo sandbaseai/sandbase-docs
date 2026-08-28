@@ -1,6 +1,6 @@
 ---
 title: "Stable Diffusion — Stability Ai Image To Image API"
-description: "Stable Diffusion XL API reference for SandBase. Use model stability-ai/fast-sdxl/image-to-image with /v1/run; view request fields, examples, capabilities, and response."
+description: "SandBase API reference for model stability-ai/fast-sdxl/image-to-image. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/stability-ai/fast-sdxl/image-to-image"

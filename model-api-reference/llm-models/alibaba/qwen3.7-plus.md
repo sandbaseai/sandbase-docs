@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen3.7 Plus API Reference"
-description: "Qwen: Qwen3.7 Plus API reference for SandBase. Use model alibaba/qwen3.7-plus with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Qwen: Qwen3.7 Plus API reference for SandBase. Use model alibaba/qwen3.7-plus with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen3.7-plus"

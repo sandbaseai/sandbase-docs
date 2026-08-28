@@ -1,6 +1,6 @@
 ---
 title: "Labs Google SERP Competitors API Reference"
-description: "Labs Google SERP Competitors API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/serp_competitors/live with /v1/run; view request fields, exampl."
+description: "SandBase API reference for model dataforseo/v3/dataforseo_labs/google/serp_competitors/live. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

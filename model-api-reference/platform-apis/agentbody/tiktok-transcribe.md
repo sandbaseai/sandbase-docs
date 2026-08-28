@@ -1,6 +1,6 @@
 ---
 title: "TikTok Transcribe API Reference"
-description: "TikTok Transcribe API reference for SandBase. Use model agentbody/tiktok-transcribe with /v1/run; view request fields, examples, capabilities, and response format."
+description: "TikTok Transcribe API reference for SandBase. Use model agentbody/tiktok-transcribe with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

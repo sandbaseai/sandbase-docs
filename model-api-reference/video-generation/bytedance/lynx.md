@@ -1,6 +1,6 @@
 ---
 title: "Lynx API Reference"
-description: "Lynx API reference for SandBase. Use model bytedance/lynx with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Lynx API reference for SandBase. Use model bytedance/lynx with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/bytedance/lynx"

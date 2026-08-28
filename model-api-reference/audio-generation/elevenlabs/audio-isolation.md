@@ -1,6 +1,6 @@
 ---
 title: "ElevenLabs Audio Isolation API Reference"
-description: "ElevenLabs Audio Isolation API reference for SandBase. Use model elevenlabs/audio-isolation with /v1/run; view request fields, examples, capabilities, and response for."
+description: "ElevenLabs Audio Isolation API reference for SandBase. Use model elevenlabs/audio-isolation with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/elevenlabs/audio-isolation"

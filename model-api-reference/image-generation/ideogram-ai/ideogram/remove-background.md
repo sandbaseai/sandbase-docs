@@ -1,6 +1,6 @@
 ---
 title: "Ideogram Remove Background API Reference"
-description: "Ideogram Remove Background API reference for SandBase. Use model ideogram-ai/ideogram/remove-background with /v1/run; view request fields, examples, capabilities, and;."
+description: "Ideogram Remove Background API reference for SandBase. Use model ideogram-ai/ideogram/remove-background with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram-ai/ideogram/remove-background"

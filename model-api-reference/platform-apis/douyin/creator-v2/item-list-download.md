@@ -1,6 +1,6 @@
 ---
 title: "Download item list API Reference"
-description: "Download item list API reference for SandBase. Use model douyin/creator-v2/item-list-download with /v1/run; see request fields, examples, and response details."
+description: "Download item list API reference for SandBase. Use model douyin/creator-v2/item-list-download with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

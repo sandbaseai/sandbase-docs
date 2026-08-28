@@ -1,6 +1,6 @@
 ---
 title: "Sonar Deep Research API Reference"
-description: "Sonar Deep Research API reference for SandBase. Use model perplexity/sonar-deep-research with /v1/chat/completions; view request fields, examples, capabilities, and re."
+description: "Sonar Deep Research API reference for SandBase. Use model perplexity/sonar-deep-research with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/perplexity/sonar-deep-research"

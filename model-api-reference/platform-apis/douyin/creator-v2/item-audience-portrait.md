@@ -1,6 +1,6 @@
 ---
 title: "Fetch item audience portrait API Reference"
-description: "Fetch item audience portrait API reference for SandBase. Use model douyin/creator-v2/item-audience-portrait with /v1/run; view request fields, examples, capabilities,;."
+description: "Fetch item audience portrait API reference for SandBase. Use model douyin/creator-v2/item-audience-portrait with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

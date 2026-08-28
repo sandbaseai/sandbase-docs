@@ -1,6 +1,6 @@
 ---
 title: "Tripo H3.1 Multiview to 3D API Reference"
-description: "Tripo H3.1 Multiview to 3D API reference for SandBase. Use model tripo3d/tripo-h3.1/multiview-to-3d with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Tripo H3.1 Multiview to 3D API reference for SandBase. Use model tripo3d/tripo-h3.1/multiview-to-3d with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/tripo3d/tripo-h3.1/multiview-to-3d"

@@ -1,6 +1,6 @@
 ---
 title: "Sonilo V1.1 Text to Music API Reference"
-description: "Sonilo V1.1 Text to Music API reference for SandBase. Use model sonilo/1.1/text-to-music with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Sonilo V1.1 Text to Music API reference for SandBase. Use model sonilo/1.1/text-to-music with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/sonilo/1.1/text-to-music"

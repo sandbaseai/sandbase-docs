@@ -1,6 +1,6 @@
 ---
 title: "Search images API Reference"
-description: "Search images API reference for SandBase. Use model xiaohongshu/app-v2/search-images with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search images API reference for SandBase. Use model xiaohongshu/app-v2/search-images with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

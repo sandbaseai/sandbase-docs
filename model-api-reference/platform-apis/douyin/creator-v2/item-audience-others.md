@@ -1,6 +1,6 @@
 ---
 title: "Fetch item audience others analysis API Reference"
-description: "Fetch item audience others analysis API reference for SandBase. Use model douyin/creator-v2/item-audience-others with /v1/run; view request fields, examples, capabilit."
+description: "Fetch item audience others analysis API reference for SandBase. Use model douyin/creator-v2/item-audience-others with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

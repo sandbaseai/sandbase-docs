@@ -1,6 +1,6 @@
 ---
 title: "Get promoted accounts API Reference"
-description: "Get promoted accounts API reference for SandBase. Use model douyin/douplus/promoted-accounts with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Get promoted accounts API reference for SandBase. Use model douyin/douplus/promoted-accounts with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

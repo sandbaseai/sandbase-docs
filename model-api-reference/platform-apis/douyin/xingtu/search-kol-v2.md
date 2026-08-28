@@ -1,6 +1,6 @@
 ---
 title: "Search Kol Advanced V2 API Reference"
-description: "Search Kol Advanced V2 API reference for SandBase. Use model douyin/xingtu/search-kol-v2 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search Kol Advanced V2 API reference for SandBase. Use model douyin/xingtu/search-kol-v2 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

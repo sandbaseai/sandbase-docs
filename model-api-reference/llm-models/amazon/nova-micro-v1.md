@@ -1,6 +1,6 @@
 ---
 title: "Nova Micro 1.0 API Reference"
-description: "Nova Micro 1.0 API reference for SandBase. Use model amazon/nova-micro-v1 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Nova Micro 1.0 API reference for SandBase. Use model amazon/nova-micro-v1 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/amazon/nova-micro-v1"

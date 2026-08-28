@@ -1,6 +1,6 @@
 ---
 title: "Seedream v5.0 Lite API Reference"
-description: "Seedream v5.0 Lite API reference for SandBase. Use model bytedance/seedream/5.0/lite with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Seedream v5.0 Lite API reference for SandBase. Use model bytedance/seedream/5.0/lite with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bytedance/seedream/5.0/lite"

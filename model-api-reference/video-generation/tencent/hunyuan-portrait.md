@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan Portrait API Reference"
-description: "Hunyuan Portrait API reference for SandBase. Use model tencent/hunyuan-portrait with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Hunyuan Portrait API reference for SandBase. Use model tencent/hunyuan-portrait with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/tencent/hunyuan-portrait"

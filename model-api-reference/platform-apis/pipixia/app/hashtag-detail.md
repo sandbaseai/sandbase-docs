@@ -1,6 +1,6 @@
 ---
 title: "Get hashtag detail API Reference"
-description: "Get hashtag detail API reference for SandBase. Use model pipixia/app/hashtag-detail with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get hashtag detail API reference for SandBase. Use model pipixia/app/hashtag-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

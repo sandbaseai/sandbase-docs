@@ -1,6 +1,6 @@
 ---
 title: "Document Parse API Reference"
-description: "Document Parse API reference for SandBase. Use model agentbody/document-parse with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Document Parse API reference for SandBase. Use model agentbody/document-parse with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

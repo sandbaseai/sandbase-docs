@@ -1,6 +1,6 @@
 ---
 title: "Brand search suggest API Reference"
-description: "Brand search suggest API reference for SandBase. Use model douyin/index/brand-suggest with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Brand search suggest API reference for SandBase. Use model douyin/index/brand-suggest with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

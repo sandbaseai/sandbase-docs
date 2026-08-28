@@ -1,6 +1,6 @@
 ---
 title: "Stable Audio 2.5 Inpaint API Reference"
-description: "Stable Audio 2.5 Inpaint API reference for SandBase. Use model stability-ai/stable-audio/2.5/inpaint with /v1/run; view request fields, examples, capabilities, and res."
+description: "Stable Audio 2.5 Inpaint API reference for SandBase. Use model stability-ai/stable-audio/2.5/inpaint with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/stability-ai/stable-audio/2.5/inpaint"

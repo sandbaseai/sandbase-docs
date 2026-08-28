@@ -1,6 +1,6 @@
 ---
 title: "Delivery analysis detail API Reference"
-description: "Delivery analysis detail API reference for SandBase. Use model douyin/douplus/analyse-detail with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Delivery analysis detail API reference for SandBase. Use model douyin/douplus/analyse-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

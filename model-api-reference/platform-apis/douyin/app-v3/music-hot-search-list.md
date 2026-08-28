@@ -1,6 +1,6 @@
 ---
 title: "Get Douyin music hot search list data API Reference"
-description: "Get Douyin music hot search list data API reference for SandBase. Use model douyin/app-v3/music-hot-search-list with /v1/run; view request fields, examples, capabiliti."
+description: "Get Douyin music hot search list data API reference for SandBase. Use model douyin/app-v3/music-hot-search-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

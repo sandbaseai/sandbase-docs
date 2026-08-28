@@ -1,6 +1,6 @@
 ---
 title: "EssentialAI: Rnj 1 Instruct API Reference"
-description: "EssentialAI: Rnj 1 Instruct API reference for SandBase. Use model essentialai/rnj-1-instruct with /v1/chat/completions; view request fields, examples, capabilities, an."
+description: "EssentialAI: Rnj 1 Instruct API reference for SandBase. Use model essentialai/rnj-1-instruct with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/essentialai/rnj-1-instruct"

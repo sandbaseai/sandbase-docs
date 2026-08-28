@@ -1,6 +1,6 @@
 ---
 title: "Get user tagged… — Instagram V2 User Tagged Posts API"
-description: "Get user tagged posts API reference for SandBase. Use model instagram/v2/user-tagged-posts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "SandBase API reference for model instagram/v2/user-tagged-posts. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

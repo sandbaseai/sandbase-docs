@@ -1,6 +1,6 @@
 ---
 title: "Get image note detail API Reference"
-description: "Get image note detail API reference for SandBase. Use model xiaohongshu/app-v2/image-note-detail with /v1/run; see request fields, examples, and response details."
+description: "Get image note detail API reference for SandBase. Use model xiaohongshu/app-v2/image-note-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

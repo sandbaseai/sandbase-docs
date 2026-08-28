@@ -1,6 +1,6 @@
 ---
 title: "Lyria 3 Pro Preview API Reference"
-description: "Lyria 3 Pro Preview API reference for SandBase. Use model google/lyria-3-pro-preview with /v1/chat/completions; see request fields, examples, and response details."
+description: "Lyria 3 Pro Preview API reference for SandBase. Use model google/lyria-3-pro-preview with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/google/lyria-3-pro-preview"

@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu User Created Collections API Reference"
-description: "Get Zhihu User Created Collections API reference for SandBase. Use model zhihu/web/user-collections with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Get Zhihu User Created Collections API reference for SandBase. Use model zhihu/web/user-collections with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

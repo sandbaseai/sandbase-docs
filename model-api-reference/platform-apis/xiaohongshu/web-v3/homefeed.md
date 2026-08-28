@@ -1,6 +1,6 @@
 ---
 title: "Fetch homepage feed API Reference"
-description: "Fetch homepage feed API reference for SandBase. Use model xiaohongshu/web-v3/homefeed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch homepage feed API reference for SandBase. Use model xiaohongshu/web-v3/homefeed with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

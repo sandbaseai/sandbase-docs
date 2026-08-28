@@ -1,6 +1,6 @@
 ---
 title: "Get details of specified… — Douyin Hashtag Detail API"
-description: "Get details of specified hashtag API reference for SandBase. Use model douyin/app-v3/hashtag-detail with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Get details of specified… — Douyin Hashtag Detail API API reference for SandBase. Use model douyin/app-v3/hashtag-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

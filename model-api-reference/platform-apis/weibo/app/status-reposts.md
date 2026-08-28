@@ -1,6 +1,6 @@
 ---
 title: "Get post reposts API Reference"
-description: "Get post reposts API reference for SandBase. Use model weibo/app/status-reposts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get post reposts API reference for SandBase. Use model weibo/app/status-reposts with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

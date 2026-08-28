@@ -1,6 +1,6 @@
 ---
 title: "Bria Eraser API Reference"
-description: "Bria Eraser API reference for SandBase. Use model bria/eraser with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Bria Eraser API reference for SandBase. Use model bria/eraser with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bria/eraser"

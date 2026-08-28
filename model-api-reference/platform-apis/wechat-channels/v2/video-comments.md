@@ -1,6 +1,6 @@
 ---
 title: "Get WeChat Channels Video Comments API Reference"
-description: "Get WeChat Channels Video Comments API reference for SandBase. Use model wechat-channels/v2/video-comments with /v1/run; view request fields, examples, capabilities, a."
+description: "Get WeChat Channels Video Comments API reference for SandBase. Use model wechat-channels/v2/video-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

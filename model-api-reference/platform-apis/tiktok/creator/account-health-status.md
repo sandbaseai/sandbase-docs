@@ -1,6 +1,6 @@
 ---
 title: "Get Creator Account Health Status API Reference"
-description: "Get Creator Account Health Status API reference for SandBase. Use model tiktok/creator/account-health-status with /v1/run; view request fields, examples, capabilities,."
+description: "Get Creator Account Health Status API reference for SandBase. Use model tiktok/creator/account-health-status with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

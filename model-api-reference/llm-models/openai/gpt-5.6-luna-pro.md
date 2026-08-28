@@ -1,6 +1,6 @@
 ---
 title: "GPT-5.6 Luna Pro API Reference"
-description: "GPT-5.6 Luna Pro API reference for SandBase. Use model openai/gpt-5.6-luna-pro with /v1/chat/completions; view request fields, examples, capabilities, and response for."
+description: "GPT-5.6 Luna Pro API reference for SandBase. Use model openai/gpt-5.6-luna-pro with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-5.6-luna-pro"

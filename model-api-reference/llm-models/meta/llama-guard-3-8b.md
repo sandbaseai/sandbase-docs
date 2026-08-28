@@ -1,6 +1,6 @@
 ---
 title: "Llama Guard 3 8B API Reference"
-description: "Llama Guard 3 8B API reference for SandBase. Use model meta/llama-guard-3-8b with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Llama Guard 3 8B API reference for SandBase. Use model meta/llama-guard-3-8b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/meta/llama-guard-3-8b"

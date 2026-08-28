@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 [dev] Depth with LoRAs API Reference"
-description: "FLUX.1 [dev] Depth with LoRAs API reference for SandBase. Use model bfl/flux-lora-depth with /v1/run; view request fields, examples, capabilities, and response format."
+description: "FLUX.1 [dev] Depth with LoRAs API reference for SandBase. Use model bfl/flux-lora-depth with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-lora-depth"

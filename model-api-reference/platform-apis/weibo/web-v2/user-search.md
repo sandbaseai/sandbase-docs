@@ -1,6 +1,6 @@
 ---
 title: "User search API Reference"
-description: "User search API reference for SandBase. Use model weibo/web-v2/user-search with /v1/run; view request fields, examples, capabilities, and response format."
+description: "User search API reference for SandBase. Use model weibo/web-v2/user-search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

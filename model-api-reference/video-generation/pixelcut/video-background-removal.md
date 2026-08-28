@@ -1,6 +1,6 @@
 ---
 title: "Pixelcut Video Background Removal API Reference"
-description: "Pixelcut Video Background Removal API reference for SandBase. Use model pixelcut/video-background-removal with /v1/run; view request fields, examples, capabilities, an."
+description: "Pixelcut Video Background Removal API reference for SandBase. Use model pixelcut/video-background-removal with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/pixelcut/video-background-removal"

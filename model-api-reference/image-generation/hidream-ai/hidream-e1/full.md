@@ -1,6 +1,6 @@
 ---
 title: "HiDream E1 Full API Reference"
-description: "HiDream E1 Full API reference for SandBase. Use model hidream-ai/hidream-e1/full with /v1/run; view request fields, examples, capabilities, and response format."
+description: "HiDream E1 Full API reference for SandBase. Use model hidream-ai/hidream-e1/full with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/hidream-ai/hidream-e1/full"

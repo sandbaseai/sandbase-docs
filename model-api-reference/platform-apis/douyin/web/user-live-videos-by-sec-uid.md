@@ -1,6 +1,6 @@
 ---
 title: "Get live video data of specified user by sec_uid API Reference"
-description: "Get live video data of specified user by sec_uid API reference for SandBase. Use model douyin/web/user-live-videos-by-sec-uid with /v1/run; view request fields, exampl."
+description: "SandBase API reference for model douyin/web/user-live-videos-by-sec-uid. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

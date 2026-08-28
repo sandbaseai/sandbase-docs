@@ -1,6 +1,6 @@
 ---
 title: "Heygen v5 Digital Twin API Reference"
-description: "Heygen v5 Digital Twin API reference for SandBase. Use model heygen/avatar5/digital-twin with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Heygen v5 Digital Twin API reference for SandBase. Use model heygen/avatar5/digital-twin with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/heygen/avatar5/digital-twin"

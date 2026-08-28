@@ -1,6 +1,6 @@
 ---
 title: "LongCat… — Meituan Image To Video API"
-description: "LongCat Video API reference for SandBase. Use model meituan/longcat-video/image-to-video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "LongCat… — Meituan Image To Video API API reference for SandBase. Use model meituan/longcat-video/image-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/meituan/longcat-video/image-to-video"

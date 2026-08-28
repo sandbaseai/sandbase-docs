@@ -1,6 +1,6 @@
 ---
 title: "Get video subtitles API Reference"
-description: "Get video subtitles API reference for SandBase. Use model youtube/web/video-subtitles with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get video subtitles API reference for SandBase. Use model youtube/web/video-subtitles with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

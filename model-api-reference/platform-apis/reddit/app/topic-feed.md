@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP Topic Feed API Reference"
-description: "Fetch Reddit APP Topic Feed API reference for SandBase. Use model reddit/app/topic-feed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch Reddit APP Topic Feed API reference for SandBase. Use model reddit/app/topic-feed with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

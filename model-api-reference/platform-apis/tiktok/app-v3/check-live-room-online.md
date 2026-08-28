@@ -1,6 +1,6 @@
 ---
 title: "Check if live room is online API Reference"
-description: "Check if live room is online API reference for SandBase. Use model tiktok/app-v3/check-live-room-online with /v1/run; view request fields, examples, capabilities, and;."
+description: "Check if live room is online API reference for SandBase. Use model tiktok/app-v3/check-live-room-online with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

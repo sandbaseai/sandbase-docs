@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Column Article Relationship API Reference"
-description: "Get Zhihu Column Article Relationship API reference for SandBase. Use model zhihu/web/column-relationship with /v1/run; view request fields, examples, capabilities, an."
+description: "Get Zhihu Column Article Relationship API reference for SandBase. Use model zhihu/web/column-relationship with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 [dev] Inpainting with LoRAs API Reference"
-description: "FLUX.1 [dev] Inpainting with LoRAs API reference for SandBase. Use model bfl/flux-lora/inpainting with /v1/run; see request fields, examples, and response details."
+description: "FLUX.1 [dev] Inpainting with LoRAs API reference for SandBase. Use model bfl/flux-lora/inpainting with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-lora/inpainting"

@@ -1,6 +1,6 @@
 ---
 title: "Relace Apply 3 API Reference"
-description: "Relace Apply 3 API reference for SandBase. Use model relace/relace-apply-3 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Relace Apply 3 API reference for SandBase. Use model relace/relace-apply-3 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/relace/relace-apply-3"

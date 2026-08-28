@@ -1,6 +1,6 @@
 ---
 title: "Generate short URL API Reference"
-description: "Generate short URL API reference for SandBase. Use model pipixia/app/short-url with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Generate short URL API reference for SandBase. Use model pipixia/app/short-url with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

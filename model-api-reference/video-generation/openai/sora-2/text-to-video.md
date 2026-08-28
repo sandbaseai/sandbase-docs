@@ -1,6 +1,6 @@
 ---
 title: "Sora… — Openai Text To Video API"
-description: "Sora 2 API reference for SandBase. Use model openai/sora-2/text-to-video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Sora… — Openai Text To Video API API reference for SandBase. Use model openai/sora-2/text-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/openai/sora-2/text-to-video"

@@ -1,6 +1,6 @@
 ---
 title: "Get user post… — Pipixia User Post List API"
-description: "Get user post list API reference for SandBase. Use model pipixia/app/user-post-list with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user post… — Pipixia User Post List API API reference for SandBase. Use model pipixia/app/user-post-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

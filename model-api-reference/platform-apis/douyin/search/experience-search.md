@@ -1,6 +1,6 @@
 ---
 title: "Fetch experience search API Reference"
-description: "Fetch experience search API reference for SandBase. Use model douyin/search/experience-search with /v1/run; see request fields, examples, and response details."
+description: "Fetch experience search API reference for SandBase. Use model douyin/search/experience-search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

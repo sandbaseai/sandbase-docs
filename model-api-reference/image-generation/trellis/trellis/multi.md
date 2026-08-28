@@ -1,6 +1,6 @@
 ---
 title: "Trellis… — Trellis Multi API"
-description: "Trellis API reference for SandBase. Use model trellis/trellis/multi with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Trellis… — Trellis Multi API API reference for SandBase. Use model trellis/trellis/multi with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/trellis/trellis/multi"

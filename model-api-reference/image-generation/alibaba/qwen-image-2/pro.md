@@ -1,6 +1,6 @@
 ---
 title: "Qwen Image 2 Pro API Reference"
-description: "Qwen Image 2 Pro API reference for SandBase. Use model alibaba/qwen-image-2/pro with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Qwen Image 2 Pro API reference for SandBase. Use model alibaba/qwen-image-2/pro with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/qwen-image-2/pro"

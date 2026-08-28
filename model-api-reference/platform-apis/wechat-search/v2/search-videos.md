@@ -1,6 +1,6 @@
 ---
 title: "WeChat Channels Video Search API Reference"
-description: "WeChat Channels Video Search API reference for SandBase. Use model wechat-search/v2/search-videos with /v1/run; see request fields, examples, and response details."
+description: "WeChat Channels Video Search API reference for SandBase. Use model wechat-search/v2/search-videos with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

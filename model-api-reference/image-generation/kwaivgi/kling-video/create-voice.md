@@ -1,6 +1,6 @@
 ---
 title: "Kling Video Create Voice API Reference"
-description: "Kling Video Create Voice API reference for SandBase. Use model kwaivgi/kling-video/create-voice with /v1/run; view request fields, examples, capabilities, and response."
+description: "Kling Video Create Voice API reference for SandBase. Use model kwaivgi/kling-video/create-voice with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/kwaivgi/kling-video/create-voice"

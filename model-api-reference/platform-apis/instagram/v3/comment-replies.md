@@ -1,6 +1,6 @@
 ---
 title: "Get comment… — Instagram V3 Comment Replies API"
-description: "Get comment replies API reference for SandBase. Use model instagram/v3/comment-replies with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get comment… — Instagram V3 Comment Replies API API reference for SandBase. Use model instagram/v3/comment-replies with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

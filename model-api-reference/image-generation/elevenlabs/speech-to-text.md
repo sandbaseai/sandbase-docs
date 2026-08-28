@@ -1,6 +1,6 @@
 ---
 title: "ElevenLabs Speech to Text API Reference"
-description: "ElevenLabs Speech to Text API reference for SandBase. Use model elevenlabs/speech-to-text with /v1/run; view request fields, examples, capabilities, and response format."
+description: "ElevenLabs Speech to Text API reference for SandBase. Use model elevenlabs/speech-to-text with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/elevenlabs/speech-to-text"

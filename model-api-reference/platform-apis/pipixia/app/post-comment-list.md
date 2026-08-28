@@ -1,6 +1,6 @@
 ---
 title: "Get post comment list API Reference"
-description: "Get post comment list API reference for SandBase. Use model pipixia/app/post-comment-list with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get post comment list API reference for SandBase. Use model pipixia/app/post-comment-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get Author Touch Distribution API Reference"
-description: "Get Author Touch Distribution API reference for SandBase. Use model douyin/xingtu-v2/author-touch-distribution with /v1/run; view request fields, examples, capabilitie."
+description: "Get Author Touch Distribution API reference for SandBase. Use model douyin/xingtu-v2/author-touch-distribution with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen3.5 Plus 2026-02-15 API Reference"
-description: "Qwen: Qwen3.5 Plus 2026-02-15 API reference for SandBase. Use model alibaba/qwen3.5-plus-02-15 with /v1/chat/completions; view request fields, examples, capabilities,;."
+description: "Qwen: Qwen3.5 Plus 2026-02-15 API reference for SandBase. Use model alibaba/qwen3.5-plus-02-15 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen3.5-plus-02-15"

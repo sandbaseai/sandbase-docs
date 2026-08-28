@@ -1,6 +1,6 @@
 ---
 title: "Get banners of discover page API Reference"
-description: "Get banners of discover page API reference for SandBase. Use model lemon8/app/discover-banners with /v1/run; view request fields, examples, capabilities, and response;."
+description: "Get banners of discover page API reference for SandBase. Use model lemon8/app/discover-banners with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

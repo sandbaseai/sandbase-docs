@@ -1,6 +1,6 @@
 ---
 title: "CC: Claude Fable 5 API Reference"
-description: "CC: Claude Fable 5 API reference for SandBase. Use model cc/claude-fable-5 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "CC: Claude Fable 5 API reference for SandBase. Use model cc/claude-fable-5 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/cc/claude-fable-5"

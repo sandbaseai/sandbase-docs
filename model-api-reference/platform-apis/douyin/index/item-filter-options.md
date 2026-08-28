@@ -1,6 +1,6 @@
 ---
 title: "Get video search filter options API Reference"
-description: "Get video search filter options API reference for SandBase. Use model douyin/index/item-filter-options with /v1/run; view request fields, examples, capabilities, and r."
+description: "Get video search filter options API reference for SandBase. Use model douyin/index/item-filter-options with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

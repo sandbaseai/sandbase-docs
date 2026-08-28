@@ -1,6 +1,6 @@
 ---
 title: "MiniMax (Hailuo AI) Video… — Minimax Text To Video API"
-description: "MiniMax (Hailuo AI) Video 01 API reference for SandBase. Use model minimax/video-01/text-to-video with /v1/run; see request fields, examples, and response details."
+description: "SandBase API reference for model minimax/video-01/text-to-video. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/minimax/video-01/text-to-video"

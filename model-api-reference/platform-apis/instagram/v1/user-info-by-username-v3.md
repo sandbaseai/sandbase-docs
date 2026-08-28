@@ -1,6 +1,6 @@
 ---
 title: "Get user data by username V3 API Reference"
-description: "Get user data by username V3 API reference for SandBase. Use model instagram/v1/user-info-by-username-v3 with /v1/run; view request fields, examples, capabilities, and."
+description: "Get user data by username V3 API reference for SandBase. Use model instagram/v1/user-info-by-username-v3 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

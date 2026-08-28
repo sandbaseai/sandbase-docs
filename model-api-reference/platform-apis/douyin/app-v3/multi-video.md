@@ -1,6 +1,6 @@
 ---
 title: "Batch Get Video Information V1 API Reference"
-description: "Batch Get Video Information V1 API reference for SandBase. Use model douyin/app-v3/multi-video with /v1/run; view request fields, examples, capabilities, and response;."
+description: "Batch Get Video Information V1 API reference for SandBase. Use model douyin/app-v3/multi-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

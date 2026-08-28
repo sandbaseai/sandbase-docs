@@ -1,6 +1,6 @@
 ---
 title: "Get fans list of specified user API Reference"
-description: "Get fans list of specified user API reference for SandBase. Use model lemon8/app/user-follower-list with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Get fans list of specified user API reference for SandBase. Use model lemon8/app/user-follower-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

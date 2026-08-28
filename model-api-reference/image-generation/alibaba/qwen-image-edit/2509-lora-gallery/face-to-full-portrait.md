@@ -1,6 +1,6 @@
 ---
 title: "Qwen Image Edit 2509 Lora… — Alibaba Face To Full Portrait API"
-description: "Qwen Image Edit 2509 Lora Gallery API reference for SandBase. Use model alibaba/qwen-image-edit/2509-lora-gallery/face-to-full-portrait with /v1/run; view request fiel."
+description: "SandBase API reference for model alibaba/qwen-image-edit/2509-lora-gallery/face-to-full-portrait. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/qwen-image-edit/2509-lora-gallery/face-to-full-portrait"

@@ -1,6 +1,6 @@
 ---
 title: "MiniMax (Hailuo AI) Video 01 Director - Image to Vide… API Ref"
-description: "MiniMax (Hailuo AI) Video 01 Director - Image to Video API reference for SandBase. Use model minimax/video-01-director/image-to-video with /v1/run; view request fields."
+description: "SandBase API reference for model minimax/video-01-director/image-to-video. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/minimax/video-01-director/image-to-video"

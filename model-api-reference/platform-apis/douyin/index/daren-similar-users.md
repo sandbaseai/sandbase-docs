@@ -1,6 +1,6 @@
 ---
 title: "Get similar daren API Reference"
-description: "Get similar daren API reference for SandBase. Use model douyin/index/daren-similar-users with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get similar daren API reference for SandBase. Use model douyin/index/daren-similar-users with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get video subtitle info API Reference"
-description: "Get video subtitle info API reference for SandBase. Use model bilibili/web/video-subtitle with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get video subtitle info API reference for SandBase. Use model bilibili/web/video-subtitle with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

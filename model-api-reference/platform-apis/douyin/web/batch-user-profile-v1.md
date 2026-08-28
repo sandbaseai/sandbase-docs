@@ -1,6 +1,6 @@
 ---
 title: "Get batch user profile (up to 10) API Reference"
-description: "Get batch user profile (up to 10) API reference for SandBase. Use model douyin/web/batch-user-profile-v1 with /v1/run; view request fields, examples, capabilities, and."
+description: "Get batch user profile (up to 10) API reference for SandBase. Use model douyin/web/batch-user-profile-v1 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

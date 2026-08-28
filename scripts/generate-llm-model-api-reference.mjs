@@ -345,11 +345,11 @@ function endpointFor(model, category) {
 
 function seoDescription(model, protocol, category) {
   const endpoint = endpointFor(model, category)
-  const base = `${cleanTitle(model)} API reference for SandBase. Use model ${model.name} with ${endpoint}; view request fields, examples, capabilities, and response format.`
+  const base = `${cleanTitle(model)} API reference for SandBase. Use model ${model.name} with ${endpoint}; see request and response examples.`
   if (base.length <= 170) return base
-  const suffix = ` (${model.name}) API reference for SandBase.`
-  const available = Math.max(0, 170 - suffix.length)
-  return `${cleanTitle(model).slice(0, available).trimEnd()}${suffix}`
+  const concise = `SandBase API reference for model ${model.name}. Call ${endpoint}; see request and response examples.`
+  if (concise.length <= 170) return concise
+  return `SandBase API reference: ${model.name} via ${endpoint}. See request and response examples.`
 }
 
 function yamlString(value) {

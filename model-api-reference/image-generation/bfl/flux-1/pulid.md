@@ -1,6 +1,6 @@
 ---
 title: "Flux 1 Pulid API Reference"
-description: "Flux 1 Pulid API reference for SandBase. Use model bfl/flux-1/pulid with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Flux 1 Pulid API reference for SandBase. Use model bfl/flux-1/pulid with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-1/pulid"

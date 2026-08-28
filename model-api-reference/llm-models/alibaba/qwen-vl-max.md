@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen VL Max API Reference"
-description: "Qwen: Qwen VL Max API reference for SandBase. Use model alibaba/qwen-vl-max with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Qwen: Qwen VL Max API reference for SandBase. Use model alibaba/qwen-vl-max with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen-vl-max"

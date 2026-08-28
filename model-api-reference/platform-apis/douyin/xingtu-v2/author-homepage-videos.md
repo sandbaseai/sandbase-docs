@@ -1,6 +1,6 @@
 ---
 title: "Get Author Homepage Videos API Reference"
-description: "Get Author Homepage Videos API reference for SandBase. Use model douyin/xingtu-v2/author-homepage-videos with /v1/run; view request fields, examples, capabilities, and."
+description: "Get Author Homepage Videos API reference for SandBase. Use model douyin/xingtu-v2/author-homepage-videos with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

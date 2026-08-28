@@ -1,6 +1,6 @@
 ---
 title: "Get information of specified post API Reference"
-description: "Get information of specified post API reference for SandBase. Use model lemon8/app/post-detail with /v1/run; view request fields, examples, capabilities, and response;."
+description: "Get information of specified post API reference for SandBase. Use model lemon8/app/post-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

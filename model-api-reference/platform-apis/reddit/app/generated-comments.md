@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit Answers Generated Comments API Reference"
-description: "Fetch Reddit Answers Generated Comments API reference for SandBase. Use model reddit/app/generated-comments with /v1/run; view request fields, examples, capabilities,;."
+description: "Fetch Reddit Answers Generated Comments API reference for SandBase. Use model reddit/app/generated-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

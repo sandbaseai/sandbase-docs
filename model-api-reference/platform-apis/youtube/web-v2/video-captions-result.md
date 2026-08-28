@@ -1,6 +1,6 @@
 ---
 title: "Get video captions async job result API Reference"
-description: "Get video captions async job result API reference for SandBase. Use model youtube/web-v2/video-captions-result with /v1/run; view request fields, examples, capabilitie."
+description: "Get video captions async job result API reference for SandBase. Use model youtube/web-v2/video-captions-result with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

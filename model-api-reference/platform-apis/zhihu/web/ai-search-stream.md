@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu AI Search (v2) API Reference"
-description: "Get Zhihu AI Search (v2) API reference for SandBase. Use model zhihu/web/ai-search-stream with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get Zhihu AI Search (v2) API reference for SandBase. Use model zhihu/web/ai-search-stream with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

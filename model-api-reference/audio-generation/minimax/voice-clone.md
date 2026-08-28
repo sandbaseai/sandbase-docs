@@ -1,6 +1,6 @@
 ---
 title: "MiniMax Voice Cloning API Reference"
-description: "MiniMax Voice Cloning API reference for SandBase. Use model minimax/voice-clone with /v1/run; view request fields, examples, capabilities, and response format."
+description: "MiniMax Voice Cloning API reference for SandBase. Use model minimax/voice-clone with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/minimax/voice-clone"

@@ -1,6 +1,6 @@
 ---
 title: "Prime Intellect: INTELLECT-3 API Reference"
-description: "Prime Intellect: INTELLECT-3 API reference for SandBase. Use model prime-intellect/intellect-3 with /v1/chat/completions; view request fields, examples, capabilities,;."
+description: "Prime Intellect: INTELLECT-3 API reference for SandBase. Use model prime-intellect/intellect-3 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/prime-intellect/intellect-3"

@@ -1,6 +1,6 @@
 ---
 title: "Get Ranking List Data API Reference"
-description: "Get Ranking List Data API reference for SandBase. Use model douyin/xingtu-v2/ranking-list-data with /v1/run; view request fields, examples, capabilities, and response;."
+description: "Get Ranking List Data API reference for SandBase. Use model douyin/xingtu-v2/ranking-list-data with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

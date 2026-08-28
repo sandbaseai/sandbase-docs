@@ -1,6 +1,6 @@
 ---
 title: "Business Data Google Hotels API Reference"
-description: "Business Data Google Hotels API reference for SandBase. Use model dataforseo/v3/business_data/google/hotel_searches/live/advanced with /v1/run; view request fields, ex."
+description: "SandBase API reference for model dataforseo/v3/business_data/google/hotel_searches/live/advanced. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

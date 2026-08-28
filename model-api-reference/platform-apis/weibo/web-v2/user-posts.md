@@ -1,6 +1,6 @@
 ---
 title: "Get Weibo user posts API Reference"
-description: "Get Weibo user posts API reference for SandBase. Use model weibo/web-v2/user-posts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get Weibo user posts API reference for SandBase. Use model weibo/web-v2/user-posts with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

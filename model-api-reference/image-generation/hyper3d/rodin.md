@@ -1,6 +1,6 @@
 ---
 title: "Hyper3D Rodin API Reference"
-description: "Hyper3D Rodin API reference for SandBase. Use model hyper3d/rodin with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Hyper3D Rodin API reference for SandBase. Use model hyper3d/rodin with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/hyper3d/rodin"

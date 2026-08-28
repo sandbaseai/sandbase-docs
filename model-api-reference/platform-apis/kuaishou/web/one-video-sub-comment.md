@@ -1,6 +1,6 @@
 ---
 title: "Fetch video sub comments API Reference"
-description: "Fetch video sub comments API reference for SandBase. Use model kuaishou/web/one-video-sub-comment with /v1/run; see request fields, examples, and response details."
+description: "Fetch video sub comments API reference for SandBase. Use model kuaishou/web/one-video-sub-comment with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

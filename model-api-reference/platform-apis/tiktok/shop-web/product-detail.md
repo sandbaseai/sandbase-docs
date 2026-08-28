@@ -1,6 +1,6 @@
 ---
 title: "Get product detail V1(Full data) API Reference"
-description: "Get product detail V1(Full data) API reference for SandBase. Use model tiktok/shop-web/product-detail with /v1/run; view request fields, examples, capabilities, and re."
+description: "Get product detail V1(Full data) API reference for SandBase. Use model tiktok/shop-web/product-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

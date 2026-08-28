@@ -1,6 +1,6 @@
 ---
 title: "Get bangumi tab API Reference"
-description: "Get bangumi tab API reference for SandBase. Use model bilibili/app/bangumi-tab with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get bangumi tab API reference for SandBase. Use model bilibili/app/bangumi-tab with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

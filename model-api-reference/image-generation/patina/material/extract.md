@@ -1,6 +1,6 @@
 ---
 title: "PATINA… — Patina Extract API"
-description: "PATINA API reference for SandBase. Use model patina/material/extract with /v1/run; view request fields, examples, capabilities, and response format."
+description: "PATINA… — Patina Extract API API reference for SandBase. Use model patina/material/extract with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/patina/material/extract"

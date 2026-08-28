@@ -1,6 +1,6 @@
 ---
 title: "GPT Audio Mini API Reference"
-description: "GPT Audio Mini API reference for SandBase. Use model openai/gpt-audio-mini with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "GPT Audio Mini API reference for SandBase. Use model openai/gpt-audio-mini with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-audio-mini"

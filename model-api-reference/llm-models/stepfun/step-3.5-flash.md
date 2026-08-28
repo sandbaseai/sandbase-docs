@@ -1,6 +1,6 @@
 ---
 title: "StepFun: Step 3.5 Flash API Reference"
-description: "StepFun: Step 3.5 Flash API reference for SandBase. Use model stepfun/step-3.5-flash with /v1/chat/completions; see request fields, examples, and response details."
+description: "StepFun: Step 3.5 Flash API reference for SandBase. Use model stepfun/step-3.5-flash with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/stepfun/step-3.5-flash"

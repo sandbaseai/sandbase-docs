@@ -1,6 +1,6 @@
 ---
 title: "GPT-5.4 API Reference"
-description: "GPT-5.4 API reference for SandBase. Use model openai/gpt-5.4 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "GPT-5.4 API reference for SandBase. Use model openai/gpt-5.4 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-5.4"

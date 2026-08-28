@@ -1,6 +1,6 @@
 ---
 title: "Get XingTu kolid by Douyin User ID API Reference"
-description: "Get XingTu kolid by Douyin User ID API reference for SandBase. Use model douyin/xingtu/xingtu-kolid-by-uid with /v1/run; view request fields, examples, capabilities, a."
+description: "Get XingTu kolid by Douyin User ID API reference for SandBase. Use model douyin/xingtu/xingtu-kolid-by-uid with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

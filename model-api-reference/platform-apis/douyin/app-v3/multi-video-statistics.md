@@ -1,6 +1,6 @@
 ---
 title: "Get the statistical data… — Douyin Multi Video Statistics API"
-description: "Get multi-video statistics by ID in SandBase. Use douyin/app-v3/multi-video-statistics with /v1/run; view fields, examples, capabilities, and response format."
+description: "SandBase API reference for model douyin/app-v3/multi-video-statistics. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

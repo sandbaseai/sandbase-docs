@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Sub Comment V5 API Reference"
-description: "Get Zhihu Sub Comment V5 API reference for SandBase. Use model zhihu/web/sub-comment-v5 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get Zhihu Sub Comment V5 API reference for SandBase. Use model zhihu/web/sub-comment-v5 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

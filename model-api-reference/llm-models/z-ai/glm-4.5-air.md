@@ -1,6 +1,6 @@
 ---
 title: "Z.ai: GLM 4.5 Air API Reference"
-description: "Z.ai: GLM 4.5 Air API reference for SandBase. Use model z-ai/glm-4.5-air with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Z.ai: GLM 4.5 Air API reference for SandBase. Use model z-ai/glm-4.5-air with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/z-ai/glm-4.5-air"

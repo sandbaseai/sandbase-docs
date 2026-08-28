@@ -1,6 +1,6 @@
 ---
 title: "Get query suggestions API Reference"
-description: "Get query suggestions API reference for SandBase. Use model tiktok/ads/query-suggestions with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get query suggestions API reference for SandBase. Use model tiktok/ads/query-suggestions with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

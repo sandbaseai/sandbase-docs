@@ -1,6 +1,6 @@
 ---
 title: "Wan 2.6 Reference to Video Flash API Reference"
-description: "Wan 2.6 Reference to Video Flash API reference for SandBase. Use model alibaba/wan/2.6/reference-to-video/flash with /v1/run; view request fields, examples, capabiliti."
+description: "Wan 2.6 Reference to Video Flash API reference for SandBase. Use model alibaba/wan/2.6/reference-to-video/flash with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/2.6/reference-to-video/flash"

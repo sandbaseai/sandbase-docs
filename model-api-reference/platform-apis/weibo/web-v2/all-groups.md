@@ -1,6 +1,6 @@
 ---
 title: "Get all groups information API Reference"
-description: "Get all groups information API reference for SandBase. Use model weibo/web-v2/all-groups with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get all groups information API reference for SandBase. Use model weibo/web-v2/all-groups with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get live room information via live link API Reference"
-description: "Get live room information via live link API reference for SandBase. Use model tiktok/web/live-data with /v1/run; view request fields, examples, capabilities, and respo."
+description: "Get live room information via live link API reference for SandBase. Use model tiktok/web/live-data with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

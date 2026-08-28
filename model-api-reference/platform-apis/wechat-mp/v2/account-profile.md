@@ -1,6 +1,6 @@
 ---
 title: "Get WeChat MP Account Profile API Reference"
-description: "Get WeChat MP Account Profile API reference for SandBase. Use model wechat-mp/v2/account-profile with /v1/run; see request fields, examples, and response details."
+description: "Get WeChat MP Account Profile API reference for SandBase. Use model wechat-mp/v2/account-profile with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

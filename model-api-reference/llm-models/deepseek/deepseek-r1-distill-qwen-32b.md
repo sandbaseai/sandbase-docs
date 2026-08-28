@@ -1,6 +1,6 @@
 ---
 title: "R1 Distill Qwen 32B API Reference"
-description: "R1 Distill Qwen 32B API reference for SandBase. Use model deepseek/deepseek-r1-distill-qwen-32b with /v1/chat/completions; view request fields, examples, capabilities,."
+description: "R1 Distill Qwen 32B API reference for SandBase. Use model deepseek/deepseek-r1-distill-qwen-32b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/deepseek/deepseek-r1-distill-qwen-32b"

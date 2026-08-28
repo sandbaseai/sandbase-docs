@@ -1,6 +1,6 @@
 ---
 title: "Z.ai: GLM 4.7 Flash API Reference"
-description: "Z.ai: GLM 4.7 Flash API reference for SandBase. Use model z-ai/glm-4.7-flash with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Z.ai: GLM 4.7 Flash API reference for SandBase. Use model z-ai/glm-4.7-flash with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/z-ai/glm-4.7-flash"

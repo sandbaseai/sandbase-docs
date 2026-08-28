@@ -1,6 +1,6 @@
 ---
 title: "Calendly API Reference"
-description: "Calendly API reference for SandBase. Use model sandbase/calendly with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Calendly API reference for SandBase. Use model sandbase/calendly with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

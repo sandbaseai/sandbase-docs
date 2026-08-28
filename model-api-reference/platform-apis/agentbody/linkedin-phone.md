@@ -1,6 +1,6 @@
 ---
 title: "LinkedIn Phone API Reference"
-description: "LinkedIn Phone API reference for SandBase. Use model agentbody/linkedin-phone with /v1/run; view request fields, examples, capabilities, and response format."
+description: "LinkedIn Phone API reference for SandBase. Use model agentbody/linkedin-phone with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

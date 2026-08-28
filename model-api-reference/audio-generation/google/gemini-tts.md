@@ -1,6 +1,6 @@
 ---
 title: "Gemini TTS API Reference"
-description: "Gemini TTS API reference for SandBase. Use model google/gemini-tts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Gemini TTS API reference for SandBase. Use model google/gemini-tts with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/google/gemini-tts"

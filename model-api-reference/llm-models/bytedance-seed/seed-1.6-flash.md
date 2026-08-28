@@ -1,6 +1,6 @@
 ---
 title: "ByteDance Seed: Seed 1.6 Flash API Reference"
-description: "ByteDance Seed: Seed 1.6 Flash API reference for SandBase. Use model bytedance-seed/seed-1.6-flash with /v1/chat/completions; view request fields, examples, capabiliti."
+description: "ByteDance Seed: Seed 1.6 Flash API reference for SandBase. Use model bytedance-seed/seed-1.6-flash with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/bytedance-seed/seed-1.6-flash"

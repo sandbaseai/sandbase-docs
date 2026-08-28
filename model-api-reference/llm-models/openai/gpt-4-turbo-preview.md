@@ -1,6 +1,6 @@
 ---
 title: "GPT-4 Turbo Preview API Reference"
-description: "GPT-4 Turbo Preview API reference for SandBase. Use model openai/gpt-4-turbo-preview with /v1/chat/completions; see request fields, examples, and response details."
+description: "GPT-4 Turbo Preview API reference for SandBase. Use model openai/gpt-4-turbo-preview with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-4-turbo-preview"

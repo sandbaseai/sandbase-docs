@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen-Turbo API Reference"
-description: "Qwen: Qwen-Turbo API reference for SandBase. Use model alibaba/qwen-turbo with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Qwen: Qwen-Turbo API reference for SandBase. Use model alibaba/qwen-turbo with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen-turbo"

@@ -1,6 +1,6 @@
 ---
 title: "Fetch hot account list API Reference"
-description: "Fetch hot account list API reference for SandBase. Use model douyin/billboard/hot-account-list with /v1/run; view request fields, examples, capabilities, and response;."
+description: "Fetch hot account list API reference for SandBase. Use model douyin/billboard/hot-account-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

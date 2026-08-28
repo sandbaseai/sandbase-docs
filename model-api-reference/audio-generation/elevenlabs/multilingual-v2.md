@@ -1,6 +1,6 @@
 ---
 title: "Multilingual V2 API Reference"
-description: "Multilingual V2 API reference for SandBase. Use model elevenlabs/multilingual-v2 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Multilingual V2 API reference for SandBase. Use model elevenlabs/multilingual-v2 with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/elevenlabs/multilingual-v2"

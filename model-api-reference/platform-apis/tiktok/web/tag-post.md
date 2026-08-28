@@ -1,6 +1,6 @@
 ---
 title: "Tag Post API Reference"
-description: "Tag Post API reference for SandBase. Use model tiktok/web/tag-post with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Tag Post API reference for SandBase. Use model tiktok/web/tag-post with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

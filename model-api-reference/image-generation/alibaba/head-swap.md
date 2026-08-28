@@ -1,6 +1,6 @@
 ---
 title: "Head Swap API Reference"
-description: "Head Swap API reference for SandBase. Use model alibaba/head-swap with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Head Swap API reference for SandBase. Use model alibaba/head-swap with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/head-swap"

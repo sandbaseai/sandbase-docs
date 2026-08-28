@@ -1,6 +1,6 @@
 ---
 title: "V1.1 API Reference"
-description: "V1.1 API reference for SandBase. Use model sonilo/1.1/video-to-music with /v1/run; view request fields, examples, capabilities, and response format."
+description: "V1.1 API reference for SandBase. Use model sonilo/1.1/video-to-music with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/sonilo/1.1/video-to-music"

@@ -1,6 +1,6 @@
 ---
 title: "Ltx 2.3  API Reference"
-description: "Ltx 2.3  API reference for SandBase. Use model lightricks/ltx-2.3/reframe with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Ltx 2.3 API reference for SandBase. Use model lightricks/ltx-2.3/reframe with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-2.3/reframe"

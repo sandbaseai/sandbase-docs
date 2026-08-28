@@ -1,6 +1,6 @@
 ---
 title: "Get following list of… — Lemon8 User Following List API"
-description: "Get following list of specified user API reference for SandBase. Use model lemon8/app/user-following-list with /v1/run; view request fields, examples, capabilities, an."
+description: "SandBase API reference for model lemon8/app/user-following-list. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

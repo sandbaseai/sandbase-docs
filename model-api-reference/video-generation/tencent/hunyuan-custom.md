@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan Custom API Reference"
-description: "Hunyuan Custom API reference for SandBase. Use model tencent/hunyuan-custom with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Hunyuan Custom API reference for SandBase. Use model tencent/hunyuan-custom with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/tencent/hunyuan-custom"

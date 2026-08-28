@@ -1,6 +1,6 @@
 ---
 title: "PixVerse V4 Text to Video Fast API Reference"
-description: "PixVerse V4 Text to Video Fast API reference for SandBase. Use model pixverse/v4/text-to-video/fast with /v1/run; view request fields, examples, capabilities, and resp."
+description: "PixVerse V4 Text to Video Fast API reference for SandBase. Use model pixverse/v4/text-to-video/fast with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/pixverse/v4/text-to-video/fast"

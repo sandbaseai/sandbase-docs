@@ -1,6 +1,6 @@
 ---
 title: "Trellis… — Trellis Retexture API"
-description: "Trellis 2 API reference for SandBase. Use model trellis/trellis-2/retexture with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Trellis… — Trellis Retexture API API reference for SandBase. Use model trellis/trellis-2/retexture with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/trellis/trellis-2/retexture"

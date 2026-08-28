@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP Comment Replies (Sub-comments) API Reference"
-description: "Fetch Reddit APP Comment Replies (Sub-comments) API reference for SandBase. Use model reddit/app/comment-replies with /v1/run; view request fields, examples, capabilit."
+description: "Fetch Reddit APP Comment Replies (Sub-comments) API reference for SandBase. Use model reddit/app/comment-replies with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

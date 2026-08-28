@@ -1,6 +1,6 @@
 ---
 title: "User Followings API Reference"
-description: "User Followings API reference for SandBase. Use model twitter/web/user-followings with /v1/run; view request fields, examples, capabilities, and response format."
+description: "User Followings API reference for SandBase. Use model twitter/web/user-followings with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get explore video data API Reference"
-description: "Get explore video data API reference for SandBase. Use model tiktok/web/explore-post with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get explore video data API reference for SandBase. Use model tiktok/web/explore-post with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Pixal3d API Reference"
-description: "Pixal3d API reference for SandBase. Use model pixal3d/pixal3d with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Pixal3d API reference for SandBase. Use model pixal3d/pixal3d with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/pixal3d/pixal3d"

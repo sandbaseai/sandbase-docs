@@ -1,6 +1,6 @@
 ---
 title: "Get Author Convert Ability API Reference"
-description: "Get Author Convert Ability API reference for SandBase. Use model douyin/xingtu-v2/author-convert-ability with /v1/run; view request fields, examples, capabilities, and."
+description: "Get Author Convert Ability API reference for SandBase. Use model douyin/xingtu-v2/author-convert-ability with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

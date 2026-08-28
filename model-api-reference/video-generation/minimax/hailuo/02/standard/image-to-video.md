@@ -1,6 +1,6 @@
 ---
 title: "MiniMax Hailuo 02 [Standard] (Image to Video) API Reference"
-description: "MiniMax Hailuo 02 [Standard] (Image to Video) API reference for SandBase. Use model minimax/hailuo/02/standard/image-to-video with /v1/run; view request fields, exampl."
+description: "SandBase API reference for model minimax/hailuo/02/standard/image-to-video. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/minimax/hailuo/02/standard/image-to-video"

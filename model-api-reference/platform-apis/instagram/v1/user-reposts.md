@@ -1,6 +1,6 @@
 ---
 title: "Get user reposts list API Reference"
-description: "Get user reposts list API reference for SandBase. Use model instagram/v1/user-reposts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user reposts list API reference for SandBase. Use model instagram/v1/user-reposts with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

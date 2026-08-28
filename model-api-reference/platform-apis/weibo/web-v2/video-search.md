@@ -1,6 +1,6 @@
 ---
 title: "Weibo video search (hot/all) API Reference"
-description: "Weibo video search (hot/all) API reference for SandBase. Use model weibo/web-v2/video-search with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Weibo video search (hot/all) API reference for SandBase. Use model weibo/web-v2/video-search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Fetch content word details API Reference"
-description: "Fetch content word details API reference for SandBase. Use model douyin/billboard/hot-total-hot-word-detail-list with /v1/run; view request fields, examples, capabilit."
+description: "Fetch content word details API reference for SandBase. Use model douyin/billboard/hot-total-hot-word-detail-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

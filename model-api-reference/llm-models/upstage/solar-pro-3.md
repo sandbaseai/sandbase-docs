@@ -1,6 +1,6 @@
 ---
 title: "Solar Pro 3 API Reference"
-description: "Solar Pro 3 API reference for SandBase. Use model upstage/solar-pro-3 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Solar Pro 3 API reference for SandBase. Use model upstage/solar-pro-3 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/upstage/solar-pro-3"

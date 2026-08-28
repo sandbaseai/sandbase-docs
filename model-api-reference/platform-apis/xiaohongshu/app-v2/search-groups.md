@@ -1,6 +1,6 @@
 ---
 title: "Search groups API Reference"
-description: "Search groups API reference for SandBase. Use model xiaohongshu/app-v2/search-groups with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search groups API reference for SandBase. Use model xiaohongshu/app-v2/search-groups with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

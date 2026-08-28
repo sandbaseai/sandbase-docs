@@ -1,6 +1,6 @@
 ---
 title: "Creatify Aurora API Reference"
-description: "Creatify Aurora API reference for SandBase. Use model creatify/aurora with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Creatify Aurora API reference for SandBase. Use model creatify/aurora with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/creatify/aurora"

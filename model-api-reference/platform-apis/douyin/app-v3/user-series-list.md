@@ -1,6 +1,6 @@
 ---
 title: "Get user series list API Reference"
-description: "Get user series list API reference for SandBase. Use model douyin/app-v3/user-series-list with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user series list API reference for SandBase. Use model douyin/app-v3/user-series-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Bria GenFill API Reference"
-description: "Bria GenFill API reference for SandBase. Use model bria/genfill with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Bria GenFill API reference for SandBase. Use model bria/genfill with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bria/genfill"

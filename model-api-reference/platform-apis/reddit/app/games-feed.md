@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP Games Feed API Reference"
-description: "Fetch Reddit APP Games Feed API reference for SandBase. Use model reddit/app/games-feed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch Reddit APP Games Feed API reference for SandBase. Use model reddit/app/games-feed with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

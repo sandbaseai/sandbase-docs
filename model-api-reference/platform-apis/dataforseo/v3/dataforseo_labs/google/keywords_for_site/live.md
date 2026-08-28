@@ -1,6 +1,6 @@
 ---
 title: "Labs Google Keywords for Site API Reference"
-description: "Labs Google Keywords for Site API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/keywords_for_site/live with /v1/run; view request fields, exam."
+description: "SandBase API reference for model dataforseo/v3/dataforseo_labs/google/keywords_for_site/live. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

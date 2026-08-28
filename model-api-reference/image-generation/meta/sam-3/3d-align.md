@@ -1,6 +1,6 @@
 ---
 title: "SAM 3 3D Align API Reference"
-description: "SAM 3 3D Align API reference for SandBase. Use model meta/sam-3/3d-align with /v1/run; view request fields, examples, capabilities, and response format."
+description: "SAM 3 3D Align API reference for SandBase. Use model meta/sam-3/3d-align with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/meta/sam-3/3d-align"

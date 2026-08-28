@@ -1,6 +1,6 @@
 ---
 title: "Fetch single video by… — Kuaishou One Video By Url API"
-description: "Fetch single video by URL API reference for SandBase. Use model kuaishou/app/one-video-by-url with /v1/run; see request fields, examples, and response details."
+description: "SandBase API reference for model kuaishou/app/one-video-by-url. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

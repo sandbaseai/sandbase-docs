@@ -1,6 +1,6 @@
 ---
 title: "Get single post API Reference"
-description: "Get single post API reference for SandBase. Use model telegram/web/post-detail with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get single post API reference for SandBase. Use model telegram/web/post-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Arcee AI: Spotlight API Reference"
-description: "Arcee AI: Spotlight API reference for SandBase. Use model arcee-ai/spotlight with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Arcee AI: Spotlight API reference for SandBase. Use model arcee-ai/spotlight with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/arcee-ai/spotlight"

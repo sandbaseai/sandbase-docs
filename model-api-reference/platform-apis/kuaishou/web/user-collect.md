@@ -1,6 +1,6 @@
 ---
 title: "Fetch user collect API Reference"
-description: "Fetch user collect API reference for SandBase. Use model kuaishou/web/user-collect with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Fetch user collect API reference for SandBase. Use model kuaishou/web/user-collect with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

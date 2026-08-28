@@ -1,6 +1,6 @@
 ---
 title: "Get location… — Instagram Location Posts API"
-description: "Get location posts API reference for SandBase. Use model instagram/v2/location-posts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get location… — Instagram Location Posts API API reference for SandBase. Use model instagram/v2/location-posts with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get creator material center config API Reference"
-description: "Get creator material center config API reference for SandBase. Use model douyin/creator/creator-material-center-config with /v1/run; view request fields, examples, cap."
+description: "Get creator material center config API reference for SandBase. Use model douyin/creator/creator-material-center-config with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Topaz Video Upscale API Reference"
-description: "Topaz Video Upscale API reference for SandBase. Use model topaz/upscale/video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Topaz Video Upscale API reference for SandBase. Use model topaz/upscale/video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/topaz/upscale/video"

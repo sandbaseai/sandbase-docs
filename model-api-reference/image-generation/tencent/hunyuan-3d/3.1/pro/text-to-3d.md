@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan 3D 3.1 Pro Text to 3D API Reference"
-description: "Hunyuan 3D 3.1 Pro Text to 3D API reference for SandBase. Use model tencent/hunyuan-3d/3.1/pro/text-to-3d with /v1/run; view request fields, examples, capabilities, an."
+description: "Hunyuan 3D 3.1 Pro Text to 3D API reference for SandBase. Use model tencent/hunyuan-3d/3.1/pro/text-to-3d with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/tencent/hunyuan-3d/3.1/pro/text-to-3d"

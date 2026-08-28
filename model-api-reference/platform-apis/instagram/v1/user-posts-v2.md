@@ -1,6 +1,6 @@
 ---
 title: "Get user posts list V2 API Reference"
-description: "Get user posts list V2 API reference for SandBase. Use model instagram/v1/user-posts-v2 with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user posts list V2 API reference for SandBase. Use model instagram/v1/user-posts-v2 with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

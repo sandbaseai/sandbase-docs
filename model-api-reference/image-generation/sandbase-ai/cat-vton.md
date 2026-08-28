@@ -1,6 +1,6 @@
 ---
 title: "try-on API Reference"
-description: "try-on API reference for SandBase. Use model sandbase-ai/cat-vton with /v1/run; view request fields, examples, capabilities, and response format."
+description: "try-on API reference for SandBase. Use model sandbase-ai/cat-vton with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/sandbase-ai/cat-vton"

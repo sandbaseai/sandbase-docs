@@ -1,6 +1,6 @@
 ---
 title: "YouTube Transcript API Reference"
-description: "YouTube Transcript API reference for SandBase. Use model agentbody/youtube-transcript with /v1/run; view request fields, examples, capabilities, and response format."
+description: "YouTube Transcript API reference for SandBase. Use model agentbody/youtube-transcript with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

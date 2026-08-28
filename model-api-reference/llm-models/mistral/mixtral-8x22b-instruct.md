@@ -1,6 +1,6 @@
 ---
 title: "Mixtral 8x22B Instruct API Reference"
-description: "Mixtral 8x22B Instruct API reference for SandBase. Use model mistral/mixtral-8x22b-instruct with /v1/chat/completions; view request fields, examples, capabilities, and."
+description: "Mixtral 8x22B Instruct API reference for SandBase. Use model mistral/mixtral-8x22b-instruct with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/mixtral-8x22b-instruct"

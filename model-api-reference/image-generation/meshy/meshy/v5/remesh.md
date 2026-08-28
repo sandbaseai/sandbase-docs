@@ -1,6 +1,6 @@
 ---
 title: "Meshy 5 Remesh API Reference"
-description: "Meshy 5 Remesh API reference for SandBase. Use model meshy/meshy/v5/remesh with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Meshy 5 Remesh API reference for SandBase. Use model meshy/meshy/v5/remesh with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/meshy/meshy/v5/remesh"

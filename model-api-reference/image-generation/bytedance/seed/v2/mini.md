@@ -1,6 +1,6 @@
 ---
 title: "Bytedance Seed 2.0 Mini API Reference"
-description: "Bytedance Seed 2.0 Mini API reference for SandBase. Use model bytedance/seed/v2/mini with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Bytedance Seed 2.0 Mini API reference for SandBase. Use model bytedance/seed/v2/mini with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/bytedance/seed/v2/mini"

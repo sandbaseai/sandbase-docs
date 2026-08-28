@@ -1,6 +1,6 @@
 ---
 title: "PixVerse V3.5 Effects API Reference"
-description: "PixVerse V3.5 Effects API reference for SandBase. Use model pixverse/v3.5/effects with /v1/run; view request fields, examples, capabilities, and response format."
+description: "PixVerse V3.5 Effects API reference for SandBase. Use model pixverse/v3.5/effects with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/pixverse/v3.5/effects"

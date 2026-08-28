@@ -1,6 +1,6 @@
 ---
 title: "Get WeChat MP Article Stats API Reference"
-description: "Get WeChat MP Article Stats API reference for SandBase. Use model wechat-mp/v2/article-stats with /v1/run; view request fields, examples, capabilities, and response fo."
+description: "Get WeChat MP Article Stats API reference for SandBase. Use model wechat-mp/v2/article-stats with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Kling Video O1 — O1 Standard Image To Video API"
-description: "Kling Video O1 Standard API reference for SandBase. Use model kwaivgi/kling-video/o1/standard/image-to-video with /v1/run; view request fields, examples, capabilities,."
+description: "SandBase API reference for model kwaivgi/kling-video/o1/standard/image-to-video. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/kwaivgi/kling-video/o1/standard/image-to-video"

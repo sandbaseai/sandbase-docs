@@ -1,6 +1,6 @@
 ---
 title: "Kling TTS API Reference"
-description: "Kling TTS API reference for SandBase. Use model kwaivgi/kling-tts with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Kling TTS API reference for SandBase. Use model kwaivgi/kling-tts with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "audio/kwaivgi/kling-tts"

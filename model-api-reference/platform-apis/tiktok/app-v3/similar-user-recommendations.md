@@ -1,6 +1,6 @@
 ---
 title: "Similar User Recommendations API Reference"
-description: "Similar User Recommendations API reference for SandBase. Use model tiktok/app-v3/similar-user-recommendations with /v1/run; view request fields, examples, capabilities."
+description: "Similar User Recommendations API reference for SandBase. Use model tiktok/app-v3/similar-user-recommendations with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

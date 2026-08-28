@@ -1,6 +1,6 @@
 ---
 title: "MythoMax 13B API Reference"
-description: "MythoMax 13B API reference for SandBase. Use model gryphe/mythomax-l2-13b with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "MythoMax 13B API reference for SandBase. Use model gryphe/mythomax-l2-13b with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/gryphe/mythomax-l2-13b"

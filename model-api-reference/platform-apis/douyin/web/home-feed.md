@@ -1,6 +1,6 @@
 ---
 title: "Get home feed data API Reference"
-description: "Get home feed data API reference for SandBase. Use model douyin/web/home-feed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get home feed data API reference for SandBase. Use model douyin/web/home-feed with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

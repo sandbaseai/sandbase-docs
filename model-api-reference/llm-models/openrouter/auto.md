@@ -1,6 +1,6 @@
 ---
 title: "Auto Router API Reference"
-description: "Auto Router API reference for SandBase. Use model openrouter/auto with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Auto Router API reference for SandBase. Use model openrouter/auto with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/openrouter/auto"

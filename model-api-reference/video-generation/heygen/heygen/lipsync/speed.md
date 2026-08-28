@@ -1,6 +1,6 @@
 ---
 title: "HeyGen Lipsync Speed API Reference"
-description: "HeyGen Lipsync Speed API reference for SandBase. Use model heygen/heygen/lipsync/speed with /v1/run; view request fields, examples, capabilities, and response format."
+description: "HeyGen Lipsync Speed API reference for SandBase. Use model heygen/heygen/lipsync/speed with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/heygen/heygen/lipsync/speed"

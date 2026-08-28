@@ -1,6 +1,6 @@
 ---
 title: "Llama 3.3 Nemotron Super 49B V1.5 API Reference"
-description: "Llama 3.3 Nemotron Super 49B V1.5 API reference for SandBase. Use model nvidia/llama-3.3-nemotron-super-49b-v1.5 with /v1/chat/completions; view request fields, exampl."
+description: "SandBase API reference for model nvidia/llama-3.3-nemotron-super-49b-v1.5. Call /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/nvidia/llama-3.3-nemotron-super-49b-v1.5"

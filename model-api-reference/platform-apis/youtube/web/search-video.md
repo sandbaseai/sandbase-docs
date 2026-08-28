@@ -1,6 +1,6 @@
 ---
 title: "Search… — Youtube Search Video API"
-description: "Search video API reference for SandBase. Use model youtube/web/search-video with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search… — Youtube Search Video API API reference for SandBase. Use model youtube/web/search-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

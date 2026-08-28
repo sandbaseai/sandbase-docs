@@ -1,6 +1,6 @@
 ---
 title: "Get user… — Instagram V3 User Highlights API"
-description: "Get user highlights API reference for SandBase. Use model instagram/v3/user-highlights with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user… — Instagram V3 User Highlights API API reference for SandBase. Use model instagram/v3/user-highlights with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

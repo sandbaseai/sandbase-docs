@@ -1,6 +1,6 @@
 ---
 title: "Get post IDs in batch through sharing links API Reference"
-description: "Get post IDs in batch through sharing links API reference for SandBase. Use model lemon8/app/item-ids with /v1/run; view request fields, examples, capabilities, and re."
+description: "Get post IDs in batch through sharing links API reference for SandBase. Use model lemon8/app/item-ids with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

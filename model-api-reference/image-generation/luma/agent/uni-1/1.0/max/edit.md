@@ -1,6 +1,6 @@
 ---
 title: "Luma Uni-1 Edit Max API Reference"
-description: "Luma Uni-1 Edit Max API reference for SandBase. Use model luma/agent/uni-1/1.0/max/edit with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Luma Uni-1 Edit Max API reference for SandBase. Use model luma/agent/uni-1/1.0/max/edit with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/luma/agent/uni-1/1.0/max/edit"

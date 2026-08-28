@@ -1,6 +1,6 @@
 ---
 title: "Search posts in a channel API Reference"
-description: "Search posts in a channel API reference for SandBase. Use model telegram/web/channel-search with /v1/run; view request fields, examples, capabilities, and response for."
+description: "Search posts in a channel API reference for SandBase. Use model telegram/web/channel-search with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

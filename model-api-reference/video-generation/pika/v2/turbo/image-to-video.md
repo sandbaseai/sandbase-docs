@@ -1,6 +1,6 @@
 ---
 title: "Pika V2 Image to Video Turbo API Reference"
-description: "Pika V2 Image to Video Turbo API reference for SandBase. Use model pika/v2/turbo/image-to-video with /v1/run; view request fields, examples, capabilities, and response."
+description: "Pika V2 Image to Video Turbo API reference for SandBase. Use model pika/v2/turbo/image-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/pika/v2/turbo/image-to-video"

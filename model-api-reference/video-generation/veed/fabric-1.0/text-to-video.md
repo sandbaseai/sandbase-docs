@@ -1,6 +1,6 @@
 ---
 title: "VEED Fabric 1.0 Text to Video API Reference"
-description: "VEED Fabric 1.0 Text to Video API reference for SandBase. Use model veed/fabric-1.0/text-to-video with /v1/run; see request fields, examples, and response details."
+description: "VEED Fabric 1.0 Text to Video API reference for SandBase. Use model veed/fabric-1.0/text-to-video with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "video/veed/fabric-1.0/text-to-video"

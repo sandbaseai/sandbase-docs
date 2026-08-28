@@ -1,6 +1,6 @@
 ---
 title: "Grok Code Fast 1 API Reference"
-description: "Grok Code Fast 1 API reference for SandBase. Use model x-ai/grok-code-fast-1 with /v1/chat/completions; view request fields, examples, capabilities, and response format."
+description: "Grok Code Fast 1 API reference for SandBase. Use model x-ai/grok-code-fast-1 with /v1/chat/completions; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "llm/x-ai/grok-code-fast-1"

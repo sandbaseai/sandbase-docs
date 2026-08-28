@@ -1,6 +1,6 @@
 ---
 title: "Search Anchor API Reference"
-description: "Search Anchor API reference for SandBase. Use model douyin/xingtu-v2/search-anchor with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Search Anchor API reference for SandBase. Use model douyin/xingtu-v2/search-anchor with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

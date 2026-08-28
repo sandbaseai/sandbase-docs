@@ -1,6 +1,6 @@
 ---
 title: "Kuaishou shopping top list API Reference"
-description: "Kuaishou shopping top list API reference for SandBase. Use model kuaishou/app/shopping-top-list with /v1/run; view request fields, examples, capabilities, and response."
+description: "Kuaishou shopping top list API reference for SandBase. Use model kuaishou/app/shopping-top-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

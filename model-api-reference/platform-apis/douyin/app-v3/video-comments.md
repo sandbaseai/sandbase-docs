@@ -1,6 +1,6 @@
 ---
 title: "Get single video comments… — Douyin Video Comments API"
-description: "Get single video comments data API reference for SandBase. Use model douyin/app-v3/video-comments with /v1/run; see request fields, examples, and response details."
+description: "Get single video comments… — Douyin Video Comments API API reference for SandBase. Use model douyin/app-v3/video-comments with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Pinterest Pin Details API Reference"
-description: "Pinterest Pin Details API reference for SandBase. Use model pinterest/pin with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Pinterest Pin Details API reference for SandBase. Use model pinterest/pin with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

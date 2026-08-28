@@ -1,6 +1,6 @@
 ---
 title: "Get hot search board detail API Reference"
-description: "Get hot search board detail API reference for SandBase. Use model pipixia/app/hot-search-board-detail with /v1/run; view request fields, examples, capabilities, and re."
+description: "Get hot search board detail API reference for SandBase. Use model pipixia/app/hot-search-board-detail with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get user following… — Weibo User Following API"
-description: "Get user following list API reference for SandBase. Use model weibo/web-v2/user-following with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get user following… — Weibo User Following API API reference for SandBase. Use model weibo/web-v2/user-following with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

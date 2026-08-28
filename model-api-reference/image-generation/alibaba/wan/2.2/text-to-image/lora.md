@@ -1,6 +1,6 @@
 ---
 title: "Wan 2.2 Text to Image LoRA API Reference"
-description: "Wan 2.2 Text to Image LoRA API reference for SandBase. Use model alibaba/wan/2.2/text-to-image/lora with /v1/run; view request fields, examples, capabilities, and resp."
+description: "Wan 2.2 Text to Image LoRA API reference for SandBase. Use model alibaba/wan/2.2/text-to-image/lora with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/wan/2.2/text-to-image/lora"

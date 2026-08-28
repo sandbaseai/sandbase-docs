@@ -1,6 +1,6 @@
 ---
 title: "Webcast id to room id API Reference"
-description: "Webcast id to room id API reference for SandBase. Use model douyin/web/webcast-id-2-room-id with /v1/run; view request fields, examples, capabilities, and response for."
+description: "Webcast id to room id API reference for SandBase. Use model douyin/web/webcast-id-2-room-id with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

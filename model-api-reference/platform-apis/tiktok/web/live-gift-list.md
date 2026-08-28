@@ -1,6 +1,6 @@
 ---
 title: "Get live room gift list API Reference"
-description: "Get live room gift list API reference for SandBase. Use model tiktok/web/live-gift-list with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Get live room gift list API reference for SandBase. Use model tiktok/web/live-gift-list with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

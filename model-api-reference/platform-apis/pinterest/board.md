@@ -1,6 +1,6 @@
 ---
 title: "Pinterest Board API Reference"
-description: "Pinterest Board API reference for SandBase. Use model pinterest/board with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Pinterest Board API reference for SandBase. Use model pinterest/board with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

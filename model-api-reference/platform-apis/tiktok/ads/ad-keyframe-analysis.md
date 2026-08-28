@@ -1,6 +1,6 @@
 ---
 title: "Get ad keyframe analysis API Reference"
-description: "Get ad keyframe analysis API reference for SandBase. Use model tiktok/ads/ad-keyframe-analysis with /v1/run; view request fields, examples, capabilities, and response;."
+description: "Get ad keyframe analysis API reference for SandBase. Use model tiktok/ads/ad-keyframe-analysis with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

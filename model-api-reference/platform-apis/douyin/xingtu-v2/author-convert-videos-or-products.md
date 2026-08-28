@@ -1,6 +1,6 @@
 ---
 title: "Get Author Convert Videos or Products API Reference"
-description: "Get Author Convert Videos or Products API reference for SandBase. Use model douyin/xingtu-v2/author-convert-videos-or-products with /v1/run; view request fields, examp."
+description: "SandBase API reference for model douyin/xingtu-v2/author-convert-videos-or-products. Call /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

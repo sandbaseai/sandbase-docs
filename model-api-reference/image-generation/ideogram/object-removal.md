@@ -1,6 +1,6 @@
 ---
 title: "Ideogram Object Removal API Reference"
-description: "Ideogram Object Removal API reference for SandBase. Use model ideogram/object-removal with /v1/run; view request fields, examples, capabilities, and response format."
+description: "Ideogram Object Removal API reference for SandBase. Use model ideogram/object-removal with /v1/run; see request and response examples."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram/object-removal"

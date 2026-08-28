@@ -1,6 +1,6 @@
 ---
 title: "Register device for TikTok Web API Reference"
-description: "Register device for TikTok Web API reference for SandBase. Use model tiktok/web/device-register with /v1/run; view request fields, examples, capabilities, and response."
+description: "Register device for TikTok Web API reference for SandBase. Use model tiktok/web/device-register with /v1/run; see request and response examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"
