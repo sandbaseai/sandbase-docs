@@ -7,6 +7,8 @@ description: Find current SandBase model identifiers, capabilities, request sche
 
 SandBase's model catalog changes frequently. Use the live catalog or the generated Model API Reference instead of relying on a static model list.
 
+The live catalog is the availability source of truth. A newly enabled model can appear there before its generated reference page is published; use the catalog response to confirm availability, then follow the model-specific page once it becomes available for the complete request schema.
+
 ::: tip Current source of truth
 Browse [Models](https://www.sandbase.ai/models) for current availability and pricing. For production integrations, call [`GET /v1/models`](/api-reference/models/list) immediately before selecting or validating a model.
 :::
