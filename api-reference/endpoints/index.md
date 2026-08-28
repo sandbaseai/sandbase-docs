@@ -15,7 +15,7 @@ Service invocation accepts an optional `session_id`. When omitted, SandBase crea
 
 | Method | Path | Purpose |
 |---|---|---|
-| `POST` | `/v1/endpoints` | Create a Service from an existing Agent and Environment, or from a declarative runtime definition. |
+| `POST` | `/v1/endpoints` | Create a Service from an existing Agent or from a declarative runtime definition. |
 | `GET` | `/v1/endpoints` | List Services with cursor pagination. |
 | `GET` | `/v1/endpoints/{endpoint_id}` | Get a Service. |
 | `PATCH` or `POST` | `/v1/endpoints/{endpoint_id}` | Update an advanced Service. Declarative definitions are immutable. |

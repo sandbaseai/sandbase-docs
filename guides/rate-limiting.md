@@ -1,201 +1,96 @@
 ---
 title: Rate limits
-description: Understanding SandBase rate limits — headers, handling 429 responses, and best practices for high-throughput usage.
+description: Handle SandBase API rate limits safely with bounded retries, jitter, queues, and idempotency-aware request handling.
 ---
 
 # Rate limits
 
-SandBase enforces rate limits to ensure fair usage and protect upstream providers from overload. Limiting is applied as a 1-minute sliding window across two layers — an optional per-key request cap and a platform-wide global cap — and a request must pass both. Understanding this helps you build resilient applications.
+SandBase can limit requests per API key and across the platform. Upstream model providers can also return their own
+`429 Too Many Requests` responses. Limits may differ by account, key, endpoint, model, and provider, so do not hardcode
+a quota unless SandBase has assigned one to your workload.
 
-::: warning
-SandBase does **not** currently emit `Retry-After` or `X-RateLimit-*` headers. You cannot read your remaining quota from response headers — handle limits reactively with backoff, and smooth your request rate proactively. The header-driven examples some providers offer do not apply here.
-:::
+## Handle a 429 response
 
-## Handling 429 Responses
-
-When you exceed a rate limit, SandBase aborts the request with HTTP 429. On the `/v1/*` API the body is a flat error object (no `Retry-After` header is sent):
+Platform-generated `/v1/*` rate-limit responses use a flat error body:
 
 ```http
 HTTP/1.1 429 Too Many Requests
 Content-Type: application/json
 
-{
-  "error": "API key rate limit exceeded"
-}
+{"error":"API key rate limit exceeded"}
 ```
 
-The message is `"API key rate limit exceeded"` for the per-key cap or `"global rate limit exceeded"` for the platform-wide cap.
+The message can instead report a platform-wide limit. A provider-originated response may use the compatible endpoint's
+error shape and may include provider rate-limit headers.
 
-### Basic Retry Logic
+`Retry-After` and remaining-quota headers are not guaranteed. If `Retry-After` is present, honor it. Otherwise, use
+exponential backoff with jitter and a maximum attempt count.
 
-::: code-group
-
-```python [Python]
-import time
+```python
+import os
 import random
+import time
+
 from openai import OpenAI, RateLimitError
 
 client = OpenAI(
     base_url="https://api.sandbase.ai/v1",
-    api_key="sk-your-key",
-    max_retries=3  # SDK handles 429 automatically
+    api_key=os.environ["SANDBASE_API_KEY"],
+    max_retries=0,
 )
 
-# The SDK automatically retries on 429 with exponential backoff.
-# For manual control — since no Retry-After header is sent, use
-# exponential backoff with jitter:
-def handle_rate_limit(func, *args, max_attempts=5, **kwargs):
-    for attempt in range(max_attempts):
+def create_with_backoff(**request):
+    for attempt in range(5):
         try:
-            return func(*args, **kwargs)
+            return client.chat.completions.create(**request)
         except RateLimitError:
-            wait = min(2 ** attempt + random.random(), 30)
-            print(f"Rate limited. Backing off {wait:.1f}s...")
-            time.sleep(wait)
-    raise RuntimeError("Exceeded max retry attempts")
+            if attempt == 4:
+                raise
+            delay = min(2 ** attempt, 30) + random.random()
+            time.sleep(delay)
 ```
 
-```javascript [JavaScript]
-import OpenAI from 'openai';
+The OpenAI SDK also supports built-in retries through `max_retries`. Choose either SDK retries or an application retry
+loop deliberately so retries do not multiply across layers.
 
-const client = new OpenAI({
-  baseURL: 'https://api.sandbase.ai/v1',
-  apiKey: 'sk-your-key',
-  maxRetries: 3, // SDK handles 429 automatically
-});
+## Retry only safe operations
 
-// For manual control — no Retry-After header is sent, so use
-// exponential backoff with jitter:
-async function handleRateLimit(fn, maxAttempts = 5) {
-  for (let attempt = 0; attempt < maxAttempts; attempt++) {
-    try {
-      return await fn();
-    } catch (error) {
-      if (error.status === 429) {
-        const wait = Math.min(2 ** attempt + Math.random(), 30);
-        console.log(`Rate limited. Backing off ${wait.toFixed(1)}s...`);
-        await new Promise(r => setTimeout(r, wait * 1000));
-      } else {
-        throw error;
-      }
-    }
-  }
-  throw new Error('Exceeded max retry attempts');
-}
-```
+A repeated inference request can create a second generation and incur additional cost. Retry it only when your
+application accepts regeneration. Do not automatically retry a state-changing request unless the operation documents
+idempotency or your application can prove the first attempt did not succeed.
 
-:::
+For streaming requests, a `429` normally arrives before the stream begins. Once bytes have arrived, treat a disconnect
+as an interrupted generation rather than assuming a rate-limit error. Preserve or discard partial output according to
+your product requirements; starting again creates a new generation.
 
-## Proactive Rate Limit Management
+## Control throughput
 
-Because SandBase does not expose remaining-quota headers, you cannot read your live quota from responses. Instead, throttle proactively on the client side by capping your own send rate below the limit you've been allocated:
-
-```python
-import time
-import threading
-
-class RateLimiter:
-    """Client-side token-bucket limiter to stay under a known RPM cap."""
-
-    def __init__(self, max_rpm: int):
-        self.min_interval = 60.0 / max_rpm
-        self._lock = threading.Lock()
-        self._last = 0.0
-
-    def acquire(self):
-        with self._lock:
-            now = time.monotonic()
-            wait = self._last + self.min_interval - now
-            if wait > 0:
-                time.sleep(wait)
-            self._last = time.monotonic()
-
-# Set this to the RPM you've been allocated (global default or your per-key cap).
-limiter = RateLimiter(max_rpm=120)
-
-def make_request(messages):
-    limiter.acquire()
-    return client.chat.completions.create(
-        model="deepseek/deepseek-v4-flash",
-        messages=messages
-    )
-```
-
-## Best Practices for High Throughput
-
-### 1. Use Request Queuing
-
-For batch workloads, queue requests and process them at a controlled rate:
+- Bound concurrency instead of releasing an unbounded batch at once.
+- Queue bursty work and smooth the send rate.
+- Avoid duplicate requests and cache reusable results when privacy and freshness requirements allow it.
+- Use separate keys for ownership, spending controls, and revocation—not to bypass platform limits.
+- Record the endpoint, model, HTTP status, and sanitized error body for troubleshooting.
+- Contact SandBase support when a workload needs an assigned or higher capacity limit.
 
 ```python
 import asyncio
-from asyncio import Semaphore
 
-async def process_batch(prompts, max_concurrent=10):
-    """Process multiple prompts with concurrency control."""
-    semaphore = Semaphore(max_concurrent)
-    
-    async def process_one(prompt):
-        async with semaphore:
-            response = await async_client.chat.completions.create(
-                model="deepseek/deepseek-v4-flash",
-                messages=[{"role": "user", "content": prompt}]
-            )
-            return response.choices[0].message.content
-    
-    tasks = [process_one(p) for p in prompts]
-    return await asyncio.gather(*tasks, return_exceptions=True)
+semaphore = asyncio.Semaphore(8)
+
+async def run_one(client, prompt):
+    async with semaphore:
+        return await client.chat.completions.create(
+            model="deepseek/deepseek-v4-flash",
+            messages=[{"role": "user", "content": prompt}],
+        )
 ```
 
-### 2. Keep Requests Purposeful
+Concurrency is not the same as requests per minute. Tune both against observed latency and the capacity assigned to
+your application.
 
-Request limits count calls, not the model's token price. Avoid duplicate work, collapse equivalent application requests when safe, and cache reusable results according to your data-freshness and privacy requirements. Choose smaller models to reduce latency and cost when they satisfy the task, but do not expect that choice to increase the documented request limit.
+## Related guidance
 
-### 3. Plan Capacity Explicitly
-
-Multiple API keys do not bypass the platform-wide limit and add credential-management risk. Smooth bursts with a queue, bound concurrency and retries, and contact SandBase support when a workload needs a guaranteed or higher limit. Use separate keys to isolate applications and spending controls, not to multiply throughput.
-
-### 4. Cache Repeated Requests
-
-Avoid hitting rate limits by caching responses for identical prompts:
-
-```python
-from functools import lru_cache
-import hashlib
-import json
-
-def cache_key(messages):
-    return hashlib.sha256(json.dumps(messages, sort_keys=True).encode()).hexdigest()
-
-response_cache = {}
-
-def cached_completion(messages, model="deepseek/deepseek-v4-flash"):
-    key = cache_key(messages)
-    if key in response_cache:
-        return response_cache[key]
-    
-    response = client.chat.completions.create(model=model, messages=messages)
-    response_cache[key] = response
-    return response
-```
-
-## Rate Limit Errors in Streaming
-
-Rate limits can also affect streaming requests. If you're rate limited mid-stream (rare), the stream will terminate with an error event. Always handle stream interruptions gracefully:
-
-```python
-try:
-    stream = client.chat.completions.create(
-        model="deepseek/deepseek-v4-flash",
-        messages=messages,
-        stream=True
-    )
-    content = ""
-    for chunk in stream:
-        if chunk.choices[0].delta.content:
-            content += chunk.choices[0].delta.content
-except RateLimitError:
-    # Partial content may have been received
-    print(f"Rate limited mid-stream. Received so far: {content[:100]}...")
-    # Retry with the full message (LLM will regenerate)
-```
+- [Error handling](/guides/error-handling)
+- [Streaming](/guides/streaming)
+- [API error reference](/api-reference/errors)
+- [API keys](/getting-started/api-keys)

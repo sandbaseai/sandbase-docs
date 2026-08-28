@@ -26,7 +26,7 @@ A public Agent is a starting point.
 
 Your Agent is the version you own, edit, test, publish as a Service, and schedule.
 
-If you need to change the prompt, tools, model, environment, schedule, or output format, clone the public Agent first.
+If you need to change the prompt, tools, model, credentials, schedule, or output format, clone the public Agent first.
 
 ## Next steps
 

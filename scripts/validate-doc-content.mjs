@@ -43,6 +43,7 @@ const forbidden = [
   [/\/docs\/setup\/cli\b/, 'retired setup alias'],
   [/sandbaseai-cli-\d+\.\d+\.\d+\.tgz/, 'version-pinned CLI archive; use the guided installer'],
   [/\bPlatform Groups?\b/, 'retired Platform Groups product label'],
+  [/^## What are Environments\?$/m, 'internal Environment product navigation'],
   [/\]\(\/store\/models\/?(?:[)#])/, 'duplicate Models page link; use /models/'],
   [/\bNew accounts receive\b[^\n]*\bfree credits\b/i, 'time-sensitive signup credit claim'],
   [/\$\d+(?:\.\d+)?\s+minimum/i, 'time-sensitive minimum payment claim'],
@@ -58,6 +59,14 @@ for (const filename of files) {
   }
   inspected += 1
 }
+
+for (const filename of ['guides/error-handling.md', 'guides/rate-limiting.md', 'guides/streaming.md']) {
+  const source = readFileSync(filename, 'utf8')
+  assert.doesNotMatch(source, /(?:api_key\s*=|apiKey:|Authorization:\s*Bearer)\s*['"]?sk-/i, `${filename} must read API keys from SANDBASE_API_KEY`)
+}
+
+const streamingLines = readFileSync('guides/streaming.md', 'utf8').split('\n').length
+assert.ok(streamingLines < 250, 'Streaming guide must stay focused; move protocol detail to the API reference')
 
 assert.ok(inspected > 0, 'content validation did not inspect any public hand-written pages')
 console.log(`public hand-written content: ok (${inspected} pages)`)

@@ -59,7 +59,7 @@ Models think and generate; APIs fetch data, take actions, or connect external sy
 
 Store Agents are working examples that combine a Model, APIs, Skills, and workflow instructions.
 
-You can inspect and test a public Agent, clone it into your workspace, customize it, and publish or schedule your version. Clone the public Agent first when you need to change its prompt, tools, model, environment, schedule, or output format.
+You can inspect and test a public Agent, clone it into your workspace, customize it, and publish or schedule your version. Clone the public Agent first when you need to change its prompt, tools, model, credentials, schedule, or output format.
 
 ## Skills
 

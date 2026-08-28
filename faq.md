@@ -64,9 +64,9 @@ They do not create Agents from scratch. Build and test the Agent first, then sch
 
 A Session is a persistent Agent interaction and its event history. A Service can create or continue a Session. Each Schedule trigger creates a distinct DeploymentRun (`drun_*`) which links to a new Session when Session creation succeeds.
 
-## What are Environments?
+## How do I give an Agent access to external APIs?
 
-Environments hold private values and runtime settings your Agents need, such as API keys for external tools.
+Add the required values under **Developer → Credentials**, then select those credentials when configuring the Agent's tools. SandBase injects selected values only at runtime, so secrets do not need to appear in prompts or source code.
 
 ## Where do Models live?
 
