@@ -1180,7 +1180,10 @@ function modelReference(model) {
             description: `Model identifier. Set to ${model.name}.`,
             default: model.name,
           },
-          ...schemaFields(model),
+          // The normalized generation schema may also declare `model`; the
+          // reference always adds the canonical model selector above, so do
+          // not render a second conflicting field from provider schemas.
+          ...schemaFields(model).filter((field) => field.name !== 'model'),
         ],
       },
       {
