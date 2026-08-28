@@ -1080,7 +1080,7 @@ function inspectPublishedSources(directory) {
       }
     }
     assert.doesNotMatch(content, /\/(?:v1\/)?sandboxes?(?:\/|\{|:|\b)/i, `${relative} must not expose sandbox API paths`)
-    if (!['api-reference/endpoints/index.md', 'api-reference/endpoints/mcp.md'].includes(relative)) {
+    if (!['api-reference/endpoints/index.md', 'api-reference/endpoints/mcp.md', 'agents/services.md'].includes(relative)) {
       assert.doesNotMatch(content, /\/v1\/endpoints\/[^\s`"']+\/mcp\b/i, `${relative} must not expose Endpoint MCP transport`)
     }
     assert.doesNotMatch(content, /\/v1\/endpoint_runtime_profiles\b/i, `${relative} must not expose Endpoint runtime profiles that reveal MCP transport`)

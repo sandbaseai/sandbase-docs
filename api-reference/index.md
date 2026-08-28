@@ -17,7 +17,7 @@ Chat, image, video, audio, embedding, and model-specific request schemas live in
 |---|---|---|
 | Define reusable behavior | [Agents](/api-reference/agents/) | Create and version an Agent configuration |
 | Run stateful work directly | [Sessions](/api-reference/sessions/) | Exchange persisted input, output, and tool events |
-| Expose an Agent to an application | [Services](/api-reference/endpoints/) | Invoke a stable REST service that creates or continues a Session |
+| Expose an Agent to an application | [Services](/api-reference/endpoints/) | Invoke a stable REST, MCP, or ACP Service that creates or continues a Session |
 | Run work later or repeatedly | [Schedules](/api-reference/deployments/) | Trigger a Schedule run and inspect its linked Session |
 | Reuse instruction bundles | [Skills](/api-reference/skills/) | Create and attach versioned Skills to Agents |
 | Supply private integration values | [Credentials](/api-reference/credentials/) | Keep secrets out of Agent instructions and request bodies |
