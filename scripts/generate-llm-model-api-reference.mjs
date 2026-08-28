@@ -343,6 +343,11 @@ function cleanDescription(model) {
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\*\*/g, '')
     .replace(/\brespone_format\b/g, 'response_format')
+    // Registry descriptions are often reused across releases and may call
+    // an older model “latest” or “newest”. Keep generated SEO copy factual
+    // without silently endorsing time-sensitive vendor marketing language.
+    .replace(/\b(?:is|was)\s+OpenAI's\s+(?:latest|newest)\s+AI\s+model\b/gi, 'is an OpenAI model')
+    .replace(/\bOpenAI's\s+(?:latest|newest)\s+model\b/gi, "OpenAI's model")
     .replace(/\s+/g, ' ')
     .trim()
 }
