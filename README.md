@@ -22,6 +22,8 @@
 
 SandBase helps developers build AI applications and Agent workflows without maintaining a separate integration for every model, media generator, search provider, or data API.
 
+If these docs help you ship an integration, consider [starring the repository](https://github.com/sandbaseai/sandbase-docs) and sharing a redacted example in the [issue tracker](https://github.com/sandbaseai/sandbase-docs/issues) so other developers can reproduce it.
+
 Use the smallest surface that fits the job:
 
 | Need | Start with |
