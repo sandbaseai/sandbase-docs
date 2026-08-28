@@ -1,5 +1,5 @@
 ---
-title: "Get promotable item list (with like & comment counts) API Reference"
+title: "Get promotable item list (with like & comment counts… API Ref"
 description: "Get promotable item list (with like & comment counts) API reference for SandBase. Use model douyin/douplus/promotable-item-list with /v1/run; view request fields, exam..."
 aside: false
 outline: false

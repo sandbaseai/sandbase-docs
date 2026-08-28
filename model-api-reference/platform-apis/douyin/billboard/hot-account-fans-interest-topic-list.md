@@ -1,5 +1,5 @@
 ---
-title: "Fetch fan interest topic in the last 3 days 10 topics API Reference"
+title: "Fetch fan interest topic in the last 3 days 10 topic… API Ref"
 description: "Fetch fan interest topic in the last 3 days 10 topics API reference for SandBase. Use model douyin/billboard/hot-account-fans-interest-topic-list with /v1/run; view re..."
 aside: false
 outline: false

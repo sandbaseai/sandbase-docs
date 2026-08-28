@@ -1,5 +1,5 @@
 ---
-title: "Get single video data V3 (support country parameter) API Reference"
+title: "Get single video data V3 (support country parameter… API Ref"
 description: "Get single video data V3 (support country parameter) API reference for SandBase. Use model tiktok/app-v3/one-video-v3 with /v1/run; view request fields, examples, capa..."
 aside: false
 outline: false

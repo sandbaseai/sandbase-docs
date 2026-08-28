@@ -1,5 +1,5 @@
 ---
-title: "Get single video data V3 (No copyright restrictions) API Reference"
+title: "Get single video data V3 (No copyright restrictions… API Ref"
 description: "Get single video data V3 (No copyright restrictions) API reference for SandBase. Use model douyin/app-v3/one-video-v3 with /v1/run; view request fields, examples, capa..."
 aside: false
 outline: false

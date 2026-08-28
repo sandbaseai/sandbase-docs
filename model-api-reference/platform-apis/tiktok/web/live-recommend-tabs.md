@@ -1,5 +1,5 @@
 ---
-title: "Get available tags for live room homepage recommendation API Reference"
+title: "Get available tags for live room homepage recommendatio… API Ref"
 description: "Get available tags for live room homepage recommendation API reference for SandBase. Use model tiktok/web/live-recommend-tabs with /v1/run; view request fields, exampl..."
 aside: false
 outline: false

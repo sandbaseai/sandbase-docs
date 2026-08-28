@@ -283,6 +283,13 @@ function cleanTitle(model) {
     : model.display_name
 }
 
+function seoTitle(model) {
+  const title = `${cleanTitle(model)} API Reference`
+  if (title.length <= 65) return title
+  const suffix = '… API Ref'
+  return `${cleanTitle(model).slice(0, 65 - suffix.length).trimEnd()}${suffix}`
+}
+
 function cleanDescription(model) {
   return String(model.description ?? '')
     .split(/\n\s*\n/)[0]
@@ -1388,7 +1395,7 @@ for (const model of category.models) {
     pagePath,
     [
       '---',
-      `title: ${yamlString(`${cleanTitle(model)} API Reference`)}`,
+      `title: ${yamlString(seoTitle(model))}`,
       `description: ${yamlString(seoDescription(model, protocol, category))}`,
       'aside: false',
       'outline: false',

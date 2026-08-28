@@ -1,5 +1,5 @@
 ---
-title: "Generate TikTok share link, call TikTok APP, and jump to the specified keyword search result API Reference"
+title: "Generate TikTok share link, call TikTok APP, and jump to… API Ref"
 description: "Generate TikTok share link, call TikTok APP, and jump to the specified keyword search result API reference for SandBase. Use model tiktok/app-v3/open-app-to-keyword-se..."
 aside: false
 outline: false

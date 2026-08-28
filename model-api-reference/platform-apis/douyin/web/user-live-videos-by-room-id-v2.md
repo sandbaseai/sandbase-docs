@@ -1,5 +1,5 @@
 ---
-title: "Gets the live stream data of the specified user by room_id V2 API Reference"
+title: "Gets the live stream data of the specified user by room_… API Ref"
 description: "Gets the live stream data of the specified user by room_id V2 API reference for SandBase. Use model douyin/web/user-live-videos-by-room-id-v2 with /v1/run; view reques..."
 aside: false
 outline: false

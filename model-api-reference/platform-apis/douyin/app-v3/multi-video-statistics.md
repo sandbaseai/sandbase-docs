@@ -1,5 +1,5 @@
 ---
-title: "Get the statistical data of the Post according to the video ID (like count, download count, play count, share count) API Reference"
+title: "Get the statistical data of the Post according to the vi… API Ref"
 description: "Get the statistical data of the Post according to the video ID (like count, download count, play count, share count) API reference for SandBase. Use model douyin/app-v..."
 aside: false
 outline: false

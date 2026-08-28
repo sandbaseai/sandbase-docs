@@ -1,5 +1,5 @@
 ---
-title: "Get information of specified user by sec_user_id (gender, age, live level、brand) API Reference"
+title: "Get information of specified user by sec_user_id (gender… API Ref"
 description: "Get information of specified user by sec_user_id (gender, age, live level、brand) API reference for SandBase. Use model douyin/web/user-profile-v4 with /v1/run; view re..."
 aside: false
 outline: false
