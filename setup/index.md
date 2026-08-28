@@ -47,7 +47,7 @@ The diagnostic checks local configuration and client-specific readback. Always p
 
 ## Manage workspace services
 
-[Workspace Services](https://www.sandbase.ai/console/setup/installed) controls what connected AI tools can discover. It organizes the workspace into Core services, My Custom, and SandBase-maintained Scenarios. My Custom can include Models, APIs, and published Agents selected for the organization.
+[Workspace Services](https://www.sandbase.ai/console/setup/installed) controls what connected AI tools can discover. It organizes the workspace into Core services, My Custom, and SandBase-maintained Scenarios. My Custom can include Models, APIs, and Services selected for the organization.
 
 Changes apply to the organization workspace. Open a new client session or run discovery again after changing the selection.
 

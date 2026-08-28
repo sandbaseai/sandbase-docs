@@ -1,6 +1,6 @@
 ---
 title: Workspace Services
-description: Choose the SandBase Models, APIs, published Agents, and scenarios available to your organization.
+description: Choose the SandBase Models, APIs, Services, and scenarios available to your organization.
 ---
 
 # Workspace Services
@@ -12,7 +12,7 @@ The page has three sections:
 | Section | What it contains |
 |---|---|
 | **Core services** | Trusted foundation capabilities maintained by SandBase |
-| **My Custom** | Models, APIs, and published Agents selected for this organization |
+| **My Custom** | Models, APIs, and Services selected for this organization |
 | **Scenarios** | SandBase-maintained combinations for common workflows |
 
 You can enable or disable a Core service or Scenario, and add or remove organization-specific items in My Custom. Changes affect the organization; connected clients receive the updated selection when they discover tools again.

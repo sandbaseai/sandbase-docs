@@ -37,6 +37,7 @@ const forbidden = [
   [/\bEmbed Configs?\b/i, 'retired Embed Config product'],
   [/\bEndpoints API\b/, 'legacy product label; use Services API'],
   [/\bDeployments API\b/, 'legacy product label; use Schedules API'],
+  [/\bPublished Agents?\b/, 'legacy product label; use Services'],
   [/\bSeedance Native API\b/, 'legacy provider-native API label; use Official Native API'],
   [/openai\/gpt-4o\b/, 'stale hand-written example model'],
   [/anthropic\/claude-sonnet-4(?:-|\b)/, 'stale hand-written example model'],
@@ -105,7 +106,7 @@ assert.match(agentOverview, /pinned to that version/, 'Agent guide must explain 
 const credentialGuide = readFileSync('agents/api-credentials.md', 'utf8')
 assert.match(credentialGuide, /Developer → Credentials/, 'Credential guide must use current Console navigation')
 assert.doesNotMatch(credentialGuide, /Agents → \[Your Agent\] → Credentials/, 'Credential guide must not use retired Agent-level navigation')
-assert.match(credentialGuide, /Workspace[\s\S]+Agent[\s\S]+Published Agent/, 'Credential guide must describe the current scope choices')
+assert.match(credentialGuide, /Workspace[\s\S]+Agent[\s\S]+Service/, 'Credential guide must describe the current scope choices')
 
 const servicesGuide = readFileSync('agents/services.md', 'utf8')
 assert.match(servicesGuide, /202 Accepted/, 'Services guide must document asynchronous REST acceptance')

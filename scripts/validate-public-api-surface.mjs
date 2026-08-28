@@ -73,6 +73,7 @@ assert.match(modelApiOverview, /\[Models API\]\(\/api-reference\/models\//, 'Mod
 assert.match(modelApiOverview, /\[Chat Completions\]\(\/api-reference\/llm-gateway\)/, 'Model API overview must link to the normalized inference contracts')
 assert.match(homePage, /Services API/, 'Home page must use the Services product name')
 assert.doesNotMatch(homePage, /Endpoint API|Published Agent API/, 'Home page must not expose retired Endpoint product labels')
+assert.doesNotMatch(homePage, />Published Agents</, 'Home page must use the current Services product label')
 assert.match(homePage, /href="\/docs\/getting-started\/api-keys"/, 'Home page must link to the published API key guide')
 assert.doesNotMatch(homePage, /href="\/docs\/admin\/api-keys"/, 'Home page must not link to the hidden legacy API key page')
 assert.match(homePage, /href="\/docs\/guides\/chat-completions"/, 'Home page must link to the published SDK-compatible chat guide')

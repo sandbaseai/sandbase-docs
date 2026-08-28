@@ -134,7 +134,7 @@
         <div class="journey-step">
           <div><span class="step-num">2</span><h4>Publish Agent</h4></div>
           <div class="step-links">
-            <a href="https://www.sandbase.ai/console/endpoints" target="_self">Published Agents</a>
+            <a href="https://www.sandbase.ai/console/endpoints" target="_self">Services</a>
             <a href="/docs/api-reference/endpoints/">Services API</a>
           </div>
         </div>

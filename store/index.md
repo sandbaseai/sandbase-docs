@@ -73,7 +73,7 @@ Use a Skill when an Agent needs consistent expertise, such as company research, 
 
 ### Use it in your AI app
 
-Add Models, APIs, or published Agents to **Workspace Services**, then follow the client-specific flow in **Setup**. Supported clients and prerequisites are shown in the Console and can change independently of this overview.
+Add Models, APIs, or Services to **Workspace Services**, then follow the client-specific flow in **Setup**. Supported clients and prerequisites are shown in the Console and can change independently of this overview.
 
 ### Call it from your app
 

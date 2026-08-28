@@ -23,7 +23,7 @@ When adding a credential, choose the narrowest useful scope:
 |---|---|
 | Workspace | A value available to eligible Agents in the current workspace |
 | Agent | A value associated with one Agent ID |
-| Published Agent | A value associated with a published Service workflow |
+| Service | A value available to a published Service workflow |
 
 Saved values cannot be read back. To replace one, use the credential's **Manage** action and rotate it. A credential can be disabled; disabled records remain visible as metadata.
 
