@@ -10,23 +10,25 @@ https://api.sandbase.ai/v1
 
 Bearer token: `Authorization: Bearer sk-YOUR_KEY`
 
-## SandBase CLI and MCP Bridge
+## Connect AI Tools
 
-Open-source repository: https://github.com/sandbaseai/cli
+Guided Setup: https://www.sandbase.ai/console/setup
 
-Preview supported clients without signing in or changing configuration:
+Choose a client in Setup and follow the exact guidance shown there. For a CLI-supported client such as Codex:
 
-`npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz catalog --json`
+`curl -fsSL https://sandbase.ai/install.sh | sh -s -- --client codex`
 
-Connect detected coding agents such as Codex, Claude Code, Cursor, Gemini CLI, Windsurf, OpenCode, Kiro, Warp, Amp, and Hermes:
+Read-only installer client catalog:
 
-`npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect`
+`curl -fsSL https://sandbase.ai/install.sh | sh -s -- --list-agents`
 
-Diagnose an installation:
+Diagnose a CLI-managed client:
 
-`npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz doctor`
+`npx -y @sandbaseai/cli doctor --client codex`
 
-The installed MCP bridge exposes six tools: `sandbase_discover`, `sandbase_inspect`, `sandbase_run`, `sandbase_run_get`, `sandbase_runs`, and `sandbase_account`. The standard agent workflow is `discover -> inspect -> run`.
+Installation and authorization are not proof of connectivity. Verify the SandBase entry and tools in the target client, then complete one safe tool request.
+
+Open-source CLI: https://github.com/sandbaseai/cli
 
 ## Core Endpoints
 

@@ -1,88 +1,70 @@
 ---
 title: Connect AI tools
-description: Connect Codex, Claude Code, Cursor, and other supported AI clients to SandBase.
+description: Connect Codex, Claude Code, Cursor, and other supported AI tools to SandBase with the guided Setup flow.
 ---
 
 # Connect AI tools
 
-[SandBase CLI](https://github.com/sandbaseai/cli) is the open-source onboarding tool and local MCP bridge for SandBase. It connects Codex, Claude Code, Cursor, Gemini CLI, Windsurf, OpenCode, and other supported clients to the Models, APIs, and Services enabled in your workspace toolkit.
+Setup connects SandBase to the AI tool you already use. The guided flow supports Codex, Claude Code, Cursor, Gemini CLI, Windsurf, OpenCode, and other clients. Depending on the client, Setup provides a CLI command, a reviewed Skill prompt, or manual import instructions.
 
 ## Quick start
 
-Connect every supported client detected on your computer:
+1. Open [Setup in the SandBase Console](https://www.sandbase.ai/console/setup).
+2. Choose your AI tool.
+3. Review its prerequisites and run the command or import steps shown.
+4. Complete browser authorization when prompted.
+5. Restart or reload the client if instructed, then verify the SandBase entry and make a safe tool request.
+
+For a CLI-supported client such as Codex, the command follows this form:
 
 ```sh
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect
+curl -fsSL https://sandbase.ai/install.sh | sh -s -- --client codex
 ```
 
-The command opens browser authorization, stores the resulting credential locally with restricted file permissions, and adds a SandBase-owned MCP configuration to each selected client.
+The installer requires Node.js 20 or newer. It starts the open-source [SandBase CLI](https://github.com/sandbaseai/cli), opens browser authorization, and manages only the SandBase-owned client configuration. The Console is the source of truth for each client's current support status and exact completion steps.
 
-To configure one client only:
+To inspect the clients recognized by the installer without changing local configuration:
 
 ```sh
-# OpenAI Codex
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect --client codex
-
-# Claude Code
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect --client claude-code
-
-# Cursor
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect --client cursor
+curl -fsSL https://sandbase.ai/install.sh | sh -s -- --list-agents
 ```
-
-You can also open **Setup** in the SandBase Console, choose a supported client, and run the command shown there. Restart a client if it was already open.
 
 ## Verify the connection
 
-Run the health check after reconnecting or changing a client configuration:
+Installation or authorization alone does not prove that a client is connected. After following the client-specific instructions, confirm that:
+
+- the SandBase server or connector is visible in the client
+- the expected SandBase tools are discoverable
+- one safe natural-language request completes successfully
+
+For CLI-managed clients, run the diagnostic command after reconnecting or changing configuration:
 
 ```sh
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz doctor --client codex
+npx -y @sandbaseai/cli doctor --client codex
 ```
 
-Preview the complete compatibility catalog without signing in or changing local files:
+The diagnostic checks local configuration and client-specific readback. Always perform the final tool call inside the client itself.
 
-```sh
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz catalog --json
-```
+## Manage workspace services
 
-## What your agent receives
+[Workspace Services](https://www.sandbase.ai/console/setup/installed) controls what connected AI tools can discover. It organizes the workspace into Core services, My Custom, and SandBase-maintained Scenarios. My Custom can include Models, APIs, and published Agents selected for the organization.
 
-The local bridge exposes six progressively disclosed MCP tools:
-
-| Tool | Purpose |
-| --- | --- |
-| `sandbase_discover` | Search the model and API catalog |
-| `sandbase_inspect` | Read the selected capability's schema and pricing |
-| `sandbase_run` | Start a model or API request |
-| `sandbase_run_get` | Poll an asynchronous request |
-| `sandbase_runs` | Review recent requests and costs |
-| `sandbase_account` | Check the current account balance |
-
-The normal agent workflow is `discover → inspect → run`. The bridge starts on demand over stdio; it does not install a background daemon.
-
-Transport endpoints are managed by the CLI and are not part of the public API contract.
-
-## Manage the workspace toolkit
-
-Use **Installed Tools** to enable or remove Models, APIs, and Services. Connected clients receive the effective workspace toolkit on their next discovery; there is no user-selected active Setup Group.
-
-SandBase may provide curated platform groups. A workspace can enable or disable those groups as inputs to its effective toolkit, but it does not clone or edit them as private groups.
+Changes apply to the organization workspace. Open a new client session or run discovery again after changing the selection.
 
 ## Troubleshooting
 
 | Problem | What to check |
 |---|---|
-| Tool does not appear | Restart the client, run `sandbase doctor --client <client>`, and retry discovery. |
-| Authorization is missing | Run `sandbase connect --client <client>` and complete the browser flow. |
-| Tool is unavailable | Confirm it is enabled in the workspace toolkit and any required credential is configured. |
+| Tool does not appear | Restart or reload the client, run `npx -y @sandbaseai/cli doctor --client <client>` for CLI-managed clients, and retry discovery. |
+| Authorization is missing | Return to Console Setup, rerun the client-specific flow, and complete browser authorization. |
+| Capability is unavailable | Confirm it is enabled in Workspace Services and that any required credential is configured. |
 
 ## Remove the managed configuration
 
 Remove only the SandBase-owned entry for one client:
 
 ```sh
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz unregister --client codex
+npx -y @sandbaseai/cli unregister --client codex
 ```
 
 SandBase leaves unrelated and user-managed MCP entries unchanged. Revoke the corresponding credential in the SandBase Console when it is no longer needed.
@@ -96,7 +78,6 @@ SandBase leaves unrelated and user-managed MCP entries unchanged. Revoke the cor
 
 ## Next steps
 
-- [Installed Tools](/setup/installed)
-- [Platform groups](/setup/groups)
+- [Workspace Services](/setup/installed)
 - [Store](/store/)
 - [Services](/agents/services)

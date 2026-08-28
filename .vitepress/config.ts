@@ -215,6 +215,8 @@ export default defineConfig({
     'api-reference/embeds/**',
     'api-reference/environments/**',
     'agents/endpoint-quickstart.md',
+    'setup/cli.md',
+    'setup/groups.md',
   ],
   title: 'SandBase Docs',
   description: 'SandBase docs for connecting Agents to models, APIs, tools, Setup, Services, Schedules, and Sessions.',
@@ -225,7 +227,7 @@ export default defineConfig({
   sitemap: {
     hostname: siteOrigin,
     transformItems: (items) => items
-      .filter((item) => !['agents/deployments', 'setup/cli', 'store/models'].includes(item.url.replace(/^\//, '')))
+      .filter((item) => !['agents/deployments', 'store/models'].includes(item.url.replace(/^\//, '')))
       .map((item) => ({
         ...item,
         url: `${docsBase}${item.url.replace(/^\//, '')}`,

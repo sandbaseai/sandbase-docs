@@ -10,6 +10,8 @@ const excluded = [
   'api-reference/environments/',
   'api-reference/webhooks.md',
   'guides/site-agent-integration.md',
+  'setup/cli.md',
+  'setup/groups.md',
 ]
 let inspected = 0
 const publicTitles = new Map()

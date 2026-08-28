@@ -8,18 +8,21 @@ const dist = path.join(root, '.vitepress', 'dist')
 
 assert.ok(existsSync(dist), 'Built docs directory is missing; run npm run build first')
 
-for (const retiredPage of ['README.html', 'CONTRIBUTING.html', 'DEPLOYMENT.html', 'agents/endpoint-quickstart.html']) {
+for (const retiredPage of [
+  'README.html',
+  'CONTRIBUTING.html',
+  'DEPLOYMENT.html',
+  'agents/endpoint-quickstart.html',
+  'setup/cli.html',
+  'setup/groups.html',
+]) {
   assert.ok(!existsSync(path.join(dist, retiredPage)), `${retiredPage} must not be included in the public docs build`)
 }
 
 const sitemap = readFileSync(path.join(dist, 'sitemap.xml'), 'utf8')
-for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/setup/cli', '/docs/agents/deployments', '/docs/store/models']) {
+for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/setup/cli', '/docs/setup/groups', '/docs/agents/deployments', '/docs/store/models']) {
   assert.ok(!sitemap.includes(`<loc>https://www.sandbase.ai${excludedUrl}</loc>`), `${excludedUrl} must not be indexed in the sitemap`)
 }
-
-const setupAlias = readFileSync(path.join(dist, 'setup', 'cli.html'), 'utf8')
-assert.match(setupAlias, /<meta name="robots" content="noindex,follow">/, 'Legacy CLI setup alias must be noindex')
-assert.match(setupAlias, /<link rel="canonical" href="https:\/\/www\.sandbase\.ai\/docs\/setup\/">/, 'Legacy CLI setup alias must canonicalize to the unified setup page')
 
 const deploymentAlias = readFileSync(path.join(dist, 'agents', 'deployments.html'), 'utf8')
 assert.match(deploymentAlias, /<meta name="robots" content="noindex,follow">/, 'Legacy deployment guide must be noindex')

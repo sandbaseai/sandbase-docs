@@ -12,10 +12,12 @@ Pick the path that matches what you want to do now.
 Choose this if you use Codex, Claude, Cursor, or Kiro and want more tools inside that app.
 
 1. Open [Setup](https://www.sandbase.ai/console/setup).
-2. Choose your AI tool.
-3. Pick Models, APIs, or Services.
-4. Run the setup command.
-5. Ask your AI tool to use the new capability.
+2. Choose your AI tool and review its prerequisites.
+3. Run the command or import steps shown for that client.
+4. Complete authorization, then restart or reload the client if instructed.
+5. Verify the SandBase entry and make one safe tool request.
+
+To change what the connected tool can discover, open [Workspace Services](https://www.sandbase.ai/console/setup/installed).
 
 For example, after adding a web search API, you can ask:
 

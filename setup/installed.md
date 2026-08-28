@@ -1,18 +1,25 @@
 ---
-title: Installed Tools
-description: Manage the effective SandBase toolkit shared by connected AI clients.
+title: Workspace Services
+description: Choose the SandBase Models, APIs, published Agents, and scenarios available to your organization.
 ---
 
-# Installed Tools
+# Workspace Services
 
-Installed Tools shows the effective toolkit for your workspace. It can contain Models, APIs, and Services. Connected AI clients discover enabled items through the remote SandBase MCP gateway.
+Workspace Services controls the SandBase capabilities available to connected AI tools in your organization.
 
-You can search the toolkit, inspect an item, enable or remove workspace-managed tools, and configure required credentials. Changes apply to the workspace toolkit rather than to a user-selected active group.
+The page has three sections:
 
-Curated platform-group contributions are controlled through platform-group preferences; platform definitions themselves remain SandBase-managed.
+| Section | What it contains |
+|---|---|
+| **Core services** | Trusted foundation capabilities maintained by SandBase |
+| **My Custom** | Models, APIs, and published Agents selected for this organization |
+| **Scenarios** | SandBase-maintained combinations for common workflows |
+
+You can enable or disable a Core service or Scenario, and add or remove organization-specific items in My Custom. Changes affect the organization; connected clients receive the updated selection when they discover tools again.
+
+Open [Workspace Services in the Console](https://www.sandbase.ai/console/setup/installed).
 
 ## Next steps
 
 - [Setup](/setup/)
-- [Platform groups](/setup/groups)
 - [Store](/store/)

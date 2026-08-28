@@ -10,6 +10,8 @@ const excluded = [
   'api-reference/environments/',
   'api-reference/webhooks.md',
   'guides/site-agent-integration.md',
+  'setup/cli.md',
+  'setup/groups.md',
 ]
 
 const files = ['index.md']
@@ -39,6 +41,8 @@ const forbidden = [
   [/anthropic\/claude-sonnet-4(?:-|\b)/, 'stale hand-written example model'],
   [/GET \/v1\/models\/\{name\}/, 'incorrect model detail path parameter'],
   [/\/docs\/setup\/cli\b/, 'retired setup alias'],
+  [/sandbaseai-cli-\d+\.\d+\.\d+\.tgz/, 'version-pinned CLI archive; use the guided installer'],
+  [/\bPlatform Groups?\b/, 'retired Platform Groups product label'],
   [/\]\(\/store\/models\/?(?:[)#])/, 'duplicate Models page link; use /models/'],
   [/\bNew accounts receive\b[^\n]*\bfree credits\b/i, 'time-sensitive signup credit claim'],
   [/\$\d+(?:\.\d+)?\s+minimum/i, 'time-sensitive minimum payment claim'],

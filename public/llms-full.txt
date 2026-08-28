@@ -16,41 +16,33 @@ Some billable operations return an x-task-id response header. Not every API oper
 
 ---
 
-## SandBase CLI and MCP Bridge
+## Connect AI Tools
 
 Source: https://github.com/sandbaseai/cli
 
-Use the open-source CLI to connect supported coding agents to SandBase without manually editing each client's MCP configuration.
+Use the guided Console flow to select an AI tool and see its current prerequisites, installation method, and verification steps:
 
-Read-only compatibility preview:
+https://www.sandbase.ai/console/setup
 
-```sh
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz catalog --json
-```
-
-Connect all detected supported clients:
+For a CLI-supported client such as Codex:
 
 ```sh
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect
+curl -fsSL https://sandbase.ai/install.sh | sh -s -- --client codex
 ```
 
-Connect or diagnose a specific client:
+Read-only installer client catalog:
 
 ```sh
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz connect --client codex
-npx -y https://github.com/sandbaseai/cli/releases/download/v0.1.17/sandbaseai-cli-0.1.17.tgz doctor --client codex
+curl -fsSL https://sandbase.ai/install.sh | sh -s -- --list-agents
 ```
 
-The local stdio bridge exposes:
+Diagnose a CLI-managed client:
 
-- `sandbase_discover`: search the 2,000+ model and API catalog;
-- `sandbase_inspect`: retrieve input schema, pricing, and a request template;
-- `sandbase_run`: execute a selected model or API;
-- `sandbase_run_get`: poll asynchronous work such as video generation;
-- `sandbase_runs`: list recent calls and costs;
-- `sandbase_account`: inspect account balance.
+```sh
+npx -y @sandbaseai/cli doctor --client codex
+```
 
-Recommended workflow: `sandbase_discover -> sandbase_inspect -> sandbase_run`.
+Installation or authorization does not prove that the target client is connected. Inspect the SandBase entry and its discovered tools in the client, then complete one safe natural-language tool request.
 
 Connect AI tools: https://www.sandbase.ai/docs/setup/
 
