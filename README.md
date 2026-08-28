@@ -38,8 +38,10 @@ The catalog, schemas, prices, and availability can change. Use the live Store an
 
 The documentation is part of a small, interoperable open-source stack:
 
-- [SandBase CLI](https://github.com/sandbaseai/cli) — connect supported AI
-  clients to the SandBase catalog through a local MCP bridge.
+- [SandBase CLI](https://github.com/sandbaseai/cli) — connect 25 AI client
+  targets to 2,000+ models and APIs through a local MCP bridge with six tools;
+  the current release is listed in the
+  [official MCP Registry](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.sandbaseai%2Fcli/versions/0.1.17).
 - [SandBase Skills](https://github.com/sandbaseai/sandbase-skills) — install
   reusable research, marketing, and business workflows into compatible agents.
 - [DeepSeek Harness Handbook](https://github.com/sandbaseai/deepseek-harness-handbook)
@@ -47,6 +49,8 @@ The documentation is part of a small, interoperable open-source stack:
 
 Choose the project that matches the layer you are building; the links above
 are maintained as the canonical contribution and issue entry points.
+If the lightweight bridge saves setup time, [star SandBase CLI](https://github.com/sandbaseai/cli/stargazers)
+so more Agent developers can discover it.
 
 ## Build and contribute locally
 
@@ -144,7 +148,7 @@ Do not force unlike workloads into one response lifecycle: an LLM may stream tok
 
 ## Connect an AI client
 
-The open-source [SandBase CLI](https://github.com/sandbaseai/cli) provides a local MCP bridge for supported AI clients. Use the versioned installation command from the [Connect AI tools guide](https://www.sandbase.ai/docs/setup/), then connect the exact client target listed there.
+The open-source [SandBase CLI](https://github.com/sandbaseai/cli) provides a local MCP bridge for 25 AI client targets. Use the versioned installation command from the [Connect AI tools guide](https://www.sandbase.ai/docs/setup/), then connect the exact client target listed there.
 
 Skills and execution remain separate:
 
