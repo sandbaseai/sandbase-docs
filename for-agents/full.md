@@ -64,7 +64,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
   }'
 ```
 
-**Response:**
+**Response (`202 Accepted`):**
 
 ```json
 {
