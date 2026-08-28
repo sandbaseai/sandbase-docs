@@ -12,7 +12,7 @@ Model capabilities change as models and provider routes are updated. Use the liv
 1. Browse [Models](https://www.sandbase.ai/models) to compare currently available models.
 2. Open the [Model API Reference](/model-api-reference/) for model-specific request fields and declared capabilities.
 3. Call [`GET /v1/models`](/api-reference/models/list) when an integration needs to discover enabled model IDs programmatically.
-4. Call [`GET /v1/models/{vendor}/{model}`](/api-reference/models/get) before depending on detailed capability or pricing metadata.
+4. Call [`GET /v1/models/{id_or_name}`](/api-reference/models/get) before depending on detailed capability or pricing metadata. For a logical model name, keep the full `vendor/model` path (for example, `/v1/models/{vendor}/{model}`).
 
 Treat model IDs and returned metadata as opaque values. Do not infer vision, tools, reasoning, structured-output, streaming, context, or caching support from the vendor name alone.
 
