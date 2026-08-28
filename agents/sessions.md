@@ -17,7 +17,7 @@ A Service can continue only a Session created by that same Service and still mat
 
 ## Sessions and DeploymentRuns
 
-A Schedule is backed by a Deployment API resource. Each manual or cron trigger first creates a separate `drun_*` **DeploymentRun** record. A successful DeploymentRun has status `succeeded` and links to the newly created `session_id`; a failed record has no Session. DeploymentRun status describes Session creation only, not the later Agent execution lifecycle.
+A Schedule uses a compatibility resource behind the `/v1/deployments` path. Each manual or cron trigger first creates a separate `drun_*` **DeploymentRun** record. A successful DeploymentRun has status `succeeded` and links to the newly created `session_id`; a failed record has no Session. DeploymentRun status describes Session creation only, not the later Agent execution lifecycle.
 
 ## Work with a Session
 
@@ -43,7 +43,7 @@ curl -N https://api.sandbase.ai/v1/sessions/sess_01.../events/stream \
 |---|---|---|
 | Agent | `agent_*` | Versioned workflow definition |
 | Service | `ep_*` | Stable callable surface |
-| Schedule (Deployment API) | `depl_*` | Repeatable trigger configuration |
+| Schedule (compatibility resource) | `depl_*` | Repeatable trigger configuration |
 | DeploymentRun | `drun_*` | One Schedule trigger and its Session-creation result |
 | Session | `sess_*` | Persistent Agent interaction and event history |
 
