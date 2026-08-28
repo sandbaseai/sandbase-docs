@@ -64,7 +64,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
   }'
 ```
 
-**Response (`202 Accepted`):**
+**Response:**
 
 ```json
 {
@@ -439,7 +439,7 @@ curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
   -d '{"input": "Summarize the latest news about AI agents"}'
 ```
 
-**Response:**
+**Response (`202 Accepted`):**
 
 ```json
 {
