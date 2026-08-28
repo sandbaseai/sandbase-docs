@@ -43,8 +43,8 @@ apiReference:
 
 ## Full reference
 
-The complete protocol reference lives in
-[Seedance Native API](/model-api-reference/seedance-native-api). It covers the supported model identifiers, the request
+The complete protocol reference lives in the
+[Official Native API](/model-api-reference/seedance-native-api). It covers the supported model identifiers, the request
 body rules, the task status vocabulary, usage reporting, and the error contract.
 
 Quick orientation:

@@ -37,6 +37,7 @@ const forbidden = [
   [/\bEmbed Configs?\b/i, 'retired Embed Config product'],
   [/\bEndpoints API\b/, 'legacy product label; use Services API'],
   [/\bDeployments API\b/, 'legacy product label; use Schedules API'],
+  [/\bSeedance Native API\b/, 'legacy provider-native API label; use Official Native API'],
   [/openai\/gpt-4o\b/, 'stale hand-written example model'],
   [/anthropic\/claude-sonnet-4(?:-|\b)/, 'stale hand-written example model'],
   [/deepseek\/deepseek-v3\b/, 'stale hand-written example model'],
