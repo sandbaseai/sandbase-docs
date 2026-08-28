@@ -13,7 +13,7 @@ Workspace settings control who owns usage, how applications authenticate, and ho
 |---|---|
 | [Organizations](/admin/organizations) | Manage the workspace boundary, members, and ownership |
 | [API Keys](/getting-started/api-keys) | Create, rotate, and revoke application credentials |
-| [Billing](/admin/billing) | Review credits, usage, and payment activity |
+| [Billing and credits](/admin/billing) | Review balance, credit transactions, usage, and payment activity |
 | [Rate Limits](/admin/rate-limits) | Understand request limits and safe retry behavior |
 
 ## Recommended setup

@@ -17,7 +17,7 @@ You can:
 - test the Agent
 - clone it into your workspace
 - customize it in Build Agent
-- publish your version as a Service for application or Setup access
+- publish your version as a Service for application access or selection in Workspace Services
 - schedule your version for recurring work
 
 ## Public Agent vs your Agent

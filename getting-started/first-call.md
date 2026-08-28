@@ -19,7 +19,7 @@ Start with a non-streaming request. Once authentication and response handling wo
 
 ## Request Anatomy
 
-Every request to SandBase's LLM Gateway follows this structure:
+This walkthrough uses the OpenAI-compatible Chat Completions route:
 
 ```bash
 POST https://api.sandbase.ai/v1/chat/completions
@@ -135,7 +135,7 @@ console.log(response.choices[0].message.content);
 
 ## Response Structure
 
-### Non-Streaming Response
+### Typical non-streaming response
 
 ```json
 {
@@ -166,12 +166,12 @@ console.log(response.choices[0].message.content);
 | Field | Description |
 |-------|-------------|
 | `id` | Unique identifier for this completion |
-| `object` | Always `"chat.completion"` for non-streaming responses |
+| `object` | OpenAI-compatible response object, normally `"chat.completion"` on this route |
 | `created` | Unix timestamp of when the response was generated |
 | `model` | The model that generated the response |
 | `choices` | Array of completion choices (typically one) |
 | `choices[].index` | Index of this choice in the array |
-| `choices[].message.role` | Always `"assistant"` |
+| `choices[].message.role` | Role returned for the generated message, normally `"assistant"` |
 | `choices[].message.content` | The generated text |
 | `choices[].finish_reason` | Why generation stopped (see below) |
 | `usage.prompt_tokens` | Tokens in your input |
@@ -253,7 +253,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 ### Streaming SSE Format
 
-Each chunk arrives as a Server-Sent Event:
+A compatible stream commonly emits Server-Sent Events like these:
 
 ```
 data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1719000000,"model":"deepseek/deepseek-v4-flash","choices":[{"index":0,"delta":{"role":"assistant"},"finish_reason":null}]}
@@ -268,10 +268,11 @@ data: [DONE]
 ```
 
 Key points:
-- The first chunk contains `delta.role` indicating the assistant is responding
-- Subsequent chunks contain `delta.content` with text fragments
-- The final chunk has `finish_reason` set and empty `delta`
-- The stream ends with `data: [DONE]`
+
+- consume chunks in order and append any `delta.content` fragments
+- tolerate metadata-only chunks, empty deltas, and provider-compatible fields you do not recognize
+- stop when the stream closes or its terminal marker arrives; Chat Completions commonly uses `data: [DONE]`
+- do not assume every model emits the exact same first or final chunk shape
 
 ## Using the Anthropic SDK
 
@@ -318,7 +319,7 @@ console.log(message.content[0].text);
 
 ### Anthropic Response Structure
 
-The Anthropic-compatible endpoint returns responses in Anthropic's format:
+The Anthropic-compatible endpoint returns an Anthropic-style response. A typical text response looks like this:
 
 ```json
 {
@@ -344,9 +345,9 @@ The Anthropic-compatible endpoint returns responses in Anthropic's format:
 | Field | Description |
 |-------|-------------|
 | `id` | Message ID (prefixed with `msg_`) |
-| `type` | Always `"message"` |
-| `role` | Always `"assistant"` |
-| `content` | Array of content blocks (text blocks) |
+| `type` | Message object type, normally `"message"` |
+| `role` | Generated message role, normally `"assistant"` |
+| `content` | Array of typed content blocks; do not assume every block is text |
 | `model` | The model that generated the response |
 | `stop_reason` | `"end_turn"` (natural stop), `"max_tokens"` (hit limit), or `"stop_sequence"` |
 | `usage.input_tokens` | Tokens in your input |

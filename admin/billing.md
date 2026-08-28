@@ -1,9 +1,9 @@
 ---
-title: Billing
-description: Manage your organization balance, top up credits, and configure spending controls in the Console.
+title: Billing and credits
+description: Review the SandBase organization balance, buy or redeem credits, and understand API-key spending controls.
 ---
 
-# Billing
+# Billing and credits
 
 This page covers billing management in the [SandBase Console](https://www.sandbase.ai/console). For rates and cost optimization, see [Pricing](/guides/billing).
 
@@ -13,16 +13,19 @@ guide.
 
 ## Balance and credits
 
-Open **Console → Billing** to view the current organization balance and the credit or payment options available to
-your account. Treat the Console as the source of truth for promotions and checkout terms; do not automate its
-internal network requests.
+Open [Console Credits](https://www.sandbase.ai/console/billing) to view the active organization's available balance,
+credit limit, checkout options, coupons, and recent credit transactions. Treat the Console as the source of truth
+for promotions and checkout terms; do not automate its internal network requests.
 
 ## Add credits
 
-1. Go to **Console → Billing**
-2. Choose **Add Credits** when it is available for your organization
-3. Review the amount, payment method, fees, and terms shown in checkout
-4. Confirm the resulting balance before starting a cost-sensitive workload
+1. Open [Console Credits](https://www.sandbase.ai/console/billing).
+2. Under **Buy credits**, enter the USD credit amount.
+3. Choose **Continue with Airwallex**, then review and complete the hosted checkout.
+4. Confirm the updated balance or transaction status before starting a cost-sensitive workload.
+
+If you have a coupon, redeem it on the same page. A coupon applies to the active workspace, so confirm the selected
+organization first.
 
 ## Spending Controls
 

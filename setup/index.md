@@ -21,7 +21,7 @@ For a CLI-supported client such as Codex, the command follows this form:
 curl -fsSL https://sandbase.ai/install.sh | sh -s -- --client codex
 ```
 
-The installer requires Node.js 20 or newer. It starts the open-source [SandBase CLI](https://github.com/sandbaseai/cli), opens browser authorization, and manages only the SandBase-owned client configuration. The Console is the source of truth for each client's current support status and exact completion steps.
+The Codex flow currently requires Node.js 20 or newer. Other clients can have different prerequisites, installation methods, policy checks, or administrator requirements; use the requirements shown after selecting that client in Console Setup. The installer starts the open-source [SandBase CLI](https://github.com/sandbaseai/cli), opens browser authorization when required, and manages only SandBase-owned client configuration. The Console is the source of truth for each client's current support status and exact completion steps.
 
 To inspect the clients recognized by the installer without changing local configuration:
 
@@ -67,7 +67,7 @@ Remove only the SandBase-owned entry for one client:
 npx -y @sandbaseai/cli unregister --client codex
 ```
 
-SandBase leaves unrelated and user-managed MCP entries unchanged. Revoke the corresponding credential in the SandBase Console when it is no longer needed.
+The command removes only configuration whose SandBase ownership it can verify and leaves unrelated or user-managed entries unchanged. Review the result, then revoke the corresponding **CLI Login** key under **Developer → API Keys** when it is no longer needed.
 
 ## Source and support
 

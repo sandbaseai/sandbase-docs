@@ -21,7 +21,7 @@ Use APIs for things like:
 You can use an API in three ways:
 
 1. **Call it directly** from your application.
-2. **Add it to Setup** so your AI tool can use it.
+2. **Add it to Workspace Services** so a connected AI tool can discover it.
 3. **Add it to an Agent** when the Agent needs tools.
 
 ## API vs Model

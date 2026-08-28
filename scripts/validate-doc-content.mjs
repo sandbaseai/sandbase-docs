@@ -90,6 +90,9 @@ assert.match(billingGuide, /Console → Activities → Usage/, 'Billing guide mu
 const billingAdmin = readFileSync('admin/billing.md', 'utf8')
 assert.doesNotMatch(billingAdmin, /\| Alert threshold \|/, 'Billing docs must not expose a Console control that is not currently rendered')
 assert.match(billingAdmin, /Request History[\s\S]+Usage/, 'Billing docs must describe the current Activities tabs')
+assert.match(billingAdmin, /Console Credits/, 'Billing docs must use the current Credits page name')
+assert.match(billingAdmin, /Buy credits[\s\S]+Continue with Airwallex/, 'Billing docs must describe the current checkout labels')
+assert.doesNotMatch(billingAdmin, /Console → Billing|Add Credits/, 'Billing docs must not use retired Console labels')
 
 const agentOverview = readFileSync('agents/index.md', 'utf8')
 assert.doesNotMatch(agentOverview, /published endpoint/i, 'Agent guide must use the Services product name')
@@ -103,6 +106,19 @@ assert.match(credentialGuide, /Workspace[\s\S]+Agent[\s\S]+Published Agent/, 'Cr
 const servicesGuide = readFileSync('agents/services.md', 'utf8')
 assert.match(servicesGuide, /202 Accepted/, 'Services guide must document asynchronous REST acceptance')
 assert.match(servicesGuide, /same Service/, 'Services guide must explain Session continuation binding')
+
+const setupGuide = readFileSync('setup/index.md', 'utf8')
+assert.doesNotMatch(setupGuide, /^The installer requires Node\.js 20 or newer\./m, 'Setup prerequisites must remain client-specific')
+assert.match(setupGuide, /Developer → API Keys/, 'Setup removal must point to the current CLI Login key location')
+
+const firstCallGuide = readFileSync('getting-started/first-call.md', 'utf8')
+assert.doesNotMatch(firstCallGuide, /Every request to SandBase's LLM Gateway follows/, 'First call must not generalize one route to every LLM request')
+assert.doesNotMatch(firstCallGuide, /The first chunk contains `delta\.role`/, 'Streaming guide must not require a provider-dependent first chunk')
+
+const storeGuide = readFileSync('store/index.md', 'utf8')
+for (const catalog of ['models', 'apis', 'agents', 'skills']) {
+  assert.ok(storeGuide.includes(`https://www.sandbase.ai/${catalog}`), `Store guide must link to the live ${catalog} catalog`)
+}
 
 assert.ok(inspected > 0, 'content validation did not inspect any public hand-written pages')
 console.log(`public hand-written content: ok (${inspected} pages)`)

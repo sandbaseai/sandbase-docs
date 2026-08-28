@@ -48,7 +48,7 @@ After it works, you can:
 
 If you want tools in your AI app, start with [Setup](/setup/).
 
-If you want to call one capability from code, start with [Models](/models/) or [APIs](/store/apis).
+If you want to call one capability from code, browse the live [Model Store](https://www.sandbase.ai/models) or [API Store](https://www.sandbase.ai/apis), then use the matching documentation and request example.
 
 If you want a repeatable workflow, start with [Build Agent](/agents/).
 

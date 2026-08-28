@@ -29,7 +29,7 @@ Learn more: [Setup](/setup/).
 
 Choose this if you are adding one capability to your app.
 
-1. Browse [Models](/models/) or [APIs](/store/apis).
+1. Browse the live [Model Store](https://www.sandbase.ai/models) or [API Store](https://www.sandbase.ai/apis).
 2. Open the detail page.
 3. Copy the request.
 4. Call it with your SandBase API key.
@@ -57,7 +57,7 @@ Choose this if the work has multiple steps or should be reused.
 3. Pick a Model.
 4. Add APIs and Skills.
 5. Test a run.
-6. Publish it or schedule it.
+6. Publish a selected version as a Service, or create a Schedule.
 
 Learn more: [Build Agent](/agents/).
 

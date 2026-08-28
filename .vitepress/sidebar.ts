@@ -97,7 +97,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Overview', link: '/agents/' },
       { text: 'Define agent', link: '/agents/agent-api' },
       { text: 'Tools & credentials', link: '/agents/mcp-tools' },
-      { text: 'API Credentials', link: '/agents/api-credentials' },
+      { text: 'Credentials for tools', link: '/agents/api-credentials' },
     ],
   },
   {
@@ -116,7 +116,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Overview', link: '/admin/' },
       { text: 'API Keys', link: '/getting-started/api-keys' },
       { text: 'Organizations', link: '/admin/organizations' },
-      { text: 'Billing', link: '/admin/billing' },
+      { text: 'Billing & credits', link: '/admin/billing' },
       { text: 'Rate Limits', link: '/admin/rate-limits' },
       { text: 'FAQ', link: '/faq' },
     ],

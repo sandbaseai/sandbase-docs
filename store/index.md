@@ -7,6 +7,8 @@ description: Browse SandBase Models, APIs, Agents, and Skills. Use a capability 
 
 Store is where you find useful building blocks for your Agent.
 
+Browse the live catalogs: [Models](https://www.sandbase.ai/models), [APIs](https://www.sandbase.ai/apis), [Agents](https://www.sandbase.ai/agents), and [Skills](https://www.sandbase.ai/skills).
+
 You can start from four kinds of things:
 
 | Kind | What it is | What you do with it |
@@ -71,7 +73,7 @@ Use a Skill when an Agent needs consistent expertise, such as company research, 
 
 ### Use it in your AI app
 
-Add Models, APIs, or Services to **Setup**, then run one setup command for Codex, Claude, Cursor, or Kiro.
+Add Models, APIs, or published Agents to **Workspace Services**, then follow the client-specific flow in **Setup**. Supported clients and prerequisites are shown in the Console and can change independently of this overview.
 
 ### Call it from your app
 
