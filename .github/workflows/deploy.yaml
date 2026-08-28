@@ -26,6 +26,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test:seo
+      - run: npm run test:ai-readable
       - run: npm run build
       - run: npm run test:built-public-api
       - name: Validate release source

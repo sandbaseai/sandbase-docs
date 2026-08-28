@@ -9,7 +9,7 @@ All models are accessible with one SandBase API key. Model availability, schemas
 and pricing can change independently.
 
 ::: warning Use live model metadata
-Always use `GET /v1/models` and `GET /v1/models/{name}` for current, authoritative data. Do not infer that every
+Always use `GET /v1/models` and `GET /v1/models/{id_or_name}` for current, authoritative data. Do not infer that every
 LLM supports streaming, vision, tools, structured output, or caching, and do not copy one model's input fields or
 pricing to another model.
 :::
@@ -19,7 +19,7 @@ pricing to another model.
 `GET /v1/models` returns OpenAI-compatible identity records containing `id`, `object`, `created`, and `owned_by`.
 It intentionally omits SandBase capability, schema, and pricing metadata.
 
-`GET /v1/models/{name}` adds `unified_schema`, `supported_modes`, and `model_card`. Read detailed pricing from
+`GET /v1/models/{id_or_name}` adds `unified_schema`, `supported_modes`, and `model_card`. Read detailed pricing from
 `model_card`; there is no top-level `pricing` object. Treat `capability_tags`, `supported_modes`, and
 `unified_schema` as model-specific.
 
@@ -42,7 +42,7 @@ infer its format or construct a different polling path from an ID prefix or comp
 Model names are vendor-qualified and may contain `/`:
 
 ```bash
-curl https://api.sandbase.ai/v1/models/openai/gpt-4o \
+curl https://api.sandbase.ai/v1/models/openai/gpt-5.4 \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 

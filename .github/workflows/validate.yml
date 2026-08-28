@@ -25,5 +25,6 @@ jobs:
       - run: npm run test:http-references
       - run: npm run test:links
       - run: npm run test:seo
+      - run: npm run test:ai-readable
       - run: npm run build
       - run: npm run test:built-public-api

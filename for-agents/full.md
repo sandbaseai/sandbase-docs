@@ -1,19 +1,15 @@
 ---
-title: Complete AI-Readable API Reference
-description: Full SandBase API reference for AI agents — all endpoints, schemas, and examples in one page.
-# TODO Phase 2: Auto-generate this file from /api-reference/ source pages.
-# This is currently hand-written. When API reference pages update, this file
-# must be manually synced. Target: build-time script aggregates all endpoint
-# pages into this single-page reference + llms-full.txt output.
+title: SandBase AI API Guide
+description: Expanded SandBase API guide for AI agents, with core workflows, request examples, and links to the authoritative OpenAPI specification.
 ---
 
-# Complete API Reference
+# AI API Guide
 
 ::: info Session contract
 `session_id` is the persistent public identity for Agent interaction. Service (Endpoint) invocation creates or continues a Session. Every Schedule (Deployment) trigger creates a public `drun_*` DeploymentRun and attempts to create one new Session. Internal Runtime Session IDs are not exposed.
 :::
 
-> One page, all endpoints, no navigation needed. Plain-text version: [`llms-full.txt`](https://www.sandbase.ai/docs/llms-full.txt).
+> A single-page guide to the most common API workflows. For the complete machine-readable contract, use the [OpenAPI specification](https://www.sandbase.ai/docs/openapi.yaml). Plain-text version: [`llms-full.txt`](https://www.sandbase.ai/docs/llms-full.txt).
 
 ## Authentication
 
@@ -57,7 +53,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "openai/gpt-4o",
+    "model": "openai/gpt-5.4",
     "messages": [
       {"role": "system", "content": "You are a helpful assistant."},
       {"role": "user", "content": "Explain quantum computing in one paragraph."}
@@ -74,7 +70,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 {
   "id": "chatcmpl-abc123",
   "object": "chat.completion",
-  "model": "openai/gpt-4o",
+  "model": "openai/gpt-5.4",
   "choices": [
     {
       "index": 0,
@@ -109,7 +105,7 @@ curl https://api.sandbase.ai/v1/messages \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "anthropic/claude-sonnet-4-20250514",
+    "model": "anthropic/claude-sonnet-5",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "What is SandBase?"}]
   }'
@@ -125,7 +121,7 @@ curl https://api.sandbase.ai/v1/messages \
   "content": [
     { "type": "text", "text": "SandBase is an AI agent infrastructure platform..." }
   ],
-  "model": "anthropic/claude-sonnet-4-20250514",
+  "model": "anthropic/claude-sonnet-5",
   "stop_reason": "end_turn",
   "usage": { "input_tokens": 12, "output_tokens": 64 }
 }
@@ -144,7 +140,7 @@ curl https://api.sandbase.ai/v1/embeddings \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "openai/text-embedding-3-small",
+    "model": "<embedding-model-id>",
     "input": "SandBase is an AI agent platform."
   }'
 ```
@@ -161,7 +157,7 @@ curl https://api.sandbase.ai/v1/embeddings \
       "embedding": [0.0023, -0.0091, 0.0152, 0.0087, -0.0034]
     }
   ],
-  "model": "openai/text-embedding-3-small",
+  "model": "<embedding-model-id>",
   "usage": { "prompt_tokens": 7, "total_tokens": 7 }
 }
 ```
@@ -185,7 +181,7 @@ curl https://api.sandbase.ai/v1/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "bfl/flux-1/schnell",
+    "model": "bfl/flux-2/flash",
     "prompt": "A futuristic city at sunset, cyberpunk style",
     "aspect_ratio": "1:1"
   }'
@@ -197,7 +193,7 @@ curl https://api.sandbase.ai/v1/run \
 {
   "id": "f3d2e8a1-7c4b-4a12-9d2e-123456789abc",
   "status": "completed",
-  "model": "bfl/flux-1/schnell",
+  "model": "bfl/flux-2/flash",
   "created_at": "2026-08-02T12:00:00Z",
   "outputs": [{
     "url": "https://cdn.sandbase.ai/outputs/f3d2e8a1-7c4b-4a12-9d2e-123456789abc.png",
@@ -309,10 +305,10 @@ The response contains `object: "list"` and a `data` array. Each item contains `i
 
 ## Get Model
 
-### GET /v1/models/{name}
+### GET /v1/models/{id_or_name}
 
 ```bash
-curl https://api.sandbase.ai/v1/models/openai/gpt-4o \
+curl https://api.sandbase.ai/v1/models/openai/gpt-5.4 \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -369,7 +365,7 @@ curl -X POST https://api.sandbase.ai/v1/agents \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Research Assistant",
-    "model": "openai/gpt-4o",
+    "model": "openai/gpt-5.4",
     "system": "You are a research assistant. Use tools to find and summarize information.",
     "tools": [{"type": "agent_toolset_20260401"}]
   }'
@@ -381,7 +377,7 @@ curl -X POST https://api.sandbase.ai/v1/agents \
 {
   "id": "agent_abc123",
   "name": "Research Assistant",
-  "model": "openai/gpt-4o",
+  "model": "openai/gpt-5.4",
   "system": "You are a research assistant...",
   "tools": [
     { "type": "agent_toolset_20260401" }
@@ -411,7 +407,7 @@ curl https://api.sandbase.ai/v1/agents/agent_abc123 \
 curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123 \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"model": "anthropic/claude-sonnet-4-20250514"}'
+  -d '{"model": "anthropic/claude-sonnet-5"}'
 ```
 
 ### POST /v1/agents/{id}/archive — Archive Agent
@@ -680,7 +676,7 @@ curl https://api.sandbase.ai/v1/skills \
 ### How costs are calculated
 
 - **LLM**: `input_tokens × prompt_price + output_tokens × completion_price`
-- **Cached tokens**: significantly discounted — Anthropic 90% off input price, OpenAI 50% off, Google 75% off
+- **Cached tokens**: read cache pricing and multipliers from the selected model's current `model_card`
 - **Image/Video/Audio**: flat `base_price` per generation
 - Check cost after generation: `GET /v1/tasks/{id}/cost`
 - When a billable operation returns a task ID, use it with `GET /v1/tasks/{id}/cost`
@@ -694,6 +690,6 @@ curl https://api.sandbase.ai/v1/skills \
 
 ## See Also
 
-- [Models & Pricing](./models) — complete model table with capabilities
+- [Models & Pricing](./models) — live model discovery, capabilities, and pricing guidance
 - [Error Codes](./errors) — all error codes with retry guidance
 - [OpenAPI Spec](https://www.sandbase.ai/docs/openapi.yaml) — machine-readable schema

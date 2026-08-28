@@ -36,7 +36,7 @@ The installed MCP bridge exposes six tools: `sandbase_discover`, `sandbase_inspe
 - POST /v1/run - Unified generation (image, video, audio, any async task)
 - GET /v1/run/{id} - Poll async generation status
 - GET /v1/models - List enabled logical models (OpenAI-compatible; defaults to type=llm)
-- GET /v1/models/{name} - Get model details + pricing
+- GET /v1/models/{id_or_name} - Get model details, schema, capabilities, and pricing
 - GET /v1/tasks/{id}/cost - Get task cost and usage
 
 ## Agent Lifecycle
@@ -63,15 +63,15 @@ The installed MCP bridge exposes six tools: `sandbase_discover`, `sandbase_inspe
 ## Pricing
 
 Pay-per-use. No monthly minimums.
-Pricing formulas differ by model. Use GET /v1/models for discovery and GET /v1/models/{name} for the current
+Pricing formulas differ by model. Use GET /v1/models for discovery and GET /v1/models/{id_or_name} for the current
 model card, capabilities, input schema, and detailed pricing. Use GET /v1/tasks/{id}/cost for recorded task cost.
 
 ## Docs
 
-- CLI setup guide: https://www.sandbase.ai/docs/setup/cli
+- Connect AI tools: https://www.sandbase.ai/docs/setup/
 - CLI source: https://github.com/sandbaseai/cli
-- Full API reference: https://www.sandbase.ai/docs/for-agents/full
+- AI API guide: https://www.sandbase.ai/docs/for-agents/full
 - Models & Pricing: https://www.sandbase.ai/docs/for-agents/models
 - Error Codes: https://www.sandbase.ai/docs/for-agents/errors
 - OpenAPI spec: https://www.sandbase.ai/docs/openapi.yaml
-- Complete LLM reference: https://www.sandbase.ai/docs/llms-full.txt
+- Expanded LLM guide: https://www.sandbase.ai/docs/llms-full.txt

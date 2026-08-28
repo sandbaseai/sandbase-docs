@@ -53,6 +53,16 @@ export const platformApiReferenceFallbackSidebar = modelApiReferenceSidebar(plat
 
 export const docsSidebar: DefaultTheme.SidebarItem[] = [
   {
+    text: 'AI-Friendly Docs',
+    collapsed: true,
+    items: [
+      { text: 'AI-Readable Overview', link: '/for-agents/' },
+      { text: 'AI API Guide', link: '/for-agents/full' },
+      { text: 'Models & Pricing', link: '/for-agents/models' },
+      { text: 'Error Codes', link: '/for-agents/errors' },
+    ],
+  },
+  {
     text: 'First steps',
     collapsed: false,
     items: [
@@ -60,16 +70,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Quickstart', link: '/getting-started/quickstart' },
       { text: 'First API call', link: '/getting-started/first-call' },
       { text: 'Connect AI tools', link: '/setup/' },
-    ],
-  },
-  {
-    text: 'AI-Friendly Docs',
-    collapsed: true,
-    items: [
-      { text: 'AI-Readable Overview', link: '/for-agents/' },
-      { text: 'Complete API Reference', link: '/for-agents/full' },
-      { text: 'Models & Pricing', link: '/for-agents/models' },
-      { text: 'Error Codes', link: '/for-agents/errors' },
     ],
   },
   {
