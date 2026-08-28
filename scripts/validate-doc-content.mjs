@@ -112,6 +112,12 @@ const servicesGuide = readFileSync('agents/services.md', 'utf8')
 assert.match(servicesGuide, /202 Accepted/, 'Services guide must document asynchronous REST acceptance')
 assert.match(servicesGuide, /same Service/, 'Services guide must explain Session continuation binding')
 
+const schedulesGuide = readFileSync('agents/schedules.md', 'utf8')
+assert.match(schedulesGuide, /public DeploymentRun object has no `status` field/, 'Schedules guide must match the public DeploymentRun schema')
+assert.match(schedulesGuide, /status=pending\|succeeded\|failed/, 'Schedules guide must document trigger-outcome status filters')
+const sessionsGuide = readFileSync('agents/sessions.md', 'utf8')
+assert.match(sessionsGuide, /does not expose a `status` field/, 'Sessions guide must not invent a DeploymentRun response status')
+
 const setupGuide = readFileSync('setup/index.md', 'utf8')
 assert.doesNotMatch(setupGuide, /^The installer requires Node\.js 20 or newer\./m, 'Setup prerequisites must remain client-specific')
 assert.match(setupGuide, /Developer → API Keys/, 'Setup removal must point to the current CLI Login key location')

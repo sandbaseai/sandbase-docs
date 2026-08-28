@@ -15,9 +15,9 @@ A **Session** is one persistent interaction with an Agent. Its public ID begins 
 
 A Service can continue only a Session created by that same Service and still matching its Agent-version binding. A Schedule never reuses a Session.
 
-## Sessions and DeploymentRuns
+## Sessions and Schedule runs
 
-A Schedule uses a compatibility resource behind the `/v1/deployments` path. Each manual or cron trigger first creates a separate `drun_*` **DeploymentRun** record. A successful DeploymentRun has status `succeeded` and links to the newly created `session_id`; a failed record has no Session. DeploymentRun status describes Session creation only, not the later Agent execution lifecycle.
+A Schedule uses a compatibility resource behind the `/v1/deployments` path. Each manual or cron trigger first creates a separate `drun_*` **DeploymentRun** record. A successful trigger links the record to a newly created `session_id`; a failed trigger has no Session and includes an error. The public DeploymentRun object does not expose a `status` field; status filters on list endpoints select trigger outcomes, not the later Agent execution lifecycle.
 
 ## Work with a Session
 
@@ -52,4 +52,4 @@ curl -N https://api.sandbase.ai/v1/sessions/sess_01.../events/stream \
 - [Services](/agents/services)
 - [Schedules](/agents/schedules)
 - [Sessions API](/api-reference/sessions/)
-- [DeploymentRuns API](/api-reference/deployments/list-runs)
+- [Schedule runs API](/api-reference/deployments/list-runs)

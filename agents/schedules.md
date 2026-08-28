@@ -13,9 +13,9 @@ Every manual or cron trigger:
 
 1. creates a new `drun_*` DeploymentRun record;
 2. attempts to create exactly one new `sess_*` Session;
-3. resolves the DeploymentRun to `succeeded` with `session_id`, or `failed` with an error.
+3. records either a `session_id` on success or an error when Session creation fails.
 
-A DeploymentRun may briefly be `pending`. Its terminal status describes whether the trigger resolved to a Session; it is not the Agent's final execution status. Inspect the linked Session for subsequent Agent events and errors.
+The public DeploymentRun object has no `status` field. List endpoints accept `status=pending|succeeded|failed` as trigger-outcome filters, but those filters do not describe the linked Agent Session's execution status. Inspect the linked Session for subsequent Agent events and errors.
 
 ## Trigger manually
 
@@ -41,5 +41,5 @@ Use `trigger_type=manual|schedule` and `status=pending|succeeded|failed` filters
 
 - [Schedules API](/api-reference/deployments/)
 - [Trigger a Schedule](/api-reference/deployments/run)
-- [List DeploymentRuns](/api-reference/deployments/list-runs)
+- [List Schedule runs](/api-reference/deployments/list-runs)
 - [Sessions](/agents/sessions)
