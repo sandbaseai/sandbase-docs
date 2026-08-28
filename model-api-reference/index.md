@@ -15,7 +15,7 @@ Use language and reasoning models for chat, tool calling, structured output, vis
 
 ### [Image Generation](/model-api-reference/image-generation)
 
-Generate, edit, transform, upscale, and train image models through SandBase. Browse image models by provider, including OpenAI, Google, Ideogram, ByteDance, Recraft, Luma, and more.
+Generate, edit, transform, and upscale images through SandBase. Browse image models by provider, including OpenAI, Google, Ideogram, ByteDance, Recraft, Luma, and more.
 
 ### [Video Generation](/model-api-reference/video-generation)
 
