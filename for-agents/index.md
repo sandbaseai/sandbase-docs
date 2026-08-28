@@ -54,7 +54,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 | `GET` | `/v1/run/{id}` | Poll async generation status and retrieve results |
 | `GET` | `/v1/models` | List enabled logical models; defaults to the LLM type |
 | `GET` | `/v1/models/{id_or_name}` | Get model details, schema, capabilities, and pricing |
-| `GET` | `/v1/tasks/{id}/cost` | Get task cost and usage |
+| `GET` | `/v1/tasks/{task_id}/cost` | Get task cost and usage |
 
 ## Additional API Groups
 

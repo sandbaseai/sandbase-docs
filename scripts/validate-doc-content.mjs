@@ -45,6 +45,7 @@ const forbidden = [
   [/deepseek\/deepseek-v3\b/, 'stale hand-written example model'],
   [/gemini-2\.5-flash\b/, 'stale hand-written example model'],
   [/GET \/v1\/models\/\{name\}/, 'incorrect model detail path parameter'],
+  [/\/v1\/tasks\/\{id\}\/cost/, 'incorrect task cost path parameter'],
   [/\/docs\/setup\/cli\b/, 'retired setup alias'],
   [/sandbaseai-cli-\d+\.\d+\.\d+\.tgz/, 'version-pinned CLI archive; use the guided installer'],
   [/\bPlatform Groups?\b/, 'retired Platform Groups product label'],
