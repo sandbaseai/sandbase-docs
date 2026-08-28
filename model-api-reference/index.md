@@ -31,7 +31,7 @@ Use provider-native protocols without rewriting an existing integration. Browse 
 
 ## Inference API contracts
 
-The normalized request contracts are maintained in the [Inference API guides](/api-reference/), while this section stays focused on choosing a model and its provider-specific schema:
+The normalized request contracts are maintained in the linked API reference pages, while this section stays focused on choosing a model and its provider-specific schema:
 
 - [Models API](/api-reference/models/) — discover enabled model IDs, capabilities, and pricing
 - [Chat Completions](/api-reference/llm-gateway) — OpenAI-compatible text and vision requests
