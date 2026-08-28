@@ -42,7 +42,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
           { "name": "start_at", "type": "RFC 3339 timestamp", "required": false, "description": "Inclusive window start, paired with end_at." },
           { "name": "end_at", "type": "RFC 3339 timestamp", "required": false, "description": "Exclusive window end; the window cannot exceed 32 days." },
           { "name": "latency_sample", "type": "positive | terminal_positive", "required": false, "description": "Restrict latency samples to positive values." },
-          { "name": "min_latency_ms", "type": "integer", "required": false, "description": "Minimum latency in milliseconds." }
+          { "name": "min_latency_ms", "type": "integer", "required": false, "description": "Minimum latency in milliseconds." },
+          { "name": "timezone", "type": "IANA time-zone name", "required": false, "description": "Compatibility validation only. Timestamps remain UTC; exact request_id lookup ignores this parameter." }
         ]
       }
     ],
@@ -55,7 +56,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"items\": [\n    {\n      \"id\": \"opaque-task-id\",\n      \"model\": \"openai/gpt-4o\",\n      \"type\": \"llm\",\n      \"execution_mode\": \"sync\",\n      \"status\": \"completed\",\n      \"latency_ms\": 842,\n      \"user_cost\": \"0.001250\",\n      \"prompt_tokens\": 120,\n      \"completion_tokens\": 48,\n      \"total_tokens\": 168,\n      \"cached_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"created_at\": \"2026-08-24T00:00:00Z\",\n      \"completed_at\": \"2026-08-24T00:00:01Z\",\n      \"api_key_prefix\": \"sk-1234567\"\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"page_size\": 20\n}"
+      "code": "{\n  \"items\": [\n    {\n      \"id\": \"opaque-task-id\",\n      \"model\": \"openai/gpt-5.4\",\n      \"type\": \"llm\",\n      \"execution_mode\": \"sync\",\n      \"status\": \"completed\",\n      \"latency_ms\": 842,\n      \"user_cost\": \"0.001250\",\n      \"prompt_tokens\": 120,\n      \"completion_tokens\": 48,\n      \"total_tokens\": 168,\n      \"cached_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"created_at\": \"2026-08-24T00:00:00Z\",\n      \"completed_at\": \"2026-08-24T00:00:01Z\",\n      \"api_key_prefix\": \"sk-1234567\"\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"page_size\": 20\n}"
     }
   },
   "endpoints/acp": {

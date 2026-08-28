@@ -11,7 +11,7 @@ A **Service** publishes a tested Agent behind a stable callable interface. Servi
 Service invocation accepts an optional `session_id`. When omitted, SandBase creates a persistent Session. When supplied, the message is appended to that Session. No public Run or Runtime Session identity is created.
 :::
 
-## Management endpoints
+## Service operations
 
 | Method | Path | Purpose |
 |---|---|---|
@@ -27,7 +27,62 @@ List requests support cursor pagination and `q` search across IDs, names, slugs,
 
 For advanced Services, update requests can change the name, slug, bound Agent or Environment, protocols, status, and Session configuration. When changing `agent_version`, include the currently bound version as `expected_agent_version` to protect against concurrent upgrades. Declarative Service definitions remain immutable.
 
-## Invoke a Service
+### Create a Service
+
+Create a Service with an existing Agent and an explicit public protocol list:
+
+```bash
+curl -X POST https://api.sandbase.ai/v1/endpoints \
+  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Research service",
+    "agent_id": "agent_01...",
+    "protocols": ["rest"]
+  }'
+```
+
+The response is `201 Created`. Store its `id` (`ep_...`) for later management and invocation calls.
+
+### List Services
+
+```bash
+curl "https://api.sandbase.ai/v1/endpoints?limit=20" \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+```
+
+Pass the returned opaque `next_page` value as `page` to request the next page. Do not parse or construct cursors.
+
+### Get a Service
+
+```bash
+curl https://api.sandbase.ai/v1/endpoints/ep_01... \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+```
+
+Check `status` before invocation and `protocols` before choosing REST or ACP. Returned URLs do not by themselves indicate that a protocol is enabled.
+
+### Update a Service
+
+```bash
+curl -X PATCH https://api.sandbase.ai/v1/endpoints/ep_01... \
+  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Research service v2"}'
+```
+
+Use `PATCH` for new integrations. `POST /v1/endpoints/{endpoint_id}` is only a compatibility alias. An effective update returns `200 OK`.
+
+### Delete a Service
+
+```bash
+curl -X DELETE https://api.sandbase.ai/v1/endpoints/ep_01... \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+```
+
+A successful deletion returns `200 OK` with `{ "id": "ep_01...", "deleted": true }`. This operation removes the Service; it is not the same as setting `status` to `disabled`.
+
+## Invoke with REST
 
 `POST /v1/endpoints/{endpoint_id}/run`
 
@@ -59,7 +114,7 @@ The Service must be active and include the `rest` protocol.
 
 Read history or stream results through the Session Events APIs using the returned `session_id`.
 
-## Connect through ACP
+## Invoke with ACP
 
 `POST /v1/endpoints/{endpoint_id}/acp` handles the experimental ACP JSON-RPC transport for Services with the `acp` protocol.
 

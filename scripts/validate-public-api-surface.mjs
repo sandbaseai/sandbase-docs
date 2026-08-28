@@ -619,6 +619,9 @@ assert.match(updateDeploymentSchema, /required: \[feishu_webhook_url\]/, 'A non-
 assert.match(updateDeploymentSchema, /pattern: '\^https:\/\/open\\\.feishu\\\.cn\/open-apis\/bot\/v2\/hook\//, 'Deployment notifications must publish the enforced Feishu webhook origin and path')
 assert.match(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Sidebar must link to the Feishu notification test reference')
 assert.match(sidebar, /\/api-reference\/endpoints\/acp/, 'Sidebar must link to the Endpoint ACP reference')
+for (const anchor of ['create-a-service', 'list-services', 'get-a-service', 'update-a-service', 'delete-a-service', 'invoke-with-rest']) {
+  assert.match(sidebar, new RegExp(`/api-reference/endpoints/#${anchor}`), `Sidebar must expose the Service ${anchor} operation`)
+}
 const deploymentSchema = openapi.match(/^    Deployment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
   if (!publicPath.startsWith('/v1/deployment')) continue
@@ -800,6 +803,10 @@ const accountHistorySchema = openapi.match(/^    AccountHistoryItem:\n[\s\S]*?(?
 for (const field of ['latency_ms', 'user_cost', 'cache_creation_tokens', 'api_key_prefix']) {
   assert.match(accountHistorySchema, new RegExp(`required: \\[[^\\]]*${field}`), `Account history must require emitted ${field}`)
 }
+const accountHistoryReference = generatedReferenceSpecs.match(/"account\/history": \{[\s\S]*?(?=\n  "endpoints\/acp")/)?.[0] ?? ''
+assert.match(accountHistoryReference, /"name": "timezone"/, 'Account history reference must list the timezone compatibility parameter')
+assert.match(accountHistoryReference, /Timestamps remain UTC/, 'Account history reference must not imply timezone conversion')
+assert.doesNotMatch(accountHistoryReference, /openai\/gpt-4o"/, 'Account history reference must not use the retired default GPT-4o example')
 const taskCostPath = openapi.match(/^  \/v1\/tasks\/\{task_id\}\/cost:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(taskCostPath, /same API key/, 'Task cost lookup must document its API-key ownership boundary')
 assert.match(taskCostPath, /spending limit/, 'Task cost lookup must document its spending-limit exception')
