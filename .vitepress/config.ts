@@ -9,6 +9,15 @@ import {
 const siteOrigin = 'https://www.sandbase.ai'
 const docsBase = '/docs/'
 
+// Keep rendered document titles within a search-friendly length even when a
+// generated page title is long. Frontmatter titles remain descriptive; the
+// head title is shortened only at render time so navigation labels and body
+// headings are unaffected.
+function seoTitle(title: string, maxLength = 60) {
+  if (title.length <= maxLength) return title
+  return `${title.slice(0, maxLength - 1).trimEnd()}…`
+}
+
 function cleanPagePath(relativePath: string) {
   if (relativePath === 'model-api-reference/platform-apis/index.md') {
     return `${docsBase}model-api-reference/platform-apis`
@@ -32,7 +41,7 @@ function modelPageHead(pageData: any) {
 
   const canonicalUrl = absoluteDocsUrl(relativePath)
   const modelDetailUrl = `${siteOrigin}/model/${seo.vendorSlug}/${seo.modelSlug}`
-  const title = `${seo.modelName} API Reference | SandBase`
+  const title = seoTitle(`${seo.modelName} API Reference | SandBase`)
   const description = pageData.description
   const categoryName = isPlatformOperation ? 'APIs' : 'LLM Models'
   const categoryPath = isPlatformOperation ? 'platform-apis' : 'llm-models'
@@ -168,7 +177,7 @@ function genericPageHead(pageData: any) {
     : absoluteDocsUrl(pageData.relativePath)
   const robots = pageData.frontmatter?.robots
     || 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1'
-  const title = pageData.title ? `${pageData.title} | SandBase Docs` : 'SandBase Docs'
+  const title = seoTitle(pageData.title ? `${pageData.title} | SandBase Docs` : 'SandBase Docs')
   const description = pageData.description || 'SandBase documentation for Models, APIs, Agents, Setup, Services, Schedules, and Sessions.'
   const techArticleJsonLd = {
     '@context': 'https://schema.org',
@@ -224,6 +233,9 @@ export default defineConfig({
   ignoreDeadLinks: true,
   appearance: true,
   cleanUrls: true,
+  // Frontmatter titles are already curated for SEO; avoid appending a second
+  // brand suffix that can push rendered titles beyond search-result limits.
+  titleTemplate: false,
 
   sitemap: {
     hostname: siteOrigin,
