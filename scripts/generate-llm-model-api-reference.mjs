@@ -295,6 +295,7 @@ function cleanDescription(model) {
     .split(/\n\s*\n/)[0]
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\*\*/g, '')
+    .replace(/\brespone_format\b/g, 'response_format')
     .replace(/\s+/g, ' ')
     .trim()
 }

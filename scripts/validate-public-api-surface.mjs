@@ -1069,6 +1069,7 @@ function inspectPublishedSources(directory) {
     assert.doesNotMatch(content, /rate_limited[^\n]*Retry-After header/i, `${relative} must not claim public 429 responses include Retry-After`)
     assert.doesNotMatch(content, /"next_page": null/, `${relative} must omit next_page on a final page`)
     assert.doesNotMatch(content, /POST \/v1\/(?:chat\/completions|embeddings)[^\n]*Bearer or x-api-key/i, `${relative} must not claim standard gateways accept x-api-key`)
+    assert.doesNotMatch(content, /\brespone_format\b/, `${relative} must use the response_format field spelling`)
     if (relative.startsWith('model-api-reference/') && content.includes('"path":"/v1/run"')) {
       assert.doesNotMatch(content, /Error message if the task failed\. Empty on success\./, `${relative} must use the structured public run error`)
       assert.doesNotMatch(content, /Array of generated content\. Empty when status is not completed\./, `${relative} must omit outputs from non-terminal run responses`)
