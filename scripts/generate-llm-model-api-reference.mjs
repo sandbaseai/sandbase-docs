@@ -353,6 +353,15 @@ function cleanDescription(model) {
     .trim()
 }
 
+function displayLabel(model, duplicateTitles = new Set()) {
+  const title = cleanTitle(model)
+  if (!duplicateTitles.has(title)) return title
+  const vendor = String(model.vendor ?? '').trim()
+  const slug = String(model.model_slug ?? '').split('/').filter(Boolean).at(-1)
+  const qualifier = vendor && slug ? `${vendor}: ${slug}` : (vendor || model.model_slug)
+  return `${title} (${qualifier})`
+}
+
 function markdownText(value) {
   return value.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
@@ -1534,11 +1543,17 @@ function writeCategoryOverview(category) {
     : ['image', 'video', 'audio'].includes(category.key)
     ? `${category.title} models use the SandBase generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.`
     : 'Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. Other LLM models use `/v1/chat/completions` unless a model-specific protocol is added later.'
+  const titleCounts = new Map()
+  for (const model of category.models) {
+    const title = cleanTitle(model)
+    titleCounts.set(title, (titleCounts.get(title) ?? 0) + 1)
+  }
+  const duplicateTitles = new Set([...titleCounts].filter(([, count]) => count > 1).map(([title]) => title))
   const providerSections = category.sortedGroups.length
     ? category.sortedGroups.flatMap((group) => [
         `### ${group.vendor}${category.key === 'api' ? ` {#${group.slug}}` : ''}`,
         '',
-        ...group.models.slice(0, 12).map((model) => `- [${cleanTitle(model)}](${docsLink(model, category)}) — ${markdownText(cleanDescription(model))}`),
+        ...group.models.slice(0, 12).map((model) => `- [${displayLabel(model, duplicateTitles)}](${docsLink(model, category)}) — ${markdownText(cleanDescription(model))}`),
         ...(group.models.length > 12 ? [`- …and ${group.models.length - 12} more models in the sidebar.`] : []),
         '',
       ])
