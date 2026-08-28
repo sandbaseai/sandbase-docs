@@ -15,7 +15,7 @@ Image Generation models use the SandBase generation protocol declared in each mo
 
 - [GPT Image 2 Official API](/model-api-reference/image-generation/openai/gpt-image-2-official) — GPT Image 2 through the OpenAI Images API contract.
 - [GPT Image 2 Official Edit API](/model-api-reference/image-generation/openai/gpt-image-2-official/edit) — GPT Image 2 editing through the OpenAI Images API contract.
-- [GPT Image 2](/model-api-reference/image-generation/openai/gpt-image-2) — GPT Image 2, OpenAI's latest image model, is capable of making fine-grained, detailed edits to images.
+- [GPT Image 2](/model-api-reference/image-generation/openai/gpt-image-2) — GPT Image 2, OpenAI's available image model, is capable of making fine-grained, detailed edits to images.
 - [GPT Image 2 Editing](/model-api-reference/image-generation/openai/gpt-image-2/edit) — GPT Image 2 Editing supports image editing and multi-image synthesis with high-quality results.
 - [GPT-Image 1.5](/model-api-reference/image-generation/openai/gpt-image-1.5/edit) — Gpt Image 1.5 Edit by OpenAI - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [GPT Image 1.5](/model-api-reference/image-generation/openai/gpt-image-1.5) — Gpt Image 1.5 is OpenAI's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.

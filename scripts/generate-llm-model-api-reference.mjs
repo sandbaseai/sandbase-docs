@@ -348,6 +348,7 @@ function cleanDescription(model) {
     // without silently endorsing time-sensitive vendor marketing language.
     .replace(/\b(?:is|was)\s+OpenAI's\s+(?:latest|newest)\s+AI\s+model\b/gi, 'is an OpenAI model')
     .replace(/\bOpenAI's\s+(?:latest|newest)\s+model\b/gi, "OpenAI's model")
+    .replace(/\b(?:latest|newest)\b/gi, 'available')
     .replace(/\s+/g, ' ')
     .trim()
 }
