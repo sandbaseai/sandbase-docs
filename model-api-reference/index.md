@@ -43,7 +43,7 @@ The normalized request contracts are maintained in the linked API reference page
 
 ## Get started
 
-All LLM models use the OpenAI-compatible [Chat Completions API](/api-reference/llm-gateway). Claude models can also use the [Anthropic Messages API](/api-reference/anthropic-compat).
+Most LLM models use the OpenAI-compatible [Chat Completions API](/api-reference/llm-gateway). Anthropic models use the [Anthropic Messages API](/api-reference/anthropic-compat); choose the protocol shown on the selected model page when both options are available.
 
 ```bash
 curl https://api.sandbase.ai/v1/chat/completions \
