@@ -50,7 +50,7 @@ Before publishing, it is a configuration you can edit and test. After publishing
 
 ## What are Services?
 
-Services are tested Agents made available outside Build Agent through a stable callable surface. The underlying API resource is an Endpoint.
+Services are tested Agents made available outside Build Agent through a stable callable surface. The compatibility API path remains `/v1/endpoints`.
 
 Use them when your app, your users, or your AI tools need to call an Agent.
 
