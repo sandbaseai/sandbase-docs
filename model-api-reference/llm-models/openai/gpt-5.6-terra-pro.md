@@ -1,6 +1,6 @@
 ---
 title: "GPT-5.6 Terra Pro API Reference"
-description: "GPT-5.6 Terra Pro API reference for SandBase. Use model openai/gpt-5.6-terra-pro with /v1/chat/completions; view request fields, examples, capabilities, and response f..."
+description: "GPT-5.6 Terra Pro API reference for SandBase. Use model openai/gpt-5.6-terra-pro with /v1/chat/completions; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-5.6-terra-pro"

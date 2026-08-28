@@ -1,6 +1,6 @@
 ---
 title: "Meshy 6 - Multi Image To 3D API Reference"
-description: "Meshy 6 - Multi Image To 3D API reference for SandBase. Use model meshy/meshy-v6/multi-image-to-3d with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Meshy 6 - Multi Image To 3D API reference for SandBase. Use model meshy/meshy-v6/multi-image-to-3d with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 apiReferenceKey: "image/meshy/meshy-v6/multi-image-to-3d"

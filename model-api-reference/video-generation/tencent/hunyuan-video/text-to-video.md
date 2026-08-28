@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan Video Text to Video API Reference"
-description: "Hunyuan Video Text to Video API reference for SandBase. Use model tencent/hunyuan-video/text-to-video with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Hunyuan Video Text to Video API reference for SandBase. Use model tencent/hunyuan-video/text-to-video with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 apiReferenceKey: "video/tencent/hunyuan-video/text-to-video"

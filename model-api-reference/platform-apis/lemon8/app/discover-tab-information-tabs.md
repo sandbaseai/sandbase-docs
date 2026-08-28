@@ -1,6 +1,6 @@
 ---
 title: "Get Editor's Picks of discover page API Reference"
-description: "Get Editor's Picks of discover page API reference for SandBase. Use model lemon8/app/discover-tab-information-tabs with /v1/run; view request fields, examples, capabil..."
+description: "Get Editor's Picks of discover page API reference for SandBase. Use model lemon8/app/discover-tab-information-tabs with /v1/run; view request fields, examples, capabil."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan 3D Smart Topology API Reference"
-description: "Hunyuan 3D Smart Topology API reference for SandBase. Use model tencent/hunyuan-3d/3.1/smart-topology with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Hunyuan 3D Smart Topology API reference for SandBase. Use model tencent/hunyuan-3d/3.1/smart-topology with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 apiReferenceKey: "image/tencent/hunyuan-3d/3.1/smart-topology"

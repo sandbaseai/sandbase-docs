@@ -1,6 +1,6 @@
 ---
 title: "Meshy Rigging Multi Animation API Reference"
-description: "Meshy Rigging Multi Animation API reference for SandBase. Use model meshy/rigging/multi-animation with /v1/run; view request fields, examples, capabilities, and respon..."
+description: "Meshy Rigging Multi Animation API reference for SandBase. Use model meshy/rigging/multi-animation with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "image/meshy/rigging/multi-animation"

@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen3 Max Thinking API Reference"
-description: "Qwen: Qwen3 Max Thinking API reference for SandBase. Use model alibaba/qwen3-max-thinking with /v1/chat/completions; view request fields, examples, capabilities, and r..."
+description: "Qwen: Qwen3 Max Thinking API reference for SandBase. Use model alibaba/qwen3-max-thinking with /v1/chat/completions; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen3-max-thinking"

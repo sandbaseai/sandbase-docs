@@ -1,6 +1,6 @@
 ---
 title: "Stable Diffusion v1.5 API Reference"
-description: "Stable Diffusion v1.5 API reference for SandBase. Use model stability-ai/stable-diffusion-v15 with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Stable Diffusion v1.5 API reference for SandBase. Use model stability-ai/stable-diffusion-v15 with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "image/stability-ai/stable-diffusion-v15"

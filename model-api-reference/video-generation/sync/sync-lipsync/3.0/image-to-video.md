@@ -1,6 +1,6 @@
 ---
 title: "sync-3 Avatar Image to Video API Reference"
-description: "sync-3 Avatar Image to Video API reference for SandBase. Use model sync/sync-lipsync/3.0/image-to-video with /v1/run; view request fields, examples, capabilities, and..."
+description: "sync-3 Avatar Image to Video API reference for SandBase. Use model sync/sync-lipsync/3.0/image-to-video with /v1/run; view request fields, examples, capabilities, and;."
 aside: false
 outline: false
 apiReferenceKey: "video/sync/sync-lipsync/3.0/image-to-video"

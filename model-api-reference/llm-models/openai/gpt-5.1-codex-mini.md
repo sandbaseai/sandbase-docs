@@ -1,6 +1,6 @@
 ---
 title: "GPT-5.1-Codex-Mini API Reference"
-description: "GPT-5.1-Codex-Mini API reference for SandBase. Use model openai/gpt-5.1-codex-mini with /v1/chat/completions; view request fields, examples, capabilities, and response..."
+description: "GPT-5.1-Codex-Mini API reference for SandBase. Use model openai/gpt-5.1-codex-mini with /v1/chat/completions; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-5.1-codex-mini"

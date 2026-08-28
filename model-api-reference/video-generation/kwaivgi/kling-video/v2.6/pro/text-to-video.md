@@ -1,6 +1,6 @@
 ---
 title: "Kling Video V2.6… — Kwaivgi Text To Video API"
-description: "Kling Video V2.6 Pro API reference for SandBase. Use model kwaivgi/kling-video/v2.6/pro/text-to-video with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Kling Video V2.6 Pro API reference for SandBase. Use model kwaivgi/kling-video/v2.6/pro/text-to-video with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 apiReferenceKey: "video/kwaivgi/kling-video/v2.6/pro/text-to-video"

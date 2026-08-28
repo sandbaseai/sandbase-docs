@@ -1,6 +1,6 @@
 ---
 title: "Fetch hashtag suggestions API Reference"
-description: "Fetch hashtag suggestions API reference for SandBase. Use model douyin/search/challenge-suggest with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Fetch hashtag suggestions API reference for SandBase. Use model douyin/search/challenge-suggest with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

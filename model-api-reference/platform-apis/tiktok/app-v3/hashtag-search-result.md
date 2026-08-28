@@ -1,6 +1,6 @@
 ---
 title: "Get hashtag search results of specified keywords API Reference"
-description: "Get hashtag search results of specified keywords API reference for SandBase. Use model tiktok/app-v3/hashtag-search-result with /v1/run; view request fields, examples,..."
+description: "Get hashtag search results of specified keywords API reference for SandBase. Use model tiktok/app-v3/hashtag-search-result with /v1/run; view request fields, examples,."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

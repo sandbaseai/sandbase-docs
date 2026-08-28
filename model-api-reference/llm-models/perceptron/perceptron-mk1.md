@@ -1,6 +1,6 @@
 ---
 title: "Perceptron Mk1 API Reference"
-description: "Perceptron Mk1 API reference for SandBase. Use model perceptron/perceptron-mk1 with /v1/chat/completions; view request fields, examples, capabilities, and response for..."
+description: "Perceptron Mk1 API reference for SandBase. Use model perceptron/perceptron-mk1 with /v1/chat/completions; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 apiReferenceKey: "llm/perceptron/perceptron-mk1"

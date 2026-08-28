@@ -1,6 +1,6 @@
 ---
 title: "Search follower list API Reference"
-description: "Search follower list API reference for SandBase. Use model tiktok/app-v3/search-follower-list with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Search follower list API reference for SandBase. Use model tiktok/app-v3/search-follower-list with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

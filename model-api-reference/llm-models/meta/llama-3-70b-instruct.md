@@ -1,6 +1,6 @@
 ---
 title: "Llama 3 70B Instruct API Reference"
-description: "Llama 3 70B Instruct API reference for SandBase. Use model meta/llama-3-70b-instruct with /v1/chat/completions; view request fields, examples, capabilities, and respon..."
+description: "Llama 3 70B Instruct API reference for SandBase. Use model meta/llama-3-70b-instruct with /v1/chat/completions; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "llm/meta/llama-3-70b-instruct"

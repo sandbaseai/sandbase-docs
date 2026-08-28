@@ -1,6 +1,6 @@
 ---
 title: "Get kol Daily Fans V1 API Reference"
-description: "Get kol Daily Fans V1 API reference for SandBase. Use model douyin/xingtu/kol-daily-fans-v1 with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Get kol Daily Fans V1 API reference for SandBase. Use model douyin/xingtu/kol-daily-fans-v1 with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

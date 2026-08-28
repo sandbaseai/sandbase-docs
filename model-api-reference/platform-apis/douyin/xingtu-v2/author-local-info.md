@@ -1,6 +1,6 @@
 ---
 title: "Get Author Local Info API Reference"
-description: "Get Author Local Info API reference for SandBase. Use model douyin/xingtu-v2/author-local-info with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get Author Local Info API reference for SandBase. Use model douyin/xingtu-v2/author-local-info with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

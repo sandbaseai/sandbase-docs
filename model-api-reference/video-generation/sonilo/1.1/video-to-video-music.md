@@ -1,6 +1,6 @@
 ---
 title: "V1.1 Video to Video Music API Reference"
-description: "V1.1 Video to Video Music API reference for SandBase. Use model sonilo/1.1/video-to-video-music with /v1/run; view request fields, examples, capabilities, and response..."
+description: "V1.1 Video to Video Music API reference for SandBase. Use model sonilo/1.1/video-to-video-music with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "video/sonilo/1.1/video-to-video-music"

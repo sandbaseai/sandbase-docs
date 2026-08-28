@@ -1,6 +1,6 @@
 ---
 title: "GPT-4o Search Preview API Reference"
-description: "GPT-4o Search Preview API reference for SandBase. Use model openai/gpt-4o-search-preview with /v1/chat/completions; view request fields, examples, capabilities, and re..."
+description: "GPT-4o Search Preview API reference for SandBase. Use model openai/gpt-4o-search-preview with /v1/chat/completions; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 apiReferenceKey: "llm/openai/gpt-4o-search-preview"

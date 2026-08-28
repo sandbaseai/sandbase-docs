@@ -1,6 +1,6 @@
 ---
 title: "Arcee AI: Maestro Reasoning API Reference"
-description: "Arcee AI: Maestro Reasoning API reference for SandBase. Use model arcee-ai/maestro-reasoning with /v1/chat/completions; view request fields, examples, capabilities, an..."
+description: "Arcee AI: Maestro Reasoning API reference for SandBase. Use model arcee-ai/maestro-reasoning with /v1/chat/completions; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 apiReferenceKey: "llm/arcee-ai/maestro-reasoning"

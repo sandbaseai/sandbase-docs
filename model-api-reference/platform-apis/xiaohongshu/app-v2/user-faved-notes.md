@@ -1,6 +1,6 @@
 ---
 title: "Get user faved notes API Reference"
-description: "Get user faved notes API reference for SandBase. Use model xiaohongshu/app-v2/user-faved-notes with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get user faved notes API reference for SandBase. Use model xiaohongshu/app-v2/user-faved-notes with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

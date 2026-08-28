@@ -1,6 +1,6 @@
 ---
 title: "Get Video-Product Association Statistics API Reference"
-description: "Get Video-Product Association Statistics API reference for SandBase. Use model tiktok/creator/video-to-product-stats with /v1/run; view request fields, examples, capab..."
+description: "Get Video-Product Association Statistics API reference for SandBase. Use model tiktok/creator/video-to-product-stats with /v1/run; view request fields, examples, capab."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

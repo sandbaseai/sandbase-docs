@@ -1,6 +1,6 @@
 ---
 title: "Query Douyin user basic information API Reference"
-description: "Query Douyin user basic information API reference for SandBase. Use model douyin/web/query-user with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Query Douyin user basic information API reference for SandBase. Use model douyin/web/query-user with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

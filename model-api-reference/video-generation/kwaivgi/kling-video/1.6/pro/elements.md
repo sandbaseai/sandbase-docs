@@ -1,6 +1,6 @@
 ---
 title: "Kling 1.6… — Kwaivgi Pro Elements API"
-description: "Kling 1.6 Elements API reference for SandBase. Use model kwaivgi/kling-video/1.6/pro/elements with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Kling 1.6 Elements API reference for SandBase. Use model kwaivgi/kling-video/1.6/pro/elements with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "video/kwaivgi/kling-video/1.6/pro/elements"

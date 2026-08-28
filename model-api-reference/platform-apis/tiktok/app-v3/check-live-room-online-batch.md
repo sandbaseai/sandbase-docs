@@ -1,6 +1,6 @@
 ---
 title: "Batch check if live rooms are online API Reference"
-description: "Batch check if live rooms are online API reference for SandBase. Use model tiktok/app-v3/check-live-room-online-batch with /v1/run; view request fields, examples, capa..."
+description: "Batch check if live rooms are online API reference for SandBase. Use model tiktok/app-v3/check-live-room-online-batch with /v1/run; view request fields, examples, capa."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

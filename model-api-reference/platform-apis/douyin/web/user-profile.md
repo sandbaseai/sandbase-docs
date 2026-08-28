@@ -1,6 +1,6 @@
 ---
 title: "Get information of specified user by sec_user_id API Reference"
-description: "Get information of specified user by sec_user_id API reference for SandBase. Use model douyin/web/user-profile with /v1/run; view request fields, examples, capabilitie..."
+description: "Get information of specified user by sec_user_id API reference for SandBase. Use model douyin/web/user-profile with /v1/run; view request fields, examples, capabilitie."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

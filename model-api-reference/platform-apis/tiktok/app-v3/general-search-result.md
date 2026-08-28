@@ -1,6 +1,6 @@
 ---
 title: "Get comprehensive search results of specified keyword… API Ref"
-description: "Get comprehensive search results of specified keywords API reference for SandBase. Use model tiktok/app-v3/general-search-result with /v1/run; view request fields, exa..."
+description: "Get comprehensive search results of specified keywords API reference for SandBase. Use model tiktok/app-v3/general-search-result with /v1/run; view request fields, exa."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

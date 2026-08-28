@@ -1,6 +1,6 @@
 ---
 title: "Get reply to the specified comment API Reference"
-description: "Get reply to the specified comment API reference for SandBase. Use model bilibili/web/comment-reply with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Get reply to the specified comment API reference for SandBase. Use model bilibili/web/comment-reply with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

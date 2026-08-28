@@ -1,6 +1,6 @@
 ---
 title: "Get creator hot inspiration feed API Reference"
-description: "Get creator hot inspiration feed API reference for SandBase. Use model xiaohongshu/app-v2/creator-hot-inspiration-feed with /v1/run; view request fields, examples, cap..."
+description: "Get creator hot inspiration feed API reference for SandBase. Use model xiaohongshu/app-v2/creator-hot-inspiration-feed with /v1/run; view request fields, examples, cap."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

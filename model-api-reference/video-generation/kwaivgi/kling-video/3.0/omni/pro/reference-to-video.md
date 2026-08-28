@@ -1,6 +1,6 @@
 ---
 title: "Kling 3.0 Omni Pro Reference to Video API Reference"
-description: "Kling 3.0 Omni Pro Reference to Video API reference for SandBase. Use model kwaivgi/kling-video/3.0/omni/pro/reference-to-video with /v1/run; view request fields, exam..."
+description: "Kling 3.0 Omni Pro Reference to Video API reference for SandBase. Use model kwaivgi/kling-video/3.0/omni/pro/reference-to-video with /v1/run; view request fields, exam."
 aside: false
 outline: false
 apiReferenceKey: "video/kwaivgi/kling-video/3.0/omni/pro/reference-to-video"

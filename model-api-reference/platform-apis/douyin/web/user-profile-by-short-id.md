@@ -1,6 +1,6 @@
 ---
 title: "Get user information by Short ID API Reference"
-description: "Get user information by Short ID API reference for SandBase. Use model douyin/web/user-profile-by-short-id with /v1/run; view request fields, examples, capabilities, a..."
+description: "Get user information by Short ID API reference for SandBase. Use model douyin/web/user-profile-by-short-id with /v1/run; view request fields, examples, capabilities, a."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

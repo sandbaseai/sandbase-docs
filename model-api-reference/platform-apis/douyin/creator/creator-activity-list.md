@@ -1,6 +1,6 @@
 ---
 title: "Get creator activity list API Reference"
-description: "Get creator activity list API reference for SandBase. Use model douyin/creator/creator-activity-list with /v1/run; view request fields, examples, capabilities, and res..."
+description: "Get creator activity list API reference for SandBase. Use model douyin/creator/creator-activity-list with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

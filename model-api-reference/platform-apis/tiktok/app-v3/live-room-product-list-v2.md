@@ -1,6 +1,6 @@
 ---
 title: "Get live room product list data V2 API Reference"
-description: "Get live room product list data V2 API reference for SandBase. Use model tiktok/app-v3/live-room-product-list-v2 with /v1/run; view request fields, examples, capabilit..."
+description: "Get live room product list data V2 API reference for SandBase. Use model tiktok/app-v3/live-room-product-list-v2 with /v1/run; view request fields, examples, capabilit."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

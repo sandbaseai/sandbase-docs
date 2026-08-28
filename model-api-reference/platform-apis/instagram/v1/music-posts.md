@@ -1,6 +1,6 @@
 ---
 title: "Get posts using specific music API Reference"
-description: "Get posts using specific music API reference for SandBase. Use model instagram/v1/music-posts with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Get posts using specific music API reference for SandBase. Use model instagram/v1/music-posts with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

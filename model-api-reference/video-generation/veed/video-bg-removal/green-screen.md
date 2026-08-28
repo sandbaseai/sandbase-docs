@@ -1,6 +1,6 @@
 ---
 title: "VEED Video Background Removal Green Screen API Reference"
-description: "VEED Video Background Removal Green Screen API reference for SandBase. Use model veed/video-bg-removal/green-screen with /v1/run; view request fields, examples, capabi..."
+description: "VEED Video Background Removal Green Screen API reference for SandBase. Use model veed/video-bg-removal/green-screen with /v1/run; view request fields, examples, capabi."
 aside: false
 outline: false
 apiReferenceKey: "video/veed/video-bg-removal/green-screen"

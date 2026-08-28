@@ -1,6 +1,6 @@
 ---
 title: "LTX 2.0 Pro Text to Video API Reference"
-description: "LTX 2.0 Pro Text to Video API reference for SandBase. Use model lightricks/ltx-2.0-pro/text-to-video with /v1/run; view request fields, examples, capabilities, and res..."
+description: "LTX 2.0 Pro Text to Video API reference for SandBase. Use model lightricks/ltx-2.0-pro/text-to-video with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-2.0-pro/text-to-video"

@@ -1,6 +1,6 @@
 ---
 title: "Flux 2 Lora… — Bfl Apartment Staging API"
-description: "Flux 2 Lora Gallery API reference for SandBase. Use model bfl/flux-2-lora-gallery/apartment-staging with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Flux 2 Lora Gallery API reference for SandBase. Use model bfl/flux-2-lora-gallery/apartment-staging with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-2-lora-gallery/apartment-staging"

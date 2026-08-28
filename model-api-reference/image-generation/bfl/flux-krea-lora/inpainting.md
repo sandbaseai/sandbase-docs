@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 Krea [dev] Inpainting with LoRAs API Reference"
-description: "FLUX.1 Krea [dev] Inpainting with LoRAs API reference for SandBase. Use model bfl/flux-krea-lora/inpainting with /v1/run; view request fields, examples, capabilities,..."
+description: "FLUX.1 Krea [dev] Inpainting with LoRAs API reference for SandBase. Use model bfl/flux-krea-lora/inpainting with /v1/run; view request fields, examples, capabilities,;."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-krea-lora/inpainting"

@@ -1,6 +1,6 @@
 ---
 title: "Get kol Xingtu Index V1 API Reference"
-description: "Get kol Xingtu Index V1 API reference for SandBase. Use model douyin/xingtu/kol-xingtu-index-v1 with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get kol Xingtu Index V1 API reference for SandBase. Use model douyin/xingtu/kol-xingtu-index-v1 with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

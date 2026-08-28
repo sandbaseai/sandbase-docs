@@ -1,6 +1,6 @@
 ---
 title: "Get share info by share code API Reference"
-description: "Get share info by share code API reference for SandBase. Use model douyin/app-v3/share-info-by-share-code with /v1/run; view request fields, examples, capabilities, an..."
+description: "Get share info by share code API reference for SandBase. Use model douyin/app-v3/share-info-by-share-code with /v1/run; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

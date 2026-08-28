@@ -1,6 +1,6 @@
 ---
 title: "Get Author Content Hot Keywords API Reference"
-description: "Get Author Content Hot Keywords API reference for SandBase. Use model douyin/xingtu-v2/author-content-hot-keywords with /v1/run; view request fields, examples, capabil..."
+description: "Get Author Content Hot Keywords API reference for SandBase. Use model douyin/xingtu-v2/author-content-hot-keywords with /v1/run; view request fields, examples, capabil."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

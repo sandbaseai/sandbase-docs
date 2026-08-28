@@ -1,6 +1,6 @@
 ---
 title: "Kuaishou hot search person board API Reference"
-description: "Kuaishou hot search person board API reference for SandBase. Use model kuaishou/app/hot-search-person with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Kuaishou hot search person board API reference for SandBase. Use model kuaishou/app/hot-search-person with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

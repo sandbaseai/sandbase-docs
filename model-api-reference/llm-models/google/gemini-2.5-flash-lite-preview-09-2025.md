@@ -1,6 +1,6 @@
 ---
 title: "Gemini 2.5 Flash Lite Preview 09-2025 API Reference"
-description: "Gemini 2.5 Flash Lite Preview 09-2025 API reference for SandBase. Use model google/gemini-2.5-flash-lite-preview-09-2025 with /v1/chat/completions; view request fields..."
+description: "Gemini 2.5 Flash Lite Preview 09-2025 API reference for SandBase. Use model google/gemini-2.5-flash-lite-preview-09-2025 with /v1/chat/completions; view request fields."
 aside: false
 outline: false
 apiReferenceKey: "llm/google/gemini-2.5-flash-lite-preview-09-2025"

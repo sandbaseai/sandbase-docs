@@ -1,6 +1,6 @@
 ---
 title: "Get information of specified live room API Reference"
-description: "Get information of specified live room API reference for SandBase. Use model bilibili/web/live-room-detail with /v1/run; view request fields, examples, capabilities, a..."
+description: "Get information of specified live room API reference for SandBase. Use model bilibili/web/live-room-detail with /v1/run; view request fields, examples, capabilities, a."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

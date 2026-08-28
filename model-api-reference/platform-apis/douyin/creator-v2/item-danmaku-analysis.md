@@ -1,6 +1,6 @@
 ---
 title: "Fetch item bullet analysis API Reference"
-description: "Fetch item bullet analysis API reference for SandBase. Use model douyin/creator-v2/item-danmaku-analysis with /v1/run; view request fields, examples, capabilities, and..."
+description: "Fetch item bullet analysis API reference for SandBase. Use model douyin/creator-v2/item-danmaku-analysis with /v1/run; view request fields, examples, capabilities, and."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

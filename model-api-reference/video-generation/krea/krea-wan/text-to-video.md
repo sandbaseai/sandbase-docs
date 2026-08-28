@@ -1,6 +1,6 @@
 ---
 title: "Krea Wan 14b- Text to Video API Reference"
-description: "Krea Wan 14b- Text to Video API reference for SandBase. Use model krea/krea-wan/text-to-video with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Krea Wan 14b- Text to Video API reference for SandBase. Use model krea/krea-wan/text-to-video with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "video/krea/krea-wan/text-to-video"

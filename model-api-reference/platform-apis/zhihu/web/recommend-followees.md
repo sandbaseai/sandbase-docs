@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Recommend Followees API Reference"
-description: "Get Zhihu Recommend Followees API reference for SandBase. Use model zhihu/web/recommend-followees with /v1/run; view request fields, examples, capabilities, and respon..."
+description: "Get Zhihu Recommend Followees API reference for SandBase. Use model zhihu/web/recommend-followees with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

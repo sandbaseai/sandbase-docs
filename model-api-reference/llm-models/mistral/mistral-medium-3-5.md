@@ -1,6 +1,6 @@
 ---
 title: "Mistral Medium 3.5 API Reference"
-description: "Mistral Medium 3.5 API reference for SandBase. Use model mistral/mistral-medium-3-5 with /v1/chat/completions; view request fields, examples, capabilities, and respons..."
+description: "Mistral Medium 3.5 API reference for SandBase. Use model mistral/mistral-medium-3-5 with /v1/chat/completions; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/mistral-medium-3-5"

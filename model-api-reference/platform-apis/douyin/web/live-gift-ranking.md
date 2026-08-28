@@ -1,6 +1,6 @@
 ---
 title: "Get live room gift user ranking API Reference"
-description: "Get live room gift user ranking API reference for SandBase. Use model douyin/web/live-gift-ranking with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Get live room gift user ranking API reference for SandBase. Use model douyin/web/live-gift-ranking with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

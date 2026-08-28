@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP Subreddit Rules and Style Info API Reference"
-description: "Fetch Reddit APP Subreddit Rules and Style Info API reference for SandBase. Use model reddit/app/subreddit-style with /v1/run; view request fields, examples, capabilit..."
+description: "Fetch Reddit APP Subreddit Rules and Style Info API reference for SandBase. Use model reddit/app/subreddit-style with /v1/run; view request fields, examples, capabilit."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

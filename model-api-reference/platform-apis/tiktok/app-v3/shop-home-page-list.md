@@ -1,6 +1,6 @@
 ---
 title: "Get shop home page list data API Reference"
-description: "Get shop home page list data API reference for SandBase. Use model tiktok/app-v3/shop-home-page-list with /v1/run; view request fields, examples, capabilities, and res..."
+description: "Get shop home page list data API reference for SandBase. Use model tiktok/app-v3/shop-home-page-list with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

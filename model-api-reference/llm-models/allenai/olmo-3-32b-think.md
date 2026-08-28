@@ -1,6 +1,6 @@
 ---
 title: "AllenAI: Olmo 3 32B Think API Reference"
-description: "AllenAI: Olmo 3 32B Think API reference for SandBase. Use model allenai/olmo-3-32b-think with /v1/chat/completions; view request fields, examples, capabilities, and re..."
+description: "AllenAI: Olmo 3 32B Think API reference for SandBase. Use model allenai/olmo-3-32b-think with /v1/chat/completions; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 apiReferenceKey: "llm/allenai/olmo-3-32b-think"

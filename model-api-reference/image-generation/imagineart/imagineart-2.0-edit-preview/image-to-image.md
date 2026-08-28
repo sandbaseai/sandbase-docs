@@ -1,6 +1,6 @@
 ---
 title: "Imagineart 2.0 Edit Preview API Reference"
-description: "Imagineart 2.0 Edit Preview API reference for SandBase. Use model imagineart/imagineart-2.0-edit-preview/image-to-image with /v1/run; view request fields, examples, ca..."
+description: "Imagineart 2.0 Edit Preview API reference for SandBase. Use model imagineart/imagineart-2.0-edit-preview/image-to-image with /v1/run; view request fields, examples, ca."
 aside: false
 outline: false
 apiReferenceKey: "image/imagineart/imagineart-2.0-edit-preview/image-to-image"

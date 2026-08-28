@@ -1,6 +1,6 @@
 ---
 title: "Get video streams info V2 API Reference"
-description: "Get video streams info V2 API reference for SandBase. Use model youtube/web-v2/video-streams-v2 with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get video streams info V2 API reference for SandBase. Use model youtube/web-v2/video-streams-v2 with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

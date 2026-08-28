@@ -1,6 +1,6 @@
 ---
 title: "Get video note detail API Reference"
-description: "Get video note detail API reference for SandBase. Use model xiaohongshu/app-v2/video-note-detail with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Get video note detail API reference for SandBase. Use model xiaohongshu/app-v2/video-note-detail with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

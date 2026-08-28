@@ -1,6 +1,6 @@
 ---
 title: "SERP Yahoo Organic Live API Reference"
-description: "SERP Yahoo Organic Live API reference for SandBase. Use model dataforseo/v3/serp/yahoo/organic/live/advanced with /v1/run; view request fields, examples, capabilities,..."
+description: "SERP Yahoo Organic Live API reference for SandBase. Use model dataforseo/v3/serp/yahoo/organic/live/advanced with /v1/run; view request fields, examples, capabilities,."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Fetch account search list API Reference"
-description: "Fetch account search list API reference for SandBase. Use model douyin/billboard/hot-account-search-list with /v1/run; view request fields, examples, capabilities, and..."
+description: "Fetch account search list API reference for SandBase. Use model douyin/billboard/hot-account-search-list with /v1/run; view request fields, examples, capabilities, and."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

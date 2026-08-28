@@ -1,6 +1,6 @@
 ---
 title: "Nemotron 3 Super API Reference"
-description: "Nemotron 3 Super API reference for SandBase. Use model nvidia/nemotron-3-super-120b-a12b with /v1/chat/completions; view request fields, examples, capabilities, and re..."
+description: "Nemotron 3 Super API reference for SandBase. Use model nvidia/nemotron-3-super-120b-a12b with /v1/chat/completions; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 apiReferenceKey: "llm/nvidia/nemotron-3-super-120b-a12b"

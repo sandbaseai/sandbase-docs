@@ -1,6 +1,6 @@
 ---
 title: "Creator Search Insights Trend API Reference"
-description: "Creator Search Insights Trend API reference for SandBase. Use model tiktok/app-v3/creator-search-insights-trend with /v1/run; view request fields, examples, capabiliti..."
+description: "Creator Search Insights Trend API reference for SandBase. Use model tiktok/app-v3/creator-search-insights-trend with /v1/run; view request fields, examples, capabiliti."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Mistral 7B Instruct v0.1 API Reference"
-description: "Mistral 7B Instruct v0.1 API reference for SandBase. Use model mistral/mistral-7b-instruct-v0.1 with /v1/chat/completions; view request fields, examples, capabilities,..."
+description: "Mistral 7B Instruct v0.1 API reference for SandBase. Use model mistral/mistral-7b-instruct-v0.1 with /v1/chat/completions; view request fields, examples, capabilities,."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/mistral-7b-instruct-v0.1"

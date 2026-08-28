@@ -1,6 +1,6 @@
 ---
 title: "LongCat Video… — Meituan Image To Video 480p API"
-description: "LongCat Video Distilled API reference for SandBase. Use model meituan/longcat-video/distilled/image-to-video-480p with /v1/run; view request fields, examples, capabili..."
+description: "LongCat Video Distilled API reference for SandBase. Use model meituan/longcat-video/distilled/image-to-video-480p with /v1/run; view request fields, examples, capabili."
 aside: false
 outline: false
 apiReferenceKey: "video/meituan/longcat-video/distilled/image-to-video-480p"

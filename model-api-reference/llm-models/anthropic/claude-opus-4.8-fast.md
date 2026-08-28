@@ -1,6 +1,6 @@
 ---
 title: "Claude Opus 4.8 (Fast) API Reference"
-description: "Claude Opus 4.8 (Fast) API reference for SandBase. Use model anthropic/claude-opus-4.8-fast with /v1/messages; view request fields, examples, capabilities, and respons..."
+description: "Claude Opus 4.8 (Fast) API reference for SandBase. Use model anthropic/claude-opus-4.8-fast with /v1/messages; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "llm/anthropic/claude-opus-4.8-fast"

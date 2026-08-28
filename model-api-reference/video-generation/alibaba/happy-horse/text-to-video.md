@@ -1,6 +1,6 @@
 ---
 title: "Happy Horse Text to Video API Reference"
-description: "Happy Horse Text to Video API reference for SandBase. Use model alibaba/happy-horse/text-to-video with /v1/run; view request fields, examples, capabilities, and respon..."
+description: "Happy Horse Text to Video API reference for SandBase. Use model alibaba/happy-horse/text-to-video with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/happy-horse/text-to-video"

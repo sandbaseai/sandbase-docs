@@ -1,6 +1,6 @@
 ---
 title: "Get Showcase Product List API Reference"
-description: "Get Showcase Product List API reference for SandBase. Use model tiktok/creator/showcase-product-list with /v1/run; view request fields, examples, capabilities, and res..."
+description: "Get Showcase Product List API reference for SandBase. Use model tiktok/creator/showcase-product-list with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

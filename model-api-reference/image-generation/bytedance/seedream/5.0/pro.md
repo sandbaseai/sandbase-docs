@@ -1,6 +1,6 @@
 ---
 title: "Seedream 5.0 Pro Text to Image API Reference"
-description: "Seedream 5.0 Pro Text to Image API reference for SandBase. Use model bytedance/seedream/5.0/pro with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Seedream 5.0 Pro Text to Image API reference for SandBase. Use model bytedance/seedream/5.0/pro with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "image/bytedance/seedream/5.0/pro"

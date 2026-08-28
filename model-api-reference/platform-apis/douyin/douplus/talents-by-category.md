@@ -1,6 +1,6 @@
 ---
 title: "Search talents by category API Reference"
-description: "Search talents by category API reference for SandBase. Use model douyin/douplus/talents-by-category with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Search talents by category API reference for SandBase. Use model douyin/douplus/talents-by-category with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

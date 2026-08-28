@@ -1,6 +1,6 @@
 ---
 title: "Get comprehensive popular video information API Reference"
-description: "Get comprehensive popular video information API reference for SandBase. Use model bilibili/web/com-popular with /v1/run; view request fields, examples, capabilities, a..."
+description: "Get comprehensive popular video information API reference for SandBase. Use model bilibili/web/com-popular with /v1/run; view request fields, examples, capabilities, a."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

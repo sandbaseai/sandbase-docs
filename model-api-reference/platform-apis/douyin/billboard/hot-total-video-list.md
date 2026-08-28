@@ -1,6 +1,6 @@
 ---
 title: "Fetch video hot list API Reference"
-description: "Fetch video hot list API reference for SandBase. Use model douyin/billboard/hot-total-video-list with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Fetch video hot list API reference for SandBase. Use model douyin/billboard/hot-total-video-list with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

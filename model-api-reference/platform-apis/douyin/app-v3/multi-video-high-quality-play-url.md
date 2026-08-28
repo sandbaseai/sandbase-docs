@@ -1,6 +1,6 @@
 ---
 title: "Batch get the… — Douyin Multi Video High Quality Play Url API"
-description: "Batch get the highest quality play URL of videos API reference for SandBase. Use model douyin/app-v3/multi-video-high-quality-play-url with /v1/run; view request field..."
+description: "Batch get the highest quality play URL of videos API reference for SandBase. Use model douyin/app-v3/multi-video-high-quality-play-url with /v1/run; view request field."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

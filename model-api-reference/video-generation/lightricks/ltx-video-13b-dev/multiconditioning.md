@@ -1,6 +1,6 @@
 ---
 title: "LTX Video-0.9.7 — Lightricks Multiconditioning API"
-description: "LTX Video-0.9.7 13B API reference for SandBase. Use model lightricks/ltx-video-13b-dev/multiconditioning with /v1/run; view request fields, examples, capabilities, and..."
+description: "LTX Video-0.9.7 13B API reference for SandBase. Use model lightricks/ltx-video-13b-dev/multiconditioning with /v1/run; view request fields, examples, capabilities, and."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-video-13b-dev/multiconditioning"

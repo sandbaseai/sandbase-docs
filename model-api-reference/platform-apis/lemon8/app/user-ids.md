@@ -1,6 +1,6 @@
 ---
 title: "Get user IDs in batch through sharing links API Reference"
-description: "Get user IDs in batch through sharing links API reference for SandBase. Use model lemon8/app/user-ids with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Get user IDs in batch through sharing links API reference for SandBase. Use model lemon8/app/user-ids with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

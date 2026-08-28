@@ -1,6 +1,6 @@
 ---
 title: "Get creator info and milestones API Reference"
-description: "Get creator info and milestones API reference for SandBase. Use model tiktok/analytics/creator-info-and-milestones with /v1/run; view request fields, examples, capabil..."
+description: "Get creator info and milestones API reference for SandBase. Use model tiktok/analytics/creator-info-and-milestones with /v1/run; view request fields, examples, capabil."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

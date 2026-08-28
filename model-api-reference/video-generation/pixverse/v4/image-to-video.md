@@ -1,6 +1,6 @@
 ---
 title: "PixVerse V4 Image to Video API Reference"
-description: "PixVerse V4 Image to Video API reference for SandBase. Use model pixverse/v4/image-to-video with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "PixVerse V4 Image to Video API reference for SandBase. Use model pixverse/v4/image-to-video with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 apiReferenceKey: "video/pixverse/v4/image-to-video"

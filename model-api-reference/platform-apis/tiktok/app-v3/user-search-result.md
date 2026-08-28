@@ -1,6 +1,6 @@
 ---
 title: "Get user search results of specified keywords API Reference"
-description: "Get user search results of specified keywords API reference for SandBase. Use model tiktok/app-v3/user-search-result with /v1/run; view request fields, examples, capab..."
+description: "Get user search results of specified keywords API reference for SandBase. Use model tiktok/app-v3/user-search-result with /v1/run; view request fields, examples, capab."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

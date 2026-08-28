@@ -1,6 +1,6 @@
 ---
 title: "Get series video list API Reference"
-description: "Get series video list API reference for SandBase. Use model douyin/app-v3/series-video-list with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Get series video list API reference for SandBase. Use model douyin/app-v3/series-video-list with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Content Analysis Search API Reference"
-description: "Content Analysis Search API reference for SandBase. Use model dataforseo/v3/content_analysis/search/live with /v1/run; view request fields, examples, capabilities, and..."
+description: "Content Analysis Search API reference for SandBase. Use model dataforseo/v3/content_analysis/search/live with /v1/run; view request fields, examples, capabilities, and."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

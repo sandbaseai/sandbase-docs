@@ -1,6 +1,6 @@
 ---
 title: "Multi Get Item Stats API Reference"
-description: "Multi Get Item Stats API reference for SandBase. Use model douyin/xingtu-v2/multi-get-item-stats with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Multi Get Item Stats API reference for SandBase. Use model douyin/xingtu-v2/multi-get-item-stats with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

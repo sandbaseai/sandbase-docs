@@ -1,6 +1,6 @@
 ---
 title: "Keywords Google Trends Explore API Reference"
-description: "Keywords Google Trends Explore API reference for SandBase. Use model dataforseo/v3/keywords_data/google_trends/explore/live with /v1/run; view request fields, examples..."
+description: "Keywords Google Trends Explore API reference for SandBase. Use model dataforseo/v3/keywords_data/google_trends/explore/live with /v1/run; view request fields, examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

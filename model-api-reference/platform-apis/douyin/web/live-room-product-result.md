@@ -1,6 +1,6 @@
 ---
 title: "Douyin live room product information API Reference"
-description: "Douyin live room product information API reference for SandBase. Use model douyin/web/live-room-product-result with /v1/run; view request fields, examples, capabilitie..."
+description: "Douyin live room product information API reference for SandBase. Use model douyin/web/live-room-product-result with /v1/run; view request fields, examples, capabilitie."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

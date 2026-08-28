@@ -1,6 +1,6 @@
 ---
 title: "SERP Google Shopping Live API Reference"
-description: "SERP Google Shopping Live API reference for SandBase. Use model dataforseo/v3/serp/google/shopping/live/advanced with /v1/run; view request fields, examples, capabilit..."
+description: "SERP Google Shopping Live API reference for SandBase. Use model dataforseo/v3/serp/google/shopping/live/advanced with /v1/run; view request fields, examples, capabilit."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

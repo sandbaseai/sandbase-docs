@@ -1,6 +1,6 @@
 ---
 title: "Backlinks Domain Pages API Reference"
-description: "Backlinks Domain Pages API reference for SandBase. Use model dataforseo/v3/backlinks/domain_pages/live with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Backlinks Domain Pages API reference for SandBase. Use model dataforseo/v3/backlinks/domain_pages/live with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

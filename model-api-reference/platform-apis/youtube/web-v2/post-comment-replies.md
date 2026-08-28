@@ -1,6 +1,6 @@
 ---
 title: "Get post comment replies API Reference"
-description: "Get post comment replies API reference for SandBase. Use model youtube/web-v2/post-comment-replies with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Get post comment replies API reference for SandBase. Use model youtube/web-v2/post-comment-replies with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

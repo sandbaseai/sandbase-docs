@@ -1,6 +1,6 @@
 ---
 title: "Get kol Data Overview V1 API Reference"
-description: "Get kol Data Overview V1 API reference for SandBase. Use model douyin/xingtu/kol-data-overview-v1 with /v1/run; view request fields, examples, capabilities, and respon..."
+description: "Get kol Data Overview V1 API reference for SandBase. Use model douyin/xingtu/kol-data-overview-v1 with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

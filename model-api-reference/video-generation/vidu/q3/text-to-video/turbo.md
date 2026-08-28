@@ -1,6 +1,6 @@
 ---
 title: "Vidu Q3 Text to Video Turbo API Reference"
-description: "Vidu Q3 Text to Video Turbo API reference for SandBase. Use model vidu/q3/text-to-video/turbo with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Vidu Q3 Text to Video Turbo API reference for SandBase. Use model vidu/q3/text-to-video/turbo with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "video/vidu/q3/text-to-video/turbo"

@@ -1,6 +1,6 @@
 ---
 title: "Sora 2 Image to Video Pro API Reference"
-description: "Sora 2 Image to Video Pro API reference for SandBase. Use model openai/sora-2/image-to-video/pro with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Sora 2 Image to Video Pro API reference for SandBase. Use model openai/sora-2/image-to-video/pro with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "video/openai/sora-2/image-to-video/pro"

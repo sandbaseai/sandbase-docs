@@ -1,6 +1,6 @@
 ---
 title: "inclusionAI: Ling-2.6-flash API Reference"
-description: "inclusionAI: Ling-2.6-flash API reference for SandBase. Use model inclusionai/ling-2.6-flash with /v1/chat/completions; view request fields, examples, capabilities, an..."
+description: "inclusionAI: Ling-2.6-flash API reference for SandBase. Use model inclusionai/ling-2.6-flash with /v1/chat/completions; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 apiReferenceKey: "llm/inclusionai/ling-2.6-flash"

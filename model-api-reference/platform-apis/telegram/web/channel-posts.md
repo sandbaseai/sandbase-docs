@@ -1,6 +1,6 @@
 ---
 title: "Get channel posts (paginated) API Reference"
-description: "Get channel posts (paginated) API reference for SandBase. Use model telegram/web/channel-posts with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get channel posts (paginated) API reference for SandBase. Use model telegram/web/channel-posts with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

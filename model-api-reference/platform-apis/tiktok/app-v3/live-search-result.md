@@ -1,6 +1,6 @@
 ---
 title: "Get live search results of specified keywords API Reference"
-description: "Get live search results of specified keywords API reference for SandBase. Use model tiktok/app-v3/live-search-result with /v1/run; view request fields, examples, capab..."
+description: "Get live search results of specified keywords API reference for SandBase. Use model tiktok/app-v3/live-search-result with /v1/run; view request fields, examples, capab."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

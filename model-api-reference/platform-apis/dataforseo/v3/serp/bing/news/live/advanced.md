@@ -1,6 +1,6 @@
 ---
 title: "SERP Bing News Live API Reference"
-description: "SERP Bing News Live API reference for SandBase. Use model dataforseo/v3/serp/bing/news/live/advanced with /v1/run; view request fields, examples, capabilities, and res..."
+description: "SERP Bing News Live API reference for SandBase. Use model dataforseo/v3/serp/bing/news/live/advanced with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

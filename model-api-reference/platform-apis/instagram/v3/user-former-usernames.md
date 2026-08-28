@@ -1,6 +1,6 @@
 ---
 title: "Get user former usernames API Reference"
-description: "Get user former usernames API reference for SandBase. Use model instagram/v3/user-former-usernames with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Get user former usernames API reference for SandBase. Use model instagram/v3/user-former-usernames with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

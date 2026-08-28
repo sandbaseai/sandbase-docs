@@ -1,6 +1,6 @@
 ---
 title: "Veo3.1 Lite FLF API Reference"
-description: "Veo3.1 Lite FLF API reference for SandBase. Use model google/veo3.1/lite/first-last-frame-to-video with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Veo3.1 Lite FLF API reference for SandBase. Use model google/veo3.1/lite/first-last-frame-to-video with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 apiReferenceKey: "video/google/veo3.1/lite/first-last-frame-to-video"

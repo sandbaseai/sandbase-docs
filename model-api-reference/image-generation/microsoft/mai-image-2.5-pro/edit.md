@@ -1,6 +1,6 @@
 ---
 title: "MAI Image 2.5 Pro (Edit) API Reference"
-description: "MAI Image 2.5 Pro (Edit) API reference for SandBase. Use model microsoft/mai-image-2.5-pro/edit with /v1/run; view request fields, examples, capabilities, and response..."
+description: "MAI Image 2.5 Pro (Edit) API reference for SandBase. Use model microsoft/mai-image-2.5-pro/edit with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "image/microsoft/mai-image-2.5-pro/edit"

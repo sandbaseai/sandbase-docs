@@ -1,6 +1,6 @@
 ---
 title: "Get product category list API Reference"
-description: "Get product category list API reference for SandBase. Use model tiktok/shop-web/products-category-list with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Get product category list API reference for SandBase. Use model tiktok/shop-web/products-category-list with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get home recommend feed API Reference"
-description: "Get home recommend feed API reference for SandBase. Use model weibo/app/home-recommend-feed with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Get home recommend feed API reference for SandBase. Use model weibo/app/home-recommend-feed with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

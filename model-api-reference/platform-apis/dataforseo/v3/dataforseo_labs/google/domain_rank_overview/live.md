@@ -1,6 +1,6 @@
 ---
 title: "Labs Google Domain Rank Overview API Reference"
-description: "Labs Google Domain Rank Overview API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/domain_rank_overview/live with /v1/run; view request fields..."
+description: "Labs Google Domain Rank Overview API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/domain_rank_overview/live with /v1/run; view request fields."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

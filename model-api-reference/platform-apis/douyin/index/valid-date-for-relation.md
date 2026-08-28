@@ -1,6 +1,6 @@
 ---
 title: "Get valid date for relation API Reference"
-description: "Get valid date for relation API reference for SandBase. Use model douyin/index/valid-date-for-relation with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Get valid date for relation API reference for SandBase. Use model douyin/index/valid-date-for-relation with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

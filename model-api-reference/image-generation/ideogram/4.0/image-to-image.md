@@ -1,6 +1,6 @@
 ---
 title: "Ideogram V4.0q Image to Image API Reference"
-description: "Ideogram V4.0q Image to Image API reference for SandBase. Use model ideogram/4.0/image-to-image with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Ideogram V4.0q Image to Image API reference for SandBase. Use model ideogram/4.0/image-to-image with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram/4.0/image-to-image"

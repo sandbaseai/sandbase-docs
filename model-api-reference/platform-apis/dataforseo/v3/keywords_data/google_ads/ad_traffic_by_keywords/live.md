@@ -1,6 +1,6 @@
 ---
 title: "Keywords Google Ads Traffic API Reference"
-description: "Keywords Google Ads Traffic API reference for SandBase. Use model dataforseo/v3/keywords_data/google_ads/ad_traffic_by_keywords/live with /v1/run; view request fields,..."
+description: "Keywords Google Ads Traffic API reference for SandBase. Use model dataforseo/v3/keywords_data/google_ads/ad_traffic_by_keywords/live with /v1/run; view request fields,."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

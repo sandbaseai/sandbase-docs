@@ -1,6 +1,6 @@
 ---
 title: "Fetch search list with rising popularity API Reference"
-description: "Fetch search list with rising popularity API reference for SandBase. Use model douyin/billboard/hot-total-high-search-list with /v1/run; view request fields, examples,..."
+description: "Fetch search list with rising popularity API reference for SandBase. Use model douyin/billboard/hot-total-high-search-list with /v1/run; view request fields, examples,."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

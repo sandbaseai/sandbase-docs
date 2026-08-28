@@ -1,6 +1,6 @@
 ---
 title: "Get Demander MCN List API Reference"
-description: "Get Demander MCN List API reference for SandBase. Use model douyin/xingtu-v2/demander-mcn-list with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get Demander MCN List API reference for SandBase. Use model douyin/xingtu-v2/demander-mcn-list with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

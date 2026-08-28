@@ -1,6 +1,6 @@
 ---
 title: "Get video featured feed API Reference"
-description: "Get video featured feed API reference for SandBase. Use model weibo/app/video-featured-feed with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Get video featured feed API reference for SandBase. Use model weibo/app/video-featured-feed with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

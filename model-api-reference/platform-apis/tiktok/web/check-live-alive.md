@@ -1,6 +1,6 @@
 ---
 title: "Live room start status check API Reference"
-description: "Live room start status check API reference for SandBase. Use model tiktok/web/check-live-alive with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Live room start status check API reference for SandBase. Use model tiktok/web/check-live-alive with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

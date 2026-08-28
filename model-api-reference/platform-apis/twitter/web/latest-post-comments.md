@@ -1,6 +1,6 @@
 ---
 title: "Get the latest tweet comments API Reference"
-description: "Get the latest tweet comments API reference for SandBase. Use model twitter/web/latest-post-comments with /v1/run; view request fields, examples, capabilities, and res..."
+description: "Get the latest tweet comments API reference for SandBase. Use model twitter/web/latest-post-comments with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

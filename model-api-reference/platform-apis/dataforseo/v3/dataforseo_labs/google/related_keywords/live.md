@@ -1,6 +1,6 @@
 ---
 title: "Labs Google Related Keywords API Reference"
-description: "Labs Google Related Keywords API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/related_keywords/live with /v1/run; view request fields, exampl..."
+description: "Labs Google Related Keywords API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/related_keywords/live with /v1/run; view request fields, exampl."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

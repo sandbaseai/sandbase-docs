@@ -1,6 +1,6 @@
 ---
 title: "Get Weibo similar search recommendations API Reference"
-description: "Get Weibo similar search recommendations API reference for SandBase. Use model weibo/web-v2/similar-search with /v1/run; view request fields, examples, capabilities, a..."
+description: "Get Weibo similar search recommendations API reference for SandBase. Use model weibo/web-v2/similar-search with /v1/run; view request fields, examples, capabilities, a."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

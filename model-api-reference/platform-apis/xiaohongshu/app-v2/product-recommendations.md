@@ -1,6 +1,6 @@
 ---
 title: "Get product recommendations API Reference"
-description: "Get product recommendations API reference for SandBase. Use model xiaohongshu/app-v2/product-recommendations with /v1/run; view request fields, examples, capabilities,..."
+description: "Get product recommendations API reference for SandBase. Use model xiaohongshu/app-v2/product-recommendations with /v1/run; view request fields, examples, capabilities,."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

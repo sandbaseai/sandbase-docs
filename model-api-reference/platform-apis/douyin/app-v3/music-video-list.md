@@ -1,6 +1,6 @@
 ---
 title: "Get video list of specified… — Douyin Music Video List API"
-description: "Get video list of specified music API reference for SandBase. Use model douyin/app-v3/music-video-list with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Get video list of specified music API reference for SandBase. Use model douyin/app-v3/music-video-list with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

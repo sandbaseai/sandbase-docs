@@ -1,6 +1,6 @@
 ---
 title: "Labs Google Bulk Keyword Difficulty API Reference"
-description: "Labs Google Bulk Keyword Difficulty API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/bulk_keyword_difficulty/live with /v1/run; view request..."
+description: "Labs Google Bulk Keyword Difficulty API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/bulk_keyword_difficulty/live with /v1/run; view request;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

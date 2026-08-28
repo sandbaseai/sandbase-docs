@@ -1,6 +1,6 @@
 ---
 title: "Get Creator Video Overview API Reference"
-description: "Get Creator Video Overview API reference for SandBase. Use model tiktok/creator/video-analytics-summary with /v1/run; view request fields, examples, capabilities, and..."
+description: "Get Creator Video Overview API reference for SandBase. Use model tiktok/creator/video-analytics-summary with /v1/run; view request fields, examples, capabilities, and;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

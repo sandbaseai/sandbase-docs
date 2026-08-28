@@ -1,6 +1,6 @@
 ---
 title: "Kuaishou hot board detail API Reference"
-description: "Kuaishou hot board detail API reference for SandBase. Use model kuaishou/app/hot-board-detail with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Kuaishou hot board detail API reference for SandBase. Use model kuaishou/app/hot-board-detail with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

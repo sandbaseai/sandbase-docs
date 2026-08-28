@@ -1,6 +1,6 @@
 ---
 title: "Get single video data by… — Tiktok One Video By Share Url API"
-description: "Get single video data by sharing link API reference for SandBase. Use model tiktok/app-v3/one-video-by-share-url with /v1/run; view request fields, examples, capabilit..."
+description: "Get single video data by sharing link API reference for SandBase. Use model tiktok/app-v3/one-video-by-share-url with /v1/run; view request fields, examples, capabilit."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

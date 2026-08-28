@@ -1,6 +1,6 @@
 ---
 title: "Qwen Image 3 Text to Image API Reference"
-description: "Qwen Image 3 Text to Image API reference for SandBase. Use model alibaba/qwen-image-3/text-to-image with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Qwen Image 3 Text to Image API reference for SandBase. Use model alibaba/qwen-image-3/text-to-image with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/qwen-image-3/text-to-image"

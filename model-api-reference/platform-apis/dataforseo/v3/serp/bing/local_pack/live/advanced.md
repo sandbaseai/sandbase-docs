@@ -1,6 +1,6 @@
 ---
 title: "SERP Bing Local Pack Live API Reference"
-description: "SERP Bing Local Pack Live API reference for SandBase. Use model dataforseo/v3/serp/bing/local_pack/live/advanced with /v1/run; view request fields, examples, capabilit..."
+description: "SERP Bing Local Pack Live API reference for SandBase. Use model dataforseo/v3/serp/bing/local_pack/live/advanced with /v1/run; view request fields, examples, capabilit."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Content author portrait API Reference"
-description: "Content author portrait API reference for SandBase. Use model douyin/index/content-author-portrait with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Content author portrait API reference for SandBase. Use model douyin/index/content-author-portrait with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

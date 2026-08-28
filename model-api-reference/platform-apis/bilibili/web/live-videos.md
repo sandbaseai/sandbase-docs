@@ -1,6 +1,6 @@
 ---
 title: "Get live video data of specified room API Reference"
-description: "Get live video data of specified room API reference for SandBase. Use model bilibili/web/live-videos with /v1/run; view request fields, examples, capabilities, and res..."
+description: "Get live video data of specified room API reference for SandBase. Use model bilibili/web/live-videos with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

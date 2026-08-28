@@ -1,6 +1,6 @@
 ---
 title: "Ideogram V2 Turbo Remix API Reference"
-description: "Ideogram V2 Turbo Remix API reference for SandBase. Use model ideogram-ai/ideogram-v2/turbo/remix with /v1/run; view request fields, examples, capabilities, and respon..."
+description: "Ideogram V2 Turbo Remix API reference for SandBase. Use model ideogram-ai/ideogram-v2/turbo/remix with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram-ai/ideogram-v2/turbo/remix"

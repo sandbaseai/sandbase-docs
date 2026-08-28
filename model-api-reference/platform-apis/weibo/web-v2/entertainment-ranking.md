@@ -1,6 +1,6 @@
 ---
 title: "Get Weibo entertainment ranking API Reference"
-description: "Get Weibo entertainment ranking API reference for SandBase. Use model weibo/web-v2/entertainment-ranking with /v1/run; view request fields, examples, capabilities, and..."
+description: "Get Weibo entertainment ranking API reference for SandBase. Use model weibo/web-v2/entertainment-ranking with /v1/run; view request fields, examples, capabilities, and."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

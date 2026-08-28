@@ -1,6 +1,6 @@
 ---
 title: "Domain Analytics WHOIS API Reference"
-description: "Domain Analytics WHOIS API reference for SandBase. Use model dataforseo/v3/domain_analytics/whois/live with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Domain Analytics WHOIS API reference for SandBase. Use model dataforseo/v3/domain_analytics/whois/live with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

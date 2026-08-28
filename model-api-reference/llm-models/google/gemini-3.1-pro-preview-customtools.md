@@ -1,6 +1,6 @@
 ---
 title: "Gemini 3.1 Pro Preview Custom Tools API Reference"
-description: "Gemini 3.1 Pro Preview Custom Tools API reference for SandBase. Use model google/gemini-3.1-pro-preview-customtools with /v1/chat/completions; view request fields, exa..."
+description: "Gemini 3.1 Pro Preview Custom Tools API reference for SandBase. Use model google/gemini-3.1-pro-preview-customtools with /v1/chat/completions; view request fields, exa."
 aside: false
 outline: false
 apiReferenceKey: "llm/google/gemini-3.1-pro-preview-customtools"

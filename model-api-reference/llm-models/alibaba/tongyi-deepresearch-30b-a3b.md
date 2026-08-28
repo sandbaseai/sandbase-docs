@@ -1,6 +1,6 @@
 ---
 title: "Tongyi DeepResearch 30B A3B API Reference"
-description: "Tongyi DeepResearch 30B A3B API reference for SandBase. Use model alibaba/tongyi-deepresearch-30b-a3b with /v1/chat/completions; view request fields, examples, capabil..."
+description: "Tongyi DeepResearch 30B A3B API reference for SandBase. Use model alibaba/tongyi-deepresearch-30b-a3b with /v1/chat/completions; view request fields, examples, capabil."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/tongyi-deepresearch-30b-a3b"

@@ -1,6 +1,6 @@
 ---
 title: "Get current hot topics API Reference"
-description: "Get current hot topics API reference for SandBase. Use model douyin/index/current-hot-topic with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Get current hot topics API reference for SandBase. Use model douyin/index/current-hot-topic with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

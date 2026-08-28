@@ -1,6 +1,6 @@
 ---
 title: "V1.1 Text to Sound Effects API Reference"
-description: "V1.1 Text to Sound Effects API reference for SandBase. Use model sonilo/1.1/text-to-sound-effects with /v1/run; view request fields, examples, capabilities, and respon..."
+description: "V1.1 Text to Sound Effects API reference for SandBase. Use model sonilo/1.1/text-to-sound-effects with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "audio/sonilo/1.1/text-to-sound-effects"

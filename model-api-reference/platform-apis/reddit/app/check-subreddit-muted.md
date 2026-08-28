@@ -1,6 +1,6 @@
 ---
 title: "Check if Subreddit is Muted API Reference"
-description: "Check if Subreddit is Muted API reference for SandBase. Use model reddit/app/check-subreddit-muted with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Check if Subreddit is Muted API reference for SandBase. Use model reddit/app/check-subreddit-muted with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

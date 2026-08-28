@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Column Article Detail API Reference"
-description: "Get Zhihu Column Article Detail API reference for SandBase. Use model zhihu/web/column-article-detail with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Get Zhihu Column Article Detail API reference for SandBase. Use model zhihu/web/column-article-detail with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get user_id and sec_user_id by Username API Reference"
-description: "Get user_id and sec_user_id by Username API reference for SandBase. Use model tiktok/app-v3/user-id-and-sec-user-id-by-username with /v1/run; view request fields, exam..."
+description: "Get user_id and sec_user_id by Username API reference for SandBase. Use model tiktok/app-v3/user-id-and-sec-user-id-by-username with /v1/run; view request fields, exam."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

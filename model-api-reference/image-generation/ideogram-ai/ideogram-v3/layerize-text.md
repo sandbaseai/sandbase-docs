@@ -1,6 +1,6 @@
 ---
 title: "Ideogram V3 Layerize Text API Reference"
-description: "Ideogram V3 Layerize Text API reference for SandBase. Use model ideogram-ai/ideogram-v3/layerize-text with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Ideogram V3 Layerize Text API reference for SandBase. Use model ideogram-ai/ideogram-v3/layerize-text with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram-ai/ideogram-v3/layerize-text"

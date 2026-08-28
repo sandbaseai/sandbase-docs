@@ -1,6 +1,6 @@
 ---
 title: "ControlNet… — Stability Ai Image To Image API"
-description: "ControlNet SDXL API reference for SandBase. Use model stability-ai/fast-sdxl-controlnet-canny/image-to-image with /v1/run; view request fields, examples, capabilities,..."
+description: "ControlNet SDXL API reference for SandBase. Use model stability-ai/fast-sdxl-controlnet-canny/image-to-image with /v1/run; view request fields, examples, capabilities,."
 aside: false
 outline: false
 apiReferenceKey: "image/stability-ai/fast-sdxl-controlnet-canny/image-to-image"

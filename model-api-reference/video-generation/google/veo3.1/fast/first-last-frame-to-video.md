@@ -1,6 +1,6 @@
 ---
 title: "Veo 3.1… — Google First Last Frame To Video API"
-description: "Veo 3.1 Fast API reference for SandBase. Use model google/veo3.1/fast/first-last-frame-to-video with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Veo 3.1 Fast API reference for SandBase. Use model google/veo3.1/fast/first-last-frame-to-video with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "video/google/veo3.1/fast/first-last-frame-to-video"

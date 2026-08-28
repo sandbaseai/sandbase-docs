@@ -1,6 +1,6 @@
 ---
 title: "Wan 2.2 5B Text to Image API Reference"
-description: "Wan 2.2 5B Text to Image API reference for SandBase. Use model alibaba/wan/2.2/5b/text-to-image with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Wan 2.2 5B Text to Image API reference for SandBase. Use model alibaba/wan/2.2/5b/text-to-image with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "image/alibaba/wan/2.2/5b/text-to-image"

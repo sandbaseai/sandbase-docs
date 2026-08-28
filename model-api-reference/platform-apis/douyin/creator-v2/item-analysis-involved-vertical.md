@@ -1,6 +1,6 @@
 ---
 title: "Fetch item analysis involved vertical API Reference"
-description: "Fetch item analysis involved vertical API reference for SandBase. Use model douyin/creator-v2/item-analysis-involved-vertical with /v1/run; view request fields, exampl..."
+description: "Fetch item analysis involved vertical API reference for SandBase. Use model douyin/creator-v2/item-analysis-involved-vertical with /v1/run; view request fields, exampl."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

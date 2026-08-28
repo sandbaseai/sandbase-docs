@@ -1,6 +1,6 @@
 ---
 title: "Business Data Google Reviews API Reference"
-description: "Business Data Google Reviews API reference for SandBase. Use model dataforseo/v3/business_data/google/reviews/live/advanced with /v1/run; view request fields, examples..."
+description: "Business Data Google Reviews API reference for SandBase. Use model dataforseo/v3/business_data/google/reviews/live/advanced with /v1/run; view request fields, examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

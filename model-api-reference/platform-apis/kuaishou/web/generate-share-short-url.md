@@ -1,6 +1,6 @@
 ---
 title: "Generate share short URL API Reference"
-description: "Generate share short URL API reference for SandBase. Use model kuaishou/web/generate-share-short-url with /v1/run; view request fields, examples, capabilities, and res..."
+description: "Generate share short URL API reference for SandBase. Use model kuaishou/web/generate-share-short-url with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

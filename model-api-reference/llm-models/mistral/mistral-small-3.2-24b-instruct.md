@@ -1,6 +1,6 @@
 ---
 title: "Mistral Small 3.2 24B API Reference"
-description: "Mistral Small 3.2 24B API reference for SandBase. Use model mistral/mistral-small-3.2-24b-instruct with /v1/chat/completions; view request fields, examples, capabiliti..."
+description: "Mistral Small 3.2 24B API reference for SandBase. Use model mistral/mistral-small-3.2-24b-instruct with /v1/chat/completions; view request fields, examples, capabiliti."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/mistral-small-3.2-24b-instruct"

@@ -1,6 +1,6 @@
 ---
 title: "Get home short drama feed API Reference"
-description: "Get home short drama feed API reference for SandBase. Use model pipixia/app/home-short-drama-feed with /v1/run; view request fields, examples, capabilities, and respon..."
+description: "Get home short drama feed API reference for SandBase. Use model pipixia/app/home-short-drama-feed with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

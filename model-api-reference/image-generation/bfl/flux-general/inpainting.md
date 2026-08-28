@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 [dev] with Controlnets and… — Bfl Inpainting API"
-description: "FLUX.1 [dev] with Controlnets and Loras API reference for SandBase. Use model bfl/flux-general/inpainting with /v1/run; view request fields, examples, capabilities, an..."
+description: "FLUX.1 [dev] with Controlnets and Loras API reference for SandBase. Use model bfl/flux-general/inpainting with /v1/run; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-general/inpainting"

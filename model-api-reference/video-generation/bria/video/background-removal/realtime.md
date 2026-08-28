@@ -1,6 +1,6 @@
 ---
 title: "Bria's VRMBG 3.0 Realtime API Reference"
-description: "Bria's VRMBG 3.0 Realtime API reference for SandBase. Use model bria/video/background-removal/realtime with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Bria's VRMBG 3.0 Realtime API reference for SandBase. Use model bria/video/background-removal/realtime with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 apiReferenceKey: "video/bria/video/background-removal/realtime"

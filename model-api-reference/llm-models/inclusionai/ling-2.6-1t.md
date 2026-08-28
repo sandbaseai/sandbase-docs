@@ -1,6 +1,6 @@
 ---
 title: "inclusionAI: Ling-2.6-1T API Reference"
-description: "inclusionAI: Ling-2.6-1T API reference for SandBase. Use model inclusionai/ling-2.6-1t with /v1/chat/completions; view request fields, examples, capabilities, and resp..."
+description: "inclusionAI: Ling-2.6-1T API reference for SandBase. Use model inclusionai/ling-2.6-1t with /v1/chat/completions; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 apiReferenceKey: "llm/inclusionai/ling-2.6-1t"

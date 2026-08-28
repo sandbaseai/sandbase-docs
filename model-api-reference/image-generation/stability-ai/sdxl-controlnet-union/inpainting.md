@@ -1,6 +1,6 @@
 ---
 title: "SDXL ControlNet… — Stability Ai Inpainting API"
-description: "SDXL ControlNet Union API reference for SandBase. Use model stability-ai/sdxl-controlnet-union/inpainting with /v1/run; view request fields, examples, capabilities, an..."
+description: "SDXL ControlNet Union API reference for SandBase. Use model stability-ai/sdxl-controlnet-union/inpainting with /v1/run; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 apiReferenceKey: "image/stability-ai/sdxl-controlnet-union/inpainting"

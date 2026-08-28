@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP Popular Feed API Reference"
-description: "Fetch Reddit APP Popular Feed API reference for SandBase. Use model reddit/app/popular-feed with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Fetch Reddit APP Popular Feed API reference for SandBase. Use model reddit/app/popular-feed with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get details of specified… — Douyin Music Detail API"
-description: "Get details of specified music API reference for SandBase. Use model douyin/app-v3/music-detail with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get details of specified music API reference for SandBase. Use model douyin/app-v3/music-detail with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

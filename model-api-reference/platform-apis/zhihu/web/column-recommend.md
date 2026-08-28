@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Similar Column Recommend API Reference"
-description: "Get Zhihu Similar Column Recommend API reference for SandBase. Use model zhihu/web/column-recommend with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Get Zhihu Similar Column Recommend API reference for SandBase. Use model zhihu/web/column-recommend with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get creator material center billboard API Reference"
-description: "Get creator material center billboard API reference for SandBase. Use model douyin/creator/creator-material-center-billboard with /v1/run; view request fields, example..."
+description: "Get creator material center billboard API reference for SandBase. Use model douyin/creator/creator-material-center-billboard with /v1/run; view request fields, example."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

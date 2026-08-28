@@ -1,6 +1,6 @@
 ---
 title: "Bytedance Seedream v4 Edit API Reference"
-description: "Bytedance Seedream v4 Edit API reference for SandBase. Use model bytedance/seedream/4.0/edit with /v1/run; view request fields, examples, capabilities, and response fo..."
+description: "Bytedance Seedream v4 Edit API reference for SandBase. Use model bytedance/seedream/4.0/edit with /v1/run; view request fields, examples, capabilities, and response fo."
 aside: false
 outline: false
 apiReferenceKey: "image/bytedance/seedream/4.0/edit"

@@ -1,6 +1,6 @@
 ---
 title: "Command R (08-2024) API Reference"
-description: "Command R (08-2024) API reference for SandBase. Use model cohere/command-r-08-2024 with /v1/chat/completions; view request fields, examples, capabilities, and response..."
+description: "Command R (08-2024) API reference for SandBase. Use model cohere/command-r-08-2024 with /v1/chat/completions; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "llm/cohere/command-r-08-2024"

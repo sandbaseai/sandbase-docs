@@ -1,6 +1,6 @@
 ---
 title: "SERP Baidu Paid Live API Reference"
-description: "SERP Baidu Paid Live API reference for SandBase. Use model dataforseo/v3/serp/baidu/paid/live/advanced with /v1/run; view request fields, examples, capabilities, and r..."
+description: "SERP Baidu Paid Live API reference for SandBase. Use model dataforseo/v3/serp/baidu/paid/live/advanced with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

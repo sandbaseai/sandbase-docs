@@ -1,6 +1,6 @@
 ---
 title: "SERP Google Maps Live API Reference"
-description: "SERP Google Maps Live API reference for SandBase. Use model dataforseo/v3/serp/google/maps/live/advanced with /v1/run; view request fields, examples, capabilities, and..."
+description: "SERP Google Maps Live API reference for SandBase. Use model dataforseo/v3/serp/google/maps/live/advanced with /v1/run; view request fields, examples, capabilities, and."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

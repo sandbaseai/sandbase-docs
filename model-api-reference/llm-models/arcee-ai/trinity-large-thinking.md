@@ -1,6 +1,6 @@
 ---
 title: "Arcee AI: Trinity Large Thinking API Reference"
-description: "Arcee AI: Trinity Large Thinking API reference for SandBase. Use model arcee-ai/trinity-large-thinking with /v1/chat/completions; view request fields, examples, capabi..."
+description: "Arcee AI: Trinity Large Thinking API reference for SandBase. Use model arcee-ai/trinity-large-thinking with /v1/chat/completions; view request fields, examples, capabi."
 aside: false
 outline: false
 apiReferenceKey: "llm/arcee-ai/trinity-large-thinking"

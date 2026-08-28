@@ -1,6 +1,6 @@
 ---
 title: "Domain Analytics By HTML Terms API Reference"
-description: "Domain Analytics By HTML Terms API reference for SandBase. Use model dataforseo/v3/domain_analytics/technologies/domains_by_html_terms/live with /v1/run; view request..."
+description: "Domain Analytics By HTML Terms API reference for SandBase. Use model dataforseo/v3/domain_analytics/technologies/domains_by_html_terms/live with /v1/run; view request;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "OnPage Lighthouse API Reference"
-description: "OnPage Lighthouse API reference for SandBase. Use model dataforseo/v3/on_page/lighthouse/live/json with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "OnPage Lighthouse API reference for SandBase. Use model dataforseo/v3/on_page/lighthouse/live/json with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

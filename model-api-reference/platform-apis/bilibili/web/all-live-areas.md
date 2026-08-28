@@ -1,6 +1,6 @@
 ---
 title: "Get a list of all live areas API Reference"
-description: "Get a list of all live areas API reference for SandBase. Use model bilibili/web/all-live-areas with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get a list of all live areas API reference for SandBase. Use model bilibili/web/all-live-areas with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Search Toutiao Creator API Reference"
-description: "Search Toutiao Creator API reference for SandBase. Use model douyin/xingtu-v2/search-toutiao-creator with /v1/run; view request fields, examples, capabilities, and res..."
+description: "Search Toutiao Creator API reference for SandBase. Use model douyin/xingtu-v2/search-toutiao-creator with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

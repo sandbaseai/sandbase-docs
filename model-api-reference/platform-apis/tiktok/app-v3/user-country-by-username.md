@@ -1,6 +1,6 @@
 ---
 title: "Get user account country by username API Reference"
-description: "Get user account country by username API reference for SandBase. Use model tiktok/app-v3/user-country-by-username with /v1/run; view request fields, examples, capabili..."
+description: "Get user account country by username API reference for SandBase. Use model tiktok/app-v3/user-country-by-username with /v1/run; view request fields, examples, capabili."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

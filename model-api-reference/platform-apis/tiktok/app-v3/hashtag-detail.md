@@ -1,6 +1,6 @@
 ---
 title: "Get details of specified… — Tiktok Hashtag Detail API"
-description: "Get details of specified hashtag API reference for SandBase. Use model tiktok/app-v3/hashtag-detail with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Get details of specified hashtag API reference for SandBase. Use model tiktok/app-v3/hashtag-detail with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Vidu Q2 Reference to Image API Reference"
-description: "Vidu Q2 Reference to Image API reference for SandBase. Use model vidu/q2/reference-to-image with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Vidu Q2 Reference to Image API reference for SandBase. Use model vidu/q2/reference-to-image with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 apiReferenceKey: "image/vidu/q2/reference-to-image"

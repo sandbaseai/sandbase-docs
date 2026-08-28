@@ -1,6 +1,6 @@
 ---
 title: "Encrypt Douyin uid to user_id API Reference"
-description: "Encrypt Douyin uid to user_id API reference for SandBase. Use model douyin/index/encrypt-user-id with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Encrypt Douyin uid to user_id API reference for SandBase. Use model douyin/index/encrypt-user-id with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get Creator Live Overview API Reference"
-description: "Get Creator Live Overview API reference for SandBase. Use model tiktok/creator/live-analytics-summary with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Get Creator Live Overview API reference for SandBase. Use model tiktok/creator/live-analytics-summary with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Recraft Creative Upscale API Reference"
-description: "Recraft Creative Upscale API reference for SandBase. Use model recraft/recraft/upscale/creative with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Recraft Creative Upscale API reference for SandBase. Use model recraft/recraft/upscale/creative with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "image/recraft/recraft/upscale/creative"

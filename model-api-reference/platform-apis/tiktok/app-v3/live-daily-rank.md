@@ -1,6 +1,6 @@
 ---
 title: "Get live daily rank data API Reference"
-description: "Get live daily rank data API reference for SandBase. Use model tiktok/app-v3/live-daily-rank with /v1/run; view request fields, examples, capabilities, and response fo..."
+description: "Get live daily rank data API reference for SandBase. Use model tiktok/app-v3/live-daily-rank with /v1/run; view request fields, examples, capabilities, and response fo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

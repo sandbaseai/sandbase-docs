@@ -1,6 +1,6 @@
 ---
 title: "Douyin live room danmaku parameters API Reference"
-description: "Douyin live room danmaku parameters API reference for SandBase. Use model douyin/web/live-im-fetch with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Douyin live room danmaku parameters API reference for SandBase. Use model douyin/web/live-im-fetch with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

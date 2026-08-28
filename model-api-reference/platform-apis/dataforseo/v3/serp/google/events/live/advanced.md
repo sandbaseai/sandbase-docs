@@ -1,6 +1,6 @@
 ---
 title: "SERP Google Events Live API Reference"
-description: "SERP Google Events Live API reference for SandBase. Use model dataforseo/v3/serp/google/events/live/advanced with /v1/run; view request fields, examples, capabilities,..."
+description: "SERP Google Events Live API reference for SandBase. Use model dataforseo/v3/serp/google/events/live/advanced with /v1/run; view request fields, examples, capabilities,."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

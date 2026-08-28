@@ -1,6 +1,6 @@
 ---
 title: "Get Author Base Info API Reference"
-description: "Get Author Base Info API reference for SandBase. Use model douyin/xingtu-v2/author-base-info with /v1/run; view request fields, examples, capabilities, and response fo..."
+description: "Get Author Base Info API reference for SandBase. Use model douyin/xingtu-v2/author-base-info with /v1/run; view request fields, examples, capabilities, and response fo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

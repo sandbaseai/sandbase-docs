@@ -1,6 +1,6 @@
 ---
 title: "SERP Google Local Finder Live API Reference"
-description: "SERP Google Local Finder Live API reference for SandBase. Use model dataforseo/v3/serp/google/local_finder/live/advanced with /v1/run; view request fields, examples, c..."
+description: "SERP Google Local Finder Live API reference for SandBase. Use model dataforseo/v3/serp/google/local_finder/live/advanced with /v1/run; view request fields, examples, c."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

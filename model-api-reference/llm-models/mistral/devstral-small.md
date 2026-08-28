@@ -1,6 +1,6 @@
 ---
 title: "Devstral Small 1.1 API Reference"
-description: "Devstral Small 1.1 API reference for SandBase. Use model mistral/devstral-small with /v1/chat/completions; view request fields, examples, capabilities, and response fo..."
+description: "Devstral Small 1.1 API reference for SandBase. Use model mistral/devstral-small with /v1/chat/completions; view request fields, examples, capabilities, and response fo."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/devstral-small"

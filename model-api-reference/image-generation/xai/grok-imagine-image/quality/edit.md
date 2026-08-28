@@ -1,6 +1,6 @@
 ---
 title: "Grok Imagine Image Quality Edit API Reference"
-description: "Grok Imagine Image Quality Edit API reference for SandBase. Use model xai/grok-imagine-image/quality/edit with /v1/run; view request fields, examples, capabilities, an..."
+description: "Grok Imagine Image Quality Edit API reference for SandBase. Use model xai/grok-imagine-image/quality/edit with /v1/run; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 apiReferenceKey: "image/xai/grok-imagine-image/quality/edit"

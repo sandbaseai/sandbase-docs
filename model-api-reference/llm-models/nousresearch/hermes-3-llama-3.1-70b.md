@@ -1,6 +1,6 @@
 ---
 title: "Nous: Hermes 3 70B Instruct API Reference"
-description: "Nous: Hermes 3 70B Instruct API reference for SandBase. Use model nousresearch/hermes-3-llama-3.1-70b with /v1/chat/completions; view request fields, examples, capabil..."
+description: "Nous: Hermes 3 70B Instruct API reference for SandBase. Use model nousresearch/hermes-3-llama-3.1-70b with /v1/chat/completions; view request fields, examples, capabil."
 aside: false
 outline: false
 apiReferenceKey: "llm/nousresearch/hermes-3-llama-3.1-70b"

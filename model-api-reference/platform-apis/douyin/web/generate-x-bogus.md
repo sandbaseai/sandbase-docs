@@ -1,6 +1,6 @@
 ---
 title: "Generate X-Bogus parameter using API URL API Reference"
-description: "Generate X-Bogus parameter using API URL API reference for SandBase. Use model douyin/web/generate-x-bogus with /v1/run; view request fields, examples, capabilities, a..."
+description: "Generate X-Bogus parameter using API URL API reference for SandBase. Use model douyin/web/generate-x-bogus with /v1/run; view request fields, examples, capabilities, a."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get Weibo complete hot search ranking (50 items) API Reference"
-description: "Get Weibo complete hot search ranking (50 items) API reference for SandBase. Use model weibo/web-v2/hot-search-summary with /v1/run; view request fields, examples, cap..."
+description: "Get Weibo complete hot search ranking (50 items) API reference for SandBase. Use model weibo/web-v2/hot-search-summary with /v1/run; view request fields, examples, cap."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get content valid date API Reference"
-description: "Get content valid date API reference for SandBase. Use model douyin/index/content-valid-date with /v1/run; view request fields, examples, capabilities, and response fo..."
+description: "Get content valid date API reference for SandBase. Use model douyin/index/content-valid-date with /v1/run; view request fields, examples, capabilities, and response fo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

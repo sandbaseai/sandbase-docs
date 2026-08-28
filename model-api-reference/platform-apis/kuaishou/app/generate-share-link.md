@@ -1,6 +1,6 @@
 ---
 title: "Generate Kuaishou share link API Reference"
-description: "Generate Kuaishou share link API reference for SandBase. Use model kuaishou/app/generate-share-link with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Generate Kuaishou share link API reference for SandBase. Use model kuaishou/app/generate-share-link with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Gemini 3 Flash Preview API Reference"
-description: "Gemini 3 Flash Preview API reference for SandBase. Use model google/gemini-3-flash-preview with /v1/chat/completions; view request fields, examples, capabilities, and..."
+description: "Gemini 3 Flash Preview API reference for SandBase. Use model google/gemini-3-flash-preview with /v1/chat/completions; view request fields, examples, capabilities, and;."
 aside: false
 outline: false
 apiReferenceKey: "llm/google/gemini-3-flash-preview"

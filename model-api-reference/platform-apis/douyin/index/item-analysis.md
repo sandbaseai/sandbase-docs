@@ -1,6 +1,6 @@
 ---
 title: "Get video comparison analysis API Reference"
-description: "Get video comparison analysis API reference for SandBase. Use model douyin/index/item-analysis with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get video comparison analysis API reference for SandBase. Use model douyin/index/item-analysis with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

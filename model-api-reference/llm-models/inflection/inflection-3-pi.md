@@ -1,6 +1,6 @@
 ---
 title: "Inflection 3 Pi API Reference"
-description: "Inflection 3 Pi API reference for SandBase. Use model inflection/inflection-3-pi with /v1/chat/completions; view request fields, examples, capabilities, and response f..."
+description: "Inflection 3 Pi API reference for SandBase. Use model inflection/inflection-3-pi with /v1/chat/completions; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "llm/inflection/inflection-3-pi"

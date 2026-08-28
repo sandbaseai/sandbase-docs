@@ -1,6 +1,6 @@
 ---
 title: "SERP Yahoo Paid Live API Reference"
-description: "SERP Yahoo Paid Live API reference for SandBase. Use model dataforseo/v3/serp/yahoo/paid/live/advanced with /v1/run; view request fields, examples, capabilities, and r..."
+description: "SERP Yahoo Paid Live API reference for SandBase. Use model dataforseo/v3/serp/yahoo/paid/live/advanced with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

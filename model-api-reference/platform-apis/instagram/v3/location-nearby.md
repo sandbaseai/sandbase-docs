@@ -1,6 +1,6 @@
 ---
 title: "Get nearby location content API Reference"
-description: "Get nearby location content API reference for SandBase. Use model instagram/v3/location-nearby with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get nearby location content API reference for SandBase. Use model instagram/v3/location-nearby with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

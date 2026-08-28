@@ -1,6 +1,6 @@
 ---
 title: "Generate browser fingerprint API Reference"
-description: "Generate browser fingerprint API reference for SandBase. Use model tiktok/web/generate-fingerprint with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Generate browser fingerprint API reference for SandBase. Use model tiktok/web/generate-fingerprint with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

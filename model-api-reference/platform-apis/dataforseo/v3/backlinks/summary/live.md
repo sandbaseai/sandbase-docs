@@ -1,6 +1,6 @@
 ---
 title: "Backlinks Summary API Reference"
-description: "Backlinks Summary API reference for SandBase. Use model dataforseo/v3/backlinks/summary/live with /v1/run; view request fields, examples, capabilities, and response fo..."
+description: "Backlinks Summary API reference for SandBase. Use model dataforseo/v3/backlinks/summary/live with /v1/run; view request fields, examples, capabilities, and response fo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

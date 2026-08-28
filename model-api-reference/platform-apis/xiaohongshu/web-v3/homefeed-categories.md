@@ -1,6 +1,6 @@
 ---
 title: "Fetch homepage categories API Reference"
-description: "Fetch homepage categories API reference for SandBase. Use model xiaohongshu/web-v3/homefeed-categories with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Fetch homepage categories API reference for SandBase. Use model xiaohongshu/web-v3/homefeed-categories with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

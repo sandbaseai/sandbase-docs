@@ -1,6 +1,6 @@
 ---
 title: "Get search keyword suggestions V2 (Mobile) API Reference"
-description: "Get search keyword suggestions V2 (Mobile) API reference for SandBase. Use model tiktok/shop-web/search-word-suggestion-v2 with /v1/run; view request fields, examples,..."
+description: "Get search keyword suggestions V2 (Mobile) API reference for SandBase. Use model tiktok/shop-web/search-word-suggestion-v2 with /v1/run; view request fields, examples,."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

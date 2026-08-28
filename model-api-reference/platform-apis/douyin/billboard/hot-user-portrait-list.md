@@ -1,6 +1,6 @@
 ---
 title: "Fetch work like audience portrait - hot list only API Reference"
-description: "Fetch work like audience portrait - hot list only API reference for SandBase. Use model douyin/billboard/hot-user-portrait-list with /v1/run; view request fields, exam..."
+description: "Fetch work like audience portrait - hot list only API reference for SandBase. Use model douyin/billboard/hot-user-portrait-list with /v1/run; view request fields, exam."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

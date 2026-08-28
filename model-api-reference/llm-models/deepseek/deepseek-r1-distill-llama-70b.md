@@ -1,6 +1,6 @@
 ---
 title: "R1 Distill Llama 70B API Reference"
-description: "R1 Distill Llama 70B API reference for SandBase. Use model deepseek/deepseek-r1-distill-llama-70b with /v1/chat/completions; view request fields, examples, capabilitie..."
+description: "R1 Distill Llama 70B API reference for SandBase. Use model deepseek/deepseek-r1-distill-llama-70b with /v1/chat/completions; view request fields, examples, capabilitie."
 aside: false
 outline: false
 apiReferenceKey: "llm/deepseek/deepseek-r1-distill-llama-70b"

@@ -1,6 +1,6 @@
 ---
 title: "Fetch activity calendar API Reference"
-description: "Fetch activity calendar API reference for SandBase. Use model douyin/billboard/hot-calendar-list with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Fetch activity calendar API reference for SandBase. Use model douyin/billboard/hot-calendar-list with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

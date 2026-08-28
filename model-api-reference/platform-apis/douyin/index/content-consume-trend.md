@@ -1,6 +1,6 @@
 ---
 title: "Content consume trend API Reference"
-description: "Content consume trend API reference for SandBase. Use model douyin/index/content-consume-trend with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Content consume trend API reference for SandBase. Use model douyin/index/content-consume-trend with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

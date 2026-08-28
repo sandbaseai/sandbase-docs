@@ -1,6 +1,6 @@
 ---
 title: "Get product detail V2 (Less Data) API Reference"
-description: "Get product detail V2 (Less Data) API reference for SandBase. Use model tiktok/shop-web/product-detail-v2 with /v1/run; view request fields, examples, capabilities, an..."
+description: "Get product detail V2 (Less Data) API reference for SandBase. Use model tiktok/shop-web/product-detail-v2 with /v1/run; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

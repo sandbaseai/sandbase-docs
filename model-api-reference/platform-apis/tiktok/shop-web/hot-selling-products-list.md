@@ -1,6 +1,6 @@
 ---
 title: "Get hot selling products list API Reference"
-description: "Get hot selling products list API reference for SandBase. Use model tiktok/shop-web/hot-selling-products-list with /v1/run; view request fields, examples, capabilities..."
+description: "Get hot selling products list API reference for SandBase. Use model tiktok/shop-web/hot-selling-products-list with /v1/run; view request fields, examples, capabilities."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

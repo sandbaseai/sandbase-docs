@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 [dev] with Controlnets and… — Bfl Image To Image API"
-description: "FLUX.1 [dev] with Controlnets and Loras API reference for SandBase. Use model bfl/flux-general/image-to-image with /v1/run; view request fields, examples, capabilities..."
+description: "FLUX.1 [dev] with Controlnets and Loras API reference for SandBase. Use model bfl/flux-general/image-to-image with /v1/run; view request fields, examples, capabilities."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-general/image-to-image"

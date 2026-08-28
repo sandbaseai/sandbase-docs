@@ -1,6 +1,6 @@
 ---
 title: "MoonshotAI: Kimi K2.6 API Reference"
-description: "MoonshotAI: Kimi K2.6 API reference for SandBase. Use model moonshotai/kimi-k2.6 with /v1/chat/completions; view request fields, examples, capabilities, and response f..."
+description: "MoonshotAI: Kimi K2.6 API reference for SandBase. Use model moonshotai/kimi-k2.6 with /v1/chat/completions; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "llm/moonshotai/kimi-k2.6"

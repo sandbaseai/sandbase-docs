@@ -1,6 +1,6 @@
 ---
 title: "Get hot search categories API Reference"
-description: "Get hot search categories API reference for SandBase. Use model weibo/app/hot-search-categories with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get hot search categories API reference for SandBase. Use model weibo/app/hot-search-categories with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

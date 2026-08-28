@@ -1,6 +1,6 @@
 ---
 title: "Get Author Show Items API Reference"
-description: "Get Author Show Items API reference for SandBase. Use model douyin/xingtu-v2/author-show-items with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get Author Show Items API reference for SandBase. Use model douyin/xingtu-v2/author-show-items with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

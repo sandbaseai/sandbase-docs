@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 Kontext — Kontext Pro Text To Image API"
-description: "FLUX.1 Kontext [pro] API reference for SandBase. Use model bfl/flux-2/kontext/pro/text-to-image with /v1/run; view request fields, examples, capabilities, and response..."
+description: "FLUX.1 Kontext [pro] API reference for SandBase. Use model bfl/flux-2/kontext/pro/text-to-image with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-2/kontext/pro/text-to-image"

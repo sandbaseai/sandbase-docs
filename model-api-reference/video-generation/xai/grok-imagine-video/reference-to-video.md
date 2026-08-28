@@ -1,6 +1,6 @@
 ---
 title: "Grok Imagine Video Reference to Video API Reference"
-description: "Grok Imagine Video Reference to Video API reference for SandBase. Use model xai/grok-imagine-video/reference-to-video with /v1/run; view request fields, examples, capa..."
+description: "Grok Imagine Video Reference to Video API reference for SandBase. Use model xai/grok-imagine-video/reference-to-video with /v1/run; view request fields, examples, capa."
 aside: false
 outline: false
 apiReferenceKey: "video/xai/grok-imagine-video/reference-to-video"

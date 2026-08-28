@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Column Comment Config API Reference"
-description: "Get Zhihu Column Comment Config API reference for SandBase. Use model zhihu/web/column-comment-config with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Get Zhihu Column Comment Config API reference for SandBase. Use model zhihu/web/column-comment-config with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

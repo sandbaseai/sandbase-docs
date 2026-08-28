@@ -1,6 +1,6 @@
 ---
 title: "Fetch User's Active Subreddits API Reference"
-description: "Fetch User's Active Subreddits API reference for SandBase. Use model reddit/app/user-active-subreddits with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Fetch User's Active Subreddits API reference for SandBase. Use model reddit/app/user-active-subreddits with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

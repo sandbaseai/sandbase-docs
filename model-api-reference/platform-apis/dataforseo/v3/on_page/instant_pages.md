@@ -1,6 +1,6 @@
 ---
 title: "OnPage Instant Pages API Reference"
-description: "OnPage Instant Pages API reference for SandBase. Use model dataforseo/v3/on_page/instant_pages with /v1/run; view request fields, examples, capabilities, and response..."
+description: "OnPage Instant Pages API reference for SandBase. Use model dataforseo/v3/on_page/instant_pages with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

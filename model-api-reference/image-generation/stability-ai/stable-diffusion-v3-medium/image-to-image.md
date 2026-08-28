@@ -1,6 +1,6 @@
 ---
-title: "Stable… — Stability Ai Stable Diffusion V3 Medium Image To…"
-description: "Stable Diffusion V3 API reference for SandBase. Use model stability-ai/stable-diffusion-v3-medium/image-to-image with /v1/run; view request fields, examples, capabilit..."
+title: "Stable Diffusion v3 Medium Image-to-Image API Reference"
+description: "Stable Diffusion V3 API reference for SandBase. Use model stability-ai/stable-diffusion-v3-medium/image-to-image with /v1/run; view request fields, examples, capabilit."
 aside: false
 outline: false
 apiReferenceKey: "image/stability-ai/stable-diffusion-v3-medium/image-to-image"

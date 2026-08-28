@@ -1,6 +1,6 @@
 ---
 title: "Get data of specified live room API Reference"
-description: "Get data of specified live room API reference for SandBase. Use model tiktok/app-v3/live-room-info with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Get data of specified live room API reference for SandBase. Use model tiktok/app-v3/live-room-info with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

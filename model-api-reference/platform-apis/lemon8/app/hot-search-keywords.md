@@ -1,6 +1,6 @@
 ---
 title: "Get hot search keywords API Reference"
-description: "Get hot search keywords API reference for SandBase. Use model lemon8/app/hot-search-keywords with /v1/run; view request fields, examples, capabilities, and response fo..."
+description: "Get hot search keywords API reference for SandBase. Use model lemon8/app/hot-search-keywords with /v1/run; view request fields, examples, capabilities, and response fo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

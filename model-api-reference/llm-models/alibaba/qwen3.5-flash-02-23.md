@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen3.5-Flash API Reference"
-description: "Qwen: Qwen3.5-Flash API reference for SandBase. Use model alibaba/qwen3.5-flash-02-23 with /v1/chat/completions; view request fields, examples, capabilities, and respo..."
+description: "Qwen: Qwen3.5-Flash API reference for SandBase. Use model alibaba/qwen3.5-flash-02-23 with /v1/chat/completions; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen3.5-flash-02-23"

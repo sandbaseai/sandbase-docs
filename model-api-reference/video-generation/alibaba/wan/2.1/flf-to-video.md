@@ -1,6 +1,6 @@
 ---
 title: "Wan-2.1 First-Last-Frame-to-Video API Reference"
-description: "Wan-2.1 First-Last-Frame-to-Video API reference for SandBase. Use model alibaba/wan/2.1/flf-to-video with /v1/run; view request fields, examples, capabilities, and res..."
+description: "Wan-2.1 First-Last-Frame-to-Video API reference for SandBase. Use model alibaba/wan/2.1/flf-to-video with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/2.1/flf-to-video"

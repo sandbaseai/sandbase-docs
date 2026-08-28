@@ -1,6 +1,6 @@
 ---
 title: "Get user homepage video… — Bilibili User Post Videos API"
-description: "Get user homepage video data API reference for SandBase. Use model bilibili/web/user-post-videos with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Get user homepage video data API reference for SandBase. Use model bilibili/web/user-post-videos with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "HeyGen Translate Precision API Reference"
-description: "HeyGen Translate Precision API reference for SandBase. Use model heygen/heygen/translate/precision with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "HeyGen Translate Precision API reference for SandBase. Use model heygen/heygen/translate/precision with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 apiReferenceKey: "video/heygen/heygen/translate/precision"

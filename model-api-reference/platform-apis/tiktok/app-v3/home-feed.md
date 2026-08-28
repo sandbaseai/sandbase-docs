@@ -1,6 +1,6 @@
 ---
 title: "Get home feed(recommend) video data API Reference"
-description: "Get home feed(recommend) video data API reference for SandBase. Use model tiktok/app-v3/home-feed with /v1/run; view request fields, examples, capabilities, and respon..."
+description: "Get home feed(recommend) video data API reference for SandBase. Use model tiktok/app-v3/home-feed with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

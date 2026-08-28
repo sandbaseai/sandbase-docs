@@ -1,6 +1,6 @@
 ---
 title: "VEED Avatars Audio to Video API Reference"
-description: "VEED Avatars Audio to Video API reference for SandBase. Use model veed/avatars/audio-to-video with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "VEED Avatars Audio to Video API reference for SandBase. Use model veed/avatars/audio-to-video with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "video/veed/avatars/audio-to-video"

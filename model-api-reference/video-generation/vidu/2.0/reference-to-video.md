@@ -1,6 +1,6 @@
 ---
 title: "Vidu 2.0 Reference to Video API Reference"
-description: "Vidu 2.0 Reference to Video API reference for SandBase. Use model vidu/2.0/reference-to-video with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Vidu 2.0 Reference to Video API reference for SandBase. Use model vidu/2.0/reference-to-video with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "video/vidu/2.0/reference-to-video"

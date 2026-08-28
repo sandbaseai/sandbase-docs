@@ -1,6 +1,6 @@
 ---
 title: "Get WeChat Channels User Videos API Reference"
-description: "Get WeChat Channels User Videos API reference for SandBase. Use model wechat-channels/v2/user-videos with /v1/run; view request fields, examples, capabilities, and res..."
+description: "Get WeChat Channels User Videos API reference for SandBase. Use model wechat-channels/v2/user-videos with /v1/run; view request fields, examples, capabilities, and res."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

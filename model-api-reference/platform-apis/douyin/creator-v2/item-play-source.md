@@ -1,6 +1,6 @@
 ---
 title: "Fetch item play source statistics API Reference"
-description: "Fetch item play source statistics API reference for SandBase. Use model douyin/creator-v2/item-play-source with /v1/run; view request fields, examples, capabilities, a..."
+description: "Fetch item play source statistics API reference for SandBase. Use model douyin/creator-v2/item-play-source with /v1/run; view request fields, examples, capabilities, a."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

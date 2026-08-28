@@ -1,6 +1,6 @@
 ---
 title: "Get Content Trend Guide API Reference"
-description: "Get Content Trend Guide API reference for SandBase. Use model douyin/xingtu-v2/content-trend-guide with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Get Content Trend Guide API reference for SandBase. Use model douyin/xingtu-v2/content-trend-guide with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

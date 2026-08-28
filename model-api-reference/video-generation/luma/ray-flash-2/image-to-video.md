@@ -1,6 +1,6 @@
 ---
 title: "Luma Ray Flash 2 Image to Video API Reference"
-description: "Luma Ray Flash 2 Image to Video API reference for SandBase. Use model luma/ray-flash-2/image-to-video with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Luma Ray Flash 2 Image to Video API reference for SandBase. Use model luma/ray-flash-2/image-to-video with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 apiReferenceKey: "video/luma/ray-flash-2/image-to-video"

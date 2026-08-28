@@ -1,6 +1,6 @@
 ---
 title: "Get Author Content Hot Comment Keywords V1 API Reference"
-description: "Get Author Content Hot Comment Keywords V1 API reference for SandBase. Use model douyin/xingtu/author-content-hot-comment-keywords-v1 with /v1/run; view request fields..."
+description: "Get Author Content Hot Comment Keywords V1 API reference for SandBase. Use model douyin/xingtu/author-content-hot-comment-keywords-v1 with /v1/run; view request fields."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Convert Channel ID to Finder Username API Reference"
-description: "Convert Channel ID to Finder Username API reference for SandBase. Use model wechat-channels/v2/channel-id-to-username with /v1/run; view request fields, examples, capa..."
+description: "Convert Channel ID to Finder Username API reference for SandBase. Use model wechat-channels/v2/channel-id-to-username with /v1/run; view request fields, examples, capa."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

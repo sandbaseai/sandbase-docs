@@ -1,6 +1,6 @@
 ---
 title: "Content Analysis Sentiment API Reference"
-description: "Content Analysis Sentiment API reference for SandBase. Use model dataforseo/v3/content_analysis/sentiment_analysis/live with /v1/run; view request fields, examples, ca..."
+description: "Content Analysis Sentiment API reference for SandBase. Use model dataforseo/v3/content_analysis/sentiment_analysis/live with /v1/run; view request fields, examples, ca."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

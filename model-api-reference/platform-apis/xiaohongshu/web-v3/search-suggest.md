@@ -1,6 +1,6 @@
 ---
 title: "Fetch search suggestions API Reference"
-description: "Fetch search suggestions API reference for SandBase. Use model xiaohongshu/web-v3/search-suggest with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Fetch search suggestions API reference for SandBase. Use model xiaohongshu/web-v3/search-suggest with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

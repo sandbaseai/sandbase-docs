@@ -1,6 +1,6 @@
 ---
 title: "Get creator content creation course API Reference"
-description: "Get creator content creation course API reference for SandBase. Use model douyin/creator/creator-content-course with /v1/run; view request fields, examples, capabiliti..."
+description: "Get creator content creation course API reference for SandBase. Use model douyin/creator/creator-content-course with /v1/run; view request fields, examples, capabiliti."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

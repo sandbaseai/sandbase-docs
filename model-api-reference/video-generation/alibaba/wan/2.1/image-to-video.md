@@ -1,6 +1,6 @@
 ---
 title: "Wan-2.1 Image-to-Video API Reference"
-description: "Wan-2.1 Image-to-Video API reference for SandBase. Use model alibaba/wan/2.1/image-to-video with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Wan-2.1 Image-to-Video API reference for SandBase. Use model alibaba/wan/2.1/image-to-video with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/2.1/image-to-video"

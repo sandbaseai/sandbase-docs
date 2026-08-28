@@ -1,6 +1,6 @@
 ---
 title: "Generate XGnarly and XBogus API Reference"
-description: "Generate XGnarly and XBogus API reference for SandBase. Use model tiktok/web/generate-xgnarly-and-xbogus with /v1/run; view request fields, examples, capabilities, and..."
+description: "Generate XGnarly and XBogus API reference for SandBase. Use model tiktok/web/generate-xgnarly-and-xbogus with /v1/run; view request fields, examples, capabilities, and."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

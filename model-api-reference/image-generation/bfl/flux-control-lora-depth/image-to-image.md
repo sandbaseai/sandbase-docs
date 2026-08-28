@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 [dev]… — Bfl Flux Control Lora Depth Image To Image API"
-description: "FLUX.1 [dev] Control LoRA Depth API reference for SandBase. Use model bfl/flux-control-lora-depth/image-to-image with /v1/run; view request fields, examples, capabilit..."
+description: "FLUX.1 [dev] Control LoRA Depth API reference for SandBase. Use model bfl/flux-control-lora-depth/image-to-image with /v1/run; view request fields, examples, capabilit."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-control-lora-depth/image-to-image"

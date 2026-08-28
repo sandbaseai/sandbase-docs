@@ -1,6 +1,6 @@
 ---
 title: "LTX 2.3 22B Reference to Video API Reference"
-description: "LTX 2.3 22B Reference to Video API reference for SandBase. Use model lightricks/ltx-2.3-22b/reference-to-video with /v1/run; view request fields, examples, capabilitie..."
+description: "LTX 2.3 22B Reference to Video API reference for SandBase. Use model lightricks/ltx-2.3-22b/reference-to-video with /v1/run; view request fields, examples, capabilitie."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-2.3-22b/reference-to-video"

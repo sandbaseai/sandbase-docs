@@ -1,6 +1,6 @@
 ---
 title: "LTX Video-0.9.7… — Lightricks Ltx Video Lora Image To Video API"
-description: "LTX Video-0.9.7 LoRA API reference for SandBase. Use model lightricks/ltx-video-lora/image-to-video with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "LTX Video-0.9.7 LoRA API reference for SandBase. Use model lightricks/ltx-video-lora/image-to-video with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-video-lora/image-to-video"

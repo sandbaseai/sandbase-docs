@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan Video LoRA Inference API Reference"
-description: "Hunyuan Video LoRA Inference API reference for SandBase. Use model tencent/hunyuan-video-lora with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Hunyuan Video LoRA Inference API reference for SandBase. Use model tencent/hunyuan-video-lora with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "video/tencent/hunyuan-video-lora"

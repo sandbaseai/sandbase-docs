@@ -1,6 +1,6 @@
 ---
 title: "Wan-2.1 Text-to-Video with LoRAs API Reference"
-description: "Wan-2.1 Text-to-Video with LoRAs API reference for SandBase. Use model alibaba/wan/2.1/text-to-video/lora with /v1/run; view request fields, examples, capabilities, an..."
+description: "Wan-2.1 Text-to-Video with LoRAs API reference for SandBase. Use model alibaba/wan/2.1/text-to-video/lora with /v1/run; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 apiReferenceKey: "video/alibaba/wan/2.1/text-to-video/lora"

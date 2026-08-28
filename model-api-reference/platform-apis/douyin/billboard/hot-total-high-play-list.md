@@ -1,6 +1,6 @@
 ---
 title: "Fetch high completion rate list API Reference"
-description: "Fetch high completion rate list API reference for SandBase. Use model douyin/billboard/hot-total-high-play-list with /v1/run; view request fields, examples, capabiliti..."
+description: "Fetch high completion rate list API reference for SandBase. Use model douyin/billboard/hot-total-high-play-list with /v1/run; view request fields, examples, capabiliti."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "AionLabs: Aion-1.0-Mini API Reference"
-description: "AionLabs: Aion-1.0-Mini API reference for SandBase. Use model aion-labs/aion-1.0-mini with /v1/chat/completions; view request fields, examples, capabilities, and respo..."
+description: "AionLabs: Aion-1.0-Mini API reference for SandBase. Use model aion-labs/aion-1.0-mini with /v1/chat/completions; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 apiReferenceKey: "llm/aion-labs/aion-1.0-mini"

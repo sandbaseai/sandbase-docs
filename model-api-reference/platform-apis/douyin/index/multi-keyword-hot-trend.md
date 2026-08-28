@@ -1,6 +1,6 @@
 ---
 title: "Get multi-keyword hot trend API Reference"
-description: "Get multi-keyword hot trend API reference for SandBase. Use model douyin/index/multi-keyword-hot-trend with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Get multi-keyword hot trend API reference for SandBase. Use model douyin/index/multi-keyword-hot-trend with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

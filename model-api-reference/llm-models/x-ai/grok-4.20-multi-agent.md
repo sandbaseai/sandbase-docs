@@ -1,6 +1,6 @@
 ---
 title: "Grok 4.20 Multi-Agent API Reference"
-description: "Grok 4.20 Multi-Agent API reference for SandBase. Use model x-ai/grok-4.20-multi-agent with /v1/chat/completions; view request fields, examples, capabilities, and resp..."
+description: "Grok 4.20 Multi-Agent API reference for SandBase. Use model x-ai/grok-4.20-multi-agent with /v1/chat/completions; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 apiReferenceKey: "llm/x-ai/grok-4.20-multi-agent"

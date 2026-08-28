@@ -1,6 +1,6 @@
 ---
 title: "MiniMax (Hailuo AI) Video 01 Subject Reference API Reference"
-description: "MiniMax (Hailuo AI) Video 01 Subject Reference API reference for SandBase. Use model minimax/video-01/subject-reference with /v1/run; view request fields, examples, ca..."
+description: "MiniMax (Hailuo AI) Video 01 Subject Reference API reference for SandBase. Use model minimax/video-01/subject-reference with /v1/run; view request fields, examples, ca."
 aside: false
 outline: false
 apiReferenceKey: "video/minimax/video-01/subject-reference"

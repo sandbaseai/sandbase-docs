@@ -1,6 +1,6 @@
 ---
 title: "LTX-2.3 22B… — Lightricks Image To Video Lora API"
-description: "LTX-2.3 22B Distilled API reference for SandBase. Use model lightricks/ltx-2.3-22b/distilled/image-to-video/lora with /v1/run; view request fields, examples, capabilit..."
+description: "LTX-2.3 22B Distilled API reference for SandBase. Use model lightricks/ltx-2.3-22b/distilled/image-to-video/lora with /v1/run; view request fields, examples, capabilit."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-2.3-22b/distilled/image-to-video/lora"

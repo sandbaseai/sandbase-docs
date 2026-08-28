@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Search Recommend API Reference"
-description: "Get Zhihu Search Recommend API reference for SandBase. Use model zhihu/web/search-recommend with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Get Zhihu Search Recommend API reference for SandBase. Use model zhihu/web/search-recommend with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get video list of specified… — Tiktok Hashtag Video List API"
-description: "Get video list of specified hashtag API reference for SandBase. Use model tiktok/app-v3/hashtag-video-list with /v1/run; view request fields, examples, capabilities, a..."
+description: "Get video list of specified hashtag API reference for SandBase. Use model tiktok/app-v3/hashtag-video-list with /v1/run; view request fields, examples, capabilities, a."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

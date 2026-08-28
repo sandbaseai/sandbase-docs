@@ -1,6 +1,6 @@
 ---
 title: "Get user homepage video… — Douyin Web User Post Videos API"
-description: "Get user homepage video data API reference for SandBase. Use model douyin/web/user-post-videos with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get user homepage video data API reference for SandBase. Use model douyin/web/user-post-videos with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

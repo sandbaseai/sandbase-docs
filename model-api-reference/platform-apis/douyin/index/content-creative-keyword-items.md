@@ -1,6 +1,6 @@
 ---
 title: "Creative keyword related items API Reference"
-description: "Creative keyword related items API reference for SandBase. Use model douyin/index/content-creative-keyword-items with /v1/run; view request fields, examples, capabilit..."
+description: "Creative keyword related items API reference for SandBase. Use model douyin/index/content-creative-keyword-items with /v1/run; view request fields, examples, capabilit."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

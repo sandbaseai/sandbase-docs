@@ -287,10 +287,19 @@ function seoTitle(model, disambiguator = '') {
   const suffix = disambiguator ? ` — ${disambiguator} API` : ''
   const title = `${cleanTitle(model)} API Reference${disambiguator ? suffix : ''}`
   if (title.length <= 65) return title
-  const compactSuffix = disambiguator ? suffix : '… API Ref'
-  const available = 65 - compactSuffix.length - (disambiguator ? 1 : 0)
-  const base = cleanTitle(model).slice(0, Math.max(10, available)).trimEnd().replace(/\s+\S*$/, '')
-  return `${base}${disambiguator ? '…' : ''}${compactSuffix}`
+  // Prefer a readable, non-truncated title. A short vendor disambiguator is
+  // enough to distinguish duplicate operation names and keeps search snippets
+  // from ending in a literal ellipsis.
+  if (disambiguator) {
+    const vendor = String(model.vendor ?? disambiguator).replace(/[-_]+/g, ' ').trim()
+    const vendorSuffix = ` — ${vendor}`
+    const compact = `${cleanTitle(model)} API Reference${vendorSuffix}`
+    if (compact.length <= 65) return compact
+  }
+  const compactSuffix = ' API Ref'
+  const available = 65 - compactSuffix.length
+  const base = cleanTitle(model).slice(0, available).trimEnd().replace(/\s+\S*$/, '')
+  return `${base}${compactSuffix}`
 }
 
 function seoDisambiguator(model) {

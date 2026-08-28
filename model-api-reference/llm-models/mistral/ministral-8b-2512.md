@@ -1,6 +1,6 @@
 ---
 title: "Ministral 3 8B 2512 API Reference"
-description: "Ministral 3 8B 2512 API reference for SandBase. Use model mistral/ministral-8b-2512 with /v1/chat/completions; view request fields, examples, capabilities, and respons..."
+description: "Ministral 3 8B 2512 API reference for SandBase. Use model mistral/ministral-8b-2512 with /v1/chat/completions; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/ministral-8b-2512"

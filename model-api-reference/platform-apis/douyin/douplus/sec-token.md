@@ -1,6 +1,6 @@
 ---
 title: "Get DOU+ sec_token for POST requests API Reference"
-description: "Get DOU+ sec_token for POST requests API reference for SandBase. Use model douyin/douplus/sec-token with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Get DOU+ sec_token for POST requests API reference for SandBase. Use model douyin/douplus/sec-token with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

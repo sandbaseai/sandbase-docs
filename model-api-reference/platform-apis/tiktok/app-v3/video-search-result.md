@@ -1,6 +1,6 @@
 ---
 title: "Get video search results of specified keywords API Reference"
-description: "Get video search results of specified keywords API reference for SandBase. Use model tiktok/app-v3/video-search-result with /v1/run; view request fields, examples, cap..."
+description: "Get video search results of specified keywords API reference for SandBase. Use model tiktok/app-v3/video-search-result with /v1/run; view request fields, examples, cap."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

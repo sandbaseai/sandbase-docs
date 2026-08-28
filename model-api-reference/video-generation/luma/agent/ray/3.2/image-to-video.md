@@ -1,6 +1,6 @@
 ---
 title: "Luma Ray 3.2 Image to Video API Reference"
-description: "Luma Ray 3.2 Image to Video API reference for SandBase. Use model luma/agent/ray/3.2/image-to-video with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Luma Ray 3.2 Image to Video API reference for SandBase. Use model luma/agent/ray/3.2/image-to-video with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 apiReferenceKey: "video/luma/agent/ray/3.2/image-to-video"

@@ -1,6 +1,6 @@
 ---
 title: "Get daily trending search words API Reference"
-description: "Get daily trending search words API reference for SandBase. Use model tiktok/web/trending-searchwords with /v1/run; view request fields, examples, capabilities, and re..."
+description: "Get daily trending search words API reference for SandBase. Use model tiktok/web/trending-searchwords with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

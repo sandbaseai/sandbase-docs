@@ -1,6 +1,6 @@
 ---
 title: "IBM: Granite 4.0 Micro API Reference"
-description: "IBM: Granite 4.0 Micro API reference for SandBase. Use model ibm-granite/granite-4.0-h-micro with /v1/chat/completions; view request fields, examples, capabilities, an..."
+description: "IBM: Granite 4.0 Micro API reference for SandBase. Use model ibm-granite/granite-4.0-h-micro with /v1/chat/completions; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 apiReferenceKey: "llm/ibm-granite/granite-4.0-h-micro"

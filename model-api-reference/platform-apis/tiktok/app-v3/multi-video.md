@@ -1,6 +1,6 @@
 ---
 title: "Batch Get Video… — Tiktok Multi Video API"
-description: "Batch Get Video Information API reference for SandBase. Use model tiktok/app-v3/multi-video with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Batch Get Video Information API reference for SandBase. Use model tiktok/app-v3/multi-video with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

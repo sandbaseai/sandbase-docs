@@ -1,6 +1,6 @@
 ---
 title: "LTX 2.3 Fast Image to Video API Reference"
-description: "LTX 2.3 Fast Image to Video API reference for SandBase. Use model lightricks/ltx-2.3-fast/image-to-video with /v1/run; view request fields, examples, capabilities, and..."
+description: "LTX 2.3 Fast Image to Video API reference for SandBase. Use model lightricks/ltx-2.3-fast/image-to-video with /v1/run; view request fields, examples, capabilities, and."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-2.3-fast/image-to-video"

@@ -1,6 +1,6 @@
 ---
 title: "FLUX.1 [dev] with Controlnets… — Bfl Differential Diffusion API"
-description: "FLUX.1 [dev] with Controlnets and Loras API reference for SandBase. Use model bfl/flux-general/differential-diffusion with /v1/run; view request fields, examples, capa..."
+description: "FLUX.1 [dev] with Controlnets and Loras API reference for SandBase. Use model bfl/flux-general/differential-diffusion with /v1/run; view request fields, examples, capa."
 aside: false
 outline: false
 apiReferenceKey: "image/bfl/flux-general/differential-diffusion"

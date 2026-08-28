@@ -1,6 +1,6 @@
 ---
 title: "SERP Google Jobs Live API Reference"
-description: "SERP Google Jobs Live API reference for SandBase. Use model dataforseo/v3/serp/google/jobs/live/advanced with /v1/run; view request fields, examples, capabilities, and..."
+description: "SERP Google Jobs Live API reference for SandBase. Use model dataforseo/v3/serp/google/jobs/live/advanced with /v1/run; view request fields, examples, capabilities, and."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "ByteDance: UI-TARS 7B  API Reference"
-description: "ByteDance: UI-TARS 7B  API reference for SandBase. Use model bytedance/ui-tars-1.5-7b with /v1/chat/completions; view request fields, examples, capabilities, and respo..."
+description: "ByteDance: UI-TARS 7B  API reference for SandBase. Use model bytedance/ui-tars-1.5-7b with /v1/chat/completions; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 apiReferenceKey: "llm/bytedance/ui-tars-1.5-7b"

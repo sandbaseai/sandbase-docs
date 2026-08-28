@@ -1,6 +1,6 @@
 ---
 title: "Kuaishou hot categories API Reference"
-description: "Kuaishou hot categories API reference for SandBase. Use model kuaishou/app/hot-board-categories with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Kuaishou hot categories API reference for SandBase. Use model kuaishou/app/hot-board-categories with /v1/run; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

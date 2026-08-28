@@ -1,6 +1,6 @@
 ---
 title: "TheDrummer: UnslopNemo 12B API Reference"
-description: "TheDrummer: UnslopNemo 12B API reference for SandBase. Use model thedrummer/unslopnemo-12b with /v1/chat/completions; view request fields, examples, capabilities, and..."
+description: "TheDrummer: UnslopNemo 12B API reference for SandBase. Use model thedrummer/unslopnemo-12b with /v1/chat/completions; view request fields, examples, capabilities, and;."
 aside: false
 outline: false
 apiReferenceKey: "llm/thedrummer/unslopnemo-12b"

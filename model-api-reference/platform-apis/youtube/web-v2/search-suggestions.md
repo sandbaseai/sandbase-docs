@@ -1,6 +1,6 @@
 ---
 title: "Get search suggestions API Reference"
-description: "Get search suggestions API reference for SandBase. Use model youtube/web-v2/search-suggestions with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Get search suggestions API reference for SandBase. Use model youtube/web-v2/search-suggestions with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

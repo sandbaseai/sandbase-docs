@@ -1,6 +1,6 @@
 ---
 title: "SERP Google Autocomplete Live API Reference"
-description: "SERP Google Autocomplete Live API reference for SandBase. Use model dataforseo/v3/serp/google/autocomplete/live/advanced with /v1/run; view request fields, examples, c..."
+description: "SERP Google Autocomplete Live API reference for SandBase. Use model dataforseo/v3/serp/google/autocomplete/live/advanced with /v1/run; view request fields, examples, c."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

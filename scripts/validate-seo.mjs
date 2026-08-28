@@ -47,6 +47,10 @@ function inspect(directory) {
     assert.ok(String(frontmatter.description ?? '').trim(), `${filename} must declare a non-empty description`)
     assert.ok(String(frontmatter.title).length <= 65, `${filename} title must be 65 characters or fewer`)
     assert.ok(String(frontmatter.description).length <= 170, `${filename} description must be 170 characters or fewer`)
+    if (filename.startsWith('model-api-reference/')) {
+      assert.ok(!/(?:\.\.\.|…)\s*$/.test(String(frontmatter.title)), `${filename} title must not end with a truncation ellipsis`)
+      assert.ok(!/(?:\.\.\.|…)\s*$/.test(String(frontmatter.description)), `${filename} description must not end with a truncation ellipsis`)
+    }
     const robots = String(frontmatter.robots ?? 'index,follow')
     if (robots.startsWith('noindex')) {
       if (frontmatter.canonical != null) {

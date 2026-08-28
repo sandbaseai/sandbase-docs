@@ -1,6 +1,6 @@
 ---
 title: "LTX… — Lightricks Ltx Video Lora Multiconditioning API"
-description: "LTX Video-0.9.7 LoRA API reference for SandBase. Use model lightricks/ltx-video-lora/multiconditioning with /v1/run; view request fields, examples, capabilities, and r..."
+description: "LTX Video-0.9.7 LoRA API reference for SandBase. Use model lightricks/ltx-video-lora/multiconditioning with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltx-video-lora/multiconditioning"

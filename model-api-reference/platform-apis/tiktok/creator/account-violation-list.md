@@ -1,6 +1,6 @@
 ---
 title: "Get Creator Account Violation Record List API Reference"
-description: "Get Creator Account Violation Record List API reference for SandBase. Use model tiktok/creator/account-violation-list with /v1/run; view request fields, examples, capa..."
+description: "Get Creator Account Violation Record List API reference for SandBase. Use model tiktok/creator/account-violation-list with /v1/run; view request fields, examples, capa."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

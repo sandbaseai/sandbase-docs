@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit Post Details in Large Batch (Max 30) API Reference"
-description: "Fetch Reddit Post Details in Large Batch (Max 30) API reference for SandBase. Use model reddit/app/post-details-batch-large with /v1/run; view request fields, examples..."
+description: "Fetch Reddit Post Details in Large Batch (Max 30) API reference for SandBase. Use model reddit/app/post-details-batch-large with /v1/run; view request fields, examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

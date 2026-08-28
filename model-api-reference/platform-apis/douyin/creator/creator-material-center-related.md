@@ -1,6 +1,6 @@
 ---
 title: "Get topic or hot spot related videos API Reference"
-description: "Get topic or hot spot related videos API reference for SandBase. Use model douyin/creator/creator-material-center-related with /v1/run; view request fields, examples,..."
+description: "Get topic or hot spot related videos API reference for SandBase. Use model douyin/creator/creator-material-center-related with /v1/run; view request fields, examples,;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

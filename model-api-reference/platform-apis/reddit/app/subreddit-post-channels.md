@@ -1,6 +1,6 @@
 ---
 title: "Fetch Reddit APP Subreddit Post Channels API Reference"
-description: "Fetch Reddit APP Subreddit Post Channels API reference for SandBase. Use model reddit/app/subreddit-post-channels with /v1/run; view request fields, examples, capabili..."
+description: "Fetch Reddit APP Subreddit Post Channels API reference for SandBase. Use model reddit/app/subreddit-post-channels with /v1/run; view request fields, examples, capabili."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

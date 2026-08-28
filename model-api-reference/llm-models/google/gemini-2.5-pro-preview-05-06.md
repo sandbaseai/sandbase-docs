@@ -1,6 +1,6 @@
 ---
 title: "Gemini 2.5 Pro Preview 05-06 API Reference"
-description: "Gemini 2.5 Pro Preview 05-06 API reference for SandBase. Use model google/gemini-2.5-pro-preview-05-06 with /v1/chat/completions; view request fields, examples, capabi..."
+description: "Gemini 2.5 Pro Preview 05-06 API reference for SandBase. Use model google/gemini-2.5-pro-preview-05-06 with /v1/chat/completions; view request fields, examples, capabi."
 aside: false
 outline: false
 apiReferenceKey: "llm/google/gemini-2.5-pro-preview-05-06"

@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen3.6 Max Preview API Reference"
-description: "Qwen: Qwen3.6 Max Preview API reference for SandBase. Use model alibaba/qwen3.6-max-preview with /v1/chat/completions; view request fields, examples, capabilities, and..."
+description: "Qwen: Qwen3.6 Max Preview API reference for SandBase. Use model alibaba/qwen3.6-max-preview with /v1/chat/completions; view request fields, examples, capabilities, and."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen3.6-max-preview"

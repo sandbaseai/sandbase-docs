@@ -1,6 +1,6 @@
 ---
 title: "DeepSeek V3.2 Speciale API Reference"
-description: "DeepSeek V3.2 Speciale API reference for SandBase. Use model deepseek/deepseek-v3.2-speciale with /v1/chat/completions; view request fields, examples, capabilities, an..."
+description: "DeepSeek V3.2 Speciale API reference for SandBase. Use model deepseek/deepseek-v3.2-speciale with /v1/chat/completions; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 apiReferenceKey: "llm/deepseek/deepseek-v3.2-speciale"

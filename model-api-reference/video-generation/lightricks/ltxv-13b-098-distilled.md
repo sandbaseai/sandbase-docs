@@ -1,6 +1,6 @@
 ---
 title: "LTX-Video 13B 0.9.8… — Lightricks Ltxv 13b 098 Distilled API"
-description: "LTX-Video 13B 0.9.8 Distilled API reference for SandBase. Use model lightricks/ltxv-13b-098-distilled with /v1/run; view request fields, examples, capabilities, and re..."
+description: "LTX-Video 13B 0.9.8 Distilled API reference for SandBase. Use model lightricks/ltxv-13b-098-distilled with /v1/run; view request fields, examples, capabilities, and re."
 aside: false
 outline: false
 apiReferenceKey: "video/lightricks/ltxv-13b-098-distilled"

@@ -1,6 +1,6 @@
 ---
 title: "Arcee AI: Virtuoso Large API Reference"
-description: "Arcee AI: Virtuoso Large API reference for SandBase. Use model arcee-ai/virtuoso-large with /v1/chat/completions; view request fields, examples, capabilities, and resp..."
+description: "Arcee AI: Virtuoso Large API reference for SandBase. Use model arcee-ai/virtuoso-large with /v1/chat/completions; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 apiReferenceKey: "llm/arcee-ai/virtuoso-large"

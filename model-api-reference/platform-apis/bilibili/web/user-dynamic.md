@@ -1,6 +1,6 @@
 ---
 title: "Get dynamic information of specified user API Reference"
-description: "Get dynamic information of specified user API reference for SandBase. Use model bilibili/web/user-dynamic with /v1/run; view request fields, examples, capabilities, an..."
+description: "Get dynamic information of specified user API reference for SandBase. Use model bilibili/web/user-dynamic with /v1/run; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Kling LipSync Audio-to-Video API Reference"
-description: "Kling LipSync Audio-to-Video API reference for SandBase. Use model kwaivgi/kling-video/lipsync with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Kling LipSync Audio-to-Video API reference for SandBase. Use model kwaivgi/kling-video/lipsync with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 apiReferenceKey: "video/kwaivgi/kling-video/lipsync"

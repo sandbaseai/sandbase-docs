@@ -1,6 +1,6 @@
 ---
 title: "Get video list of specified… — Douyin Hashtag Video List API"
-description: "Get video list of specified hashtag API reference for SandBase. Use model douyin/app-v3/hashtag-video-list with /v1/run; view request fields, examples, capabilities, a..."
+description: "Get video list of specified hashtag API reference for SandBase. Use model douyin/app-v3/hashtag-video-list with /v1/run; view request fields, examples, capabilities, a."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

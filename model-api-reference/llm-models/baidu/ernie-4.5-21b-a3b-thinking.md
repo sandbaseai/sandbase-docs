@@ -1,6 +1,6 @@
 ---
 title: "ERNIE 4.5 21B A3B Thinking API Reference"
-description: "ERNIE 4.5 21B A3B Thinking API reference for SandBase. Use model baidu/ernie-4.5-21b-a3b-thinking with /v1/chat/completions; view request fields, examples, capabilitie..."
+description: "ERNIE 4.5 21B A3B Thinking API reference for SandBase. Use model baidu/ernie-4.5-21b-a3b-thinking with /v1/chat/completions; view request fields, examples, capabilitie."
 aside: false
 outline: false
 apiReferenceKey: "llm/baidu/ernie-4.5-21b-a3b-thinking"

@@ -1,6 +1,6 @@
 ---
 title: "HeyGen Avatar 4 Image to Video API Reference"
-description: "HeyGen Avatar 4 Image to Video API reference for SandBase. Use model heygen/heygen-avatar4/image-to-video with /v1/run; view request fields, examples, capabilities, an..."
+description: "HeyGen Avatar 4 Image to Video API reference for SandBase. Use model heygen/heygen-avatar4/image-to-video with /v1/run; view request fields, examples, capabilities, an."
 aside: false
 outline: false
 apiReferenceKey: "video/heygen/heygen-avatar4/image-to-video"

@@ -1,6 +1,6 @@
 ---
 title: "Check if Weibo allows image comments API Reference"
-description: "Check if Weibo allows image comments API reference for SandBase. Use model weibo/web-v2/check-allow-comment-with-pic with /v1/run; view request fields, examples, capab..."
+description: "Check if Weibo allows image comments API reference for SandBase. Use model weibo/web-v2/check-allow-comment-with-pic with /v1/run; view request fields, examples, capab."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

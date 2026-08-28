@@ -1,6 +1,6 @@
 ---
 title: "SoteDiffusion API Reference"
-description: "SoteDiffusion API reference for SandBase. Use model stability-ai/stable-cascade/sote-diffusion with /v1/run; view request fields, examples, capabilities, and response..."
+description: "SoteDiffusion API reference for SandBase. Use model stability-ai/stable-cascade/sote-diffusion with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 apiReferenceKey: "image/stability-ai/stable-cascade/sote-diffusion"

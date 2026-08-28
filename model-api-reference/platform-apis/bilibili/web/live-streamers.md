@@ -1,6 +1,6 @@
 ---
 title: "Get live streamers of specified live area API Reference"
-description: "Get live streamers of specified live area API reference for SandBase. Use model bilibili/web/live-streamers with /v1/run; view request fields, examples, capabilities,..."
+description: "Get live streamers of specified live area API reference for SandBase. Use model bilibili/web/live-streamers with /v1/run; view request fields, examples, capabilities,;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

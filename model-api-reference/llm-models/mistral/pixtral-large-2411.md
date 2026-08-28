@@ -1,6 +1,6 @@
 ---
 title: "Pixtral Large 2411 API Reference"
-description: "Pixtral Large 2411 API reference for SandBase. Use model mistral/pixtral-large-2411 with /v1/chat/completions; view request fields, examples, capabilities, and respons..."
+description: "Pixtral Large 2411 API reference for SandBase. Use model mistral/pixtral-large-2411 with /v1/chat/completions; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "llm/mistral/pixtral-large-2411"

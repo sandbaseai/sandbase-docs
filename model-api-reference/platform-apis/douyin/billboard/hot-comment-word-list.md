@@ -1,6 +1,6 @@
 ---
 title: "Fetch work comment analysis word cloud weight API Reference"
-description: "Fetch work comment analysis word cloud weight API reference for SandBase. Use model douyin/billboard/hot-comment-word-list with /v1/run; view request fields, examples,..."
+description: "Fetch work comment analysis word cloud weight API reference for SandBase. Use model douyin/billboard/hot-comment-word-list with /v1/run; view request fields, examples,."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

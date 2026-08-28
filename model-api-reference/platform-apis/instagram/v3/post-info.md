@@ -1,6 +1,6 @@
 ---
 title: "Get post info (media_id or URL) API Reference"
-description: "Get post info (media_id or URL) API reference for SandBase. Use model instagram/v3/post-info with /v1/run; view request fields, examples, capabilities, and response fo..."
+description: "Get post info (media_id or URL) API reference for SandBase. Use model instagram/v3/post-info with /v1/run; view request fields, examples, capabilities, and response fo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

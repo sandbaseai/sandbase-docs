@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu User Included Articles API Reference"
-description: "Get Zhihu User Included Articles API reference for SandBase. Use model zhihu/web/user-included-articles with /v1/run; view request fields, examples, capabilities, and..."
+description: "Get Zhihu User Included Articles API reference for SandBase. Use model zhihu/web/user-included-articles with /v1/run; view request fields, examples, capabilities, and;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

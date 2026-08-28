@@ -1,6 +1,6 @@
 ---
 title: "Get signed video stream URL API Reference"
-description: "Get signed video stream URL API reference for SandBase. Use model youtube/web-v2/signed-stream-url with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Get signed video stream URL API reference for SandBase. Use model youtube/web-v2/signed-stream-url with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

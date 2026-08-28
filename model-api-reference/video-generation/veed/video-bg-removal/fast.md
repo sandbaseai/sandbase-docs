@@ -1,6 +1,6 @@
 ---
 title: "VEED Video Background Removal Fast API Reference"
-description: "VEED Video Background Removal Fast API reference for SandBase. Use model veed/video-bg-removal/fast with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "VEED Video Background Removal Fast API reference for SandBase. Use model veed/video-bg-removal/fast with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 apiReferenceKey: "video/veed/video-bg-removal/fast"

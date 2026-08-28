@@ -1,6 +1,6 @@
 ---
 title: "SERP Google Organic Live API Reference"
-description: "SERP Google Organic Live API reference for SandBase. Use model dataforseo/v3/serp/google/organic/live/advanced with /v1/run; view request fields, examples, capabilitie..."
+description: "SERP Google Organic Live API reference for SandBase. Use model dataforseo/v3/serp/google/organic/live/advanced with /v1/run; view request fields, examples, capabilitie."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

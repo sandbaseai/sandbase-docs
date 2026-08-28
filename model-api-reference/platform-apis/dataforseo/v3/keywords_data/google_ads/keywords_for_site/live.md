@@ -1,6 +1,6 @@
 ---
 title: "Keywords Google Ads for Site API Reference"
-description: "Keywords Google Ads for Site API reference for SandBase. Use model dataforseo/v3/keywords_data/google_ads/keywords_for_site/live with /v1/run; view request fields, exa..."
+description: "Keywords Google Ads for Site API reference for SandBase. Use model dataforseo/v3/keywords_data/google_ads/keywords_for_site/live with /v1/run; view request fields, exa."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

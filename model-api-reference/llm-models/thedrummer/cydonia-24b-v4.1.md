@@ -1,6 +1,6 @@
 ---
 title: "TheDrummer: Cydonia 24B V4.1 API Reference"
-description: "TheDrummer: Cydonia 24B V4.1 API reference for SandBase. Use model thedrummer/cydonia-24b-v4.1 with /v1/chat/completions; view request fields, examples, capabilities,..."
+description: "TheDrummer: Cydonia 24B V4.1 API reference for SandBase. Use model thedrummer/cydonia-24b-v4.1 with /v1/chat/completions; view request fields, examples, capabilities,;."
 aside: false
 outline: false
 apiReferenceKey: "llm/thedrummer/cydonia-24b-v4.1"

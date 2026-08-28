@@ -1,6 +1,6 @@
 ---
 title: "Generate real… — Douyin Generate Real Ms Token API"
-description: "Generate real msToken API reference for SandBase. Use model douyin/web/generate-real-ms-token with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Generate real msToken API reference for SandBase. Use model douyin/web/generate-real-ms-token with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

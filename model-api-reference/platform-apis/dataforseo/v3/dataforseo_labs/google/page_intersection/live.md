@@ -1,6 +1,6 @@
 ---
 title: "Labs Google Page Intersection API Reference"
-description: "Labs Google Page Intersection API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/page_intersection/live with /v1/run; view request fields, exam..."
+description: "Labs Google Page Intersection API reference for SandBase. Use model dataforseo/v3/dataforseo_labs/google/page_intersection/live with /v1/run; view request fields, exam."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

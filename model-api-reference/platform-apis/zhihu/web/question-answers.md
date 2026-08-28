@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Question Answers API Reference"
-description: "Get Zhihu Question Answers API reference for SandBase. Use model zhihu/web/question-answers with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Get Zhihu Question Answers API reference for SandBase. Use model zhihu/web/question-answers with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

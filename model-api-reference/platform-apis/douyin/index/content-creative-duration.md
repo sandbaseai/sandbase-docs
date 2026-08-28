@@ -1,6 +1,6 @@
 ---
 title: "Content creative duration API Reference"
-description: "Content creative duration API reference for SandBase. Use model douyin/index/content-creative-duration with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Content creative duration API reference for SandBase. Use model douyin/index/content-creative-duration with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

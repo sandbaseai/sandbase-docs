@@ -1,6 +1,6 @@
 ---
 title: "Fetch search hot list API Reference"
-description: "Fetch search hot list API reference for SandBase. Use model douyin/billboard/hot-total-search-list with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Fetch search hot list API reference for SandBase. Use model douyin/billboard/hot-total-search-list with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

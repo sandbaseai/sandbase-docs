@@ -1,6 +1,6 @@
 ---
 title: "Weibo AI Search Content Extension API Reference"
-description: "Weibo AI Search Content Extension API reference for SandBase. Use model weibo/web-v2/ai-related-search with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Weibo AI Search Content Extension API reference for SandBase. Use model weibo/web-v2/ai-related-search with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

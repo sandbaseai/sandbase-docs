@@ -1,6 +1,6 @@
 ---
 title: "Get user subscribed keywords API Reference"
-description: "Get user subscribed keywords API reference for SandBase. Use model douyin/index/get-user-sub-word with /v1/run; view request fields, examples, capabilities, and respon..."
+description: "Get user subscribed keywords API reference for SandBase. Use model douyin/index/get-user-sub-word with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

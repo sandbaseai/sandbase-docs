@@ -1,6 +1,6 @@
 ---
 title: "Qwen: Qwen Plus 0728 (thinking) API Reference"
-description: "Qwen: Qwen Plus 0728 (thinking) API reference for SandBase. Use model alibaba/qwen-plus-2025-07-28:thinking with /v1/chat/completions; view request fields, examples, c..."
+description: "Qwen: Qwen Plus 0728 (thinking) API reference for SandBase. Use model alibaba/qwen-plus-2025-07-28:thinking with /v1/chat/completions; view request fields, examples, c."
 aside: false
 outline: false
 apiReferenceKey: "llm/alibaba/qwen-plus-2025-07-28:thinking"

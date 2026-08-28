@@ -1,6 +1,6 @@
 ---
 title: "Delivery analysis trend graph API Reference"
-description: "Delivery analysis trend graph API reference for SandBase. Use model douyin/douplus/analyse-graph with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Delivery analysis trend graph API reference for SandBase. Use model douyin/douplus/analyse-graph with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Get live room ranking list API Reference"
-description: "Get live room ranking list API reference for SandBase. Use model tiktok/app-v3/live-ranking-list with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Get live room ranking list API reference for SandBase. Use model tiktok/app-v3/live-ranking-list with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

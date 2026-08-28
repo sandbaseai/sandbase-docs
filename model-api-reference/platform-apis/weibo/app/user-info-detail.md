@@ -1,6 +1,6 @@
 ---
 title: "Get user detail information API Reference"
-description: "Get user detail information API reference for SandBase. Use model weibo/app/user-info-detail with /v1/run; view request fields, examples, capabilities, and response fo..."
+description: "Get user detail information API reference for SandBase. Use model weibo/app/user-info-detail with /v1/run; view request fields, examples, capabilities, and response fo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

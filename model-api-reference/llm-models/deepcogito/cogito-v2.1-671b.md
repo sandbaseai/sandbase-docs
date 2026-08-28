@@ -1,6 +1,6 @@
 ---
 title: "Deep Cogito: Cogito v2.1 671B API Reference"
-description: "Deep Cogito: Cogito v2.1 671B API reference for SandBase. Use model deepcogito/cogito-v2.1-671b with /v1/chat/completions; view request fields, examples, capabilities,..."
+description: "Deep Cogito: Cogito v2.1 671B API reference for SandBase. Use model deepcogito/cogito-v2.1-671b with /v1/chat/completions; view request fields, examples, capabilities,."
 aside: false
 outline: false
 apiReferenceKey: "llm/deepcogito/cogito-v2.1-671b"

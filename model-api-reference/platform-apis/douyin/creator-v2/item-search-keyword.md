@@ -1,6 +1,6 @@
 ---
 title: "Fetch item search keywords statistics API Reference"
-description: "Fetch item search keywords statistics API reference for SandBase. Use model douyin/creator-v2/item-search-keyword with /v1/run; view request fields, examples, capabili..."
+description: "Fetch item search keywords statistics API reference for SandBase. Use model douyin/creator-v2/item-search-keyword with /v1/run; view request fields, examples, capabili."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

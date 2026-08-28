@@ -1,6 +1,6 @@
 ---
 title: "Get explore page sections API Reference"
-description: "Get explore page sections API reference for SandBase. Use model instagram/v1/explore-sections with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Get explore page sections API reference for SandBase. Use model instagram/v1/explore-sections with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

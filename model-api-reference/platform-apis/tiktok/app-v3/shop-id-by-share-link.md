@@ -1,6 +1,6 @@
 ---
 title: "Get Shop ID by Share… — Tiktok Shop Id By Share Link API"
-description: "Get Shop ID by Share Link API reference for SandBase. Use model tiktok/app-v3/shop-id-by-share-link with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Get Shop ID by Share Link API reference for SandBase. Use model tiktok/app-v3/shop-id-by-share-link with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

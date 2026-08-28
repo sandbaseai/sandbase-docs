@@ -1,6 +1,6 @@
 ---
 title: "Get brand initiative rank weekly API Reference"
-description: "Get brand initiative rank weekly API reference for SandBase. Use model douyin/index/brand-initiative-rank-weekly with /v1/run; view request fields, examples, capabilit..."
+description: "Get brand initiative rank weekly API reference for SandBase. Use model douyin/index/brand-initiative-rank-weekly with /v1/run; view request fields, examples, capabilit."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

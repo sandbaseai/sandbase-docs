@@ -1,6 +1,6 @@
 ---
 title: "Ideogram V3 Transparent API Reference"
-description: "Ideogram V3 Transparent API reference for SandBase. Use model ideogram-ai/ideogram-v3/transparent with /v1/run; view request fields, examples, capabilities, and respon..."
+description: "Ideogram V3 Transparent API reference for SandBase. Use model ideogram-ai/ideogram-v3/transparent with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "image/ideogram-ai/ideogram-v3/transparent"

@@ -1,6 +1,6 @@
 ---
 title: "ControlNet… — Stability Ai Fast Sdxl Controlnet Canny API"
-description: "ControlNet SDXL API reference for SandBase. Use model stability-ai/fast-sdxl-controlnet-canny with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "ControlNet SDXL API reference for SandBase. Use model stability-ai/fast-sdxl-controlnet-canny with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "image/stability-ai/fast-sdxl-controlnet-canny"

@@ -1,6 +1,6 @@
 ---
 title: "Gets video data from a collection folder API Reference"
-description: "Gets video data from a collection folder API reference for SandBase. Use model bilibili/web/user-collection-videos with /v1/run; view request fields, examples, capabil..."
+description: "Gets video data from a collection folder API reference for SandBase. Use model bilibili/web/user-collection-videos with /v1/run; view request fields, examples, capabil."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

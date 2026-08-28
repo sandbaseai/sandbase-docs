@@ -1,6 +1,6 @@
 ---
 title: "Sao10K: Llama 3 8B Lunaris API Reference"
-description: "Sao10K: Llama 3 8B Lunaris API reference for SandBase. Use model sao10k/l3-lunaris-8b with /v1/chat/completions; view request fields, examples, capabilities, and respo..."
+description: "Sao10K: Llama 3 8B Lunaris API reference for SandBase. Use model sao10k/l3-lunaris-8b with /v1/chat/completions; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 apiReferenceKey: "llm/sao10k/l3-lunaris-8b"

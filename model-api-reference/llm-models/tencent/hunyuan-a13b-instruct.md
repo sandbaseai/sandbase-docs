@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan A13B Instruct API Reference"
-description: "Hunyuan A13B Instruct API reference for SandBase. Use model tencent/hunyuan-a13b-instruct with /v1/chat/completions; view request fields, examples, capabilities, and r..."
+description: "Hunyuan A13B Instruct API reference for SandBase. Use model tencent/hunyuan-a13b-instruct with /v1/chat/completions; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 apiReferenceKey: "llm/tencent/hunyuan-a13b-instruct"

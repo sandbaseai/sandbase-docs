@@ -1,6 +1,6 @@
 ---
 title: "Kling Video V3 — Kwaivgi Motion Control API"
-description: "Kling Video V3 Pro API reference for SandBase. Use model kwaivgi/kling-video/v3/pro/motion-control with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Kling Video V3 Pro API reference for SandBase. Use model kwaivgi/kling-video/v3/pro/motion-control with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 apiReferenceKey: "image/kwaivgi/kling-video/v3/pro/motion-control"

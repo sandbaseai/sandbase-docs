@@ -1,6 +1,6 @@
 ---
 title: "Kling AI Avatar Pro API Reference"
-description: "Kling AI Avatar Pro API reference for SandBase. Use model kwaivgi/kling-video/v1/pro/ai-avatar with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Kling AI Avatar Pro API reference for SandBase. Use model kwaivgi/kling-video/v1/pro/ai-avatar with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 apiReferenceKey: "video/kwaivgi/kling-video/v1/pro/ai-avatar"

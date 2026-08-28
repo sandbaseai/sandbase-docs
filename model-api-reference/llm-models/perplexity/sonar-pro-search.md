@@ -1,6 +1,6 @@
 ---
 title: "Sonar Pro Search API Reference"
-description: "Sonar Pro Search API reference for SandBase. Use model perplexity/sonar-pro-search with /v1/chat/completions; view request fields, examples, capabilities, and response..."
+description: "Sonar Pro Search API reference for SandBase. Use model perplexity/sonar-pro-search with /v1/chat/completions; view request fields, examples, capabilities, and response."
 aside: false
 outline: false
 apiReferenceKey: "llm/perplexity/sonar-pro-search"

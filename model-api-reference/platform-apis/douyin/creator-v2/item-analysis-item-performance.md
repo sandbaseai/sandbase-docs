@@ -1,6 +1,6 @@
 ---
 title: "Fetch item analysis item performance API Reference"
-description: "Fetch item analysis item performance API reference for SandBase. Use model douyin/creator-v2/item-analysis-item-performance with /v1/run; view request fields, examples..."
+description: "Fetch item analysis item performance API reference for SandBase. Use model douyin/creator-v2/item-analysis-item-performance with /v1/run; view request fields, examples."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

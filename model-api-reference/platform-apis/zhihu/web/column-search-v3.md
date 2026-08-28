@@ -1,6 +1,6 @@
 ---
 title: "Get Zhihu Column Search V3 API Reference"
-description: "Get Zhihu Column Search V3 API reference for SandBase. Use model zhihu/web/column-search-v3 with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Get Zhihu Column Search V3 API reference for SandBase. Use model zhihu/web/column-search-v3 with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

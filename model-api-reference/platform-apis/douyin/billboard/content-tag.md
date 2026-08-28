@@ -1,6 +1,6 @@
 ---
 title: "Fetch vertical content tags API Reference"
-description: "Fetch vertical content tags API reference for SandBase. Use model douyin/billboard/content-tag with /v1/run; view request fields, examples, capabilities, and response..."
+description: "Fetch vertical content tags API reference for SandBase. Use model douyin/billboard/content-tag with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

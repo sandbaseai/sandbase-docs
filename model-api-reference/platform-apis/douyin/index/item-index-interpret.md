@@ -1,6 +1,6 @@
 ---
 title: "Get video index interpretation API Reference"
-description: "Get video index interpretation API reference for SandBase. Use model douyin/index/item-index-interpret with /v1/run; view request fields, examples, capabilities, and r..."
+description: "Get video index interpretation API reference for SandBase. Use model douyin/index/item-index-interpret with /v1/run; view request fields, examples, capabilities, and r."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

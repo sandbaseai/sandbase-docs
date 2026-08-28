@@ -1,6 +1,6 @@
 ---
 title: "Hunyuan Image 3.0 Edit API Reference"
-description: "Hunyuan Image 3.0 Edit API reference for SandBase. Use model tencent/hunyuan-image/3.0/edit with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "Hunyuan Image 3.0 Edit API reference for SandBase. Use model tencent/hunyuan-image/3.0/edit with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 apiReferenceKey: "image/tencent/hunyuan-image/3.0/edit"

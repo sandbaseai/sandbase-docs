@@ -1,6 +1,6 @@
 ---
 title: "Domain Analytics Aggregation API Reference"
-description: "Domain Analytics Aggregation API reference for SandBase. Use model dataforseo/v3/domain_analytics/technologies/aggregation_technologies/live with /v1/run; view request..."
+description: "Domain Analytics Aggregation API reference for SandBase. Use model dataforseo/v3/domain_analytics/technologies/aggregation_technologies/live with /v1/run; view request."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

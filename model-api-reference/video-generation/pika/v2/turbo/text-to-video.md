@@ -1,6 +1,6 @@
 ---
 title: "Pika V2 Text to Video Turbo API Reference"
-description: "Pika V2 Text to Video Turbo API reference for SandBase. Use model pika/v2/turbo/text-to-video with /v1/run; view request fields, examples, capabilities, and response f..."
+description: "Pika V2 Text to Video Turbo API reference for SandBase. Use model pika/v2/turbo/text-to-video with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 apiReferenceKey: "video/pika/v2/turbo/text-to-video"

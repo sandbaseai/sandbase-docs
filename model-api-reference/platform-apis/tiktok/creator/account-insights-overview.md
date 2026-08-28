@@ -1,6 +1,6 @@
 ---
 title: "Get Creator Account Overview API Reference"
-description: "Get Creator Account Overview API reference for SandBase. Use model tiktok/creator/account-insights-overview with /v1/run; view request fields, examples, capabilities,..."
+description: "Get Creator Account Overview API reference for SandBase. Use model tiktok/creator/account-insights-overview with /v1/run; view request fields, examples, capabilities,;."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

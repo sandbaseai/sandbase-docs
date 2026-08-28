@@ -1,6 +1,6 @@
 ---
 title: "Fetch vision search (image-based search) API Reference"
-description: "Fetch vision search (image-based search) API reference for SandBase. Use model douyin/search/vision-search with /v1/run; view request fields, examples, capabilities, a..."
+description: "Fetch vision search (image-based search) API reference for SandBase. Use model douyin/search/vision-search with /v1/run; view request fields, examples, capabilities, a."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

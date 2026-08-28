@@ -1,6 +1,6 @@
 ---
 title: "General search (with pagination) API Reference"
-description: "General search (with pagination) API reference for SandBase. Use model instagram/v3/general-search with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "General search (with pagination) API reference for SandBase. Use model instagram/v3/general-search with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

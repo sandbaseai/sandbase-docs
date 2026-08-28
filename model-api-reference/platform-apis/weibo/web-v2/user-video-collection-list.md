@@ -1,6 +1,6 @@
 ---
 title: "Get user video collection list API Reference"
-description: "Get user video collection list API reference for SandBase. Use model weibo/web-v2/user-video-collection-list with /v1/run; view request fields, examples, capabilities,..."
+description: "Get user video collection list API reference for SandBase. Use model weibo/web-v2/user-video-collection-list with /v1/run; view request fields, examples, capabilities,."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

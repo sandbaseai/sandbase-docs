@@ -1,6 +1,6 @@
 ---
 title: "VEED Avatars Text to Video API Reference"
-description: "VEED Avatars Text to Video API reference for SandBase. Use model veed/avatars/text-to-video with /v1/run; view request fields, examples, capabilities, and response for..."
+description: "VEED Avatars Text to Video API reference for SandBase. Use model veed/avatars/text-to-video with /v1/run; view request fields, examples, capabilities, and response for."
 aside: false
 outline: false
 apiReferenceKey: "video/veed/avatars/text-to-video"

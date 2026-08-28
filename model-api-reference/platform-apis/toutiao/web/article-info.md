@@ -1,6 +1,6 @@
 ---
 title: "Get information of specified… — Toutiao Web Article Info API"
-description: "Get information of specified article API reference for SandBase. Use model toutiao/web/article-info with /v1/run; view request fields, examples, capabilities, and resp..."
+description: "Get information of specified article API reference for SandBase. Use model toutiao/web/article-info with /v1/run; view request fields, examples, capabilities, and resp."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

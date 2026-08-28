@@ -1,6 +1,6 @@
 ---
 title: "Get user posted notes API Reference"
-description: "Get user posted notes API reference for SandBase. Use model xiaohongshu/app-v2/user-posted-notes with /v1/run; view request fields, examples, capabilities, and respons..."
+description: "Get user posted notes API reference for SandBase. Use model xiaohongshu/app-v2/user-posted-notes with /v1/run; see request fields, examples, and response details."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

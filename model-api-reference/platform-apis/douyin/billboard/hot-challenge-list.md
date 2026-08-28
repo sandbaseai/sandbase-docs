@@ -1,6 +1,6 @@
 ---
 title: "Fetch hot challenge list API Reference"
-description: "Fetch hot challenge list API reference for SandBase. Use model douyin/billboard/hot-challenge-list with /v1/run; view request fields, examples, capabilities, and respo..."
+description: "Fetch hot challenge list API reference for SandBase. Use model douyin/billboard/hot-challenge-list with /v1/run; view request fields, examples, capabilities, and respo."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

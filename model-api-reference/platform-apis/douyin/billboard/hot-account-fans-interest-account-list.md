@@ -1,6 +1,6 @@
 ---
 title: "Fetch fan interest author 20 users API Reference"
-description: "Fetch fan interest author 20 users API reference for SandBase. Use model douyin/billboard/hot-account-fans-interest-account-list with /v1/run; view request fields, exa..."
+description: "Fetch fan interest author 20 users API reference for SandBase. Use model douyin/billboard/hot-account-fans-interest-account-list with /v1/run; view request fields, exa."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

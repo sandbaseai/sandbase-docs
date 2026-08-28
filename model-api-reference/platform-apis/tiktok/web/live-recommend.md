@@ -1,6 +1,6 @@
 ---
 title: "Get live room homepage recommendation list API Reference"
-description: "Get live room homepage recommendation list API reference for SandBase. Use model tiktok/web/live-recommend with /v1/run; view request fields, examples, capabilities, a..."
+description: "Get live room homepage recommendation list API reference for SandBase. Use model tiktok/web/live-recommend with /v1/run; view request fields, examples, capabilities, a."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "Search products list V2 (Mobile) API Reference"
-description: "Search products list V2 (Mobile) API reference for SandBase. Use model tiktok/shop-web/search-products-list-v2 with /v1/run; view request fields, examples, capabilitie..."
+description: "Search products list V2 (Mobile) API reference for SandBase. Use model tiktok/shop-web/search-products-list-v2 with /v1/run; view request fields, examples, capabilitie."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

@@ -1,6 +1,6 @@
 ---
 title: "HeyGen Lipsync Precision API Reference"
-description: "HeyGen Lipsync Precision API reference for SandBase. Use model heygen/heygen/lipsync/precision with /v1/run; view request fields, examples, capabilities, and response..."
+description: "HeyGen Lipsync Precision API reference for SandBase. Use model heygen/heygen/lipsync/precision with /v1/run; view request fields, examples, capabilities, and response;."
 aside: false
 outline: false
 apiReferenceKey: "video/heygen/heygen/lipsync/precision"
