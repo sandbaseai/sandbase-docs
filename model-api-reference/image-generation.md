@@ -5,7 +5,7 @@ description: Browse SandBase Image Generation APIs by provider and open a model 
 
 # Image Generation
 
-SandBase currently publishes API reference pages for 438 enabled image generation models across 43 providers. Choose a provider in the left navigation, then open a model page for its exact API identifier, supported capabilities, and a working request.
+Browse enabled image generation models by provider in the left navigation. Open a model page for its exact API identifier, supported capabilities, and a working request. The catalog is generated from the current SandBase model registry; confirm availability before integrating.
 
 Image Generation models use the async SandBase generation protocol declared in each model registry file. Submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out.
 

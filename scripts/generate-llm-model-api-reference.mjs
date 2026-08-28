@@ -1440,7 +1440,7 @@ function writeCategoryOverview(category) {
       [
         '---',
         'title: APIs',
-        `description: Browse ${category.models.length} SandBase API operations across ${category.sortedGroups.length} platforms.`,
+        'description: Browse SandBase API operations by platform and open an operation page for its exact request format.',
         'aside: false',
         'outline: false',
         platformGeneratedMarker,
@@ -1486,7 +1486,7 @@ function writeCategoryOverview(category) {
       '',
       `# ${category.title}`,
       '',
-      `SandBase currently publishes API reference pages for ${category.models.length} enabled ${categoryModelLabel} across ${category.sortedGroups.length} ${category.key === 'api' ? 'platforms' : 'providers'}. Choose a ${category.key === 'api' ? 'platform' : 'provider'} in the left navigation, then open a model page for its exact API identifier, supported capabilities, and a working request.`,
+      `Browse enabled ${categoryModelLabel} by ${category.key === 'api' ? 'platform' : 'provider'} in the left navigation. Open an entry for its exact ${category.key === 'api' ? 'request' : 'model identifier'}, supported capabilities, and a working request.`,
       '',
       protocolNote,
       '',

@@ -163,7 +163,7 @@ Skills and execution remain separate:
 | [Getting Started](https://www.sandbase.ai/docs/getting-started/) | API keys, quickstart, and first call |
 | [Store](https://www.sandbase.ai/docs/store/) | Models, APIs, Agents, and Skills |
 | [Models](https://www.sandbase.ai/docs/models/) | Supported interfaces and capability guidance |
-| [API Reference](https://www.sandbase.ai/docs/api-reference/) | Authentication, endpoints, schemas, errors, and webhooks |
+| [API Reference](https://www.sandbase.ai/docs/api-reference/) | Authentication, Services, Schedules, Sessions, schemas, and errors |
 | [Agents](https://www.sandbase.ai/docs/agents/) | Reusable Agent definitions, Services, Sessions, and Schedules |
 | [Setup](https://www.sandbase.ai/docs/setup/) | Connect AI clients and install capabilities |
 | [For AI Tools](https://www.sandbase.ai/docs/for-agents/) | Machine-readable integration guidance |

@@ -51,6 +51,7 @@ for (const [label, content] of [['Capabilities', capabilitiesPage], ['Vision', v
 assert.match(legacySeedanceReference, /^canonical:\s*\/docs\/model-api-reference\/seedance-native-api\/$/m, 'Legacy Seedance reference must canonicalize to Official Native API')
 assert.match(legacySeedanceReference, /^robots:\s*noindex,follow$/m, 'Legacy Seedance reference must not compete in search results')
 assert.doesNotMatch(readme, /deepseek\/deepseek-v3\b/i, 'README must not recommend the retired DeepSeek V3 model')
+assert.match(sidebar, /text: 'Models'[\s\S]*?List Models[\s\S]*?Get Model/, 'Model API navigation must expose model discovery operations')
 
 const forbiddenOpenApiPatterns = [
   [/^  \/sandboxes(?:[/{:]|$)/m, 'sandbox path'],

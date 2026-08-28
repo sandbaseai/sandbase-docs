@@ -5,7 +5,7 @@ description: Browse SandBase LLM Models APIs by provider and open a model page f
 
 # LLM Models
 
-SandBase currently publishes API reference pages for 371 enabled LLM models across 55 providers. Choose a provider in the left navigation, then open a model page for its exact API identifier, supported capabilities, and a working request.
+Browse enabled LLM models by provider in the left navigation. Open a model page for its exact API identifier, supported capabilities, and a working request. The catalog is generated from the current SandBase model registry; use the live catalog or `GET /v1/models` to confirm availability before integrating.
 
 Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. Other LLM models use `/v1/chat/completions` unless a model-specific protocol is added later.
 

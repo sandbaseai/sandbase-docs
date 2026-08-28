@@ -11,6 +11,15 @@ import {
 // than in modelApiReferenceSidebar.generated.ts, which the generator overwrites.
 const handWrittenModelApiReferenceItems: DefaultTheme.SidebarItem[] = [
   {
+    text: 'Models',
+    collapsed: true,
+    items: [
+      { text: 'Overview', link: '/api-reference/models/' },
+      { text: 'List Models', link: '/api-reference/models/list' },
+      { text: 'Get Model', link: '/api-reference/models/get' },
+    ],
+  },
+  {
     text: 'Inference APIs',
     collapsed: true,
     items: [
