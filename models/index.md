@@ -22,7 +22,7 @@ SandBase lets you browse model APIs, inspect capabilities, copy a working reques
 
 ```bash
 curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
+  -H "Authorization: Bearer $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "deepseek/deepseek-v4-flash",

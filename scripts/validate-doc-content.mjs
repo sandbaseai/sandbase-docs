@@ -60,13 +60,24 @@ for (const filename of files) {
   inspected += 1
 }
 
-for (const filename of ['guides/error-handling.md', 'guides/rate-limiting.md', 'guides/streaming.md']) {
+for (const filename of [
+  'guides/anthropic-messages.md',
+  'guides/chat-completions.md',
+  'guides/error-handling.md',
+  'guides/rate-limiting.md',
+  'guides/streaming.md',
+]) {
   const source = readFileSync(filename, 'utf8')
   assert.doesNotMatch(source, /(?:api_key\s*=|apiKey:|Authorization:\s*Bearer)\s*['"]?sk-/i, `${filename} must read API keys from SANDBASE_API_KEY`)
 }
 
 const streamingLines = readFileSync('guides/streaming.md', 'utf8').split('\n').length
 assert.ok(streamingLines < 250, 'Streaming guide must stay focused; move protocol detail to the API reference')
+
+const guidesIndex = readFileSync('guides/index.md', 'utf8')
+for (const link of ['./chat-completions', './anthropic-messages', './streaming', './error-handling', './rate-limiting', './billing']) {
+  assert.ok(guidesIndex.includes(`](${link})`), `Guides index must link to ${link}`)
+}
 
 assert.ok(inspected > 0, 'content validation did not inspect any public hand-written pages')
 console.log(`public hand-written content: ok (${inspected} pages)`)

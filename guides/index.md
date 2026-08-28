@@ -11,8 +11,10 @@ These guides cover common patterns for using SandBase in production.
 
 | Guide | Description |
 |-------|-------------|
-| [Streaming](./streaming) | Stream Model and Agent output to your app |
-| [Errors](./error-handling) | Handle retries, failures, and request IDs |
+| [Chat Completions](./chat-completions) | Call SandBase through the OpenAI-compatible chat protocol |
+| [Anthropic Messages](./anthropic-messages) | Call SandBase through the Anthropic-compatible messages protocol |
+| [Streaming](./streaming) | Stream compatible Model output to your application |
+| [Errors](./error-handling) | Classify failures and retry only when an operation is safe to repeat |
 | [Rate limits](./rate-limiting) | Handle 429 responses and smooth request bursts |
 | [Pricing](./billing) | Understand credits, usage, and cost controls |
 

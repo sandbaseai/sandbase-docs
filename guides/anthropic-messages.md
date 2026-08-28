@@ -8,10 +8,11 @@ description: Use Anthropic-compatible messages, content blocks, tools, thinking,
 SandBase provides an Anthropic-compatible endpoint at `POST /v1/messages`. Anthropic SDK applications can connect by changing the API key and base URL.
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="sk-your-api-key",
+    api_key=os.environ["SANDBASE_API_KEY"],
     base_url="https://api.sandbase.ai",
 )
 ```

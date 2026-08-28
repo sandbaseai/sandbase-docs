@@ -8,10 +8,11 @@ description: Use OpenAI-compatible chat completions, streaming, tools, multimoda
 SandBase provides an OpenAI-compatible Chat Completions endpoint at `POST /v1/chat/completions`. Existing OpenAI SDK applications can use SandBase by changing the API key and base URL.
 
 ```python
+import os
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="sk-your-api-key",
+    api_key=os.environ["SANDBASE_API_KEY"],
     base_url="https://api.sandbase.ai/v1",
 )
 ```
@@ -22,7 +23,7 @@ Send messages in conversation order using roles supported by the selected provid
 
 ## Streaming
 
-Set `stream: true` to receive Server-Sent Events. Read each `data:` event in order and concatenate `choices[0].delta.content`. The stream ends with `data: [DONE]`. Add `stream_options: {"include_usage": true}` when final token usage is required.
+Set `stream: true` to receive Server-Sent Events. Read each `data:` event in order and concatenate `choices[0].delta.content`. The stream ends with `data: [DONE]`. Add `stream_options: {"include_usage": true}` when the selected provider supplies streaming usage; otherwise usage may be absent.
 
 ## Tools
 
@@ -38,4 +39,4 @@ SandBase uses `model` and `stream` for routing. Additional OpenAI-compatible req
 
 ## Errors and retries
 
-Retry `429`, `500`, `502`, and `503` responses with exponential backoff and jitter. Do not automatically retry malformed requests or authentication failures. For the complete field and response schema, see [Create Chat Completion](/api-reference/llm-gateway).
+Use bounded backoff for retryable `429` and transient server responses only when regenerating is safe. Do not automatically retry malformed requests, authentication failures, or requests whose tool side effects may already have occurred. See [Errors and retries](/guides/error-handling). For the complete field and response schema, see [Create Chat Completion](/api-reference/llm-gateway).
