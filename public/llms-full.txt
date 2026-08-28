@@ -377,7 +377,7 @@ capability tags, input schema, and pricing before sending a request.
 
 ---
 
-## Error Codes
+## Error Handling
 
 Error bodies are protocol-specific. Core middleware may return {"error":"message"}; Agent resource APIs return
 {"error":{"type":"...","message":"..."}}; OpenAI and Anthropic gateways retain compatible envelopes.
@@ -391,23 +391,14 @@ Error bodies are protocol-specific. Core middleware may return {"error":"message
 | API key rate limit exceeded | 429 | Optional per-key RPM cap exceeded; back off with jitter |
 | global rate limit exceeded | 429 | Platform-wide RPM protection exceeded; back off with jitter |
 | API key spending limit exceeded | 402 or protocol-specific 403 | Key spending limit reached |
-| model_not_found | 404 | Check model name via GET /v1/models |
-| model_overloaded | 503 | Retry after 5-10s or use fallback |
-| context_length_exceeded | 400 | Input too long for model |
-| output_length_exceeded | 400 | Hit max_tokens limit |
-| invalid_request | 400 | Check message field for details |
-| invalid_json | 400 | Malformed JSON body |
-| content_policy_violation | 400 | Input violated safety policy |
-| run_failed | 500 | Check GET /v1/sessions/{id}/events |
-| run_timeout | 408 | Simplify task or increase timeout |
-| internal_error | 500 | Retry 1-2 times |
-| service_unavailable | 503 | Retry with backoff |
-| gateway_timeout | 504 | Retry or switch model |
+| HTTP 400 | Invalid or unsupported input; fix the request using the endpoint and model schema |
+| HTTP 404 | Model or resource not found; verify current IDs before retrying |
+| HTTP 409 | Resource state conflict; read current state before deciding whether retry is safe |
+| HTTP 5xx | SandBase or upstream failure; retry only when the operation is safe to repeat |
 
-Retry strategy: wait = min(1s * 2^attempt, 60s) + random jitter
+Retry strategy: bounded exponential backoff plus random jitter.
 The API does not currently send Retry-After or X-RateLimit-* headers and has no published universal numeric default.
-Retryable: 429, 503, 504, 500 (1-2 times only)
-Not retryable: 400, 401, 402, 403
+Do not retry unchanged 400, 401, 402, 403, or 404 requests. Check idempotency before repeating create, trigger, or external-action requests.
 
 ---
 

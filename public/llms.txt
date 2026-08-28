@@ -72,6 +72,6 @@ model card, capabilities, input schema, and detailed pricing. Use GET /v1/tasks/
 - CLI source: https://github.com/sandbaseai/cli
 - AI API guide: https://www.sandbase.ai/docs/for-agents/full
 - Models & Pricing: https://www.sandbase.ai/docs/for-agents/models
-- Error Codes: https://www.sandbase.ai/docs/for-agents/errors
+- Error guide: https://www.sandbase.ai/docs/for-agents/errors
 - OpenAPI spec: https://www.sandbase.ai/docs/openapi.yaml
 - Expanded LLM guide: https://www.sandbase.ai/docs/llms-full.txt

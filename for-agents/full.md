@@ -691,5 +691,5 @@ curl https://api.sandbase.ai/v1/skills \
 ## See Also
 
 - [Models & Pricing](./models) — live model discovery, capabilities, and pricing guidance
-- [Error Codes](./errors) — all error codes with retry guidance
+- [Error Guide](./errors) — documented response shapes, HTTP handling, and retry safety
 - [OpenAPI Spec](https://www.sandbase.ai/docs/openapi.yaml) — machine-readable schema

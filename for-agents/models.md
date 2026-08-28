@@ -63,4 +63,4 @@ curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
 ```
 
 See the [Models API reference](/api-reference/models/) for the response contracts and the
-[Errors reference](/for-agents/errors) for `model_not_found` and validation failures.
+[Error Guide](/for-agents/errors) for response-shape and retry guidance.

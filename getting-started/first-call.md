@@ -383,5 +383,5 @@ Before production, set request timeouts, retry only transient failures with boun
 
 - [**Model API Reference**](/model-api-reference/) — Model endpoints, parameters, and model-specific references
 - [**Streaming Guide**](/guides/streaming) — Advanced streaming patterns and error handling
-- [**Models**](/models/) — Complete list of available models with pricing
+- [**Models**](/models/) — Model discovery, capabilities, and current pricing guidance
 - [**Errors**](/guides/error-handling) — Handle failures and retries

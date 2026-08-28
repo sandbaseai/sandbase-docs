@@ -59,7 +59,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'AI-Readable Overview', link: '/for-agents/' },
       { text: 'AI API Guide', link: '/for-agents/full' },
       { text: 'Models & Pricing', link: '/for-agents/models' },
-      { text: 'Error Codes', link: '/for-agents/errors' },
+      { text: 'Error Guide', link: '/for-agents/errors' },
     ],
   },
   {

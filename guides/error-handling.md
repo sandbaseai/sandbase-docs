@@ -22,7 +22,7 @@ Errors from the OpenAI-compatible endpoints (`/v1/chat/completions`) follow Open
 }
 ```
 
-The Anthropic-compatible endpoint (`/v1/messages`) returns Anthropic's format instead. See the [Error Codes reference](/api-reference/errors) for every format and status code.
+The Anthropic-compatible endpoint (`/v1/messages`) returns Anthropic's format instead. See the [Error Codes reference](/api-reference/errors) for documented public formats and common HTTP statuses.
 
 ## Common Error Types
 
@@ -42,8 +42,10 @@ The Anthropic-compatible endpoint (`/v1/messages`) returns Anthropic's format in
 
 ### Which Errors to Retry
 
-**Always retry:** 429, 500, 502, 503
-**Never retry:** 400, 401, 402, 403, 404
+**Usually retryable:** `429` and transient `500`, `502`, `503`, or `504` responses, when the operation is safe to repeat.
+
+**Not retryable unchanged:** `400`, `401`, `402`, `403`, and `404`. Correct the input, credential, billing state,
+permission, or resource identifier before sending another request.
 
 ### Exponential Backoff
 
@@ -276,27 +278,21 @@ client = OpenAI(
 
 # Longer timeout for complex reasoning
 response = client.chat.completions.create(
-    model="o3",
+    model="openai/gpt-5.4",
     messages=[{"role": "user", "content": "Solve this complex problem..."}],
     timeout=120.0  # Override per-request
 )
 ```
 
-### Recommended Timeouts
-
-| Use Case | Timeout | Reasoning |
-|----------|---------|-----------|
-| Simple chat | 30s | Fast models respond in <5s |
-| Complex reasoning (o3, thinking) | 120s | Reasoning models can take 30-60s |
-| Streaming (first chunk) | 30s | TTFT should be <10s for most models |
-| Streaming (between chunks) | 60s | SandBase auto-terminates at 60s silence |
-| Tool-heavy workflows | 90s | Multiple tool calls add latency |
+Choose connection, first-byte, between-chunk, and total deadlines from the selected model's execution mode and your
+application latency budget. Do not assume one timeout works for every provider or capability. Async operations
+should follow the documented polling contract instead of keeping a synchronous request open indefinitely.
 
 ## Error Handling Best Practices
 
 1. **Log errors with context** — Include the model, message count, and error type for debugging
 2. **Surface errors to users gracefully** — Don't expose raw API errors; translate them to user-friendly messages
-3. **Monitor error rates** — Alert on sustained 5xx rates above 1%
+3. **Monitor error rates** — Alert on a sustained deviation from your application's normal baseline
 4. **Use the OpenAI/Anthropic SDK retry features** — Both SDKs have built-in retry with backoff
 5. **Implement request budgets** — Cap total retries per user request to avoid runaway costs
 

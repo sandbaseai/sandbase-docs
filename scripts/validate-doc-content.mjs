@@ -40,6 +40,10 @@ const forbidden = [
   [/GET \/v1\/models\/\{name\}/, 'incorrect model detail path parameter'],
   [/\/docs\/setup\/cli\b/, 'retired setup alias'],
   [/\]\(\/store\/models\/?(?:[)#])/, 'duplicate Models page link; use /models/'],
+  [/\bNew accounts receive\b[^\n]*\bfree credits\b/i, 'time-sensitive signup credit claim'],
+  [/\$\d+(?:\.\d+)?\s+minimum/i, 'time-sensitive minimum payment claim'],
+  [/\b(?:Apple Pay|Google Pay)\b/, 'time-sensitive payment-method claim'],
+  [/\bSandBase auto-terminates at \d+s silence\b/i, 'undocumented fixed streaming timeout'],
 ]
 
 let inspected = 0

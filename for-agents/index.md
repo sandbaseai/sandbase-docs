@@ -89,7 +89,7 @@ curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
 
 There is no published universal numeric default. Requests are subject to an optional per-key RPM cap and the
 current platform-wide RPM protection. A `429` response does not include quota or `Retry-After` headers; use bounded
-exponential backoff with jitter. See [Error Codes](./errors).
+exponential backoff with jitter. See the [Error Guide](./errors).
 
 ---
 
@@ -97,7 +97,7 @@ exponential backoff with jitter. See [Error Codes](./errors).
 
 - [AI API Guide](./full) — core workflows, request/response shapes, and curl examples
 - [Models & Pricing](./models) — live model discovery, pricing, and capability guidance
-- [Error Codes](./errors) — public error categories with retry guidance
+- [Error Guide](./errors) — documented response shapes, HTTP handling, and retry safety
 - [OpenAPI Spec](https://www.sandbase.ai/docs/openapi.yaml) — machine-readable OpenAPI 3.1
 
 ## Plain-Text Versions (for AI agents)
