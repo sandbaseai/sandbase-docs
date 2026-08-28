@@ -166,6 +166,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
     collapsed: true,
     items: [
       { text: 'Overview', link: "/model-api-reference/llm-models" },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "OpenAI",
         collapsed: true,
@@ -241,6 +242,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "GPT-4 (older v0314)", link: "/model-api-reference/llm-models/openai/gpt-4-0314" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Anthropic",
         collapsed: true,
@@ -267,6 +269,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Claude 3 Haiku", link: "/model-api-reference/llm-models/anthropic/claude-3-haiku" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Google",
         collapsed: true,
@@ -304,6 +307,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Gemma 2 27B", link: "/model-api-reference/llm-models/google/gemma-2-27b-it" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "DeepSeek",
         collapsed: true,
@@ -324,6 +328,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "DeepSeek V3", link: "/model-api-reference/llm-models/deepseek/deepseek-chat" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Alibaba",
         collapsed: true,
@@ -384,6 +389,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Qwen2.5 72B Instruct", link: "/model-api-reference/llm-models/alibaba/qwen-2.5-72b-instruct" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Meta",
         collapsed: true,
@@ -402,6 +408,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Llama 3 8B Instruct", link: "/model-api-reference/llm-models/meta/llama-3-8b-instruct" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Bytedance",
         collapsed: true,
@@ -409,6 +416,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "ByteDance: UI-TARS 7B", link: "/model-api-reference/llm-models/bytedance/ui-tars-1.5-7b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Bytedance-Seed",
         collapsed: true,
@@ -419,6 +427,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "ByteDance Seed: Seed 1.6", link: "/model-api-reference/llm-models/bytedance-seed/seed-1.6" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "xAI",
         collapsed: true,
@@ -436,6 +445,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Grok 3 Beta", link: "/model-api-reference/llm-models/x-ai/grok-3-beta" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Mistral",
         collapsed: true,
@@ -466,6 +476,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Mistral 7B Instruct v0.1", link: "/model-api-reference/llm-models/mistral/mistral-7b-instruct-v0.1" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Perplexity",
         collapsed: true,
@@ -477,6 +488,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Sonar", link: "/model-api-reference/llm-models/perplexity/sonar" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Cohere",
         collapsed: true,
@@ -487,6 +499,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Command R+ (08-2024)", link: "/model-api-reference/llm-models/cohere/command-r-plus-08-2024" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Ai21",
         collapsed: true,
@@ -494,6 +507,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "AI21: Jamba Large 1.7", link: "/model-api-reference/llm-models/ai21/jamba-large-1.7" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Aion-Labs",
         collapsed: true,
@@ -504,6 +518,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "AionLabs: Aion-RP 1.0 (8B)", link: "/model-api-reference/llm-models/aion-labs/aion-rp-llama-3.1-8b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Alfredpros",
         collapsed: true,
@@ -511,6 +526,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "AlfredPros: CodeLLaMa 7B Instruct Solidity", link: "/model-api-reference/llm-models/alfredpros/codellama-7b-instruct-solidity" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Allenai",
         collapsed: true,
@@ -518,6 +534,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "AllenAI: Olmo 3 32B Think", link: "/model-api-reference/llm-models/allenai/olmo-3-32b-think" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Alpindale",
         collapsed: true,
@@ -525,6 +542,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Goliath 120B", link: "/model-api-reference/llm-models/alpindale/goliath-120b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Amazon",
         collapsed: true,
@@ -536,6 +554,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Nova Pro 1.0", link: "/model-api-reference/llm-models/amazon/nova-pro-v1" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Anthracite-Org",
         collapsed: true,
@@ -543,6 +562,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Magnum v4 72B", link: "/model-api-reference/llm-models/anthracite-org/magnum-v4-72b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Arcee-Ai",
         collapsed: true,
@@ -556,6 +576,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Arcee AI: Coder Large", link: "/model-api-reference/llm-models/arcee-ai/coder-large" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Baidu",
         collapsed: true,
@@ -568,6 +589,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "ERNIE 4.5 300B A47B", link: "/model-api-reference/llm-models/baidu/ernie-4.5-300b-a47b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "cc",
         collapsed: true,
@@ -576,6 +598,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "CC: Claude Opus 4.6", link: "/model-api-reference/llm-models/cc/claude-opus-4.6" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Deepcogito",
         collapsed: true,
@@ -583,6 +606,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Deep Cogito: Cogito v2.1 671B", link: "/model-api-reference/llm-models/deepcogito/cogito-v2.1-671b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Essentialai",
         collapsed: true,
@@ -590,6 +614,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "EssentialAI: Rnj 1 Instruct", link: "/model-api-reference/llm-models/essentialai/rnj-1-instruct" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Gryphe",
         collapsed: true,
@@ -597,6 +622,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "MythoMax 13B", link: "/model-api-reference/llm-models/gryphe/mythomax-l2-13b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Ibm-Granite",
         collapsed: true,
@@ -605,6 +631,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "IBM: Granite 4.0 Micro", link: "/model-api-reference/llm-models/ibm-granite/granite-4.0-h-micro" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Inception",
         collapsed: true,
@@ -612,6 +639,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Mercury 2", link: "/model-api-reference/llm-models/inception/mercury-2" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Inclusionai",
         collapsed: true,
@@ -621,6 +649,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "inclusionAI: Ling-2.6-flash", link: "/model-api-reference/llm-models/inclusionai/ling-2.6-flash" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Inflection",
         collapsed: true,
@@ -629,6 +658,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Inflection 3 Pi", link: "/model-api-reference/llm-models/inflection/inflection-3-pi" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Kwaipilot",
         collapsed: true,
@@ -636,6 +666,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "KAT-Coder-Pro V2", link: "/model-api-reference/llm-models/kwaipilot/kat-coder-pro-v2" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Liquid",
         collapsed: true,
@@ -643,6 +674,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "LiquidAI: LFM2-24B-A2B", link: "/model-api-reference/llm-models/liquid/lfm-2-24b-a2b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Mancer",
         collapsed: true,
@@ -650,6 +682,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Weaver (alpha)", link: "/model-api-reference/llm-models/mancer/weaver" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Microsoft",
         collapsed: true,
@@ -659,6 +692,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "WizardLM-2 8x22B", link: "/model-api-reference/llm-models/microsoft/wizardlm-2-8x22b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Minimax",
         collapsed: true,
@@ -673,6 +707,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "MiniMax: MiniMax-01", link: "/model-api-reference/llm-models/minimax/minimax-01" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Moonshotai",
         collapsed: true,
@@ -686,6 +721,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "MoonshotAI: Kimi K2 0711", link: "/model-api-reference/llm-models/moonshotai/kimi-k2" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Morph",
         collapsed: true,
@@ -694,6 +730,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Morph V3 Fast", link: "/model-api-reference/llm-models/morph/morph-v3-fast" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Nex-Agi",
         collapsed: true,
@@ -702,6 +739,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Nex AGI: DeepSeek V3.1 Nex N1", link: "/model-api-reference/llm-models/nex-agi/deepseek-v3.1-nex-n1" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Nousresearch",
         collapsed: true,
@@ -713,6 +751,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "NousResearch: Hermes 2 Pro - Llama-3 8B", link: "/model-api-reference/llm-models/nousresearch/hermes-2-pro-llama-3-8b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "NVIDIA",
         collapsed: true,
@@ -724,6 +763,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Nemotron Nano 9B V2", link: "/model-api-reference/llm-models/nvidia/nemotron-nano-9b-v2" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Openrouter",
         collapsed: true,
@@ -734,6 +774,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Auto Router", link: "/model-api-reference/llm-models/openrouter/auto" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Perceptron",
         collapsed: true,
@@ -741,6 +782,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Perceptron Mk1", link: "/model-api-reference/llm-models/perceptron/perceptron-mk1" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Poolside",
         collapsed: true,
@@ -749,6 +791,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Laguna XS.2", link: "/model-api-reference/llm-models/poolside/laguna-xs.2" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Prime-Intellect",
         collapsed: true,
@@ -756,6 +799,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Prime Intellect: INTELLECT-3", link: "/model-api-reference/llm-models/prime-intellect/intellect-3" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Rekaai",
         collapsed: true,
@@ -764,6 +808,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Reka Flash 3", link: "/model-api-reference/llm-models/rekaai/reka-flash-3" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Relace",
         collapsed: true,
@@ -772,6 +817,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Relace Apply 3", link: "/model-api-reference/llm-models/relace/relace-apply-3" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Sao10k",
         collapsed: true,
@@ -783,6 +829,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Llama 3 Euryale 70B v2.1", link: "/model-api-reference/llm-models/sao10k/l3-euryale-70b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Stepfun",
         collapsed: true,
@@ -791,6 +838,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "StepFun: Step 3.5 Flash", link: "/model-api-reference/llm-models/stepfun/step-3.5-flash" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Switchpoint",
         collapsed: true,
@@ -798,6 +846,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Switchpoint Router", link: "/model-api-reference/llm-models/switchpoint/router" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Tencent",
         collapsed: true,
@@ -807,6 +856,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Hunyuan A13B Instruct", link: "/model-api-reference/llm-models/tencent/hunyuan-a13b-instruct" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Thedrummer",
         collapsed: true,
@@ -817,6 +867,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "TheDrummer: Rocinante 12B", link: "/model-api-reference/llm-models/thedrummer/rocinante-12b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Undi95",
         collapsed: true,
@@ -824,6 +875,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "ReMM SLERP 13B", link: "/model-api-reference/llm-models/undi95/remm-slerp-l2-13b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Upstage",
         collapsed: true,
@@ -831,6 +883,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Solar Pro 3", link: "/model-api-reference/llm-models/upstage/solar-pro-3" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Writer",
         collapsed: true,
@@ -838,6 +891,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Palmyra X5", link: "/model-api-reference/llm-models/writer/palmyra-x5" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Xiaomi",
         collapsed: true,
@@ -848,6 +902,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "MiMo-V2-Pro", link: "/model-api-reference/llm-models/xiaomi/mimo-v2-pro" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Z-Ai",
         collapsed: true,
@@ -874,6 +929,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
     collapsed: true,
     items: [
       { text: 'Overview', link: "/model-api-reference/image-generation" },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "OpenAI",
         collapsed: true,
@@ -890,6 +946,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "GPT Image 1 Edit", link: "/model-api-reference/image-generation/openai/gpt-image-1/edit" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Google",
         collapsed: true,
@@ -905,13 +962,14 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Gemini 2.5 Flash Image Edit", link: "/model-api-reference/image-generation/google/gemini-2.5-flash-image/edit" },
           { text: "Nano Banana Image Editing", link: "/model-api-reference/image-generation/google/nano-banana/edit" },
           { text: "Nano Banana", link: "/model-api-reference/image-generation/google/nano-banana" },
-          { text: "Imagen 4", link: "/model-api-reference/image-generation/google/imagen-4/preview/fast" },
+          { text: "Imagen 4 (Google: fast)", link: "/model-api-reference/image-generation/google/imagen-4/preview/fast" },
           { text: "Imagen 4 Ultra", link: "/model-api-reference/image-generation/google/imagen-4/preview/ultra" },
-          { text: "Imagen 4", link: "/model-api-reference/image-generation/google/imagen-4/preview" },
+          { text: "Imagen 4 (Google: preview)", link: "/model-api-reference/image-generation/google/imagen-4/preview" },
           { text: "Imagen3", link: "/model-api-reference/image-generation/google/imagen-3" },
           { text: "Imagen3 Fast", link: "/model-api-reference/image-generation/google/imagen-3/fast" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Ideogram",
         collapsed: true,
@@ -921,28 +979,30 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "V4.0q [fast]", link: "/model-api-reference/image-generation/ideogram/4.0/fast" },
           { text: "Ideogram V4.0q Tiling", link: "/model-api-reference/image-generation/ideogram/4.0/tiling" },
           { text: "Ideogram V4.0q Image to Image", link: "/model-api-reference/image-generation/ideogram/4.0/image-to-image" },
-          { text: "Ideogram", link: "/model-api-reference/image-generation/ideogram/custom-models" },
+          { text: "Ideogram (Ideogram: custom-models)", link: "/model-api-reference/image-generation/ideogram/custom-models" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Bytedance",
         collapsed: true,
         items: [
           { text: "Seedream 5.0 Pro Image Editing", link: "/model-api-reference/image-generation/bytedance/seedream/5.0/pro/edit" },
           { text: "Seedream 5.0 Pro Text to Image", link: "/model-api-reference/image-generation/bytedance/seedream/5.0/pro" },
-          { text: "SeedVR2", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/image/seamless" },
+          { text: "SeedVR2 (Bytedance: seamless)", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/image/seamless" },
           { text: "Bytedance Seed 2.0 Mini", link: "/model-api-reference/image-generation/bytedance/seed/v2/mini" },
           { text: "Seedream v5.0 Lite", link: "/model-api-reference/image-generation/bytedance/seedream/5.0/lite" },
           { text: "Seedream v4.5", link: "/model-api-reference/image-generation/bytedance/seedream/4.5" },
           { text: "Seedream v4.5 Image Editing", link: "/model-api-reference/image-generation/bytedance/seedream/4.5/edit" },
-          { text: "SeedVR2", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/video" },
-          { text: "SeedVR2", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/image" },
+          { text: "SeedVR2 (Bytedance: video)", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/video" },
+          { text: "SeedVR2 (Bytedance: image)", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/image" },
           { text: "Bytedance Seedream v4 Edit", link: "/model-api-reference/image-generation/bytedance/seedream/4.0/edit" },
           { text: "Bytedance Seedream v4", link: "/model-api-reference/image-generation/bytedance/seedream/4.0" },
           { text: "Dreamina 3.1", link: "/model-api-reference/image-generation/bytedance/dreamina/3.1" },
           { text: "Seedream v5.0 Lite Editing", link: "/model-api-reference/image-generation/bytedance/seedream/5.0/lite/edit" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Recraft",
         collapsed: true,
@@ -966,6 +1026,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Recraft 20b", link: "/model-api-reference/image-generation/recraft/recraft-20b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Luma",
         collapsed: true,
@@ -982,13 +1043,15 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Luma Photon", link: "/model-api-reference/image-generation/luma/photon-1" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Z-Image",
         collapsed: true,
         items: [
-          { text: "Z-Image Turbo", link: "/model-api-reference/image-generation/z-image/turbo" },
+          { text: "Z-Image Turbo (Z-Image: turbo)", link: "/model-api-reference/image-generation/z-image/turbo" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Alibaba",
         collapsed: true,
@@ -1000,12 +1063,12 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Wan 2.7 Edit", link: "/model-api-reference/image-generation/alibaba/wan/2.7/edit" },
           { text: "Wan 2.7", link: "/model-api-reference/image-generation/alibaba/wan/2.7" },
           { text: "Wan 2.7 Pro", link: "/model-api-reference/image-generation/alibaba/wan/2.7/pro" },
-          { text: "Z-Image Turbo Seamless Tiling", link: "/model-api-reference/image-generation/alibaba/z-image/turbo/tiling/lora" },
-          { text: "Z-Image Turbo Seamless Tiling", link: "/model-api-reference/image-generation/alibaba/z-image/turbo/tiling" },
-          { text: "Qwen Image 2", link: "/model-api-reference/image-generation/alibaba/qwen-image-2/pro/text-to-image" },
+          { text: "Z-Image Turbo Seamless Tiling (Alibaba: lora)", link: "/model-api-reference/image-generation/alibaba/z-image/turbo/tiling/lora" },
+          { text: "Z-Image Turbo Seamless Tiling (Alibaba: tiling)", link: "/model-api-reference/image-generation/alibaba/z-image/turbo/tiling" },
+          { text: "Qwen Image 2 (Alibaba: text-to-image)", link: "/model-api-reference/image-generation/alibaba/qwen-image-2/pro/text-to-image" },
           { text: "Qwen Image 2 Pro", link: "/model-api-reference/image-generation/alibaba/qwen-image-2/pro" },
-          { text: "Qwen Image 2", link: "/model-api-reference/image-generation/alibaba/qwen-image-2" },
-          { text: "Qwen Image 2", link: "/model-api-reference/image-generation/alibaba/qwen-image-2/text-to-image" },
+          { text: "Qwen Image 2 (Alibaba: qwen-image-2)", link: "/model-api-reference/image-generation/alibaba/qwen-image-2" },
+          { text: "Qwen Image 2 (Alibaba: text-to-image)", link: "/model-api-reference/image-generation/alibaba/qwen-image-2/text-to-image" },
           { text: "Qwen Image 2 Pro Edit", link: "/model-api-reference/image-generation/alibaba/qwen-image-2/pro/edit" },
           { text: "Qwen Image 2 Edit", link: "/model-api-reference/image-generation/alibaba/qwen-image-2/edit" },
           { text: "Qwen Image Max", link: "/model-api-reference/image-generation/alibaba/qwen-image/max" },
@@ -1023,36 +1086,36 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Qwen Image Layered", link: "/model-api-reference/image-generation/alibaba/qwen-image/layered" },
           { text: "Z-Image Turbo Inpaint LoRA", link: "/model-api-reference/image-generation/alibaba/z-image/turbo/inpaint/lora" },
           { text: "Z-Image Turbo Inpaint", link: "/model-api-reference/image-generation/alibaba/z-image/turbo/inpaint" },
-          { text: "Qwen Image Edit 2509 Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-2509-lora-gallery/remove-element" },
-          { text: "Qwen Image Edit 2509 Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/2509-lora-gallery/lighting-restoration" },
-          { text: "Qwen Image Edit 2509 Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/2509-lora-gallery/integrate-product" },
-          { text: "Qwen Image Edit 2509 Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/2509-lora-gallery/face-to-full-portrait" },
-          { text: "Qwen Image Edit 2509 Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/2509-lora-gallery/add-background" },
-          { text: "Qwen Image Edit 2509 Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-2509-lora-gallery/multiple-angles" },
+          { text: "Qwen Image Edit 2509 Lora Gallery (Alibaba: remove-element)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-2509-lora-gallery/remove-element" },
+          { text: "Qwen Image Edit 2509 Lora Gallery (Alibaba: lighting-restoration)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/2509-lora-gallery/lighting-restoration" },
+          { text: "Qwen Image Edit 2509 Lora Gallery (Alibaba: integrate-product)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/2509-lora-gallery/integrate-product" },
+          { text: "Qwen Image Edit 2509 Lora Gallery (Alibaba: face-to-full-portrait)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/2509-lora-gallery/face-to-full-portrait" },
+          { text: "Qwen Image Edit 2509 Lora Gallery (Alibaba: add-background)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/2509-lora-gallery/add-background" },
+          { text: "Qwen Image Edit 2509 Lora Gallery (Alibaba: multiple-angles)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-2509-lora-gallery/multiple-angles" },
           { text: "Qwen Image Edit 2509 LoRA", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/2509/lora" },
           { text: "Qwen Image Edit 2509", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-2509" },
-          { text: "Qwen Image Edit Plus Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus/lora-gallery/lighting-restoration" },
+          { text: "Qwen Image Edit Plus Lora Gallery (Alibaba: lighting-restoration)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus/lora-gallery/lighting-restoration" },
           { text: "Z-Image Turbo Edit LoRA", link: "/model-api-reference/image-generation/alibaba/z-image/turbo/edit/lora" },
           { text: "Z-Image Turbo Edit", link: "/model-api-reference/image-generation/alibaba/z-image/turbo/edit" },
           { text: "Z-Image Turbo LoRA", link: "/model-api-reference/image-generation/alibaba/z-image/turbo/lora" },
-          { text: "Z-Image Turbo", link: "/model-api-reference/image-generation/alibaba/z-image/turbo" },
-          { text: "Qwen Image Edit Plus Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus-lora-gallery/multiple-angles" },
-          { text: "Qwen Image Edit Plus Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus/lora-gallery/remove-lighting" },
-          { text: "Qwen Image Edit Plus Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus-lora-gallery/remove-element" },
-          { text: "Qwen Image Edit Plus Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus/lora-gallery/next-scene" },
-          { text: "Qwen Image Edit Plus Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus/lora-gallery/integrate-product" },
-          { text: "Qwen Image Edit Plus Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus-lora-gallery/group-photo" },
-          { text: "Qwen Image Edit Plus Lora Gallery", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus/lora-gallery/add-background" },
+          { text: "Z-Image Turbo (Alibaba: turbo)", link: "/model-api-reference/image-generation/alibaba/z-image/turbo" },
+          { text: "Qwen Image Edit Plus Lora Gallery (Alibaba: multiple-angles)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus-lora-gallery/multiple-angles" },
+          { text: "Qwen Image Edit Plus Lora Gallery (Alibaba: remove-lighting)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus/lora-gallery/remove-lighting" },
+          { text: "Qwen Image Edit Plus Lora Gallery (Alibaba: remove-element)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus-lora-gallery/remove-element" },
+          { text: "Qwen Image Edit Plus Lora Gallery (Alibaba: next-scene)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus/lora-gallery/next-scene" },
+          { text: "Qwen Image Edit Plus Lora Gallery (Alibaba: integrate-product)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus/lora-gallery/integrate-product" },
+          { text: "Qwen Image Edit Plus Lora Gallery (Alibaba: group-photo)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus-lora-gallery/group-photo" },
+          { text: "Qwen Image Edit Plus Lora Gallery (Alibaba: add-background)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus/lora-gallery/add-background" },
           { text: "Qwen Image Edit Plus LoRA", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/plus/lora" },
-          { text: "Qwen Image Edit", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit" },
-          { text: "Qwen Image Edit", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/image-to-image" },
+          { text: "Qwen Image Edit (Alibaba: qwen-image-edit)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit" },
+          { text: "Qwen Image Edit (Alibaba: image-to-image)", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/image-to-image" },
           { text: "Wan 2.5 Image Edit", link: "/model-api-reference/image-generation/alibaba/wan/2.5/image-edit" },
           { text: "Wan 2.5 Text to Image", link: "/model-api-reference/image-generation/alibaba/wan/2.5/text-to-image" },
           { text: "Qwen Image Edit Plus", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-plus" },
           { text: "Qwen Image Edit Inpaint", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/inpaint" },
           { text: "Qwen Image Edit LoRA", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit/lora" },
           { text: "Wan 2.2 Image Edit", link: "/model-api-reference/image-generation/alibaba/wan/2.2/image-edit" },
-          { text: "Qwen Image Edit", link: "/model-api-reference/image-generation/alibaba/qwen-image/edit" },
+          { text: "Qwen Image Edit (Alibaba: edit)", link: "/model-api-reference/image-generation/alibaba/qwen-image/edit" },
           { text: "Wan 2.2 Text to Image LoRA", link: "/model-api-reference/image-generation/alibaba/wan/2.2/text-to-image/lora" },
           { text: "Wan 2.2 5B Text to Image", link: "/model-api-reference/image-generation/alibaba/wan/2.2/5b/text-to-image" },
           { text: "Wan 2.2 Text to Image", link: "/model-api-reference/image-generation/alibaba/wan/2.2/text-to-image" },
@@ -1064,89 +1127,91 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Z-Image Exp0622", link: "/model-api-reference/image-generation/alibaba/z-image-exp0622" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Baidu",
         collapsed: true,
         items: [
           { text: "ERNIE-Image Trainer", link: "/model-api-reference/image-generation/baidu/ernie-image-trainer" },
-          { text: "Ernie Image", link: "/model-api-reference/image-generation/baidu/ernie-image" },
-          { text: "Ernie Image", link: "/model-api-reference/image-generation/baidu/ernie-image/turbo" },
+          { text: "Ernie Image (Baidu: ernie-image)", link: "/model-api-reference/image-generation/baidu/ernie-image" },
+          { text: "Ernie Image (Baidu: turbo)", link: "/model-api-reference/image-generation/baidu/ernie-image/turbo" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "BFL",
         collapsed: true,
         items: [
           { text: "FLUX Virtual Try-On", link: "/model-api-reference/image-generation/bfl/flux-pro/1.0/vto" },
           { text: "Flux Pro Erase", link: "/model-api-reference/image-generation/bfl/flux-pro/1.0/erase" },
-          { text: "Flux 2 Pro", link: "/model-api-reference/image-generation/bfl/flux-2-pro/outpaint" },
-          { text: "FLUX.2 [klein] 9B LoRA", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/edit/lora" },
-          { text: "FLUX.2 [klein] 9B LoRA", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/lora" },
-          { text: "FLUX.2 [klein] 4B LoRA", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/edit/lora" },
-          { text: "FLUX.2 [klein] 4B LoRA", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/lora" },
+          { text: "Flux 2 Pro (BFL: outpaint)", link: "/model-api-reference/image-generation/bfl/flux-2-pro/outpaint" },
+          { text: "FLUX.2 [klein] 9B LoRA (BFL: lora)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/edit/lora" },
+          { text: "FLUX.2 [klein] 9B LoRA (BFL: lora)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/lora" },
+          { text: "FLUX.2 [klein] 4B LoRA (BFL: lora)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/edit/lora" },
+          { text: "FLUX.2 [klein] 4B LoRA (BFL: lora)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/lora" },
           { text: "Flux 2 [klein] Realtime", link: "/model-api-reference/image-generation/bfl/flux-2/klein/realtime" },
-          { text: "FLUX.2 [klein] 9B Base LoRA", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/base/edit/lora" },
-          { text: "FLUX.2 [klein] 9B Base LoRA", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/base/lora" },
-          { text: "FLUX.2 [klein] 4B Base LoRA", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/base/edit/lora" },
-          { text: "FLUX.2 [klein] 4B Base LoRA", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/base/lora" },
-          { text: "Flux 2 Klein 4b", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/base/edit" },
-          { text: "Flux 2 Klein 9b", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/base" },
-          { text: "Flux 2 Klein 9b", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/base/edit" },
-          { text: "Flux 2 Klein 4b", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/base" },
-          { text: "Flux 2 Klein 4b", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/edit" },
-          { text: "Flux 2 Klein 9b", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/edit" },
-          { text: "Flux 2 Klein 9b", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b" },
-          { text: "Flux 2 Klein 4b", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b" },
+          { text: "FLUX.2 [klein] 9B Base LoRA (BFL: lora)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/base/edit/lora" },
+          { text: "FLUX.2 [klein] 9B Base LoRA (BFL: lora)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/base/lora" },
+          { text: "FLUX.2 [klein] 4B Base LoRA (BFL: lora)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/base/edit/lora" },
+          { text: "FLUX.2 [klein] 4B Base LoRA (BFL: lora)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/base/lora" },
+          { text: "Flux 2 Klein 4b (BFL: edit)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/base/edit" },
+          { text: "Flux 2 Klein 9b (BFL: base)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/base" },
+          { text: "Flux 2 Klein 9b (BFL: edit)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/base/edit" },
+          { text: "Flux 2 Klein 4b (BFL: base)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/base" },
+          { text: "Flux 2 Klein 4b (BFL: edit)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b/edit" },
+          { text: "Flux 2 Klein 9b (BFL: edit)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/edit" },
+          { text: "Flux 2 Klein 9b (BFL: 9b)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b" },
+          { text: "Flux 2 Klein 4b (BFL: 4b)", link: "/model-api-reference/image-generation/bfl/flux-2/klein/4b" },
           { text: "Flux 2 Flash Edit", link: "/model-api-reference/image-generation/bfl/flux-2/flash/edit" },
           { text: "Flux 2 Flash", link: "/model-api-reference/image-generation/bfl/flux-2/flash" },
           { text: "Flux 2 Turbo Edit", link: "/model-api-reference/image-generation/bfl/flux-2/turbo/edit" },
           { text: "Flux 2 Turbo", link: "/model-api-reference/image-generation/bfl/flux-2/turbo" },
           { text: "Flux 2 Max", link: "/model-api-reference/image-generation/bfl/flux-2/max" },
           { text: "Flux 2 Max Edit", link: "/model-api-reference/image-generation/bfl/flux-2/max/edit" },
-          { text: "Flux 2 Lora Gallery", link: "/model-api-reference/image-generation/bfl/flux-2/lora-gallery/sepia-vintage" },
-          { text: "Flux 2 Lora Gallery", link: "/model-api-reference/image-generation/bfl/flux-2/virtual-tryon" },
-          { text: "Flux 2 Lora Gallery", link: "/model-api-reference/image-generation/bfl/flux-2/lora-gallery/satellite-view-style" },
-          { text: "Flux 2 Lora Gallery", link: "/model-api-reference/image-generation/bfl/flux-2-lora-gallery/realism" },
-          { text: "Flux 2 Lora Gallery", link: "/model-api-reference/image-generation/bfl/flux-2-lora-gallery/multiple-angles" },
-          { text: "Flux 2 Lora Gallery", link: "/model-api-reference/image-generation/bfl/flux-2/lora-gallery/hdr-style" },
-          { text: "Flux 2 Lora Gallery", link: "/model-api-reference/image-generation/bfl/flux-2-lora-gallery/face-to-full-portrait" },
-          { text: "Flux 2 Lora Gallery", link: "/model-api-reference/image-generation/bfl/flux-2-lora-gallery/apartment-staging" },
-          { text: "Flux 2 Lora Gallery", link: "/model-api-reference/image-generation/bfl/flux-2/lora-gallery/add-background" },
+          { text: "Flux 2 Lora Gallery (BFL: sepia-vintage)", link: "/model-api-reference/image-generation/bfl/flux-2/lora-gallery/sepia-vintage" },
+          { text: "Flux 2 Lora Gallery (BFL: virtual-tryon)", link: "/model-api-reference/image-generation/bfl/flux-2/virtual-tryon" },
+          { text: "Flux 2 Lora Gallery (BFL: satellite-view-style)", link: "/model-api-reference/image-generation/bfl/flux-2/lora-gallery/satellite-view-style" },
+          { text: "Flux 2 Lora Gallery (BFL: realism)", link: "/model-api-reference/image-generation/bfl/flux-2-lora-gallery/realism" },
+          { text: "Flux 2 Lora Gallery (BFL: multiple-angles)", link: "/model-api-reference/image-generation/bfl/flux-2-lora-gallery/multiple-angles" },
+          { text: "Flux 2 Lora Gallery (BFL: hdr-style)", link: "/model-api-reference/image-generation/bfl/flux-2/lora-gallery/hdr-style" },
+          { text: "Flux 2 Lora Gallery (BFL: face-to-full-portrait)", link: "/model-api-reference/image-generation/bfl/flux-2-lora-gallery/face-to-full-portrait" },
+          { text: "Flux 2 Lora Gallery (BFL: apartment-staging)", link: "/model-api-reference/image-generation/bfl/flux-2-lora-gallery/apartment-staging" },
+          { text: "Flux 2 Lora Gallery (BFL: add-background)", link: "/model-api-reference/image-generation/bfl/flux-2/lora-gallery/add-background" },
           { text: "Flux 2 Flex Edit", link: "/model-api-reference/image-generation/bfl/flux-2/flex/edit" },
           { text: "Flux 2 Flex", link: "/model-api-reference/image-generation/bfl/flux-2/flex" },
-          { text: "Flux 2", link: "/model-api-reference/image-generation/bfl/flux-2/lora/edit" },
-          { text: "Flux 2", link: "/model-api-reference/image-generation/bfl/flux-2/lora" },
+          { text: "Flux 2 (BFL: edit)", link: "/model-api-reference/image-generation/bfl/flux-2/lora/edit" },
+          { text: "Flux 2 (BFL: lora)", link: "/model-api-reference/image-generation/bfl/flux-2/lora" },
           { text: "Flux 2 Dev Edit", link: "/model-api-reference/image-generation/bfl/flux-2/dev/edit" },
           { text: "Flux 2 Dev", link: "/model-api-reference/image-generation/bfl/flux-2/dev" },
-          { text: "Flux 2 Pro", link: "/model-api-reference/image-generation/bfl/flux-2/pro" },
+          { text: "Flux 2 Pro (BFL: pro)", link: "/model-api-reference/image-generation/bfl/flux-2/pro" },
           { text: "Flux 2 Pro Edit", link: "/model-api-reference/image-generation/bfl/flux-2/pro/edit" },
           { text: "Flux Vision Upscaler", link: "/model-api-reference/image-generation/bfl/flux-vision-upscaler" },
-          { text: "FLUX.1 SRPO [dev]", link: "/model-api-reference/image-generation/bfl/flux-1/srpo/image-to-image" },
-          { text: "FLUX.1 SRPO [dev]", link: "/model-api-reference/image-generation/bfl/flux-1/srpo" },
+          { text: "FLUX.1 SRPO [dev] (BFL: image-to-image)", link: "/model-api-reference/image-generation/bfl/flux-1/srpo/image-to-image" },
+          { text: "FLUX.1 SRPO [dev] (BFL: srpo)", link: "/model-api-reference/image-generation/bfl/flux-1/srpo" },
           { text: "FLUX.1 Krea [dev] Inpainting with LoRAs", link: "/model-api-reference/image-generation/bfl/flux-krea-lora/inpainting" },
-          { text: "FLUX.1 Krea [dev] with LoRAs", link: "/model-api-reference/image-generation/bfl/flux-krea-lora" },
-          { text: "FLUX.1 Krea [dev] with LoRAs", link: "/model-api-reference/image-generation/bfl/flux-krea-lora/image-to-image" },
-          { text: "FLUX.1 Krea [dev]", link: "/model-api-reference/image-generation/bfl/flux-1/krea/image-to-image" },
+          { text: "FLUX.1 Krea [dev] with LoRAs (BFL: flux-krea-lora)", link: "/model-api-reference/image-generation/bfl/flux-krea-lora" },
+          { text: "FLUX.1 Krea [dev] with LoRAs (BFL: image-to-image)", link: "/model-api-reference/image-generation/bfl/flux-krea-lora/image-to-image" },
+          { text: "FLUX.1 Krea [dev] (BFL: image-to-image)", link: "/model-api-reference/image-generation/bfl/flux-1/krea/image-to-image" },
           { text: "FLUX.1 Krea [dev] Redux", link: "/model-api-reference/image-generation/bfl/flux-1/krea/redux" },
-          { text: "FLUX.1 Krea [dev]", link: "/model-api-reference/image-generation/bfl/flux-1/krea" },
-          { text: "Flux Kontext Lora", link: "/model-api-reference/image-generation/bfl/flux-kontext-lora/inpaint" },
-          { text: "Flux Kontext Lora", link: "/model-api-reference/image-generation/bfl/flux-kontext-lora/text-to-image" },
-          { text: "Flux Kontext Lora", link: "/model-api-reference/image-generation/bfl/flux-kontext-lora" },
+          { text: "FLUX.1 Krea [dev] (BFL: krea)", link: "/model-api-reference/image-generation/bfl/flux-1/krea" },
+          { text: "Flux Kontext Lora (BFL: inpaint)", link: "/model-api-reference/image-generation/bfl/flux-kontext-lora/inpaint" },
+          { text: "Flux Kontext Lora (BFL: text-to-image)", link: "/model-api-reference/image-generation/bfl/flux-kontext-lora/text-to-image" },
+          { text: "Flux Kontext Lora (BFL: flux-kontext-lora)", link: "/model-api-reference/image-generation/bfl/flux-kontext-lora" },
           { text: "FLUX.1 [schnell] Redux", link: "/model-api-reference/image-generation/bfl/flux-1/schnell/redux" },
           { text: "FLUX.1 [dev] Redux", link: "/model-api-reference/image-generation/bfl/flux-1/dev/redux" },
           { text: "FLUX.1 [dev]", link: "/model-api-reference/image-generation/bfl/flux-1/dev/image-to-image" },
-          { text: "FLUX.1 Kontext [max]", link: "/model-api-reference/image-generation/bfl/flux-2/kontext/max/multi" },
-          { text: "FLUX.1 Kontext [pro]", link: "/model-api-reference/image-generation/bfl/flux-2/kontext/pro/multi" },
+          { text: "FLUX.1 Kontext [max] (BFL: multi)", link: "/model-api-reference/image-generation/bfl/flux-2/kontext/max/multi" },
+          { text: "FLUX.1 Kontext [pro] (BFL: multi)", link: "/model-api-reference/image-generation/bfl/flux-2/kontext/pro/multi" },
           { text: "Flux 1 Kontext Max", link: "/model-api-reference/image-generation/bfl/flux-1/kontext-max" },
-          { text: "FLUX.1 Kontext [max]", link: "/model-api-reference/image-generation/bfl/flux-2/kontext/max/text-to-image" },
-          { text: "FLUX.1 Kontext [pro]", link: "/model-api-reference/image-generation/bfl/flux-2/kontext/pro/text-to-image" },
+          { text: "FLUX.1 Kontext [max] (BFL: text-to-image)", link: "/model-api-reference/image-generation/bfl/flux-2/kontext/max/text-to-image" },
+          { text: "FLUX.1 Kontext [pro] (BFL: text-to-image)", link: "/model-api-reference/image-generation/bfl/flux-2/kontext/pro/text-to-image" },
           { text: "FLUX.1 Kontext [dev]", link: "/model-api-reference/image-generation/bfl/flux-2/kontext/dev" },
           { text: "Flux 1 Kontext", link: "/model-api-reference/image-generation/bfl/flux-1/kontext" },
           { text: "Flux 1 Dev", link: "/model-api-reference/image-generation/bfl/flux-1/dev" },
-          { text: "FLUX.1 [dev] Control LoRA Canny", link: "/model-api-reference/image-generation/bfl/flux-control-lora-canny" },
-          { text: "FLUX.1 [dev] Control LoRA Depth", link: "/model-api-reference/image-generation/bfl/flux-control-lora-depth" },
-          { text: "FLUX.1 [dev] Control LoRA Canny", link: "/model-api-reference/image-generation/bfl/flux-control-lora-canny/image-to-image" },
-          { text: "FLUX.1 [dev] Control LoRA Depth", link: "/model-api-reference/image-generation/bfl/flux-control-lora-depth/image-to-image" },
+          { text: "FLUX.1 [dev] Control LoRA Canny (BFL: flux-control-lora-canny)", link: "/model-api-reference/image-generation/bfl/flux-control-lora-canny" },
+          { text: "FLUX.1 [dev] Control LoRA Depth (BFL: flux-control-lora-depth)", link: "/model-api-reference/image-generation/bfl/flux-control-lora-depth" },
+          { text: "FLUX.1 [dev] Control LoRA Canny (BFL: image-to-image)", link: "/model-api-reference/image-generation/bfl/flux-control-lora-canny/image-to-image" },
+          { text: "FLUX.1 [dev] Control LoRA Depth (BFL: image-to-image)", link: "/model-api-reference/image-generation/bfl/flux-control-lora-depth/image-to-image" },
           { text: "Flux 1.1 Pro", link: "/model-api-reference/image-generation/bfl/flux-1.1/pro" },
           { text: "FLUX.1 [dev] Canny with LoRAs", link: "/model-api-reference/image-generation/bfl/flux-lora-canny" },
           { text: "FLUX1.1 [pro] ultra Fine-tuned", link: "/model-api-reference/image-generation/bfl/flux-pro/v1.1-ultra-finetuned" },
@@ -1160,17 +1225,18 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "FLUX.1 [dev] Differential Diffusion", link: "/model-api-reference/image-generation/bfl/flux-differential-diffusion" },
           { text: "Flux 1 Pulid", link: "/model-api-reference/image-generation/bfl/flux-1/pulid" },
           { text: "FLUX.1 [dev] Inpainting with LoRAs", link: "/model-api-reference/image-generation/bfl/flux-lora/inpainting" },
-          { text: "FLUX.1 [dev] with Controlnets and Loras", link: "/model-api-reference/image-generation/bfl/flux-general/rf-inversion" },
-          { text: "FLUX.1 [dev] with Controlnets and Loras", link: "/model-api-reference/image-generation/bfl/flux-general" },
-          { text: "FLUX.1 [dev] with Controlnets and Loras", link: "/model-api-reference/image-generation/bfl/flux-general/image-to-image" },
-          { text: "FLUX.1 [dev] with Controlnets and Loras", link: "/model-api-reference/image-generation/bfl/flux-general/inpainting" },
+          { text: "FLUX.1 [dev] with Controlnets and Loras (BFL: rf-inversion)", link: "/model-api-reference/image-generation/bfl/flux-general/rf-inversion" },
+          { text: "FLUX.1 [dev] with Controlnets and Loras (BFL: flux-general)", link: "/model-api-reference/image-generation/bfl/flux-general" },
+          { text: "FLUX.1 [dev] with Controlnets and Loras (BFL: image-to-image)", link: "/model-api-reference/image-generation/bfl/flux-general/image-to-image" },
+          { text: "FLUX.1 [dev] with Controlnets and Loras (BFL: inpainting)", link: "/model-api-reference/image-generation/bfl/flux-general/inpainting" },
           { text: "FLUX.1 [dev] with LoRAs", link: "/model-api-reference/image-generation/bfl/flux-lora/image-to-image" },
-          { text: "FLUX.1 [dev] with Controlnets and Loras", link: "/model-api-reference/image-generation/bfl/flux-general/differential-diffusion" },
+          { text: "FLUX.1 [dev] with Controlnets and Loras (BFL: differential-diffusion)", link: "/model-api-reference/image-generation/bfl/flux-general/differential-diffusion" },
           { text: "Flux 1 Lora", link: "/model-api-reference/image-generation/bfl/flux-1/lora" },
           { text: "FLUX.1 Subject", link: "/model-api-reference/image-generation/bfl/flux-subject" },
           { text: "Flux 1 Dev Edit", link: "/model-api-reference/image-generation/bfl/flux-1/dev/edit" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Bria",
         collapsed: true,
@@ -1195,6 +1261,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Bria Text-to-Image Base", link: "/model-api-reference/image-generation/bria/text-to-image/base" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "ClarityAI",
         collapsed: true,
@@ -1202,6 +1269,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Clarity Upscaler", link: "/model-api-reference/image-generation/clarity-ai/clarity-upscaler" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "ElevenLabs",
         collapsed: true,
@@ -1209,6 +1277,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "ElevenLabs Speech to Text", link: "/model-api-reference/image-generation/elevenlabs/speech-to-text" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "FASHN",
         collapsed: true,
@@ -1217,6 +1286,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "FASHN Virtual Try-On V1.5", link: "/model-api-reference/image-generation/fashn/tryon/v1.5" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "HiDream",
         collapsed: true,
@@ -1233,6 +1303,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "HiDream E1 Full", link: "/model-api-reference/image-generation/hidream-ai/hidream-e1/full" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "hyper3d",
         collapsed: true,
@@ -1241,12 +1312,13 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Hyper3D Rodin", link: "/model-api-reference/image-generation/hyper3d/rodin" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Ideogram",
         collapsed: true,
         items: [
           { text: "Ideogram Remove Background", link: "/model-api-reference/image-generation/ideogram-ai/ideogram/remove-background" },
-          { text: "Ideogram", link: "/model-api-reference/image-generation/ideogram-ai/ideogram/custom-models/generate" },
+          { text: "Ideogram (ideogram-ai: generate)", link: "/model-api-reference/image-generation/ideogram-ai/ideogram/custom-models/generate" },
           { text: "Ideogram V3 Layerize Text", link: "/model-api-reference/image-generation/ideogram-ai/ideogram-v3/layerize-text" },
           { text: "Ideogram V3 Transparent", link: "/model-api-reference/image-generation/ideogram-ai/ideogram-v3/transparent" },
           { text: "Ideogram V3 Character Edit", link: "/model-api-reference/image-generation/ideogram-ai/ideogram-v3/character/edit" },
@@ -1270,6 +1342,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Ideogram V2 Turbo Edit", link: "/model-api-reference/image-generation/ideogram-ai/ideogram-v2/turbo/edit" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "ImagineArt",
         collapsed: true,
@@ -1278,33 +1351,35 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Imagineart 2.0 Preview", link: "/model-api-reference/image-generation/imagineart/imagineart-2.0-preview/text-to-image" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "KwaiVGI",
         collapsed: true,
         items: [
           { text: "Kling Video V3 Standard", link: "/model-api-reference/image-generation/kwaivgi/kling-video/v3/standard/motion-control" },
           { text: "Kling Video V3 Pro", link: "/model-api-reference/image-generation/kwaivgi/kling-video/v3/pro/motion-control" },
-          { text: "Kling Video O3 Pro", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/pro/edit" },
-          { text: "Kling Video O3 Pro", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/pro/video-to-video" },
-          { text: "Kling Video O3 Standard", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/standard/edit" },
-          { text: "Kling Video O3 Standard", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/standard/video-to-video" },
+          { text: "Kling Video O3 Pro (KwaiVGI: edit)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/pro/edit" },
+          { text: "Kling Video O3 Pro (KwaiVGI: video-to-video)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/pro/video-to-video" },
+          { text: "Kling Video O3 Standard (KwaiVGI: edit)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/standard/edit" },
+          { text: "Kling Video O3 Standard (KwaiVGI: video-to-video)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/standard/video-to-video" },
           { text: "Kling Image V3", link: "/model-api-reference/image-generation/kwaivgi/kling-image/v3" },
           { text: "Kling Image V3 Edit", link: "/model-api-reference/image-generation/kwaivgi/kling-image/v3/edit" },
-          { text: "Kling Image", link: "/model-api-reference/image-generation/kwaivgi/kling-image/o3/edit" },
-          { text: "Kling Image", link: "/model-api-reference/image-generation/kwaivgi/kling-image/o3" },
+          { text: "Kling Image (KwaiVGI: edit)", link: "/model-api-reference/image-generation/kwaivgi/kling-image/o3/edit" },
+          { text: "Kling Image (KwaiVGI: o3)", link: "/model-api-reference/image-generation/kwaivgi/kling-image/o3" },
           { text: "Kling Video V2.6 Standard", link: "/model-api-reference/image-generation/kwaivgi/kling-video/v2.6/standard/motion-control" },
           { text: "Kling Video V2.6 Pro", link: "/model-api-reference/image-generation/kwaivgi/kling-video/v2.6/pro/motion-control" },
           { text: "Kling Video Create Voice", link: "/model-api-reference/image-generation/kwaivgi/kling-video/create-voice" },
-          { text: "Kling Video O1 Standard", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/standard/video-to-video" },
-          { text: "Kling Video O1 Standard", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/standard/edit" },
-          { text: "Kling Video O1 Pro", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/pro/edit" },
-          { text: "Kling Video O1 Pro", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/pro/video-to-video" },
+          { text: "Kling Video O1 Standard (KwaiVGI: video-to-video)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/standard/video-to-video" },
+          { text: "Kling Video O1 Standard (KwaiVGI: edit)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/standard/edit" },
+          { text: "Kling Video O1 Pro (KwaiVGI: edit)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/pro/edit" },
+          { text: "Kling Video O1 Pro (KwaiVGI: video-to-video)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/pro/video-to-video" },
           { text: "Kling O1 Image", link: "/model-api-reference/image-generation/kwaivgi/kling-image/o1" },
           { text: "Kling Kolors Virtual TryOn v1.5", link: "/model-api-reference/image-generation/kwaivgi/kolors-tryon" },
           { text: "Kolors Image to Image", link: "/model-api-reference/image-generation/kwaivgi/kolors/image-to-image" },
           { text: "Kolors", link: "/model-api-reference/image-generation/kwaivgi/kolors" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Lightricks",
         collapsed: true,
@@ -1313,21 +1388,23 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "LTX-2.3 22B Video to Video Trainer", link: "/model-api-reference/image-generation/lightricks/ltx23-v2v-trainer" },
           { text: "LTX-2.3 22B Video Trainer", link: "/model-api-reference/image-generation/lightricks/ltx23-video-trainer" },
           { text: "LTX-2 19B Distilled", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/distilled/audio-to-video" },
-          { text: "LTX-2 19B", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/audio-to-video" },
-          { text: "LTX-2 19B", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/video-to-video" },
-          { text: "LTX-2 19B", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/extend-video" },
+          { text: "LTX-2 19B (Lightricks: audio-to-video)", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/audio-to-video" },
+          { text: "LTX-2 19B (Lightricks: video-to-video)", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/video-to-video" },
+          { text: "LTX-2 19B (Lightricks: extend-video)", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/extend-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "meituan",
         collapsed: true,
         items: [
           { text: "Longcat Multi Avatar", link: "/model-api-reference/image-generation/meituan/longcat-multi-avatar/image-audio-to-video" },
           { text: "Longcat Single Avatar", link: "/model-api-reference/image-generation/meituan/longcat-single-avatar/audio-to-video" },
-          { text: "Longcat Image", link: "/model-api-reference/image-generation/meituan/longcat-image/edit" },
-          { text: "Longcat Image", link: "/model-api-reference/image-generation/meituan/longcat-image" },
+          { text: "Longcat Image (meituan: edit)", link: "/model-api-reference/image-generation/meituan/longcat-image/edit" },
+          { text: "Longcat Image (meituan: longcat-image)", link: "/model-api-reference/image-generation/meituan/longcat-image" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Meshy",
         collapsed: true,
@@ -1335,32 +1412,34 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Meshy Rigging Multi Animation", link: "/model-api-reference/image-generation/meshy/rigging/multi-animation" },
           { text: "Meshy Rigging", link: "/model-api-reference/image-generation/meshy/rigging" },
           { text: "Meshy 6 - Multi Image To 3D", link: "/model-api-reference/image-generation/meshy/meshy-v6/multi-image-to-3d" },
-          { text: "Meshy 6", link: "/model-api-reference/image-generation/meshy/meshy-v6" },
-          { text: "Meshy 6", link: "/model-api-reference/image-generation/meshy/meshy-v6/text-to-3d" },
+          { text: "Meshy 6 (Meshy: meshy-v6)", link: "/model-api-reference/image-generation/meshy/meshy-v6" },
+          { text: "Meshy 6 (Meshy: text-to-3d)", link: "/model-api-reference/image-generation/meshy/meshy-v6/text-to-3d" },
           { text: "Meshy 5 Retexture", link: "/model-api-reference/image-generation/meshy/meshy/v5/retexture" },
           { text: "Meshy 5 Remesh", link: "/model-api-reference/image-generation/meshy/meshy/v5/remesh" },
-          { text: "Meshy 6 Preview", link: "/model-api-reference/image-generation/meshy/meshy-v6-preview/text-to-3d" },
+          { text: "Meshy 6 Preview (Meshy: text-to-3d)", link: "/model-api-reference/image-generation/meshy/meshy-v6-preview/text-to-3d" },
           { text: "Meshy 5 Multi", link: "/model-api-reference/image-generation/meshy/meshy/v5/multi-image-to-3d" },
-          { text: "Meshy 6 Preview", link: "/model-api-reference/image-generation/meshy/meshy-v6-preview" },
+          { text: "Meshy 6 Preview (Meshy: meshy-v6-preview)", link: "/model-api-reference/image-generation/meshy/meshy-v6-preview" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Meta",
         collapsed: true,
         items: [
-          { text: "Sam 3 1", link: "/model-api-reference/image-generation/meta/sam-3-1/video" },
-          { text: "Sam 3 1", link: "/model-api-reference/image-generation/meta/sam-3-1/image-rle" },
-          { text: "Sam 3 1", link: "/model-api-reference/image-generation/meta/sam-3-1/image" },
+          { text: "Sam 3 1 (Meta: video)", link: "/model-api-reference/image-generation/meta/sam-3-1/video" },
+          { text: "Sam 3 1 (Meta: image-rle)", link: "/model-api-reference/image-generation/meta/sam-3-1/image-rle" },
+          { text: "Sam 3 1 (Meta: image)", link: "/model-api-reference/image-generation/meta/sam-3-1/image" },
           { text: "SAM 3 3D Align", link: "/model-api-reference/image-generation/meta/sam-3/3d-align" },
-          { text: "Sam 3", link: "/model-api-reference/image-generation/meta/sam-3/3d-body" },
-          { text: "Sam 3", link: "/model-api-reference/image-generation/meta/sam-3/3d-objects" },
-          { text: "Sam 3", link: "/model-api-reference/image-generation/meta/sam-3/image-rle" },
+          { text: "Sam 3 (Meta: 3d-body)", link: "/model-api-reference/image-generation/meta/sam-3/3d-body" },
+          { text: "Sam 3 (Meta: 3d-objects)", link: "/model-api-reference/image-generation/meta/sam-3/3d-objects" },
+          { text: "Sam 3 (Meta: image-rle)", link: "/model-api-reference/image-generation/meta/sam-3/image-rle" },
           { text: "SAM 3 Embed", link: "/model-api-reference/image-generation/meta/sam-3/image/embed" },
-          { text: "Sam 3", link: "/model-api-reference/image-generation/meta/sam-3/video-rle" },
+          { text: "Sam 3 (Meta: video-rle)", link: "/model-api-reference/image-generation/meta/sam-3/video-rle" },
           { text: "SAM 3 Image", link: "/model-api-reference/image-generation/meta/sam-3/image" },
           { text: "Demucs", link: "/model-api-reference/image-generation/meta/demucs" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Microsoft",
         collapsed: true,
@@ -1369,6 +1448,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Mai Image 2.5", link: "/model-api-reference/image-generation/microsoft/mai-image-2.5/edit" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "MiniMax",
         collapsed: true,
@@ -1377,33 +1457,37 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "MiniMax (Hailuo AI) Text to Image", link: "/model-api-reference/image-generation/minimax/image-01" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Mirelo",
         collapsed: true,
         items: [
-          { text: "Mirelo SFX1.6", link: "/model-api-reference/image-generation/mirelo/sfx1.6/video-to-video" },
-          { text: "Mirelo SFX1.6", link: "/model-api-reference/image-generation/mirelo/sfx1.6/inpaint-audio" },
-          { text: "Mirelo SFX1.6", link: "/model-api-reference/image-generation/mirelo/sfx1.6/extend-audio" },
+          { text: "Mirelo SFX1.6 (Mirelo: video-to-video)", link: "/model-api-reference/image-generation/mirelo/sfx1.6/video-to-video" },
+          { text: "Mirelo SFX1.6 (Mirelo: inpaint-audio)", link: "/model-api-reference/image-generation/mirelo/sfx1.6/inpaint-audio" },
+          { text: "Mirelo SFX1.6 (Mirelo: extend-audio)", link: "/model-api-reference/image-generation/mirelo/sfx1.6/extend-audio" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "NVIDIA",
         collapsed: true,
         items: [
           { text: "Cosmos 3 Super", link: "/model-api-reference/image-generation/nvidia/cosmos-3-super/text-to-image" },
-          { text: "Nemotron 3 Nano Omni", link: "/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/vision" },
-          { text: "Nemotron 3 Nano Omni", link: "/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/video" },
-          { text: "Nemotron 3 Nano Omni", link: "/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/audio" },
+          { text: "Nemotron 3 Nano Omni (NVIDIA: vision)", link: "/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/vision" },
+          { text: "Nemotron 3 Nano Omni (NVIDIA: video)", link: "/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/video" },
+          { text: "Nemotron 3 Nano Omni (NVIDIA: audio)", link: "/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/audio" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "patina",
         collapsed: true,
         items: [
-          { text: "PATINA", link: "/model-api-reference/image-generation/patina/material/extract" },
-          { text: "PATINA", link: "/model-api-reference/image-generation/patina/material" },
+          { text: "PATINA (patina: extract)", link: "/model-api-reference/image-generation/patina/material/extract" },
+          { text: "PATINA (patina: material)", link: "/model-api-reference/image-generation/patina/material" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "pixal3d",
         collapsed: true,
@@ -1411,6 +1495,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Pixal3d", link: "/model-api-reference/image-generation/pixal3d/pixal3d" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "PixVerse",
         collapsed: true,
@@ -1418,15 +1503,17 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "PixVerse V6 Extend", link: "/model-api-reference/image-generation/pixverse/v6/extend" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Reve",
         collapsed: true,
         items: [
-          { text: "Reve 2.1", link: "/model-api-reference/image-generation/reve/2.1/remix" },
-          { text: "Reve 2.1", link: "/model-api-reference/image-generation/reve/2.1/edit" },
-          { text: "Reve 2.1", link: "/model-api-reference/image-generation/reve/2.1/text-to-image" },
+          { text: "Reve 2.1 (Reve: remix)", link: "/model-api-reference/image-generation/reve/2.1/remix" },
+          { text: "Reve 2.1 (Reve: edit)", link: "/model-api-reference/image-generation/reve/2.1/edit" },
+          { text: "Reve 2.1 (Reve: text-to-image)", link: "/model-api-reference/image-generation/reve/2.1/text-to-image" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "sandbase-ai",
         collapsed: true,
@@ -1439,6 +1526,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Creative Upscaler", link: "/model-api-reference/image-generation/sandbase-ai/creative-upscaler" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Sonilo",
         collapsed: true,
@@ -1447,27 +1535,29 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "V1.1", link: "/model-api-reference/image-generation/sonilo/1.1/video-to-music" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Stability AI",
         collapsed: true,
         items: [
           { text: "Stable Diffusion 3.5 Large", link: "/model-api-reference/image-generation/stability-ai/sd/3.5-large" },
           { text: "Stable Diffusion 3.5 Medium", link: "/model-api-reference/image-generation/stability-ai/sd/3.5-medium" },
-          { text: "Stable Diffusion V3", link: "/model-api-reference/image-generation/stability-ai/stable-diffusion-v3-medium" },
-          { text: "SDXL ControlNet Union", link: "/model-api-reference/image-generation/stability-ai/sdxl-controlnet-union/image-to-image" },
-          { text: "SDXL ControlNet Union", link: "/model-api-reference/image-generation/stability-ai/sdxl-controlnet-union" },
-          { text: "SDXL ControlNet Union", link: "/model-api-reference/image-generation/stability-ai/sdxl-controlnet-union/inpainting" },
+          { text: "Stable Diffusion V3 (Stability AI: stable-diffusion-v3-medium)", link: "/model-api-reference/image-generation/stability-ai/stable-diffusion-v3-medium" },
+          { text: "SDXL ControlNet Union (Stability AI: image-to-image)", link: "/model-api-reference/image-generation/stability-ai/sdxl-controlnet-union/image-to-image" },
+          { text: "SDXL ControlNet Union (Stability AI: sdxl-controlnet-union)", link: "/model-api-reference/image-generation/stability-ai/sdxl-controlnet-union" },
+          { text: "SDXL ControlNet Union (Stability AI: inpainting)", link: "/model-api-reference/image-generation/stability-ai/sdxl-controlnet-union/inpainting" },
           { text: "Stable Cascade", link: "/model-api-reference/image-generation/stability-ai/stable-cascade" },
-          { text: "Stable Diffusion XL", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl" },
-          { text: "Stable Diffusion V3", link: "/model-api-reference/image-generation/stability-ai/stable-diffusion-v3-medium/image-to-image" },
+          { text: "Stable Diffusion XL (Stability AI: fast-sdxl)", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl" },
+          { text: "Stable Diffusion V3 (Stability AI: image-to-image)", link: "/model-api-reference/image-generation/stability-ai/stable-diffusion-v3-medium/image-to-image" },
           { text: "SoteDiffusion", link: "/model-api-reference/image-generation/stability-ai/stable-cascade/sote-diffusion" },
-          { text: "Stable Diffusion XL", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl/image-to-image" },
+          { text: "Stable Diffusion XL (Stability AI: image-to-image)", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl/image-to-image" },
           { text: "Stable Diffusion v1.5", link: "/model-api-reference/image-generation/stability-ai/stable-diffusion-v15" },
-          { text: "Stable Diffusion XL", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl/inpainting" },
-          { text: "ControlNet SDXL", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl-controlnet-canny" },
-          { text: "ControlNet SDXL", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl-controlnet-canny/image-to-image" },
+          { text: "Stable Diffusion XL (Stability AI: inpainting)", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl/inpainting" },
+          { text: "ControlNet SDXL (Stability AI: fast-sdxl-controlnet-canny)", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl-controlnet-canny" },
+          { text: "ControlNet SDXL (Stability AI: image-to-image)", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl-controlnet-canny/image-to-image" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Sync Labs",
         collapsed: true,
@@ -1479,6 +1569,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "sync.so -- lipsync 1.9.0-beta", link: "/model-api-reference/image-generation/sync/sync-lipsync" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Tencent",
         collapsed: true,
@@ -1493,21 +1584,22 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Hunyuan 3D Part Splitter", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/3.1/part" },
           { text: "Hunyuan Motion Fast", link: "/model-api-reference/image-generation/tencent/hunyuan-motion/fast" },
           { text: "Hunyuan Motion", link: "/model-api-reference/image-generation/tencent/hunyuan-motion" },
-          { text: "Hunyuan3d V3", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v3/text-to-3d" },
-          { text: "Hunyuan3d V3", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v3/sketch-to-3d" },
-          { text: "Hunyuan3d V3", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v3" },
+          { text: "Hunyuan3d V3 (Tencent: text-to-3d)", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v3/text-to-3d" },
+          { text: "Hunyuan3d V3 (Tencent: sketch-to-3d)", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v3/sketch-to-3d" },
+          { text: "Hunyuan3d V3 (Tencent: v3)", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v3" },
           { text: "Hunyuan Image 3.0", link: "/model-api-reference/image-generation/tencent/hunyuan-image/3.0" },
           { text: "Hunyuan Image", link: "/model-api-reference/image-generation/tencent/hunyuan-image/2.1" },
-          { text: "Hunyuan World", link: "/model-api-reference/image-generation/tencent/hunyuan-world" },
-          { text: "Hunyuan World", link: "/model-api-reference/image-generation/tencent/hunyuan_world/image-to-world" },
-          { text: "Hunyuan3D", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v2" },
-          { text: "Hunyuan3D", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v2/multi-view" },
-          { text: "Hunyuan3D", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v2/mini-turbo" },
-          { text: "Hunyuan3D", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v2/mini" },
-          { text: "Hunyuan3D", link: "/model-api-reference/image-generation/tencent/hunyuan3d/v2/turbo" },
-          { text: "Hunyuan3D", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v2/multi-view-turbo" },
+          { text: "Hunyuan World (Tencent: hunyuan-world)", link: "/model-api-reference/image-generation/tencent/hunyuan-world" },
+          { text: "Hunyuan World (Tencent: image-to-world)", link: "/model-api-reference/image-generation/tencent/hunyuan_world/image-to-world" },
+          { text: "Hunyuan3D (Tencent: v2)", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v2" },
+          { text: "Hunyuan3D (Tencent: multi-view)", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v2/multi-view" },
+          { text: "Hunyuan3D (Tencent: mini-turbo)", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v2/mini-turbo" },
+          { text: "Hunyuan3D (Tencent: mini)", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v2/mini" },
+          { text: "Hunyuan3D (Tencent: turbo)", link: "/model-api-reference/image-generation/tencent/hunyuan3d/v2/turbo" },
+          { text: "Hunyuan3D (Tencent: multi-view-turbo)", link: "/model-api-reference/image-generation/tencent/hunyuan-3d/v2/multi-view-turbo" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Topaz Labs",
         collapsed: true,
@@ -1515,16 +1607,18 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Topaz Upscale", link: "/model-api-reference/image-generation/topaz/upscale/image" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "trellis",
         collapsed: true,
         items: [
-          { text: "Trellis 2", link: "/model-api-reference/image-generation/trellis/trellis-2/retexture" },
-          { text: "Trellis 2", link: "/model-api-reference/image-generation/trellis/trellis-2" },
-          { text: "Trellis", link: "/model-api-reference/image-generation/trellis/trellis/multi" },
-          { text: "Trellis", link: "/model-api-reference/image-generation/trellis/trellis" },
+          { text: "Trellis 2 (trellis: retexture)", link: "/model-api-reference/image-generation/trellis/trellis-2/retexture" },
+          { text: "Trellis 2 (trellis: trellis-2)", link: "/model-api-reference/image-generation/trellis/trellis-2" },
+          { text: "Trellis (trellis: multi)", link: "/model-api-reference/image-generation/trellis/trellis/multi" },
+          { text: "Trellis (trellis: trellis)", link: "/model-api-reference/image-generation/trellis/trellis" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Tripo3D",
         collapsed: true,
@@ -1537,6 +1631,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Tripo P1 Image to 3D", link: "/model-api-reference/image-generation/tripo3d/tripo-p1/image-to-3d" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "VEED",
         collapsed: true,
@@ -1544,6 +1639,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Subtitles", link: "/model-api-reference/image-generation/veed/subtitles" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Vidu",
         collapsed: true,
@@ -1553,6 +1649,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Vidu 2.0 Reference to Image", link: "/model-api-reference/image-generation/vidu/2.0/reference-to-image" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "xAI",
         collapsed: true,
@@ -1564,12 +1661,13 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Grok Imagine Video Edit", link: "/model-api-reference/image-generation/xai/grok-imagine-video/edit" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "zhipu",
         collapsed: true,
         items: [
-          { text: "Glm Image", link: "/model-api-reference/image-generation/zhipu/glm-image/edit" },
-          { text: "Glm Image", link: "/model-api-reference/image-generation/zhipu/glm-image" },
+          { text: "Glm Image (zhipu: edit)", link: "/model-api-reference/image-generation/zhipu/glm-image/edit" },
+          { text: "Glm Image (zhipu: glm-image)", link: "/model-api-reference/image-generation/zhipu/glm-image" },
         ],
       },
     ],
@@ -1579,6 +1677,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
     collapsed: true,
     items: [
       { text: 'Overview', link: "/model-api-reference/video-generation" },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "OpenAI",
         collapsed: true,
@@ -1587,10 +1686,11 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Sora 2 Remix", link: "/model-api-reference/video-generation/openai/sora-2/video-to-video/remix" },
           { text: "Sora 2 Image to Video Pro", link: "/model-api-reference/video-generation/openai/sora-2/image-to-video/pro" },
           { text: "Sora 2 Text to Video Pro", link: "/model-api-reference/video-generation/openai/sora-2/text-to-video/pro" },
-          { text: "Sora 2", link: "/model-api-reference/video-generation/openai/sora-2/text-to-video" },
-          { text: "Sora 2", link: "/model-api-reference/video-generation/openai/sora-2/image-to-video" },
+          { text: "Sora 2 (OpenAI: text-to-video)", link: "/model-api-reference/video-generation/openai/sora-2/text-to-video" },
+          { text: "Sora 2 (OpenAI: image-to-video)", link: "/model-api-reference/video-generation/openai/sora-2/image-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Bytedance",
         collapsed: true,
@@ -1614,31 +1714,32 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Bytedance OmniHuman v1.5", link: "/model-api-reference/video-generation/bytedance/omnihuman/1.5" },
           { text: "Video Stylize", link: "/model-api-reference/video-generation/bytedance/video-stylize" },
           { text: "OmniHuman 1.0", link: "/model-api-reference/video-generation/bytedance/omnihuman/1.0" },
-          { text: "Seedance 1.0 Pro", link: "/model-api-reference/video-generation/bytedance/seedance/1.0/pro/text-to-video" },
-          { text: "Seedance 1.0 Pro", link: "/model-api-reference/video-generation/bytedance/seedance/1.0/pro/image-to-video" },
+          { text: "Seedance 1.0 Pro (Bytedance: text-to-video)", link: "/model-api-reference/video-generation/bytedance/seedance/1.0/pro/text-to-video" },
+          { text: "Seedance 1.0 Pro (Bytedance: image-to-video)", link: "/model-api-reference/video-generation/bytedance/seedance/1.0/pro/image-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Google",
         collapsed: true,
         items: [
-          { text: "Gemini Omni Flash", link: "/model-api-reference/video-generation/google/gemini-omni-flash/reference-to-video" },
-          { text: "Gemini Omni Flash", link: "/model-api-reference/video-generation/google/gemini-omni-flash/image-to-video" },
-          { text: "Gemini Omni Flash", link: "/model-api-reference/video-generation/google/gemini-omni-flash/edit" },
-          { text: "Gemini Omni Flash", link: "/model-api-reference/video-generation/google/gemini-omni-flash" },
-          { text: "Veo 3.1 Fast", link: "/model-api-reference/video-generation/google/veo3.1/fast/reference-to-video" },
+          { text: "Gemini Omni Flash (Google: reference-to-video)", link: "/model-api-reference/video-generation/google/gemini-omni-flash/reference-to-video" },
+          { text: "Gemini Omni Flash (Google: image-to-video)", link: "/model-api-reference/video-generation/google/gemini-omni-flash/image-to-video" },
+          { text: "Gemini Omni Flash (Google: edit)", link: "/model-api-reference/video-generation/google/gemini-omni-flash/edit" },
+          { text: "Gemini Omni Flash (Google: gemini-omni-flash)", link: "/model-api-reference/video-generation/google/gemini-omni-flash" },
+          { text: "Veo 3.1 Fast (Google: reference-to-video)", link: "/model-api-reference/video-generation/google/veo3.1/fast/reference-to-video" },
           { text: "Veo3.1 Lite FLF", link: "/model-api-reference/video-generation/google/veo3.1/lite/first-last-frame-to-video" },
           { text: "Veo3.1 Lite Image to Video", link: "/model-api-reference/video-generation/google/veo3.1/lite/image-to-video" },
           { text: "Veo3.1 Lite Text to Video", link: "/model-api-reference/video-generation/google/veo3.1/lite" },
-          { text: "Veo 3.1 Fast", link: "/model-api-reference/video-generation/google/veo3.1/fast/extend-video" },
-          { text: "Veo 3.1", link: "/model-api-reference/video-generation/google/veo3.1/extend-video" },
-          { text: "Veo 3.1 Fast", link: "/model-api-reference/video-generation/google/veo3.1/fast/first-last-frame-to-video" },
-          { text: "Veo 3.1", link: "/model-api-reference/video-generation/google/veo3.1/first-last-frame-to-video" },
-          { text: "Veo 3.1", link: "/model-api-reference/video-generation/google/veo3.1/reference-to-video" },
-          { text: "Veo 3.1 Fast", link: "/model-api-reference/video-generation/google/veo3.1/fast" },
-          { text: "Veo 3.1 Fast", link: "/model-api-reference/video-generation/google/veo3.1/fast/image-to-video" },
-          { text: "Veo 3.1", link: "/model-api-reference/video-generation/google/veo3.1/image-to-video" },
-          { text: "Veo 3.1", link: "/model-api-reference/video-generation/google/veo3.1" },
+          { text: "Veo 3.1 Fast (Google: extend-video)", link: "/model-api-reference/video-generation/google/veo3.1/fast/extend-video" },
+          { text: "Veo 3.1 (Google: extend-video)", link: "/model-api-reference/video-generation/google/veo3.1/extend-video" },
+          { text: "Veo 3.1 Fast (Google: first-last-frame-to-video)", link: "/model-api-reference/video-generation/google/veo3.1/fast/first-last-frame-to-video" },
+          { text: "Veo 3.1 (Google: first-last-frame-to-video)", link: "/model-api-reference/video-generation/google/veo3.1/first-last-frame-to-video" },
+          { text: "Veo 3.1 (Google: reference-to-video)", link: "/model-api-reference/video-generation/google/veo3.1/reference-to-video" },
+          { text: "Veo 3.1 Fast (Google: fast)", link: "/model-api-reference/video-generation/google/veo3.1/fast" },
+          { text: "Veo 3.1 Fast (Google: image-to-video)", link: "/model-api-reference/video-generation/google/veo3.1/fast/image-to-video" },
+          { text: "Veo 3.1 (Google: image-to-video)", link: "/model-api-reference/video-generation/google/veo3.1/image-to-video" },
+          { text: "Veo 3.1 (Google: veo3.1)", link: "/model-api-reference/video-generation/google/veo3.1" },
           { text: "Veo3", link: "/model-api-reference/video-generation/google/veo-3/image-to-video" },
           { text: "Veo 3 Fast [Image to Video]", link: "/model-api-reference/video-generation/google/veo-3/fast/image-to-video" },
           { text: "Veo 3 Fast", link: "/model-api-reference/video-generation/google/veo-3/fast" },
@@ -1647,6 +1748,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Veo 2", link: "/model-api-reference/video-generation/google/veo-2" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Luma",
         collapsed: true,
@@ -1665,6 +1767,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Luma Ray 2 Text to Video", link: "/model-api-reference/video-generation/luma/ray-2/text-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "MiniMax",
         collapsed: true,
@@ -1688,11 +1791,12 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "MiniMax (Hailuo AI) Video 01 Director", link: "/model-api-reference/video-generation/minimax/video-01-director/text-to-video" },
           { text: "MiniMax (Hailuo AI) Video 01 Subject Reference", link: "/model-api-reference/video-generation/minimax/video-01/subject-reference" },
           { text: "MiniMax (Hailuo AI) Video 01 Live", link: "/model-api-reference/video-generation/minimax/video-01-live/text-to-video" },
-          { text: "MiniMax (Hailuo AI) Video 01", link: "/model-api-reference/video-generation/minimax/video-01-live/image-to-video" },
-          { text: "MiniMax (Hailuo AI) Video 01", link: "/model-api-reference/video-generation/minimax/video-01/image-to-video" },
-          { text: "MiniMax (Hailuo AI) Video 01", link: "/model-api-reference/video-generation/minimax/video-01/text-to-video" },
+          { text: "MiniMax (Hailuo AI) Video 01 (MiniMax: image-to-video)", link: "/model-api-reference/video-generation/minimax/video-01-live/image-to-video" },
+          { text: "MiniMax (Hailuo AI) Video 01 (MiniMax: image-to-video)", link: "/model-api-reference/video-generation/minimax/video-01/image-to-video" },
+          { text: "MiniMax (Hailuo AI) Video 01 (MiniMax: text-to-video)", link: "/model-api-reference/video-generation/minimax/video-01/text-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Pika",
         collapsed: true,
@@ -1709,22 +1813,24 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Pika V2.1 Image to Video", link: "/model-api-reference/video-generation/pika/v2.1/image-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "VEED",
         collapsed: true,
         items: [
-          { text: "VEED Lipsync", link: "/model-api-reference/video-generation/veed/lipsync/2.0" },
+          { text: "VEED Lipsync (VEED: 2.0)", link: "/model-api-reference/video-generation/veed/lipsync/2.0" },
           { text: "VEED Fabric 1.0 Text to Video", link: "/model-api-reference/video-generation/veed/fabric-1.0/text-to-video" },
           { text: "VEED Video Background Removal Fast", link: "/model-api-reference/video-generation/veed/video-bg-removal/fast" },
           { text: "VEED Video Background Removal", link: "/model-api-reference/video-generation/veed/video-bg-removal" },
           { text: "VEED Video Background Removal Green Screen", link: "/model-api-reference/video-generation/veed/video-bg-removal/green-screen" },
           { text: "VEED Fabric 1.0 Fast Image to Video", link: "/model-api-reference/video-generation/veed/fabric-1.0/fast/image-to-video" },
           { text: "VEED Fabric 1.0 Image to Video", link: "/model-api-reference/video-generation/veed/fabric-1.0/image-to-video" },
-          { text: "VEED Lipsync", link: "/model-api-reference/video-generation/veed/lipsync" },
+          { text: "VEED Lipsync (VEED: lipsync)", link: "/model-api-reference/video-generation/veed/lipsync" },
           { text: "VEED Avatars Text to Video", link: "/model-api-reference/video-generation/veed/avatars/text-to-video" },
           { text: "VEED Avatars Audio to Video", link: "/model-api-reference/video-generation/veed/avatars/audio-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Alibaba",
         collapsed: true,
@@ -1793,6 +1899,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Wan-Animate", link: "/model-api-reference/video-generation/alibaba/wan-animate" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Bria",
         collapsed: true,
@@ -1801,6 +1908,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Bria's VRMBG 3.0 Realtime", link: "/model-api-reference/video-generation/bria/video/background-removal/realtime" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Creatify",
         collapsed: true,
@@ -1808,6 +1916,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Creatify Aurora", link: "/model-api-reference/video-generation/creatify/aurora" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "ElevenLabs",
         collapsed: true,
@@ -1815,6 +1924,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "ElevenLabs Dubbing", link: "/model-api-reference/video-generation/elevenlabs/dubbing" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "HeyGen",
         collapsed: true,
@@ -1831,6 +1941,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "HeyGen Video Agent V2", link: "/model-api-reference/video-generation/heygen/heygen/video-agent/v2" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "krea",
         collapsed: true,
@@ -1839,6 +1950,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Krea Wan 14B", link: "/model-api-reference/video-generation/krea/krea-wan/video-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "KwaiVGI",
         collapsed: true,
@@ -1847,56 +1959,56 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Kling 3.0 Turbo Pro Text to Video", link: "/model-api-reference/video-generation/kwaivgi/kling-video/3.0/turbo/pro/text-to-video" },
           { text: "Kling 3.0 Turbo Pro Image to Video", link: "/model-api-reference/video-generation/kwaivgi/kling-video/3.0/turbo/pro/image-to-video" },
           { text: "Kling 3.0 Turbo Standard Text to Video", link: "/model-api-reference/video-generation/kwaivgi/kling-video/3.0/turbo/standard/text-to-video" },
-          { text: "Kling Video O3 4k", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/4k/reference-to-video" },
-          { text: "Kling Video O3 4k", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/4k/image-to-video" },
-          { text: "Kling Video O3 4k", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/4k/text-to-video" },
-          { text: "Kling Video V3 4k", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/4k/image-to-video" },
-          { text: "Kling Video V3 4k", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/4k/text-to-video" },
-          { text: "Kling Video V3 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/pro/image-to-video" },
-          { text: "Kling Video V3 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/standard/image-to-video" },
-          { text: "Kling Video V3 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/pro/text-to-video" },
-          { text: "Kling Video O3 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/image-to-video" },
-          { text: "Kling Video O3 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/image-to-video" },
-          { text: "Kling Video O3 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/reference-to-video" },
-          { text: "Kling Video V3 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/standard/text-to-video" },
-          { text: "Kling Video O3 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/reference-to-video" },
-          { text: "Kling Video O3 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/text-to-video" },
-          { text: "Kling Video O3 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/text-to-video" },
-          { text: "Kling Video O1 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/standard/reference-to-video" },
-          { text: "Kling Video O1 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/standard/image-to-video" },
+          { text: "Kling Video O3 4k (KwaiVGI: reference-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/4k/reference-to-video" },
+          { text: "Kling Video O3 4k (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/4k/image-to-video" },
+          { text: "Kling Video O3 4k (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/4k/text-to-video" },
+          { text: "Kling Video V3 4k (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/4k/image-to-video" },
+          { text: "Kling Video V3 4k (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/4k/text-to-video" },
+          { text: "Kling Video V3 Pro (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/pro/image-to-video" },
+          { text: "Kling Video V3 Standard (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/standard/image-to-video" },
+          { text: "Kling Video V3 Pro (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/pro/text-to-video" },
+          { text: "Kling Video O3 Pro (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/image-to-video" },
+          { text: "Kling Video O3 Standard (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/image-to-video" },
+          { text: "Kling Video O3 Pro (KwaiVGI: reference-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/reference-to-video" },
+          { text: "Kling Video V3 Standard (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/standard/text-to-video" },
+          { text: "Kling Video O3 Standard (KwaiVGI: reference-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/reference-to-video" },
+          { text: "Kling Video O3 Pro (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/text-to-video" },
+          { text: "Kling Video O3 Standard (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/text-to-video" },
+          { text: "Kling Video O1 Standard (KwaiVGI: reference-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/standard/reference-to-video" },
+          { text: "Kling Video O1 Standard (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/standard/image-to-video" },
           { text: "Kling AI Avatar v2 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/ai-avatar/2.0/pro" },
           { text: "Kling AI Avatar v2 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/ai-avatar/2.0/standard" },
-          { text: "Kling Video V2.6 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.6/pro/text-to-video" },
-          { text: "Kling Video V2.6 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.6/pro/image-to-video" },
-          { text: "Kling Video O1 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/pro/image-to-video" },
-          { text: "Kling Video O1 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/pro/reference-to-video" },
+          { text: "Kling Video V2.6 Pro (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.6/pro/text-to-video" },
+          { text: "Kling Video V2.6 Pro (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.6/pro/image-to-video" },
+          { text: "Kling Video O1 Pro (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/pro/image-to-video" },
+          { text: "Kling Video O1 Pro (KwaiVGI: reference-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/pro/reference-to-video" },
           { text: "Kling Video V2.5 Turbo Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.5-turbo/standard/image-to-video" },
-          { text: "Kling Video V2.5 Turbo Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.5-turbo/pro/image-to-video" },
-          { text: "Kling Video V2.5 Turbo Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.5-turbo/pro/text-to-video" },
+          { text: "Kling Video V2.5 Turbo Pro (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.5-turbo/pro/image-to-video" },
+          { text: "Kling Video V2.5 Turbo Pro (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.5-turbo/pro/text-to-video" },
           { text: "Kling AI Avatar", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1/standard/ai-avatar" },
           { text: "Kling AI Avatar Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1/pro/ai-avatar" },
-          { text: "Kling Video V2.1 Master", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.1/master/text-to-video" },
-          { text: "Kling Video V2.1 Master", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.1/master/image-to-video" },
+          { text: "Kling Video V2.1 Master (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.1/master/text-to-video" },
+          { text: "Kling Video V2.1 Master (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.1/master/image-to-video" },
           { text: "Kling Video V2.1 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.1/pro/image-to-video" },
           { text: "Kling Video V2.1 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.1/standard/image-to-video" },
-          { text: "Kling 1.6 Elements", link: "/model-api-reference/video-generation/kwaivgi/kling-video/1.6/elements" },
-          { text: "Kling 1.6 Elements", link: "/model-api-reference/video-generation/kwaivgi/kling-video/1.6/pro/elements" },
-          { text: "Kling Video V2 Master", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2/master/image-to-video" },
-          { text: "Kling Video V2 Master", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2/master/text-to-video" },
+          { text: "Kling 1.6 Elements (KwaiVGI: elements)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/1.6/elements" },
+          { text: "Kling 1.6 Elements (KwaiVGI: elements)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/1.6/pro/elements" },
+          { text: "Kling Video V2 Master (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2/master/image-to-video" },
+          { text: "Kling Video V2 Master (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2/master/text-to-video" },
           { text: "Kling LipSync Audio-to-Video", link: "/model-api-reference/video-generation/kwaivgi/kling-video/lipsync" },
           { text: "Kling LipSync Text-to-Video", link: "/model-api-reference/video-generation/kwaivgi/kling-video/lipsync/text-to-video" },
-          { text: "Kling 1.6", link: "/model-api-reference/video-generation/kwaivgi/kling-video/1.6/effects" },
-          { text: "Kling 1.6", link: "/model-api-reference/video-generation/kwaivgi/kling-video/1.6/pro/effects" },
+          { text: "Kling 1.6 (KwaiVGI: effects)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/1.6/effects" },
+          { text: "Kling 1.6 (KwaiVGI: effects)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/1.6/pro/effects" },
           { text: "Kling 1.0", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1/standard/effects" },
           { text: "Kling 1.5", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.5/pro/effects" },
-          { text: "Kling Video V1.6 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.6/pro/text-to-video" },
-          { text: "Kling Video V1.6 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.6/standard/image-to-video" },
-          { text: "Kling Video V1.6 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.6/pro/image-to-video" },
-          { text: "Kling Video V1.6 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.6/standard/text-to-video" },
-          { text: "Kling Video V1 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1/standard/text-to-video" },
-          { text: "Kling Video V1.5 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.5/pro/text-to-video" },
-          { text: "Kling Video V1 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1/standard/image-to-video" },
-          { text: "Kling Video V1.5 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.5/pro/image-to-video" },
+          { text: "Kling Video V1.6 Pro (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.6/pro/text-to-video" },
+          { text: "Kling Video V1.6 Standard (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.6/standard/image-to-video" },
+          { text: "Kling Video V1.6 Pro (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.6/pro/image-to-video" },
+          { text: "Kling Video V1.6 Standard (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.6/standard/text-to-video" },
+          { text: "Kling Video V1 Standard (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1/standard/text-to-video" },
+          { text: "Kling Video V1.5 Pro (KwaiVGI: text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.5/pro/text-to-video" },
+          { text: "Kling Video V1 Standard (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1/standard/image-to-video" },
+          { text: "Kling Video V1.5 Pro (KwaiVGI: image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v1.5/pro/image-to-video" },
           { text: "Kling 3.0 Omni Pro Image to Video", link: "/model-api-reference/video-generation/kwaivgi/kling-video/3.0/omni/pro/image-to-video" },
           { text: "Kling 3.0 Omni Pro Reference to Video", link: "/model-api-reference/video-generation/kwaivgi/kling-video/3.0/omni/pro/reference-to-video" },
           { text: "Kling 3.0 Omni Pro Video Edit", link: "/model-api-reference/video-generation/kwaivgi/kling-video/3.0/omni/pro/video-to-video/edit" },
@@ -1905,37 +2017,38 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Kling Video V3", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Lightricks",
         collapsed: true,
         items: [
           { text: "Ltx 2.3", link: "/model-api-reference/video-generation/lightricks/ltx-2.3/reframe" },
-          { text: "Ltx 2.3 Quality", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/extend-video" },
-          { text: "Ltx 2.3 Quality", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/hdr" },
-          { text: "Ltx 2.3 Quality", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/image-to-video" },
-          { text: "Ltx 2.3 Quality", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/text-to-video" },
-          { text: "LTX-2.3 22B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/reference-video-to-video/lora" },
+          { text: "Ltx 2.3 Quality (Lightricks: extend-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/extend-video" },
+          { text: "Ltx 2.3 Quality (Lightricks: hdr)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/hdr" },
+          { text: "Ltx 2.3 Quality (Lightricks: image-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/image-to-video" },
+          { text: "Ltx 2.3 Quality (Lightricks: text-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/text-to-video" },
+          { text: "LTX-2.3 22B Distilled (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/reference-video-to-video/lora" },
           { text: "LTX 2.3 22B Distilled Reference to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b-distilled/reference-to-video" },
           { text: "LTX 2.3 22B", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/reference-video-to-video/lora" },
           { text: "LTX 2.3 22B Reference to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/reference-to-video" },
-          { text: "LTX-2.3 22B", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/extend-video/lora" },
+          { text: "LTX-2.3 22B (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/extend-video/lora" },
           { text: "LTX 2.3 22B Extend", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/extend" },
-          { text: "LTX-2.3 22B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/video-to-video/lora" },
-          { text: "LTX-2.3 22B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/audio-to-video/lora" },
-          { text: "LTX-2.3 22B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/image-to-video/lora" },
-          { text: "LTX-2.3 22B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/text-to-video/lora" },
+          { text: "LTX-2.3 22B Distilled (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/video-to-video/lora" },
+          { text: "LTX-2.3 22B Distilled (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/audio-to-video/lora" },
+          { text: "LTX-2.3 22B Distilled (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/image-to-video/lora" },
+          { text: "LTX-2.3 22B Distilled (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/text-to-video/lora" },
           { text: "LTX 2.3 22B Distilled Video to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b-distilled/video-to-video" },
           { text: "LTX 2.3 22B Distilled Audio to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b-distilled/audio-to-video" },
           { text: "LTX 2.3 22B Distilled Image to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b-distilled/image-to-video" },
           { text: "LTX 2.3 22B Distilled Text to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b-distilled/text-to-video" },
-          { text: "LTX-2.3 22B", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/video-to-video/lora" },
-          { text: "LTX-2.3 22B", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/image-to-video/lora" },
-          { text: "LTX-2.3 22B", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/text-to-video/lora" },
+          { text: "LTX-2.3 22B (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/video-to-video/lora" },
+          { text: "LTX-2.3 22B (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/image-to-video/lora" },
+          { text: "LTX-2.3 22B (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/text-to-video/lora" },
           { text: "LTX 2.3 22B Video to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/video-to-video" },
           { text: "LTX 2.3 22B Audio to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/audio-to-video" },
           { text: "LTX 2.3 22B Image to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/image-to-video" },
           { text: "LTX 2.3 22B Text to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/text-to-video" },
-          { text: "LTX-2.3 22B", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/audio-to-video/lora" },
+          { text: "LTX-2.3 22B (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/audio-to-video/lora" },
           { text: "LTX 2.3 Fast Image to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-fast/image-to-video" },
           { text: "LTX 2.3 Fast Text to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-fast/text-to-video" },
           { text: "LTX 2.3 Pro Image to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-pro/image-to-video" },
@@ -1945,54 +2058,56 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "LTX 2.3 Pro Extend", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-pro/extend" },
           { text: "LTX 2.0 Pro Extend", link: "/model-api-reference/video-generation/lightricks/ltx-2.0-pro/extend" },
           { text: "LTX 2.0 Pro Audio to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.0-pro/audio-to-video" },
-          { text: "LTX-2 19B", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/audio-to-video/lora" },
-          { text: "LTX-2 19B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/video-to-video/lora" },
-          { text: "LTX-2 19B", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/video-to-video/lora" },
-          { text: "LTX-2 19B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/extend-video/lora" },
-          { text: "LTX-2 19B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/extend-video" },
-          { text: "LTX-2 19B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/image-to-video/lora" },
-          { text: "LTX-2 19B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/image-to-video" },
-          { text: "LTX-2 19B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/text-to-video/lora" },
-          { text: "LTX-2 19B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/text-to-video" },
-          { text: "LTX-2 19B", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/extend-video/lora" },
-          { text: "LTX-2 19B", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/image-to-video/lora" },
-          { text: "LTX-2 19B", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/text-to-video" },
-          { text: "LTX-2 19B", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/image-to-video" },
+          { text: "LTX-2 19B (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/audio-to-video/lora" },
+          { text: "LTX-2 19B Distilled (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/video-to-video/lora" },
+          { text: "LTX-2 19B (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/video-to-video/lora" },
+          { text: "LTX-2 19B Distilled (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/extend-video/lora" },
+          { text: "LTX-2 19B Distilled (Lightricks: extend-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/extend-video" },
+          { text: "LTX-2 19B Distilled (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/image-to-video/lora" },
+          { text: "LTX-2 19B Distilled (Lightricks: image-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/image-to-video" },
+          { text: "LTX-2 19B Distilled (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/text-to-video/lora" },
+          { text: "LTX-2 19B Distilled (Lightricks: text-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/text-to-video" },
+          { text: "LTX-2 19B (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/extend-video/lora" },
+          { text: "LTX-2 19B (Lightricks: lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/image-to-video/lora" },
+          { text: "LTX-2 19B (Lightricks: text-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/text-to-video" },
+          { text: "LTX-2 19B (Lightricks: image-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/image-to-video" },
           { text: "LTX 2.0 Fast Text to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.0-fast/text-to-video" },
           { text: "LTX 2.0 Pro Text to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.0-pro/text-to-video" },
           { text: "LTX Video 2.0 Fast", link: "/model-api-reference/video-generation/lightricks/ltx-2.0-fast/image-to-video" },
           { text: "LTX 2.0 Pro Image to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.0-pro/image-to-video" },
           { text: "LTX 2.0 Pro Retake", link: "/model-api-reference/video-generation/lightricks/ltx-2.0-pro/retake" },
-          { text: "LTX-Video 13B 0.9.8 Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-0.9.8-13b-distilled/image-to-video" },
-          { text: "LTX-Video 13B 0.9.8 Distilled", link: "/model-api-reference/video-generation/lightricks/ltxv-13b-098-distilled" },
-          { text: "LTX-Video 13B 0.9.8 Distilled", link: "/model-api-reference/video-generation/lightricks/ltxv-13b-098-distilled/multiconditioning" },
-          { text: "LTX Video-0.9.7 13B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-video-13b-distilled/image-to-video" },
-          { text: "LTX Video-0.9.7 13B", link: "/model-api-reference/video-generation/lightricks/ltx-video-13b-dev/multiconditioning" },
-          { text: "LTX Video-0.9.7 13B", link: "/model-api-reference/video-generation/lightricks/ltx-video-13b-dev/image-to-video" },
-          { text: "LTX Video-0.9.7 13B", link: "/model-api-reference/video-generation/lightricks/ltx-video-13b-dev" },
-          { text: "LTX Video-0.9.7 13B Distilled", link: "/model-api-reference/video-generation/lightricks/ltx-0.9.7-13b-distilled" },
-          { text: "LTX Video-0.9.7 LoRA", link: "/model-api-reference/video-generation/lightricks/ltx-video-lora/multiconditioning" },
-          { text: "LTX Video-0.9.7 LoRA", link: "/model-api-reference/video-generation/lightricks/ltx-video-lora/image-to-video" },
+          { text: "LTX-Video 13B 0.9.8 Distilled (Lightricks: image-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-0.9.8-13b-distilled/image-to-video" },
+          { text: "LTX-Video 13B 0.9.8 Distilled (Lightricks: ltxv-13b-098-distilled)", link: "/model-api-reference/video-generation/lightricks/ltxv-13b-098-distilled" },
+          { text: "LTX-Video 13B 0.9.8 Distilled (Lightricks: multiconditioning)", link: "/model-api-reference/video-generation/lightricks/ltxv-13b-098-distilled/multiconditioning" },
+          { text: "LTX Video-0.9.7 13B Distilled (Lightricks: image-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-video-13b-distilled/image-to-video" },
+          { text: "LTX Video-0.9.7 13B (Lightricks: multiconditioning)", link: "/model-api-reference/video-generation/lightricks/ltx-video-13b-dev/multiconditioning" },
+          { text: "LTX Video-0.9.7 13B (Lightricks: image-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-video-13b-dev/image-to-video" },
+          { text: "LTX Video-0.9.7 13B (Lightricks: ltx-video-13b-dev)", link: "/model-api-reference/video-generation/lightricks/ltx-video-13b-dev" },
+          { text: "LTX Video-0.9.7 13B Distilled (Lightricks: ltx-0.9.7-13b-distilled)", link: "/model-api-reference/video-generation/lightricks/ltx-0.9.7-13b-distilled" },
+          { text: "LTX Video-0.9.7 LoRA (Lightricks: multiconditioning)", link: "/model-api-reference/video-generation/lightricks/ltx-video-lora/multiconditioning" },
+          { text: "LTX Video-0.9.7 LoRA (Lightricks: image-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-video-lora/image-to-video" },
           { text: "LTX Video-0.9.5", link: "/model-api-reference/video-generation/lightricks/ltx-video-v095" },
-          { text: "LTX Video (preview)", link: "/model-api-reference/video-generation/lightricks/ltx-video/image-to-video" },
-          { text: "LTX Video (preview)", link: "/model-api-reference/video-generation/lightricks/ltx-video" },
+          { text: "LTX Video (preview) (Lightricks: image-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-video/image-to-video" },
+          { text: "LTX Video (preview) (Lightricks: ltx-video)", link: "/model-api-reference/video-generation/lightricks/ltx-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "meituan",
         collapsed: true,
         items: [
           { text: "LongCat Single Avatar", link: "/model-api-reference/video-generation/meituan/longcat-single-avatar/image-audio-to-video" },
-          { text: "LongCat Video", link: "/model-api-reference/video-generation/meituan/longcat-video/text-to-video/720p" },
-          { text: "LongCat Video", link: "/model-api-reference/video-generation/meituan/longcat-video/image-to-video" },
-          { text: "LongCat Video", link: "/model-api-reference/video-generation/meituan/longcat-video/image-to-video-480p" },
-          { text: "LongCat Video", link: "/model-api-reference/video-generation/meituan/longcat-video/text-to-video/480p" },
-          { text: "LongCat Video Distilled", link: "/model-api-reference/video-generation/meituan/longcat-video/distilled/image-to-video" },
-          { text: "LongCat Video Distilled", link: "/model-api-reference/video-generation/meituan/longcat-video/distilled/text-to-video-720p" },
-          { text: "LongCat Video Distilled", link: "/model-api-reference/video-generation/meituan/longcat-video/distilled/image-to-video-480p" },
-          { text: "LongCat Video Distilled", link: "/model-api-reference/video-generation/meituan/longcat-video/distilled/text-to-video/480p" },
+          { text: "LongCat Video (meituan: 720p)", link: "/model-api-reference/video-generation/meituan/longcat-video/text-to-video/720p" },
+          { text: "LongCat Video (meituan: image-to-video)", link: "/model-api-reference/video-generation/meituan/longcat-video/image-to-video" },
+          { text: "LongCat Video (meituan: image-to-video-480p)", link: "/model-api-reference/video-generation/meituan/longcat-video/image-to-video-480p" },
+          { text: "LongCat Video (meituan: 480p)", link: "/model-api-reference/video-generation/meituan/longcat-video/text-to-video/480p" },
+          { text: "LongCat Video Distilled (meituan: image-to-video)", link: "/model-api-reference/video-generation/meituan/longcat-video/distilled/image-to-video" },
+          { text: "LongCat Video Distilled (meituan: text-to-video-720p)", link: "/model-api-reference/video-generation/meituan/longcat-video/distilled/text-to-video-720p" },
+          { text: "LongCat Video Distilled (meituan: image-to-video-480p)", link: "/model-api-reference/video-generation/meituan/longcat-video/distilled/image-to-video-480p" },
+          { text: "LongCat Video Distilled (meituan: 480p)", link: "/model-api-reference/video-generation/meituan/longcat-video/distilled/text-to-video/480p" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Meta",
         collapsed: true,
@@ -2001,6 +2116,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Sam 3", link: "/model-api-reference/video-generation/meta/sam-3/video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "NVIDIA",
         collapsed: true,
@@ -2008,6 +2124,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Cosmos 3 Super Image to Video", link: "/model-api-reference/video-generation/nvidia/cosmos-3-super/image-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Pixelcut",
         collapsed: true,
@@ -2015,6 +2132,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Pixelcut Video Background Removal", link: "/model-api-reference/video-generation/pixelcut/video-background-removal" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "PixVerse",
         collapsed: true,
@@ -2061,6 +2179,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "PixVerse V3.5 Image to Video Fast", link: "/model-api-reference/video-generation/pixverse/v3.5/image-to-video/fast" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Sonilo",
         collapsed: true,
@@ -2069,6 +2188,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "V1.1 Video to Video Sound Effects", link: "/model-api-reference/video-generation/sonilo/1.1/video-to-video-sound-effects" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Stability AI",
         collapsed: true,
@@ -2077,6 +2197,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "High Quality Stable Video Diffusion", link: "/model-api-reference/video-generation/stability-ai/stable-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Sync Labs",
         collapsed: true,
@@ -2084,6 +2205,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "sync-3 Avatar Image to Video", link: "/model-api-reference/video-generation/sync/sync-lipsync/3.0/image-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Tencent",
         collapsed: true,
@@ -2100,6 +2222,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Hunyuan Video Text to Video", link: "/model-api-reference/video-generation/tencent/hunyuan-video/text-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Topaz Labs",
         collapsed: true,
@@ -2107,6 +2230,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Topaz Video Upscale", link: "/model-api-reference/video-generation/topaz/upscale/video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Vidu",
         collapsed: true,
@@ -2131,14 +2255,15 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Vidu 2.0 Reference to Video", link: "/model-api-reference/video-generation/vidu/2.0/reference-to-video" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "xAI",
         collapsed: true,
         items: [
           { text: "Grok Imagine Video 1.5", link: "/model-api-reference/video-generation/xai/grok-imagine-video/1.5/image-to-video" },
           { text: "Grok Imagine Video Reference to Video", link: "/model-api-reference/video-generation/xai/grok-imagine-video/reference-to-video" },
-          { text: "Grok Imagine Video", link: "/model-api-reference/video-generation/xai/grok-imagine-video/image-to-video" },
-          { text: "Grok Imagine Video", link: "/model-api-reference/video-generation/xai/grok-imagine-video/text-to-video" },
+          { text: "Grok Imagine Video (xAI: image-to-video)", link: "/model-api-reference/video-generation/xai/grok-imagine-video/image-to-video" },
+          { text: "Grok Imagine Video (xAI: text-to-video)", link: "/model-api-reference/video-generation/xai/grok-imagine-video/text-to-video" },
         ],
       },
     ],
@@ -2148,6 +2273,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
     collapsed: true,
     items: [
       { text: 'Overview', link: "/model-api-reference/audio-generation" },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "OpenAI",
         collapsed: true,
@@ -2155,6 +2281,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Wizper (Whisper v3)", link: "/model-api-reference/audio-generation/openai/wizper" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "ElevenLabs",
         collapsed: true,
@@ -2170,6 +2297,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "ElevenLabs Audio Isolation", link: "/model-api-reference/audio-generation/elevenlabs/audio-isolation" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Google",
         collapsed: true,
@@ -2179,6 +2307,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Lyria2", link: "/model-api-reference/audio-generation/google/lyria-2" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "MiniMax",
         collapsed: true,
@@ -2200,6 +2329,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "MiniMax (Hailuo AI) Music", link: "/model-api-reference/audio-generation/minimax/minimax-music" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Mirelo",
         collapsed: true,
@@ -2207,6 +2337,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Mirelo SFX1.6", link: "/model-api-reference/audio-generation/mirelo/sfx1.6/text-to-audio" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "stability-ai",
         collapsed: true,
@@ -2217,6 +2348,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Stable Audio Open", link: "/model-api-reference/audio-generation/stability-ai/stable-audio/open" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Alibaba",
         collapsed: true,
@@ -2228,17 +2360,19 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Qwen 3 TTS - Clone Voice [0.6B]", link: "/model-api-reference/audio-generation/alibaba/qwen-3-tts/clone-voice/0.6b" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "ace",
         collapsed: true,
         items: [
           { text: "ACE-Step Audio Outpaint", link: "/model-api-reference/audio-generation/ace/ace-step/audio-outpaint" },
-          { text: "ACE-Step", link: "/model-api-reference/audio-generation/ace/ace-step/audio-inpaint" },
-          { text: "ACE-Step", link: "/model-api-reference/audio-generation/ace/ace-step/audio-to-audio" },
-          { text: "ACE-Step", link: "/model-api-reference/audio-generation/ace/ace-step/prompt-to-audio" },
-          { text: "ACE-Step", link: "/model-api-reference/audio-generation/ace/ace-step" },
+          { text: "ACE-Step (ace: audio-inpaint)", link: "/model-api-reference/audio-generation/ace/ace-step/audio-inpaint" },
+          { text: "ACE-Step (ace: audio-to-audio)", link: "/model-api-reference/audio-generation/ace/ace-step/audio-to-audio" },
+          { text: "ACE-Step (ace: prompt-to-audio)", link: "/model-api-reference/audio-generation/ace/ace-step/prompt-to-audio" },
+          { text: "ACE-Step (ace: ace-step)", link: "/model-api-reference/audio-generation/ace/ace-step" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Bytedance",
         collapsed: true,
@@ -2246,6 +2380,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Bytedance Seed Speech Text to Speech", link: "/model-api-reference/audio-generation/bytedance/seed-speech/tts/2.0" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "KwaiVGI",
         collapsed: true,
@@ -2254,6 +2389,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Kling TTS", link: "/model-api-reference/audio-generation/kwaivgi/kling-tts" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "Sonilo",
         collapsed: true,
@@ -2262,6 +2398,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Sonilo V1.1 Text to Music", link: "/model-api-reference/audio-generation/sonilo/1.1/text-to-music" },
         ],
       },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
         text: "xAI",
         collapsed: true,

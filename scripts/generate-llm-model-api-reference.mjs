@@ -362,6 +362,15 @@ function displayLabel(model, duplicateTitles = new Set()) {
   return `${title} (${qualifier})`
 }
 
+function duplicateTitlesFor(models) {
+  const counts = new Map()
+  for (const model of models) {
+    const title = cleanTitle(model)
+    counts.set(title, (counts.get(title) ?? 0) + 1)
+  }
+  return new Set([...counts].filter(([, count]) => count > 1).map(([title]) => title))
+}
+
 function markdownText(value) {
   return value.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
@@ -443,8 +452,8 @@ function tsString(value) {
   return JSON.stringify(value)
 }
 
-function sidebarItem(model, category) {
-  return `{ text: ${tsString(cleanTitle(model))}, link: ${tsString(docsLink(model, category))} }`
+function sidebarItem(model, category, duplicateTitles = new Set()) {
+  return `{ text: ${tsString(displayLabel(model, duplicateTitles))}, link: ${tsString(docsLink(model, category))} }`
 }
 
 function loadModels(root, filter, category) {
@@ -1543,12 +1552,7 @@ function writeCategoryOverview(category) {
     : ['image', 'video', 'audio'].includes(category.key)
     ? `${category.title} models use the SandBase generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.`
     : 'Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. Other LLM models use `/v1/chat/completions` unless a model-specific protocol is added later.'
-  const titleCounts = new Map()
-  for (const model of category.models) {
-    const title = cleanTitle(model)
-    titleCounts.set(title, (titleCounts.get(title) ?? 0) + 1)
-  }
-  const duplicateTitles = new Set([...titleCounts].filter(([, count]) => count > 1).map(([title]) => title))
+  const duplicateTitles = duplicateTitlesFor(category.models)
   const providerSections = category.sortedGroups.length
     ? category.sortedGroups.flatMap((group) => [
         `### ${group.vendor}${category.key === 'api' ? ` {#${group.slug}}` : ''}`,
@@ -1605,11 +1609,12 @@ const sidebarItems = [
     '  items: [',
     `    { text: 'Overview', link: ${tsString(`/model-api-reference/${category.slug}`)} },`,
     ...category.sortedGroups.map((group) => [
+      `      // Duplicate model names are qualified with provider and operation path for navigation clarity.`,
       '    {',
       `      text: ${tsString(group.vendor)},`,
       '      collapsed: true,',
       '      items: [',
-      ...group.models.map((model) => `        ${sidebarItem(model, category)},`),
+      ...group.models.map((model) => `        ${sidebarItem(model, category, duplicateTitlesFor(category.models))},`),
       '      ],',
       '    },',
       ].join('\n')),
