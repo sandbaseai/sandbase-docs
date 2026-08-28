@@ -108,7 +108,7 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 
 ### Bytedance
 
-- [ByteDance: UI-TARS 7B ](/model-api-reference/llm-models/bytedance/ui-tars-1.5-7b) — UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based environments, including desktop interfaces, web browsers, mobile systems, and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement learning-based reasoning, enabling robust action planning and execution across virtual interfaces.
+- [ByteDance: UI-TARS 7B](/model-api-reference/llm-models/bytedance/ui-tars-1.5-7b) — UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based environments, including desktop interfaces, web browsers, mobile systems, and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement learning-based reasoning, enabling robust action planning and execution across virtual interfaces.
 
 ### Bytedance-Seed
 

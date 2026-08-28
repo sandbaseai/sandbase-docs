@@ -380,7 +380,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Qwen: Qwen-Turbo", link: "/model-api-reference/llm-models/alibaba/qwen-turbo" },
           { text: "Qwen2.5 Coder 32B Instruct", link: "/model-api-reference/llm-models/alibaba/qwen-2.5-coder-32b-instruct" },
           { text: "Qwen: Qwen2.5 7B Instruct", link: "/model-api-reference/llm-models/alibaba/qwen-2.5-7b-instruct" },
-          { text: "Qwen: Qwen-Max ", link: "/model-api-reference/llm-models/alibaba/qwen-max" },
+          { text: "Qwen: Qwen-Max", link: "/model-api-reference/llm-models/alibaba/qwen-max" },
           { text: "Qwen2.5 72B Instruct", link: "/model-api-reference/llm-models/alibaba/qwen-2.5-72b-instruct" },
         ],
       },
@@ -406,7 +406,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Bytedance",
         collapsed: true,
         items: [
-          { text: "ByteDance: UI-TARS 7B ", link: "/model-api-reference/llm-models/bytedance/ui-tars-1.5-7b" },
+          { text: "ByteDance: UI-TARS 7B", link: "/model-api-reference/llm-models/bytedance/ui-tars-1.5-7b" },
         ],
       },
       {
@@ -864,7 +864,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Z.ai: GLM 4.5V", link: "/model-api-reference/llm-models/z-ai/glm-4.5v" },
           { text: "Z.ai: GLM 4.5", link: "/model-api-reference/llm-models/z-ai/glm-4.5" },
           { text: "Z.ai: GLM 4.5 Air", link: "/model-api-reference/llm-models/z-ai/glm-4.5-air" },
-          { text: "Z.ai: GLM 4 32B ", link: "/model-api-reference/llm-models/z-ai/glm-4-32b" },
+          { text: "Z.ai: GLM 4 32B", link: "/model-api-reference/llm-models/z-ai/glm-4-32b" },
         ],
       },
     ],
@@ -1077,7 +1077,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "BFL",
         collapsed: true,
         items: [
-          { text: "FLUX Virtual Try-On ", link: "/model-api-reference/image-generation/bfl/flux-pro/1.0/vto" },
+          { text: "FLUX Virtual Try-On", link: "/model-api-reference/image-generation/bfl/flux-pro/1.0/vto" },
           { text: "Flux Pro Erase", link: "/model-api-reference/image-generation/bfl/flux-pro/1.0/erase" },
           { text: "Flux 2 Pro", link: "/model-api-reference/image-generation/bfl/flux-2-pro/outpaint" },
           { text: "FLUX.2 [klein] 9B LoRA", link: "/model-api-reference/image-generation/bfl/flux-2/klein/9b/edit/lora" },
@@ -1909,7 +1909,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Lightricks",
         collapsed: true,
         items: [
-          { text: "Ltx 2.3 ", link: "/model-api-reference/video-generation/lightricks/ltx-2.3/reframe" },
+          { text: "Ltx 2.3", link: "/model-api-reference/video-generation/lightricks/ltx-2.3/reframe" },
           { text: "Ltx 2.3 Quality", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/extend-video" },
           { text: "Ltx 2.3 Quality", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/hdr" },
           { text: "Ltx 2.3 Quality", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/image-to-video" },
@@ -2095,7 +2095,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Hunyuan Portrait", link: "/model-api-reference/video-generation/tencent/hunyuan-portrait" },
           { text: "Hunyuan Custom", link: "/model-api-reference/video-generation/tencent/hunyuan-custom" },
           { text: "Hunyuan Video Image to Video", link: "/model-api-reference/video-generation/tencent/hunyuan-video/image-to-video" },
-          { text: "Hunyuan Video Video to Video", link: "/model-api-reference/video-generation/tencent/hunyuan-video/video-to-video" },
+          { text: "Hunyuan Video to Video", link: "/model-api-reference/video-generation/tencent/hunyuan-video/video-to-video" },
           { text: "Hunyuan Video LoRA Inference", link: "/model-api-reference/video-generation/tencent/hunyuan-video-lora" },
           { text: "Hunyuan Video Text to Video", link: "/model-api-reference/video-generation/tencent/hunyuan-video/text-to-video" },
         ],

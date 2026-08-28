@@ -285,9 +285,13 @@ function docsLink(model, category) {
 
 function cleanTitle(model) {
   const prefix = `${model.vendor}:`
-  return model.display_name?.startsWith(prefix)
+  const title = model.display_name?.startsWith(prefix)
     ? model.display_name.slice(prefix.length).trim()
     : model.display_name
+  // Provider registries occasionally repeat a path segment in the display
+  // name (for example, “Kling Video Video to Audio”). Keep generated titles,
+  // descriptions, and directory listings readable without changing IDs.
+  return String(title ?? '').replace(/\b([A-Za-z][A-Za-z0-9'-]*)\s+\1\b/gi, '$1').trim()
 }
 
 function seoTitle(model, disambiguator = '') {

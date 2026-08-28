@@ -122,7 +122,7 @@ Image Generation models use the async SandBase generation protocol declared in e
 
 ### BFL
 
-- [FLUX Virtual Try-On ](/model-api-reference/image-generation/bfl/flux-pro/1.0/vto) — Flux Pro 1.0 Vto by BFL - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [FLUX Virtual Try-On](/model-api-reference/image-generation/bfl/flux-pro/1.0/vto) — Flux Pro 1.0 Vto by BFL - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Flux Pro Erase](/model-api-reference/image-generation/bfl/flux-pro/1.0/erase) — Flux Pro 1.0 Erase by BFL - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Flux 2 Pro](/model-api-reference/image-generation/bfl/flux-2-pro/outpaint) — Flux 2 Pro Outpaint is BFL's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [FLUX.2 [klein] 9B LoRA](/model-api-reference/image-generation/bfl/flux-2/klein/9b/edit/lora) — Flux 2 Klein 9b is BFL's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
