@@ -39,7 +39,7 @@ The catalog, schemas, prices, and availability can change. Use the live Store an
 The documentation is part of a small, interoperable open-source stack:
 
 - [SandBase CLI](https://github.com/sandbaseai/cli) — connect 25 AI client
-  targets to 2,000+ models and APIs through a local MCP bridge with six tools;
+  targets to the current SandBase model and API catalog through a local MCP bridge;
   the current release is listed in the
   [official MCP Registry](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.sandbaseai%2Fcli/versions/0.1.17).
 - [SandBase Skills](https://github.com/sandbaseai/sandbase-skills) — install

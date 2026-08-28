@@ -59,6 +59,7 @@ assert.match(legacySeedanceReference, /^canonical:\s*\/docs\/model-api-reference
 assert.match(legacySeedanceReference, /^robots:\s*noindex,follow$/m, 'Legacy Seedance reference must not compete in search results')
 assert.doesNotMatch(readme, /deepseek\/deepseek-v3\b/i, 'README must not recommend the retired DeepSeek V3 model')
 assert.doesNotMatch(readme, /API Reference[^\n]*webhooks/i, 'README must not advertise the hidden Webhooks page')
+assert.doesNotMatch(readme, /\b\d[\d,]*\+?\s+models and APIs\b/i, 'README must not hard-code time-sensitive catalog counts')
 for (const overview of catalogOverviews) {
   assert.doesNotMatch(overview, /currently publishes API reference pages for \d/i, 'Catalog overviews must not hard-code time-sensitive counts')
   assert.doesNotMatch(overview, /Browse \d[\d,]* SandBase API operations across \d+ platforms/i, 'Catalog overviews must not hard-code platform operation counts')
