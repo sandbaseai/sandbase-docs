@@ -13,7 +13,7 @@ for (const retiredPage of ['README.html', 'CONTRIBUTING.html', 'DEPLOYMENT.html'
 }
 
 const sitemap = readFileSync(path.join(dist, 'sitemap.xml'), 'utf8')
-for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/setup/cli', '/docs/agents/deployments']) {
+for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/setup/cli', '/docs/agents/deployments', '/docs/store/models']) {
   assert.ok(!sitemap.includes(`<loc>https://www.sandbase.ai${excludedUrl}</loc>`), `${excludedUrl} must not be indexed in the sitemap`)
 }
 
@@ -23,6 +23,10 @@ assert.match(setupAlias, /<link rel="canonical" href="https:\/\/www\.sandbase\.a
 
 const deploymentAlias = readFileSync(path.join(dist, 'agents', 'deployments.html'), 'utf8')
 assert.match(deploymentAlias, /<meta name="robots" content="noindex,follow">/, 'Legacy deployment guide must be noindex')
+
+const storeModelsAlias = readFileSync(path.join(dist, 'store', 'models.html'), 'utf8')
+assert.match(storeModelsAlias, /<meta name="robots" content="noindex,follow">/, 'Legacy Store Models alias must be noindex')
+assert.match(storeModelsAlias, /<link rel="canonical" href="https:\/\/www\.sandbase\.ai\/docs\/models\/">/, 'Legacy Store Models alias must canonicalize to the Models page')
 
 const forbidden = [
   [/\/v1\/generations(?:\/|\b)/i, 'withdrawn generation API'],

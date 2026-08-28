@@ -90,7 +90,7 @@ apiReference:
         "version": 2,
         "name": "Research Assistant",
         "description": "",
-        "model": {"id": "anthropic/claude-sonnet-4", "effort": {"type": "high"}, "speed": "standard"},
+        "model": {"id": "anthropic/claude-sonnet-5", "effort": {"type": "high"}, "speed": "standard"},
         "system": "Research carefully and always cite sources.",
         "tools": [{"type":"agent_toolset_20260401"}],
         "mcp_servers": null,

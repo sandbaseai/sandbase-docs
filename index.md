@@ -19,7 +19,7 @@ SandBase provides two complementary ways to build AI applications. Start with th
 | **Start here** | [Models and APIs](/models/) | [Build Agent](/agents/) |
 
 ::: tip One SandBase API key
-The same API key can call Models, APIs, Agents, Endpoints, and scheduled workloads. Keep keys on the server and never expose them in browser code.
+The same API key can call Models, APIs, Agents, Services, and scheduled workloads. Keep keys on the server and never expose them in browser code.
 :::
 
 ## Core concepts
@@ -46,7 +46,7 @@ An Agent is a reusable, versioned configuration containing a Model, instructions
 A Service exposes a tested Agent to applications. Its API resource is an Endpoint. Invoking it creates or continues a Session whose `session_id` identifies the durable interaction.
 
 - [Services guide](/agents/services)
-- [Endpoints API](/api-reference/endpoints/)
+- [Services API](/api-reference/endpoints/)
 - [Sessions API](/api-reference/sessions/)
 
 ### Schedules, DeploymentRuns, and Sessions
@@ -54,7 +54,7 @@ A Service exposes a tested Agent to applications. Its API resource is an Endpoin
 Schedules execute an Agent later or repeatedly. Their API resource is a Deployment. Every trigger creates a distinct `drun_*` DeploymentRun and, on successful Session creation, links it to a new `sess_*` Session.
 
 - [Schedules guide](/agents/schedules)
-- [Deployments API](/api-reference/deployments/)
+- [Schedules API](/api-reference/deployments/)
 - [Sessions guide](/agents/sessions)
 
 ## First steps
@@ -62,7 +62,7 @@ Schedules execute an Agent later or repeatedly. Their API resource is a Deployme
 1. Create an organization and [API key](/getting-started/api-keys).
 2. Choose a Model, API, or Agent from the [Store](/store/).
 3. Make a direct request or define and test an Agent.
-4. Publish the Agent as an Endpoint when an application needs to invoke it.
+4. Publish the Agent as a Service when an application needs to invoke it.
 5. Add a Schedule when the work should run automatically.
 6. Review Sessions, errors, latency, and cost in the Console.
 

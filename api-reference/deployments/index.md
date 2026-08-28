@@ -1,6 +1,6 @@
 ---
 title: Schedules API
-description: Create, manage, trigger, and inspect SandBase Schedules through the Deployments API.
+description: Create, manage, trigger, and inspect SandBase Schedules through the compatibility /v1/deployments resource.
 ---
 
 # Schedules API

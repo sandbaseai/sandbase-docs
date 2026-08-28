@@ -5,7 +5,7 @@ description: Create and manage versioned Agent definitions.
 
 # Agents API
 
-An Agent is a reusable, versioned definition containing a model, instructions, tools, and Skills. Creating or updating an Agent does not run it. Use a [Session](/api-reference/sessions/) for an interactive execution, a [Service](/api-reference/endpoints/) for a stable callable surface, or a [Schedule](/api-reference/deployments/) for recurring work. Schedules are managed through the Deployments API.
+An Agent is a reusable, versioned definition containing a model, instructions, tools, and Skills. Creating or updating an Agent does not run it. Use a [Session](/api-reference/sessions/) for an interactive execution, a [Service](/api-reference/endpoints/) for a stable callable surface, or a [Schedule](/api-reference/deployments/) for recurring work. Schedule resources retain the `/v1/deployments` path for API compatibility.
 
 Agent model IDs use the public `vendor/model` identity returned by the [Models API](/api-reference/models/). Effective updates create immutable versions; no-op updates keep the current version number.
 

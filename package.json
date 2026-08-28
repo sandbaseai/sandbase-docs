@@ -15,8 +15,9 @@
     "test:links": "node scripts/validate-internal-links.mjs",
     "test:seo": "node scripts/validate-seo.mjs",
     "test:ai-readable": "node scripts/validate-ai-readable.mjs",
+    "test:doc-content": "node scripts/validate-doc-content.mjs",
     "test:built-public-api": "node scripts/validate-built-public-surface.mjs",
-    "validate": "npm run lint:openapi && npm run test:public-api && npm run test:api-reference && npm run test:http-references && npm run test:links && npm run test:seo && npm run test:ai-readable && npm run build && npm run test:built-public-api",
+    "validate": "npm run lint:openapi && npm run test:public-api && npm run test:api-reference && npm run test:http-references && npm run test:links && npm run test:seo && npm run test:ai-readable && npm run test:doc-content && npm run build && npm run test:built-public-api",
     "test:generator": "node --test scripts/generate-llm-model-api-reference.test.mjs"
   },
   "devDependencies": {

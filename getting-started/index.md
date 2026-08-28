@@ -48,7 +48,7 @@ After it works, you can:
 
 If you want tools in your AI app, start with [Setup](/setup/).
 
-If you want to call one capability from code, start with [Models](/store/models) or [APIs](/store/apis).
+If you want to call one capability from code, start with [Models](/models/) or [APIs](/store/apis).
 
 If you want a repeatable workflow, start with [Build Agent](/agents/).
 

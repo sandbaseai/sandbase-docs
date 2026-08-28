@@ -74,7 +74,7 @@ apiReference:
             "version": 1,
             "name": "Research Assistant",
             "description": "A general-purpose research Agent.",
-            "model": {"id": "anthropic/claude-sonnet-4", "effort": {"type": "high"}, "speed": "standard"},
+            "model": {"id": "anthropic/claude-sonnet-5", "effort": {"type": "high"}, "speed": "standard"},
             "system": "You are a research assistant...",
             "tools": [],
             "mcp_servers": [],

@@ -58,5 +58,5 @@ Check capability details before using a Model in production.
 - [Supported Models](/models/supported)
 - [Capability Matrix](/models/capabilities)
 - [Chat Completions API](/api-reference/llm-gateway)
-- [Store: Models](/store/models)
+- [Browse the Store](/store/)
 - [Build Agent](/agents/)

@@ -39,7 +39,7 @@ Use `trigger_type=manual|schedule` and `status=pending|succeeded|failed` filters
 
 ## Next steps
 
-- [Deployments API](/api-reference/deployments/)
-- [Trigger a Deployment](/api-reference/deployments/run)
+- [Schedules API](/api-reference/deployments/)
+- [Trigger a Schedule](/api-reference/deployments/run)
 - [List DeploymentRuns](/api-reference/deployments/list-runs)
 - [Sessions](/agents/sessions)

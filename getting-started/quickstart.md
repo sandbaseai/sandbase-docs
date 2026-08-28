@@ -27,7 +27,7 @@ Learn more: [Setup](/setup/).
 
 Choose this if you are adding one capability to your app.
 
-1. Browse [Models](/store/models) or [APIs](/store/apis).
+1. Browse [Models](/models/) or [APIs](/store/apis).
 2. Open the detail page.
 3. Copy the request.
 4. Call it with your SandBase API key.

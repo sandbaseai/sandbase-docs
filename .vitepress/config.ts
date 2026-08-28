@@ -225,7 +225,7 @@ export default defineConfig({
   sitemap: {
     hostname: siteOrigin,
     transformItems: (items) => items
-      .filter((item) => !['agents/deployments', 'setup/cli'].includes(item.url.replace(/^\//, '')))
+      .filter((item) => !['agents/deployments', 'setup/cli', 'store/models'].includes(item.url.replace(/^\//, '')))
       .map((item) => ({
         ...item,
         url: `${docsBase}${item.url.replace(/^\//, '')}`,

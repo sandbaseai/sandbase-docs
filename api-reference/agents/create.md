@@ -72,7 +72,7 @@ apiReference:
           -H "Authorization: Bearer $SANDBASE_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{
-            "model": "anthropic/claude-sonnet-4",
+            "model": "anthropic/claude-sonnet-5",
             "name": "Research Assistant",
             "system": "Research carefully and cite sources.",
             "tools": [{"type": "agent_toolset_20260401"}]
@@ -81,7 +81,7 @@ apiReference:
       language: python
       code: |
         agent = client.beta.agents.create(
-            model="anthropic/claude-sonnet-4",
+            model="anthropic/claude-sonnet-5",
             name="Research Assistant",
             system="Research carefully and cite sources.",
             tools=[{"type": "agent_toolset_20260401"}],
@@ -91,7 +91,7 @@ apiReference:
       language: typescript
       code: |
         const agent = await client.beta.agents.create({
-          model: 'anthropic/claude-sonnet-4',
+          model: 'anthropic/claude-sonnet-5',
           name: 'Research Assistant',
           system: 'Research carefully and cite sources.',
           tools: [{ type: 'agent_toolset_20260401' }],
@@ -106,7 +106,7 @@ apiReference:
         "version": 1,
         "name": "Research Assistant",
         "description": "",
-        "model": {"id": "anthropic/claude-sonnet-4"},
+        "model": {"id": "anthropic/claude-sonnet-5"},
         "system": "Research carefully and cite sources.",
         "tools": [{ "type": "agent_toolset_20260401" }],
         "mcp_servers": null,

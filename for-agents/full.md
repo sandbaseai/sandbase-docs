@@ -597,7 +597,7 @@ data: {"id":"sevt_002","type":"session.status_idle","stop_reason":{"type":"end_t
 
 ### POST /v1/deployments — Create Schedule
 
-Create a Schedule through the Deployments API. Every manual or cron trigger creates a distinct `drun_*` DeploymentRun and attempts to create one new Session.
+Create a Schedule through the compatibility `/v1/deployments` resource. Every manual or cron trigger creates a distinct `drun_*` DeploymentRun and attempts to create one new Session.
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/deployments \

@@ -12,6 +12,14 @@ const excluded = [
   'guides/site-agent-integration.md',
 ]
 let inspected = 0
+const publicTitles = new Map()
+const publicDescriptions = new Map()
+
+function registerUnique(map, value, filename, label) {
+  const previous = map.get(value)
+  assert.ok(!previous, `${filename} duplicates ${label} from ${previous}: ${value}`)
+  map.set(value, filename)
+}
 
 function isExcluded(filename) {
   return excluded.some((entry) => filename === entry || filename.startsWith(entry))
@@ -35,6 +43,15 @@ function inspect(directory) {
     assert.ok(String(frontmatter.description ?? '').trim(), `${filename} must declare a non-empty description`)
     assert.ok(String(frontmatter.title).length <= 65, `${filename} title must be 65 characters or fewer`)
     assert.ok(String(frontmatter.description).length <= 170, `${filename} description must be 170 characters or fewer`)
+    const robots = String(frontmatter.robots ?? 'index,follow')
+    if (robots.startsWith('noindex')) {
+      if (frontmatter.canonical != null) {
+        assert.ok(String(frontmatter.canonical).startsWith('/docs/'), `${filename} canonical URL must start with /docs/`)
+      }
+    } else {
+      registerUnique(publicTitles, String(frontmatter.title).trim(), filename, 'an indexable title')
+      registerUnique(publicDescriptions, String(frontmatter.description).trim(), filename, 'an indexable description')
+    }
     inspected += 1
   }
 }
