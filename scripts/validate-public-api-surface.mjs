@@ -18,6 +18,7 @@ const capabilitiesPage = readFileSync(new URL('../models/capabilities.md', impor
 const visionPage = readFileSync(new URL('../models/vision.md', import.meta.url), 'utf8')
 const modelApiOverview = readFileSync(new URL('../model-api-reference/index.md', import.meta.url), 'utf8')
 const homePage = readFileSync(new URL('../.vitepress/theme/HomePage.vue', import.meta.url), 'utf8')
+const officialNativeSidebar = readFileSync(new URL('../.vitepress/theme/OfficialNativeApiSidebar.vue', import.meta.url), 'utf8')
 const legacySeedanceReference = readFileSync(new URL('../api-reference/volcengine-contents-generations.md', import.meta.url), 'utf8')
 const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8')
 const catalogOverviews = [
@@ -427,7 +428,7 @@ assert.deepEqual(
   ['queued', 'running', 'cancelled', 'succeeded', 'failed', 'expired'],
   'Volcengine task listing must document every implemented native status',
 )
-assert.match(sidebar, /\/model-api-reference\/seedance-native-api\//, 'Sidebar must link to the Official Native API reference')
+assert.match(officialNativeSidebar, /\/model-api-reference\/seedance-native-api\//, 'Official Native API sidebar must link to its reference')
 assert.doesNotMatch(sidebar, /\/api-reference\/volcengine-contents-generations/, 'Inference navigation must not duplicate the Official Native API reference')
 assert.doesNotMatch(sidebar, /platform-apis\/(?:douyin|tiktok)\/web\/live-room/, 'Provider sidebars must not link operations that are unavailable online')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
@@ -655,9 +656,10 @@ assert.match(updateDeploymentSchema, /required: \[feishu_webhook_url\]/, 'A non-
 assert.match(updateDeploymentSchema, /pattern: '\^https:\/\/open\\\.feishu\\\.cn\/open-apis\/bot\/v2\/hook\//, 'Deployment notifications must publish the enforced Feishu webhook origin and path')
 assert.match(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Sidebar must link to the Feishu notification test reference')
 assert.match(sidebar, /\/api-reference\/endpoints\/acp/, 'Sidebar must link to the Endpoint ACP reference')
-assert.match(sidebar, /Official Native API/, 'Model API sidebar must expose Official Native API')
-assert.match(sidebar, /seedance-native-api\/bytedance\/seedance-2\.5-official/, 'Official Native API sidebar must expose Seedance 2.5')
-assert.match(sidebar, /seedance-native-api\/bytedance\/seedance-2\.0-official/, 'Official Native API sidebar must expose Seedance 2.0')
+assert.doesNotMatch(modelSidebar, /text: 'Official Native API'/, 'Model API main navigation must not duplicate the custom Official Native API sidebar')
+assert.match(officialNativeSidebar, /Official Native API/, 'Custom sidebar must expose Official Native API')
+assert.match(officialNativeSidebar, /seedance-native-api\/bytedance\/seedance-2\.5-official/, 'Official Native API sidebar must expose Seedance 2.5')
+assert.match(officialNativeSidebar, /seedance-native-api\/bytedance\/seedance-2\.0-official/, 'Official Native API sidebar must expose Seedance 2.0')
 const scheduleOverview = readFileSync(new URL('../api-reference/deployments/index.md', import.meta.url), 'utf8')
 assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/runs/, 'Schedule overview must document the preferred plural trigger path')
 assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/run` remains a compatibility alias/, 'Schedule overview must label the singular trigger path as compatibility-only')

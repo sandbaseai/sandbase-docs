@@ -6,25 +6,6 @@ import {
 
 // ─── Model API Reference ─────────────────────────────────────
 
-// Official provider-native protocols are hand-written and intentionally live
-// after the generated model categories so the primary catalog stays focused on
-// normalized Model API calls.
-const officialNativeApiItems: DefaultTheme.SidebarItem = {
-  text: 'Official Native API',
-  collapsed: true,
-  items: [
-    { text: 'Overview', link: '/model-api-reference/seedance-native-api/' },
-    {
-      text: 'ByteDance',
-      collapsed: true,
-      items: [
-        { text: 'Seedance 2.5 Official', link: '/model-api-reference/seedance-native-api/bytedance/seedance-2.5-official' },
-        { text: 'Seedance 2.0 Official', link: '/model-api-reference/seedance-native-api/bytedance/seedance-2.0-official' },
-      ],
-    },
-  ],
-}
-
 function modelApiReferenceSidebar(items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] {
   return [
     { text: 'Status', link: 'https://status.sandbase.ai' },
@@ -32,7 +13,7 @@ function modelApiReferenceSidebar(items: DefaultTheme.SidebarItem[]): DefaultThe
     { text: 'Blog', link: 'https://www.sandbase.ai/blog' },
     {
       text: 'Model API Reference',
-      items: [...items, officialNativeApiItems],
+      items: [...items],
     },
   ]
 }
