@@ -357,7 +357,7 @@ function displayLabel(model, duplicateTitles = new Set()) {
   const title = cleanTitle(model)
   if (!duplicateTitles.has(title)) return title
   const vendor = String(model.vendor ?? '').trim()
-  const slug = String(model.model_slug ?? '').split('/').filter(Boolean).at(-1)
+  const slug = String(model.model_slug ?? '').split('/').filter(Boolean).join(' / ')
   const qualifier = vendor && slug ? `${vendor}: ${slug}` : (vendor || model.model_slug)
   return `${title} (${qualifier})`
 }

@@ -71,9 +71,9 @@ Audio Generation models use the SandBase generation protocol declared in each mo
 ### ace
 
 - [ACE-Step Audio Outpaint](/model-api-reference/audio-generation/ace/ace-step/audio-outpaint) — Ace Step Audio Outpaint by ace - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [ACE-Step (ace: audio-inpaint)](/model-api-reference/audio-generation/ace/ace-step/audio-inpaint) — Ace Step Audio Inpaint by ace - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [ACE-Step (ace: audio-to-audio)](/model-api-reference/audio-generation/ace/ace-step/audio-to-audio) — Ace Step Audio To Audio by ace - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [ACE-Step (ace: prompt-to-audio)](/model-api-reference/audio-generation/ace/ace-step/prompt-to-audio) — Ace Step Prompt To Audio by ace - generate music, sound effects, and audio from text descriptions with AI. Create original compositions, ambient sounds, and audio content for any creative project.
+- [ACE-Step (ace: ace-step / audio-inpaint)](/model-api-reference/audio-generation/ace/ace-step/audio-inpaint) — Ace Step Audio Inpaint by ace - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
+- [ACE-Step (ace: ace-step / audio-to-audio)](/model-api-reference/audio-generation/ace/ace-step/audio-to-audio) — Ace Step Audio To Audio by ace - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
+- [ACE-Step (ace: ace-step / prompt-to-audio)](/model-api-reference/audio-generation/ace/ace-step/prompt-to-audio) — Ace Step Prompt To Audio by ace - generate music, sound effects, and audio from text descriptions with AI. Create original compositions, ambient sounds, and audio content for any creative project.
 - [ACE-Step (ace: ace-step)](/model-api-reference/audio-generation/ace/ace-step) — Ace Step by ace - generate music, sound effects, and audio from text descriptions with AI. Create original compositions, ambient sounds, and audio content for any creative project.
 
 ### Bytedance
