@@ -200,7 +200,7 @@
           <h4>SDKs</h4>
           <p>Use SandBase with Python and JavaScript clients.</p>
         </a>
-        <a href="/docs/admin/api-keys" class="resource-card">
+        <a href="/docs/getting-started/api-keys" class="resource-card">
           <span class="resource-icon">03</span>
           <h4>Keys and billing</h4>
           <p>Manage API keys, billing, limits, and organization settings.</p>
