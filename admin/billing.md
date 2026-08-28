@@ -28,13 +28,13 @@ internal network requests.
 
 | Control | Scope | Behavior |
 |---------|-------|----------|
-| Organization balance | Whole org | Hard cap — the API returns HTTP 402 when depleted |
+| Organization funding boundary | Whole org | Available balance plus any configured credit limit; an unfunded request can return HTTP 402 |
 | Key spending limit | Per API key | Optional per-key cap, bounded by the org balance |
-| Alert threshold | Whole org | Notification behavior shown in the current Console |
 
 To set a per-key spending limit, see [API Keys](/getting-started/api-keys).
 
-## Activities and invoices
+## Activities and usage
 
-The **Console → Activities** page shows request history and usage together. For public pricing and task-cost
-contracts, see [Pricing and Usage](/guides/billing) and [Get Task Cost](/api-reference/tasks/cost).
+The **Console → Activities** page provides **Request History** and **Usage** tabs. Usage includes request and cost
+summaries, model spend, billing records, and the CSV exports currently available in the Console. For public pricing
+and task-cost contracts, see [Pricing and Usage](/guides/billing) and [Get Task Cost](/api-reference/tasks/cost).

@@ -29,20 +29,23 @@ When a limit is exceeded, the API aborts the request with HTTP 429. On the `/v1/
 The message is `"API key rate limit exceeded"` when the per-key limit is hit, or `"global rate limit exceeded"` when the platform-wide limit is hit.
 
 ::: warning
-The API does **not** currently emit `Retry-After` or `X-RateLimit-*` headers on 429 responses. Do not rely on these headers — they are not sent. Use client-side backoff instead.
+Platform-generated rate-limit responses do not currently add `Retry-After` or remaining-quota headers. A compatible
+provider response can include provider rate-limit headers. Honor `Retry-After` when present; otherwise use bounded
+client-side backoff with jitter.
 :::
 
 ### Best Practices
 
 1. **Implement exponential backoff** — on a 429, wait with increasing delays before retrying.
-2. **Batch where possible** — combine multiple small requests into fewer larger ones.
-3. **Smooth your request rate** — spread bursts across the window rather than firing all at once.
-4. **Cap retry attempts** — stop after a bounded number of retries and surface the failure.
-5. **Add jitter** — randomize retry delays so multiple workers do not retry at the same moment.
+2. **Smooth your request rate** — spread bursts across the window rather than firing all at once.
+3. **Cap retry attempts** — stop after a bounded number of retries and surface the failure.
+4. **Add jitter** — randomize retry delays so multiple workers do not retry at the same moment.
+5. **Retry only safe operations** — repeating a generation can add cost, and state-changing requests can duplicate work.
 
 ## Per-Key Limit
 
-A per-key request cap can be set on an individual key (stored as `rate_limit`, requests per minute). When set, it is enforced independently of and in addition to the global limit.
+A per-key request cap can be configured for an individual key. When present, it is enforced independently of and in
+addition to the platform-wide limit.
 
 ::: info
 Setting a per-key rate limit is not currently exposed through the public key-management API. Contact support if you need a custom per-key limit configured.

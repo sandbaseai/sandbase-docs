@@ -79,5 +79,17 @@ for (const link of ['./chat-completions', './anthropic-messages', './streaming',
   assert.ok(guidesIndex.includes(`](${link})`), `Guides index must link to ${link}`)
 }
 
+const organizationsGuide = readFileSync('admin/organizations.md', 'utf8')
+assert.doesNotMatch(organizationsGuide, /Console → Settings[\s\S]{0,80}Create Team/, 'Team creation must use the current Team or Create Team navigation')
+assert.match(organizationsGuide, /existing SandBase account/, 'Organization guide must explain the current member prerequisite')
+
+const billingGuide = readFileSync('guides/billing.md', 'utf8')
+assert.doesNotMatch(billingGuide, /Console → Usage/, 'Usage is a tab under Console Activities')
+assert.match(billingGuide, /Console → Activities → Usage/, 'Billing guide must use the current Usage navigation')
+
+const billingAdmin = readFileSync('admin/billing.md', 'utf8')
+assert.doesNotMatch(billingAdmin, /\| Alert threshold \|/, 'Billing docs must not expose a Console control that is not currently rendered')
+assert.match(billingAdmin, /Request History[\s\S]+Usage/, 'Billing docs must describe the current Activities tabs')
+
 assert.ok(inspected > 0, 'content validation did not inspect any public hand-written pages')
 console.log(`public hand-written content: ok (${inspected} pages)`)

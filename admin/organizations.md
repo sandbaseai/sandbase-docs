@@ -18,16 +18,19 @@ Organizations are the billing and access control unit in SandBase. API keys, bal
 
 | Role | Permissions |
 |------|-------------|
-| **Owner** | Full access. Manage members, billing, keys, Setup, and Agents. |
-| **Admin** | Manage keys, billing, Setup, and Agents. Cannot remove owner. |
-| **Member** | Use API keys only. Read-only dashboard access. |
+| **Owner** | Full workspace access, including changing member roles. |
+| **Admin** | Manage keys and billing, and add or remove non-owner members. |
+| **Member** | Use the workspace and its API keys without member-management access. |
 
 ## Create a Team Organization
 
-1. Go to Console → Settings
-2. Click **Create Team**
-3. Name your organization
-4. Invite members by email
+1. Open the workspace menu in the Console header.
+2. Choose **Create Team**, or open **Team** and select **Create team**.
+3. Enter the team name and create the workspace.
+4. Select **Add member** and enter the email of an existing SandBase account.
+
+An added member must already have a SandBase account. Owners can change member roles; owners and admins can remove
+non-owner members.
 
 ## Switch Organizations
 
