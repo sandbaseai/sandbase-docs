@@ -29,7 +29,7 @@ Use the smallest surface that fits the job:
 | Need | Start with |
 |---|---|
 | OpenAI-compatible LLM and vision calls | [Chat Completions API](https://www.sandbase.ai/docs/api-reference/llm-gateway) |
-| Image, video, audio, or embedding jobs | [Model API Reference](https://www.sandbase.ai/docs/model-api-reference/llm-models) |
+| Image, video, audio, or embedding jobs | [Model API Reference](https://www.sandbase.ai/docs/model-api-reference/) |
 | Search, scrape, social, business, or other external data | [Store](https://www.sandbase.ai/docs/store/) |
 | Reusable, versioned Agent workflows | [Agents](https://www.sandbase.ai/docs/agents/) |
 | Codex, Claude Code, Cursor, and other AI clients | [Connect AI tools](https://www.sandbase.ai/docs/setup/) |
