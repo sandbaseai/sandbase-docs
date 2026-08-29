@@ -1189,7 +1189,7 @@ function modelReference(model) {
       {
         title: 'Response Schema',
         description: isGeneration
-          ? 'The submit endpoint returns an accepted generation task. Poll the result endpoint with the returned id for terminal outputs or errors.'
+          ? 'The submit endpoint returns a run response. If its status is pending or running, poll GET /v1/run/{id} with the returned opaque ID until it reaches a terminal state.'
           : 'Fields returned by this model API response.',
         fields: isGeneration ? publicGenerationResponseFields(model) : responseFields(model),
       },
@@ -1565,7 +1565,7 @@ function writeCategoryOverview(category) {
   const protocolNote = category.key === 'api'
     ? 'Platform operations use `POST /v1/run` with the model name shown on each page. Synchronous operations return their result directly; asynchronous operations return a run id that can be queried with `GET /v1/run/{id}`. The live Store is the availability source of truth; a newly enabled operation can appear there before its generated reference page is published.'
     : ['image', 'video', 'audio'].includes(category.key)
-    ? `${category.title} models use the SandBase generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.`
+    ? `${category.title} models use the SandBase generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive an opaque run ID, then poll GET /v1/run/{id} until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.`
     : 'Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. Other LLM models use `/v1/chat/completions` unless a model-specific protocol is added later.'
   const duplicateTitles = duplicateTitlesFor(category.models)
   const providerSections = category.sortedGroups.length
