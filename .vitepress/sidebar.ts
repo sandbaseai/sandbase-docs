@@ -46,12 +46,18 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
     text: 'Models & APIs',
     collapsed: false,
     items: [
-      { text: 'Guides overview', link: '/guides/' },
       { text: 'Store', link: '/store/' },
       { text: 'Models', link: '/models/' },
       { text: 'Supported Models', link: '/models/supported' },
       { text: 'Capabilities', link: '/models/capabilities' },
       { text: 'Vision', link: '/models/vision' },
+    ],
+  },
+  {
+    text: 'Guides',
+    collapsed: false,
+    items: [
+      { text: 'Overview', link: '/guides/' },
       { text: 'Chat Completions', link: '/guides/chat-completions' },
       { text: 'Anthropic Messages', link: '/guides/anthropic-messages' },
       { text: 'Streaming', link: '/guides/streaming' },
