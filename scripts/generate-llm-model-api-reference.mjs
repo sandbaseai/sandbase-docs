@@ -364,6 +364,8 @@ function cleanDescription(model) {
     .replace(/\b(?:is|was)\s+OpenAI's\s+(?:latest|newest)\s+AI\s+model\b/gi, 'is an OpenAI model')
     .replace(/\bOpenAI's\s+(?:latest|newest)\s+model\b/gi, "OpenAI's model")
     .replace(/\b(?:latest|newest)\b/gi, 'available')
+    .replace(/\bavailable state of the art\b/gi, 'current state-of-the-art')
+    .replace(/\bavailable flagship\b/gi, 'current flagship')
     // Keep vendor names consistent with their public brand styling.
     .replace(/\bBytedance\b/g, 'ByteDance')
     .replace(/\s+/g, ' ')
