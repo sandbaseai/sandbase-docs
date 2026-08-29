@@ -6,7 +6,13 @@ description: Use official provider-native protocols through SandBase, organized 
 # Official Native API
 
 Official Native APIs preserve a provider's request and response protocol for easier migration of existing integrations.
-Browse by provider, then choose the exact model. SandBase currently documents native protocols for ByteDance and Google.
+Browse by provider, then choose the exact model. SandBase currently documents native protocols for ByteDance, Google, and OpenAI.
+
+## OpenAI
+
+- [GPT Image 2](/model-api-reference/seedance-native-api/openai/gpt-image-2)
+
+GPT Image 2 uses the native OpenAI Images API at `/v1/images/generations`. Pass `gpt-image-2` as the model value and use the synchronous response directly; this is separate from the general `/v1/run` model endpoint.
 
 ## ByteDance
 

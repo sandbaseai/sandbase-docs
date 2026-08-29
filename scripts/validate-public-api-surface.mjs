@@ -675,6 +675,8 @@ assert.match(officialNativeSidebar, /Gemini Omni Flash Preview/, 'Official Nativ
 assert.match(officialNativeSidebar, /llm-models\/google\/gemini-omni-flash-preview/, 'Official Native API sidebar must link the Google native model')
 assert.match(officialNativeSidebar, /Gemini 3\.1 Pro Preview/, 'Official Native API sidebar must expose the current Gemini 3.1 model')
 assert.match(officialNativeSidebar, /llm-models\/google\/gemini-3\.1-pro-preview/, 'Official Native API sidebar must link the Gemini 3.1 model')
+assert.match(officialNativeSidebar, /GPT Image 2/, 'Official Native API sidebar must expose GPT Image 2')
+assert.match(officialNativeSidebar, /seedance-native-api\/openai\/gpt-image-2/, 'Official Native API sidebar must link GPT Image 2')
 const scheduleOverview = readFileSync(new URL('../api-reference/deployments/index.md', import.meta.url), 'utf8')
 assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/runs/, 'Schedule overview must document the preferred plural trigger path')
 assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/run` remains a compatibility alias/, 'Schedule overview must label the singular trigger path as compatibility-only')

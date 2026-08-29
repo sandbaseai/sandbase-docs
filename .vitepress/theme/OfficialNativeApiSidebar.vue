@@ -6,6 +6,7 @@ const route = useRoute()
 const isCategoryExpanded = ref(false)
 const isByteDanceExpanded = ref(false)
 const isGoogleExpanded = ref(false)
+const isOpenAIExpanded = ref(false)
 const isModelApiReferenceRoute = computed(() => /\/model-api-reference(?:\/|$)/.test(route.path))
 
 const models = [
@@ -16,6 +17,13 @@ const models = [
   {
     text: 'Seedance 2.0 Official',
     link: '/model-api-reference/seedance-native-api/bytedance/seedance-2.0-official',
+  },
+]
+
+const openaiModels = [
+  {
+    text: 'GPT Image 2',
+    link: '/model-api-reference/seedance-native-api/openai/gpt-image-2',
   },
 ]
 
@@ -57,6 +65,7 @@ watch(
       isCategoryExpanded.value = true
       if (path.includes('/seedance-native-api/bytedance/')) isByteDanceExpanded.value = true
       if (path.includes('/seedance-native-api/google/')) isGoogleExpanded.value = true
+      if (path.includes('/seedance-native-api/openai/')) isOpenAIExpanded.value = true
     }
     if (path.includes('/model-api-reference/llm-models/google/')) {
       isCategoryExpanded.value = true
@@ -93,6 +102,28 @@ watch(
         :aria-current="isActive('/model-api-reference/seedance-native-api') ? 'page' : undefined"
         :href="withBase('/model-api-reference/seedance-native-api')"
       >Overview</a>
+      <div class="sidebar-row provider-row">
+        <button
+          class="provider-button"
+          type="button"
+          :aria-expanded="isOpenAIExpanded"
+          aria-controls="official-native-openai-panel"
+          @click="isOpenAIExpanded = !isOpenAIExpanded"
+        >
+          <span>OpenAI</span>
+          <span class="provider-chevron" aria-hidden="true">›</span>
+        </button>
+      </div>
+      <ul v-if="isOpenAIExpanded" id="official-native-openai-panel" class="model-list">
+        <li v-for="model in openaiModels" :key="model.link">
+          <a
+            class="sidebar-link model-link"
+            :class="{ active: isActive(model.link) }"
+            :aria-current="isActive(model.link) ? 'page' : undefined"
+            :href="withBase(model.link)"
+          >{{ model.text }}</a>
+        </li>
+      </ul>
       <div class="sidebar-row provider-row">
         <button
           class="provider-button"
