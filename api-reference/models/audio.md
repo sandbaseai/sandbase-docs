@@ -1,6 +1,6 @@
 ---
 title: "Unified Audio Run API"
-description: "Call speech and audio models through the unified model API. Poll asynchronous operations through GET /v1/run/{id}."
+description: "Run audio generation and processing capabilities through SandBase's unified model API."
 aside: false
 outline: false
 apiReferenceKey: "models/audio"
