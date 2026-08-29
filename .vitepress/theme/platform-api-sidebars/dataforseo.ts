@@ -293,6 +293,10 @@ export default {
           "link": "/model-api-reference/platform-apis/dataforseo/v3/on_page/lighthouse/live/json"
         },
         {
+          "text": "OnPage Page Screenshot",
+          "link": "/model-api-reference/platform-apis/dataforseo/v3/on_page/page_screenshot"
+        },
+        {
           "text": "OnPage Raw HTML",
           "link": "/model-api-reference/platform-apis/dataforseo/v3/on_page/raw_html/live"
         }
