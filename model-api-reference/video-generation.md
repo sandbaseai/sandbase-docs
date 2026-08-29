@@ -34,6 +34,9 @@ Video Generation models use the SandBase generation protocol declared in each mo
 - [DreamActor 2.0](/model-api-reference/video-generation/bytedance/dreamactor/2.0) — DreamActor M2.0 by ByteDance generates videos by animating a reference image using motion from a driving video. It replicates motion, facial expressions, and lip movements from the template video while preserving the subject and background features of the input image.
 - [Seedance v1.5 Pro Text to Video](/model-api-reference/video-generation/bytedance/seedance/1.5/pro/text-to-video) — ByteDance Seedance v1.5 Pro text-to-video model generating cinematic video from text prompts with native audio generation, camera control, and professional-grade output quality.
 - [Seedance v1.5 Pro Image to Video](/model-api-reference/video-generation/bytedance/seedance/1.5/pro/image-to-video) — ByteDance Seedance v1.5 Pro image-to-video model transforming still images into cinematic video with native audio generation, camera control, and professional-grade output quality.
+- [Seedance 2.0 Mini Text to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/mini/text-to-video) — Seedance 2.0 Mini text-to-video generation through the unified `/v1/run` endpoint.
+- [Seedance 2.0 Mini Image to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/mini/image-to-video) — Seedance 2.0 Mini image-to-video generation through the unified `/v1/run` endpoint.
+- [Seedance 2.0 Mini Reference to Video](/model-api-reference/video-generation/bytedance/seedance/2.0/mini/reference-to-video) — Seedance 2.0 Mini reference-guided video generation through the unified `/v1/run` endpoint.
 - …and 9 more models in the sidebar.
 
 ### Google
