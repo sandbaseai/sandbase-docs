@@ -29,7 +29,7 @@ Audio Generation models use the SandBase generation protocol declared in each mo
 
 ### Google
 
-- [Gemini 3.1 Flash Tts](/model-api-reference/audio-generation/google/gemini-3.1-flash-tts) — Gemini 3.1 Flash Tts by Google - convert text to natural-sounding speech with AI. Supports multiple voices, languages, emotions, and speaking styles for content creation and accessibility.
+- [Gemini 3.1 Flash TTS](/model-api-reference/audio-generation/google/gemini-3.1-flash-tts) — Gemini 3.1 Flash TTS by Google - convert text to natural-sounding speech with AI. Supports multiple voices, languages, emotions, and speaking styles for content creation and accessibility.
 - [Gemini TTS](/model-api-reference/audio-generation/google/gemini-tts) — Gemini TTS by Google - convert text to natural-sounding speech with AI. Supports multiple voices, languages, emotions, and speaking styles for content creation and accessibility.
 - [Lyria2](/model-api-reference/audio-generation/google/lyria-2) — Lyria 2 is Google's AI audio generation model. Produce high-quality music tracks, sound effects, and audio landscapes from natural language prompts.
 
@@ -62,11 +62,11 @@ Audio Generation models use the SandBase generation protocol declared in each mo
 
 ### Alibaba
 
-- [Qwen 3 TTS - Voice Design [1.7B]](/model-api-reference/audio-generation/alibaba/qwen-3-tts/voice-design/1.7b) — Qwen 3 Tts Voice Design 1.7b by Alibaba - convert text to natural-sounding speech with AI. Supports multiple voices, languages, emotions, and speaking styles for content creation and accessibility.
-- [Qwen 3 TTS - Text to Speech [1.7B]](/model-api-reference/audio-generation/alibaba/qwen-3-tts/1.7b) — Qwen 3 Tts 1.7b is Alibaba's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
-- [Qwen 3 TTS - Text to Speech [0.6B]](/model-api-reference/audio-generation/alibaba/qwen-3-tts/0.6b) — Qwen 3 Tts 0.6b is Alibaba's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
-- [Qwen 3 TTS - Clone Voice [1.7B]](/model-api-reference/audio-generation/alibaba/qwen-3-tts/clone-voice/1.7b) — Qwen 3 Tts Clone Voice 1.7b by Alibaba - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [Qwen 3 TTS - Clone Voice [0.6B]](/model-api-reference/audio-generation/alibaba/qwen-3-tts/clone-voice/0.6b) — Qwen 3 Tts Clone Voice 0.6b by Alibaba - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
+- [Qwen 3 TTS - Voice Design [1.7B]](/model-api-reference/audio-generation/alibaba/qwen-3-tts/voice-design/1.7b) — Qwen 3 TTS Voice Design 1.7b by Alibaba - convert text to natural-sounding speech with AI. Supports multiple voices, languages, emotions, and speaking styles for content creation and accessibility.
+- [Qwen 3 TTS - Text to Speech [1.7B]](/model-api-reference/audio-generation/alibaba/qwen-3-tts/1.7b) — Qwen 3 TTS 1.7b is Alibaba's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
+- [Qwen 3 TTS - Text to Speech [0.6B]](/model-api-reference/audio-generation/alibaba/qwen-3-tts/0.6b) — Qwen 3 TTS 0.6b is Alibaba's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
+- [Qwen 3 TTS - Clone Voice [1.7B]](/model-api-reference/audio-generation/alibaba/qwen-3-tts/clone-voice/1.7b) — Qwen 3 TTS Clone Voice 1.7b by Alibaba - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
+- [Qwen 3 TTS - Clone Voice [0.6B]](/model-api-reference/audio-generation/alibaba/qwen-3-tts/clone-voice/0.6b) — Qwen 3 TTS Clone Voice 0.6b by Alibaba - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 
 ### ace
 
@@ -78,12 +78,12 @@ Audio Generation models use the SandBase generation protocol declared in each mo
 
 ### ByteDance
 
-- [ByteDance Seed Speech Text to Speech](/model-api-reference/audio-generation/bytedance/seed-speech/tts/2.0) — Seed Speech Tts 2.0 is ByteDance's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
+- [ByteDance Seed Speech Text to Speech](/model-api-reference/audio-generation/bytedance/seed-speech/tts/2.0) — Seed Speech TTS 2.0 is ByteDance's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
 
 ### KwaiVGI
 
 - [Kling Video](/model-api-reference/audio-generation/kwaivgi/kling-video/video-to-audio) — Kling Video Video To Audio by KwaiVGI - advanced AI model for video-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [Kling TTS](/model-api-reference/audio-generation/kwaivgi/kling-tts) — Kling Tts is KwaiVGI's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
+- [Kling TTS](/model-api-reference/audio-generation/kwaivgi/kling-tts) — Kling TTS is KwaiVGI's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
 
 ### Sonilo
 
@@ -92,7 +92,7 @@ Audio Generation models use the SandBase generation protocol declared in each mo
 
 ### xAI
 
-- [xAI Text to Speech](/model-api-reference/audio-generation/xai/grok-tts) — Grok Tts by xAI - convert text to natural-sounding speech with AI. Supports multiple voices, languages, emotions, and speaking styles for content creation and accessibility.
+- [xAI Text to Speech](/model-api-reference/audio-generation/xai/grok-tts) — Grok TTS by xAI - convert text to natural-sounding speech with AI. Supports multiple voices, languages, emotions, and speaking styles for content creation and accessibility.
 
 ## Capability coverage
 

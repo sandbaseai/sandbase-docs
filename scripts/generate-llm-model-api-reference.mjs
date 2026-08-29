@@ -291,7 +291,12 @@ function cleanTitle(model) {
   // Provider registries occasionally repeat a path segment in the display
   // name (for example, “Kling Video Video to Audio”). Keep generated titles,
   // descriptions, and directory listings readable without changing IDs.
-  return String(title ?? '').replace(/\b([A-Za-z][A-Za-z0-9'-]*)\s+\1\b/gi, '$1').trim()
+  return String(title ?? '')
+    .replace(/\b([A-Za-z][A-Za-z0-9'-]*)\s+\1\b/gi, '$1')
+    // Keep common audio acronyms correctly capitalized in titles and
+    // navigation labels generated from provider display names.
+    .replace(/\bTts\b/g, 'TTS')
+    .trim()
 }
 
 function seoTitle(model, disambiguator = '') {
