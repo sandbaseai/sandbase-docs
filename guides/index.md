@@ -20,7 +20,7 @@ These guides cover common patterns for using SandBase in production.
 
 ## Quick Tips
 
-- Use **Setup** when the user wants tools inside Codex, Claude, Cursor, or Kiro.
-- Use **Models and APIs** when your app needs one capability.
-- Use **Build Agent** when the work has multiple steps or should be reused.
-- Use **Activities** in the Console to review requests and usage together.
+- Use [Setup](/setup/) when the user wants tools inside Codex, Claude, Cursor, or Kiro.
+- Use [Models](/models/) or [APIs](/store/apis) when your app needs one capability.
+- Use [Build Agent](/agents/) when the work has multiple steps or should be reused.
+- Use [Activities](https://www.sandbase.ai/console/activities) in the Console to review requests and usage together.
