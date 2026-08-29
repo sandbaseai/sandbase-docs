@@ -52,7 +52,8 @@ curl https://api.sandbase.ai/v1/chat/completions \
   -d '{"model":"deepseek/deepseek-v4-flash","messages":[{"role":"user","content":"Hello"}]}'
 ```
 
-Image, video, and audio generation models use the async `/v1/run` flow:
+Image, video, and audio generation models use the unified `/v1/run` endpoint. The selected model's
+`execution_mode` determines whether the response is synchronous or returns `202 Accepted` for polling:
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/run \
@@ -61,8 +62,8 @@ curl -X POST https://api.sandbase.ai/v1/run \
   -d '{"model":"openai/gpt-image-2","prompt":"A studio product photo on a clean white background"}'
 ```
 
-Poll the returned opaque run ID until the result is ready. Use the ID exactly as returned; do not add a task prefix or
-construct a provider-specific status path:
+When the response is `202 Accepted`, poll the returned opaque run ID until the result is ready. Use the ID exactly as
+returned; do not add a task prefix or construct a provider-specific status path:
 
 ```bash
 curl https://api.sandbase.ai/v1/run/f3d2e8a1-7c4b-4a12-9d2e-123456789abc \
