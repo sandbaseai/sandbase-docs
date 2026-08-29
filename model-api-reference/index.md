@@ -27,7 +27,7 @@ Generate, transform, clone, transcribe, and synthesize audio through SandBase. B
 
 ### [Official Native API](/model-api-reference/seedance-native-api)
 
-Use provider-native protocols without rewriting an existing integration. Browse by provider and model; ByteDance Seedance is currently supported through the Volcengine Ark Contents Generations task protocol.
+Use provider-native protocols without rewriting an existing integration. Browse by provider and model; ByteDance Seedance uses the Volcengine Ark Contents Generations task protocol, while Google models use the Gemini-compatible GenerateContent or Interactions protocols.
 
 ## Inference API contracts
 

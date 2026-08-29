@@ -345,7 +345,11 @@ function seoDisambiguator(model) {
 }
 
 function cleanDescription(model) {
-  return String(model.description ?? '')
+  const rawDescription = String(model.description ?? '').trim()
+  const normalizedDescription = rawDescription === '第三方供应商提供的 Gemini Omni Flash Preview 模型。'
+    ? 'Google Gemini Omni Flash Preview is a multimodal video-generation model available through SandBase. Use the Google Gemini Interactions protocol for native video requests.'
+    : rawDescription
+  return normalizedDescription
     .split(/\n\s*\n/)[0]
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\*\*/g, '')
