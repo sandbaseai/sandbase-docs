@@ -1,9 +1,9 @@
 ---
-title: APIs
+title: API Catalog
 description: Browse ready-to-use APIs for search, scrape, data, media, SaaS, and connectors.
 ---
 
-# APIs
+# API Catalog
 
 APIs give your Agent access to the real world.
 
