@@ -55,7 +55,8 @@ watch(
   (path) => {
     if (/\/model-api-reference\/seedance-native-api(?:\/|$)/.test(path)) {
       isCategoryExpanded.value = true
-      isByteDanceExpanded.value = true
+      if (path.includes('/seedance-native-api/bytedance/')) isByteDanceExpanded.value = true
+      if (path.includes('/seedance-native-api/google/')) isGoogleExpanded.value = true
     }
     if (path.includes('/model-api-reference/llm-models/google/')) {
       isCategoryExpanded.value = true
