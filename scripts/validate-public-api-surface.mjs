@@ -97,6 +97,8 @@ const forbiddenOpenApiPatterns = [
   [/^  - name: Embed Configs$/m, 'Embed Configs tag'],
   [/^    (?:Create|Update|Delete)?EmbedConfig(?:Request|Response|List|Usage)?:$/m, 'Embed Config schema'],
   [/^    EmbedConfigId:$/m, 'Embed Config parameter'],
+  [/(?:openai\/gpt-4o|anthropic\/claude-sonnet-4|google\/gemini-2\.5-flash)(?:["'`,\s]|$)/i, 'stale model example'],
+  [/(?:^|[\s"'`])gemini-2\.5-flash(?:[,\s"'`]|$)/i, 'stale Gemini model example'],
 ]
 
 for (const [pattern, label] of forbiddenOpenApiPatterns) {

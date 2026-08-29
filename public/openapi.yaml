@@ -359,7 +359,7 @@ paths:
               properties:
                 model:
                   type: string
-                  example: "claude-sonnet-4"
+                  example: "claude-sonnet-5"
                 max_tokens:
                   type: integer
                   example: 4096
@@ -449,7 +449,7 @@ paths:
       summary: Generate content with the Google Gemini protocol
       description: |
         Accepts a Google Gemini GenerateContent request and returns a Gemini-compatible response. A bare model name,
-        such as gemini-2.5-flash, is normalized to the SandBase catalog name google/gemini-2.5-flash. This endpoint
+        such as gemini-3.5-flash, is normalized to the SandBase catalog name google/gemini-3.5-flash. This endpoint
         also accepts x-goog-api-key and the key query parameter for Google SDK compatibility, although headers are safer.
       security:
         - GoogleApiKey: []
@@ -2173,7 +2173,7 @@ paths:
       operationId: getModel
       tags: [Models]
       summary: Get model details
-      description: Get model details by UUID or full logical model name. Model names containing slashes are supported as path segments, for example /v1/models/openai/gpt-4o. Name lookup returns enabled catalog models; UUID lookup can return a disabled catalog record with enabled set to false. Protocol-ingress-only models are never returned.
+      description: Get model details by UUID or full logical model name. Model names containing slashes are supported as path segments, for example /v1/models/openai/gpt-5.6-luna. Name lookup returns enabled catalog models; UUID lookup can return a disabled catalog record with enabled set to false. Protocol-ingress-only models are never returned.
       parameters:
         - name: id_or_name
           in: path
@@ -3492,10 +3492,10 @@ components:
           description: Internal model resource ID. Use name in inference requests.
         name:
           type: string
-          example: openai/gpt-4o
+          example: openai/gpt-5.6-luna
         display_name:
           type: string
-          example: GPT-4o
+          example: GPT-5.6 Luna
         vendor:
           type: string
         description:
@@ -4918,7 +4918,7 @@ components:
           oneOf:
             - type: string
               pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*$'
-              example: "anthropic/claude-sonnet-4"
+              example: "anthropic/claude-sonnet-5"
             - type: object
               additionalProperties: true
               required: [id]
