@@ -9,6 +9,7 @@ const openapiDocument = parse(openapi)
 const config = readFileSync(new URL('../.vitepress/config.ts', import.meta.url), 'utf8')
 const sidebar = readFileSync(new URL('../.vitepress/sidebar.ts', import.meta.url), 'utf8')
 const modelSidebar = sidebar.slice(0, sidebar.indexOf('export const docsSidebar'))
+const generatedModelSidebar = readFileSync(new URL('../.vitepress/modelApiReferenceSidebar.generated.ts', import.meta.url), 'utf8')
 const platformSidebar = sidebar.slice(sidebar.indexOf('export const apiReferenceSidebar'))
 const generatedReferenceSpecs = readFileSync(new URL('../.vitepress/theme/generatedApiReferenceSpecs.ts', import.meta.url), 'utf8')
 const apiKeyGuide = readFileSync(new URL('../getting-started/api-keys.md', import.meta.url), 'utf8')
@@ -70,6 +71,13 @@ for (const overview of catalogOverviews) {
 }
 assert.doesNotMatch(modelSidebar, /text: 'Models'[\s\S]*?List Models[\s\S]*?Get Model/, 'Model API navigation must not duplicate the Models API module')
 assert.doesNotMatch(modelSidebar, /text: 'Inference APIs'/, 'Model API navigation must not duplicate the normalized Inference API module')
+for (const modelPath of [
+  'video-generation/bytedance/seedance/2.0/mini/text-to-video',
+  'video-generation/bytedance/seedance/2.0/mini/image-to-video',
+  'video-generation/bytedance/seedance/2.0/mini/reference-to-video',
+]) {
+  assert.match(generatedModelSidebar, new RegExp(`/model-api-reference/${modelPath.replaceAll('/', '\\/')}`), `Model API navigation must expose current model ${modelPath}`)
+}
 assert.match(modelApiOverview, /\[Models API\]\(\/api-reference\/models\//, 'Model API overview must link to the Models API contract')
 assert.match(modelApiOverview, /\[Chat Completions\]\(\/api-reference\/llm-gateway\)/, 'Model API overview must link to the normalized inference contracts')
 assert.match(homePage, /Services API/, 'Home page must use the Services product name')
