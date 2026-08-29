@@ -1,5 +1,5 @@
 ---
-title: "Fetch single video by URL API Reference — Kuaishou Video By Url"
+title: "Fetch single video by URL API Reference — Kuaishou Video By URL"
 description: "Fetch single video by URL API reference for SandBase. Use model kuaishou/app/one-video-by-url with /v1/run; see request and response examples."
 aside: false
 outline: false

@@ -296,6 +296,8 @@ function cleanTitle(model) {
     // Keep common audio acronyms correctly capitalized in titles and
     // navigation labels generated from provider display names.
     .replace(/\bTts\b/g, 'TTS')
+    .replace(/\bUrl\b/g, 'URL')
+    .replace(/\bVton\b/g, 'VTON')
     .trim()
 }
 
