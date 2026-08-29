@@ -61,7 +61,8 @@ curl -X POST https://api.sandbase.ai/v1/run \
   -d '{"model":"openai/gpt-image-2","prompt":"A studio product photo on a clean white background"}'
 ```
 
-Poll the returned task id until the result is ready:
+Poll the returned opaque run ID until the result is ready. Use the ID exactly as returned; do not add a task prefix or
+construct a provider-specific status path:
 
 ```bash
 curl https://api.sandbase.ai/v1/run/f3d2e8a1-7c4b-4a12-9d2e-123456789abc \
