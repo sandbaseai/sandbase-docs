@@ -8,7 +8,7 @@ apiReferenceJson: "{\"title\":\"ByteDance: UI-TARS 7B\",\"operation\":\"Chat Com
 seo:
   modelName: "ByteDance: UI-TARS 7B"
   modelId: "bytedance/ui-tars-1.5-7b"
-  vendor: "Bytedance"
+  vendor: "ByteDance"
   vendorSlug: "bytedance"
   modelSlug: "ui-tars-1.5-7b"
   protocol: "Chat Completions API"

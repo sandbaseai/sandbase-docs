@@ -8,7 +8,7 @@ apiReferenceJson: "{\"title\":\"Seedream v5.0 Lite\",\"operation\":\"Image Gener
 seo:
   modelName: "Seedream v5.0 Lite"
   modelId: "bytedance/seedream/5.0/lite"
-  vendor: "Bytedance"
+  vendor: "ByteDance"
   vendorSlug: "bytedance"
   modelSlug: "seedream/5.0/lite"
   protocol: "Image Generation Reference"

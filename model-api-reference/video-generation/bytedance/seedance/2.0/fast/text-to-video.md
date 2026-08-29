@@ -8,7 +8,7 @@ apiReferenceJson: "{\"title\":\"Seedance 2.0 Fast Text to Video\",\"operation\":
 seo:
   modelName: "Seedance 2.0 Fast Text to Video"
   modelId: "bytedance/seedance/2.0/fast/text-to-video"
-  vendor: "Bytedance"
+  vendor: "ByteDance"
   vendorSlug: "bytedance"
   modelSlug: "seedance/2.0/fast/text-to-video"
   protocol: "Video Generation Reference"

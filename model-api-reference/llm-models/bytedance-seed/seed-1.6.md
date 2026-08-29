@@ -8,7 +8,7 @@ apiReferenceJson: "{\"title\":\"ByteDance Seed: Seed 1.6\",\"operation\":\"Chat 
 seo:
   modelName: "ByteDance Seed: Seed 1.6"
   modelId: "bytedance-seed/seed-1.6"
-  vendor: "Bytedance-Seed"
+  vendor: "ByteDance-Seed"
   vendorSlug: "bytedance-seed"
   modelSlug: "seed-1.6"
   protocol: "Chat Completions API"
