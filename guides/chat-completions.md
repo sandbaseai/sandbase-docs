@@ -39,4 +39,4 @@ SandBase uses `model` and `stream` for routing. Additional OpenAI-compatible req
 
 ## Errors and retries
 
-Use bounded backoff for retryable `429` and transient server responses only when regenerating is safe. Do not automatically retry malformed requests, authentication failures, or requests whose tool side effects may already have occurred. See [Errors and retries](/guides/error-handling). For the complete field and response schema, see [Create Chat Completion](/api-reference/llm-gateway).
+Use bounded backoff for retryable `429` and transient server responses only when regenerating is safe. Do not automatically retry malformed requests, authentication failures, or requests whose tool side effects may have already occurred. See [Errors and retries](/guides/error-handling). For the complete field and response schema, see [Chat Completions API](/api-reference/llm-gateway).
