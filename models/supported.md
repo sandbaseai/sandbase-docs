@@ -40,7 +40,7 @@ The response follows the OpenAI-compatible model-list format and contains enable
 Do not copy prices from a documentation table into application logic. Pricing, provider availability, routing, and enabled status can change independently of this page.
 
 - Check [live model pricing](https://www.sandbase.ai/models) before estimating production cost.
-- Use [`GET /v1/tasks/{task_id}/cost`](/api-reference/tasks/cost) to inspect the settled cost and usage of a completed task.
+- For a capability that returns a task ID (including an `x-task-id` response header), use [`GET /v1/tasks/{task_id}/cost`](/api-reference/tasks/cost) to inspect settlement and usage. This is a cost lookup, not a generation-result endpoint: for asynchronous `POST /v1/run` calls, poll [`GET /v1/run/{id}`](/api-reference/models/run-get) with the returned opaque run ID instead.
 - Handle model-unavailable and admission errors even when a model appeared in an earlier catalog response.
 - Use the model-specific reference page rather than assuming every model supports the same context window, tools, vision, streaming, or reasoning parameters.
 
