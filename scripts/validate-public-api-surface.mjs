@@ -447,7 +447,8 @@ for (const status of ['400', '401', '402', '403', '404', '500', '502', '503']) {
 const runRequestSchema = openapi.match(/^    RunRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(runRequestSchema, /enum: \[auto, sync, async, stream\]/, 'Run must document every implemented execution mode')
 assert.match(runRequestSchema, /^        stream:\n\s+type: boolean/m, 'Run must document the stream shortcut')
-assert.match(runRequestSchema, /public HTTPS callback URL for asynchronous image, video, audio, or API tasks/, 'Run must scope webhook callbacks to implemented async capability types')
+assert.match(runRequestSchema, /public HTTPS callback URL for asynchronous image, video, or audio tasks/, 'Run must scope webhook callbacks to implemented async capability types')
+assert.doesNotMatch(runRequestSchema, /public HTTPS callback URL for asynchronous image, video, audio, or API tasks/, 'Run must not promise callbacks for API capabilities')
 const runResponseSchema = openapi.match(/^    RunResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(runResponseSchema, /required: \[id, status, model\]/, 'Run responses must require the always-emitted model field')
 assert.match(runResponseSchema, /completed task can temporarily be reported as running while output transfer is still pending/, 'Run status must document transfer-pending downgrade behavior')

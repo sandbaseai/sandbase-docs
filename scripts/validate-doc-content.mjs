@@ -164,6 +164,9 @@ assert.match(modelReference, /Anthropic models use the .*Anthropic Messages API/
 const runReference = readFileSync('api-reference/models/run.md', 'utf8')
 assert.doesNotMatch(runReference, /webhook_url[^\n]*API tasks/i, 'Run reference must not promise callbacks for API capabilities')
 assert.match(runReference, /webhook_url[^\n]*image, video, or audio tasks/i, 'Run reference must match webhook capability scope')
+const openApiReference = readFileSync('public/openapi.yaml', 'utf8')
+assert.doesNotMatch(openApiReference, /webhook_url:\n[\s\S]{0,180}?description:[^\n]*API tasks/i, 'OpenAPI must not promise callbacks for API capabilities')
+assert.match(openApiReference, /webhook_url:\n[\s\S]{0,180}?description:[^\n]*image, video, or audio tasks/i, 'OpenAPI must match webhook capability scope')
 
 // Official Native API has one dedicated, bottom-of-sidebar navigation block.
 // Keep the generated model catalog free of a second top-level copy.

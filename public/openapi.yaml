@@ -3268,7 +3268,7 @@ components:
         webhook_url:
           type: string
           format: uri
-          description: Optional public HTTPS callback URL for asynchronous image, video, audio, or API tasks. It is validated only for those tasks and ignored for other execution types.
+          description: Optional public HTTPS callback URL for asynchronous image, video, or audio tasks. It is validated only for those tasks and ignored for other execution types.
       additionalProperties: true
 
     RunResponse:
