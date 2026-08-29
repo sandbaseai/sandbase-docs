@@ -1,39 +1,30 @@
 # Documentation deployment
 
-The documentation site owns its production image release in this repository.
-Kubernetes manifests, Services, and Ingress remain owned by
-`sandbaseai/sandbase-monorepo`; this workflow only updates the image of the
-existing `sandbase-docs` Deployment.
+Production documentation is served from Cloudflare Workers Static Assets at
+`https://www.sandbase.ai/docs/`. The Worker entry point is `worker/index.js`;
+the VitePress output is uploaded from `.vitepress/dist` as configured in
+`wrangler.jsonc`.
 
 ## Required GitHub configuration
 
-Create a protected `production` environment and make these secrets available
-to this repository, either as repository secrets or selected organization
-secrets:
-
-- `CCR_USERNAME`
-- `CCR_PASSWORD`
-- `KUBECONFIG_PROD`
-- `K8S_SERVER`
-
-The self-hosted runner must provide Docker, Buildx, kubectl, and network access
-to the production cluster and Tencent Cloud Container Registry.
+The `production` environment must provide `CLOUDFLARE_API_TOKEN`. The account
+ID and route configuration are declared in `wrangler.jsonc` and the workflow.
 
 ## Release
 
 Production releases use `.github/workflows/deploy.yaml` and are serialized by
-the `deploy-docs-production` concurrency group.
+the `deploy-docs-production` concurrency group. The workflow builds the site,
+uploads it with `wrangler deploy`, and verifies `/docs/health`. It does not
+cancel an earlier deployment in the same queue (`cancel-in-progress: false`).
 
 - Push an immutable `docs-v*` tag whose commit belongs to `main`; or
 - Run **Deploy Docs** manually from `main`.
 
-Both paths build the VitePress site, publish an immutable `sha-<commit>` image
-tag plus the release alias and `latest`, roll out `deployment/sandbase-docs`
-using the SHA tag, verify the live image and ready endpoints, and check
-`https://www.sandbase.ai/docs/health`.
+Both paths build and publish the VitePress static assets to Cloudflare Workers,
+then verify `https://www.sandbase.ai/docs/health` with retries.
 
 ## Rollback
 
-Run **Rollback Docs** from `main` with a previously published `docs-v*` image
-tag. The workflow verifies that the image exists before updating the existing
-Deployment and waiting for the rollback to become ready.
+Use the Cloudflare dashboard's Worker deployment history to roll back to a
+previous version. Verify `/docs/health` and a representative API-reference URL
+after the rollback.
