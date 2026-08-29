@@ -1,6 +1,6 @@
 ---
 title: "Image Generation"
-description: "Generate images using AI models like FLUX, Stable Diffusion, DALL-E, and more."
+description: "Run image generation and editing capabilities through SandBase's unified model API."
 aside: false
 outline: false
 apiReferenceKey: "models/image"

@@ -1,6 +1,6 @@
 ---
 title: Run a model or API capability
-description: Submit a SandBase model or API capability through the unified asynchronous run endpoint.
+description: Submit a SandBase model or API capability through the unified run endpoint.
 aside: false
 outline: false
 apiReference:
