@@ -61,7 +61,7 @@ for reconciliation and longer-term records.
 - Limit unnecessary prompt context and set an appropriate output-token limit when the selected model supports it.
 - Treat caching as model-specific. Check the model card and returned usage fields instead of assuming a provider-wide
   discount.
-- Record task IDs for asynchronous work and poll `GET /v1/run/{id}` only while status is `pending` or `running`.
+- Record task IDs only for the task-cost lookup; for asynchronous `/v1/run` work, record the returned opaque run ID and poll `GET /v1/run/{id}` only while status is `pending` or `running`.
 - Use spending controls exposed in the Console for your organization.
 
 ## Payment errors
