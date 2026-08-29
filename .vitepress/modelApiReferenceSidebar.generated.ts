@@ -410,7 +410,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
-        text: "Bytedance",
+        text: "ByteDance",
         collapsed: true,
         items: [
           { text: "ByteDance: UI-TARS 7B", link: "/model-api-reference/llm-models/bytedance/ui-tars-1.5-7b" },
@@ -418,7 +418,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
-        text: "Bytedance-Seed",
+        text: "ByteDance Seed",
         collapsed: true,
         items: [
           { text: "ByteDance Seed: Seed-2.0-Lite", link: "/model-api-reference/llm-models/bytedance-seed/seed-2.0-lite" },
@@ -984,7 +984,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
-        text: "Bytedance",
+        text: "ByteDance",
         collapsed: true,
         items: [
           { text: "Seedream 5.0 Pro Image Editing", link: "/model-api-reference/image-generation/bytedance/seedream/5.0/pro/edit" },
@@ -1692,7 +1692,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
-        text: "Bytedance",
+        text: "ByteDance",
         collapsed: true,
         items: [
           { text: "Seedance 2.5 Image to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.5/image-to-video" },
@@ -2374,7 +2374,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
-        text: "Bytedance",
+        text: "ByteDance",
         collapsed: true,
         items: [
           { text: "Bytedance Seed Speech Text to Speech", link: "/model-api-reference/audio-generation/bytedance/seed-speech/tts/2.0" },

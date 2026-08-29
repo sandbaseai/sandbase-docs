@@ -76,9 +76,9 @@ Audio Generation models use the SandBase generation protocol declared in each mo
 - [ACE-Step (ace: ace-step / prompt-to-audio)](/model-api-reference/audio-generation/ace/ace-step/prompt-to-audio) — Ace Step Prompt To Audio by ace - generate music, sound effects, and audio from text descriptions with AI. Create original compositions, ambient sounds, and audio content for any creative project.
 - [ACE-Step (ace: ace-step)](/model-api-reference/audio-generation/ace/ace-step) — Ace Step by ace - generate music, sound effects, and audio from text descriptions with AI. Create original compositions, ambient sounds, and audio content for any creative project.
 
-### Bytedance
+### ByteDance
 
-- [Bytedance Seed Speech Text to Speech](/model-api-reference/audio-generation/bytedance/seed-speech/tts/2.0) — Seed Speech Tts 2.0 is Bytedance's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
+- [Bytedance Seed Speech Text to Speech](/model-api-reference/audio-generation/bytedance/seed-speech/tts/2.0) — Seed Speech Tts 2.0 is ByteDance's text-to-speech AI model. Generate human-like voiceovers with expressive intonation, multilingual support, and customizable voice characteristics.
 
 ### KwaiVGI
 

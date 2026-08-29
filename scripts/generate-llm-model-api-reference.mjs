@@ -349,14 +349,22 @@ function cleanDescription(model) {
     .replace(/\b(?:is|was)\s+OpenAI's\s+(?:latest|newest)\s+AI\s+model\b/gi, 'is an OpenAI model')
     .replace(/\bOpenAI's\s+(?:latest|newest)\s+model\b/gi, "OpenAI's model")
     .replace(/\b(?:latest|newest)\b/gi, 'available')
+    // Keep vendor names consistent with their public brand styling.
+    .replace(/\bBytedance\b/g, 'ByteDance')
     .replace(/\s+/g, ' ')
     .trim()
+}
+
+function vendorLabel(vendor) {
+  return String(vendor ?? '')
+    .replace(/\bBytedance\b/g, 'ByteDance')
+    .replace(/^ByteDance-Seed$/, 'ByteDance Seed')
 }
 
 function displayLabel(model, duplicateTitles = new Set()) {
   const title = cleanTitle(model)
   if (!duplicateTitles.has(title)) return title
-  const vendor = String(model.vendor ?? '').trim()
+  const vendor = vendorLabel(model.vendor)
   const slug = String(model.model_slug ?? '').split('/').filter(Boolean).join(' / ')
   const qualifier = vendor && slug ? `${vendor}: ${slug}` : (vendor || model.model_slug)
   return `${title} (${qualifier})`
@@ -1570,7 +1578,7 @@ function writeCategoryOverview(category) {
   const duplicateTitles = duplicateTitlesFor(category.models)
   const providerSections = category.sortedGroups.length
     ? category.sortedGroups.flatMap((group) => [
-        `### ${group.vendor}${category.key === 'api' ? ` {#${group.slug}}` : ''}`,
+        `### ${vendorLabel(group.vendor)}${category.key === 'api' ? ` {#${group.slug}}` : ''}`,
         '',
         ...group.models.slice(0, 12).map((model) => `- [${displayLabel(model, duplicateTitles)}](${docsLink(model, category)}) — ${markdownText(cleanDescription(model))}`),
         ...(group.models.length > 12 ? [`- …and ${group.models.length - 12} more models in the sidebar.`] : []),

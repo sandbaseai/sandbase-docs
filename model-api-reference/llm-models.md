@@ -106,11 +106,11 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 - [Llama 3 70B Instruct](/model-api-reference/llm-models/meta/llama-3-70b-instruct) — Meta's available class of model (Llama 3) launched with a variety of sizes & flavors. This 70B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong...
 - [Llama 3 8B Instruct](/model-api-reference/llm-models/meta/llama-3-8b-instruct) — Meta's available class of model (Llama 3) launched with a variety of sizes & flavors. This 8B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong...
 
-### Bytedance
+### ByteDance
 
 - [ByteDance: UI-TARS 7B](/model-api-reference/llm-models/bytedance/ui-tars-1.5-7b) — UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based environments, including desktop interfaces, web browsers, mobile systems, and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement learning-based reasoning, enabling robust action planning and execution across virtual interfaces.
 
-### Bytedance-Seed
+### ByteDance Seed
 
 - [ByteDance Seed: Seed-2.0-Lite](/model-api-reference/llm-models/bytedance-seed/seed-2.0-lite) — Seed-2.0-Lite is a versatile, cost‑efficient enterprise workhorse that delivers strong multimodal and agent capabilities while offering noticeably lower latency, making it a practical default choice for most production workloads across text, vision, and tools. Engineered for high-frequency visual understanding and agentic workflows, it's an ideal choice for deployment at scale with minimal latency.
 - [ByteDance Seed: Seed-2.0-Mini](/model-api-reference/llm-models/bytedance-seed/seed-2.0-mini) — Seed-2.0-mini targets latency-sensitive, high-concurrency, and cost-sensitive scenarios, emphasizing fast response and flexible inference deployment. It delivers performance comparable to ByteDance-Seed-1.6, supports 256k context, four reasoning effort modes (minimal/low/medium/high), multimodal understanding, and is optimized for lightweight tasks where cost and speed take priority.

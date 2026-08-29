@@ -20,7 +20,7 @@ Video Generation models use the SandBase generation protocol declared in each mo
 - [Sora 2 (OpenAI: sora-2 / text-to-video)](/model-api-reference/video-generation/openai/sora-2/text-to-video) — Sora 2 by OpenAI - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
 - [Sora 2 (OpenAI: sora-2 / image-to-video)](/model-api-reference/video-generation/openai/sora-2/image-to-video) — Sora 2 is OpenAI's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
 
-### Bytedance
+### ByteDance
 
 - [Seedance 2.5 Image to Video](/model-api-reference/video-generation/bytedance/seedance/2.5/image-to-video) — ByteDance's next-generation image-to-video model, animating a single still into a native clip up to 30 seconds at 720p with continuous, coherent motion, native audio, and director-level camera control.
 - [Seedance 2.5 Reference to Video](/model-api-reference/video-generation/bytedance/seedance/2.5/reference-to-video) — ByteDance's next-generation reference-to-video model, generating video from multimodal references (images, videos, audio) and locking a character, set, and palette across a full take up to 30 seconds for production-grade consistency.
