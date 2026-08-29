@@ -675,8 +675,8 @@ curl https://api.sandbase.ai/v1/skills \
 - Read the selected model's current pricing formula and units from its `model_card`.
 - Token-priced models can include input, output, cache, or reasoning components when declared.
 - Media and other models can use per-request, duration, resolution, or other model-specific units.
-- Check cost after generation: `GET /v1/tasks/{task_id}/cost`
-- When a billable operation returns a task ID, use it with `GET /v1/tasks/{task_id}/cost`
+- When a billable operation returns a task ID (including an `x-task-id` response header), use `GET /v1/tasks/{task_id}/cost` for settlement and usage.
+- For asynchronous `POST /v1/run` responses, query the generation result with `GET /v1/run/{id}`; a run ID is not a task ID and must not be sent to the cost endpoint.
 
 ### Budget control
 
