@@ -174,6 +174,24 @@ assert.match(openApiReference, /webhook_url:\n[\s\S]{0,180}?description:[^\n]*im
 const generatedModelSidebar = readFileSync('.vitepress/modelApiReferenceSidebar.generated.ts', 'utf8')
 assert.doesNotMatch(generatedModelSidebar, /Official Native API|seedance-native-api/i, 'Official Native API must stay in its dedicated sidebar block')
 
+// Platform operation counts are displayed in the dynamic sidebar. Keep the
+// generated count aligned with the operation pages so a newly added page does
+// not silently disappear from the navigation summary.
+function countMarkdownPages(directory) {
+  let count = 0
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const filename = path.join(directory, entry.name)
+    if (entry.isDirectory()) count += countMarkdownPages(filename)
+    else if (entry.name.endsWith('.md') && entry.name !== 'index.md') count += 1
+  }
+  return count
+}
+
+const dataForSeoPages = countMarkdownPages('model-api-reference/platform-apis/dataforseo')
+const dataForSeoSidebar = readFileSync('.vitepress/theme/platform-api-sidebars/dataforseo.ts', 'utf8')
+const dataForSeoCount = dataForSeoSidebar.match(/"operationCount":\s*(\d+)/)?.[1]
+assert.equal(Number(dataForSeoCount), dataForSeoPages, 'DataForSEO sidebar count must match its operation pages')
+
 const nativeReference = readFileSync('model-api-reference/seedance-native-api/index.md', 'utf8')
 assert.match(nativeReference, /`DELETE`\s*\|\s*`\/api\/v3\/contents\/generations\/tasks\/\{task_id\}`/, 'Official Native API must document task deletion')
 assert.match(nativeReference, /Cancel or remove a task/, 'Official Native API must explain task cancellation semantics')

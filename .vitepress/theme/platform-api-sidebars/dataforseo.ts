@@ -2,7 +2,7 @@
 export default {
   "platform": "DataForSEO",
   "slug": "dataforseo",
-  "operationCount": 85,
+  "operationCount": 86,
   "groups": [
     {
       "key": "serp",

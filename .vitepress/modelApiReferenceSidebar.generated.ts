@@ -20,7 +20,7 @@ export const platformApiReferencePlatforms = [
   {
     "text": "DataForSEO",
     "slug": "dataforseo",
-    "operationCount": 85
+    "operationCount": 86
   },
   {
     "text": "Agent Body",
