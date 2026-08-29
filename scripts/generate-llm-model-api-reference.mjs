@@ -354,6 +354,10 @@ function cleanDescription(model) {
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\*\*/g, '')
     .replace(/\brespone_format\b/g, 'response_format')
+    // Do not send users to an upstream aggregator from SandBase's model
+    // reference. Keep the interoperability guidance, but make it local and
+    // provider-neutral so generated SEO/API descriptions remain durable.
+    .replace(/Reasoning Details must be preserved when using multi-turn tool calling, see our docs here:\s*https?:\/\/openrouter\.ai\/docs\/use-cases\/reasoning-tokens#preserving-reasoning\.?/gi, 'Preserve reasoning details when using multi-turn tool calls.')
     // Registry descriptions are often reused across releases and may call
     // an older model “latest” or “newest”. Keep generated SEO copy factual
     // without silently endorsing time-sensitive vendor marketing language.
