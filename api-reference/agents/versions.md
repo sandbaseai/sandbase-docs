@@ -1,6 +1,6 @@
 ---
 title: List Agent Versions
-description: List historical versions of an agent.
+description: List immutable historical versions of an Agent, including version IDs and creation metadata for rollback and auditing.
 aside: false
 outline: false
 apiReference:
