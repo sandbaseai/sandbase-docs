@@ -6,12 +6,24 @@ description: Use official provider-native protocols through SandBase, organized 
 # Official Native API
 
 Official Native APIs preserve a provider's request and response protocol for easier migration of existing integrations.
-Browse by provider, then choose the exact model. The currently supported provider is ByteDance.
+Browse by provider, then choose the exact model. SandBase currently documents native protocols for ByteDance and Google.
 
 ## ByteDance
 
 - [Seedance 2.5 Official](/model-api-reference/seedance-native-api/bytedance/seedance-2.5-official)
 - [Seedance 2.0 Official](/model-api-reference/seedance-native-api/bytedance/seedance-2.0-official)
+
+## Google
+
+- [Gemini Omni Flash Preview](/model-api-reference/llm-models/google/gemini-omni-flash-preview)
+- [Gemini 3.1 Pro Preview](/model-api-reference/llm-models/google/gemini-3.1-pro-preview)
+- [Gemini 3.1 Flash Lite](/model-api-reference/llm-models/google/gemini-3.1-flash-lite)
+- [Gemini 3.1 Flash Lite Preview](/model-api-reference/llm-models/google/gemini-3.1-flash-lite-preview)
+
+Use the [Google Gemini GenerateContent](/api-reference/gemini-generate-content) or [Google Gemini Interactions](/api-reference/gemini-interactions)
+reference for the provider-native request and response format. `google/gemini-omni-flash-preview` is currently shown in the
+Interactions example; the Gemini 3.1 models above use the GenerateContent-compatible native protocol and are also
+available through the standard model APIs documented on their model pages.
 
 ## Seedance protocol
 

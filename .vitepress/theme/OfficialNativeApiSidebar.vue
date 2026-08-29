@@ -5,6 +5,7 @@ import { useRoute, withBase } from 'vitepress'
 const route = useRoute()
 const isCategoryExpanded = ref(false)
 const isByteDanceExpanded = ref(false)
+const isGoogleExpanded = ref(false)
 const isModelApiReferenceRoute = computed(() => /\/model-api-reference(?:\/|$)/.test(route.path))
 
 const models = [
@@ -15,6 +16,25 @@ const models = [
   {
     text: 'Seedance 2.0 Official',
     link: '/model-api-reference/seedance-native-api/bytedance/seedance-2.0-official',
+  },
+]
+
+const googleModels = [
+  {
+    text: 'Gemini Omni Flash Preview',
+    link: '/model-api-reference/llm-models/google/gemini-omni-flash-preview',
+  },
+  {
+    text: 'Gemini 3.1 Pro Preview',
+    link: '/model-api-reference/llm-models/google/gemini-3.1-pro-preview',
+  },
+  {
+    text: 'Gemini 3.1 Flash Lite',
+    link: '/model-api-reference/llm-models/google/gemini-3.1-flash-lite',
+  },
+  {
+    text: 'Gemini 3.1 Flash Lite Preview',
+    link: '/model-api-reference/llm-models/google/gemini-3.1-flash-lite-preview',
   },
 ]
 
@@ -32,6 +52,10 @@ watch(
     if (/\/model-api-reference\/seedance-native-api(?:\/|$)/.test(path)) {
       isCategoryExpanded.value = true
       isByteDanceExpanded.value = true
+    }
+    if (path.includes('/model-api-reference/llm-models/google/')) {
+      isCategoryExpanded.value = true
+      isGoogleExpanded.value = true
     }
   },
   { immediate: true },
@@ -78,6 +102,28 @@ watch(
       </div>
       <ul v-if="isByteDanceExpanded" id="official-native-bytedance-panel" class="model-list">
         <li v-for="model in models" :key="model.link">
+          <a
+            class="sidebar-link model-link"
+            :class="{ active: isActive(model.link) }"
+            :aria-current="isActive(model.link) ? 'page' : undefined"
+            :href="withBase(model.link)"
+          >{{ model.text }}</a>
+        </li>
+      </ul>
+      <div class="sidebar-row provider-row">
+        <button
+          class="provider-button"
+          type="button"
+          :aria-expanded="isGoogleExpanded"
+          aria-controls="official-native-google-panel"
+          @click="isGoogleExpanded = !isGoogleExpanded"
+        >
+          <span>Google</span>
+          <span class="provider-chevron" aria-hidden="true">›</span>
+        </button>
+      </div>
+      <ul v-if="isGoogleExpanded" id="official-native-google-panel" class="model-list">
+        <li v-for="model in googleModels" :key="model.link">
           <a
             class="sidebar-link model-link"
             :class="{ active: isActive(model.link) }"
