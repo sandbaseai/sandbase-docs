@@ -1098,7 +1098,7 @@ function platformReference(model) {
       },
     ],
     examples: [
-      { label: 'cURL', language: 'bash', code: [...submitLines, ...(isAsync ? ['', '# Poll a non-terminal task by its returned id', `curl https://api.sandbase.ai/v1/run/${publicRunExampleID} \\`, '  -H "Authorization: Bearer $SANDBASE_API_KEY"'] : [])].join('\n') },
+      { label: 'cURL', language: 'bash', code: [...submitLines, ...(isAsync ? ['', '# Poll a non-terminal run by its returned opaque id', `curl https://api.sandbase.ai/v1/run/${publicRunExampleID} \\`, '  -H "Authorization: Bearer $SANDBASE_API_KEY"'] : [])].join('\n') },
       { label: 'Python', language: 'python', code: pythonLines.join('\n') },
       { label: 'TypeScript', language: 'typescript', code: typeScriptLines.join('\n') },
     ],
