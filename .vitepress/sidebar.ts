@@ -134,6 +134,17 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
+    text: 'Protocol endpoints',
+    collapsed: true,
+    items: [
+      { text: 'OpenAI Responses', link: '/api-reference/responses' },
+      { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
+      { text: 'Gemini GenerateContent', link: '/api-reference/gemini-generate-content' },
+      { text: 'Gemini Interactions', link: '/api-reference/gemini-interactions' },
+      { text: 'LLM Gateway', link: '/api-reference/llm-gateway' },
+    ],
+  },
+  {
     text: 'Agents',
     collapsed: true,
     items: [
