@@ -418,6 +418,7 @@ function pollPathFor(model) {
 
 function endpointFor(model, category) {
   if (['image', 'video', 'audio', 'api'].includes(category.key)) return '/v1/run'
+  if (isGeminiInteractionsModel(model)) return '/v1beta/interactions'
   return model.vendor_slug === 'anthropic' ? '/v1/messages' : '/v1/chat/completions'
 }
 
@@ -595,6 +596,11 @@ function isAsyncGenerationModel(model) {
   return ['image', 'video', 'audio'].includes(model.__category)
 }
 
+function isGeminiInteractionsModel(model) {
+  return model.name === 'google/gemini-omni-flash-preview'
+    || model.name === 'google/gemini-omni-1.1-flash-preview'
+}
+
 function requestSchema(model) {
   if (isAsyncGenerationModel(model)) {
     const paths = openApiPaths(model)
@@ -660,6 +666,20 @@ function responseSchema(model) {
       },
     }
   }
+  if (isGeminiInteractionsModel(model)) {
+    return {
+      type: 'object',
+      required: ['id', 'object', 'model', 'status'],
+      properties: {
+        id: { type: 'string', description: 'Provider Interaction identifier used for polling.' },
+        object: { type: 'string', description: 'Response object type.' },
+        model: { type: 'string', description: 'Model that handles the Interaction.' },
+        status: { type: 'string', description: 'Interaction lifecycle status.' },
+        output: { type: 'object', description: 'Terminal output when the Interaction completes.' },
+        usage: { type: 'object', description: 'Usage details when available.' },
+      },
+    }
+  }
   return {
     type: 'object',
     required: ['id', 'model', 'choices'],
@@ -682,6 +702,7 @@ function prettyJson(value) {
 
 function protocolForModel(model) {
   if (isAsyncGenerationModel(model)) return 'generation'
+  if (isGeminiInteractionsModel(model)) return 'gemini-interactions'
   return model.vendor_slug === 'anthropic' ? 'messages' : 'chat'
 }
 
@@ -1164,10 +1185,18 @@ function modelReference(model) {
   const modelProtocol = protocolForModel(model)
   const isMessages = modelProtocol === 'messages'
   const isGeneration = modelProtocol === 'generation'
-  const apiPath = isGeneration ? submitPathFor(model) : isMessages ? '/v1/messages' : '/v1/chat/completions'
+  const isGeminiInteractions = modelProtocol === 'gemini-interactions'
+  const apiPath = isGeneration ? submitPathFor(model) : isGeminiInteractions ? '/v1beta/interactions' : isMessages ? '/v1/messages' : '/v1/chat/completions'
   const resultPath = isGeneration ? pollPathFor(model) : ''
   const requestBody = isGeneration
     ? requestBodyForSchema(model)
+    : isGeminiInteractions
+      ? {
+          model: model.name,
+          input: 'A red ball rolls across a table, 3 seconds.',
+          background: true,
+          response_format: { type: 'video' },
+        }
     : isMessages
       ? {
           model: model.name,
@@ -1180,6 +1209,13 @@ function modelReference(model) {
         }
   const responseBody = isGeneration
     ? { id: publicRunExampleID, model: model.name, status: 'running' }
+    : isGeminiInteractions
+      ? {
+          id: 'job_75b74acd12534b01baba820b',
+          object: 'interaction',
+          model: model.name,
+          status: 'in_progress',
+        }
     : isMessages
       ? {
           id: 'msg_abc123',
@@ -1197,7 +1233,7 @@ function modelReference(model) {
 
   return {
     title: cleanTitle(model),
-    operation: isGeneration ? `${model.__category === 'video' ? 'Video' : model.__category === 'audio' ? 'Audio' : 'Image'} Generation` : isMessages ? 'Anthropic Messages' : 'Chat Completions',
+    operation: isGeneration ? `${model.__category === 'video' ? 'Video' : model.__category === 'audio' ? 'Audio' : 'Image'} Generation` : isGeminiInteractions ? 'Gemini Interactions' : isMessages ? 'Anthropic Messages' : 'Chat Completions',
     method: 'POST',
     path: apiPath,
     description: cleanDescription(model),
@@ -1206,6 +1242,8 @@ function modelReference(model) {
         title: 'Request body',
         description: isGeneration
           ? 'Submit an async generation request. The model field selects the model; other fields are model-specific input parameters.'
+          : isGeminiInteractions
+            ? 'Create a native Google Interaction. Use background for video generation that should be polled.'
           : 'Parameters supported by this model. Values, defaults, and limits are read from the model registry.',
         fields: [
           {
@@ -1218,13 +1256,21 @@ function modelReference(model) {
           // The normalized generation schema may also declare `model`; the
           // reference always adds the canonical model selector above, so do
           // not render a second conflicting field from provider schemas.
-          ...schemaFields(model).filter((field) => field.name !== 'model'),
+          ...(isGeminiInteractions
+            ? [
+                { name: 'input', type: 'string | object | array', required: true, description: 'Native Google Interaction input.' },
+                { name: 'background', type: 'boolean', required: false, description: 'Submit durably and return an immediately pollable Interaction.', default: 'true' },
+                { name: 'response_format', type: 'object | array', required: false, description: 'Requested output format.', default: '{"type":"video"}' },
+              ]
+            : schemaFields(model).filter((field) => field.name !== 'model')),
         ],
       },
       {
         title: 'Response Schema',
         description: isGeneration
           ? 'The submit endpoint returns a run response. If its status is pending or running, poll GET /v1/run/{id} with the returned opaque ID until it reaches a terminal state.'
+          : isGeminiInteractions
+            ? 'The response contains an Interaction ID. Poll GET /v1beta/interactions/{id} while status is in_progress.'
           : 'Fields returned by this model API response.',
         fields: isGeneration ? publicGenerationResponseFields(model) : responseFields(model),
       },
@@ -1269,6 +1315,15 @@ function modelReference(model) {
           '# 2. If the response is still running, poll the returned id',
           `curl https://api.sandbase.ai${pathWithExampleId(resultPath)} \\`,
           '  -H "Authorization: Bearer $SANDBASE_API_KEY"',
+        ].join('\n') : isGeminiInteractions ? [
+          `curl -X POST https://api.sandbase.ai${apiPath} \\`,
+          '  -H "x-goog-api-key: $SANDBASE_API_KEY" \\',
+          '  -H "Content-Type: application/json" \\',
+          `  -d '${prettyJson(requestBody)}'`,
+          '',
+          '# Poll the Interaction while it is in progress',
+          'curl https://api.sandbase.ai/v1beta/interactions/job_75b74acd12534b01baba820b \\',
+          '  -H "x-goog-api-key: $SANDBASE_API_KEY"',
         ].join('\n') : [
           `curl -X POST https://api.sandbase.ai${apiPath} \\`,
           '  -H "Authorization: Bearer $SANDBASE_API_KEY" \\',
@@ -1514,6 +1569,7 @@ for (const model of category.models) {
     ? 'API Reference'
     : ['image', 'video', 'audio'].includes(category.key)
       ? `${category.title} Reference`
+      : isGeminiInteractionsModel(model) ? 'Gemini Interactions API'
       : model.vendor_slug === 'anthropic' ? 'Messages API' : 'Chat Completions API'
   const endpoint = endpointFor(model, category)
   fs.writeFileSync(
