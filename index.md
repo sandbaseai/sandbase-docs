@@ -49,7 +49,7 @@ A Service exposes a tested Agent to applications. Its compatibility API path is 
 - [Services API](/api-reference/endpoints/)
 - [Sessions API](/api-reference/sessions/)
 
-### Schedules, DeploymentRuns, and Sessions
+### Schedules and run history
 
 Schedules execute an Agent later or repeatedly. Their API resource is a Deployment. Every trigger creates a distinct `drun_*` DeploymentRun and, on successful Session creation, links it to a new `sess_*` Session.
 
