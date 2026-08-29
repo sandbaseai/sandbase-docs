@@ -24,6 +24,22 @@ The response is a standard MCP JSON-RPC result or error. A streaming response ma
 
 The Service must be active and include the `mcp` protocol. A Service configured only for `rest` or `acp` cannot be invoked through this transport.
 
+## Read MCP results
+
+MCP responses are transport messages, not a separate result resource. For a Service invocation
+that creates or continues a SandBase Session, use the returned `session_id` (when present) with
+the Session APIs to retrieve persisted Agent messages and tool events:
+
+```bash
+curl "https://api.sandbase.ai/v1/sessions/sess_01.../events?order=asc" \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+```
+
+Use [`GET /v1/sessions/{id}/events/stream`](/api-reference/sessions/stream) for live SSE
+updates, or [`GET /v1/sessions/{id}`](/api-reference/sessions/get) to inspect Session status.
+There is no `/v1/endpoints/{endpoint_id}/result` endpoint and no provider-specific result URL;
+keep IDs opaque and follow the Session event history.
+
 ## Close the transport
 
 `DELETE /v1/endpoints/{endpoint_id}/mcp`

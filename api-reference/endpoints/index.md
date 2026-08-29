@@ -114,6 +114,28 @@ The Service must be active and include the `rest` protocol.
 
 Read history or stream results through the Session Events APIs using the returned `session_id`.
 
+## Read invocation results
+
+Service invocations are asynchronous Session events; there is no separate Service-result or
+`/v1/endpoints/{endpoint_id}/result` endpoint. Use the returned `session_id` to inspect the
+current Session and its persisted output:
+
+```bash
+# Check the Session lifecycle status
+curl https://api.sandbase.ai/v1/sessions/sess_01... \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+
+# Read the event history, including agent messages and tool activity
+curl "https://api.sandbase.ai/v1/sessions/sess_01.../events?order=asc" \
+  -H "Authorization: Bearer $SANDBASE_API_KEY"
+```
+
+For live results, use [`GET /v1/sessions/{id}/events/stream`](/api-reference/sessions/stream)
+with Server-Sent Events (SSE). Follow `next_page` as an opaque cursor when listing events; do
+not infer completion from a fixed event count. See [Get Session](/api-reference/sessions/get),
+[List Events](/api-reference/sessions/list-events), and [Stream Events](/api-reference/sessions/stream)
+for response shapes and resume behavior.
+
 ## Invoke with ACP
 
 `POST /v1/endpoints/{endpoint_id}/acp` handles the experimental ACP JSON-RPC transport for Services with the `acp` protocol.

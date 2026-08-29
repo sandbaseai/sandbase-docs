@@ -564,8 +564,12 @@ function formatType(schema = {}) {
 
 function formatConstraints(schema = {}) {
   const limits = []
-  if (schema.minimum !== undefined || schema.maximum !== undefined) {
-    limits.push(`Range: ${schema.minimum ?? '−∞'} to ${schema.maximum ?? '∞'}`)
+  if (schema.minimum !== undefined && schema.maximum !== undefined) {
+    limits.push(`Range: ${schema.minimum} to ${schema.maximum}`)
+  } else if (schema.minimum !== undefined) {
+    limits.push(`Minimum: ${schema.minimum}`)
+  } else if (schema.maximum !== undefined) {
+    limits.push(`Maximum: ${schema.maximum}`)
   }
   if (schema.enum?.length) limits.push(`Allowed values: ${schema.enum.join(', ')}`)
   return limits.join('. ')
@@ -889,7 +893,13 @@ function platformFormatConstraints(model, schema = {}) {
   const resolved = resolveLocalRef(model, schema) ?? {}
   const limits = []
   if (resolved.minimum !== undefined || resolved.maximum !== undefined) {
-    limits.push(`Range: ${resolved.minimum ?? '−∞'} to ${resolved.maximum ?? '∞'}`)
+    if (resolved.minimum !== undefined && resolved.maximum !== undefined) {
+      limits.push(`Range: ${resolved.minimum} to ${resolved.maximum}`)
+    } else if (resolved.minimum !== undefined) {
+      limits.push(`Minimum: ${resolved.minimum}`)
+    } else {
+      limits.push(`Maximum: ${resolved.maximum}`)
+    }
   }
   const variantEnums = (resolved.oneOf ?? resolved.anyOf ?? []).flatMap((variant) => resolveLocalRef(model, variant)?.enum ?? [])
   const allowedValues = resolved.enum?.length ? resolved.enum : variantEnums

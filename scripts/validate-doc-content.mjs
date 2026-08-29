@@ -81,6 +81,7 @@ function collectModelPages(directory) {
 }
 for (const filename of collectModelPages('model-api-reference')) {
   const source = readFileSync(filename, 'utf8')
+  assert.doesNotMatch(source, /Range: −∞ to|Range: [0-9.]+ to ∞/, `${filename} contains an unbounded constraint rendered as a fake range`)
   const frontmatter = source.split(/^---$/m)[1] ?? ''
   const metadata = parseYaml(frontmatter)
   if (!metadata?.apiReferenceJson) continue
