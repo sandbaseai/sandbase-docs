@@ -25,6 +25,10 @@ const googleModels = [
     link: '/model-api-reference/llm-models/google/gemini-omni-flash-preview',
   },
   {
+    text: 'Gemini Omni 1.1 Flash Preview',
+    link: '/model-api-reference/seedance-native-api/google/gemini-omni-1.1-flash-preview',
+  },
+  {
     text: 'Gemini 3.1 Pro Preview',
     link: '/model-api-reference/llm-models/google/gemini-3.1-pro-preview',
   },
