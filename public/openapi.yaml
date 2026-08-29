@@ -3056,7 +3056,7 @@ components:
       in: path
       required: true
       schema: { type: string, minLength: 1 }
-      description: Bare Gemini model name, such as gemini-2.5-flash. SandBase adds the google/ catalog prefix.
+      description: Bare Gemini model name, such as gemini-3.5-flash. SandBase adds the google/ catalog prefix.
     EndpointId:
       name: id
       in: path
