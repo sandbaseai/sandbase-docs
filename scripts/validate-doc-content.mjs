@@ -161,6 +161,10 @@ const modelReference = readFileSync('model-api-reference/index.md', 'utf8')
 assert.match(modelReference, /Most LLM models use the OpenAI-compatible/, 'Model reference must not claim every LLM uses one protocol')
 assert.match(modelReference, /Anthropic models use the .*Anthropic Messages API/, 'Model reference must identify the Anthropic protocol')
 
+const runReference = readFileSync('api-reference/models/run.md', 'utf8')
+assert.doesNotMatch(runReference, /webhook_url[^\n]*API tasks/i, 'Run reference must not promise callbacks for API capabilities')
+assert.match(runReference, /webhook_url[^\n]*image, video, or audio tasks/i, 'Run reference must match webhook capability scope')
+
 // Official Native API has one dedicated, bottom-of-sidebar navigation block.
 // Keep the generated model catalog free of a second top-level copy.
 const generatedModelSidebar = readFileSync('.vitepress/modelApiReferenceSidebar.generated.ts', 'utf8')

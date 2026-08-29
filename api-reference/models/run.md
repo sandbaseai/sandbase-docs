@@ -15,7 +15,7 @@ apiReference:
         - { name: model, type: string, required: true, description: Enabled logical model or API capability identifier. }
         - { name: mode, type: 'auto | sync | async | stream', required: false, description: 'Execution mode hint. `auto` uses the selected capability''s configured default; other values require capability support.' }
         - { name: stream, type: boolean, required: false, description: 'Request streaming output when the selected capability supports it. Equivalent to `mode: stream`.' }
-        - { name: webhook_url, type: string, required: false, description: Optional HTTPS callback for supported asynchronous image, video, audio, or API tasks. }
+        - { name: webhook_url, type: string, required: false, description: Optional HTTPS callback for supported asynchronous image, video, or audio tasks. See the Webhooks reference for validation and delivery behavior. }
   examples:
     - label: cURL
       language: bash
