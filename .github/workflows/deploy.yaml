@@ -25,13 +25,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run test:seo
-      - run: npm run test:ai-readable
-      - run: npm run test:setup-docs
-      - run: npm run test:auth-docs
-      - run: npm run test:doc-content
-      - run: npm run build
-      - run: npm run test:built-public-api
+      # Keep the release gate identical to the local production check so a
+      # deployment cannot skip API-surface, link, OpenAPI, or Worker tests.
+      - run: npm run validate
       - name: Validate release source
         shell: bash
         run: |
