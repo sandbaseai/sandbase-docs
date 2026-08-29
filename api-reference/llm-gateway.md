@@ -1,6 +1,6 @@
 ---
-title: Create Chat Completion
-description: Create an OpenAI-compatible chat completion with a SandBase model.
+title: Chat Completions API
+description: Create OpenAI-compatible chat completions with SandBase language and vision models.
 aside: false
 outline: false
 apiReferenceKey: "inference/chat-completions"
