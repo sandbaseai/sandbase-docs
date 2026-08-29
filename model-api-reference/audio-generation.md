@@ -7,7 +7,7 @@ description: Browse SandBase Audio Generation APIs by provider and open a model 
 
 Browse enabled audio generation models by provider in the left navigation. Open an entry for its exact model identifier, supported capabilities, and a working request.
 
-Audio Generation models use the SandBase generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive a task id, then poll the result endpoint until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.
+Audio Generation models use the SandBase generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive an opaque run ID, then poll `GET /v1/run/{id}` until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.
 
 ## Providers
 
