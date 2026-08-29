@@ -110,6 +110,27 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
+    text: 'Model resources',
+    collapsed: true,
+    items: [
+      { text: 'Overview', link: '/api-reference/models/' },
+      { text: 'List Models', link: '/api-reference/models/list' },
+      { text: 'Get Model', link: '/api-reference/models/get' },
+      { text: 'Run a Model or API', link: '/api-reference/models/run' },
+      { text: 'Get Run Result', link: '/api-reference/models/run-get' },
+      { text: 'API Passthrough', link: '/api-reference/models/api-passthrough' },
+      { text: 'Upload Asset', link: '/api-reference/models/upload' },
+      { text: 'Create Asset', link: '/api-reference/models/assets-create' },
+      { text: 'Get Asset', link: '/api-reference/models/assets-get' },
+      { text: 'List Assets', link: '/api-reference/models/assets' },
+      { text: 'Embeddings', link: '/api-reference/models/embedding' },
+      { text: 'Image Generation', link: '/api-reference/images/generations' },
+      { text: 'Image Editing', link: '/api-reference/images/edits' },
+      { text: 'Video Generation', link: '/api-reference/models/video' },
+      { text: 'Audio Generation', link: '/api-reference/models/audio' },
+    ],
+  },
+  {
     text: 'Agents',
     collapsed: true,
     items: [
@@ -212,6 +233,13 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Overview', link: '/api-reference/account/' },
       { text: 'Get Account Balance', link: '/api-reference/account/balance' },
       { text: 'List Account History', link: '/api-reference/account/history' },
+    ],
+  },
+  {
+    text: 'Usage',
+    collapsed: true,
+    items: [
+      { text: 'Get Task Cost', link: '/api-reference/tasks/cost' },
     ],
   },
 ]
