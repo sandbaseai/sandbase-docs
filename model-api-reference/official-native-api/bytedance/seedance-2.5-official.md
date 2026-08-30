@@ -68,3 +68,9 @@ While generation is in progress, `status` is `queued` or `running`. A completed 
 Stop polling when `status` is `succeeded`, `failed`, `expired`, or `cancelled`. See
 [Official Native API](/model-api-reference/official-native-api) for every input workflow, parameter, response field,
 status, and error.
+
+## Official ByteDance resources
+
+- [Seedance video generation documentation](https://www.volcengine.com/docs/82379/1520758?lang=en)
+- [Create contents generation task API](https://api.volcengine.com/api-explorer/?action=CreateContentsGenerationsTasks&groupName=%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90API&serviceCode=ark&version=2024-01-01)
+- [Seedance 2.0 prompting guide](https://www.volcengine.com/docs/82379/2222480?lang=en)

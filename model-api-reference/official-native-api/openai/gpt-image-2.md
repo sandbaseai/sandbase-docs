@@ -62,3 +62,9 @@ apiReference:
 This model uses the OpenAI Images API contract, not the general SandBase `/v1/run` model endpoint. Requests are synchronous and return the generated image in `data` as `b64_json` or a URL.
 
 Use the shared [image generation reference](/api-reference/images/generations) for authentication, response details, limits, and error handling. The SandBase catalog entry is `openai/gpt-image-2-official`; because this endpoint preserves the OpenAI Images protocol, send the provider model name `gpt-image-2` in the request body.
+
+## Official OpenAI resources
+
+- [Images API guide](https://platform.openai.com/docs/guides/images)
+- [Images API reference](https://platform.openai.com/docs/api-reference/images)
+- [OpenAI API quickstart](https://platform.openai.com/docs/quickstart)

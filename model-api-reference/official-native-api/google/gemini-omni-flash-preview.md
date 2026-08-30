@@ -19,3 +19,9 @@ seo:
 ---
 
 <ApiReferencePage />
+
+## Official Google resources
+
+- [Gemini API documentation](https://ai.google.dev/gemini-api/docs)
+- [Gemini Interactions API reference](https://ai.google.dev/api/interactions-api)
+- [Interactions API getting started guide](https://ai.google.dev/gemini-api/docs/get-started)
