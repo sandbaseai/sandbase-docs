@@ -15,6 +15,7 @@ These guides cover common patterns for using SandBase in production.
 | [OpenAI Responses](./openai-responses) | Call GPT models through the OpenAI-compatible Responses protocol |
 | [Anthropic Messages](./anthropic-messages) | Call SandBase through the Anthropic-compatible messages protocol |
 | [Image and Video Models](./image-video) | Generate images and videos through the shared asynchronous Run API |
+| [API Catalog](/store/apis) | Browse API capabilities and their vendor-qualified endpoints |
 | [Streaming](./streaming) | Stream compatible Model output to your application |
 | [Errors](./error-handling) | Classify failures and retry only when an operation is safe to repeat |
 | [Rate limits](./rate-limiting) | Handle 429 responses and smooth request bursts |

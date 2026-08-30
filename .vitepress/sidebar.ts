@@ -47,6 +47,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
     collapsed: false,
     items: [
       { text: 'Store', link: '/store/' },
+      { text: 'APIs', link: '/store/apis' },
       { text: 'Models', link: '/models/' },
       { text: 'Supported Models', link: '/models/supported' },
       { text: 'Capabilities', link: '/models/capabilities' },

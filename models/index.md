@@ -7,7 +7,7 @@ description: Browse and call SandBase model APIs, or use Models inside Setup and
 
 Models are the AI engines your app or Agent can use.
 
-SandBase lets you browse model APIs, inspect capabilities, copy a working request, and use the same Model inside Setup or Build Agent. Each model page documents the exact identifier, input fields, output shape, and endpoint to call.
+SandBase lets you browse Models and APIs, inspect capabilities, copy a working request, and use the same capability inside Setup or Build Agent. Each model page documents the exact identifier, input fields, output shape, and endpoint to call. Browse the separate [API Catalog](/store/apis) for non-model capabilities such as search, scraping, data, and SaaS actions.
 
 ## Where Models fit
 
