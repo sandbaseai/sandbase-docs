@@ -1,67 +1,25 @@
 ---
 title: "Gemini Omni 1.1 Flash Preview Native API Reference"
-description: "Use Google Gemini Omni 1.1 Flash Preview through SandBase's native Gemini Interactions API. Submit a background interaction, then poll its status and result."
+description: "Gemini Omni 1.1 Flash Preview API reference for SandBase. Use the native Google Gemini Interactions API."
 aside: false
 outline: false
+apiReferenceKey: "llm/google/gemini-omni-1.1-flash-preview"
+apiReferenceJson: >-
+  {"title":"Gemini Omni 1.1 Flash Preview","operation":"Gemini Interactions","method":"POST","path":"/v1beta/interactions","description":"Google Gemini Omni 1.1 Flash Preview is available through SandBase native Google Gemini Interactions API. Create an interaction, poll its ID, and read the terminal output.","groups":[{"title":"Request body","description":"Create a native Google Interaction. Use background for video generation that should be polled.","fields":[{"name":"model","type":"string","required":true,"description":"Model identifier. Set to google/gemini-omni-1.1-flash-preview.","default":"google/gemini-omni-1.1-flash-preview"},{"name":"input","type":"string | object | array","required":true,"description":"Native Google Interaction input."},{"name":"background","type":"boolean","required":false,"description":"Submit durably and return an immediately pollable Interaction.","default":"true"},{"name":"response_format","type":"object | array","required":false,"description":"Requested output format.","default":"{\"type\":\"video\"}"}]},{"title":"Response Schema","description":"The response contains an Interaction ID. Poll GET /v1beta/interactions/{id} while status is in_progress.","fields":[{"name":"id","type":"string","required":true,"description":"Provider Interaction identifier used for polling."},{"name":"model","type":"string","required":true,"description":"Model that handles the Interaction."},{"name":"object","type":"string","required":true,"description":"Response object type."},{"name":"output","type":"object","required":false,"description":"Terminal output when the Interaction completes."},{"name":"status","type":"string","required":true,"description":"Interaction lifecycle status."},{"name":"usage","type":"object","required":false,"description":"Usage details when available."}]}],"examples":[{"label":"cURL","language":"bash","code":"curl -X POST https://api.sandbase.ai/v1beta/interactions \\\n  -H \"x-goog-api-key: $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n  \"model\": \"google/gemini-omni-1.1-flash-preview\",\n  \"input\": \"Create a short cinematic product video of a red ball rolling across a table.\",\n  \"background\": true,\n  \"response_format\": {\"type\": \"video\"}\n}'"}],"response":{"status":"200 OK","code":"{\n  \"id\": \"job_75b74acd12534b01baba820b\",\n  \"object\": \"interaction\",\n  \"model\": \"google/gemini-omni-1.1-flash-preview\",\n  \"status\": \"in_progress\"\n}"}}
+seo:
+  modelName: "Gemini Omni 1.1 Flash Preview"
+  modelId: "google/gemini-omni-1.1-flash-preview"
+  vendor: "Google"
+  vendorSlug: "google"
+  modelSlug: "gemini-omni-1.1-flash-preview"
+  protocol: "Gemini Interactions API"
+  endpoint: "/v1beta/interactions"
+  publishedAt: "2026-06-30T00:00:00Z"
+  capabilities: ["chat"]
+  category: "LLM Models"
 ---
 
-# Gemini Omni 1.1 Flash Preview
-
-`google/gemini-omni-1.1-flash-preview` is available through SandBase's native
-[Google Gemini Interactions API](/api-reference/gemini-interactions). The protocol
-keeps the provider-style interaction lifecycle: create an interaction, poll its
-ID, and read the terminal output.
-
-## Create an interaction
-
-Use `background: true` for generation that may take longer than a synchronous
-request. The `model` value must be the exact SandBase model ID.
-
-```bash
-curl -X POST https://api.sandbase.ai/v1beta/interactions \
-  -H "x-goog-api-key: $SANDBASE_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "google/gemini-omni-1.1-flash-preview",
-    "input": "Create a short cinematic product video of a red ball rolling across a table.",
-    "background": true,
-    "response_format": {"type": "video"}
-  }'
-```
-
-The response contains an opaque provider interaction ID:
-
-```json
-{
-  "id": "job_75b74acd12534b01baba820b",
-  "object": "interaction",
-  "model": "google/gemini-omni-1.1-flash-preview",
-  "status": "in_progress"
-}
-```
-
-## Poll for the result
-
-Poll the same ID until `status` is `completed`, `failed`, `cancelled`, or
-`incomplete`:
-
-```bash
-curl https://api.sandbase.ai/v1beta/interactions/job_75b74acd12534b01baba820b \
-  -H "x-goog-api-key: $SANDBASE_API_KEY"
-```
-
-Completed interactions can include inline video data and usage details. Persist
-media promptly because upstream retention may expire. For authentication,
-streaming behavior, status semantics, and error handling, see the complete
-[Gemini Interactions reference](/api-reference/gemini-interactions).
-
-## Current limits
-
-- SandBase exposes create and get for this native interaction.
-- `background: true` and `stream: true` cannot be combined.
-- Interaction list, delete, cancel, URI delivery, and GET-based stream
-  reconnection are not exposed.
-- The model ID is case-sensitive; use it exactly as shown above.
+<ApiReferencePage />
 
 ## Official Google resources
 
