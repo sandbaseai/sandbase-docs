@@ -47,6 +47,24 @@ use `GET /v1/run/{id}` and handle duplicate or delayed callbacks safely. See
 [Run a capability](/api-reference/models/run#webhook-callbacks) for the common
 callback contract.
 
+## API capabilities use a URL-derived path
+
+The shared Run API is for model generation. API Store capabilities use a
+different URL-derived route: `GET` or `POST /v1/api/{vendor}/{upstream_path}`.
+The vendor-qualified capability name comes from the Models API or Store, so the
+`model` field can be omitted from a POST body:
+
+```bash
+curl -X POST https://api.sandbase.ai/v1/api/firecrawl/scrape \
+  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"url":"https://example.com"}'
+```
+
+This route is for API capabilities, not a replacement for `/v1/run` when
+calling image or video models. If the selected API capability is asynchronous,
+poll the returned run ID with `GET /v1/run/{id}`.
+
 ## Next steps
 
 - [Supported Models](/models/supported)
@@ -54,3 +72,4 @@ callback contract.
 - [Video Generation API reference](/model-api-reference/video-generation)
 - [Run a capability](/api-reference/models/run)
 - [Get a run result](/api-reference/models/run-get)
+- [API Passthrough](/api-reference/models/api-passthrough)

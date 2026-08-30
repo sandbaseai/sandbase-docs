@@ -28,9 +28,12 @@ Use the API surface that matches the model category:
 | Image models | `POST /v1/run` | Submit an image generation task, then poll `GET /v1/run/{id}` for the result. |
 | Video models | `POST /v1/run` | Submit an asynchronous video task, then poll `GET /v1/run/{id}` until it is terminal. |
 | Audio and other capabilities | `POST /v1/run` | Use the model-specific fields documented on its API reference page. |
+| API Store capabilities | `GET/POST /v1/api/{vendor}/{upstream_path}` | Put the vendor-qualified capability name in the URL; a POST body can omit `model`. |
 | Provider-native APIs | Provider-specific endpoint | Use the native protocol and authentication shown in the Official Native API section. |
 
 The shared `/v1/run` endpoint is the standard SandBase interface for image and video models. Requests return an opaque run ID for asynchronous capabilities; keep polling the run endpoint for authoritative status and outputs. See [Run a capability](/api-reference/models/run) and [Get a run result](/api-reference/models/run-get) for the common request and response contract.
+
+API Store capabilities are addressed by URL instead: use [API Passthrough](/api-reference/models/api-passthrough) with `/v1/api/{vendor}/{upstream_path}`. This URL-derived route is separate from model generation through `/v1/run`.
 
 ## Call an LLM
 
