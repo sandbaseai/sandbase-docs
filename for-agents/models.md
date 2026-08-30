@@ -8,7 +8,7 @@ description: Discover current SandBase models, capabilities, schemas, and pricin
 All models are accessible with one SandBase API key. Model availability, schemas, capabilities, context limits,
 and pricing can change independently.
 
-::: warning Use live model metadata
+::: info Use live model metadata
 Always use `GET /v1/models` and `GET /v1/models/{id_or_name}` for current, authoritative data. Do not infer that every
 LLM supports streaming, vision, tools, structured output, or caching, and do not copy one model's input fields or
 pricing to another model.
