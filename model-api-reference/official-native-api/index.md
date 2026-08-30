@@ -10,14 +10,14 @@ Browse by provider, then choose the exact model. SandBase currently documents na
 
 ## OpenAI
 
-- [GPT Image 2](/model-api-reference/seedance-native-api/openai/gpt-image-2)
+- [GPT Image 2](/model-api-reference/official-native-api/openai/gpt-image-2)
 
 GPT Image 2 uses the native OpenAI Images API at `/v1/images/generations`. Pass `gpt-image-2` as the model value and use the synchronous response directly; this is separate from the general `/v1/run` model endpoint.
 
 ## ByteDance
 
-- [Seedance 2.5 Official](/model-api-reference/seedance-native-api/bytedance/seedance-2.5-official)
-- [Seedance 2.0 Official](/model-api-reference/seedance-native-api/bytedance/seedance-2.0-official)
+- [Seedance 2.5 Official](/model-api-reference/official-native-api/bytedance/seedance-2.5-official)
+- [Seedance 2.0 Official](/model-api-reference/official-native-api/bytedance/seedance-2.0-official)
 
 ## Google
 

@@ -12,18 +12,18 @@ const isModelApiReferenceRoute = computed(() => /\/model-api-reference(?:\/|$)/.
 const models = [
   {
     text: 'Seedance 2.5 Official',
-    link: '/model-api-reference/seedance-native-api/bytedance/seedance-2.5-official',
+    link: '/model-api-reference/official-native-api/bytedance/seedance-2.5-official',
   },
   {
     text: 'Seedance 2.0 Official',
-    link: '/model-api-reference/seedance-native-api/bytedance/seedance-2.0-official',
+    link: '/model-api-reference/official-native-api/bytedance/seedance-2.0-official',
   },
 ]
 
 const openaiModels = [
   {
     text: 'GPT Image 2',
-    link: '/model-api-reference/seedance-native-api/openai/gpt-image-2',
+    link: '/model-api-reference/official-native-api/openai/gpt-image-2',
   },
 ]
 
@@ -61,11 +61,11 @@ function isActive(link: string) {
 watch(
   () => route.path,
   (path) => {
-    if (/\/model-api-reference\/seedance-native-api(?:\/|$)/.test(path)) {
+    if (/\/model-api-reference\/official-native-api(?:\/|$)/.test(path)) {
       isCategoryExpanded.value = true
-      if (path.includes('/seedance-native-api/bytedance/')) isByteDanceExpanded.value = true
-      if (path.includes('/seedance-native-api/google/') || path.includes('/official-native-api/google/')) isGoogleExpanded.value = true
-      if (path.includes('/seedance-native-api/openai/')) isOpenAIExpanded.value = true
+      if (path.includes('/official-native-api/bytedance/')) isByteDanceExpanded.value = true
+      if (path.includes('/official-native-api/google/')) isGoogleExpanded.value = true
+      if (path.includes('/official-native-api/openai/')) isOpenAIExpanded.value = true
     }
     if (path.includes('/model-api-reference/llm-models/google/')) {
       isCategoryExpanded.value = true
@@ -81,9 +81,9 @@ watch(
     <div class="sidebar-row category-row">
       <a
         class="sidebar-link category-link"
-        :class="{ active: isActive('/model-api-reference/seedance-native-api') }"
-        :aria-current="isActive('/model-api-reference/seedance-native-api') ? 'page' : undefined"
-        :href="withBase('/model-api-reference/seedance-native-api')"
+        :class="{ active: isActive('/model-api-reference/official-native-api') }"
+        :aria-current="isActive('/model-api-reference/official-native-api') ? 'page' : undefined"
+        :href="withBase('/model-api-reference/official-native-api')"
       >Official Native API</a>
       <button
         class="disclosure"
@@ -98,9 +98,9 @@ watch(
     <div v-if="isCategoryExpanded" id="official-native-api-panel" class="nested-panel">
       <a
         class="sidebar-link overview-link"
-        :class="{ active: isActive('/model-api-reference/seedance-native-api') }"
-        :aria-current="isActive('/model-api-reference/seedance-native-api') ? 'page' : undefined"
-        :href="withBase('/model-api-reference/seedance-native-api')"
+        :class="{ active: isActive('/model-api-reference/official-native-api') }"
+        :aria-current="isActive('/model-api-reference/official-native-api') ? 'page' : undefined"
+        :href="withBase('/model-api-reference/official-native-api')"
       >Overview</a>
       <div class="sidebar-row provider-row">
         <button

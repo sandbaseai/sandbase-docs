@@ -1,5 +1,5 @@
 ---
-title: "Gemini Omni Flash Preview API Reference"
+title: "Gemini Omni Flash Preview Native API Reference"
 description: "Gemini Omni Flash Preview API reference for SandBase. Use model google/gemini-omni-flash-preview with /v1beta/interactions; see request and response examples."
 aside: false
 outline: false

@@ -162,7 +162,7 @@ const modelReference = readFileSync('model-api-reference/index.md', 'utf8')
 assert.match(modelReference, /Most LLM models use the OpenAI-compatible/, 'Model reference must not claim every LLM uses one protocol')
 assert.match(modelReference, /Anthropic models use the .*Anthropic Messages API/, 'Model reference must identify the Anthropic protocol')
 
-const geminiOmniReference = readFileSync('model-api-reference/llm-models/google/gemini-omni-flash-preview.md', 'utf8')
+const geminiOmniReference = readFileSync('model-api-reference/official-native-api/google/gemini-omni-flash-preview.md', 'utf8')
 assert.match(geminiOmniReference, /path\\?\":\\?\"\/v1beta\/interactions/, 'Gemini Omni must use the native Interactions endpoint')
 assert.doesNotMatch(geminiOmniReference, /path\\?\":\\?\"\/v1\/chat\/completions/, 'Gemini Omni must not advertise Chat Completions')
 
@@ -196,7 +196,7 @@ const dataForSeoSidebar = readFileSync('.vitepress/theme/platform-api-sidebars/d
 const dataForSeoCount = dataForSeoSidebar.match(/"operationCount":\s*(\d+)/)?.[1]
 assert.equal(Number(dataForSeoCount), dataForSeoPages, 'DataForSEO sidebar count must match its operation pages')
 
-const nativeReference = readFileSync('model-api-reference/seedance-native-api/index.md', 'utf8')
+const nativeReference = readFileSync('model-api-reference/official-native-api/index.md', 'utf8')
 assert.match(nativeReference, /`DELETE`\s*\|\s*`\/api\/v3\/contents\/generations\/tasks\/\{task_id\}`/, 'Official Native API must document task deletion')
 assert.match(nativeReference, /Cancel or remove a task/, 'Official Native API must explain task cancellation semantics')
 

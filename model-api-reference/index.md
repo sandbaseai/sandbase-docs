@@ -25,7 +25,7 @@ Generate, edit, animate, upscale, and transform videos through SandBase. Browse 
 
 Generate, transform, clone, transcribe, and synthesize audio through SandBase. Browse audio models by provider and copy the exact async request format for each model.
 
-### [Official Native API](/model-api-reference/seedance-native-api)
+### [Official Native API](/model-api-reference/official-native-api)
 
 Use provider-native protocols without rewriting an existing integration. Browse by provider and model; ByteDance Seedance uses the Volcengine Ark Contents Generations task protocol, while Google models use the Gemini-compatible GenerateContent or Interactions protocols.
 

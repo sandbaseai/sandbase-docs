@@ -1,7 +1,7 @@
 ---
 title: Volcengine Ark Contents Generations
 description: Create and manage asynchronous Seedance video tasks with the Volcengine Ark native protocol.
-canonical: /docs/model-api-reference/seedance-native-api/
+canonical: /docs/model-api-reference/official-native-api/
 robots: noindex,follow
 aside: false
 outline: false
@@ -44,7 +44,7 @@ apiReference:
 ## Full reference
 
 The complete protocol reference lives in the
-[Official Native API](/model-api-reference/seedance-native-api). It covers the supported model identifiers, the request
+[Official Native API](/model-api-reference/official-native-api). It covers the supported model identifiers, the request
 body rules, the task status vocabulary, usage reporting, and the error contract.
 
 Quick orientation:

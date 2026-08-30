@@ -1,18 +1,18 @@
 ---
-title: Seedance 2.5 Official
-description: Generate Seedance 2.5 video through the official ByteDance task protocol with up to 1080p output.
+title: Seedance 2.0 Official
+description: Generate Seedance 2.0 video through the official ByteDance task protocol at 480p or 720p.
 ---
 
-# Seedance 2.5 Official
+# Seedance 2.0 Official
 
 Use the ByteDance-native Contents Generations task protocol with this exact model identifier:
 
 ```text
-bytedance/seedance/2.5-official
+bytedance/seedance/2.0-official
 ```
 
-Choose this model when you need up to 1080p output. It supports 480p, 720p, and 1080p generation with text, image,
-video, and audio references.
+Choose this lower-priced model when 480p or 720p output is sufficient. It supports text, image, video, and audio
+references using the same request structure as Seedance 2.5 Official.
 
 ## Create a task
 
@@ -21,12 +21,12 @@ curl -X POST https://api.sandbase.ai/api/v3/contents/generations/tasks \
   -H "Authorization: Bearer $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "bytedance/seedance/2.5-official",
+    "model": "bytedance/seedance/2.0-official",
     "content": [
       {"type": "text", "text": "A cinematic aerial shot over an alpine lake at sunrise"}
     ],
     "ratio": "16:9",
-    "resolution": "1080p",
+    "resolution": "720p",
     "duration": 5,
     "generate_audio": true
   }'
@@ -53,18 +53,18 @@ While generation is in progress, `status` is `queued` or `running`. A completed 
 ```json
 {
   "id": "158d2649-e01d-45b9-b88a-ef3c450c601c",
-  "model": "bytedance/seedance/2.5-official",
+  "model": "bytedance/seedance/2.0-official",
   "status": "succeeded",
   "content": {
     "video_url": "https://media.sandbase.ai/files/158d2649.../0.mp4"
   },
   "usage": {
-    "completion_tokens": 108900,
-    "total_tokens": 108900
+    "completion_tokens": 72600,
+    "total_tokens": 72600
   }
 }
 ```
 
 Stop polling when `status` is `succeeded`, `failed`, `expired`, or `cancelled`. See
-[Official Native API](/model-api-reference/seedance-native-api) for every input workflow, parameter, response field,
+[Official Native API](/model-api-reference/official-native-api) for every input workflow, parameter, response field,
 status, and error.
