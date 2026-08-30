@@ -21,8 +21,8 @@ GPT Image 2 uses the native OpenAI Images API at `/v1/images/generations`. Pass 
 
 ## Google
 
-- [Gemini Omni Flash Preview](/model-api-reference/llm-models/google/gemini-omni-flash-preview)
-- [Gemini Omni 1.1 Flash Preview](/model-api-reference/seedance-native-api/google/gemini-omni-1.1-flash-preview)
+- [Gemini Omni Flash Preview](/model-api-reference/official-native-api/google/gemini-omni-flash-preview)
+- [Gemini Omni 1.1 Flash Preview](/model-api-reference/official-native-api/google/gemini-omni-1.1-flash-preview)
 - [Gemini 3.1 Pro Preview](/model-api-reference/llm-models/google/gemini-3.1-pro-preview)
 - [Gemini 3.1 Flash Lite](/model-api-reference/llm-models/google/gemini-3.1-flash-lite)
 - [Gemini 3.1 Flash Lite Preview](/model-api-reference/llm-models/google/gemini-3.1-flash-lite-preview)
