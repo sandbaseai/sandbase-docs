@@ -6,7 +6,7 @@ description: Use official provider-native protocols through SandBase, organized 
 # Official Native API
 
 Official Native APIs preserve a provider's request and response protocol for easier migration of existing integrations.
-Browse by provider, then choose the exact model. SandBase currently documents native protocols for ByteDance and OpenAI; LLMs are documented in the LLM Models section because their provider-native protocol is the default model interface.
+Browse by provider, then choose the exact model. SandBase currently documents native protocols for ByteDance, Google Gemini Omni, and OpenAI; other LLMs are documented in the LLM Models section because their provider-native protocol is the default model interface.
 
 ## OpenAI
 
@@ -18,6 +18,13 @@ GPT Image 2 uses the native OpenAI Images API at `/v1/images/generations`. Pass 
 
 - [Seedance 2.5 Official](/model-api-reference/official-native-api/bytedance/seedance-2.5-official)
 - [Seedance 2.0 Official](/model-api-reference/official-native-api/bytedance/seedance-2.0-official)
+
+## Google
+
+- [Gemini Omni Flash Preview](/model-api-reference/official-native-api/google/gemini-omni-flash-preview)
+- [Gemini Omni 1.1 Flash Preview](/model-api-reference/official-native-api/google/gemini-omni-1.1-flash-preview)
+
+Gemini Omni models use the native Google Gemini Interactions protocol at `/v1beta/interactions`.
 
 ## Seedance protocol
 
