@@ -41,3 +41,7 @@ apiReference:
 Synchronous capabilities return a completed response in the original request. Asynchronous capabilities return `202 Accepted` with an opaque `id`; poll [Get an asynchronous run](./run-get) until the status is terminal.
 
 Capability-specific request fields and output shapes are defined on the selected model or API operation page. Send those fields at the top level of the JSON body; do not wrap them in an `input` object. Do not assume that every capability accepts the same parameters.
+
+## Webhook callbacks
+
+Set `webhook_url` only for supported asynchronous image, video, or audio tasks. SandBase sends the final run event to the HTTPS endpoint after completion or failure; the callback is a delivery hint, not a replacement for `GET /v1/run/{id}`. Always keep polling the run endpoint for authoritative status and retry safely when a callback is delayed or duplicated. Synchronous model responses and provider-native endpoints do not use this callback field.
