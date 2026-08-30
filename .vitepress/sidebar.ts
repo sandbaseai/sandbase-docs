@@ -60,6 +60,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Overview', link: '/guides/' },
       { text: 'Chat Completions', link: '/guides/chat-completions' },
       { text: 'Anthropic Messages', link: '/guides/anthropic-messages' },
+      { text: 'Image and Video Models', link: '/guides/image-video' },
       { text: 'Streaming', link: '/guides/streaming' },
       { text: 'Errors', link: '/guides/error-handling' },
       { text: 'Rate limits', link: '/guides/rate-limiting' },
