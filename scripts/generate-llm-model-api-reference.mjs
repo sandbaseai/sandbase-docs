@@ -667,6 +667,20 @@ function responseSchema(model) {
       },
     }
   }
+  if (model.vendor_slug === 'openai') {
+    return {
+      type: 'object',
+      required: ['id', 'object', 'status', 'model', 'output'],
+      properties: {
+        id: { type: 'string', description: 'Unique response identifier.' },
+        object: { type: 'string', description: 'Response object type.' },
+        status: { type: 'string', description: 'Response lifecycle status.' },
+        model: { type: 'string', description: 'Model that generated the response.' },
+        output: { type: 'array', items: { type: 'object' }, description: 'Generated response output items.' },
+        usage: { type: 'object', description: 'Token usage when available.' },
+      },
+    }
+  }
   if (isGeminiInteractionsModel(model)) {
     return {
       type: 'object',
@@ -704,6 +718,7 @@ function prettyJson(value) {
 function protocolForModel(model) {
   if (isAsyncGenerationModel(model)) return 'generation'
   if (isGeminiInteractionsModel(model)) return 'gemini-interactions'
+  if (model.vendor_slug === 'openai') return 'responses'
   return model.vendor_slug === 'anthropic' ? 'messages' : 'chat'
 }
 
@@ -1188,9 +1203,10 @@ function modelReference(model) {
   if (model.__category === 'api') return platformReference(model)
   const modelProtocol = protocolForModel(model)
   const isMessages = modelProtocol === 'messages'
+  const isResponses = modelProtocol === 'responses'
   const isGeneration = modelProtocol === 'generation'
   const isGeminiInteractions = modelProtocol === 'gemini-interactions'
-  const apiPath = isGeneration ? submitPathFor(model) : isGeminiInteractions ? '/v1beta/interactions' : isMessages ? '/v1/messages' : '/v1/chat/completions'
+  const apiPath = isGeneration ? submitPathFor(model) : isGeminiInteractions ? '/v1beta/interactions' : isMessages ? '/v1/messages' : isResponses ? '/v1/responses' : '/v1/chat/completions'
   const resultPath = isGeneration ? pollPathFor(model) : ''
   const requestBody = isGeneration
     ? requestBodyForSchema(model)
@@ -1207,6 +1223,11 @@ function modelReference(model) {
           max_tokens: 1024,
           messages: [{ role: 'user', content: 'Describe this product in one sentence.' }],
         }
+      : isResponses
+        ? {
+            model: model.name,
+            input: 'Describe this product in one sentence.',
+          }
       : {
           model: model.name,
           messages: [{ role: 'user', content: 'Describe this product in one sentence.' }],
@@ -1229,6 +1250,14 @@ function modelReference(model) {
           content: [{ type: 'text', text: 'A concise product description.' }],
           stop_reason: 'end_turn',
         }
+      : isResponses
+        ? {
+            id: 'resp_abc123',
+            object: 'response',
+            status: 'completed',
+            model: model.name,
+            output: [{ type: 'message', content: [{ type: 'output_text', text: 'A concise product description.' }] }],
+          }
       : {
           id: 'chatcmpl_abc123',
           model: model.name,
@@ -1237,7 +1266,7 @@ function modelReference(model) {
 
   return {
     title: cleanTitle(model),
-    operation: isGeneration ? `${model.__category === 'video' ? 'Video' : model.__category === 'audio' ? 'Audio' : 'Image'} Generation` : isGeminiInteractions ? 'Gemini Interactions' : isMessages ? 'Anthropic Messages' : 'Chat Completions',
+    operation: isGeneration ? `${model.__category === 'video' ? 'Video' : model.__category === 'audio' ? 'Audio' : 'Image'} Generation` : isGeminiInteractions ? 'Gemini Interactions' : isMessages ? 'Anthropic Messages' : isResponses ? 'OpenAI Responses' : 'Chat Completions',
     method: 'POST',
     path: apiPath,
     description: cleanDescription(model),
@@ -1248,6 +1277,8 @@ function modelReference(model) {
           ? 'Submit an async generation request. The model field selects the model; other fields are model-specific input parameters.'
           : isGeminiInteractions
             ? 'Create a native Google Interaction. Use background for video generation that should be polled.'
+          : isResponses
+            ? 'Parameters supported by the OpenAI Responses API. Values, defaults, and limits are read from the model registry.'
           : 'Parameters supported by this model. Values, defaults, and limits are read from the model registry.',
         fields: [
           {
@@ -1266,7 +1297,9 @@ function modelReference(model) {
                 { name: 'background', type: 'boolean', required: false, description: 'Submit durably and return an immediately pollable Interaction.', default: 'true' },
                 { name: 'response_format', type: 'object | array', required: false, description: 'Requested output format.', default: '{"type":"video"}' },
               ]
-            : schemaFields(model).filter((field) => field.name !== 'model')),
+            : isResponses
+              ? [{ name: 'input', type: 'string | array<object>', required: true, description: 'Input text or structured content for the response.' }, ...schemaFields(model).filter((field) => !['model', 'messages'].includes(field.name))]
+              : schemaFields(model).filter((field) => field.name !== 'model')),
         ],
       },
       {
@@ -1275,7 +1308,9 @@ function modelReference(model) {
           ? 'The submit endpoint returns a run response. If its status is pending or running, poll GET /v1/run/{id} with the returned opaque ID until it reaches a terminal state.'
           : isGeminiInteractions
             ? 'The response contains an Interaction ID. Poll GET /v1beta/interactions/{id} while status is in_progress.'
-          : 'Fields returned by this model API response.',
+          : isResponses
+            ? 'Fields returned by the OpenAI Responses API.'
+            : 'Fields returned by this model API response.',
         fields: isGeneration ? publicGenerationResponseFields(model) : responseFields(model),
       },
       {
@@ -1574,7 +1609,8 @@ for (const model of category.models) {
     : ['image', 'video', 'audio'].includes(category.key)
       ? `${category.title} Reference`
       : isGeminiInteractionsModel(model) ? 'Gemini Interactions API'
-      : model.vendor_slug === 'anthropic' ? 'Messages API' : 'Chat Completions API'
+      : model.vendor_slug === 'anthropic' ? 'Messages API'
+      : model.vendor_slug === 'openai' ? 'Responses API' : 'Chat Completions API'
   const endpoint = endpointFor(model, category)
   fs.writeFileSync(
     pagePath,

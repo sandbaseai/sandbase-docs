@@ -59,6 +59,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
     items: [
       { text: 'Overview', link: '/guides/' },
       { text: 'Chat Completions', link: '/guides/chat-completions' },
+      { text: 'OpenAI Responses', link: '/guides/openai-responses' },
       { text: 'Anthropic Messages', link: '/guides/anthropic-messages' },
       { text: 'Image and Video Models', link: '/guides/image-video' },
       { text: 'Streaming', link: '/guides/streaming' },

@@ -12,6 +12,7 @@ These guides cover common patterns for using SandBase in production.
 | Guide | Description |
 |-------|-------------|
 | [Chat Completions](./chat-completions) | Call SandBase through the OpenAI-compatible chat protocol |
+| [OpenAI Responses](./openai-responses) | Call GPT models through the OpenAI-compatible Responses protocol |
 | [Anthropic Messages](./anthropic-messages) | Call SandBase through the Anthropic-compatible messages protocol |
 | [Image and Video Models](./image-video) | Generate images and videos through the shared asynchronous Run API |
 | [Streaming](./streaming) | Stream compatible Model output to your application |
