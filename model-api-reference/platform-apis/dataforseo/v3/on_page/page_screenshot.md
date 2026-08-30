@@ -1,6 +1,6 @@
 ---
 title: "OnPage Page Screenshot API Reference"
-description: "Capture a full-page or viewport screenshot with DataForSEO through SandBase. Use dataforseo/v3/on_page/page_screenshot with /v1/run."
+description: "SandBase API operation page_screenshot."
 aside: false
 outline: false
 generatedBy: "sandbase-platform-api-reference"

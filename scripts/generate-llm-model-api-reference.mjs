@@ -417,7 +417,8 @@ function pollPathFor(model) {
 }
 
 function endpointFor(model, category) {
-  if (['image', 'video', 'audio', 'api'].includes(category.key)) return '/v1/run'
+  if (category.key === 'api') return `/v1/api/${model.name}`
+  if (['image', 'video', 'audio'].includes(category.key)) return '/v1/run'
   if (isGeminiInteractionsModel(model)) return '/v1beta/interactions'
   return model.vendor_slug === 'anthropic' ? '/v1/messages' : '/v1/chat/completions'
 }
@@ -1075,15 +1076,18 @@ function assertUniquePlatformModels(models, category) {
 
 function platformReference(model) {
   const requestBody = platformRequestBody(model)
+  const apiPath = `/v1/api/${model.name}`
+  const requestPayload = { ...requestBody }
+  delete requestPayload.model
   const isAsync = model.execution_mode === 'async'
   const responseBody = publicPlatformResponseBody(model, isAsync ? 'pending' : 'completed')
   const responseExamples = ['pending', 'running', 'completed', 'failed', 'timeout']
     .map((status) => ({ title: `${status} response`, description: JSON.stringify(publicPlatformResponseBody(model, status)) }))
   const submitLines = [
-    'curl -X POST https://api.sandbase.ai/v1/run \\',
+    `curl -X POST https://api.sandbase.ai${apiPath} \\`,
     '  -H "Authorization: Bearer $SANDBASE_API_KEY" \\',
     '  -H "Content-Type: application/json" \\',
-    `  -d '${prettyJson(requestBody)}'`,
+    `  -d '${prettyJson(requestPayload)}'`,
   ]
   const pythonLines = [
     'import os',
@@ -1091,8 +1095,8 @@ function platformReference(model) {
     'import requests',
     '',
     'headers = {"Authorization": f"Bearer {os.environ[\'SANDBASE_API_KEY\']}"}',
-    `payload = ${pythonLiteral(requestBody)}`,
-    'response = requests.post("https://api.sandbase.ai/v1/run", headers=headers, json=payload)',
+    `payload = ${pythonLiteral(requestPayload)}`,
+    `response = requests.post("https://api.sandbase.ai${apiPath}", headers=headers, json=payload)`,
     'response.raise_for_status()',
     'result = response.json()',
     ...(isAsync ? [
@@ -1107,9 +1111,9 @@ function platformReference(model) {
     'print(result)',
   ]
   const typeScriptLines = [
-    `const payload = ${prettyJson(requestBody)};`,
+    `const payload = ${prettyJson(requestPayload)};`,
     'const headers = { Authorization: `Bearer ${process.env.SANDBASE_API_KEY}`, "Content-Type": "application/json" };',
-    'const response = await fetch("https://api.sandbase.ai/v1/run", { method: "POST", headers, body: JSON.stringify(payload) });',
+    `const response = await fetch("https://api.sandbase.ai${apiPath}", { method: "POST", headers, body: JSON.stringify(payload) });`,
     'if (!response.ok) throw new Error(await response.text());',
     'let result = await response.json();',
     ...(isAsync ? [
@@ -1130,13 +1134,13 @@ function platformReference(model) {
     title: cleanTitle(model),
     operation: `${model.vendor} API Operation`,
     method: 'POST',
-    path: '/v1/run',
+    path: apiPath,
     description: cleanDescription(model),
     groups: [
       {
         title: 'Request body',
-        description: `Call this ${model.execution_mode} operation with its public SandBase model identifier and operation-specific input fields.`,
-        fields: [{ name: 'model', type: 'string', required: true, description: `Model identifier. Set to ${model.name}.`, default: model.name }, ...platformFields(model)],
+        description: `Call this ${model.execution_mode} operation at its vendor-qualified URL. The model identity is encoded in the path; only operation-specific input fields belong in the request body.`,
+        fields: platformFields(model),
       },
       {
         title: 'Response Schema',
