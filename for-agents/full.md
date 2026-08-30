@@ -129,43 +129,6 @@ curl https://api.sandbase.ai/v1/messages \
 
 ---
 
-## Embeddings
-
-### POST /v1/embeddings
-
-Generate text embeddings. OpenAI-compatible interface.
-
-```bash
-curl https://api.sandbase.ai/v1/embeddings \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "<embedding-model-id>",
-    "input": "SandBase is an AI agent platform."
-  }'
-```
-
-**Response:**
-
-```json
-{
-  "object": "list",
-  "data": [
-    {
-      "object": "embedding",
-      "index": 0,
-      "embedding": [0.0023, -0.0091, 0.0152, 0.0087, -0.0034]
-    }
-  ],
-  "model": "<embedding-model-id>",
-  "usage": { "prompt_tokens": 7, "total_tokens": 7 }
-}
-```
-
-> The `embedding` array is truncated. Its actual length depends on the selected model and any supported dimensions parameter.
-
----
-
 ## Image Generation
 
 ### POST /v1/run

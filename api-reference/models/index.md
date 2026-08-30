@@ -18,7 +18,7 @@ Use the Models API to discover models before choosing an inference endpoint. The
 | Browse supported models | — | [Supported Models](/models/supported) |
 | Compare capabilities | — | [Capabilities](/models/capabilities) |
 
-To run a model, use the [Model API Reference](/model-api-reference/) for normalized Chat Completions, Anthropic Messages, image, video, audio, vision, and embedding contracts. This page documents discovery, the unified capability runner, API passthrough, assets, and task-cost lookup.
+To run a model, use the [Model API Reference](/model-api-reference/) for normalized Chat Completions, Anthropic Messages, image, video, and audio contracts. This page documents discovery, the unified capability runner, API passthrough, assets, and task-cost lookup.
 
 `GET /v1/models` supports `q`, `vendor`, `type`, and `order`; it is not paginated. Omitting `type` defaults to `llm`, while an explicitly empty `type=` lists all public model types. The `vendor` filter is exact and case-sensitive; `q` is a case-insensitive substring search. Each list item contains `id`, `object`, `created`, and `owned_by`, where `id` is the logical model name used in requests.
 

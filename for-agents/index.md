@@ -13,7 +13,7 @@ description: Everything an AI agent needs to discover and use SandBase API — o
 
 ## What is SandBase?
 
-SandBase is an AI agent infrastructure platform. One API key can access enabled Models and APIs across language, image, video, audio, embeddings, search, and data, plus Agent workflows. Discover the current catalog instead of relying on a fixed count.
+SandBase is an AI agent infrastructure platform. One API key can access enabled Models and APIs across language, image, video, audio, search, and data, plus Agent workflows. Discover the current catalog instead of relying on a fixed count.
 
 ## API Base URL
 
@@ -49,7 +49,6 @@ curl https://api.sandbase.ai/v1/chat/completions \
 |--------|----------|-------------|
 | `POST` | `/v1/chat/completions` | OpenAI-compatible chat; optional capabilities depend on the selected model |
 | `POST` | `/v1/messages` | Anthropic-compatible messages API |
-| `POST` | `/v1/embeddings` | Generate text embeddings |
 | `POST` | `/v1/run` | Submit a model generation using its model-specific schema |
 | `GET` | `/v1/run/{id}` | Poll async generation status and retrieve results |
 | `GET` | `/v1/models` | List enabled logical models; defaults to the LLM type |

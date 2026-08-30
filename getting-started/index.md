@@ -21,7 +21,7 @@ You can use it in three simple ways:
 
 Store is where you find capabilities:
 
-- **Models** for reasoning, text, image, audio, video, and embeddings
+- **Models** for reasoning, text, image, audio, and video
 - **APIs** for search, scrape, data, media, SaaS, and connectors
 - **Agents** as ready-made examples you can test or clone
 - **Skills** as reusable task packages for Agents

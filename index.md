@@ -13,7 +13,7 @@ SandBase provides two complementary ways to build AI applications. Start with th
 
 | | Models and APIs | Managed Agents |
 |---|---|---|
-| **What it is** | Direct access to language, image, video, audio, embedding, and third-party APIs | Reusable, versioned Agent configurations executed by SandBase |
+| **What it is** | Direct access to language, image, video, audio, and third-party APIs | Reusable, versioned Agent configurations executed by SandBase |
 | **Best for** | Custom application loops and fine-grained request control | Multi-step, asynchronous, scheduled, or repeatable work |
 | **You manage** | Prompts, orchestration, retries, and application state | Agent definition, enabled capabilities, inputs, and delivery behavior |
 | **Start here** | [Models and APIs](/models/) | [Build Agent](/agents/) |
@@ -26,7 +26,7 @@ The same API key can call Models, APIs, Agents, Services, and scheduled workload
 
 ### Models and APIs
 
-Use Models for language, image, video, audio, and embedding workloads. Use APIs when the application needs external data or actions. The Store shows available capabilities, pricing, input schemas, and working examples.
+Use Models for language, image, video, and audio workloads. Use APIs when the application needs external data or actions. The Store shows available capabilities, pricing, input schemas, and working examples.
 
 - [Browse the Store](/store/)
 - [Supported Models](/models/supported)

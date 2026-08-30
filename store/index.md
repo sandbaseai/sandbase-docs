@@ -13,7 +13,7 @@ You can start from four kinds of things:
 
 | Kind | What it is | What you do with it |
 |---|---|---|
-| **Models** | AI models for text, image, audio, video, and embeddings | Call them directly, or use them inside an Agent |
+| **Models** | AI models for text, image, audio, and video | Call them directly, or use them inside an Agent |
 | **APIs** | Ready-to-use capabilities like search, scrape, data, media, and SaaS actions | Copy a request, add to Setup, or give to an Agent |
 | **Agents** | Proven Agent examples and best-practice workflows | Test them, clone them, or publish your own Service |
 | **Skills** | Reusable task packages for Agents | Attach them when building an Agent |
@@ -39,7 +39,7 @@ When two entries look similar, compare their input, output, pricing, latency, an
 
 ## Models
 
-Models are AI engines for text generation and reasoning, image generation or editing, audio, video, and embeddings.
+Models are AI engines for text generation and reasoning, image generation or editing, audio, and video.
 
 You can call a Model directly, add it to Setup for a connected AI tool, or select it when building an Agent. The Model determines how an Agent thinks; APIs and Skills determine what it can do.
 

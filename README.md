@@ -1,7 +1,7 @@
 <p align="center">
   <h1 align="center">SandBase Docs</h1>
   <p align="center">
-    <strong>One API surface for LLMs, image, video, audio, embeddings, real-world APIs, and reusable Agents.</strong>
+    <strong>One API surface for LLMs, image, video, audio, real-world APIs, and reusable Agents.</strong>
   </p>
   <p align="center">
     <a href="https://www.sandbase.ai/docs/">Docs</a> ·
@@ -29,7 +29,7 @@ Use the smallest surface that fits the job:
 | Need | Start with |
 |---|---|
 | OpenAI-compatible LLM and vision calls | [Chat Completions API](https://www.sandbase.ai/docs/api-reference/llm-gateway) |
-| Image, video, audio, or embedding jobs | [Model API Reference](https://www.sandbase.ai/docs/model-api-reference/) |
+| Image, video, or audio jobs | [Model API Reference](https://www.sandbase.ai/docs/model-api-reference/) |
 | Search, scrape, social, business, or other external data | [Store](https://www.sandbase.ai/docs/store/) |
 | Reusable, versioned Agent workflows | [Agents](https://www.sandbase.ai/docs/agents/) |
 | Codex, Claude Code, Cursor, and other AI clients | [Connect AI tools](https://www.sandbase.ai/docs/setup/) |
@@ -134,7 +134,7 @@ Compatibility reduces migration work; it does not make every model, parameter, s
 
 ## Run a model or external API
 
-Image, video, audio, embedding, and external API operations use the public run contract documented on each Store detail page. The model/API identifier and input fields are operation-specific.
+Image, video, audio, and external API operations use the public run contract documented on each Store detail page. The model/API identifier and input fields are operation-specific.
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/run \

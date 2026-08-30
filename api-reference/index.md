@@ -8,7 +8,7 @@ description: Manage SandBase Agents, Sessions, Services, Schedules, Skills, cred
 Use the Platform API to define reusable Agents, run stateful work, publish callable services, and schedule repeatable execution.
 
 ::: tip Looking for model inference?
-Chat, image, video, audio, embedding, and model-specific request schemas live in the [Model API Reference](/model-api-reference/). The Platform API covers managed Agent resources and operations.
+Chat, image, video, audio, and model-specific request schemas live in the [Model API Reference](/model-api-reference/). The Platform API covers managed Agent resources and operations.
 :::
 
 ## Choose a starting point

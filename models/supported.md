@@ -22,7 +22,6 @@ Browse [Models](https://www.sandbase.ai/models) for current availability and pri
 | Image generation and editing | [Image generation](/model-api-reference/image-generation) | [`POST /v1/run`](/api-reference/models/image) or [OpenAI Images](/api-reference/images/generations) |
 | Video generation and editing | [Video generation](/model-api-reference/video-generation) | [`POST /v1/run`](/api-reference/models/video) |
 | Audio generation and processing | [Audio generation](/model-api-reference/audio-generation) | [`POST /v1/run`](/api-reference/models/audio) |
-| Embeddings | [Embedding models](/api-reference/models/embedding) | [`POST /v1/embeddings`](/api-reference/models/embedding) |
 
 Each generated model page contains the exact public model identifier, request fields, supported values, capabilities, and a working request. Disabled or internal-only registry entries are not published there.
 

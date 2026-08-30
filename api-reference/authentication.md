@@ -31,7 +31,7 @@ x-api-key: sk-your-api-key
 ```
 
 This header is supported only by `POST /v1/messages`. Other public endpoints do not extract it; use Bearer
-authentication for Chat Completions, Embeddings, `/v1/run`, and resource APIs.
+authentication for Chat Completions, `/v1/run`, and resource APIs.
 
 ### Priority
 
@@ -126,7 +126,6 @@ Keys can optionally have an expiration date. Expired keys return `401 Unauthoriz
 |----------|-------------|-------------|
 | `POST /v1/chat/completions` | API Key (Bearer) | Chat Completions |
 | `POST /v1/responses` | API Key (Bearer) | OpenAI-compatible Responses API |
-| `POST /v1/embeddings` | API Key (Bearer) | Text embeddings |
 | `POST /v1/messages` | API Key (Bearer or x-api-key) | Anthropic Messages |
 | `/v1beta/models/*` | API Key (x-goog-api-key, Bearer, or query key) | Gemini GenerateContent |
 | `/v1beta/interactions*` | API Key (x-goog-api-key, Bearer, or query key) | Gemini Interactions |
