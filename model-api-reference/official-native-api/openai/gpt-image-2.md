@@ -68,3 +68,4 @@ Use the shared [image generation reference](/api-reference/images/generations) f
 - [Images API guide](https://platform.openai.com/docs/guides/images)
 - [Images API reference](https://platform.openai.com/docs/api-reference/images)
 - [OpenAI API quickstart](https://platform.openai.com/docs/quickstart)
+- [SandBase webhook behavior](/api-reference/models/run) — not used by this synchronous native Images endpoint.

@@ -74,3 +74,4 @@ status, and error.
 - [Seedance video generation documentation](https://www.volcengine.com/docs/82379/1520758?lang=en)
 - [Create contents generation task API](https://api.volcengine.com/api-explorer/?action=CreateContentsGenerationsTasks&groupName=%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90API&serviceCode=ark&version=2024-01-01)
 - [Seedance 2.0 prompting guide](https://www.volcengine.com/docs/82379/2222480?lang=en)
+- [SandBase webhook behavior for asynchronous model tasks](/api-reference/models/run)

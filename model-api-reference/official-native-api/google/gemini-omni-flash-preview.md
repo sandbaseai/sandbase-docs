@@ -25,3 +25,4 @@ seo:
 - [Gemini API documentation](https://ai.google.dev/gemini-api/docs)
 - [Gemini Interactions API reference](https://ai.google.dev/api/interactions-api)
 - [Interactions API getting started guide](https://ai.google.dev/gemini-api/docs/get-started)
+- [SandBase webhook behavior](/api-reference/models/run) — not used by this native Interactions endpoint; poll the Interaction ID instead.
