@@ -30,11 +30,11 @@ const openaiModels = [
 const googleModels = [
   {
     text: 'Gemini Omni Flash Preview',
-    link: '/model-api-reference/llm-models/google/gemini-omni-flash-preview',
+    link: '/model-api-reference/official-native-api/google/gemini-omni-flash-preview',
   },
   {
     text: 'Gemini Omni 1.1 Flash Preview',
-    link: '/model-api-reference/seedance-native-api/google/gemini-omni-1.1-flash-preview',
+    link: '/model-api-reference/official-native-api/google/gemini-omni-1.1-flash-preview',
   },
   {
     text: 'Gemini 3.1 Pro Preview',
@@ -64,7 +64,7 @@ watch(
     if (/\/model-api-reference\/seedance-native-api(?:\/|$)/.test(path)) {
       isCategoryExpanded.value = true
       if (path.includes('/seedance-native-api/bytedance/')) isByteDanceExpanded.value = true
-      if (path.includes('/seedance-native-api/google/')) isGoogleExpanded.value = true
+      if (path.includes('/seedance-native-api/google/') || path.includes('/official-native-api/google/')) isGoogleExpanded.value = true
       if (path.includes('/seedance-native-api/openai/')) isOpenAIExpanded.value = true
     }
     if (path.includes('/model-api-reference/llm-models/google/')) {
