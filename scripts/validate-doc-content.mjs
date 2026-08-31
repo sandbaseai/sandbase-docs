@@ -166,6 +166,17 @@ const geminiOmniReference = readFileSync('model-api-reference/official-native-ap
 assert.match(geminiOmniReference, /path\\?\":\\?\"\/v1beta\/interactions/, 'Gemini Omni must use the native Interactions endpoint')
 assert.doesNotMatch(geminiOmniReference, /path\\?\":\\?\"\/v1\/chat\/completions/, 'Gemini Omni must not advertise Chat Completions')
 
+const geminiInteractionsReference = readFileSync('api-reference/gemini-interactions.md', 'utf8')
+assert.match(geminiInteractionsReference, /not a generic route for every model/, 'Gemini Interactions must not imply support for every Google model')
+assert.match(geminiInteractionsReference, /Nano Banana Pro and Nano Banana 2 use\s+`\/v1beta\/models\/\{model\}:generateContent`/, 'Gemini Interactions must direct image models to GenerateContent')
+
+for (const filename of ['gemini-3-pro-image.md', 'gemini-3.1-flash-image.md']) {
+  const geminiImageReference = readFileSync(`model-api-reference/official-native-api/google/${filename}`, 'utf8')
+  assert.match(geminiImageReference, /path:\s*\/v1beta\/models\//, `${filename} must use the native GenerateContent endpoint`)
+  assert.match(geminiImageReference, /:generateContent/, `${filename} must document the GenerateContent action`)
+  assert.doesNotMatch(geminiImageReference, /path:\s*\/v1\/chat\/completions/, `${filename} must not advertise Chat Completions`)
+}
+
 const runReference = readFileSync('api-reference/models/run.md', 'utf8')
 assert.doesNotMatch(runReference, /webhook_url[^\n]*API tasks/i, 'Run reference must not promise callbacks for API capabilities')
 assert.match(runReference, /webhook_url[^\n]*image, video, or audio tasks/i, 'Run reference must match webhook capability scope')

@@ -451,6 +451,8 @@ paths:
         Accepts a Google Gemini GenerateContent request and returns a Gemini-compatible response. A bare model name,
         such as gemini-3.5-flash, is normalized to the SandBase catalog name google/gemini-3.5-flash. This endpoint
         also accepts x-goog-api-key and the key query parameter for Google SDK compatibility, although headers are safer.
+        Models with a native passthrough mapping preserve provider-defined request and response fields, including image
+        response modalities. Other mappings may use the translated capability subset documented in the schema below.
       security:
         - GoogleApiKey: []
         - BearerAuth: []
@@ -464,14 +466,14 @@ paths:
             schema: { $ref: '#/components/schemas/GeminiGenerateContentRequest' }
       responses:
         '200': { description: Gemini GenerateContent response, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiGenerateContentResponse' } } } }
-        '400': { description: Invalid JSON or an input field that SandBase cannot safely translate, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '400': { description: Invalid JSON or a request rejected by the selected native or translated mapping, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '403': { description: 'API Key spending limit reached, organization disabled, or upstream permission rejected', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '404': { description: 'Model, method, or upstream resource not found', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '429': { description: Provider rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '500': { description: Prediction lifecycle or provider error, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
-        '502': { description: Upstream response could not be translated, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '502': { description: Upstream response failed or could not be processed, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '503': { description: Routing failed or all provider candidates were unavailable, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '504': { description: Upstream request timed out, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
 
@@ -3976,7 +3978,7 @@ components:
     GeminiGenerateContentRequest:
       type: object
       additionalProperties: true
-      description: Google Gemini GenerateContent request. Unknown top-level fields are ignored by the current translator.
+      description: Google Gemini GenerateContent request. Native passthrough mappings preserve provider-defined fields; translated mappings use the documented capability subset.
       properties:
         contents:
           type: array
@@ -3992,7 +3994,7 @@ components:
             topK: { type: integer }
             maxOutputTokens: { type: integer }
             stopSequences: { type: array, items: { type: string } }
-            candidateCount: { type: integer, description: The current translator accepts only 1 when supplied. }
+            candidateCount: { type: integer, description: Translated mappings accept only 1 when supplied; native passthrough mappings preserve the provider request. }
             seed: { type: integer }
             presencePenalty: { type: number }
             frequencyPenalty: { type: number }
@@ -4001,7 +4003,7 @@ components:
             responseModalities:
               type: array
               items: { type: string }
-              description: The current translator supports TEXT only.
+              description: Native image mappings support provider image modalities. Other translated mappings may support TEXT only.
             thinkingConfig: { type: object, additionalProperties: true }
         tools:
           type: array

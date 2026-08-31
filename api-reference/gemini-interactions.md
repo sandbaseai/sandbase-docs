@@ -53,6 +53,18 @@ apiReference:
 
 Use `x-goog-api-key`, `Authorization: Bearer …`, or the `key` query parameter, in that priority order. Prefer a header because query-string credentials can be logged.
 
+## Supported models
+
+The Interactions endpoint is not a generic route for every model whose catalog name starts with `google/`. The model
+must have an Interactions-compatible provider mapping. SandBase currently documents these compatible models:
+
+- [Gemini Omni Flash Preview](/model-api-reference/official-native-api/google/gemini-omni-flash-preview)
+- [Gemini Omni 1.1 Flash Preview](/model-api-reference/official-native-api/google/gemini-omni-1.1-flash-preview)
+
+Use the endpoint documented on each model page. For example, Nano Banana Pro and Nano Banana 2 use
+`/v1beta/models/{model}:generateContent`, not `/v1beta/interactions`. An unsupported model fails instead of being routed
+through a different Google protocol.
+
 ## Success and polling
 
 Successful submissions return HTTP `200`, including background work and synchronous requests whose bounded wait expires. Always inspect `status`:
