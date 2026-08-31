@@ -20,6 +20,7 @@ GPT Image 2 uses the native OpenAI Images API at `/v1/images/generations`. Pass 
 
 - [Seedance 2.5 Official](/model-api-reference/official-native-api/bytedance/seedance-2.5-official)
 - [Seedance 2.0 Official](/model-api-reference/official-native-api/bytedance/seedance-2.0-official)
+- [Media Assets for Seedance](/model-api-reference/official-native-api/bytedance/media-assets)
 
 ## Google
 

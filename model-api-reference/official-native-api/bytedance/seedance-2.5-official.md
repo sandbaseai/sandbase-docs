@@ -14,6 +14,31 @@ bytedance/seedance/2.5-official
 Choose this model when you need up to 1080p output. It supports 480p, 720p, and 1080p generation with text, image,
 video, and audio references.
 
+## Use reusable media
+
+Seedance accepts public HTTP(S) references directly. For media you plan to reuse, register it in the SandBase Asset
+library and pass the returned persistent `asset://` reference in the same `content` shape:
+
+```json
+{
+  "model": "bytedance/seedance/2.5-official",
+  "content": [
+    {"type": "text", "text": "Keep the product appearance and add a slow cinematic camera orbit"},
+    {
+      "type": "image_url",
+      "image_url": {"url": "asset://asset-20260710150403-hx4hf"},
+      "role": "reference_image"
+    }
+  ],
+  "ratio": "16:9",
+  "resolution": "1080p",
+  "duration": 5
+}
+```
+
+See [Media Assets for Seedance](./media-assets) for the complete upload, registration, readiness, and generation
+workflow, including image, video, and audio roles.
+
 ## Create a task
 
 ```bash

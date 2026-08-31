@@ -7,6 +7,9 @@ description: Register reusable media Assets and retrieve their current metadata 
 
 Register media file URLs into the platform asset library and get an `asset_url` for use in video generation requests.
 
+For an end-to-end example that registers media and uses the returned `asset://` reference with Seedance, see
+[Media Assets for Seedance](/model-api-reference/official-native-api/bytedance/media-assets).
+
 ## Overview
 
 | Method | Path | Description |

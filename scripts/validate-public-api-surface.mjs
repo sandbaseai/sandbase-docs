@@ -671,6 +671,8 @@ assert.doesNotMatch(modelSidebar, /text: 'Official Native API'/, 'Model API main
 assert.match(officialNativeSidebar, /Official Native API/, 'Custom sidebar must expose Official Native API')
 assert.match(officialNativeSidebar, /official-native-api\/bytedance\/seedance-2\.5-official/, 'Official Native API sidebar must expose Seedance 2.5')
 assert.match(officialNativeSidebar, /official-native-api\/bytedance\/seedance-2\.0-official/, 'Official Native API sidebar must expose Seedance 2.0')
+assert.match(officialNativeSidebar, /Media Assets for Seedance/, 'Official Native API sidebar must expose the Seedance Asset workflow')
+assert.match(officialNativeSidebar, /official-native-api\/bytedance\/media-assets/, 'Official Native API sidebar must link the Seedance Asset workflow')
 assert.match(officialNativeSidebar, /Gemini Omni Flash Preview/, 'Official Native API sidebar must expose Gemini Omni')
 assert.match(officialNativeSidebar, /official-native-api\/google\/gemini-omni-flash-preview/, 'Official Native API sidebar must link Gemini Omni')
 assert.match(officialNativeSidebar, /Nano Banana Pro/, 'Official Native API sidebar must expose Gemini 3 Pro Image')
