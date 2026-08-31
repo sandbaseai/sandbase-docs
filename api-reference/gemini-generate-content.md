@@ -71,6 +71,24 @@ curl -N -X POST \
   -d '{"contents":[{"role":"user","parts":[{"text":"Write a short greeting."}]}]}'
 ```
 
-## Translation boundaries
+## Native image generation
 
-SandBase accepts text, function calls and responses, inline `image/*` data, and public HTTP(S) image references. Unsupported inline MIME types, private Google Files or `gs://` references, multiple candidates, and non-text response modalities are rejected with a Google-style `400 INVALID_ARGUMENT` response instead of being silently discarded.
+These image models have dedicated native GenerateContent mappings:
+
+- [Nano Banana Pro (Gemini 3 Pro Image)](/model-api-reference/official-native-api/google/gemini-3-pro-image)
+- [Nano Banana 2 (Gemini 3.1 Flash Image)](/model-api-reference/official-native-api/google/gemini-3.1-flash-image)
+
+For these mappings, SandBase forwards the request and response payloads without converting them through Chat
+Completions. This preserves image parts, response modalities, and provider-defined fields. Use the bare model name in
+the URL; for example, `google/gemini-3.1-flash-image` becomes `gemini-3.1-flash-image` in the path.
+
+## Routing and translation boundaries
+
+SandBase selects only providers that support the requested native Gemini protocol. If the selected model has no
+compatible native mapping, the request fails instead of falling back to a provider with a different protocol.
+
+Models that use the translated GenerateContent path support text, function calls and responses, inline `image/*` data,
+and public HTTP(S) image references. That translated path rejects unsupported inline MIME types, private Google Files or
+`gs://` references, multiple candidates, and unsupported response modalities with a Google-style `400 INVALID_ARGUMENT`
+response. The image-generation mappings listed above use raw passthrough and are not subject to those translation-only
+limits; validate the returned media fields according to the selected provider's response.
