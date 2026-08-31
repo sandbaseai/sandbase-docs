@@ -18,6 +18,10 @@ const models = [
     text: 'Seedance 2.0 Official',
     link: '/model-api-reference/official-native-api/bytedance/seedance-2.0-official',
   },
+  {
+    text: 'Media Assets for Seedance',
+    link: '/model-api-reference/official-native-api/bytedance/media-assets',
+  },
 ]
 
 const openaiModels = [
