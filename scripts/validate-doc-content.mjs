@@ -216,6 +216,10 @@ assert.match(seedanceAssetReference, /`POST \/v1\/assets`/, 'Seedance Asset guid
 assert.match(seedanceAssetReference, /`GET \/v1\/assets\/\{external_id\}`/, 'Seedance Asset guide must document Asset readiness lookup')
 assert.match(seedanceAssetReference, /asset:\/\/asset-/, 'Seedance Asset guide must use the persistent Asset reference in a generation request')
 assert.match(seedanceAssetReference, /reference_image[\s\S]*reference_video[\s\S]*reference_audio/, 'Seedance Asset guide must map image, video, and audio roles')
+assert.match(seedanceAssetReference, /official-compatible Asset protocol/, 'Seedance Asset guide must describe the official-compatible protocol boundary')
+assert.match(seedanceAssetReference, /passed through unchanged/, 'Seedance Asset guide must state that asset references pass through unchanged')
+assert.doesNotMatch(seedanceAssetReference, /\/v1\/upload/, 'Seedance official Asset guide must not mix in the generic upload endpoint')
+assert.doesNotMatch(seedanceAssetReference, /SandBase Asset library/, 'Seedance Asset guide must not describe the compatible Asset protocol as a separate SandBase library')
 assert.doesNotMatch(seedanceAssetReference, /POST \/api\/v3\/assets/, 'Seedance Asset guide must not expose the internal Asset gateway')
 
 for (const filename of ['seedance-2.5-official.md', 'seedance-2.0-official.md']) {

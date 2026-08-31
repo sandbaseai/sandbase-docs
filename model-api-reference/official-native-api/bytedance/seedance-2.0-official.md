@@ -16,8 +16,9 @@ references using the same request structure as Seedance 2.5 Official.
 
 ## Use reusable media
 
-Seedance accepts public HTTP(S) references directly. For media you plan to reuse, register it in the SandBase Asset
-library and pass the returned persistent `asset://` reference in the same `content` shape:
+Seedance accepts public HTTP(S) references directly. It also supports the official-compatible Asset protocol: register
+the media URL with `/v1/assets`, then pass the returned `asset://` reference through unchanged in the same native
+`content` shape:
 
 ```json
 {
@@ -36,7 +37,7 @@ library and pass the returned persistent `asset://` reference in the same `conte
 }
 ```
 
-See [Media Assets for Seedance](./media-assets) for the complete upload, registration, readiness, and generation
+See [Media Assets for Seedance](./media-assets) for the complete registration, readiness, and generation
 workflow, including image, video, and audio roles.
 
 ## Create a task

@@ -1,61 +1,33 @@
 ---
 title: Media Assets for Seedance
-description: Upload or register reusable image, video, and audio Assets, then use asset:// references with Seedance 2.0 and 2.5.
+description: Register reusable media through the official-compatible Asset protocol, then use asset:// references with Seedance 2.0 and 2.5.
 ---
 
 # Media Assets for Seedance
 
-Use the SandBase Asset library when the same image, video, or audio file will be referenced by more than one Seedance
-task. The library imports media from a reachable URL and returns a persistent `asset://` reference. Both
+SandBase exposes the official-compatible Asset protocol at `/v1/assets`. The Asset request and the returned `asset://`
+reference follow the official protocol, and the reference is passed through unchanged in the native ByteDance Contents
+Generations request. Both
 [Seedance 2.5 Official](./seedance-2.5-official) and [Seedance 2.0 Official](./seedance-2.0-official) accept that reference
 where they normally accept a public HTTP(S) URL.
 
 The complete workflow is:
 
-1. Start with a public media URL, or upload a local file to get one.
-2. Register that URL with `POST /v1/assets`.
-3. Query `GET /v1/assets/{external_id}` until the provider reports that the Asset is usable.
-4. Put the returned `asset_url` in a Seedance `content` item and submit the generation task.
+1. Register a reachable media URL with `POST /v1/assets`.
+2. Query `GET /v1/assets/{external_id}` until the provider reports that the Asset is usable.
+3. Put the returned `asset_url` in a Seedance `content` item and submit the generation task.
 
-## Public Asset operations
+## Official-compatible Asset operations
 
 | Method | Path | Purpose |
 | --- | --- | --- |
-| `POST` | `/v1/upload` | Optional: upload one local image, video, or audio file and receive a public stored URL |
-| `POST` | `/v1/assets` | Import a reachable URL into the Asset library and receive an `asset://` reference |
+| `POST` | `/v1/assets` | Register a reachable media URL and receive an official-compatible `asset://` reference |
 | `GET` | `/v1/assets/{external_id}` | Read the provider status and obtain the current preview/download URL |
 
 The public API currently exposes registration and lookup. Asset groups, listing, renaming, updating, and deletion are
 not public operations. Assets belong to the organization associated with the API key.
 
-## Step 1: get a reachable media URL
-
-If the media already has a public HTTP(S) URL, use it in [Step 2](#step-2-register-the-asset).
-
-For a local file, upload it first:
-
-```bash
-curl -X POST https://api.sandbase.ai/v1/upload \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
-  -F "file=@product-reference.png" \
-  -F "type=image"
-```
-
-The response includes a stored `url`:
-
-```json
-{
-  "url": "https://media.sandbase.ai/uploads/2026/08/550e8400-e29b-41d4-a716-446655440000.png",
-  "filename": "product-reference.png",
-  "size": 1048576,
-  "type": "image/png",
-  "content_type": "image/png"
-}
-```
-
-See [Upload Media](/api-reference/models/upload) for supported formats and file-size limits.
-
-## Step 2: register the Asset
+## Step 1: register the Asset
 
 Send the reachable URL to `POST /v1/assets`. `asset_type` is case-sensitive and must be `Image`, `Video`, or `Audio`:
 
@@ -64,7 +36,7 @@ curl -X POST https://api.sandbase.ai/v1/assets \
   -H "Authorization: Bearer $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "url": "https://media.sandbase.ai/uploads/2026/08/550e8400-e29b-41d4-a716-446655440000.png",
+    "url": "https://example.com/product-reference.png",
     "asset_type": "Image",
     "name": "Product reference"
   }'
@@ -82,9 +54,9 @@ Save `asset_url` from the response:
 }
 ```
 
-`id` is the SandBase record ID. The value after `asset://` is the provider-facing `external_id` used for lookup.
+The value after `asset://` is the `external_id` used by the official-compatible lookup operation.
 
-## Step 3: check readiness
+## Step 2: check readiness
 
 Query the Asset with the `external_id`, without the `asset://` prefix:
 
@@ -111,9 +83,9 @@ state before submitting the generation task; a common ready value is `Active`. `
 can be empty while processing. Query the Asset again when you need a current preview URL. Keep using the persistent
 `asset_url` in Seedance requests rather than copying `download_url`.
 
-## Step 4: generate with the Asset
+## Step 3: generate with the Asset
 
-Place `asset_url` in the URL field that matches the media type. This example uses the uploaded image as a visual
+Place `asset_url` in the URL field that matches the media type. This example uses the registered image as a visual
 reference:
 
 ```bash
@@ -176,12 +148,12 @@ contains a `video_url` uses the video-to-video billing rate.
 }
 ```
 
-## Direct URL or Asset library?
+## Direct URL or `asset://` reference?
 
 | Input | Best when | Trade-off |
 | --- | --- | --- |
 | Public HTTP(S) URL | The media is already hosted and used once | Fastest path, but the URL must remain reachable through task submission and provider fetch |
-| `asset://` reference | The media is reused or should be imported before generation | Adds a registration/readiness step, then gives a persistent reference for later Seedance tasks |
+| `asset://` reference | The media is reused through the official Asset protocol | Adds a registration/readiness step, then gives a persistent reference for later Seedance tasks |
 
 For request parameters, polling, task statuses, and billing, continue with
 [Seedance 2.5 Official](./seedance-2.5-official), [Seedance 2.0 Official](./seedance-2.0-official), or the complete
