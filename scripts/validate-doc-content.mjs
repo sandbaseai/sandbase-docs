@@ -211,5 +211,22 @@ const nativeReference = readFileSync('model-api-reference/official-native-api/in
 assert.match(nativeReference, /`DELETE`\s*\|\s*`\/api\/v3\/contents\/generations\/tasks\/\{task_id\}`/, 'Official Native API must document task deletion')
 assert.match(nativeReference, /Cancel or remove a task/, 'Official Native API must explain task cancellation semantics')
 
+const seedanceAssetReference = readFileSync('model-api-reference/official-native-api/bytedance/media-assets.md', 'utf8')
+assert.match(seedanceAssetReference, /`POST \/v1\/assets`/, 'Seedance Asset guide must document Asset registration')
+assert.match(seedanceAssetReference, /`GET \/v1\/assets\/\{external_id\}`/, 'Seedance Asset guide must document Asset readiness lookup')
+assert.match(seedanceAssetReference, /asset:\/\/asset-/, 'Seedance Asset guide must use the persistent Asset reference in a generation request')
+assert.match(seedanceAssetReference, /reference_image[\s\S]*reference_video[\s\S]*reference_audio/, 'Seedance Asset guide must map image, video, and audio roles')
+assert.match(seedanceAssetReference, /official-compatible Asset protocol/, 'Seedance Asset guide must describe the official-compatible protocol boundary')
+assert.match(seedanceAssetReference, /passed through unchanged/, 'Seedance Asset guide must state that asset references pass through unchanged')
+assert.doesNotMatch(seedanceAssetReference, /\/v1\/upload/, 'Seedance official Asset guide must not mix in the generic upload endpoint')
+assert.doesNotMatch(seedanceAssetReference, /SandBase Asset library/, 'Seedance Asset guide must not describe the compatible Asset protocol as a separate SandBase library')
+assert.doesNotMatch(seedanceAssetReference, /POST \/api\/v3\/assets/, 'Seedance Asset guide must not expose the internal Asset gateway')
+
+for (const filename of ['seedance-2.5-official.md', 'seedance-2.0-official.md']) {
+  const seedanceModelReference = readFileSync(`model-api-reference/official-native-api/bytedance/${filename}`, 'utf8')
+  assert.match(seedanceModelReference, /Media Assets for Seedance/, `${filename} must link the Asset workflow`)
+  assert.match(seedanceModelReference, /asset:\/\/asset-/, `${filename} must show how to use a reusable Asset`)
+}
+
 assert.ok(inspected > 0, 'content validation did not inspect any public hand-written pages')
 console.log(`public hand-written content: ok (${inspected} pages)`)
