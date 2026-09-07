@@ -1,10 +1,10 @@
 ---
-title: "Nano Banana Pro Native API Reference"
+title: "Gemini 3 Pro Image（Nano Banana Pro）Native API Reference"
 description: "Native Gemini GenerateContent API reference for google/gemini-3-pro-image (Nano Banana Pro) on SandBase."
 aside: false
 outline: false
 apiReference:
-  title: Nano Banana Pro (Gemini 3 Pro Image)
+  title: Gemini 3 Pro Image（Nano Banana Pro）
   operation: Gemini GenerateContent
   method: POST
   path: /v1beta/models/gemini-3-pro-image:generateContent
@@ -52,7 +52,7 @@ apiReference:
         "usageMetadata": {"totalTokenCount": 1290}
       }
 seo:
-  modelName: "Nano Banana Pro (Gemini 3 Pro Image)"
+  modelName: "Gemini 3 Pro Image（Nano Banana Pro）"
   modelId: "google/gemini-3-pro-image"
   vendor: "Google"
   vendorSlug: "google"
