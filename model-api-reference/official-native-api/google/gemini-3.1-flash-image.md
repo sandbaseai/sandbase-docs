@@ -1,10 +1,10 @@
 ---
-title: "Nano Banana 2 Native API Reference"
+title: "Gemini 3.1 Flash Image（Nano Banana 2）Native API Reference"
 description: "Native Gemini GenerateContent API reference for google/gemini-3.1-flash-image (Nano Banana 2) on SandBase."
 aside: false
 outline: false
 apiReference:
-  title: Nano Banana 2 (Gemini 3.1 Flash Image)
+  title: Gemini 3.1 Flash Image（Nano Banana 2）
   operation: Gemini GenerateContent
   method: POST
   path: /v1beta/models/gemini-3.1-flash-image:generateContent
@@ -51,7 +51,7 @@ apiReference:
         "usageMetadata": {"totalTokenCount": 980}
       }
 seo:
-  modelName: "Nano Banana 2 (Gemini 3.1 Flash Image)"
+  modelName: "Gemini 3.1 Flash Image（Nano Banana 2）"
   modelId: "google/gemini-3.1-flash-image"
   vendor: "Google"
   vendorSlug: "google"

@@ -41,11 +41,11 @@ const googleModels = [
     link: '/model-api-reference/official-native-api/google/gemini-omni-1.1-flash-preview',
   },
   {
-    text: 'Nano Banana Pro',
+    text: 'Gemini 3 Pro Image（Nano Banana Pro）',
     link: '/model-api-reference/official-native-api/google/gemini-3-pro-image',
   },
   {
-    text: 'Nano Banana 2',
+    text: 'Gemini 3.1 Flash Image（Nano Banana 2）',
     link: '/model-api-reference/official-native-api/google/gemini-3.1-flash-image',
   },
 ]

@@ -26,8 +26,8 @@ GPT Image 2 uses the native OpenAI Images API at `/v1/images/generations`. Pass 
 
 - [Gemini Omni Flash Preview](/model-api-reference/official-native-api/google/gemini-omni-flash-preview)
 - [Gemini Omni 1.1 Flash Preview](/model-api-reference/official-native-api/google/gemini-omni-1.1-flash-preview)
-- [Nano Banana Pro (Gemini 3 Pro Image)](/model-api-reference/official-native-api/google/gemini-3-pro-image)
-- [Nano Banana 2 (Gemini 3.1 Flash Image)](/model-api-reference/official-native-api/google/gemini-3.1-flash-image)
+- [Gemini 3 Pro Image（Nano Banana Pro）](/model-api-reference/official-native-api/google/gemini-3-pro-image)
+- [Gemini 3.1 Flash Image（Nano Banana 2）](/model-api-reference/official-native-api/google/gemini-3.1-flash-image)
 
 Gemini Omni models use the native Google Gemini Interactions protocol at `/v1beta/interactions`. The two image models
 use Google GenerateContent at `/v1beta/models/{model}:generateContent`; their native request and response payloads are

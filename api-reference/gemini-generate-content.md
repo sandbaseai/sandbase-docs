@@ -75,8 +75,8 @@ curl -N -X POST \
 
 These image models have dedicated native GenerateContent mappings:
 
-- [Nano Banana Pro (Gemini 3 Pro Image)](/model-api-reference/official-native-api/google/gemini-3-pro-image)
-- [Nano Banana 2 (Gemini 3.1 Flash Image)](/model-api-reference/official-native-api/google/gemini-3.1-flash-image)
+- [Gemini 3 Pro Image（Nano Banana Pro）](/model-api-reference/official-native-api/google/gemini-3-pro-image)
+- [Gemini 3.1 Flash Image（Nano Banana 2）](/model-api-reference/official-native-api/google/gemini-3.1-flash-image)
 
 For these mappings, SandBase forwards the request and response payloads without converting them through Chat
 Completions. This preserves image parts, response modalities, and provider-defined fields. Use the bare model name in
