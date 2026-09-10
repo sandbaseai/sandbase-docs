@@ -177,6 +177,14 @@ for (const filename of ['gemini-3-pro-image.md', 'gemini-3.1-flash-image.md']) {
   assert.doesNotMatch(geminiImageReference, /path:\s*\/v1\/chat\/completions/, `${filename} must not advertise Chat Completions`)
 }
 
+for (const variant of ['flare', 'sunburst']) {
+  const gptImage25Reference = readFileSync(`model-api-reference/official-native-api/openai/gpt-image-2.5-${variant}.md`, 'utf8')
+  assert.match(gptImage25Reference, /path:\s*\/v1\/images\/generations/, `GPT Image 2.5 ${variant} must document native generation`)
+  assert.match(gptImage25Reference, /POST \/v1\/images\/edits/, `GPT Image 2.5 ${variant} must document native editing`)
+  assert.match(gptImage25Reference, new RegExp(`gpt-image-2\\.5-${variant}`), `GPT Image 2.5 ${variant} must use its exact public alias`)
+  assert.doesNotMatch(gptImage25Reference, /model=?(?:"|')?openai\/gpt-image-2\.5/, `GPT Image 2.5 ${variant} must not send an internal model name to the native endpoint`)
+}
+
 const runReference = readFileSync('api-reference/models/run.md', 'utf8')
 assert.doesNotMatch(runReference, /webhook_url[^\n]*API tasks/i, 'Run reference must not promise callbacks for API capabilities')
 assert.match(runReference, /webhook_url[^\n]*image, video, or audio tasks/i, 'Run reference must match webhook capability scope')

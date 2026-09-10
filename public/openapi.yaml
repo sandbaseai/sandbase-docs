@@ -234,9 +234,9 @@ paths:
       tags: [Images]
       summary: Generate an image
       description: >-
-        Generate images through the synchronous OpenAI Images-compatible endpoint. The public model name is
-        gpt-image-2. Additional compatible JSON fields are forwarded unchanged. Streaming and asynchronous mode
-        are not supported on this endpoint.
+        Generate images through the synchronous OpenAI Images-compatible endpoint. Supported public model names are
+        gpt-image-2, gpt-image-2.5-flare, and gpt-image-2.5-sunburst. Additional compatible JSON fields are forwarded
+        unchanged. Streaming and asynchronous mode are not supported on this endpoint.
       requestBody:
         required: true
         content:
@@ -281,8 +281,9 @@ paths:
       summary: Edit an image
       description: >-
         Edit one or more uploaded images through the synchronous OpenAI Images-compatible multipart endpoint.
-        Repeating the image field is supported. Additional compatible multipart fields are forwarded unchanged.
-        Streaming and asynchronous mode are not supported on this endpoint.
+        Supported public model names are gpt-image-2, gpt-image-2.5-flare, and gpt-image-2.5-sunburst. Repeating the
+        image field is supported. Additional compatible multipart fields are forwarded unchanged. Streaming and
+        asynchronous mode are not supported on this endpoint.
       requestBody:
         required: true
         content:
@@ -4372,7 +4373,7 @@ components:
       properties:
         model:
           type: string
-          const: gpt-image-2
+          enum: [gpt-image-2, gpt-image-2.5-flare, gpt-image-2.5-sunburst]
         prompt:
           type: string
           minLength: 1
@@ -4381,10 +4382,10 @@ components:
           minimum: 1
         size:
           type: string
-          description: Output size supported by gpt-image-2, such as 1024x1024, 1024x1536, 1536x1024, or auto.
+          description: Output size supported by the selected model, such as 1024x1024, 1024x1536, 1536x1024, or auto.
         quality:
           type: string
-          description: Output quality supported by gpt-image-2, such as low, medium, high, or auto.
+          description: Output quality supported by the selected model, such as low, medium, high, or auto.
         background:
           type: string
           description: Background setting such as transparent, opaque, or auto.
@@ -4416,7 +4417,7 @@ components:
       properties:
         model:
           type: string
-          const: gpt-image-2
+          enum: [gpt-image-2, gpt-image-2.5-flare, gpt-image-2.5-sunburst]
         prompt:
           type: string
           minLength: 1

@@ -26,6 +26,14 @@ const models = [
 
 const openaiModels = [
   {
+    text: 'GPT Image 2.5 Flare',
+    link: '/model-api-reference/official-native-api/openai/gpt-image-2.5-flare',
+  },
+  {
+    text: 'GPT Image 2.5 Sunburst',
+    link: '/model-api-reference/official-native-api/openai/gpt-image-2.5-sunburst',
+  },
+  {
     text: 'GPT Image 2',
     link: '/model-api-reference/official-native-api/openai/gpt-image-2',
   },

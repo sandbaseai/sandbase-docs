@@ -541,10 +541,11 @@ assert.match(imageGenerationPath, /application\/json:/, 'Image generation must d
 const imageEditPath = openapi.match(/^  \/v1\/images\/edits:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(imageEditPath, /multipart\/form-data:/, 'Image edits must document multipart uploads')
 const imageGenerationRequest = openapi.match(/^    ImageGenerationRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(imageGenerationRequest, /const: gpt-image-2/, 'Image generation must publish the implemented public model alias')
+assert.match(imageGenerationRequest, /enum: \[gpt-image-2, gpt-image-2\.5-flare, gpt-image-2\.5-sunburst\]/, 'Image generation must publish every implemented public model alias')
 assert.match(imageGenerationRequest, /additionalProperties: true/, 'Image generation must preserve compatible JSON fields')
 assert.match(imageGenerationRequest, /stream:\n\s+type: boolean\n\s+const: false/, 'Image generation must not advertise unsupported streaming')
 const imageEditRequest = openapi.match(/^    ImageEditRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
+assert.match(imageEditRequest, /enum: \[gpt-image-2, gpt-image-2\.5-flare, gpt-image-2\.5-sunburst\]/, 'Image edits must publish every implemented public model alias')
 assert.match(imageEditRequest, /required: \[model, prompt, image\]/, 'Image edits must require model, prompt, and source image')
 assert.match(imageEditRequest, /type: array\n\s+items:\n\s+type: string\n\s+format: binary/, 'Image edits must allow repeated source image files')
 const imagesResponse = openapi.match(/^    ImagesResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
@@ -682,6 +683,10 @@ assert.match(officialNativeSidebar, /official-native-api\/google\/gemini-3\.1-fl
 assert.doesNotMatch(officialNativeSidebar, /llm-models\/google\/gemini-3(?:\.1)?-(?:pro|flash)-image/, 'Official Native API sidebar must use dedicated native pages for Gemini image models')
 assert.match(officialNativeSidebar, /GPT Image 2/, 'Official Native API sidebar must expose GPT Image 2')
 assert.match(officialNativeSidebar, /official-native-api\/openai\/gpt-image-2/, 'Official Native API sidebar must link GPT Image 2')
+assert.match(officialNativeSidebar, /GPT Image 2\.5 Flare/, 'Official Native API sidebar must expose GPT Image 2.5 Flare')
+assert.match(officialNativeSidebar, /official-native-api\/openai\/gpt-image-2\.5-flare/, 'Official Native API sidebar must link GPT Image 2.5 Flare')
+assert.match(officialNativeSidebar, /GPT Image 2\.5 Sunburst/, 'Official Native API sidebar must expose GPT Image 2.5 Sunburst')
+assert.match(officialNativeSidebar, /official-native-api\/openai\/gpt-image-2\.5-sunburst/, 'Official Native API sidebar must link GPT Image 2.5 Sunburst')
 const scheduleOverview = readFileSync(new URL('../api-reference/deployments/index.md', import.meta.url), 'utf8')
 assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/runs/, 'Schedule overview must document the preferred plural trigger path')
 assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/run` remains a compatibility alias/, 'Schedule overview must label the singular trigger path as compatibility-only')
