@@ -12,9 +12,11 @@ section.
 
 ## OpenAI
 
+- [GPT Image 2.5 Flare](/model-api-reference/official-native-api/openai/gpt-image-2.5-flare)
+- [GPT Image 2.5 Sunburst](/model-api-reference/official-native-api/openai/gpt-image-2.5-sunburst)
 - [GPT Image 2](/model-api-reference/official-native-api/openai/gpt-image-2)
 
-GPT Image 2 uses the native OpenAI Images API at `/v1/images/generations`. Pass `gpt-image-2` as the model value and use the synchronous response directly; this is separate from the general `/v1/run` model endpoint.
+GPT Image models use the native OpenAI Images API at `/v1/images/generations` and `/v1/images/edits`. Pass the exact public model value shown on each page and use the synchronous response directly; these endpoints are separate from the general `/v1/run` model endpoint. Choose Flare for faster everyday creative work and Sunburst when visual fidelity and precision take priority.
 
 ## ByteDance
 
