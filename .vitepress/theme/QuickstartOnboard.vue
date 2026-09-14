@@ -217,12 +217,12 @@ const steps = copy.steps
   position: relative;
   z-index: 1;
   margin: 0 0 32px;
-  max-width: 42rem;
   color: var(--vp-c-text-1);
   font-size: clamp(26px, 3.2vw, 34px);
   font-weight: 550;
   line-height: 1.28;
   letter-spacing: -0.042em;
+  white-space: nowrap;
 }
 
 .brief-actions {
@@ -459,12 +459,12 @@ const steps = copy.steps
     gap: 48px;
   }
 
-  .brief-lead {
-    max-width: none;
-  }
-
   .brief::after {
     display: none;
+  }
+
+  .brief-lead {
+    white-space: normal;
   }
 
   .process,
