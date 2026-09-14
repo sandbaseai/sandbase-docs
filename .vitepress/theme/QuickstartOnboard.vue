@@ -217,7 +217,7 @@ const steps = copy.steps
   position: relative;
   z-index: 1;
   margin: 0 0 32px;
-  max-width: 18em;
+  max-width: 42rem;
   color: var(--vp-c-text-1);
   font-size: clamp(26px, 3.2vw, 34px);
   font-weight: 550;
