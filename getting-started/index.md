@@ -1,18 +1,21 @@
 ---
 title: Getting Started
-description: Learn how SandBase helps you use Models, APIs, and Agents through Setup, direct API calls, or Build Agent.
+description: Learn how SandBase helps you use Models, APIs, and Agents through API calls, the website, Setup, or Build Agent.
 ---
 
 # Getting Started with SandBase
 
 SandBase helps your Agent connect to the real world.
 
-You can use it in three simple ways:
+Start with [Quickstart](/getting-started/quickstart) if you are new: create an account, set up an organization, then make one real request.
+
+After that, you can use SandBase in four ways:
 
 | Path | Best for | What you get |
 |---|---|---|
-| **Setup** | People using Codex, Claude, Cursor, or Kiro | Useful Models, APIs, and Services inside your AI app |
 | **Call Models and APIs** | Developers and builders | A working request you can call from your application |
+| **Use on the website** | Trying a capability in the browser | A Store detail page you can run without writing code |
+| **Setup** | People using Codex, Claude, Cursor, or Kiro | Useful Models, APIs, and Services inside your AI app |
 | **Build Agent** | FDEs and teams building reusable workflows | An Agent you can test, publish, or schedule |
 
 ## Core ideas
@@ -46,9 +49,13 @@ After it works, you can:
 
 ## Where should I start?
 
-If you want tools in your AI app, start with [Setup](/setup/).
+If you do not have an account yet, start with [Quickstart](/getting-started/quickstart).
 
 If you want to call one capability from code, browse the live [Model Store](https://www.sandbase.ai/models) or [API Store](https://www.sandbase.ai/apis), then use the matching documentation and request example.
+
+If you want to try a capability in the browser first, open a Store detail page on [sandbase.ai](https://www.sandbase.ai/models).
+
+If you want tools in your AI app, start with [Setup](/setup/).
 
 If you want a repeatable workflow, start with [Build Agent](/agents/).
 

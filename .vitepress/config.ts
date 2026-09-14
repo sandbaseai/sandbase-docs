@@ -141,7 +141,7 @@ function modelPageHead(pageData: any) {
       url: siteOrigin,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteOrigin}${docsBase}logo-horizontal-light.png`,
+        url: `${siteOrigin}${docsBase}logo-light.png`,
       },
     },
   }
@@ -261,6 +261,8 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/docs/favicon.svg' }],
     ['link', { rel: 'icon', type: 'image/png', href: '/docs/favicon.png' }],
+    ['link', { rel: 'shortcut icon', href: '/docs/favicon.ico' }],
+    ['link', { rel: 'apple-touch-icon', href: '/docs/apple-touch-icon.png' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap' }],
@@ -282,18 +284,18 @@ export default defineConfig({
 
   themeConfig: {
     logo: {
-      light: '/logo-horizontal-light.png',
-      dark: '/logo-horizontal-dark.png',
+      light: '/logo-light.png',
+      dark: '/logo-dark.png',
       alt: 'SandBase',
     },
-    siteTitle: false,
-    logoLink: { link: 'https://www.sandbase.ai', target: '_self', rel: '' },
+    siteTitle: 'SandBase',
+    logoLink: { link: 'https://www.sandbase.ai', target: '_blank', rel: 'noopener noreferrer' },
 
     nav: [
       { text: 'Docs', link: '/', activeMatch: '^/(?!api-reference/|model-api-reference/)' },
       { text: 'Model API Reference', link: '/model-api-reference/', activeMatch: '^/model-api-reference/' },
       { text: 'Platform API', link: '/api-reference/', activeMatch: '^/api-reference/' },
-      { text: 'Console', link: 'https://www.sandbase.ai/console' },
+      { text: 'Console', link: 'https://www.sandbase.ai/console', target: '_blank', rel: 'noopener noreferrer' },
     ],
 
     sidebar: {

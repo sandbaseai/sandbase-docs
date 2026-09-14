@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { withBase } from 'vitepress'
+
 type SocialLink = {
   href: string
   label: string
@@ -67,9 +69,12 @@ const footerColumns: FooterColumn[] = [
 <template>
   <footer class="sb-contact-footer" aria-label="SandBase footer">
     <div class="sb-contact-brand">
-      <a class="sb-contact-logo" href="https://www.sandbase.ai" aria-label="SandBase home">
-        <img class="sb-logo-light" src="/logo-horizontal-light.png" alt="SandBase" />
-        <img class="sb-logo-dark" src="/logo-horizontal-dark.png" alt="SandBase" />
+      <a class="sb-contact-logo" href="https://www.sandbase.ai" target="_blank" rel="noopener noreferrer" aria-label="SandBase home">
+        <span class="sb-contact-mark" aria-hidden="true">
+          <img class="sb-logo-light" :src="withBase('/logo-light.png')" alt="" />
+          <img class="sb-logo-dark" :src="withBase('/logo-dark.png')" alt="" />
+        </span>
+        <span class="sb-contact-wordmark">SandBase</span>
       </a>
 
       <div class="sb-contact-links">
@@ -109,7 +114,13 @@ const footerColumns: FooterColumn[] = [
     <nav class="sb-footer-columns" aria-label="Footer navigation">
       <div v-for="column in footerColumns" :key="column.title" class="sb-footer-column">
         <h2>{{ column.title }}</h2>
-        <a v-for="link in column.links" :key="link.href" :href="link.href">
+        <a
+          v-for="link in column.links"
+          :key="link.href"
+          :href="link.href"
+          :target="link.href.startsWith('http') || link.href.startsWith('mailto:') ? '_blank' : undefined"
+          :rel="link.href.startsWith('http') ? 'noopener noreferrer' : undefined"
+        >
           {{ link.label }}
         </a>
       </div>

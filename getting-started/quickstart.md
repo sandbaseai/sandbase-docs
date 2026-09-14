@@ -1,44 +1,68 @@
 ---
 title: Quickstart
-description: Start with SandBase through Setup, direct API calls, or Build Agent.
+description: Create a SandBase account, set up an organization, then call an API, try it on the website, connect an AI tool, or build an Agent.
+pageClass: quickstart-page
 ---
 
 # Quickstart
 
-Pick the path that matches what you want to do now.
+<QuickstartOnboard />
 
-## Option 1: Use SandBase in your AI tool
+## 1. Create your account {#create-account}
 
-Choose this if you use Codex, Claude, Cursor, or Kiro and want more tools inside that app.
+SandBase uses GitHub or Google. There is no separate email-and-password signup.
 
-1. Open [Setup](https://www.sandbase.ai/console/setup).
-2. Choose your AI tool and review its prerequisites.
-3. Run the command or import steps shown for that client.
-4. Complete authorization, then restart or reload the client if instructed.
-5. Verify the SandBase entry and make one safe tool request.
+1. Open [Create account / Sign in](https://www.sandbase.ai/login){target="_blank"}.
+2. Complete the security check, then choose **Sign in with GitHub** or **Sign in with Google**.
+3. Approve access in the provider window.
+4. Confirm you land in the [Console](https://www.sandbase.ai/console){target="_blank"}.
 
-To change what the connected tool can discover, open [Workspace Services](https://www.sandbase.ai/console/setup/installed).
+First login creates your account and a **personal workspace**. You do not need to create an organization before you can try SandBase.
 
-For example, after adding a web search API, you can ask:
+If a welcome credit appears, you can start without adding a payment method. Treat [Console Credits](https://www.sandbase.ai/console/billing){target="_blank"} as the source of truth for the current balance.
 
-> Research this company and give me a sourced customer brief.
+## 2. Create an organization {#create-organization}
 
-Learn more: [Setup](/setup/).
+API keys, usage, and billing belong to an organization. Stay in the personal workspace if you are evaluating alone. Create a team when several people will share keys and spend.
 
-## Option 2: Call a Model or API
+| Workspace | When to use it |
+|---|---|
+| **Personal** | Created automatically on first login. One per user. |
+| **Team** | Shared members, keys, and balance. Create this for a company or project. |
+
+### 2.1 Create a team {#create-team}
+
+1. Open [Create team](https://www.sandbase.ai/console/members?create=1){target="_blank"}, or use **Create Team** in the Console header menu.
+2. Enter a team name, then create the workspace.
+3. Confirm the Console header now shows that team as the active organization.
+4. Select **Add member** and enter the email of an existing SandBase account.
+
+An invited person must already have a SandBase account. If they do not, send them [this page](/getting-started/quickstart) so they can sign in first, then add them.
+
+If you belong to more than one organization, switch in the Console header. Keys and billing follow the **active** organization. See [Organizations](/admin/organizations) for roles.
+
+## 3. Connect SandBase {#connect}
+
+Pick the path that matches the work you need to do now. You can add the others later. Confirm the active organization first so keys and connected tools land in the right workspace.
+
+### 3.1 Call an API {#call-api}
 
 Choose this if you are adding one capability to your app.
 
-1. Browse the live [Model Store](https://www.sandbase.ai/models) or [API Store](https://www.sandbase.ai/apis).
-2. Open the detail page.
-3. Copy the request.
-4. Call it with your SandBase API key.
+1. Create an [API key](/getting-started/api-keys) in [Console → API Keys](https://www.sandbase.ai/console/keys){target="_blank"}. Copy it immediately; it is shown only once.
+2. Filter the Store and open a detail page:
+   - [Language models](https://www.sandbase.ai/models){target="_blank"} — filter by provider, capabilities, context, and price
+   - [Image and video models](https://www.sandbase.ai/models/image-video){target="_blank"} — filter multimodal models such as text-to-image, image-to-image, text-to-video, and image-to-video
+   - [APIs](https://www.sandbase.ai/apis){target="_blank"} — filter API resources by platform and data source
+3. Copy the request and call it with your SandBase API key.
 
 Example Model call:
 
 ```bash
+export SANDBASE_API_KEY="sk-YOUR_KEY"
+
 curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
+  -H "Authorization: Bearer $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "deepseek/deepseek-v4-flash",
@@ -48,11 +72,43 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 Learn more: [First API Call](/getting-started/first-call).
 
-## Option 3: Build an Agent
+### 3.2 Use SandBase on the website {#use-on-website}
+
+Choose this if you want to try a Model, API, or Agent in the browser first — no client install and no code.
+
+1. Sign in, then open the Store:
+   - [Language models](https://www.sandbase.ai/models){target="_blank"}
+   - [Image and video models](https://www.sandbase.ai/models/image-video){target="_blank"}
+   - [APIs](https://www.sandbase.ai/apis){target="_blank"}
+   - [Agents](https://www.sandbase.ai/agents){target="_blank"}
+2. Filter and open a detail page.
+3. Run one request on that page and confirm a result comes back.
+
+Learn more: [Store](/store/).
+
+### 3.3 Use SandBase in your AI tool {#use-in-ai-tool}
+
+Choose this if you use Codex, Claude, Cursor, Kiro, or another supported client and want Models, APIs, and Services inside that app.
+
+1. Open [Setup](https://www.sandbase.ai/console/setup){target="_blank"}.
+2. Choose your AI tool and review its prerequisites.
+3. Run the command or import steps shown for that client.
+4. Complete authorization, then restart or reload the client if instructed.
+5. Verify the SandBase entry and make one safe tool request.
+
+To change what the connected tool can discover, open [Workspace Services](https://www.sandbase.ai/console/setup/installed){target="_blank"}.
+
+For example, after adding a web search API, you can ask:
+
+> Research this company and give me a sourced customer brief.
+
+Learn more: [Connect AI tools](/setup/).
+
+### 3.4 Build an Agent {#build-agent}
 
 Choose this if the work has multiple steps or should be reused.
 
-1. Open [Build Agent](https://www.sandbase.ai/console/agents).
+1. Open [Build Agent](https://www.sandbase.ai/console/agents){target="_blank"}.
 2. Define the Agent instructions.
 3. Pick a Model.
 4. Add APIs and Skills.
@@ -61,9 +117,28 @@ Choose this if the work has multiple steps or should be reused.
 
 Learn more: [Build Agent](/agents/).
 
-## What to do next
+## 4. Confirm it works {#confirm-it-works}
 
-- [Store](/store/) — find Models, APIs, Agents, and Skills
+You are ready when all of the following are true:
+
+- The Console header shows the organization you intend to use.
+- You completed one path: an API call, a run on the website, a connected AI tool, or an Agent.
+- One request succeeds.
+
+If the request fails, check the active organization, the key, and [Errors](/guides/error-handling). Add credits in [Billing](https://www.sandbase.ai/console/billing){target="_blank"} when the workspace has no remaining balance.
+
+## 5. Billing and usage {#billing-and-usage}
+
+After you sign in, review spend for the active organization:
+
+<QuickstartResources group="ops" />
+
+## 6. What to do next {#next-steps}
+
+<QuickstartResources group="catalog" />
+
+- [API keys](/getting-started/api-keys) — create and rotate organization keys
+- [Store](/store/) — try Models, APIs, and Agents on the website
 - [Setup](/setup/) — install capabilities into AI tools
 - [Build Agent](/agents/) — create reusable Agents
 - [API Reference](/api-reference/) — integrate with code
