@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withBase } from 'vitepress'
+import BrandMark from './BrandMark.vue'
 
 type SocialLink = {
   href: string
@@ -71,8 +71,7 @@ const footerColumns: FooterColumn[] = [
     <div class="sb-contact-brand">
       <a class="sb-contact-logo" href="https://www.sandbase.ai" target="_blank" rel="noopener noreferrer" aria-label="SandBase home">
         <span class="sb-contact-mark" aria-hidden="true">
-          <img class="sb-logo-light" :src="withBase('/logo-light.png')" alt="" />
-          <img class="sb-logo-dark" :src="withBase('/logo-dark.png')" alt="" />
+          <BrandMark />
         </span>
         <span class="sb-contact-wordmark">SandBase</span>
       </a>

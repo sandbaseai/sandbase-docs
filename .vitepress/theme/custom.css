@@ -268,43 +268,37 @@
 .sb-contact-logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.7rem;
   max-width: 100%;
-  color: var(--vp-c-text-1);
+  color: #000;
   text-decoration: none;
+}
+
+.dark .sb-contact-logo {
+  color: #fff;
 }
 
 .sb-contact-mark {
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 21.11px;
+  height: 26px;
   flex: none;
   overflow: hidden;
-  border-radius: 6px;
+  border-radius: 0.4rem;
+  color: inherit;
 }
 
-.sb-contact-logo img {
-  display: block;
+.sb-brand-mark {
   grid-area: 1 / 1;
-  width: 32px;
-  height: 32px;
-  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .sb-contact-wordmark {
-  font-size: 1.125rem;
+  font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1;
-}
-
-.sb-logo-dark,
-.dark .sb-logo-light {
-  display: none;
-}
-
-.dark .sb-logo-dark {
-  display: block;
 }
 
 .sb-contact-links {
@@ -423,23 +417,33 @@
   }
 }
 
-/* Nav brand — mark plus wordmark, matching the main site */
+/* Nav brand — stacked mark plus wordmark, matching the main site */
 .VPNavBarTitle {
   display: flex;
   align-items: center;
 }
 
 .VPNavBarTitle .title {
-  color: var(--vp-c-text-1) !important;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #000 !important;
+  font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.dark .VPNavBarTitle .title {
+  color: #fff !important;
 }
 
 .VPNavBar .VPImage.logo {
-  height: 28px;
-  width: 28px;
-  object-fit: cover;
-  border-radius: 6px;
+  width: 21.11px;
+  height: 26px;
+  margin-right: 0;
+  object-fit: contain;
+  border-radius: 0.4rem;
 }
 
 /* ─── Nav link styling — align with Dashboard (15px / 500, active 600) ─── */

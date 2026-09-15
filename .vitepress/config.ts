@@ -284,8 +284,8 @@ export default defineConfig({
 
   themeConfig: {
     logo: {
-      light: '/logo-light.png',
-      dark: '/logo-dark.png',
+      light: '/logo-mark-light.svg',
+      dark: '/logo-mark-dark.svg',
       alt: 'SandBase',
     },
     siteTitle: 'SandBase',

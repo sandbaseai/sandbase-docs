@@ -15,7 +15,7 @@ export default {
   Layout() {
     return h(DefaultTheme.Layout, null, {
       'sidebar-nav-after': () => [h(PlatformApiSidebar), h(OfficialNativeApiSidebar)],
-      'doc-footer-after': () => h(ContactFooter),
+      'doc-after': () => h(ContactFooter),
     })
   },
   enhanceApp({ app }) {
