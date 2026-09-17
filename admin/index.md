@@ -1,6 +1,6 @@
 ---
 title: Workspace
-description: Manage your SandBase organization, API keys, billing, usage, and limits.
+description: Manage your AGRouter organization, API keys, billing, usage, and limits.
 ---
 
 # Workspace

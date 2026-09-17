@@ -27,7 +27,7 @@ from anthropic import Anthropic
 
 client = Anthropic(
     api_key="sk-sb-YOUR_KEY",
-    base_url="https://api.sandbase.ai"
+    base_url="https://api.agrouter.ai"
 )
 
 env = client.beta.environments.archive(
@@ -37,7 +37,7 @@ print(env.archived_at)
 ```
 
 ```bash [cURL]
-curl -X POST https://api.sandbase.ai/v1/environments/env_011CZkZ9X2dpNyB7HsEFoRfW/archive \
+curl -X POST https://api.agrouter.ai/v1/environments/env_011CZkZ9X2dpNyB7HsEFoRfW/archive \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 

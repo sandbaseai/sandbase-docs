@@ -29,7 +29,7 @@ from anthropic import Anthropic
 
 client = Anthropic(
     api_key="sk-sb-YOUR_KEY",
-    base_url="https://api.sandbase.ai"
+    base_url="https://api.agrouter.ai"
 )
 
 page = client.beta.environments.list(limit=20)
@@ -38,7 +38,7 @@ for env in page.data:
 ```
 
 ```bash [cURL]
-curl "https://api.sandbase.ai/v1/environments?limit=20" \
+curl "https://api.agrouter.ai/v1/environments?limit=20" \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 

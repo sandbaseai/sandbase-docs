@@ -1,16 +1,16 @@
 ---
 title: Sandbox API
-description: E2B-compatible Sandbox API reference for SandBase. Create, manage, and interact with cloud sandboxes for code execution.
+description: E2B-compatible Sandbox API reference for AGRouter. Create, manage, and interact with cloud sandboxes for code execution.
 ---
 
 # Sandbox API
 
-SandBase provides an E2B-compatible Sandbox API for creating and managing isolated cloud execution environments. You can use the [E2B SDK](https://e2b.dev) pointed at SandBase, or call the REST endpoints directly.
+AGRouter provides an E2B-compatible Sandbox API for creating and managing isolated cloud execution environments. You can use the [E2B SDK](https://e2b.dev) pointed at AGRouter, or call the REST endpoints directly.
 
 ## Base URL
 
 ```
-https://api.sandbase.ai
+https://api.agrouter.ai
 ```
 
 ## Authentication
@@ -84,7 +84,7 @@ POST /sandboxes
 ::: code-group
 
 ```bash [cURL]
-curl -X POST https://api.sandbase.ai/sandboxes \
+curl -X POST https://api.agrouter.ai/sandboxes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -99,7 +99,7 @@ curl -X POST https://api.sandbase.ai/sandboxes \
 import requests
 
 resp = requests.post(
-    "https://api.sandbase.ai/sandboxes",
+    "https://api.agrouter.ai/sandboxes",
     headers={"Authorization": "Bearer sk-sb-YOUR_KEY"},
     json={
         "templateID": "code_interpreter",
@@ -138,7 +138,7 @@ print(sandbox["sandboxID"])
 | `status` | string | `creating`, `running`, `paused`, `stopped`, `error` |
 
 ::: tip E2B field compatibility
-The E2B `Sandbox` schema also includes `cpuCount`, `memoryMB`, `diskSizeMB`, `envdVersion`, `state`, `alias`, and `envdAccessToken`. SandBase returns `status` (equivalent to E2B's `state`) and the core fields above; the remaining E2B fields are on the roadmap. E2B SDK clients tolerate their absence.
+The E2B `Sandbox` schema also includes `cpuCount`, `memoryMB`, `diskSizeMB`, `envdVersion`, `state`, `alias`, and `envdAccessToken`. AGRouter returns `status` (equivalent to E2B's `state`) and the core fields above; the remaining E2B fields are on the roadmap. E2B SDK clients tolerate their absence.
 :::
 
 ---
@@ -158,7 +158,7 @@ List sandboxes for your organization, ordered most-recently-created first.
 | `status` | string | ❌ | Filter by status: `running`, `paused`, `stopped`, `creating`, `error` |
 
 ```bash
-curl "https://api.sandbase.ai/sandboxes?status=running" \
+curl "https://api.agrouter.ai/sandboxes?status=running" \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -191,7 +191,7 @@ GET /sandboxes/:id
 Returns the same [sandbox object](#response) as Create.
 
 ```bash
-curl https://api.sandbase.ai/sandboxes/sbx_a1b2c3d4e5f6 \
+curl https://api.agrouter.ai/sandboxes/sbx_a1b2c3d4e5f6 \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -213,7 +213,7 @@ DELETE /sandboxes/:id
 Permanently destroys the sandbox. Returns **HTTP 204 No Content** with an empty body.
 
 ```bash
-curl -X DELETE https://api.sandbase.ai/sandboxes/sbx_a1b2c3d4e5f6 \
+curl -X DELETE https://api.agrouter.ai/sandboxes/sbx_a1b2c3d4e5f6 \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -228,7 +228,7 @@ POST /sandboxes/:id/pause
 Pauses a running sandbox, preserving its filesystem and memory state for later resume. See [Persistence](/agents/sandbox-persistence).
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_a1b2c3d4e5f6/pause \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_a1b2c3d4e5f6/pause \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -256,7 +256,7 @@ Resumes a paused sandbox and returns the sandbox object. Connecting also extends
 | `timeout` | integer | ❌ | New timeout in **seconds** from now |
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_a1b2c3d4e5f6/connect \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_a1b2c3d4e5f6/connect \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{ "timeout": 300 }'
@@ -281,7 +281,7 @@ Sets the sandbox timeout. The sandbox will expire `timeout` seconds from the tim
 | `timeout` | integer | ✅ | Seconds from now until the sandbox expires |
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_a1b2c3d4e5f6/timeout \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_a1b2c3d4e5f6/timeout \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{ "timeout": 600 }'
@@ -306,7 +306,7 @@ POST /sandboxes/:id/processes
 | `timeout` | integer | ❌ | 60 | Execution timeout in seconds |
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_a1b2c3d4e5f6/processes \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_a1b2c3d4e5f6/processes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{ "cmd": "python3", "args": ["-c", "print(2+2)"], "timeout": 30 }'
@@ -390,7 +390,7 @@ Track sandbox lifecycle (`created`, `paused`, `resumed`, `killed`, `updated`) vi
 | `error` | Fatal error during creation |
 
 ::: tip Roadmap — E2B endpoints not yet available
-The following E2B platform endpoints are part of the E2B API but not yet exposed by SandBase:
+The following E2B platform endpoints are part of the E2B API but not yet exposed by AGRouter:
 
 - `GET /v2/sandboxes` (list with metadata filter + cursor pagination) — the v1 `GET /sandboxes` with `status` filter is available today
 - `POST /sandboxes/:id/snapshots`, `GET /snapshots` (snapshots)

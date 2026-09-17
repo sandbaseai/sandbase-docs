@@ -57,7 +57,7 @@ Pause agent execution and return control to the user. The session transitions ba
 ```
 
 ::: info Roadmap — tool result events
-Claude also accepts `user.tool_confirmation` (approve/deny a tool call under an `always_ask` policy) and `user.custom_tool_result` (return a client-executed custom tool result). SandBase does not yet accept these event types — sending them returns `400 invalid_request`. They will be added alongside tool permission policies and custom tools.
+Claude also accepts `user.tool_confirmation` (approve/deny a tool call under an `always_ask` policy) and `user.custom_tool_result` (return a client-executed custom tool result). AGRouter does not yet accept these event types — sending them returns `400 invalid_request`. They will be added alongside tool permission policies and custom tools.
 :::
 
 ## Content Blocks
@@ -107,7 +107,7 @@ from anthropic import Anthropic
 
 client = Anthropic(
     api_key="sk-sb-YOUR_KEY",
-    base_url="https://api.sandbase.ai"
+    base_url="https://api.agrouter.ai"
 )
 
 result = client.beta.sessions.events.send(
@@ -123,7 +123,7 @@ print(result.data)
 ```
 
 ```bash [cURL]
-curl -X POST https://api.sandbase.ai/v1/sessions/sess_01abc.../events \
+curl -X POST https://api.agrouter.ai/v1/sessions/sess_01abc.../events \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{

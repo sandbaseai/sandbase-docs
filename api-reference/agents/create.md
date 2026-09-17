@@ -41,7 +41,7 @@ apiReference:
           description: Agent handoff configurations.
         - name: metadata
           type: object
-          description: Application-defined JSON metadata. The platform-owned _sandbase namespace is stripped from public requests.
+          description: Application-defined JSON metadata. The platform-owned _agrouter namespace is stripped from public requests.
     - title: Agent object
       description: Fields returned for an agent resource.
       fields:
@@ -68,8 +68,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |
-        curl -X POST https://api.sandbase.ai/v1/agents \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+        curl -X POST https://api.agrouter.ai/v1/agents \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{
             "model": "anthropic/claude-sonnet-5",
@@ -119,7 +119,7 @@ apiReference:
       }
   notes:
     - title: Model choice
-      description: SandBase is multi-model. The model field accepts any available model identifier from the SandBase catalog.
+      description: AGRouter is multi-model. The model field accepts any available model identifier from the AGRouter catalog.
     - title: Tool execution
       description: Built-in tools run inside the managed agent runtime. Custom tools are executed by your client after an agent.custom_tool_use event.
   errors:

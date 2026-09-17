@@ -23,8 +23,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |-
-        curl -X POST https://api.sandbase.ai/v1/sessions/sess_01... \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+        curl -X POST https://api.agrouter.ai/v1/sessions/sess_01... \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"title":"Research follow-up","metadata":{"phase":2,"obsolete_key":null}}'
 ---

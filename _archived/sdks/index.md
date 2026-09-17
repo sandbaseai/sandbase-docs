@@ -1,24 +1,24 @@
 ---
 title: SDK Overview
-description: Use existing OpenAI and Anthropic SDKs with SandBase — no custom SDK needed, just change the base URL.
+description: Use existing OpenAI and Anthropic SDKs with AGRouter — no custom SDK needed, just change the base URL.
 ---
 
 # SDK Overview
 
-SandBase is fully compatible with the official **OpenAI** and **Anthropic** SDKs. You don't need a custom SandBase SDK — just point your existing SDK at SandBase's base URL and use your SandBase API key.
+AGRouter is fully compatible with the official **OpenAI** and **Anthropic** SDKs. You don't need a custom AGRouter SDK — just point your existing SDK at AGRouter's base URL and use your AGRouter API key.
 
 ## Why No Custom SDK?
 
-SandBase implements the OpenAI Chat Completions API and Anthropic Messages API byte-for-byte. This means:
+AGRouter implements the OpenAI Chat Completions API and Anthropic Messages API byte-for-byte. This means:
 
 - ✅ All existing OpenAI SDK features work (streaming, tools, structured output)
 - ✅ All existing Anthropic SDK features work (streaming, thinking, caching)
 - ✅ No new library to learn or maintain
-- ✅ Switch between SandBase and direct providers by changing one line
+- ✅ Switch between AGRouter and direct providers by changing one line
 
 ## Quick Setup
 
-### OpenAI SDK → SandBase
+### OpenAI SDK → AGRouter
 
 ::: code-group
 
@@ -26,7 +26,7 @@ SandBase implements the OpenAI Chat Completions API and Anthropic Messages API b
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",  # ← Only change needed
+    base_url="https://api.agrouter.ai/v1",  # ← Only change needed
     api_key="sk-sb-your-key"
 )
 
@@ -41,7 +41,7 @@ response = client.chat.completions.create(
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  baseURL: 'https://api.sandbase.ai/v1',  // ← Only change needed
+  baseURL: 'https://api.agrouter.ai/v1',  // ← Only change needed
   apiKey: 'sk-sb-your-key',
 });
 
@@ -53,7 +53,7 @@ const response = await client.chat.completions.create({
 
 :::
 
-### Anthropic SDK → SandBase
+### Anthropic SDK → AGRouter
 
 ::: code-group
 
@@ -61,7 +61,7 @@ const response = await client.chat.completions.create({
 import anthropic
 
 client = anthropic.Anthropic(
-    base_url="https://api.sandbase.ai",  # ← Only change needed
+    base_url="https://api.agrouter.ai",  # ← Only change needed
     api_key="sk-sb-your-key"
 )
 
@@ -76,7 +76,7 @@ response = client.messages.create(
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  baseURL: 'https://api.sandbase.ai',  // ← Only change needed
+  baseURL: 'https://api.agrouter.ai',  // ← Only change needed
   apiKey: 'sk-sb-your-key',
 });
 
@@ -100,13 +100,13 @@ const response = await client.messages.create({
 
 ## Cross-Provider Access
 
-The key advantage of SandBase is accessing **any model** through **any SDK**:
+The key advantage of AGRouter is accessing **any model** through **any SDK**:
 
 ```python
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -133,15 +133,15 @@ response = client.chat.completions.create(
 For convenience, set these environment variables instead of hardcoding:
 
 ```bash
-export OPENAI_BASE_URL="https://api.sandbase.ai/v1"
+export OPENAI_BASE_URL="https://api.agrouter.ai/v1"
 export OPENAI_API_KEY="sk-sb-your-key"
 
 # Or for Anthropic SDK
-export ANTHROPIC_BASE_URL="https://api.sandbase.ai"
+export ANTHROPIC_BASE_URL="https://api.agrouter.ai"
 export ANTHROPIC_API_KEY="sk-sb-your-key"
 ```
 
-Then your code doesn't need any SandBase-specific configuration:
+Then your code doesn't need any AGRouter-specific configuration:
 
 ```python
 from openai import OpenAI

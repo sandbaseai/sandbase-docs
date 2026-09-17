@@ -1,7 +1,7 @@
 # Documentation deployment
 
 Production documentation is served from Cloudflare Workers Static Assets at
-`https://www.sandbase.ai/docs/`. The Worker entry point is `worker/index.js`;
+`https://www.agrouter.ai/docs/`. The Worker entry point is `worker/index.js`;
 the VitePress output is uploaded from `.vitepress/dist` as configured in
 `wrangler.jsonc`.
 
@@ -21,7 +21,7 @@ cancel an earlier deployment in the same queue (`cancel-in-progress: false`).
 - Run **Deploy Docs** manually from `main`.
 
 Both paths build and publish the VitePress static assets to Cloudflare Workers,
-then verify `https://www.sandbase.ai/docs/health` with retries.
+then verify `https://www.agrouter.ai/docs/health` with retries.
 
 ## Rollback
 

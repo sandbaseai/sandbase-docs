@@ -11,7 +11,7 @@ const operationCount = computed(() => platformApiReferencePlatforms.reduce((tota
       <p class="eyebrow">Model API Reference</p>
       <h1 id="apis-title">APIs</h1>
       <p class="landing-summary">
-        Call data, automation, search, and platform operations through SandBase using each operation's exact public request schema.
+        Call data, automation, search, and platform operations through AGRouter using each operation's exact public request schema.
       </p>
       <dl class="landing-counts" aria-label="API catalog totals">
         <div>

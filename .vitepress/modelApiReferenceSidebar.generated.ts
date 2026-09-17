@@ -83,8 +83,8 @@ export const platformApiReferencePlatforms = [
     "operationCount": 27
   },
   {
-    "text": "SandBase",
-    "slug": "sandbase",
+    "text": "AGRouter",
+    "slug": "agrouter",
     "operationCount": 18
   },
   {
@@ -1515,15 +1515,15 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
-        text: "sandbase-ai",
+        text: "agrouter-ai",
         collapsed: true,
         items: [
-          { text: "Phota Text to Image", link: "/model-api-reference/image-generation/sandbase-ai/phota" },
-          { text: "Hy Wu Edit", link: "/model-api-reference/image-generation/sandbase-ai/hy-wu-edit" },
-          { text: "Firered Image Edit V1.1", link: "/model-api-reference/image-generation/sandbase-ai/firered-image-edit-v1.1" },
-          { text: "try-on", link: "/model-api-reference/image-generation/sandbase-ai/cat-vton" },
-          { text: "Sana", link: "/model-api-reference/image-generation/sandbase-ai/sana" },
-          { text: "Creative Upscaler", link: "/model-api-reference/image-generation/sandbase-ai/creative-upscaler" },
+          { text: "Phota Text to Image", link: "/model-api-reference/image-generation/agrouter-ai/phota" },
+          { text: "Hy Wu Edit", link: "/model-api-reference/image-generation/agrouter-ai/hy-wu-edit" },
+          { text: "Firered Image Edit V1.1", link: "/model-api-reference/image-generation/agrouter-ai/firered-image-edit-v1.1" },
+          { text: "try-on", link: "/model-api-reference/image-generation/agrouter-ai/cat-vton" },
+          { text: "Sana", link: "/model-api-reference/image-generation/agrouter-ai/sana" },
+          { text: "Creative Upscaler", link: "/model-api-reference/image-generation/agrouter-ai/creative-upscaler" },
         ],
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.

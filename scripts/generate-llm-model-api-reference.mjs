@@ -4,10 +4,10 @@ import { fileURLToPath } from 'node:url'
 
 const docsRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const repoRoot = path.resolve(docsRoot, '..')
-const standaloneRegistryDataRoot = path.join(repoRoot, 'sandbase-registry', 'data')
-const monorepoRegistryDataRoot = path.join(repoRoot, 'sandbase-monorepo', 'sandbase-registry', 'data')
-const registryDataRoot = process.env.SANDBASE_REGISTRY_DATA_ROOT
-  ? path.resolve(process.env.SANDBASE_REGISTRY_DATA_ROOT)
+const standaloneRegistryDataRoot = path.join(repoRoot, 'agrouter-registry', 'data')
+const monorepoRegistryDataRoot = path.join(repoRoot, 'agrouter-monorepo', 'agrouter-registry', 'data')
+const registryDataRoot = process.env.AGROUTER_REGISTRY_DATA_ROOT
+  ? path.resolve(process.env.AGROUTER_REGISTRY_DATA_ROOT)
   : fs.existsSync(standaloneRegistryDataRoot)
     ? standaloneRegistryDataRoot
     : monorepoRegistryDataRoot
@@ -85,10 +85,10 @@ const platformVendorPriority = [
   'nango',
 ]
 
-const platformGeneratedMarker = 'generatedBy: "sandbase-platform-api-reference"'
+const platformGeneratedMarker = 'generatedBy: "agrouter-platform-api-reference"'
 const publicRunExampleID = 'f3d2e8a1-7c4b-4a12-9d2e-123456789abc'
 const requestedModelNames = new Set(
-  (process.env.SANDBASE_GENERATE_MODELS ?? '').split(',').map((name) => name.trim()).filter(Boolean),
+  (process.env.AGROUTER_GENERATE_MODELS ?? '').split(',').map((name) => name.trim()).filter(Boolean),
 )
 
 const sharedPlatformDomains = [
@@ -347,14 +347,14 @@ function seoDisambiguator(model) {
 function cleanDescription(model) {
   const rawDescription = String(model.description ?? '').trim()
   const normalizedDescription = rawDescription === '第三方供应商提供的 Gemini Omni Flash Preview 模型。'
-    ? 'Google Gemini Omni Flash Preview is a multimodal video-generation model available through SandBase. Use the Google Gemini Interactions protocol for native video requests.'
+    ? 'Google Gemini Omni Flash Preview is a multimodal video-generation model available through AGRouter. Use the Google Gemini Interactions protocol for native video requests.'
     : rawDescription
   return normalizedDescription
     .split(/\n\s*\n/)[0]
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\*\*/g, '')
     .replace(/\brespone_format\b/g, 'response_format')
-    // Do not send users to an upstream aggregator from SandBase's model
+    // Do not send users to an upstream aggregator from AGRouter's model
     // reference. Keep the interoperability guidance, but make it local and
     // provider-neutral so generated SEO/API descriptions remain durable.
     .replace(/Reasoning Details must be preserved when using multi-turn tool calling, see our docs here:\s*https?:\/\/openrouter\.ai\/docs\/use-cases\/reasoning-tokens#preserving-reasoning\.?/gi, 'Preserve reasoning details when using multi-turn tool calls.')
@@ -427,11 +427,11 @@ function seoDescription(model, protocol, category) {
   const endpoint = endpointFor(model, category)
   const modelTitle = cleanTitle(model)
   const apiLabel = /\bAPI$/i.test(modelTitle) ? modelTitle : `${modelTitle} API`
-  const base = `${apiLabel} reference for SandBase. Use model ${model.name} with ${endpoint}; see request and response examples.`
+  const base = `${apiLabel} reference for AGRouter. Use model ${model.name} with ${endpoint}; see request and response examples.`
   if (base.length <= 170) return base
-  const concise = `SandBase API reference for model ${model.name}. Call ${endpoint}; see request and response examples.`
+  const concise = `AGRouter API reference for model ${model.name}. Call ${endpoint}; see request and response examples.`
   if (concise.length <= 170) return concise
-  return `SandBase API reference: ${model.name} via ${endpoint}. See request and response examples.`
+  return `AGRouter API reference: ${model.name} via ${endpoint}. See request and response examples.`
 }
 
 function yamlString(value) {
@@ -736,10 +736,10 @@ function exampleValueForField(name, schema = {}) {
   }
   if (schema.examples?.length) return schema.examples[0]
   if (name === 'prompt') return 'A cinematic product photo of a matte black smart speaker on a marble table, soft studio lighting'
-  if (name.includes('audio')) return 'https://static.sandbase.ai/examples/input.mp3'
-  if (name.includes('video')) return 'https://static.sandbase.ai/examples/input.mp4'
-  if (name.includes('image')) return 'https://static.sandbase.ai/examples/input.png'
-  if (['text', 'input'].includes(name)) return 'Hello from SandBase.'
+  if (name.includes('audio')) return 'https://static.agrouter.ai/examples/input.mp3'
+  if (name.includes('video')) return 'https://static.agrouter.ai/examples/input.mp4'
+  if (name.includes('image')) return 'https://static.agrouter.ai/examples/input.png'
+  if (['text', 'input'].includes(name)) return 'Hello from AGRouter.'
   if (name === 'voice') return 'alloy'
   if (schema.enum?.length) return schema.enum[0]
   if (schema.type === 'integer') return schema.minimum ?? 1
@@ -1013,9 +1013,9 @@ function publicPlatformResponseBody(model, status) {
 
 function publicPlatformResponseFields() {
   return [
-    { name: 'id', type: 'string', required: true, description: 'Opaque SandBase run identifier. Use it exactly as returned; no prefix is guaranteed.' },
+    { name: 'id', type: 'string', required: true, description: 'Opaque AGRouter run identifier. Use it exactly as returned; no prefix is guaranteed.' },
     { name: 'status', type: 'string', required: true, description: 'Current public run status.', constraints: 'Allowed values: pending, running, completed, failed, timeout' },
-    { name: 'model', type: 'string', required: true, description: 'Public SandBase model name used for this run.' },
+    { name: 'model', type: 'string', required: true, description: 'Public AGRouter model name used for this run.' },
     { name: 'outputs', type: 'array<object>', required: false, description: 'Present only for completed runs. Contains exactly one item whose only field is data.' },
     { name: 'outputs[0].data', type: 'object | array', required: false, description: 'Operation-specific business payload. This reference uses an empty object when no safe example can be confirmed.' },
     { name: 'error', type: 'object', required: false, description: 'Present only for failed or timeout runs. Contains a public error type and sanitized message.' },
@@ -1040,9 +1040,9 @@ const minimaxH3UsageDescriptions = {
 
 function publicGenerationResponseFields(model) {
   const fields = [
-    { name: 'id', type: 'string', required: true, description: 'Opaque SandBase run identifier. Use it exactly as returned; no prefix is guaranteed.' },
+    { name: 'id', type: 'string', required: true, description: 'Opaque AGRouter run identifier. Use it exactly as returned; no prefix is guaranteed.' },
     { name: 'status', type: 'string', required: true, description: 'Current public run status.', constraints: 'Allowed values: pending, running, completed, failed, timeout' },
-    { name: 'model', type: 'string', required: false, description: 'Public SandBase model name used for this run.' },
+    { name: 'model', type: 'string', required: false, description: 'Public AGRouter model name used for this run.' },
     { name: 'outputs', type: 'array<object>', required: false, description: 'Present only for completed runs. Each object is capability-specific; inspect the selected model schema for its fields.' },
     { name: 'error', type: 'object', required: false, description: 'Present only for failed or timeout runs. Contains a public error type and sanitized message.' },
     { name: 'error.type', type: 'string', required: false, description: 'Stable public error category.' },
@@ -1099,8 +1099,8 @@ function platformReference(model) {
   const responseExamples = ['pending', 'running', 'completed', 'failed', 'timeout']
     .map((status) => ({ title: `${status} response`, description: JSON.stringify(publicPlatformResponseBody(model, status)) }))
   const submitLines = [
-    `curl -X POST https://api.sandbase.ai${apiPath} \\`,
-    '  -H "Authorization: Bearer $SANDBASE_API_KEY" \\',
+    `curl -X POST https://api.agrouter.ai${apiPath} \\`,
+    '  -H "Authorization: Bearer $AGROUTER_API_KEY" \\',
     '  -H "Content-Type: application/json" \\',
     `  -d '${prettyJson(requestPayload)}'`,
   ]
@@ -1109,15 +1109,15 @@ function platformReference(model) {
     ...(isAsync ? ['import time'] : []),
     'import requests',
     '',
-    'headers = {"Authorization": f"Bearer {os.environ[\'SANDBASE_API_KEY\']}"}',
+    'headers = {"Authorization": f"Bearer {os.environ[\'AGROUTER_API_KEY\']}"}',
     `payload = ${pythonLiteral(requestPayload)}`,
-    `response = requests.post("https://api.sandbase.ai${apiPath}", headers=headers, json=payload)`,
+    `response = requests.post("https://api.agrouter.ai${apiPath}", headers=headers, json=payload)`,
     'response.raise_for_status()',
     'result = response.json()',
     ...(isAsync ? [
       'while result["status"] in ("pending", "running"):',
       '    time.sleep(1)',
-      '    poll = requests.get(f"https://api.sandbase.ai/v1/run/{result[\'id\']}", headers=headers)',
+      '    poll = requests.get(f"https://api.agrouter.ai/v1/run/{result[\'id\']}", headers=headers)',
       '    poll.raise_for_status()',
       '    result = poll.json()',
       'if result["status"] in ("failed", "timeout"):',
@@ -1127,14 +1127,14 @@ function platformReference(model) {
   ]
   const typeScriptLines = [
     `const payload = ${prettyJson(requestPayload)};`,
-    'const headers = { Authorization: `Bearer ${process.env.SANDBASE_API_KEY}`, "Content-Type": "application/json" };',
-    `const response = await fetch("https://api.sandbase.ai${apiPath}", { method: "POST", headers, body: JSON.stringify(payload) });`,
+    'const headers = { Authorization: `Bearer ${process.env.AGROUTER_API_KEY}`, "Content-Type": "application/json" };',
+    `const response = await fetch("https://api.agrouter.ai${apiPath}", { method: "POST", headers, body: JSON.stringify(payload) });`,
     'if (!response.ok) throw new Error(await response.text());',
     'let result = await response.json();',
     ...(isAsync ? [
       'while (["pending", "running"].includes(result.status)) {',
       '  await new Promise((resolve) => setTimeout(resolve, 1000));',
-      '  const poll = await fetch(`https://api.sandbase.ai/v1/run/${result.id}`, { headers });',
+      '  const poll = await fetch(`https://api.agrouter.ai/v1/run/${result.id}`, { headers });',
       '  if (!poll.ok) throw new Error(await poll.text());',
       '  result = await poll.json();',
       '}',
@@ -1173,7 +1173,7 @@ function platformReference(model) {
       },
     ],
     examples: [
-      { label: 'cURL', language: 'bash', code: [...submitLines, ...(isAsync ? ['', '# Poll a non-terminal run by its returned opaque id', `curl https://api.sandbase.ai/v1/run/${publicRunExampleID} \\`, '  -H "Authorization: Bearer $SANDBASE_API_KEY"'] : [])].join('\n') },
+      { label: 'cURL', language: 'bash', code: [...submitLines, ...(isAsync ? ['', '# Poll a non-terminal run by its returned opaque id', `curl https://api.agrouter.ai/v1/run/${publicRunExampleID} \\`, '  -H "Authorization: Bearer $AGROUTER_API_KEY"'] : [])].join('\n') },
       { label: 'Python', language: 'python', code: pythonLines.join('\n') },
       { label: 'TypeScript', language: 'typescript', code: typeScriptLines.join('\n') },
     ],
@@ -1346,26 +1346,26 @@ function modelReference(model) {
         language: 'bash',
         code: isGeneration ? [
           '# 1. Submit a generation request',
-          `curl -X POST https://api.sandbase.ai${apiPath} \\`,
-          '  -H "Authorization: Bearer $SANDBASE_API_KEY" \\',
+          `curl -X POST https://api.agrouter.ai${apiPath} \\`,
+          '  -H "Authorization: Bearer $AGROUTER_API_KEY" \\',
           '  -H "Content-Type: application/json" \\',
           `  -d '${prettyJson(requestBody)}'`,
           '',
           '# 2. If the response is still running, poll the returned id',
-          `curl https://api.sandbase.ai${pathWithExampleId(resultPath)} \\`,
-          '  -H "Authorization: Bearer $SANDBASE_API_KEY"',
+          `curl https://api.agrouter.ai${pathWithExampleId(resultPath)} \\`,
+          '  -H "Authorization: Bearer $AGROUTER_API_KEY"',
         ].join('\n') : isGeminiInteractions ? [
-          `curl -X POST https://api.sandbase.ai${apiPath} \\`,
-          '  -H "x-goog-api-key: $SANDBASE_API_KEY" \\',
+          `curl -X POST https://api.agrouter.ai${apiPath} \\`,
+          '  -H "x-goog-api-key: $AGROUTER_API_KEY" \\',
           '  -H "Content-Type: application/json" \\',
           `  -d '${prettyJson(requestBody)}'`,
           '',
           '# Poll the Interaction while it is in progress',
-          'curl https://api.sandbase.ai/v1beta/interactions/job_75b74acd12534b01baba820b \\',
-          '  -H "x-goog-api-key: $SANDBASE_API_KEY"',
+          'curl https://api.agrouter.ai/v1beta/interactions/job_75b74acd12534b01baba820b \\',
+          '  -H "x-goog-api-key: $AGROUTER_API_KEY"',
         ].join('\n') : [
-          `curl -X POST https://api.sandbase.ai${apiPath} \\`,
-          '  -H "Authorization: Bearer $SANDBASE_API_KEY" \\',
+          `curl -X POST https://api.agrouter.ai${apiPath} \\`,
+          '  -H "Authorization: Bearer $AGROUTER_API_KEY" \\',
           '  -H "Content-Type: application/json" \\',
           `  -d '${prettyJson(requestBody)}'`,
         ].join('\n'),
@@ -1379,9 +1379,9 @@ function modelReference(model) {
             'import time',
             'import requests',
             '',
-            'api_url = "https://api.sandbase.ai"',
+            'api_url = "https://api.agrouter.ai"',
             'headers = {',
-            '    "Authorization": f"Bearer {os.environ[\'SANDBASE_API_KEY\']}",',
+            '    "Authorization": f"Bearer {os.environ[\'AGROUTER_API_KEY\']}",',
             '    "Content-Type": "application/json",',
             '}',
             `payload = ${prettyJson(requestBody)}`.replace(/true|false|null/g, (value) => ({ true: 'True', false: 'False', null: 'None' }[value] ?? value)),
@@ -1401,9 +1401,9 @@ function modelReference(model) {
           label: 'TypeScript',
           language: 'typescript',
           code: [
-            'const apiUrl = "https://api.sandbase.ai";',
+            'const apiUrl = "https://api.agrouter.ai";',
             'const headers = {',
-            '  Authorization: `Bearer ${process.env.SANDBASE_API_KEY}`,',
+            '  Authorization: `Bearer ${process.env.AGROUTER_API_KEY}`,',
             '  "Content-Type": "application/json",',
             '};',
             '',
@@ -1450,7 +1450,7 @@ const categories = [
     key: 'image',
     title: 'Image Generation',
     slug: 'image-generation',
-    description: 'Generate, edit, transform, upscale, or train image models through SandBase with the exact request schema for each provider.',
+    description: 'Generate, edit, transform, upscale, or train image models through AGRouter with the exact request schema for each provider.',
     registryRoot: multimodalRegistryRoot,
     filter: (model) => model.type === 'image',
     vendorPriority: imageVendorPriority,
@@ -1459,7 +1459,7 @@ const categories = [
     key: 'video',
     title: 'Video Generation',
     slug: 'video-generation',
-    description: 'Generate, edit, animate, upscale, and transform videos through SandBase with async model APIs.',
+    description: 'Generate, edit, animate, upscale, and transform videos through AGRouter with async model APIs.',
     registryRoot: multimodalRegistryRoot,
     filter: (model) => model.type === 'video',
     vendorPriority: videoVendorPriority,
@@ -1468,7 +1468,7 @@ const categories = [
     key: 'audio',
     title: 'Audio Generation',
     slug: 'audio-generation',
-    description: 'Generate, transform, clone, transcribe, and synthesize audio through SandBase with exact request schemas.',
+    description: 'Generate, transform, clone, transcribe, and synthesize audio through AGRouter with exact request schemas.',
     registryRoot: multimodalRegistryRoot,
     filter: (model) => model.type === 'audio',
     vendorPriority: audioVendorPriority,
@@ -1477,7 +1477,7 @@ const categories = [
     key: 'api',
     title: 'APIs',
     slug: 'platform-apis',
-    description: 'Call data, automation, search, and platform operations through SandBase with each operation\'s exact public request schema.',
+    description: 'Call data, automation, search, and platform operations through AGRouter with each operation\'s exact public request schema.',
     registryRoot: apiRegistryRoot,
     filter: (model) => model.type === 'api',
     vendorPriority: platformVendorPriority,
@@ -1568,7 +1568,7 @@ function cleanLegacyPlatformOverview(file = legacyPlatformOverviewPath) {
   const isManagedLegacyOverview = content.includes(platformGeneratedMarker) || (
     content.startsWith('---\ntitle: Platform APIs\n')
     && content.includes('\n# Platform APIs\n')
-    && content.includes('SandBase currently publishes API reference pages for ')
+    && content.includes('AGRouter currently publishes API reference pages for ')
     && content.includes('Platform operations use `POST /v1/run`')
   )
   if (!isManagedLegacyOverview) {
@@ -1666,7 +1666,7 @@ function writeCategoryOverview(category) {
       [
         '---',
         'title: APIs',
-        'description: Browse SandBase API operations by platform and open an operation page for its exact request format.',
+        'description: Browse AGRouter API operations by platform and open an operation page for its exact request format.',
         'aside: false',
         'outline: false',
         platformGeneratedMarker,
@@ -1676,7 +1676,7 @@ function writeCategoryOverview(category) {
         '',
         '::: tip Live catalog',
         '',
-        'The [Store](https://www.sandbase.ai/apis) is the availability source of truth for API operations. Newly enabled operations can appear in the live catalog before their generated reference page is published here; confirm the operation and its current input schema in the catalog before integrating.',
+        'The [Store](https://www.agrouter.ai/apis) is the availability source of truth for API operations. Newly enabled operations can appear in the live catalog before their generated reference page is published here; confirm the operation and its current input schema in the catalog before integrating.',
         '',
         ':::',
         '',
@@ -1696,8 +1696,8 @@ function writeCategoryOverview(category) {
   const protocolNote = category.key === 'api'
     ? 'Platform operations use `GET` or `POST /v1/api/{vendor}/{upstream_path}`. The vendor-qualified API name is encoded in the URL, so POST bodies contain only operation-specific fields. Synchronous operations return their result directly; asynchronous operations return a run id that can be queried with `GET /v1/run/{id}`. The live Store is the availability source of truth.'
     : ['image', 'video', 'audio'].includes(category.key)
-    ? `${category.title} models use the SandBase generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive an opaque run ID, then poll GET /v1/run/{id} until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.`
-    : 'Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. Other LLM models use `/v1/chat/completions` unless a model-specific protocol is added later.'
+    ? `${category.title} models use the AGRouter generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive an opaque run ID, then poll GET /v1/run/{id} until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.`
+    : 'Claude / Anthropic models use the AGRouter-compatible `/v1/messages` protocol. Other LLM models use `/v1/chat/completions` unless a model-specific protocol is added later.'
   const duplicateTitles = duplicateTitlesFor(category.models)
   const providerSections = category.sortedGroups.length
     ? category.sortedGroups.flatMap((group) => [
@@ -1719,7 +1719,7 @@ function writeCategoryOverview(category) {
     [
       '---',
       `title: ${category.title}`,
-      `description: Browse SandBase ${categoryApiLabel} by ${category.key === 'api' ? 'platform' : 'provider'} and open a model page for its exact request format.`,
+      `description: Browse AGRouter ${categoryApiLabel} by ${category.key === 'api' ? 'platform' : 'provider'} and open a model page for its exact request format.`,
       ...(category.key === 'api' ? [platformGeneratedMarker] : []),
       '---',
       '',

@@ -1,13 +1,13 @@
 ---
 title: Video Generation
-description: Browse SandBase Video Generation APIs by provider and open a model page for its exact request format.
+description: Browse AGRouter Video Generation APIs by provider and open a model page for its exact request format.
 ---
 
 # Video Generation
 
 Browse enabled video generation models by provider in the left navigation. Open an entry for its exact model identifier, supported capabilities, and a working request.
 
-Video Generation models use the SandBase generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive an opaque run ID, then poll `GET /v1/run/{id}` until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.
+Video Generation models use the AGRouter generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive an opaque run ID, then poll `GET /v1/run/{id}` until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.
 
 ## Providers
 
@@ -193,13 +193,13 @@ Video Generation models use the SandBase generation protocol declared in each mo
 
 ### meituan
 
-- [LongCat Single Avatar](/model-api-reference/video-generation/meituan/longcat-single-avatar/image-audio-to-video) — Longcat Single Avatar Image Audio To Video by sandbase-ai - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
+- [LongCat Single Avatar](/model-api-reference/video-generation/meituan/longcat-single-avatar/image-audio-to-video) — Longcat Single Avatar Image Audio To Video by agrouter-ai - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [LongCat Video (meituan: longcat-video / text-to-video / 720p)](/model-api-reference/video-generation/meituan/longcat-video/text-to-video/720p) — Longcat Video 720p by meituan - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
 - [LongCat Video (meituan: longcat-video / image-to-video)](/model-api-reference/video-generation/meituan/longcat-video/image-to-video) — Longcat Video is meituan's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
 - [LongCat Video (meituan: longcat-video / image-to-video-480p)](/model-api-reference/video-generation/meituan/longcat-video/image-to-video-480p) — Longcat Video Image To Video 480p is meituan's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
 - [LongCat Video (meituan: longcat-video / text-to-video / 480p)](/model-api-reference/video-generation/meituan/longcat-video/text-to-video/480p) — Longcat Video 480p by meituan - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
 - [LongCat Video Distilled (meituan: longcat-video / distilled / image-to-video)](/model-api-reference/video-generation/meituan/longcat-video/distilled/image-to-video) — Longcat Video Distilled is meituan's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
-- [LongCat Video Distilled (meituan: longcat-video / distilled / text-to-video-720p)](/model-api-reference/video-generation/meituan/longcat-video/distilled/text-to-video-720p) — Longcat Video Distilled Text To Video 720p by sandbase-ai - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
+- [LongCat Video Distilled (meituan: longcat-video / distilled / text-to-video-720p)](/model-api-reference/video-generation/meituan/longcat-video/distilled/text-to-video-720p) — Longcat Video Distilled Text To Video 720p by agrouter-ai - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
 - [LongCat Video Distilled (meituan: longcat-video / distilled / image-to-video-480p)](/model-api-reference/video-generation/meituan/longcat-video/distilled/image-to-video-480p) — Longcat Video Distilled Image To Video 480p is meituan's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
 - [LongCat Video Distilled (meituan: longcat-video / distilled / text-to-video / 480p)](/model-api-reference/video-generation/meituan/longcat-video/distilled/text-to-video/480p) — Longcat Video Distilled 480p by meituan - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
 

@@ -1,20 +1,20 @@
 ---
 title: Rate Limits
-description: SandBase API rate limiting — how limits are enforced and how to handle 429 responses.
+description: AGRouter API rate limiting — how limits are enforced and how to handle 429 responses.
 ---
 
 # Rate Limits
 
-SandBase enforces rate limits to ensure fair usage and platform stability. Limiting is applied as a 1-minute sliding window using two layers, and a request must pass both to be served:
+AGRouter enforces rate limits to ensure fair usage and platform stability. Limiting is applied as a 1-minute sliding window using two layers, and a request must pass both to be served:
 
 1. **Per-key limit** — an optional per-minute request cap on an individual API key. When unset, the key is only subject to the global limit.
 2. **Global limit** — a platform-wide per-minute request cap.
 
 ## How to find your effective limit
 
-SandBase does not publish a single fixed requests-per-minute number because the effective limit can vary by workspace, key, and platform capacity. Your key is governed by the lower of any custom per-key limit and the current platform-wide protection limit.
+AGRouter does not publish a single fixed requests-per-minute number because the effective limit can vary by workspace, key, and platform capacity. Your key is governed by the lower of any custom per-key limit and the current platform-wide protection limit.
 
-If your workload needs a guaranteed or higher limit, contact SandBase support with the organization, application, expected steady rate, and expected burst rate. Do not design a production client around an undocumented numeric default.
+If your workload needs a guaranteed or higher limit, contact AGRouter support with the organization, application, expected steady rate, and expected burst rate. Do not design a production client around an undocumented numeric default.
 
 ## Handling 429 Responses
 

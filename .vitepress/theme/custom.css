@@ -1,4 +1,4 @@
-/* SandBase docs palette — documentation-first neutrals. Brand green is a
+/* AGRouter docs palette — documentation-first neutrals. Brand green is a
    semantic accent, never the default text or surface color. */
 :root {
   --vp-c-brand-1: #303238;
@@ -105,7 +105,7 @@
   color: var(--vp-c-text-1);
 }
 
-.VPSidebarItem.level-0 > .item .link[href*="status.sandbase.ai"],
+.VPSidebarItem.level-0 > .item .link[href*="status.agrouter.ai"],
 .VPSidebarItem.level-0 > .item .link[href*="/community"],
 .VPSidebarItem.level-0 > .item .link[href*="/blog"] {
   display: flex;
@@ -118,14 +118,14 @@
   transition: background-color 120ms ease, color 120ms ease;
 }
 
-.VPSidebarItem.level-0 > .item .link[href*="status.sandbase.ai"]:hover,
+.VPSidebarItem.level-0 > .item .link[href*="status.agrouter.ai"]:hover,
 .VPSidebarItem.level-0 > .item .link[href*="/community"]:hover,
 .VPSidebarItem.level-0 > .item .link[href*="/blog"]:hover {
   background: var(--sb-sidebar-hover-bg);
   color: var(--vp-c-text-1);
 }
 
-.VPSidebarItem.level-0 > .item .link[href*="status.sandbase.ai"] > .text,
+.VPSidebarItem.level-0 > .item .link[href*="status.agrouter.ai"] > .text,
 .VPSidebarItem.level-0 > .item .link[href*="/community"] > .text,
 .VPSidebarItem.level-0 > .item .link[href*="/blog"] > .text {
   color: inherit;
@@ -134,7 +134,7 @@
   letter-spacing: 0;
 }
 
-.VPSidebarItem.level-0 > .item .link[href*="status.sandbase.ai"]::before,
+.VPSidebarItem.level-0 > .item .link[href*="status.agrouter.ai"]::before,
 .VPSidebarItem.level-0 > .item .link[href*="/community"]::before,
 .VPSidebarItem.level-0 > .item .link[href*="/blog"]::before {
   content: '';
@@ -147,7 +147,7 @@
   mask-size: 16px 16px;
 }
 
-.VPSidebarItem.level-0 > .item .link[href*="status.sandbase.ai"]::before {
+.VPSidebarItem.level-0 > .item .link[href*="status.agrouter.ai"]::before {
   mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 10h2v4H2v-4Zm4-4h2v8H6V6Zm4-3h2v11h-2V3Zm4 6h2v5h-2V9Z'/%3E%3C/svg%3E");
 }
 

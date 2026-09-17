@@ -8,13 +8,13 @@ const redirectingAssets = {
 }
 
 const rewritten = await worker.fetch(
-  new Request('https://www.sandbase.ai/docs/models/supported/'),
+  new Request('https://www.agrouter.ai/docs/models/supported/'),
   { ASSETS: redirectingAssets },
 )
 assert.equal(rewritten.status, 307)
 assert.equal(rewritten.headers.get('Location'), '/docs/models/supported')
 
-const outside = await worker.fetch(new Request('https://www.sandbase.ai/models/supported'), { ASSETS: redirectingAssets })
+const outside = await worker.fetch(new Request('https://www.agrouter.ai/models/supported'), { ASSETS: redirectingAssets })
 assert.equal(outside.status, 404)
 
 console.log('Worker routing: ok (docs mount preserved across asset redirects)')

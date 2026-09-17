@@ -1,13 +1,13 @@
 ---
 title: Store
-description: Browse SandBase Models, APIs, Agents, and Skills. Use a capability directly, add it to Setup, or clone it into Build Agent.
+description: Browse AGRouter Models, APIs, Agents, and Skills. Use a capability directly, add it to Setup, or clone it into Build Agent.
 ---
 
 # Store
 
 Store is where you find useful building blocks for your Agent.
 
-Browse the live catalogs: [Models](https://www.sandbase.ai/models), [APIs](https://www.sandbase.ai/apis), [Agents](https://www.sandbase.ai/agents), and [Skills](https://www.sandbase.ai/skills).
+Browse the live catalogs: [Models](https://www.agrouter.ai/models), [APIs](https://www.agrouter.ai/apis), [Agents](https://www.agrouter.ai/agents), and [Skills](https://www.agrouter.ai/skills).
 
 You can start from four kinds of things:
 
@@ -77,7 +77,7 @@ Add Models, APIs, or Services to **Workspace Services**, then follow the client-
 
 ### Call it from your app
 
-Open a Model or API detail page, copy a working request, and call it with your SandBase key.
+Open a Model or API detail page, copy a working request, and call it with your AGRouter key.
 
 ### Build your own Agent
 
@@ -90,7 +90,7 @@ Check the detail page for:
 - the exact input and output shape
 - pricing and whether usage is per token or per call
 - required API credentials
-- whether the item is public, maintained by SandBase, or owned by your workspace
+- whether the item is public, maintained by AGRouter, or owned by your workspace
 - examples you can run before adopting it
 
 ## Next steps

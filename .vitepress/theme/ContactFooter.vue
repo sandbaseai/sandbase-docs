@@ -16,10 +16,10 @@ type FooterColumn = {
 }
 
 const socialLinks: SocialLink[] = [
-  { href: 'https://github.com/sandbaseai', label: 'GitHub', icon: 'github' },
+  { href: 'https://github.com/agrouterai', label: 'GitHub', icon: 'github' },
   { href: 'https://discord.com/invite/4hXv2f5Q9f', label: 'Discord', icon: 'discord' },
-  { href: 'https://x.com/SandbaseAI', label: 'X', icon: 'x' },
-  { href: 'https://www.linkedin.com/company/sandbaseai/', label: 'LinkedIn', icon: 'linkedin' },
+  { href: 'https://x.com/AGRouterAI', label: 'X', icon: 'x' },
+  { href: 'https://www.linkedin.com/company/agrouterai/', label: 'LinkedIn', icon: 'linkedin' },
 ]
 
 const footerColumns: FooterColumn[] = [
@@ -30,7 +30,7 @@ const footerColumns: FooterColumn[] = [
       { href: '/docs/models/', label: 'Models' },
       { href: '/docs/model-api-reference/', label: 'Model API Reference' },
       { href: '/docs/api-reference/', label: 'Platform API' },
-      { href: 'https://www.sandbase.ai/console', label: 'Console' },
+      { href: 'https://www.agrouter.ai/console', label: 'Console' },
     ],
   },
   {
@@ -39,41 +39,41 @@ const footerColumns: FooterColumn[] = [
       { href: '/docs/', label: 'Docs' },
       { href: '/docs/getting-started/quickstart', label: 'Quickstart' },
       { href: '/docs/getting-started/first-call', label: 'First API call' },
-      { href: 'https://www.sandbase.ai/blog', label: 'Blog' },
-      { href: 'https://status.sandbase.ai', label: 'Status' },
+      { href: 'https://www.agrouter.ai/blog', label: 'Blog' },
+      { href: 'https://status.agrouter.ai', label: 'Status' },
     ],
   },
   {
     title: 'Company',
     links: [
-      { href: 'https://www.sandbase.ai/about', label: 'About' },
-      { href: 'https://www.sandbase.ai/pricing', label: 'Pricing' },
-      { href: 'https://www.sandbase.ai/contact', label: 'Contact' },
-      { href: 'https://github.com/sandbaseai', label: 'GitHub' },
-      { href: 'https://x.com/SandbaseAI', label: 'X' },
+      { href: 'https://www.agrouter.ai/about', label: 'About' },
+      { href: 'https://www.agrouter.ai/pricing', label: 'Pricing' },
+      { href: 'https://www.agrouter.ai/contact', label: 'Contact' },
+      { href: 'https://github.com/agrouterai', label: 'GitHub' },
+      { href: 'https://x.com/AGRouterAI', label: 'X' },
     ],
   },
   {
     title: 'Help and security',
     links: [
-      { href: 'mailto:support@sandbase.ai', label: 'Support' },
+      { href: 'mailto:support@agrouter.ai', label: 'Support' },
       { href: 'https://discord.com/invite/4hXv2f5Q9f', label: 'Discord' },
       { href: '/docs/api-reference/errors', label: 'Errors' },
       { href: '/docs/admin/rate-limits', label: 'Rate limits' },
-      { href: 'https://www.sandbase.ai/privacy', label: 'Privacy policy' },
+      { href: 'https://www.agrouter.ai/privacy', label: 'Privacy policy' },
     ],
   },
 ]
 </script>
 
 <template>
-  <footer class="sb-contact-footer" aria-label="SandBase footer">
+  <footer class="sb-contact-footer" aria-label="AGRouter footer">
     <div class="sb-contact-brand">
-      <a class="sb-contact-logo" href="https://www.sandbase.ai" target="_blank" rel="noopener noreferrer" aria-label="SandBase home">
+      <a class="sb-contact-logo" href="https://www.agrouter.ai" target="_blank" rel="noopener noreferrer" aria-label="AGRouter home">
         <span class="sb-contact-mark" aria-hidden="true">
           <BrandMark />
         </span>
-        <span class="sb-contact-wordmark">SandBase</span>
+        <span class="sb-contact-wordmark">AGRouter</span>
       </a>
 
       <div class="sb-contact-links">

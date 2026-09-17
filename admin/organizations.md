@@ -1,11 +1,11 @@
 ---
 title: Organizations
-description: Manage organizations, members, and roles on SandBase.
+description: Manage organizations, members, and roles on AGRouter.
 ---
 
 # Organizations
 
-Organizations are the billing and access control unit in SandBase. API keys, balance, usage, and members all belong to an organization.
+Organizations are the billing and access control unit in AGRouter. API keys, balance, usage, and members all belong to an organization.
 
 ## Organization Types
 
@@ -27,9 +27,9 @@ Organizations are the billing and access control unit in SandBase. API keys, bal
 1. Open the workspace menu in the Console header.
 2. Choose **Create Team**, or open **Team** and select **Create team**.
 3. Enter the team name and create the workspace.
-4. Select **Add member** and enter the email of an existing SandBase account.
+4. Select **Add member** and enter the email of an existing AGRouter account.
 
-An added member must already have a SandBase account. Owners can change member roles; owners and admins can remove
+An added member must already have a AGRouter account. Owners can change member roles; owners and admins can remove
 non-owner members.
 
 ## Switch Organizations

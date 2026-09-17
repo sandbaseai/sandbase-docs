@@ -1,19 +1,19 @@
 ---
 title: Chat Completions
-description: Use OpenAI-compatible chat completions, streaming, tools, multimodal input, and structured output with SandBase.
+description: Use OpenAI-compatible chat completions, streaming, tools, multimodal input, and structured output with AGRouter.
 ---
 
 # Chat Completions
 
-SandBase provides an OpenAI-compatible Chat Completions endpoint at `POST /v1/chat/completions`. Existing OpenAI SDK applications can use SandBase by changing the API key and base URL.
+AGRouter provides an OpenAI-compatible Chat Completions endpoint at `POST /v1/chat/completions`. Existing OpenAI SDK applications can use AGRouter by changing the API key and base URL.
 
 ```python
 import os
 from openai import OpenAI
 
 client = OpenAI(
-    api_key=os.environ["SANDBASE_API_KEY"],
-    base_url="https://api.sandbase.ai/v1",
+    api_key=os.environ["AGROUTER_API_KEY"],
+    base_url="https://api.agrouter.ai/v1",
 )
 ```
 
@@ -35,7 +35,7 @@ Use `response_format` to request a JSON object or JSON Schema response. Support 
 
 ## Provider-specific parameters
 
-SandBase uses `model` and `stream` for routing. Additional OpenAI-compatible request fields are preserved when the selected provider uses the same protocol. When SandBase translates between protocols, use documented fields or `extra_body`; support varies by provider.
+AGRouter uses `model` and `stream` for routing. Additional OpenAI-compatible request fields are preserved when the selected provider uses the same protocol. When AGRouter translates between protocols, use documented fields or `extra_body`; support varies by provider.
 
 ## Errors and retries
 

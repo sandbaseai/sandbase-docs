@@ -1,24 +1,24 @@
 ---
-title: SandBase Docs
+title: AGRouter Docs
 description: Build with Models and APIs directly, or define reusable Agents that run on managed infrastructure.
 ---
 
-# SandBase Docs
+# AGRouter Docs
 
 Build with Models and APIs directly, or define reusable Agents that run on managed infrastructure.
 
-SandBase provides two complementary ways to build AI applications. Start with the smallest surface that fits the work; you can combine them as the application grows.
+AGRouter provides two complementary ways to build AI applications. Start with the smallest surface that fits the work; you can combine them as the application grows.
 
 ## Choose how to build
 
 | | Models and APIs | Managed Agents |
 |---|---|---|
-| **What it is** | Direct access to language, image, video, audio, and third-party APIs | Reusable, versioned Agent configurations executed by SandBase |
+| **What it is** | Direct access to language, image, video, audio, and third-party APIs | Reusable, versioned Agent configurations executed by AGRouter |
 | **Best for** | Custom application loops and fine-grained request control | Multi-step, asynchronous, scheduled, or repeatable work |
 | **You manage** | Prompts, orchestration, retries, and application state | Agent definition, enabled capabilities, inputs, and delivery behavior |
 | **Start here** | [Models and APIs](/models/) | [Build Agent](/agents/) |
 
-::: tip One SandBase API key
+::: tip One AGRouter API key
 The same API key can call Models, APIs, Agents, Services, and scheduled workloads. Keep keys on the server and never expose them in browser code.
 :::
 
@@ -76,7 +76,7 @@ Schedules execute an Agent later or repeatedly. Their API resource is a Deployme
 
 ## Next steps
 
-- New to SandBase: [Getting started](/getting-started/)
+- New to AGRouter: [Getting started](/getting-started/)
 - Calling a Model or API: [Model API Reference](/model-api-reference/)
 - Managing Agents and workloads: [Platform API Reference](/api-reference/)
 - Building reusable work: [Build Agent](/agents/)

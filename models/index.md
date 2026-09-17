@@ -1,13 +1,13 @@
 ---
 title: Models
-description: Browse and call SandBase model APIs, or use Models inside Setup and Build Agent.
+description: Browse and call AGRouter model APIs, or use Models inside Setup and Build Agent.
 ---
 
 # Models
 
 Models are the AI engines your app or Agent can use.
 
-SandBase lets you browse Models and APIs, inspect capabilities, copy a working request, and use the same capability inside Setup or Build Agent. Each model page documents the exact identifier, input fields, output shape, and endpoint to call. Browse the separate [API Catalog](/store/apis) for non-model capabilities such as search, scraping, data, and SaaS actions.
+AGRouter lets you browse Models and APIs, inspect capabilities, copy a working request, and use the same capability inside Setup or Build Agent. Each model page documents the exact identifier, input fields, output shape, and endpoint to call. Browse the separate [API Catalog](/store/apis) for non-model capabilities such as search, scraping, data, and SaaS actions.
 
 ## Where Models fit
 
@@ -31,15 +31,15 @@ Use the API surface that matches the model category:
 | API Store capabilities | `GET/POST /v1/api/{vendor}/{upstream_path}` | Put the vendor-qualified capability name in the URL; a POST body can omit `model`. |
 | Provider-native APIs | Provider-specific endpoint | Use the native protocol and authentication shown in the Official Native API section. |
 
-The shared `/v1/run` endpoint is the standard SandBase interface for image and video models. Requests return an opaque run ID for asynchronous capabilities; keep polling the run endpoint for authoritative status and outputs. See [Run a capability](/api-reference/models/run) and [Get a run result](/api-reference/models/run-get) for the common request and response contract.
+The shared `/v1/run` endpoint is the standard AGRouter interface for image and video models. Requests return an opaque run ID for asynchronous capabilities; keep polling the run endpoint for authoritative status and outputs. See [Run a capability](/api-reference/models/run) and [Get a run result](/api-reference/models/run-get) for the common request and response contract.
 
 API Store capabilities are addressed by URL instead: use [API Passthrough](/api-reference/models/api-passthrough) with `/v1/api/{vendor}/{upstream_path}`. This URL-derived route is separate from model generation through `/v1/run`.
 
 ## Call an LLM
 
 ```bash
-curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl https://api.agrouter.ai/v1/chat/completions \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "deepseek/deepseek-v4-flash",
@@ -49,12 +49,12 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 ## Call an image or video model
 
-Image and video models use the same asynchronous Run API. The `model` value is the exact SandBase model ID, while the remaining fields come from that model's reference page.
+Image and video models use the same asynchronous Run API. The `model` value is the exact AGRouter model ID, while the remaining fields come from that model's reference page.
 
 ```bash
 # Submit an image or video task
-curl -X POST https://api.sandbase.ai/v1/run \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/run \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "<model-id>",
@@ -62,8 +62,8 @@ curl -X POST https://api.sandbase.ai/v1/run \
   }'
 
 # Poll the returned id until status is completed or failed
-curl https://api.sandbase.ai/v1/run/<run-id> \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/run/<run-id> \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 For model-specific parameters, response fields, limits, and working examples, open the model's API reference from [Supported Models](/models/supported).

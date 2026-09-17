@@ -3,16 +3,16 @@
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="hero-content">
-        <p class="hero-badge">SandBase Docs</p>
+        <p class="hero-badge">AGRouter Docs</p>
         <h1 class="hero-title">Connect your Agent<br/>to the real world.</h1>
         <p class="hero-desc">Start with the path you need: add tools to your AI app, call Models and APIs directly, or build an Agent for repeatable work.</p>
         <div class="hero-actions">
-          <a href="https://www.sandbase.ai/console/setup" target="_self" class="btn-primary">Start with Setup</a>
-          <a href="https://www.sandbase.ai/apis" target="_self" class="btn-secondary">Browse Store</a>
+          <a href="https://www.agrouter.ai/console/setup" target="_self" class="btn-primary">Start with Setup</a>
+          <a href="https://www.agrouter.ai/apis" target="_self" class="btn-secondary">Browse Store</a>
           <a href="/docs/api-reference/" class="btn-secondary">API Reference</a>
         </div>
       </div>
-      <div class="hero-map" aria-label="SandBase product map">
+      <div class="hero-map" aria-label="AGRouter product map">
         <div class="map-row">
           <span class="map-index">01</span>
           <div>
@@ -24,7 +24,7 @@
           <span class="map-index">02</span>
           <div>
             <strong>Call an API</strong>
-            <p>Copy a working request for a Model or API. Call it from your app with one SandBase key.</p>
+            <p>Copy a working request for a Model or API. Call it from your app with one AGRouter key.</p>
           </div>
         </div>
         <div class="map-row">
@@ -45,28 +45,28 @@
         <p>Store is where you browse ready-made capabilities: Models, APIs, Agents, and Skills. Inspect first, then install, call, or clone.</p>
       </div>
       <div class="catalog-api-links">
-        <a href="https://www.sandbase.ai/models" target="_self" class="catalog-api-link">
+        <a href="https://www.agrouter.ai/models" target="_self" class="catalog-api-link">
           <span class="method-badge">MODELS</span>
           <span>
             <strong>Models</strong>
             <small>Language, image, audio, video, and embeddings</small>
           </span>
         </a>
-        <a href="https://www.sandbase.ai/apis" target="_self" class="catalog-api-link">
+        <a href="https://www.agrouter.ai/apis" target="_self" class="catalog-api-link">
           <span class="method-badge">APIS</span>
           <span>
             <strong>APIs</strong>
             <small>Search, data, SaaS, media, and connector APIs</small>
           </span>
         </a>
-        <a href="https://www.sandbase.ai/agents" target="_self" class="catalog-api-link">
+        <a href="https://www.agrouter.ai/agents" target="_self" class="catalog-api-link">
           <span class="method-badge">AGENTS</span>
           <span>
             <strong>Agents</strong>
             <small>Ready-made examples you can test or clone</small>
           </span>
         </a>
-        <a href="https://www.sandbase.ai/skills" target="_self" class="catalog-api-link">
+        <a href="https://www.agrouter.ai/skills" target="_self" class="catalog-api-link">
           <span class="method-badge">SKILLS</span>
           <span>
             <strong>Skills</strong>
@@ -83,7 +83,7 @@
       <p class="section-desc">Start small. You can move from setup, to direct API calls, to reusable Agents when the work needs more structure.</p>
 
       <div class="choose-cards">
-        <a href="https://www.sandbase.ai/console/setup" target="_self" class="choose-card featured">
+        <a href="https://www.agrouter.ai/console/setup" target="_self" class="choose-card featured">
           <div class="choose-card-icon">01</div>
           <h3>Setup</h3>
           <p>Add Models, APIs, and published Agents to the AI app you already use.</p>
@@ -126,31 +126,31 @@
         <div class="journey-step">
           <div><span class="step-num">1</span><h4>Build Agent</h4></div>
           <div class="step-links">
-            <a href="https://www.sandbase.ai/console/agents" target="_self">Create Agent</a>
+            <a href="https://www.agrouter.ai/console/agents" target="_self">Create Agent</a>
             <a href="/docs/agents/agent-api">Agent docs</a>
-            <a href="https://www.sandbase.ai/skills" target="_self">Browse Skills</a>
+            <a href="https://www.agrouter.ai/skills" target="_self">Browse Skills</a>
           </div>
         </div>
         <div class="journey-step">
           <div><span class="step-num">2</span><h4>Publish Agent</h4></div>
           <div class="step-links">
-            <a href="https://www.sandbase.ai/console/endpoints" target="_self">Services</a>
+            <a href="https://www.agrouter.ai/console/endpoints" target="_self">Services</a>
             <a href="/docs/api-reference/endpoints/">Services API</a>
           </div>
         </div>
         <div class="journey-step">
           <div><span class="step-num">3</span><h4>Schedule Agent</h4></div>
           <div class="step-links">
-            <a href="https://www.sandbase.ai/console/deployments" target="_self">Schedules</a>
+            <a href="https://www.agrouter.ai/console/deployments" target="_self">Schedules</a>
             <a href="/docs/api-reference/deployments/">Schedule docs</a>
-            <a href="https://www.sandbase.ai/console/runs" target="_self">Runs</a>
+            <a href="https://www.agrouter.ai/console/runs" target="_self">Runs</a>
           </div>
         </div>
         <div class="journey-step">
           <div><span class="step-num">4</span><h4>Operate</h4></div>
           <div class="step-links">
-            <a href="https://www.sandbase.ai/console/webhooks" target="_self">Webhooks</a>
-            <a href="https://www.sandbase.ai/console/activities" target="_self">Activities</a>
+            <a href="https://www.agrouter.ai/console/webhooks" target="_self">Webhooks</a>
+            <a href="https://www.agrouter.ai/console/activities" target="_self">Activities</a>
           </div>
         </div>
       </div>
@@ -198,7 +198,7 @@
         <a href="/docs/guides/chat-completions" class="resource-card">
           <span class="resource-icon">02</span>
           <h4>Use an SDK</h4>
-          <p>Connect OpenAI-compatible clients to SandBase.</p>
+          <p>Connect OpenAI-compatible clients to AGRouter.</p>
         </a>
         <a href="/docs/getting-started/api-keys" class="resource-card">
           <span class="resource-icon">03</span>

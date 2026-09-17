@@ -27,7 +27,7 @@ The public `session_id` identifies one persistent Session across Direct Session 
 
 ## Basic flow
 
-1. Create a Session with an Agent; SandBase resolves the runtime binding internally.
+1. Create a Session with an Agent; AGRouter resolves the runtime binding internally.
 2. Include the first `user.message` in `initial_events`, or send it later through the events endpoint.
 3. Poll the event list, or replay persisted events through the SSE endpoint.
 4. Archive the Session when it should no longer accept new events. History remains readable.

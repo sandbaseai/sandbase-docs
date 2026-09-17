@@ -16,7 +16,7 @@ Retrieve a sandbox ID by [listing sandboxes](/agents/sandbox-list):
 ```python [Python]
 from e2b import Sandbox
 
-paginator = Sandbox.list(api_url="https://api.sandbase.ai")
+paginator = Sandbox.list(api_url="https://api.agrouter.ai")
 running = paginator.next_items()
 if not running:
     raise Exception("No running sandboxes found")
@@ -29,7 +29,7 @@ import { Sandbox } from 'e2b'
 
 const paginator = await Sandbox.list({
   query: { state: ['running'] },
-  apiUrl: 'https://api.sandbase.ai',
+  apiUrl: 'https://api.agrouter.ai',
 })
 const running = await paginator.nextItems()
 if (running.length === 0) {
@@ -50,7 +50,7 @@ Use `connect()` with the sandbox ID. If the sandbox is paused, connecting resume
 ```python [Python]
 from e2b import Sandbox
 
-sandbox = Sandbox.connect(sandbox_id, api_url="https://api.sandbase.ai")
+sandbox = Sandbox.connect(sandbox_id, api_url="https://api.agrouter.ai")
 
 result = sandbox.commands.run("whoami")
 print(f'Running in {sandbox.sandbox_id} as "{result.stdout.strip()}"')
@@ -59,7 +59,7 @@ print(f'Running in {sandbox.sandbox_id} as "{result.stdout.strip()}"')
 ```javascript [JavaScript]
 import { Sandbox } from 'e2b'
 
-const sandbox = await Sandbox.connect(sandboxId, { apiUrl: 'https://api.sandbase.ai' })
+const sandbox = await Sandbox.connect(sandboxId, { apiUrl: 'https://api.agrouter.ai' })
 
 const result = await sandbox.commands.run('whoami')
 console.log(`Running in ${sandbox.sandboxId} as "${result.stdout.trim()}"`)
@@ -72,7 +72,7 @@ console.log(`Running in ${sandbox.sandboxId} as "${result.stdout.trim()}"`)
 Connecting to (and resuming) a sandbox maps to:
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/SANDBOX_ID/resume \
+curl -X POST https://api.agrouter.ai/sandboxes/SANDBOX_ID/resume \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 

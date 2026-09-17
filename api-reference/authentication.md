@@ -1,16 +1,16 @@
 ---
 title: API Authentication
-description: Authenticate SandBase APIs with Bearer tokens and supported protocol-compatible API key headers.
+description: Authenticate AGRouter APIs with Bearer tokens and supported protocol-compatible API key headers.
 ---
 
 # Authentication
 
-SandBase uses API keys to authenticate public API requests. This page covers the supported integration methods and
+AGRouter uses API keys to authenticate public API requests. This page covers the supported integration methods and
 key-management practices. Console authentication and its internal APIs are not part of the public API contract.
 
 ## Authentication Methods
 
-Standard SandBase `/v1/*` endpoints require a Bearer token. Anthropic Messages and Google Gemini-compatible operations also accept their native SDK-compatible API key locations.
+Standard AGRouter `/v1/*` endpoints require a Bearer token. Anthropic Messages and Google Gemini-compatible operations also accept their native SDK-compatible API key locations.
 
 ### Bearer token
 
@@ -70,7 +70,7 @@ Never expose your API key in client-side code, public repositories, or logs. Tre
 
 ### Via Console
 
-1. Log in to the [SandBase Console](https://www.sandbase.ai/console)
+1. Log in to the [AGRouter Console](https://www.agrouter.ai/console)
 2. Open **Developer → API Keys**
 3. Click **New key**
 4. Give the key a descriptive name (e.g., "Production Backend", "Development")
@@ -87,7 +87,7 @@ Never expose your API key in client-side code, public repositories, or logs. Tre
 | Expires At | Optional expiration date |
 | Created At | When the key was created |
 
-Standard Console-created keys use organization-level access to the documented public API. SandBase-issued credentials, such as CLI Login keys, can carry a restricted scope. The Console does not expose user-selected scopes for standard keys.
+Standard Console-created keys use organization-level access to the documented public API. AGRouter-issued credentials, such as CLI Login keys, can carry a restricted scope. The Console does not expose user-selected scopes for standard keys.
 
 ## Key lifecycle
 
@@ -130,7 +130,7 @@ Keys can optionally have an expiration date. Expired keys return `401 Unauthoriz
 | `/v1beta/models/*` | API Key (x-goog-api-key, Bearer, or query key) | Gemini GenerateContent |
 | `/v1beta/interactions*` | API Key (x-goog-api-key, Bearer, or query key) | Gemini Interactions |
 
-The SandBase Console uses a separate browser authentication flow. Its internal requests are not supported public
+The AGRouter Console uses a separate browser authentication flow. Its internal requests are not supported public
 endpoints and must not be used by integrations.
 
 ## Organization Isolation
@@ -173,7 +173,7 @@ API keys are scoped to an organization. When you authenticate with a key:
 ::: code-group
 
 ```bash [.env]
-SANDBASE_API_KEY=sk-your-api-key
+AGROUTER_API_KEY=sk-your-api-key
 ```
 
 ```python [Python]
@@ -181,8 +181,8 @@ import os
 from openai import OpenAI
 
 client = OpenAI(
-    api_key=os.environ["SANDBASE_API_KEY"],
-    base_url="https://api.sandbase.ai/v1"
+    api_key=os.environ["AGROUTER_API_KEY"],
+    base_url="https://api.agrouter.ai/v1"
 )
 ```
 
@@ -190,8 +190,8 @@ client = OpenAI(
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: process.env.SANDBASE_API_KEY,
-  baseURL: 'https://api.sandbase.ai/v1',
+  apiKey: process.env.AGROUTER_API_KEY,
+  baseURL: 'https://api.agrouter.ai/v1',
 });
 ```
 

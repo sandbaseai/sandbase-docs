@@ -1,16 +1,16 @@
 ---
 title: Supported models
-description: Find current SandBase model identifiers, capabilities, request schemas, and live pricing.
+description: Find current AGRouter model identifiers, capabilities, request schemas, and live pricing.
 ---
 
 # Supported models
 
-SandBase's model catalog changes frequently. Use the live catalog or the generated Model API Reference instead of relying on a static model list.
+AGRouter's model catalog changes frequently. Use the live catalog or the generated Model API Reference instead of relying on a static model list.
 
 The live catalog is the availability source of truth. A newly enabled model can appear there before its generated reference page is published; use the catalog response to confirm availability, then follow the model-specific page once it becomes available for the complete request schema.
 
 ::: tip Current source of truth
-Browse [Models](https://www.sandbase.ai/models) for current availability and pricing. For production integrations, call [`GET /v1/models`](/api-reference/models/list) immediately before selecting or validating a model.
+Browse [Models](https://www.agrouter.ai/models) for current availability and pricing. For production integrations, call [`GET /v1/models`](/api-reference/models/list) immediately before selecting or validating a model.
 :::
 
 ## Browse by capability
@@ -28,8 +28,8 @@ Each generated model page contains the exact public model identifier, request fi
 ## List models through the API
 
 ```bash
-curl https://api.sandbase.ai/v1/models \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/models \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 The response follows the OpenAI-compatible model-list format and contains enabled logical models available to your account. Treat returned model IDs as opaque strings and send them unchanged in the relevant request's `model` field.
@@ -38,7 +38,7 @@ The response follows the OpenAI-compatible model-list format and contains enable
 
 Do not copy prices from a documentation table into application logic. Pricing, provider availability, routing, and enabled status can change independently of this page.
 
-- Check [live model pricing](https://www.sandbase.ai/models) before estimating production cost.
+- Check [live model pricing](https://www.agrouter.ai/models) before estimating production cost.
 - For a capability that returns a task ID (including an `x-task-id` response header), use [`GET /v1/tasks/{task_id}/cost`](/api-reference/tasks/cost) to inspect settlement and usage. This is a cost lookup, not a generation-result endpoint: for asynchronous `POST /v1/run` calls, poll [`GET /v1/run/{id}`](/api-reference/models/run-get) with the returned opaque run ID instead.
 - Handle model-unavailable and admission errors even when a model appeared in an earlier catalog response.
 - Use the model-specific reference page rather than assuming every model supports the same context window, tools, vision, streaming, or reasoning parameters.
@@ -47,4 +47,4 @@ Do not copy prices from a documentation table into application logic. Pricing, p
 
 Choose from the current catalog based on the operation you need, then verify the exact schema on its generated reference page. For a stable production integration, pin a specific logical model ID when available; use moving aliases only when you intentionally accept upstream model changes.
 
-Check operational incidents separately on the [SandBase Status Page](https://status.sandbase.ai).
+Check operational incidents separately on the [AGRouter Status Page](https://status.agrouter.ai).

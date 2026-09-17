@@ -7,20 +7,20 @@ description: Pause a sandbox and resume it later from the exact state it was in 
 
 Sandbox persistence lets you pause a sandbox and resume it later from the same state it was in when you paused it. This preserves both the sandbox's **filesystem** and its **memory** — all running processes, loaded variables, and data.
 
-SandBase is E2B-compatible, so you can use the E2B SDK pointed at SandBase:
+AGRouter is E2B-compatible, so you can use the E2B SDK pointed at AGRouter:
 
 ::: code-group
 
 ```python [Python]
 from e2b import Sandbox
 
-sbx = Sandbox.create(api_url="https://api.sandbase.ai")
+sbx = Sandbox.create(api_url="https://api.agrouter.ai")
 ```
 
 ```javascript [JavaScript]
 import { Sandbox } from 'e2b'
 
-const sbx = await Sandbox.create({ apiUrl: 'https://api.sandbase.ai' })
+const sbx = await Sandbox.create({ apiUrl: 'https://api.agrouter.ai' })
 ```
 
 :::
@@ -58,7 +58,7 @@ When you pause a sandbox, both its filesystem and memory state are saved. Save t
 ```python [Python]
 from e2b import Sandbox
 
-sbx = Sandbox.create(api_url="https://api.sandbase.ai")
+sbx = Sandbox.create(api_url="https://api.agrouter.ai")
 print("Sandbox created", sbx.sandbox_id)
 
 # Pause the sandbox — save the ID to resume later
@@ -69,7 +69,7 @@ print("Sandbox paused", sbx.sandbox_id)
 ```javascript [JavaScript]
 import { Sandbox } from 'e2b'
 
-const sbx = await Sandbox.create({ apiUrl: 'https://api.sandbase.ai' })
+const sbx = await Sandbox.create({ apiUrl: 'https://api.agrouter.ai' })
 console.log('Sandbox created', sbx.sandboxId)
 
 await sbx.pause()
@@ -83,7 +83,7 @@ console.log('Sandbox paused', sbx.sandboxId)
 If you're not using the SDK, pause maps to:
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/SANDBOX_ID/pause \
+curl -X POST https://api.agrouter.ai/sandboxes/SANDBOX_ID/pause \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -97,14 +97,14 @@ Resuming restores the sandbox to the exact state it was in when paused — files
 from e2b import Sandbox
 
 # Connect to a paused sandbox by ID — it resumes automatically
-sbx = Sandbox.connect(sandbox_id, api_url="https://api.sandbase.ai")
+sbx = Sandbox.connect(sandbox_id, api_url="https://api.agrouter.ai")
 print("Resumed", sbx.sandbox_id)
 ```
 
 ```javascript [JavaScript]
 import { Sandbox } from 'e2b'
 
-const sbx = await Sandbox.connect(sandboxId, { apiUrl: 'https://api.sandbase.ai' })
+const sbx = await Sandbox.connect(sandboxId, { apiUrl: 'https://api.agrouter.ai' })
 console.log('Resumed', sbx.sandboxId)
 ```
 
@@ -113,7 +113,7 @@ console.log('Resumed', sbx.sandboxId)
 ### REST API
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/SANDBOX_ID/resume \
+curl -X POST https://api.agrouter.ai/sandboxes/SANDBOX_ID/resume \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -124,11 +124,11 @@ When you connect to a paused sandbox, its timeout resets. Pass a custom timeout 
 ::: code-group
 
 ```python [Python]
-sbx = Sandbox.connect(sandbox_id, timeout=60, api_url="https://api.sandbase.ai")  # 60 seconds
+sbx = Sandbox.connect(sandbox_id, timeout=60, api_url="https://api.agrouter.ai")  # 60 seconds
 ```
 
 ```javascript [JavaScript]
-const sbx = await Sandbox.connect(sandboxId, { timeoutMs: 60_000, apiUrl: 'https://api.sandbase.ai' })
+const sbx = await Sandbox.connect(sandboxId, { timeoutMs: 60_000, apiUrl: 'https://api.agrouter.ai' })
 ```
 
 :::
@@ -142,13 +142,13 @@ Paused sandboxes are retained until you explicitly remove them. Call `kill()` to
 ```python [Python]
 sbx.kill()
 # Or by ID:
-Sandbox.kill(sandbox_id, api_url="https://api.sandbase.ai")
+Sandbox.kill(sandbox_id, api_url="https://api.agrouter.ai")
 ```
 
 ```javascript [JavaScript]
 await sbx.kill()
 // Or by ID:
-await Sandbox.kill(sandboxId, { apiUrl: 'https://api.sandbase.ai' })
+await Sandbox.kill(sandboxId, { apiUrl: 'https://api.agrouter.ai' })
 ```
 
 :::
@@ -164,7 +164,7 @@ If you have a service (e.g. a web server) running inside a sandbox and you pause
 - **Continuous runtime**: a running sandbox has a maximum continuous lifetime (see [Sandbox Lifecycle](/agents/sandbox-lifecycle)). Pausing and resuming resets that window.
 
 ::: tip Roadmap
-E2B's **snapshots** (one-to-many checkpoints that spawn new sandboxes) and **auto-resume on request** are not yet available on SandBase. Today, persistence is one-to-one: a paused sandbox is resumed back into the same sandbox via `connect()`.
+E2B's **snapshots** (one-to-many checkpoints that spawn new sandboxes) and **auto-resume on request** are not yet available on AGRouter. Today, persistence is one-to-one: a paused sandbox is resumed back into the same sandbox via `connect()`.
 :::
 
 ## Next steps

@@ -1,6 +1,6 @@
 ---
 title: GPT Image 2.5 Flare Native API Reference
-description: Generate and edit images with GPT Image 2.5 Flare through SandBase's native OpenAI Images API.
+description: Generate and edit images with GPT Image 2.5 Flare through AGRouter's native OpenAI Images API.
 aside: false
 outline: false
 apiReference:
@@ -29,8 +29,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |-
-        curl https://api.sandbase.ai/v1/images/generations \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+        curl https://api.agrouter.ai/v1/images/generations \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"model":"gpt-image-2.5-flare","prompt":"A paper-cut city floating above the clouds","size":"1024x1024"}'
     - label: Python
@@ -38,7 +38,7 @@ apiReference:
       code: |-
         from openai import OpenAI
 
-        client = OpenAI(api_key="sk-...", base_url="https://api.sandbase.ai/v1")
+        client = OpenAI(api_key="sk-...", base_url="https://api.agrouter.ai/v1")
         result = client.images.generate(
             model="gpt-image-2.5-flare",
             prompt="A paper-cut city floating above the clouds",
@@ -59,24 +59,24 @@ apiReference:
 
 ## Native protocol notes
 
-GPT Image 2.5 Flare is optimized for fast, high-quality image generation and editing in everyday creative workflows. It uses the OpenAI Images API contract, not the general SandBase `/v1/run` model endpoint. Requests are synchronous and return image data in `data` as `b64_json` or a URL.
+GPT Image 2.5 Flare is optimized for fast, high-quality image generation and editing in everyday creative workflows. It uses the OpenAI Images API contract, not the general AGRouter `/v1/run` model endpoint. Requests are synchronous and return image data in `data` as `b64_json` or a URL.
 
-Use the shared [image generation reference](/api-reference/images/generations) for authentication, response details, limits, and error handling. The SandBase native catalog entries are `openai/gpt-image-2.5-flare-official` and `openai/gpt-image-2.5-flare-official/edit`; send the public model name `gpt-image-2.5-flare` in native requests.
+Use the shared [image generation reference](/api-reference/images/generations) for authentication, response details, limits, and error handling. The AGRouter native catalog entries are `openai/gpt-image-2.5-flare-official` and `openai/gpt-image-2.5-flare-official/edit`; send the public model name `gpt-image-2.5-flare` in native requests.
 
 ## Edit images
 
 Send edits to `POST /v1/images/edits` as `multipart/form-data`. Provide `model`, `prompt`, and at least one `image` file. Repeat the `image` field to compose or edit multiple source images.
 
 ```bash
-curl https://api.sandbase.ai/v1/images/edits \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl https://api.agrouter.ai/v1/images/edits \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -F "model=gpt-image-2.5-flare" \
   -F "prompt=Turn this product photo into a warm editorial scene" \
   -F "image=@product.png" \
   -F "quality=high"
 ```
 
-See the shared [image editing reference](/api-reference/images/edits) for the multipart request and response schema. To use the general asynchronous `/v1/run` contract instead, see [`openai/gpt-image-2.5-flare/edit`](https://www.sandbase.ai/model/openai/gpt-image-2.5-flare/edit).
+See the shared [image editing reference](/api-reference/images/edits) for the multipart request and response schema. To use the general asynchronous `/v1/run` contract instead, see [`openai/gpt-image-2.5-flare/edit`](https://www.agrouter.ai/model/openai/gpt-image-2.5-flare/edit).
 
 ## Official OpenAI resources
 

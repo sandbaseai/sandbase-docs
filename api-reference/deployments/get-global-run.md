@@ -17,8 +17,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |-
-        curl https://api.sandbase.ai/v1/deployment_runs/drun_01... \
-          -H "Authorization: Bearer $SANDBASE_API_KEY"
+        curl https://api.agrouter.ai/v1/deployment_runs/drun_01... \
+          -H "Authorization: Bearer $AGROUTER_API_KEY"
   notes:
     - title: Direct lookup
       description: Use this route when you already have the drun_* ID. The nested /v1/deployments/{deployment_id}/runs/{drun_id} route additionally verifies the owning Schedule.

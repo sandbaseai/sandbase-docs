@@ -1,11 +1,11 @@
 ---
 title: Streaming responses
-description: Stream SandBase model output with the OpenAI or Anthropic compatible SDKs and handle partial results safely.
+description: Stream AGRouter model output with the OpenAI or Anthropic compatible SDKs and handle partial results safely.
 ---
 
 # Streaming responses
 
-Streaming returns model output as it becomes available. SandBase preserves the event format of the compatible API you
+Streaming returns model output as it becomes available. AGRouter preserves the event format of the compatible API you
 call: OpenAI Chat Completions uses data-only Server-Sent Events (SSE), while Anthropic Messages uses named SSE events.
 
 Use an official compatible SDK when possible. It handles event framing, incremental tool-call arguments, and protocol
@@ -22,8 +22,8 @@ import os
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
-    api_key=os.environ["SANDBASE_API_KEY"],
+    base_url="https://api.agrouter.ai/v1",
+    api_key=os.environ["AGROUTER_API_KEY"],
 )
 
 stream = client.chat.completions.create(
@@ -42,8 +42,8 @@ for chunk in stream:
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  baseURL: 'https://api.sandbase.ai/v1',
-  apiKey: process.env.SANDBASE_API_KEY,
+  baseURL: 'https://api.agrouter.ai/v1',
+  apiKey: process.env.AGROUTER_API_KEY,
 });
 
 const stream = await client.chat.completions.create({
@@ -59,8 +59,8 @@ for await (const chunk of stream) {
 ```
 
 ```bash [cURL]
-curl -N https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -N https://api.agrouter.ai/v1/chat/completions \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "deepseek/deepseek-v4-flash",
@@ -90,8 +90,8 @@ import os
 import anthropic
 
 client = anthropic.Anthropic(
-    base_url="https://api.sandbase.ai",
-    api_key=os.environ["SANDBASE_API_KEY"],
+    base_url="https://api.agrouter.ai",
+    api_key=os.environ["AGROUTER_API_KEY"],
 )
 
 with client.messages.stream(
@@ -107,8 +107,8 @@ with client.messages.stream(
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  baseURL: 'https://api.sandbase.ai',
-  apiKey: process.env.SANDBASE_API_KEY,
+  baseURL: 'https://api.agrouter.ai',
+  apiKey: process.env.AGROUTER_API_KEY,
 });
 
 const stream = client.messages.stream({
@@ -142,10 +142,10 @@ normal termination signal.
 ```javascript
 const controller = new AbortController();
 
-const response = await fetch('https://api.sandbase.ai/v1/chat/completions', {
+const response = await fetch('https://api.agrouter.ai/v1/chat/completions', {
   method: 'POST',
   headers: {
-    Authorization: `Bearer ${process.env.SANDBASE_API_KEY}`,
+    Authorization: `Bearer ${process.env.AGROUTER_API_KEY}`,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({

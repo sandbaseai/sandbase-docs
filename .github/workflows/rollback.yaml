@@ -20,10 +20,10 @@ jobs:
     runs-on: self-hosted
     environment: production
     env:
-      REGISTRY: sgccr.ccs.tencentyun.com/sandbase
+      REGISTRY: sgccr.ccs.tencentyun.com/agrouter
       REGISTRY_HOST: sgccr.ccs.tencentyun.com
-      NAMESPACE: sandbase
-      DEPLOYMENT: sandbase-docs
+      NAMESPACE: agrouter
+      DEPLOYMENT: agrouter-docs
       CONTAINER: docs
       IMAGE_TAG: ${{ inputs.image_tag }}
     steps:
@@ -64,4 +64,4 @@ jobs:
           curl --fail --silent --show-error --location \
             --retry 6 --retry-delay 10 --retry-all-errors \
             --max-time 30 \
-            https://www.sandbase.ai/docs/health >/dev/null
+            https://www.agrouter.ai/docs/health >/dev/null

@@ -1,13 +1,13 @@
 ---
 title: Rate limits
-description: Handle SandBase API rate limits safely with bounded retries, jitter, queues, and idempotency-aware request handling.
+description: Handle AGRouter API rate limits safely with bounded retries, jitter, queues, and idempotency-aware request handling.
 ---
 
 # Rate limits
 
-SandBase can limit requests per API key and across the platform. Upstream model providers can also return their own
+AGRouter can limit requests per API key and across the platform. Upstream model providers can also return their own
 `429 Too Many Requests` responses. Limits may differ by account, key, endpoint, model, and provider, so do not hardcode
-a quota unless SandBase has assigned one to your workload.
+a quota unless AGRouter has assigned one to your workload.
 
 ## Handle a 429 response
 
@@ -34,8 +34,8 @@ import time
 from openai import OpenAI, RateLimitError
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
-    api_key=os.environ["SANDBASE_API_KEY"],
+    base_url="https://api.agrouter.ai/v1",
+    api_key=os.environ["AGROUTER_API_KEY"],
     max_retries=0,
 )
 
@@ -70,7 +70,7 @@ your product requirements; starting again creates a new generation.
 - Avoid duplicate requests and cache reusable results when privacy and freshness requirements allow it.
 - Use separate keys for ownership, spending controls, and revocation—not to bypass platform limits.
 - Record the endpoint, model, HTTP status, and sanitized error body for troubleshooting.
-- Contact SandBase support when a workload needs an assigned or higher capacity limit.
+- Contact AGRouter support when a workload needs an assigned or higher capacity limit.
 
 ```python
 import asyncio

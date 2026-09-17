@@ -17,8 +17,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |-
-        curl -X DELETE https://api.sandbase.ai/v1/sessions/sess_01... \
-          -H "Authorization: Bearer $SANDBASE_API_KEY"
+        curl -X DELETE https://api.agrouter.ai/v1/sessions/sess_01... \
+          -H "Authorization: Bearer $AGROUTER_API_KEY"
   response:
     status: 200 OK
     code: |-

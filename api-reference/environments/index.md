@@ -1,6 +1,6 @@
 ---
 title: Environments API
-description: Configure the high-level runtime environment and credential bindings used by SandBase Agents.
+description: Configure the high-level runtime environment and credential bindings used by AGRouter Agents.
 ---
 
 # Environments API
@@ -34,8 +34,8 @@ Updates are partial and in place. `{}` is accepted as a no-op. A JSON `null` for
 ## Create an Environment
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/environments \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/environments \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "research-runtime",
@@ -60,4 +60,4 @@ Credential bindings reference an existing Credential and the environment-variabl
 }
 ```
 
-Targets must be unique, use uppercase environment-variable syntax, and must not begin with `SANDBASE_`. Each Credential must be active and belong to the caller's organization; otherwise creation or update returns `422`. Credential plaintext is never returned by the Environment API. See [Credentials API](/api-reference/credentials/).
+Targets must be unique, use uppercase environment-variable syntax, and must not begin with `AGROUTER_`. Each Credential must be active and belong to the caller's organization; otherwise creation or update returns `422`. Credential plaintext is never returned by the Environment API. See [Credentials API](/api-reference/credentials/).

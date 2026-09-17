@@ -1,6 +1,6 @@
 ---
 title: Credentials API
-description: Create and manage private values injected into SandBase Agent runtimes.
+description: Create and manage private values injected into AGRouter Agent runtimes.
 ---
 
 # Credentials API
@@ -8,7 +8,7 @@ description: Create and manage private values injected into SandBase Agent runti
 Credentials store API keys, tokens, and other private values used by an Agent at runtime. Values are scoped to your organization and are masked after creation.
 
 ::: warning Server-side only
-Credential endpoints require a secret SandBase API key. Never call them from browser code or expose credential values in prompts, logs, or source control.
+Credential endpoints require a secret AGRouter API key. Never call them from browser code or expose credential values in prompts, logs, or source control.
 :::
 
 ## Credential operations
@@ -26,8 +26,8 @@ Credentials do not currently have a delete endpoint. Set `status` to `disabled` 
 ## Create a credential
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/credentials \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/credentials \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "agent_id": "agent_01...",
@@ -42,13 +42,13 @@ Credential IDs use the `sec_` prefix. The plaintext `value` is accepted only on 
 
 The only supported selection strategy is `round_robin`, and `weight` must be a positive integer.
 
-`scope`, `scope_name`, and `secret_key` are caller-defined identifiers. SandBase trims their surrounding whitespace and rejects control characters. If `group_key` is omitted, it defaults to `scope_name:secret_key`.
+`scope`, `scope_name`, and `secret_key` are caller-defined identifiers. AGRouter trims their surrounding whitespace and rejects control characters. If `group_key` is omitted, it defaults to `scope_name:secret_key`.
 
 ## List credentials
 
 ```bash
-curl https://api.sandbase.ai/v1/credentials \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/credentials \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 The response lists credentials in your organization. Secret values are never returned; each record contains masked metadata such as `value_hint` instead.
@@ -56,8 +56,8 @@ The response lists credentials in your organization. Secret values are never ret
 ## Get a credential
 
 ```bash
-curl https://api.sandbase.ai/v1/credentials/sec_01... \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/credentials/sec_01... \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 Use the `sec_` credential ID returned by create or list. The response contains the credential's masked metadata and current selection status, but not its stored value.
@@ -65,8 +65,8 @@ Use the `sec_` credential ID returned by create or list. The response contains t
 ## Update a credential
 
 ```bash
-curl -X PATCH https://api.sandbase.ai/v1/credentials/sec_01... \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X PATCH https://api.agrouter.ai/v1/credentials/sec_01... \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"status":"disabled"}'
 ```
@@ -76,8 +76,8 @@ Use update to change `status`, `strategy`, or `weight`. To stop a credential fro
 ## Rotate a credential
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/credentials/sec_01.../rotate \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/credentials/sec_01.../rotate \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"value":"YOUR_NEW_SECRET_VALUE"}'
 ```

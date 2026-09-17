@@ -36,8 +36,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |
-        curl "https://api.sandbase.ai/v1/agents?limit=20" \
-          -H "Authorization: Bearer $SANDBASE_API_KEY"
+        curl "https://api.agrouter.ai/v1/agents?limit=20" \
+          -H "Authorization: Bearer $AGROUTER_API_KEY"
     - label: Python
       language: python
       code: |
@@ -45,7 +45,7 @@ apiReference:
 
         client = Anthropic(
             api_key="sk-YOUR_KEY",
-            base_url="https://api.sandbase.ai",
+            base_url="https://api.agrouter.ai",
         )
 
         page = client.beta.agents.list(limit=20)
@@ -57,8 +57,8 @@ apiReference:
         import Anthropic from '@anthropic-ai/sdk';
 
         const client = new Anthropic({
-          apiKey: process.env.SANDBASE_API_KEY,
-          baseURL: 'https://api.sandbase.ai',
+          apiKey: process.env.AGROUTER_API_KEY,
+          baseURL: 'https://api.agrouter.ai',
         });
 
         const page = await client.beta.agents.list({ limit: 20 });

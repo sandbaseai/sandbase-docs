@@ -20,7 +20,7 @@ for (const required of [
   'New key',
   'Create key',
   'A revoked key cannot be re-enabled',
-  'Authorization: Bearer $SANDBASE_API_KEY',
+  'Authorization: Bearer $AGROUTER_API_KEY',
   'POST /v1/messages',
   'x-api-key',
   'x-goog-api-key',
@@ -34,6 +34,6 @@ assert.doesNotMatch(firstCall, /api_key\s*=\s*['"]sk-/, 'First-call SDK examples
 assert.doesNotMatch(errors, /Add `Authorization: Bearer sk-sb-/, 'error guidance must treat API key formats as opaque')
 assert.doesNotMatch(openapi, /description: "API key with `sk-sb-` prefix"/, 'OpenAPI bearer authentication must treat keys as opaque')
 assert.doesNotMatch(openapi, /example: "gpt-4o"/, 'OpenAPI must not publish a stale example model')
-assert.doesNotMatch(openapi, /Agents and Sessions.*Use Anthropic SDK/, 'OpenAPI must not map SandBase resource APIs to the Anthropic SDK')
+assert.doesNotMatch(openapi, /Agents and Sessions.*Use Anthropic SDK/, 'OpenAPI must not map AGRouter resource APIs to the Anthropic SDK')
 
 console.log('Authentication docs: ok (one key guide, current Console flow, irreversible revocation)')

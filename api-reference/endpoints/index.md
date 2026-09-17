@@ -8,7 +8,7 @@ description: Publish an Agent as a reusable REST, MCP, or experimental ACP Servi
 A **Service** publishes a tested Agent behind a stable callable interface. Service URLs and IDs retain the existing `/v1/endpoints` path and `ep_` prefix for API compatibility. Public invocation uses REST, MCP, or the experimental ACP protocol.
 
 ::: info Session identity
-Service invocation accepts an optional `session_id`. When omitted, SandBase creates a persistent Session. When supplied, the message is appended to that Session. No public Run or Runtime Session identity is created.
+Service invocation accepts an optional `session_id`. When omitted, AGRouter creates a persistent Session. When supplied, the message is appended to that Session. No public Run or Runtime Session identity is created.
 :::
 
 ## Service operations
@@ -21,7 +21,7 @@ Service invocation accepts an optional `session_id`. When omitted, SandBase crea
 | `PATCH` or `POST` | `/v1/endpoints/{endpoint_id}` | Update an advanced Service. Declarative definitions are immutable. |
 | `DELETE` | `/v1/endpoints/{endpoint_id}` | Delete a Service. |
 
-For the advanced creation mode, `name`, `agent_id`, and an explicit non-empty `protocols` array are required by the public contract. A declarative definition similarly requires `name`, `runtime`, and `protocols`; it cannot be mixed with `agent_id`. Public protocol values are `rest`, `mcp`, and experimental `acp`. Always send the intended values instead of relying on server defaults. Optional advanced fields include `agent_version`, `slug`, and Session configuration. Runtime binding is resolved internally. `session_metadata` is copied to each newly created Session. `memory_config`, `resource_config`, and `vault_config` are reserved fields: SandBase stores and returns them, but does not currently apply them to Session execution.
+For the advanced creation mode, `name`, `agent_id`, and an explicit non-empty `protocols` array are required by the public contract. A declarative definition similarly requires `name`, `runtime`, and `protocols`; it cannot be mixed with `agent_id`. Public protocol values are `rest`, `mcp`, and experimental `acp`. Always send the intended values instead of relying on server defaults. Optional advanced fields include `agent_version`, `slug`, and Session configuration. Runtime binding is resolved internally. `session_metadata` is copied to each newly created Session. `memory_config`, `resource_config`, and `vault_config` are reserved fields: AGRouter stores and returns them, but does not currently apply them to Session execution.
 
 List requests support cursor pagination and `q` search across IDs, names, slugs, runtimes, and Agent IDs. `search` is retained as an alias for `q`.
 
@@ -32,8 +32,8 @@ For advanced Services, update requests can change the name, slug, bound Agent, p
 Create a Service with an existing Agent and an explicit public protocol list:
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/endpoints \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/endpoints \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Research service",
@@ -47,8 +47,8 @@ The response is `201 Created`. Store its `id` (`ep_...`) for later management an
 ### List Services
 
 ```bash
-curl "https://api.sandbase.ai/v1/endpoints?limit=20" \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl "https://api.agrouter.ai/v1/endpoints?limit=20" \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 Pass the returned opaque `next_page` value as `page` to request the next page. Do not parse or construct cursors.
@@ -56,8 +56,8 @@ Pass the returned opaque `next_page` value as `page` to request the next page. D
 ### Get a Service
 
 ```bash
-curl https://api.sandbase.ai/v1/endpoints/ep_01... \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/endpoints/ep_01... \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 Check `status` before invocation and `protocols` before choosing REST, MCP, or ACP. Returned URLs do not by themselves indicate that a protocol is enabled.
@@ -65,8 +65,8 @@ Check `status` before invocation and `protocols` before choosing REST, MCP, or A
 ### Update a Service
 
 ```bash
-curl -X PATCH https://api.sandbase.ai/v1/endpoints/ep_01... \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X PATCH https://api.agrouter.ai/v1/endpoints/ep_01... \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"name":"Research service v2"}'
 ```
@@ -76,8 +76,8 @@ Use `PATCH` for new integrations. `POST /v1/endpoints/{endpoint_id}` is only a c
 ### Delete a Service
 
 ```bash
-curl -X DELETE https://api.sandbase.ai/v1/endpoints/ep_01... \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl -X DELETE https://api.agrouter.ai/v1/endpoints/ep_01... \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 A successful deletion returns `200 OK` with `{ "id": "ep_01...", "deleted": true }`. This operation removes the Service; it is not the same as setting `status` to `disabled`.
@@ -87,15 +87,15 @@ A successful deletion returns `200 OK` with `{ "id": "ep_01...", "deleted": true
 `POST /v1/endpoints/{endpoint_id}/run`
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../run \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/endpoints/ep_01.../run \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"input":"Research Acme and return a sourced brief."}'
 ```
 
 The body accepts `input` or `content`, plus an optional `session_id`.
 
-Each invocation sends a standard Session event. If `session_id` is omitted, SandBase first creates a Session fixed to the Service's Agent-version runtime binding.
+Each invocation sends a standard Session event. If `session_id` is omitted, AGRouter first creates a Session fixed to the Service's Agent-version runtime binding.
 
 The response is `202 Accepted`:
 
@@ -122,12 +122,12 @@ current Session and its persisted output:
 
 ```bash
 # Check the Session lifecycle status
-curl https://api.sandbase.ai/v1/sessions/sess_01... \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/sessions/sess_01... \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 
 # Read the event history, including agent messages and tool activity
-curl "https://api.sandbase.ai/v1/sessions/sess_01.../events?order=asc" \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl "https://api.agrouter.ai/v1/sessions/sess_01.../events?order=asc" \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 For live results, use [`GET /v1/sessions/{id}/events/stream`](/api-reference/sessions/stream)
@@ -149,8 +149,8 @@ REST, MCP, and ACP are invocation protocols on the same Service.
 `POST /v1/endpoints/{endpoint_id}/mcp` handles MCP JSON-RPC for a Service whose `protocols` includes `mcp`. Send standard MCP messages with `Content-Type: application/json`; initialize the connection before calling the tools exposed by the Service. A streaming response may use newline-delimited JSON.
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../mcp \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/endpoints/ep_01.../mcp \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"my-app","version":"1.0.0"}}}'
 ```

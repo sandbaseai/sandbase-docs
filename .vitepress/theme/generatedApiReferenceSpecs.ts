@@ -10,7 +10,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl https://api.sandbase.ai/v1/account/balance \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl https://api.agrouter.ai/v1/account/balance \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ],
     "response": {
@@ -51,7 +51,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/account/history?range=24h&page_size=20\" \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl \"https://api.agrouter.ai/v1/account/history?range=24h&page_size=20\" \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ],
     "response": {
@@ -86,12 +86,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "Initialize",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../acp -H \"Authorization: Bearer $SANDBASE_API_KEY\" -H \"Content-Type: application/json\" -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{}}'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/endpoints/ep_01.../acp -H \"Authorization: Bearer $AGROUTER_API_KEY\" -H \"Content-Type: application/json\" -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{}}'"
       },
       {
         "label": "Create session",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../acp -H \"Authorization: Bearer $SANDBASE_API_KEY\" -H \"Content-Type: application/json\" -d '{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"session/new\",\"params\":{}}'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/endpoints/ep_01.../acp -H \"Authorization: Bearer $AGROUTER_API_KEY\" -H \"Content-Type: application/json\" -d '{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"session/new\",\"params\":{}}'"
       }
     ],
     "response": {
@@ -100,7 +100,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     },
     "notes": [
       { "title": "Prompt streaming", "description": "session/prompt returns application/x-ndjson session/update notifications followed by a final result containing stopReason." },
-      { "title": "Experimental transport", "description": "ACP-over-HTTP may change. ACP Session IDs are canonical SandBase Session IDs." }
+      { "title": "Experimental transport", "description": "ACP-over-HTTP may change. ACP Session IDs are canonical AGRouter Session IDs." }
     ]
   },
   "deployments/archive": {
@@ -126,7 +126,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/deployments/depl_01.../archive \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl -X POST https://api.agrouter.ai/v1/deployments/depl_01.../archive \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ]
   },
@@ -178,12 +178,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/deployments \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"Daily customer brief\",\n    \"agent_id\": \"agent_01...\",\n    \"environment_id\": \"env_01...\",\n    \"initial_events\": [{\n      \"type\": \"user.message\",\n      \"content\": [{\"type\":\"text\",\"text\":\"Prepare today’s brief.\"}]\n    }],\n    \"schedule\": {\n      \"type\": \"cron\",\n      \"expression\": \"0 9 * * *\",\n      \"timezone\": \"Asia/Shanghai\"\n    }\n  }'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/deployments \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"Daily customer brief\",\n    \"agent_id\": \"agent_01...\",\n    \"environment_id\": \"env_01...\",\n    \"initial_events\": [{\n      \"type\": \"user.message\",\n      \"content\": [{\"type\":\"text\",\"text\":\"Prepare today’s brief.\"}]\n    }],\n    \"schedule\": {\n      \"type\": \"cron\",\n      \"expression\": \"0 9 * * *\",\n      \"timezone\": \"Asia/Shanghai\"\n    }\n  }'"
       },
       {
         "label": "Declarative YAML",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/deployments -H \"Authorization: Bearer $SANDBASE_API_KEY\" -H \"Content-Type: application/yaml\" --data-binary $'name: Daily customer brief\\nruntime: hermes\\ninitial_events:\\n  - type: user.message\\n    content:\\n      - type: text\\n        text: Prepare today’s brief.'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/deployments -H \"Authorization: Bearer $AGROUTER_API_KEY\" -H \"Content-Type: application/yaml\" --data-binary $'name: Daily customer brief\\nruntime: hermes\\ninitial_events:\\n  - type: user.message\\n    content:\\n      - type: text\\n        text: Prepare today’s brief.'"
       }
     ]
   },
@@ -210,7 +210,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl https://api.sandbase.ai/v1/deployments/depl_01... \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl https://api.agrouter.ai/v1/deployments/depl_01... \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ]
   },
@@ -243,7 +243,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl https://api.sandbase.ai/v1/deployments/depl_01.../runs/drun_01... \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl https://api.agrouter.ai/v1/deployments/depl_01.../runs/drun_01... \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ],
     "response": {
@@ -304,7 +304,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/deployments/depl_01.../runs?limit=20\" \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl \"https://api.agrouter.ai/v1/deployments/depl_01.../runs?limit=20\" \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ],
     "notes": [
@@ -338,7 +338,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/deployments?limit=20\" \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl \"https://api.agrouter.ai/v1/deployments?limit=20\" \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ]
   },
@@ -365,7 +365,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/deployments/depl_01.../pause \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl -X POST https://api.agrouter.ai/v1/deployments/depl_01.../pause \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ]
   },
@@ -392,7 +392,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/deployments/depl_01.../runs \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Idempotency-Key: daily-acme-2026-08-03\" \\\n  -d '{}'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/deployments/depl_01.../runs \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Idempotency-Key: daily-acme-2026-08-03\" \\\n  -d '{}'"
       }
     ]
   },
@@ -419,7 +419,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/deployments/depl_01.../unpause \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl -X POST https://api.agrouter.ai/v1/deployments/depl_01.../unpause \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ]
   },
@@ -428,7 +428,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Schedules",
     "method": "POST",
     "path": "/v1/deployments/{deployment_id}/notifications/feishu/test",
-    "description": "Send a fixed SandBase test message to the Feishu webhook already saved on a Deployment. No URL or custom message is accepted.",
+    "description": "Send a fixed AGRouter test message to the Feishu webhook already saved on a Deployment. No URL or custom message is accepted.",
     "groups": [
       {
         "title": "Path parameters",
@@ -446,7 +446,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/deployments/depl_01.../notifications/feishu/test \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{}'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/deployments/depl_01.../notifications/feishu/test \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{}'"
       }
     ],
     "response": {
@@ -480,7 +480,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X PATCH https://api.sandbase.ai/v1/deployments/depl_01... \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"Weekday customer brief\",\n    \"schedule\": {\"type\":\"cron\",\"expression\":\"0 9 * * 1-5\",\"timezone\":\"Asia/Shanghai\"}\n  }'"
+        "code": "curl -X PATCH https://api.agrouter.ai/v1/deployments/depl_01... \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"Weekday customer brief\",\n    \"schedule\": {\"type\":\"cron\",\"expression\":\"0 9 * * 1-5\",\"timezone\":\"Asia/Shanghai\"}\n  }'"
       }
     ]
   },
@@ -514,15 +514,15 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"bytedance/seed-speech/tts/2.0\",\"text\":\"Hello, welcome to SandBase!\"}'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/run \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"bytedance/seed-speech/tts/2.0\",\"text\":\"Hello, welcome to AGRouter!\"}'"
       },
       {
         "label": "Python",
         "language": "python",
-        "code": "response = client.post(\"/v1/run\", json={\n    \"model\": \"bytedance/seed-speech/tts/2.0\",\n    \"text\": \"Hello, welcome to SandBase!\"\n})\nprint(response.json()[\"outputs\"][0][\"url\"])"
+        "code": "response = client.post(\"/v1/run\", json={\n    \"model\": \"bytedance/seed-speech/tts/2.0\",\n    \"text\": \"Hello, welcome to AGRouter!\"\n})\nprint(response.json()[\"outputs\"][0][\"url\"])"
       }
     ],
-    "response": { "status": "200 OK", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"completed\",\n  \"outputs\": [{ \"url\": \"https://media.sandbase.ai/audio/output.mp3\" }]\n}" }
+    "response": { "status": "200 OK", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"completed\",\n  \"outputs\": [{ \"url\": \"https://media.agrouter.ai/audio/output.mp3\" }]\n}" }
   },
   "assets/upload": {
     "title": "Upload Media",
@@ -551,12 +551,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/upload \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -F \"file=@reference.mp4\" \\\n  -F \"type=video\""
+        "code": "curl -X POST https://api.agrouter.ai/v1/upload \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -F \"file=@reference.mp4\" \\\n  -F \"type=video\""
       }
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"url\": \"https://media.sandbase.ai/uploads/2026/08/550e8400-e29b-41d4-a716-446655440000.mp4\",\n  \"filename\": \"reference.mp4\",\n  \"size\": 1048576,\n  \"type\": \"video/mp4\",\n  \"content_type\": \"video/mp4\"\n}"
+      "code": "{\n  \"url\": \"https://media.agrouter.ai/uploads/2026/08/550e8400-e29b-41d4-a716-446655440000.mp4\",\n  \"filename\": \"reference.mp4\",\n  \"size\": 1048576,\n  \"type\": \"video/mp4\",\n  \"content_type\": \"video/mp4\"\n}"
     },
     "notes": [
       { "title": "MIME detection", "description": "The server detects the file type from its bytes and filename. The optional type field does not force a MIME type." }
@@ -582,7 +582,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/assets \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"url\": \"https://example.com/tea-ad.mp4\",\n    \"asset_type\": \"Video\",\n    \"name\": \"Tea ad reference video\"\n  }'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/assets \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"url\": \"https://example.com/tea-ad.mp4\",\n    \"asset_type\": \"Video\",\n    \"name\": \"Tea ad reference video\"\n  }'"
       }
     ],
     "response": {
@@ -608,7 +608,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl https://api.sandbase.ai/v1/assets/asset-20260710150403-hx4hf \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl https://api.agrouter.ai/v1/assets/asset-20260710150403-hx4hf \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ],
     "response": {
@@ -660,17 +660,17 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "HTTP",
         "language": "http",
-        "code": "POST https://api.sandbase.ai/v1/embeddings\nAuthorization: Bearer sk-your-api-key\nContent-Type: application/json\n\n{\"model\":\"alibaba/text-embedding-v4\",\"input\":\"SandBase provides a unified API for AI models, agents, and developer tools.\",\"dimensions\":1024,\"encoding_format\":\"float\"}"
+        "code": "POST https://api.agrouter.ai/v1/embeddings\nAuthorization: Bearer sk-your-api-key\nContent-Type: application/json\n\n{\"model\":\"alibaba/text-embedding-v4\",\"input\":\"AGRouter provides a unified API for AI models, agents, and developer tools.\",\"dimensions\":1024,\"encoding_format\":\"float\"}"
       },
       {
         "label": "Python",
         "language": "python",
-        "code": "from openai import OpenAI\n\nclient = OpenAI(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai/v1\",\n)\n\nresponse = client.embeddings.create(\n    model=\"alibaba/text-embedding-v4\",\n    input=\"SandBase provides a unified API for AI models, agents, and developer tools.\",\n    dimensions=1024,\n    encoding_format=\"float\",\n)\n\nembedding = response.data[0].embedding\nprint(f\"Dimensions: {len(embedding)}\")"
+        "code": "from openai import OpenAI\n\nclient = OpenAI(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.agrouter.ai/v1\",\n)\n\nresponse = client.embeddings.create(\n    model=\"alibaba/text-embedding-v4\",\n    input=\"AGRouter provides a unified API for AI models, agents, and developer tools.\",\n    dimensions=1024,\n    encoding_format=\"float\",\n)\n\nembedding = response.data[0].embedding\nprint(f\"Dimensions: {len(embedding)}\")"
       },
       {
         "label": "TypeScript",
         "language": "typescript",
-        "code": "import OpenAI from 'openai';\n\nconst client = new OpenAI({\n  apiKey: 'sk-YOUR_KEY',\n  baseURL: 'https://api.sandbase.ai/v1',\n});\n\nconst response = await client.embeddings.create({\n  model: 'alibaba/text-embedding-v4',\n  input: 'SandBase provides a unified API for AI models, agents, and developer tools.',\n  dimensions: 1024,\n  encoding_format: 'float',\n});\n\nconsole.log(response.data[0].embedding.length);"
+        "code": "import OpenAI from 'openai';\n\nconst client = new OpenAI({\n  apiKey: 'sk-YOUR_KEY',\n  baseURL: 'https://api.agrouter.ai/v1',\n});\n\nconst response = await client.embeddings.create({\n  model: 'alibaba/text-embedding-v4',\n  input: 'AGRouter provides a unified API for AI models, agents, and developer tools.',\n  dimensions: 1024,\n  encoding_format: 'float',\n});\n\nconsole.log(response.data[0].embedding.length);"
       }
     ],
     "response": {
@@ -701,7 +701,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/models/openai/gpt-4o\" \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl \"https://api.agrouter.ai/v1/models/openai/gpt-4o\" \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ],
     "response": {
@@ -768,7 +768,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"bfl/flux-1/schnell\",\"prompt\":\"A futuristic city at sunset\",\"aspect_ratio\":\"1:1\"}'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/run \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"bfl/flux-1/schnell\",\"prompt\":\"A futuristic city at sunset\",\"aspect_ratio\":\"1:1\"}'"
       },
       {
         "label": "Python",
@@ -776,7 +776,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
         "code": "response = client.post(\"/v1/run\", json={\n    \"model\": \"bfl/flux-1/schnell\",\n    \"prompt\": \"A futuristic city at sunset, cyberpunk style\",\n    \"aspect_ratio\": \"1:1\"\n})\nprint(response.json()[\"outputs\"][0][\"url\"])"
       }
     ],
-    "response": { "status": "200 OK", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"completed\",\n  \"outputs\": [{ \"url\": \"https://media.sandbase.ai/images/output.png\" }]\n}" }
+    "response": { "status": "200 OK", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"completed\",\n  \"outputs\": [{ \"url\": \"https://media.agrouter.ai/images/output.png\" }]\n}" }
   },
   "models/list": {
     "title": "List Models",
@@ -819,7 +819,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/models\" \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl \"https://api.agrouter.ai/v1/models\" \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ],
     "response": {
@@ -874,12 +874,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\",\"prompt\":\"A cat playing piano\",\"duration\":5}'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/run \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\",\"prompt\":\"A cat playing piano\",\"duration\":5}'"
       },
       {
         "label": "Python",
         "language": "python",
-        "code": "# 1. Submit generation request\nresponse = client.post(\"/v1/run\", json={\n    \"model\": \"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\",\n    \"prompt\": \"A cat playing piano\",\n    \"duration\": 5,\n    \"webhook_url\": \"https://hooks.example.com/sandbase/task?token=opaque-token\"\n})\ngeneration_id = response.json()[\"id\"]\n\n# 2. SandBase posts the terminal event to webhook_url.\n# You may still poll the existing result endpoint as a fallback.\nimport time\nwhile True:\n    result = client.get(f\"/v1/run/{generation_id}\").json()\n    if result[\"status\"] in (\"completed\", \"failed\", \"timeout\"):\n        print(result)\n        break\n    time.sleep(5)"
+        "code": "# 1. Submit generation request\nresponse = client.post(\"/v1/run\", json={\n    \"model\": \"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\",\n    \"prompt\": \"A cat playing piano\",\n    \"duration\": 5,\n    \"webhook_url\": \"https://hooks.example.com/agrouter/task?token=opaque-token\"\n})\ngeneration_id = response.json()[\"id\"]\n\n# 2. AGRouter posts the terminal event to webhook_url.\n# You may still poll the existing result endpoint as a fallback.\nimport time\nwhile True:\n    result = client.get(f\"/v1/run/{generation_id}\").json()\n    if result[\"status\"] in (\"completed\", \"failed\", \"timeout\"):\n        print(result)\n        break\n    time.sleep(5)"
       }
     ],
     "response": { "status": "202 Accepted", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"pending\",\n  \"model\": \"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\"\n}" }
@@ -907,7 +907,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/sessions/sess_01.../archive \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl -X POST https://api.agrouter.ai/v1/sessions/sess_01.../archive \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ]
   },
@@ -916,7 +916,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Sessions",
     "method": "POST",
     "path": "/v1/sessions",
-    "description": "Create a stateful execution of an Agent. SandBase resolves runtime binding internally.",
+    "description": "Create a stateful execution of an Agent. AGRouter resolves runtime binding internally.",
     "groups": [
       {
         "title": "Request body",
@@ -946,7 +946,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/sessions \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"agent\": \"agent_01...\",\n    \"environment_id\": \"env_01...\",\n    \"title\": \"Customer research\"\n  }'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/sessions \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"agent\": \"agent_01...\",\n    \"environment_id\": \"env_01...\",\n    \"title\": \"Customer research\"\n  }'"
       }
     ],
     "response": {
@@ -977,7 +977,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "Python",
         "language": "python",
-        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\nsession = client.beta.sessions.retrieve(\n    session_id=\"sess_01abc...\"\n)\nprint(f\"Status: {session.status}\")"
+        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.agrouter.ai\"\n)\n\nsession = client.beta.sessions.retrieve(\n    session_id=\"sess_01abc...\"\n)\nprint(f\"Status: {session.status}\")"
       },
       {
         "label": "TypeScript",
@@ -987,7 +987,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl https://api.sandbase.ai/v1/sessions/sess_01abc... \\\n  -H \"Authorization: Bearer sk-YOUR_KEY\""
+        "code": "curl https://api.agrouter.ai/v1/sessions/sess_01abc... \\\n  -H \"Authorization: Bearer sk-YOUR_KEY\""
       }
     ],
     "response": {
@@ -1083,12 +1083,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "Python",
         "language": "python",
-        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\npage = client.beta.sessions.events.list(session_id=\"sess_01abc...\")\nfor event in page.data:\n    print(f\"{event.type}: {event.id}\")"
+        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.agrouter.ai\"\n)\n\npage = client.beta.sessions.events.list(session_id=\"sess_01abc...\")\nfor event in page.data:\n    print(f\"{event.type}: {event.id}\")"
       },
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/sessions/sess_01abc.../events\" \\\n  -H \"Authorization: Bearer sk-YOUR_KEY\""
+        "code": "curl \"https://api.agrouter.ai/v1/sessions/sess_01abc.../events\" \\\n  -H \"Authorization: Bearer sk-YOUR_KEY\""
       }
     ],
     "response": {
@@ -1155,12 +1155,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "Python",
         "language": "python",
-        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\npage = client.beta.sessions.list(agent_id=\"agent_01HqR2k7...\", limit=20)\nfor session in page.data:\n    print(f\"{session.id} — {session.status} — {session.title}\")"
+        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.agrouter.ai\"\n)\n\npage = client.beta.sessions.list(agent_id=\"agent_01HqR2k7...\", limit=20)\nfor session in page.data:\n    print(f\"{session.id} — {session.status} — {session.title}\")"
       },
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/sessions?agent_id=agent_01HqR2k7...&created_at%5Bgte%5D=2026-05-01T00%3A00%3A00Z&limit=20\" \\\n  -H \"Authorization: Bearer sk-YOUR_KEY\""
+        "code": "curl \"https://api.agrouter.ai/v1/sessions?agent_id=agent_01HqR2k7...&created_at%5Bgte%5D=2026-05-01T00%3A00%3A00Z&limit=20\" \\\n  -H \"Authorization: Bearer sk-YOUR_KEY\""
       }
     ],
     "response": {
@@ -1191,7 +1191,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/sessions/sess_01.../events \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"events\": [{\n      \"type\": \"user.message\",\n      \"content\": [{\"type\": \"text\", \"text\": \"Summarize this account.\"}]\n    }]\n  }'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/sessions/sess_01.../events \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"events\": [{\n      \"type\": \"user.message\",\n      \"content\": [{\"type\": \"text\", \"text\": \"Summarize this account.\"}]\n    }]\n  }'"
       }
     ]
   },
@@ -1223,12 +1223,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "Python",
         "language": "python",
-        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.sandbase.ai\"\n)\n\nfor event in client.beta.sessions.events.stream(session_id=\"sess_01abc...\"):\n    if event.type == \"agent.message\":\n        for block in event.content:\n            print(block.text, end=\"\")\n    elif event.type == \"session.status_idle\":\n        print(f\"\\n[done: {event.stop_reason.type}]\")\n        break"
+        "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"sk-YOUR_KEY\",\n    base_url=\"https://api.agrouter.ai\"\n)\n\nfor event in client.beta.sessions.events.stream(session_id=\"sess_01abc...\"):\n    if event.type == \"agent.message\":\n        for block in event.content:\n            print(block.text, end=\"\")\n    elif event.type == \"session.status_idle\":\n        print(f\"\\n[done: {event.stop_reason.type}]\")\n        break"
       },
       {
         "label": "Raw SSE",
         "language": "python",
-        "code": "import json, httpx\n\nwith httpx.stream(\"GET\",\n    \"https://api.sandbase.ai/v1/sessions/sess_01abc.../events/stream\",\n    headers={\"Authorization\": \"Bearer sk-YOUR_KEY\"}\n) as response:\n    for line in response.iter_lines():\n        if line.startswith(\"data: \"):\n            event = json.loads(line[6:])\n            if \"type\" in event:\n                print(event[\"type\"])"
+        "code": "import json, httpx\n\nwith httpx.stream(\"GET\",\n    \"https://api.agrouter.ai/v1/sessions/sess_01abc.../events/stream\",\n    headers={\"Authorization\": \"Bearer sk-YOUR_KEY\"}\n) as response:\n    for line in response.iter_lines():\n        if line.startswith(\"data: \"):\n            event = json.loads(line[6:])\n            if \"type\" in event:\n                print(event[\"type\"])"
       }
     ],
     "response": {
@@ -1289,7 +1289,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/skills \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"release-notes\",\n    \"description\": \"Draft concise release notes\",\n    \"categories\": [\"writing\"],\n    \"skill_file_url\": \"https://media.sandbase.ai/_private/.../release-notes.zip\"\n  }'"
+        "code": "curl -X POST https://api.agrouter.ai/v1/skills \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"release-notes\",\n    \"description\": \"Draft concise release notes\",\n    \"categories\": [\"writing\"],\n    \"skill_file_url\": \"https://media.agrouter.ai/_private/.../release-notes.zip\"\n  }'"
       }
     ],
     "response": {
@@ -1320,7 +1320,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X DELETE https://api.sandbase.ai/v1/skills/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl -X DELETE https://api.agrouter.ai/v1/skills/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ],
     "response": {
@@ -1351,12 +1351,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl https://api.sandbase.ai/v1/skills/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl https://api.agrouter.ai/v1/skills/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"description\": \"Draft concise release notes\",\n  \"categories\": [\"writing\"],\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"skill_file_url\": \"https://media.sandbase.ai/_private/.../release-notes.zip\",\n  \"git_url\": \"\",\n  \"created_at\": \"2026-08-03T10:00:00Z\",\n  \"updated_at\": \"2026-08-03T10:00:00Z\"\n}"
+      "code": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"description\": \"Draft concise release notes\",\n  \"categories\": [\"writing\"],\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"skill_file_url\": \"https://media.agrouter.ai/_private/.../release-notes.zip\",\n  \"git_url\": \"\",\n  \"created_at\": \"2026-08-03T10:00:00Z\",\n  \"updated_at\": \"2026-08-03T10:00:00Z\"\n}"
     }
   },
   "skills/list": {
@@ -1388,7 +1388,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl \"https://api.sandbase.ai/v1/skills?page=1&page_size=20\" \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\""
+        "code": "curl \"https://api.agrouter.ai/v1/skills?page=1&page_size=20\" \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\""
       }
     ],
     "response": {
@@ -1454,12 +1454,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X PUT https://api.sandbase.ai/v1/skills/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"release-notes\",\n    \"description\": \"Draft release notes with a concise changelog\",\n    \"categories\": [\"writing\", \"product\"]\n  }'"
+        "code": "curl -X PUT https://api.agrouter.ai/v1/skills/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"release-notes\",\n    \"description\": \"Draft release notes with a concise changelog\",\n    \"categories\": [\"writing\", \"product\"]\n  }'"
       }
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"description\": \"Draft release notes with a concise changelog\",\n  \"categories\": [\"writing\", \"product\"],\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"skill_file_url\": \"https://media.sandbase.ai/_private/.../release-notes.zip\",\n  \"git_url\": \"\",\n  \"created_at\": \"2026-08-03T10:00:00Z\",\n  \"updated_at\": \"2026-08-03T10:05:00Z\"\n}"
+      "code": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"acme/release-notes\",\n  \"display_name\": \"release-notes\",\n  \"vendor_slug\": \"acme\",\n  \"plugin_slug\": \"release-notes\",\n  \"description\": \"Draft release notes with a concise changelog\",\n  \"categories\": [\"writing\", \"product\"],\n  \"icon_url\": \"\",\n  \"preview_urls\": [],\n  \"skill_file_url\": \"https://media.agrouter.ai/_private/.../release-notes.zip\",\n  \"git_url\": \"\",\n  \"created_at\": \"2026-08-03T10:00:00Z\",\n  \"updated_at\": \"2026-08-03T10:05:00Z\"\n}"
     }
   },
   "images/generations": {
@@ -1467,7 +1467,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Images",
     "method": "POST",
     "path": "/v1/images/generations",
-    "description": "Generate images through SandBase's synchronous OpenAI Images-compatible endpoint. This endpoint is distinct from the general /v1/run model API.",
+    "description": "Generate images through AGRouter's synchronous OpenAI Images-compatible endpoint. This endpoint is distinct from the general /v1/run model API.",
     "signature": "client.images.generate(params)",
     "groups": [
       {
@@ -1488,8 +1488,8 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       }
     ],
     "examples": [
-      { "label": "cURL", "language": "bash", "code": "curl https://api.sandbase.ai/v1/images/generations \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"gpt-image-2\",\"prompt\":\"A paper-cut city floating above the clouds\",\"size\":\"1024x1024\"}'" },
-      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-...\", base_url=\"https://api.sandbase.ai/v1\")\nresult = client.images.generate(\n    model=\"gpt-image-2\",\n    prompt=\"A paper-cut city floating above the clouds\",\n    size=\"1024x1024\",\n)\nprint(result.data[0].b64_json or result.data[0].url)" }
+      { "label": "cURL", "language": "bash", "code": "curl https://api.agrouter.ai/v1/images/generations \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"gpt-image-2\",\"prompt\":\"A paper-cut city floating above the clouds\",\"size\":\"1024x1024\"}'" },
+      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-...\", base_url=\"https://api.agrouter.ai/v1\")\nresult = client.images.generate(\n    model=\"gpt-image-2\",\n    prompt=\"A paper-cut city floating above the clouds\",\n    size=\"1024x1024\",\n)\nprint(result.data[0].b64_json or result.data[0].url)" }
     ],
     "response": { "status": "200 OK", "code": "{\n  \"created\": 1787529600,\n  \"data\": [{\"b64_json\": \"iVBORw0KGgo...\"}],\n  \"usage\": {\n    \"input_tokens\": 12,\n    \"output_tokens\": 4096,\n    \"total_tokens\": 4108,\n    \"input_tokens_details\": {\"text_tokens\": 12, \"image_tokens\": 0}\n  }\n}" },
     "notes": [
@@ -1513,12 +1513,12 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Images",
     "method": "POST",
     "path": "/v1/images/edits",
-    "description": "Edit one or more uploaded images through SandBase's synchronous OpenAI Images-compatible multipart endpoint.",
+    "description": "Edit one or more uploaded images through AGRouter's synchronous OpenAI Images-compatible multipart endpoint.",
     "signature": "client.images.edit(params)",
     "groups": [],
     "examples": [
-      { "label": "cURL", "language": "bash", "code": "curl https://api.sandbase.ai/v1/images/edits \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -F model=gpt-image-2 \\\n  -F 'prompt=Turn the daytime sky into a starry night' \\\n  -F image=@landscape.png" },
-      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-...\", base_url=\"https://api.sandbase.ai/v1\")\nwith open(\"landscape.png\", \"rb\") as image:\n    result = client.images.edit(\n        model=\"gpt-image-2\",\n        image=image,\n        prompt=\"Turn the daytime sky into a starry night\",\n    )\nprint(result.data[0].b64_json or result.data[0].url)" }
+      { "label": "cURL", "language": "bash", "code": "curl https://api.agrouter.ai/v1/images/edits \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -F model=gpt-image-2 \\\n  -F 'prompt=Turn the daytime sky into a starry night' \\\n  -F image=@landscape.png" },
+      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-...\", base_url=\"https://api.agrouter.ai/v1\")\nwith open(\"landscape.png\", \"rb\") as image:\n    result = client.images.edit(\n        model=\"gpt-image-2\",\n        image=image,\n        prompt=\"Turn the daytime sky into a starry night\",\n    )\nprint(result.data[0].b64_json or result.data[0].url)" }
     ],
     "response": { "status": "200 OK", "code": "{\n  \"created\": 1787529600,\n  \"data\": [{\"b64_json\": \"iVBORw0KGgo...\"}],\n  \"usage\": {\n    \"input_tokens\": 1024,\n    \"output_tokens\": 4096,\n    \"total_tokens\": 5120,\n    \"input_tokens_details\": {\"text_tokens\": 12, \"image_tokens\": 1012}\n  }\n}" },
     "notes": [
@@ -1542,7 +1542,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Inference",
     "method": "POST",
     "path": "/v1/responses",
-    "description": "Create an OpenAI-compatible model response. SandBase preserves request fields after model mapping, then sanitizes responses to public OpenAI fields.",
+    "description": "Create an OpenAI-compatible model response. AGRouter preserves request fields after model mapping, then sanitizes responses to public OpenAI fields.",
     "signature": "client.responses.create(params)",
     "groups": [
       {
@@ -1570,13 +1570,13 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       }
     ],
     "examples": [
-      { "label": "cURL", "language": "bash", "code": "curl https://api.sandbase.ai/v1/responses \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"openai/gpt-5.2\",\"input\":\"Explain immutable infrastructure in one sentence.\"}'" },
-      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-sb-...\", base_url=\"https://api.sandbase.ai/v1\")\nresponse = client.responses.create(\n    model=\"openai/gpt-5.2\",\n    input=\"Explain immutable infrastructure in one sentence.\",\n)\nprint(response.output_text)" },
-      { "label": "TypeScript", "language": "typescript", "code": "import OpenAI from \"openai\";\n\nconst client = new OpenAI({ apiKey: process.env.SANDBASE_API_KEY, baseURL: \"https://api.sandbase.ai/v1\" });\nconst response = await client.responses.create({\n  model: \"openai/gpt-5.2\",\n  input: \"Explain immutable infrastructure in one sentence.\",\n});\nconsole.log(response.output_text);" }
+      { "label": "cURL", "language": "bash", "code": "curl https://api.agrouter.ai/v1/responses \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"openai/gpt-5.2\",\"input\":\"Explain immutable infrastructure in one sentence.\"}'" },
+      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-sb-...\", base_url=\"https://api.agrouter.ai/v1\")\nresponse = client.responses.create(\n    model=\"openai/gpt-5.2\",\n    input=\"Explain immutable infrastructure in one sentence.\",\n)\nprint(response.output_text)" },
+      { "label": "TypeScript", "language": "typescript", "code": "import OpenAI from \"openai\";\n\nconst client = new OpenAI({ apiKey: process.env.AGROUTER_API_KEY, baseURL: \"https://api.agrouter.ai/v1\" });\nconst response = await client.responses.create({\n  model: \"openai/gpt-5.2\",\n  input: \"Explain immutable infrastructure in one sentence.\",\n});\nconsole.log(response.output_text);" }
     ],
     "response": { "status": "200 OK", "code": "{\n  \"id\": \"resp_01...\",\n  \"object\": \"response\",\n  \"status\": \"completed\",\n  \"model\": \"openai/gpt-5.2\",\n  \"output\": [],\n  \"usage\": {\n    \"input_tokens\": 18,\n    \"output_tokens\": 12,\n    \"total_tokens\": 30,\n    \"input_tokens_details\": {\"cached_tokens\": 0},\n    \"output_tokens_details\": {\"reasoning_tokens\": 0}\n  }\n}" },
     "notes": [
-      { "title": "Request compatibility", "description": "SandBase rewrites model to the selected upstream model and preserves other request fields. Provider support still varies." },
+      { "title": "Request compatibility", "description": "AGRouter rewrites model to the selected upstream model and preserves other request fields. Provider support still varies." },
       { "title": "Sanitized responses", "description": "Only public OpenAI response fields and token usage are returned. Provider billing, account, routing, and unknown top-level extensions are removed; output item content is preserved." },
       { "title": "Streaming", "description": "Public response.* and error SSE events are sanitized and forwarded. Unknown private events are dropped; malformed data closes the stream rather than forwarding unsafe content." }
     ],
@@ -1596,7 +1596,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Inference",
     "method": "POST",
     "path": "/v1/chat/completions",
-    "description": "Create an OpenAI-compatible chat completion with any supported SandBase chat model. Provider-compatible fields are preserved when supported by the selected route.",
+    "description": "Create an OpenAI-compatible chat completion with any supported AGRouter chat model. Provider-compatible fields are preserved when supported by the selected route.",
     "signature": "client.chat.completions.create(params)",
     "groups": [
       {
@@ -1627,14 +1627,14 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       }
     ],
     "examples": [
-      { "label": "cURL", "language": "bash", "code": "curl https://api.sandbase.ai/v1/chat/completions \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"deepseek/deepseek-v4-flash\",\"messages\":[{\"role\":\"user\",\"content\":\"Hello\"}]}'" },
-      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-sb-...\", base_url=\"https://api.sandbase.ai/v1\")\nresponse = client.chat.completions.create(\n    model=\"deepseek/deepseek-v4-flash\",\n    messages=[{\"role\": \"user\", \"content\": \"Hello\"}],\n)\nprint(response.choices[0].message.content)" },
-      { "label": "TypeScript", "language": "typescript", "code": "import OpenAI from \"openai\";\n\nconst client = new OpenAI({ apiKey: process.env.SANDBASE_API_KEY, baseURL: \"https://api.sandbase.ai/v1\" });\nconst response = await client.chat.completions.create({\n  model: \"deepseek/deepseek-v4-flash\",\n  messages: [{ role: \"user\", content: \"Hello\" }],\n});\nconsole.log(response.choices[0].message.content);" }
+      { "label": "cURL", "language": "bash", "code": "curl https://api.agrouter.ai/v1/chat/completions \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"deepseek/deepseek-v4-flash\",\"messages\":[{\"role\":\"user\",\"content\":\"Hello\"}]}'" },
+      { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-sb-...\", base_url=\"https://api.agrouter.ai/v1\")\nresponse = client.chat.completions.create(\n    model=\"deepseek/deepseek-v4-flash\",\n    messages=[{\"role\": \"user\", \"content\": \"Hello\"}],\n)\nprint(response.choices[0].message.content)" },
+      { "label": "TypeScript", "language": "typescript", "code": "import OpenAI from \"openai\";\n\nconst client = new OpenAI({ apiKey: process.env.AGROUTER_API_KEY, baseURL: \"https://api.agrouter.ai/v1\" });\nconst response = await client.chat.completions.create({\n  model: \"deepseek/deepseek-v4-flash\",\n  messages: [{ role: \"user\", content: \"Hello\" }],\n});\nconsole.log(response.choices[0].message.content);" }
     ],
     "response": { "status": "200 OK", "code": "{\n  \"id\": \"chatcmpl_01...\",\n  \"object\": \"chat.completion\",\n  \"model\": \"deepseek/deepseek-v4-flash\",\n  \"choices\": [{\n    \"index\": 0,\n    \"message\": { \"role\": \"assistant\", \"content\": \"Hello! How can I help?\" },\n    \"finish_reason\": \"stop\"\n  }],\n  \"usage\": { \"prompt_tokens\": 8, \"completion_tokens\": 7, \"total_tokens\": 15 }\n}" },
     "notes": [
       { "title": "Streaming and tools", "description": "Set stream to true for SSE; the stream ends with data: [DONE]. Add stream_options.include_usage for the final usage chunk. Tool calls and multimodal content follow the OpenAI-compatible schema." },
-      { "title": "Provider compatibility", "description": "SandBase preserves additional compatible fields on same-protocol routes. Cross-protocol and provider-specific field support varies; use extra_body where applicable." }
+      { "title": "Provider compatibility", "description": "AGRouter preserves additional compatible fields on same-protocol routes. Cross-protocol and provider-specific field support varies; use extra_body where applicable." }
     ],
     "errors": [
       { "status": "400", "description": "Invalid request body or unsupported parameter." },
@@ -1652,14 +1652,14 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Inference",
     "method": "POST",
     "path": "/v1/messages",
-    "description": "Create a message through SandBase's Anthropic-compatible Messages endpoint. SandBase maps the model for the selected provider and preserves compatible request and response fields.",
+    "description": "Create a message through AGRouter's Anthropic-compatible Messages endpoint. AGRouter maps the model for the selected provider and preserves compatible request and response fields.",
     "signature": "client.messages.create(params)",
     "groups": [
       {
         "title": "Request headers",
         "fields": [
-          { "name": "x-api-key", "type": "string", "required": false, "description": "SandBase API key. Authorization: Bearer is also accepted; x-api-key takes precedence when both are present." },
-          { "name": "anthropic-version", "type": "string", "required": false, "default": "2023-06-01", "description": "Anthropic API version forwarded upstream. SandBase supplies 2023-06-01 when omitted." },
+          { "name": "x-api-key", "type": "string", "required": false, "description": "AGRouter API key. Authorization: Bearer is also accepted; x-api-key takes precedence when both are present." },
+          { "name": "anthropic-version", "type": "string", "required": false, "default": "2023-06-01", "description": "Anthropic API version forwarded upstream. AGRouter supplies 2023-06-01 when omitted." },
           { "name": "anthropic-beta", "type": "string", "required": false, "description": "Comma-separated beta feature identifiers, subject to provider compatibility." }
         ]
       },
@@ -1684,14 +1684,14 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       }
     ],
     "examples": [
-      { "label": "cURL", "language": "bash", "code": "curl https://api.sandbase.ai/v1/messages \\\n  -H \"x-api-key: $SANDBASE_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"anthropic/claude-sonnet-4\",\"max_tokens\":256,\"messages\":[{\"role\":\"user\",\"content\":\"Hello\"}]}'" },
-      { "label": "Python", "language": "python", "code": "from anthropic import Anthropic\n\nclient = Anthropic(api_key=\"sk-sb-...\", base_url=\"https://api.sandbase.ai\")\nmessage = client.messages.create(\n    model=\"anthropic/claude-sonnet-4\",\n    max_tokens=256,\n    messages=[{\"role\": \"user\", \"content\": \"Hello\"}],\n)\nprint(message.content[0].text)" },
-      { "label": "TypeScript", "language": "typescript", "code": "import Anthropic from \"@anthropic-ai/sdk\";\n\nconst client = new Anthropic({ apiKey: process.env.SANDBASE_API_KEY, baseURL: \"https://api.sandbase.ai\" });\nconst message = await client.messages.create({\n  model: \"anthropic/claude-sonnet-4\",\n  max_tokens: 256,\n  messages: [{ role: \"user\", content: \"Hello\" }],\n});\nconsole.log(message.content);" }
+      { "label": "cURL", "language": "bash", "code": "curl https://api.agrouter.ai/v1/messages \\\n  -H \"x-api-key: $AGROUTER_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"anthropic/claude-sonnet-4\",\"max_tokens\":256,\"messages\":[{\"role\":\"user\",\"content\":\"Hello\"}]}'" },
+      { "label": "Python", "language": "python", "code": "from anthropic import Anthropic\n\nclient = Anthropic(api_key=\"sk-sb-...\", base_url=\"https://api.agrouter.ai\")\nmessage = client.messages.create(\n    model=\"anthropic/claude-sonnet-4\",\n    max_tokens=256,\n    messages=[{\"role\": \"user\", \"content\": \"Hello\"}],\n)\nprint(message.content[0].text)" },
+      { "label": "TypeScript", "language": "typescript", "code": "import Anthropic from \"@anthropic-ai/sdk\";\n\nconst client = new Anthropic({ apiKey: process.env.AGROUTER_API_KEY, baseURL: \"https://api.agrouter.ai\" });\nconst message = await client.messages.create({\n  model: \"anthropic/claude-sonnet-4\",\n  max_tokens: 256,\n  messages: [{ role: \"user\", content: \"Hello\" }],\n});\nconsole.log(message.content);" }
     ],
     "response": { "status": "200 OK", "code": "{\n  \"id\": \"msg_01...\",\n  \"type\": \"message\",\n  \"role\": \"assistant\",\n  \"model\": \"anthropic/claude-sonnet-4\",\n  \"content\": [{ \"type\": \"text\", \"text\": \"Hello! How can I help?\" }],\n  \"stop_reason\": \"end_turn\",\n  \"usage\": { \"input_tokens\": 8, \"output_tokens\": 7 }\n}" },
     "notes": [
       { "title": "Authentication", "description": "Use x-api-key or Authorization: Bearer. When both are provided, x-api-key takes precedence." },
-      { "title": "Transparent protocol", "description": "Except for model mapping and configured provider compatibility rules, SandBase forwards compatible request fields, non-stream responses, and SSE events without protocol translation." },
+      { "title": "Transparent protocol", "description": "Except for model mapping and configured provider compatibility rules, AGRouter forwards compatible request fields, non-stream responses, and SSE events without protocol translation." },
       { "title": "Beta features", "description": "anthropic-beta is forwarded when present. A candidate's compatibility rules may remove unsupported beta fields or skip that candidate." }
     ],
     "errors": [
@@ -1712,7 +1712,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "operation": "Tasks",
     "method": "GET",
     "path": "/v1/tasks/{task_id}/cost",
-    "description": "Retrieve the asynchronous settlement status, final cost, and token usage for a recent SandBase task.",
+    "description": "Retrieve the asynchronous settlement status, final cost, and token usage for a recent AGRouter task.",
     "groups": [
       {
         "title": "Path parameters",
@@ -1735,7 +1735,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -sS \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  \"https://api.sandbase.ai/v1/tasks/$TASK_ID/cost\" | jq ."
+        "code": "curl -sS \\\n  -H \"Authorization: Bearer $AGROUTER_API_KEY\" \\\n  \"https://api.agrouter.ai/v1/tasks/$TASK_ID/cost\" | jq ."
       }
     ],
     "response": {

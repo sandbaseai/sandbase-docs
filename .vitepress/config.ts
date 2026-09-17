@@ -6,7 +6,7 @@ import {
   platformApiReferenceFallbackSidebar,
 } from './sidebar'
 
-const siteOrigin = 'https://www.sandbase.ai'
+const siteOrigin = 'https://www.agrouter.ai'
 const docsBase = '/docs/'
 
 // Keep rendered document titles within a search-friendly length even when a
@@ -41,7 +41,7 @@ function modelPageHead(pageData: any) {
 
   const canonicalUrl = absoluteDocsUrl(relativePath)
   const modelDetailUrl = `${siteOrigin}/model/${seo.vendorSlug}/${seo.modelSlug}`
-  const title = seoTitle(`${seo.modelName} API Reference | SandBase`)
+  const title = seoTitle(`${seo.modelName} API Reference | AGRouter`)
   const description = pageData.description
   const categoryName = isPlatformOperation ? 'APIs' : 'LLM Models'
   const categoryPath = isPlatformOperation ? 'platform-apis' : 'llm-models'
@@ -51,7 +51,7 @@ function modelPageHead(pageData: any) {
     `${seo.modelId} API`,
     `${seo.vendor} API`,
     `${categoryName} reference`,
-    'SandBase model API',
+    'AGRouter model API',
     seo.endpoint,
     ...(seo.capabilities ?? []).map((capability: string) => `${capability} model`),
   ].join(', ')
@@ -106,7 +106,7 @@ function modelPageHead(pageData: any) {
     dateModified: publishedAt,
     isPartOf: {
       '@type': 'WebSite',
-      name: 'SandBase',
+      name: 'AGRouter',
       url: siteOrigin,
     },
     about: [
@@ -125,19 +125,19 @@ function modelPageHead(pageData: any) {
         name: `${seo.modelName} ${seo.protocol}`,
         url: `${siteOrigin}${docsBase}api-reference/`,
         documentation: canonicalUrl,
-        endpointUrl: `https://api.sandbase.ai${seo.endpoint}`,
+        endpointUrl: `https://api.agrouter.ai${seo.endpoint}`,
       },
     ],
     mainEntity: {
       '@type': 'WebAPI',
       name: `${seo.modelName} API`,
       url: canonicalUrl,
-      endpointUrl: `https://api.sandbase.ai${seo.endpoint}`,
+      endpointUrl: `https://api.agrouter.ai${seo.endpoint}`,
       documentation: canonicalUrl,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'SandBase',
+      name: 'AGRouter',
       url: siteOrigin,
       logo: {
         '@type': 'ImageObject',
@@ -156,7 +156,7 @@ function modelPageHead(pageData: any) {
     ['meta', { property: 'og:description', content: description }],
     ['meta', { property: 'og:url', content: canonicalUrl }],
     ['meta', { property: 'og:type', content: 'article' }],
-    ['meta', { property: 'og:site_name', content: 'SandBase' }],
+    ['meta', { property: 'og:site_name', content: 'AGRouter' }],
     ...(publishedAt ? [
       ['meta', { property: 'article:published_time', content: publishedAt }],
       ['meta', { property: 'article:modified_time', content: publishedAt }],
@@ -177,8 +177,8 @@ function genericPageHead(pageData: any) {
     : absoluteDocsUrl(pageData.relativePath)
   const robots = pageData.frontmatter?.robots
     || 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1'
-  const title = seoTitle(pageData.title ? `${pageData.title} | SandBase Docs` : 'SandBase Docs')
-  const description = pageData.description || 'SandBase documentation for Models, APIs, Agents, Setup, Services, Schedules, and Sessions.'
+  const title = seoTitle(pageData.title ? `${pageData.title} | AGRouter Docs` : 'AGRouter Docs')
+  const description = pageData.description || 'AGRouter documentation for Models, APIs, Agents, Setup, Services, Schedules, and Sessions.'
   const techArticleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
@@ -188,7 +188,7 @@ function genericPageHead(pageData: any) {
     description,
     publisher: {
       '@type': 'Organization',
-      name: 'SandBase',
+      name: 'AGRouter',
       url: siteOrigin,
     },
   }
@@ -232,8 +232,8 @@ export default defineConfig({
     'model-api-reference/platform-apis/douyin/web/live-room.md',
     'model-api-reference/platform-apis/tiktok/web/live-room.md',
   ],
-  title: 'SandBase Docs',
-  description: 'SandBase docs for connecting Agents to models, APIs, tools, Setup, Services, Schedules, and Sessions.',
+  title: 'AGRouter Docs',
+  description: 'AGRouter docs for connecting Agents to models, APIs, tools, Setup, Services, Schedules, and Sessions.',
   ignoreDeadLinks: true,
   appearance: true,
   cleanUrls: true,
@@ -266,15 +266,15 @@ export default defineConfig({
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap' }],
-    ['meta', { property: 'og:title', content: 'SandBase Docs - Connect Your Agent to the Real World' }],
-    ['meta', { property: 'og:description', content: 'Learn how to use Setup, call Models and APIs, build Agents, publish Services, create Schedules, and review Sessions in SandBase.' }],
+    ['meta', { property: 'og:title', content: 'AGRouter Docs - Connect Your Agent to the Real World' }],
+    ['meta', { property: 'og:description', content: 'Learn how to use Setup, call Models and APIs, build Agents, publish Services, create Schedules, and review Sessions in AGRouter.' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:site_name', content: 'SandBase' }],
-    ['meta', { property: 'og:image', content: 'https://www.sandbase.ai/og-default.png' }],
+    ['meta', { property: 'og:site_name', content: 'AGRouter' }],
+    ['meta', { property: 'og:image', content: 'https://www.agrouter.ai/og-default.png' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:title', content: 'SandBase Docs' }],
+    ['meta', { name: 'twitter:title', content: 'AGRouter Docs' }],
     ['meta', { name: 'twitter:description', content: 'Docs for Setup, Models, APIs, Agents, Services, Schedules, and Sessions.' }],
-    ['meta', { name: 'keywords', content: 'SandBase docs, AI agent docs, Setup docs, AI tool setup, model API docs, API catalog, agent services, agent schedules, agent sessions' }],
+    ['meta', { name: 'keywords', content: 'AGRouter docs, AI agent docs, Setup docs, AI tool setup, model API docs, API catalog, agent services, agent schedules, agent sessions' }],
   ],
 
   transformHead({ pageData }) {
@@ -284,18 +284,18 @@ export default defineConfig({
 
   themeConfig: {
     logo: {
-      light: '/logo-mark-light.svg',
-      dark: '/logo-mark-dark.svg',
-      alt: 'SandBase',
+      light: '/logo-router-light.svg',
+      dark: '/logo-router-dark.svg',
+      alt: 'AGRouter',
     },
-    siteTitle: 'SandBase',
-    logoLink: { link: 'https://www.sandbase.ai', target: '_blank', rel: 'noopener noreferrer' },
+    siteTitle: 'AGRouter',
+    logoLink: { link: 'https://www.agrouter.ai', target: '_blank', rel: 'noopener noreferrer' },
 
     nav: [
       { text: 'Docs', link: '/', activeMatch: '^/(?!api-reference/|model-api-reference/)' },
       { text: 'Model API Reference', link: '/model-api-reference/', activeMatch: '^/model-api-reference/' },
       { text: 'Platform API', link: '/api-reference/', activeMatch: '^/api-reference/' },
-      { text: 'Console', link: 'https://www.sandbase.ai/console', target: '_blank', rel: 'noopener noreferrer' },
+      { text: 'Console', link: 'https://www.agrouter.ai/console', target: '_blank', rel: 'noopener noreferrer' },
     ],
 
     sidebar: {
@@ -315,7 +315,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/SandBase' },
+      { icon: 'github', link: 'https://github.com/AGRouter' },
     ],
   },
 })

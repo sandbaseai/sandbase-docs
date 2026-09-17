@@ -48,7 +48,7 @@ assert.deepEqual(
   'The public OpenAPI document must not declare empty navigation groups',
 )
 
-assert.match(supportedModelsPage, /https:\/\/www\.sandbase\.ai\/models/, 'Supported Models must point to the live catalog')
+assert.match(supportedModelsPage, /https:\/\/www\.agrouter\.ai\/models/, 'Supported Models must point to the live catalog')
 assert.match(supportedModelsPage, /GET \/v1\/models/, 'Supported Models must identify the runtime catalog API')
 for (const category of ['llm-models', 'image-generation', 'video-generation', 'audio-generation']) {
   assert.match(supportedModelsPage, new RegExp(`/model-api-reference/${category}`), `Supported Models must link the generated ${category} reference`)
@@ -67,7 +67,7 @@ assert.doesNotMatch(readme, /API Reference[^\n]*webhooks/i, 'README must not adv
 assert.doesNotMatch(readme, /\b\d[\d,]*\+?\s+models and APIs\b/i, 'README must not hard-code time-sensitive catalog counts')
 for (const overview of catalogOverviews) {
   assert.doesNotMatch(overview, /currently publishes API reference pages for \d/i, 'Catalog overviews must not hard-code time-sensitive counts')
-  assert.doesNotMatch(overview, /Browse \d[\d,]* SandBase API operations across \d+ platforms/i, 'Catalog overviews must not hard-code platform operation counts')
+  assert.doesNotMatch(overview, /Browse \d[\d,]* AGRouter API operations across \d+ platforms/i, 'Catalog overviews must not hard-code platform operation counts')
 }
 assert.doesNotMatch(modelSidebar, /text: 'Models'[\s\S]*?List Models[\s\S]*?Get Model/, 'Model API navigation must not duplicate the Models API module')
 assert.doesNotMatch(modelSidebar, /text: 'Inference APIs'/, 'Model API navigation must not duplicate the normalized Inference API module')
@@ -329,7 +329,7 @@ assert.match(openapi, /^    delete:/m, 'Endpoint MCP transport must support DELE
 assert.doesNotMatch(openapi, /^  \/v1\/endpoint_runtime_profiles:$/m, 'Endpoint runtime profiles that reveal MCP transport must not be public')
 assert.doesNotMatch(openapi, /^\s+mcp_url:$/m, 'Endpoint MCP transport URL must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/generations(?:\/\{[^}]+\})?:$/m, 'Withdrawn generation paths must not be public')
-assert.doesNotMatch(openapi, /https:\/\/api\.sandbase\.ai\/v1\/generations(?:\/|\b)/, 'Public OpenAPI examples must not call withdrawn generation paths')
+assert.doesNotMatch(openapi, /https:\/\/api\.agrouter\.ai\/v1\/generations(?:\/|\b)/, 'Public OpenAPI examples must not call withdrawn generation paths')
 assert.doesNotMatch(openapi, /^  \/v1\/blog\/assets:$/m, 'Blog publishing storage must not be exposed as a general developer API')
 assert.doesNotMatch(openapi, /^  \/v1\/mcp:$/m, 'Generic MCP transport must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/mcp\/(?:servers|\{[^}]+\}\/config):$/m, 'MCP discovery and runtime config routes must not be public')

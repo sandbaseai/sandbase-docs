@@ -1,11 +1,11 @@
 ---
 title: AI-Readable Error Guide
-description: Handle SandBase API errors by endpoint family, HTTP status, retry safety, and documented response shape.
+description: Handle AGRouter API errors by endpoint family, HTTP status, retry safety, and documented response shape.
 ---
 
 # Error handling for AI clients
 
-SandBase does not expose one universal error schema. Branch on HTTP status first, then parse the response shape
+AGRouter does not expose one universal error schema. Branch on HTTP status first, then parse the response shape
 documented for the endpoint family. Do not assume that every response contains `code`, `param`, `request_id`, or a
 specific message string.
 
@@ -47,7 +47,7 @@ Anthropic-compatible envelope:
 | `404` | Model or resource not found | Verify the current model name or resource ID. |
 | `409` | Resource state conflict | Read the latest resource state before deciding whether a retry is safe. |
 | `429` | Per-key or platform-wide request protection | Retry with bounded exponential backoff and jitter. |
-| `500`, `502`, `503`, `504` | SandBase or upstream transient failure | Retry only when the operation is safe to repeat. |
+| `500`, `502`, `503`, `504` | AGRouter or upstream transient failure | Retry only when the operation is safe to repeat. |
 
 ## Authentication and rate-limit messages
 

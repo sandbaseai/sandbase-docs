@@ -25,7 +25,7 @@ export default {
     app.component('QuickstartOnboard', QuickstartOnboard)
     app.component('QuickstartResources', QuickstartResources)
 
-    // Sync theme with main site: read localStorage 'theme' key set by SandBase-dashboard
+    // Sync theme with main site: read localStorage 'theme' key set by AGRouter-dashboard
     if (typeof window !== 'undefined') {
       const siteTheme = localStorage.getItem('theme')
       if (siteTheme === 'dark') {

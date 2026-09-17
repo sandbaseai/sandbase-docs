@@ -1,6 +1,6 @@
 ---
 title: Define an Agent
-description: Configure a SandBase Agent with a model, instructions, APIs, Skills, and API credentials.
+description: Configure a AGRouter Agent with a model, instructions, APIs, Skills, and API credentials.
 ---
 
 # Define an Agent
@@ -20,7 +20,7 @@ tools:
   - web_search
   - page_scraping
 skills:
-  - sandbase/research-report
+  - agrouter/research-report
 credentials:
   - SERPER_API_KEY
 ```
@@ -31,7 +31,7 @@ The exact UI can change, but the idea stays the same:
 - **Instructions** tell it what outcome to produce.
 - **APIs** connect it to real-world data and actions.
 - **Skills** give it reusable know-how.
-- **Credentials** keep API keys and other secrets outside the prompt. SandBase supplies them to the runtime as environment variables.
+- **Credentials** keep API keys and other secrets outside the prompt. AGRouter supplies them to the runtime as environment variables.
 
 ## Test before publishing
 

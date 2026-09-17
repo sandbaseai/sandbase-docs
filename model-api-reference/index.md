@@ -1,11 +1,11 @@
 ---
 title: Model API Reference
-description: Browse SandBase model APIs by capability, provider, and model identifier.
+description: Browse AGRouter model APIs by capability, provider, and model identifier.
 ---
 
 # Model API Reference
 
-Browse the models available through SandBase, find the exact model identifier to use, and copy a working API request.
+Browse the models available through AGRouter, find the exact model identifier to use, and copy a working API request.
 
 ## Models by category
 
@@ -15,15 +15,15 @@ Use language and reasoning models for chat, tool calling, structured output, vis
 
 ### [Image Generation](/model-api-reference/image-generation)
 
-Generate, edit, transform, and upscale images through SandBase. Browse image models by provider, including OpenAI, Google, Ideogram, ByteDance, Recraft, Luma, and more.
+Generate, edit, transform, and upscale images through AGRouter. Browse image models by provider, including OpenAI, Google, Ideogram, ByteDance, Recraft, Luma, and more.
 
 ### [Video Generation](/model-api-reference/video-generation)
 
-Generate, edit, animate, upscale, and transform videos through SandBase. Browse video models by provider, including OpenAI, ByteDance, Kling, Google, Luma, Runway, Veed, and more.
+Generate, edit, animate, upscale, and transform videos through AGRouter. Browse video models by provider, including OpenAI, ByteDance, Kling, Google, Luma, Runway, Veed, and more.
 
 ### [Audio Generation](/model-api-reference/audio-generation)
 
-Generate, transform, clone, transcribe, and synthesize audio through SandBase. Browse audio models by provider and copy the exact async request format for each model.
+Generate, transform, clone, transcribe, and synthesize audio through AGRouter. Browse audio models by provider and copy the exact async request format for each model.
 
 ### [Official Native API](/model-api-reference/official-native-api)
 
@@ -46,7 +46,7 @@ The normalized request contracts are maintained in the linked API reference page
 Most LLM models use the OpenAI-compatible [Chat Completions API](/api-reference/llm-gateway). Anthropic models use the [Anthropic Messages API](/api-reference/anthropic-compat); choose the protocol shown on the selected model page when both options are available.
 
 ```bash
-curl https://api.sandbase.ai/v1/chat/completions \
+curl https://api.agrouter.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model":"deepseek/deepseek-v4-flash","messages":[{"role":"user","content":"Hello"}]}'
@@ -56,7 +56,7 @@ Image, video, and audio generation models use the unified `/v1/run` endpoint. Th
 `execution_mode` determines whether the response is synchronous or returns `202 Accepted` for polling:
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/run \
+curl -X POST https://api.agrouter.ai/v1/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model":"openai/gpt-image-2","prompt":"A studio product photo on a clean white background"}'
@@ -66,6 +66,6 @@ When the response is `202 Accepted`, poll the returned opaque run ID until the r
 returned; do not add a task prefix or construct a provider-specific status path:
 
 ```bash
-curl https://api.sandbase.ai/v1/run/f3d2e8a1-7c4b-4a12-9d2e-123456789abc \
+curl https://api.agrouter.ai/v1/run/f3d2e8a1-7c4b-4a12-9d2e-123456789abc \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```

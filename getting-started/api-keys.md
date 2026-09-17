@@ -1,16 +1,16 @@
 ---
 title: API keys
-description: How to create, manage, and secure your SandBase API keys for authenticating API requests.
+description: How to create, manage, and secure your AGRouter API keys for authenticating API requests.
 ---
 
 # API keys
 
-API keys authenticate your requests to SandBase. This guide covers how to create keys, use them in requests, and keep them secure.
+API keys authenticate your requests to AGRouter. This guide covers how to create keys, use them in requests, and keep them secure.
 
 ## Create an API key
 
-1. Log in to the [SandBase Console](https://www.sandbase.ai/console)
-2. Open **Developer → API Keys** (or go directly to [Console → API Keys](https://www.sandbase.ai/console/keys))
+1. Log in to the [AGRouter Console](https://www.agrouter.ai/console)
+2. Open **Developer → API Keys** (or go directly to [Console → API Keys](https://www.agrouter.ai/console/keys))
 3. Click **New key**
 4. Enter a descriptive name (e.g., "Production Server", "Local Development")
 5. Optionally set a spending limit and expiration
@@ -34,14 +34,14 @@ credential; always treat the complete value as an opaque secret.
 
 ## Authentication methods
 
-SandBase supports two ways to pass your API key in requests:
+AGRouter supports two ways to pass your API key in requests:
 
 ### Authorization Header (Recommended)
 
 Use the standard `Authorization: Bearer` header. This is compatible with the OpenAI and Anthropic SDKs:
 
 ```bash
-curl https://api.sandbase.ai/v1/chat/completions \
+curl https://api.agrouter.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "deepseek/deepseek-v4-flash", "messages": [{"role": "user", "content": "Hi"}]}'
@@ -52,7 +52,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 `POST /v1/messages` also accepts the native Anthropic `x-api-key` header:
 
 ```bash
-curl https://api.sandbase.ai/v1/messages \
+curl https://api.agrouter.ai/v1/messages \
   -H "x-api-key: sk-YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "anthropic/claude-sonnet-5", "max_tokens": 1024, "messages": [{"role": "user", "content": "Hi"}]}'
@@ -65,12 +65,12 @@ Bearer header for every other public endpoint.
 
 ## Key permissions
 
-SandBase API keys are scoped at the **organization level**:
+AGRouter API keys are scoped at the **organization level**:
 
 - A standard Console-created key can call public API resources available to the organization
 - Usage is billed to the organization that owns the key
 - A key can have an optional expiration and spending limit
-- SandBase-issued credentials, such as CLI Login keys, can carry a restricted scope and return `403` outside that scope
+- AGRouter-issued credentials, such as CLI Login keys, can carry a restricted scope and return `403` outside that scope
 
 The Console does not currently expose user-selected scopes for a standard key. CLI Login keys are created by the guided authorization flow, appear separately in the API Keys page, and cannot be edited like standard keys.
 
@@ -101,7 +101,7 @@ Keys without an expiration date remain valid until manually revoked.
 
 To revoke (disable) a key:
 
-1. Go to [Console → API Keys](https://www.sandbase.ai/console/keys)
+1. Go to [Console → API Keys](https://www.agrouter.ai/console/keys)
 2. Find the key you want to revoke
 3. Click **Revoke**
 4. Confirm the action
@@ -116,7 +116,7 @@ Use environment variables or a secrets manager instead:
 
 ```bash
 # .env file (add to .gitignore!)
-SANDBASE_API_KEY=sk-your-key-here
+AGROUTER_API_KEY=sk-your-key-here
 ```
 
 ```python
@@ -124,8 +124,8 @@ import os
 from openai import OpenAI
 
 client = OpenAI(
-    api_key=os.environ["SANDBASE_API_KEY"],
-    base_url="https://api.sandbase.ai/v1"
+    api_key=os.environ["AGROUTER_API_KEY"],
+    base_url="https://api.agrouter.ai/v1"
 )
 ```
 
@@ -133,8 +133,8 @@ client = OpenAI(
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: process.env.SANDBASE_API_KEY,
-  baseURL: 'https://api.sandbase.ai/v1',
+  apiKey: process.env.AGROUTER_API_KEY,
+  baseURL: 'https://api.agrouter.ai/v1',
 });
 ```
 

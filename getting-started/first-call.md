@@ -1,18 +1,18 @@
 ---
 title: First API call
-description: Detailed walkthrough of making your first SandBase API call, understanding request anatomy, response structure, and streaming.
+description: Detailed walkthrough of making your first AGRouter API call, understanding request anatomy, response structure, and streaming.
 ---
 
 # First API call
 
-This guide walks through the anatomy of a SandBase API request and response in detail. By the end, you'll understand every field in the request body, how to read the response, and how to use streaming.
+This guide walks through the anatomy of a AGRouter API request and response in detail. By the end, you'll understand every field in the request body, how to read the response, and how to use streaming.
 
 ## Before you start
 
-You need an active SandBase organization, an [API key](/getting-started/api-keys), and a model ID from [Supported Models](/models/supported). Export the key so examples do not place secrets in source code:
+You need an active AGRouter organization, an [API key](/getting-started/api-keys), and a model ID from [Supported Models](/models/supported). Export the key so examples do not place secrets in source code:
 
 ```bash
-export SANDBASE_API_KEY="sk-YOUR_API_KEY"
+export AGROUTER_API_KEY="sk-YOUR_API_KEY"
 ```
 
 Start with a non-streaming request. Once authentication and response handling work, add streaming and production retry behavior.
@@ -22,14 +22,14 @@ Start with a non-streaming request. Once authentication and response handling wo
 This walkthrough uses the OpenAI-compatible Chat Completions route:
 
 ```bash
-POST https://api.sandbase.ai/v1/chat/completions
+POST https://api.agrouter.ai/v1/chat/completions
 ```
 
 ### Required Headers
 
 | Header | Value | Description |
 |--------|-------|-------------|
-| `Authorization` | `Bearer sk-YOUR_API_KEY` | Your SandBase API key |
+| `Authorization` | `Bearer sk-YOUR_API_KEY` | Your AGRouter API key |
 | `Content-Type` | `application/json` | Request body format |
 
 ### Request Body
@@ -74,8 +74,8 @@ POST https://api.sandbase.ai/v1/chat/completions
 ::: code-group
 
 ```bash [cURL]
-curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl https://api.agrouter.ai/v1/chat/completions \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "deepseek/deepseek-v4-flash",
@@ -93,8 +93,8 @@ import os
 from openai import OpenAI
 
 client = OpenAI(
-    api_key=os.environ["SANDBASE_API_KEY"],
-    base_url="https://api.sandbase.ai/v1"
+    api_key=os.environ["AGROUTER_API_KEY"],
+    base_url="https://api.agrouter.ai/v1"
 )
 
 response = client.chat.completions.create(
@@ -114,8 +114,8 @@ print(response.choices[0].message.content)
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: process.env.SANDBASE_API_KEY,
-  baseURL: 'https://api.sandbase.ai/v1',
+  apiKey: process.env.AGROUTER_API_KEY,
+  baseURL: 'https://api.agrouter.ai/v1',
 });
 
 const response = await client.chat.completions.create({
@@ -200,8 +200,8 @@ import os
 from openai import OpenAI
 
 client = OpenAI(
-    api_key=os.environ["SANDBASE_API_KEY"],
-    base_url="https://api.sandbase.ai/v1"
+    api_key=os.environ["AGROUTER_API_KEY"],
+    base_url="https://api.agrouter.ai/v1"
 )
 
 stream = client.chat.completions.create(
@@ -220,8 +220,8 @@ print()  # newline at the end
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: process.env.SANDBASE_API_KEY,
-  baseURL: 'https://api.sandbase.ai/v1',
+  apiKey: process.env.AGROUTER_API_KEY,
+  baseURL: 'https://api.agrouter.ai/v1',
 });
 
 const stream = await client.chat.completions.create({
@@ -238,8 +238,8 @@ console.log();
 ```
 
 ```bash [cURL]
-curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl https://api.agrouter.ai/v1/chat/completions \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -N \
   -d '{
@@ -276,7 +276,7 @@ Key points:
 
 ## Using the Anthropic SDK
 
-SandBase also exposes an Anthropic-compatible endpoint at `POST /v1/messages`. Use the Anthropic SDK by changing the `base_url`:
+AGRouter also exposes an Anthropic-compatible endpoint at `POST /v1/messages`. Use the Anthropic SDK by changing the `base_url`:
 
 ::: code-group
 
@@ -285,8 +285,8 @@ import os
 import anthropic
 
 client = anthropic.Anthropic(
-    api_key=os.environ["SANDBASE_API_KEY"],
-    base_url="https://api.sandbase.ai"
+    api_key=os.environ["AGROUTER_API_KEY"],
+    base_url="https://api.agrouter.ai"
 )
 
 message = client.messages.create(
@@ -303,8 +303,8 @@ print(message.content[0].text)
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: process.env.SANDBASE_API_KEY,
-  baseURL: 'https://api.sandbase.ai',
+  apiKey: process.env.AGROUTER_API_KEY,
+  baseURL: 'https://api.agrouter.ai',
 });
 
 const message = await client.messages.create({
@@ -362,8 +362,8 @@ import os
 import anthropic
 
 client = anthropic.Anthropic(
-    api_key=os.environ["SANDBASE_API_KEY"],
-    base_url="https://api.sandbase.ai"
+    api_key=os.environ["AGROUTER_API_KEY"],
+    base_url="https://api.agrouter.ai"
 )
 
 with client.messages.stream(

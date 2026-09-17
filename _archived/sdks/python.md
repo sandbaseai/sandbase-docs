@@ -1,39 +1,39 @@
 ---
 title: Python SDK
-description: Using SandBase with the Python OpenAI and Anthropic SDKs — installation, configuration, and examples.
+description: Using AGRouter with the Python OpenAI and Anthropic SDKs — installation, configuration, and examples.
 ---
 
 # Python SDK
 
-SandBase doesn't require a custom SDK. Use the official `openai` and `anthropic` Python packages you already know — just point them at SandBase.
+AGRouter doesn't require a custom SDK. Use the official `openai` and `anthropic` Python packages you already know — just point them at AGRouter.
 
 ```python
-# That's it. Change the base_url, use your SandBase API key.
+# That's it. Change the base_url, use your AGRouter API key.
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 ```
 
-This gives you access to SandBase model APIs through one account and one key. Use the same key later for ready-made APIs and published Agents when your app needs to do more than generate text.
+This gives you access to AGRouter model APIs through one account and one key. Use the same key later for ready-made APIs and published Agents when your app needs to do more than generate text.
 
 ## How It Works
 
-SandBase implements the OpenAI and Anthropic APIs. Any code that works with those SDKs works with SandBase — you only change two things:
+AGRouter implements the OpenAI and Anthropic APIs. Any code that works with those SDKs works with AGRouter — you only change two things:
 
-| Setting | OpenAI Direct | SandBase |
+| Setting | OpenAI Direct | AGRouter |
 |---------|--------------|----------|
-| `base_url` | `https://api.openai.com/v1` (default) | `https://api.sandbase.ai/v1` |
-| `api_key` | `sk-...` (OpenAI key) | `sk-sb-...` (SandBase key) |
+| `base_url` | `https://api.openai.com/v1` (default) | `https://api.agrouter.ai/v1` |
+| `api_key` | `sk-...` (OpenAI key) | `sk-sb-...` (AGRouter key) |
 
 The same applies to the Anthropic SDK:
 
-| Setting | Anthropic Direct | SandBase |
+| Setting | Anthropic Direct | AGRouter |
 |---------|-----------------|----------|
-| `base_url` | `https://api.anthropic.com` (default) | `https://api.sandbase.ai` |
-| `api_key` | `sk-ant-...` (Anthropic key) | `sk-sb-...` (SandBase key) |
+| `base_url` | `https://api.anthropic.com` (default) | `https://api.agrouter.ai` |
+| `api_key` | `sk-ant-...` (Anthropic key) | `sk-sb-...` (AGRouter key) |
 
 ## Installation
 
@@ -61,7 +61,7 @@ pip install openai anthropic
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 ```
@@ -72,7 +72,7 @@ client = OpenAI(
 import anthropic
 
 client = anthropic.Anthropic(
-    base_url="https://api.sandbase.ai",
+    base_url="https://api.agrouter.ai",
     api_key="sk-sb-your-key"
 )
 ```
@@ -83,7 +83,7 @@ The cleanest approach — no credentials in code:
 
 ```bash
 # .env or shell environment
-export OPENAI_BASE_URL="https://api.sandbase.ai/v1"
+export OPENAI_BASE_URL="https://api.agrouter.ai/v1"
 export OPENAI_API_KEY="sk-sb-your-key"
 ```
 
@@ -97,7 +97,7 @@ client = OpenAI()
 For the Anthropic SDK:
 
 ```bash
-export ANTHROPIC_BASE_URL="https://api.sandbase.ai"
+export ANTHROPIC_BASE_URL="https://api.agrouter.ai"
 export ANTHROPIC_API_KEY="sk-sb-your-key"
 ```
 
@@ -122,7 +122,7 @@ Use a `.env` file with [python-dotenv](https://pypi.org/project/python-dotenv/) 
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -142,7 +142,7 @@ print(response.choices[0].message.content)
 import anthropic
 
 client = anthropic.Anthropic(
-    base_url="https://api.sandbase.ai",
+    base_url="https://api.agrouter.ai",
     api_key="sk-sb-your-key"
 )
 
@@ -167,7 +167,7 @@ print(response.content[0].text)
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -189,7 +189,7 @@ print(response.choices[0].message.content)
 
 ### Switching Models
 
-One of SandBase's strengths — switch between any provider's models without changing your code:
+One of AGRouter's strengths — switch between any provider's models without changing your code:
 
 ```python
 # Use OpenAI
@@ -219,7 +219,7 @@ response = client.chat.completions.create(
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -242,7 +242,7 @@ print()  # Newline at end
 import anthropic
 
 client = anthropic.Anthropic(
-    base_url="https://api.sandbase.ai",
+    base_url="https://api.agrouter.ai",
     api_key="sk-sb-your-key"
 )
 
@@ -263,7 +263,7 @@ import asyncio
 from openai import AsyncOpenAI
 
 client = AsyncOpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -290,7 +290,7 @@ import json
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -359,7 +359,7 @@ if message.tool_calls:
 import anthropic
 
 client = anthropic.Anthropic(
-    base_url="https://api.sandbase.ai",
+    base_url="https://api.agrouter.ai",
     api_key="sk-sb-your-key"
 )
 
@@ -405,7 +405,7 @@ for block in response.content:
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -437,7 +437,7 @@ import base64
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -470,7 +470,7 @@ import anthropic
 import base64
 
 client = anthropic.Anthropic(
-    base_url="https://api.sandbase.ai",
+    base_url="https://api.agrouter.ai",
     api_key="sk-sb-your-key"
 )
 
@@ -510,7 +510,7 @@ import json
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -549,7 +549,7 @@ from pydantic import BaseModel
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -585,7 +585,7 @@ from openai import (
 )
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key",
     max_retries=3,  # Automatic retry with exponential backoff
     timeout=30.0,   # Request timeout in seconds
@@ -597,7 +597,7 @@ try:
         messages=[{"role": "user", "content": "Hello"}]
     )
 except APIConnectionError:
-    print("Failed to connect to SandBase. Check your network.")
+    print("Failed to connect to AGRouter. Check your network.")
 except RateLimitError:
     print("Rate limited. The SDK will retry automatically.")
 except APIStatusError as e:
@@ -610,7 +610,7 @@ except APIStatusError as e:
 import anthropic
 
 client = anthropic.Anthropic(
-    base_url="https://api.sandbase.ai",
+    base_url="https://api.agrouter.ai",
     api_key="sk-sb-your-key",
     max_retries=3,
     timeout=30.0,
@@ -623,7 +623,7 @@ try:
         messages=[{"role": "user", "content": "Hello"}]
     )
 except anthropic.APIConnectionError:
-    print("Failed to connect to SandBase. Check your network.")
+    print("Failed to connect to AGRouter. Check your network.")
 except anthropic.RateLimitError:
     print("Rate limited. The SDK will retry automatically.")
 except anthropic.APIStatusError as e:
@@ -639,8 +639,8 @@ except anthropic.APIStatusError as e:
 | 403 | Insufficient permissions | Verify key permissions in dashboard |
 | 404 | Model not found | Check model name in [supported models](/models/supported) |
 | 429 | Rate limit exceeded | SDK retries automatically; reduce concurrency |
-| 500 | Server error | Retry; SandBase auto-routes to fallback providers |
-| 503 | Provider unavailable | Retry; SandBase auto-routes to fallback providers |
+| 500 | Server error | Retry; AGRouter auto-routes to fallback providers |
+| 503 | Provider unavailable | Retry; AGRouter auto-routes to fallback providers |
 
 ## Async Client
 
@@ -653,7 +653,7 @@ import asyncio
 from openai import AsyncOpenAI
 
 client = AsyncOpenAI(
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key"
 )
 
@@ -683,7 +683,7 @@ import asyncio
 import anthropic
 
 client = anthropic.AsyncAnthropic(
-    base_url="https://api.sandbase.ai",
+    base_url="https://api.agrouter.ai",
     api_key="sk-sb-your-key"
 )
 
@@ -708,7 +708,7 @@ from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
     model="gpt-4o",
-    base_url="https://api.sandbase.ai/v1",
+    base_url="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key",
 )
 
@@ -723,7 +723,7 @@ from llama_index.llms.openai import OpenAI
 
 llm = OpenAI(
     model="gpt-4o",
-    api_base="https://api.sandbase.ai/v1",
+    api_base="https://api.agrouter.ai/v1",
     api_key="sk-sb-your-key",
 )
 
@@ -738,7 +738,7 @@ Use the `requests` library for sandbox API calls (not covered by OpenAI/Anthropi
 ```python
 import requests
 
-BASE_URL = "https://api.sandbase.ai"
+BASE_URL = "https://api.agrouter.ai"
 HEADERS = {"Authorization": "Bearer sk-sb-your-key"}
 
 # Create a sandbox

@@ -28,11 +28,11 @@ import {
 
 const docsRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const repoRoot = path.resolve(docsRoot, '..')
-const registryDataRoot = process.env.SANDBASE_REGISTRY_DATA_ROOT
-  ? path.resolve(process.env.SANDBASE_REGISTRY_DATA_ROOT)
-  : fs.existsSync(path.join(repoRoot, 'sandbase-registry', 'data'))
-    ? path.join(repoRoot, 'sandbase-registry', 'data')
-    : path.join(repoRoot, 'sandbase-monorepo', 'sandbase-registry', 'data')
+const registryDataRoot = process.env.AGROUTER_REGISTRY_DATA_ROOT
+  ? path.resolve(process.env.AGROUTER_REGISTRY_DATA_ROOT)
+  : fs.existsSync(path.join(repoRoot, 'agrouter-registry', 'data'))
+    ? path.join(repoRoot, 'agrouter-registry', 'data')
+    : path.join(repoRoot, 'agrouter-monorepo', 'agrouter-registry', 'data')
 const apiRegistryRoot = path.join(registryDataRoot, 'api')
 const platformRoot = path.join(docsRoot, 'model-api-reference', 'platform-apis')
 const platformOverview = path.join(platformRoot, 'index.md')
@@ -134,7 +134,7 @@ describe('Platform API reference generator', () => {
     const landing = fs.readFileSync(platformOverview, 'utf8')
     assert.match(landing, new RegExp(platformGeneratedMarker.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
     assert.match(landing, /^title: APIs$/m)
-    assert.match(landing, /^description: Browse SandBase API operations by platform and open an operation page for its exact request format\.$/m)
+    assert.match(landing, /^description: Browse AGRouter API operations by platform and open an operation page for its exact request format\.$/m)
     assert.match(landing, /^aside: false$/m)
     assert.match(landing, /^outline: false$/m)
     assert.match(landing, /<PlatformApiLanding \/>/)
@@ -171,7 +171,7 @@ describe('Platform API reference generator', () => {
     assert.match(config, /isPlatformOperation \? 'platform-apis' : 'llm-models'/)
     assert.match(config, /name: categoryName,[\s\S]+item: categoryUrl/)
     assert.match(config, /name: String\(seo\.vendor\),[\s\S]+item: isLlmModel \? `\$\{categoryUrl\}\/\$\{seo\.vendorSlug\}` : canonicalUrl/)
-    assert.match(config, /'@type': 'WebAPI',[\s\S]+endpointUrl: `https:\/\/api\.sandbase\.ai\$\{seo\.endpoint\}`/)
+    assert.match(config, /'@type': 'WebAPI',[\s\S]+endpointUrl: `https:\/\/api\.agrouter\.ai\$\{seo\.endpoint\}`/)
     assert.match(config, /sameAs: modelDetailUrl/)
 
     const operation = fs.readFileSync(path.join(platformRoot, 'cloudsway', 'search.md'), 'utf8')
@@ -497,7 +497,7 @@ describe('Platform API reference generator', () => {
   })
 
   test('removes only managed orphan pages and refuses unknown files', () => {
-    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'sandbase-platform-pages-'))
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'agrouter-platform-pages-'))
     const expected = path.join(root, 'vendor', 'kept.md')
     const orphan = path.join(root, 'vendor', 'orphan.md')
     fs.mkdirSync(path.dirname(expected), { recursive: true })
@@ -512,9 +512,9 @@ describe('Platform API reference generator', () => {
     assert.throws(() => cleanManagedPlatformPages(new Set([path.resolve(expected)]), root), /Refusing to delete unknown/)
     assert.equal(fs.existsSync(unknown), true)
 
-    const legacyRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'sandbase-platform-legacy-'))
+    const legacyRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'agrouter-platform-legacy-'))
     const legacy = path.join(legacyRoot, 'platform-apis.md')
-    fs.writeFileSync(legacy, '---\ntitle: Platform APIs\n---\n\n# Platform APIs\n\nSandBase currently publishes API reference pages for 1 enabled operations.\n\nPlatform operations use `POST /v1/run` with a model.\n')
+    fs.writeFileSync(legacy, '---\ntitle: Platform APIs\n---\n\n# Platform APIs\n\nAGRouter currently publishes API reference pages for 1 enabled operations.\n\nPlatform operations use `POST /v1/run` with a model.\n')
     assert.equal(cleanLegacyPlatformOverview(legacy), 1)
     assert.equal(fs.existsSync(legacy), false)
     fs.writeFileSync(legacy, '# Hand-written page\n')

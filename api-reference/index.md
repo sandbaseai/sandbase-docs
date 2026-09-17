@@ -1,6 +1,6 @@
 ---
 title: Platform API Reference
-description: Manage SandBase Agents, Sessions, Services, Schedules, Skills, credentials, and account resources.
+description: Manage AGRouter Agents, Sessions, Services, Schedules, Skills, credentials, and account resources.
 ---
 
 # Platform API Reference
@@ -39,7 +39,7 @@ Agent + version
 
 ## Authentication
 
-Send a SandBase API key as a Bearer token:
+Send a AGRouter API key as a Bearer token:
 
 ```http
 Authorization: Bearer sk-YOUR_KEY

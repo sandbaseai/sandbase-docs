@@ -1,11 +1,11 @@
 ---
 title: Sandbox Lifecycle Events
-description: Track Sandbox lifecycle events through the Events API or SandBase webhooks.
+description: Track Sandbox lifecycle events through the Events API or AGRouter webhooks.
 ---
 
 # Sandbox Lifecycle Events
 
-SandBase records lifecycle events when a Sandbox changes state. You can poll them with the Events API or have SandBase deliver matching events to a webhook endpoint.
+AGRouter records lifecycle events when a Sandbox changes state. You can poll them with the Events API or have AGRouter deliver matching events to a webhook endpoint.
 
 ## Event types
 
@@ -24,21 +24,21 @@ SandBase records lifecycle events when a Sandbox changes state. You can poll the
 All Events API calls use an API key:
 
 ```http
-Authorization: Bearer $SANDBASE_API_KEY
+Authorization: Bearer $AGROUTER_API_KEY
 ```
 
 ### List events for a Sandbox
 
 ```bash
-curl https://api.sandbase.ai/events/sandboxes/SANDBOX_ID \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/events/sandboxes/SANDBOX_ID \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 ### List events for your organization
 
 ```bash
-curl "https://api.sandbase.ai/events/sandboxes?limit=10" \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl "https://api.agrouter.ai/events/sandboxes?limit=10" \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 | Query parameter | Description |
@@ -67,12 +67,12 @@ Example response from either Events API endpoint:
 Register an outbound Sandbox webhook with the Events API:
 
 ```bash
-curl -X POST https://api.sandbase.ai/events/webhooks \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/events/webhooks \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Sandbox monitor",
-    "url": "https://example.com/hooks/sandbase",
+    "url": "https://example.com/hooks/agrouter",
     "resourceType": "sandbox",
     "events": ["sandbox.lifecycle.created", "sandbox.lifecycle.killed"],
     "signatureSecret": "whsec_replace-with-your-secret"
@@ -86,7 +86,7 @@ GET    /events/webhooks
 DELETE /events/webhooks/{webhookID}
 ```
 
-You can also manage registrations from the [Dashboard Webhooks page](https://www.sandbase.ai/console/webhooks). It supports `session` webhooks too; Template and Model options are not available yet.
+You can also manage registrations from the [Dashboard Webhooks page](https://www.agrouter.ai/console/webhooks). It supports `session` webhooks too; Template and Model options are not available yet.
 
 ### Representative delivery payload
 

@@ -1,11 +1,11 @@
 ---
 title: Pricing and Usage
-description: Find current model pricing, inspect task costs, and manage SandBase billing safely.
+description: Find current model pricing, inspect task costs, and manage AGRouter billing safely.
 ---
 
 # Pricing and Usage
 
-SandBase uses pay-as-you-go billing. Model availability, price formulas, cache multipliers, and capability-specific
+AGRouter uses pay-as-you-go billing. Model availability, price formulas, cache multipliers, and capability-specific
 charges can change independently, so integrations should read live metadata instead of relying on copied price
 tables.
 
@@ -24,15 +24,15 @@ public API. Do not automate Console network requests or depend on internal Conso
 First discover an enabled model:
 
 ```bash
-curl 'https://api.sandbase.ai/v1/models?q=gpt' \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl 'https://api.agrouter.ai/v1/models?q=gpt' \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 Then request its full model card:
 
 ```bash
-curl https://api.sandbase.ai/v1/models/deepseek/deepseek-v4-flash \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/models/deepseek/deepseek-v4-flash \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 The list endpoint is optimized for discovery and intentionally omits detailed token, cache, and reasoning prices.
@@ -44,8 +44,8 @@ that applies to every LLM, media model, embedding model, or API capability.
 When an operation returns a task ID, query its settlement record:
 
 ```bash
-curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/tasks/{task_id}/cost \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 The response distinguishes the current `cost` from `estimated_cost` and reports whether settlement is final. Do

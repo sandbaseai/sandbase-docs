@@ -1,6 +1,6 @@
 ---
 title: Models page moved
-description: The SandBase Models guide now lives at the canonical Models page.
+description: The AGRouter Models guide now lives at the canonical Models page.
 canonical: /docs/models/
 robots: noindex,follow
 ---

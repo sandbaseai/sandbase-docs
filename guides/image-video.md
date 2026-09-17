@@ -1,11 +1,11 @@
 ---
 title: Image and Video Models
-description: Use SandBase's shared Run API to generate images and videos asynchronously.
+description: Use AGRouter's shared Run API to generate images and videos asynchronously.
 ---
 
 # Image and Video Models
 
-Image and video models use SandBase's shared asynchronous Run API. Submit a task
+Image and video models use AGRouter's shared asynchronous Run API. Submit a task
 with `POST /v1/run`, then poll `GET /v1/run/{id}` until the run reaches a
 terminal status.
 
@@ -16,8 +16,8 @@ request fields are model-specific; open the model's API reference for its
 required inputs and limits.
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/run \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/run \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "<model-id>",
@@ -31,8 +31,8 @@ The response includes an opaque `id` and a `status` such as `pending` or
 ## Poll for the result
 
 ```bash
-curl https://api.sandbase.ai/v1/run/<run-id> \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/run/<run-id> \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 Continue polling until `status` is `completed`, `failed`, or `timeout`. Completed
@@ -55,8 +55,8 @@ The vendor-qualified capability name comes from the Models API or Store, so the
 `model` field can be omitted from a POST body:
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/api/firecrawl/scrape \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/api/firecrawl/scrape \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"url":"https://example.com"}'
 ```

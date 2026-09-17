@@ -1,6 +1,6 @@
 ---
 title: Schedules API
-description: Create, manage, trigger, and inspect SandBase Schedules through the compatibility /v1/deployments resource.
+description: Create, manage, trigger, and inspect AGRouter Schedules through the compatibility /v1/deployments resource.
 ---
 
 # Schedules API
@@ -36,11 +36,11 @@ Every trigger creates a durable `drun_*` `DeploymentRun`. A successful trigger a
 
 ## Create example
 
-`name`, `agent_id`, and valid `initial_events` are required. `initial_events` must contain at least one `user.message` event. Runtime binding is resolved by SandBase and is not a public request field.
+`name`, `agent_id`, and valid `initial_events` are required. `initial_events` must contain at least one `user.message` event. Runtime binding is resolved by AGRouter and is not a public request field.
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/deployments \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/deployments \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Daily customer research",
@@ -69,4 +69,4 @@ List one Schedule's records at `/v1/deployments/{deployment_id}/runs`, or query 
 
 Updates support `name`, `initial_events`, `schedule`, `timeout_policy`, `expected_version`, `agent_binding`, `agent_config`, and `notification_settings`. Changing the Agent binding requires a paused Deployment and the current `expected_version` when applicable.
 
-`notification_settings` accepts exactly one `feishu_webhook_url` on the official `open.feishu.cn` custom-bot path. The URL is encrypted and never returned; detail responses expose only `feishu_webhook_configured`. Send `notification_settings: null` or `feishu_webhook_url: null` to remove it. The test endpoint sends a fixed SandBase message to the saved target and accepts only an absent body or `{}`.
+`notification_settings` accepts exactly one `feishu_webhook_url` on the official `open.feishu.cn` custom-bot path. The URL is encrypted and never returned; detail responses expose only `feishu_webhook_configured`. Send `notification_settings: null` or `feishu_webhook_url: null` to remove it. The test endpoint sends a fixed AGRouter message to the saved target and accepts only an absent body or `{}`.

@@ -8,7 +8,7 @@ apiReference:
   operation: Models
   method: POST
   path: /v1/api/{vendor}/{upstream_path}
-  description: Resolve an enabled catalog capability named vendor/upstream_path and execute a JSON object through the unified SandBase pipeline. GET is also supported for capabilities that use it.
+  description: Resolve an enabled catalog capability named vendor/upstream_path and execute a JSON object through the unified AGRouter pipeline. GET is also supported for capabilities that use it.
   groups:
     - title: Path parameters
       fields:
@@ -22,8 +22,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |-
-        curl -X POST https://api.sandbase.ai/v1/api/firecrawl/scrape \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+        curl -X POST https://api.agrouter.ai/v1/api/firecrawl/scrape \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"url":"https://example.com"}'
 ---

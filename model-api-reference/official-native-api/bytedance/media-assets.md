@@ -5,7 +5,7 @@ description: Register reusable media through the official-compatible Asset proto
 
 # Media Assets for Seedance
 
-SandBase exposes the official-compatible Asset protocol at `/v1/assets`. The Asset request and the returned `asset://`
+AGRouter exposes the official-compatible Asset protocol at `/v1/assets`. The Asset request and the returned `asset://`
 reference follow the official protocol, and the reference is passed through unchanged in the native ByteDance Contents
 Generations request. Both
 [Seedance 2.5 Official](./seedance-2.5-official) and [Seedance 2.0 Official](./seedance-2.0-official) accept that reference
@@ -32,8 +32,8 @@ not public operations. Assets belong to the organization associated with the API
 Send the reachable URL to `POST /v1/assets`. `asset_type` is case-sensitive and must be `Image`, `Video`, or `Audio`:
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/assets \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/assets \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://example.com/product-reference.png",
@@ -61,8 +61,8 @@ The value after `asset://` is the `external_id` used by the official-compatible 
 Query the Asset with the `external_id`, without the `asset://` prefix:
 
 ```bash
-curl https://api.sandbase.ai/v1/assets/asset-20260710150403-hx4hf \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/assets/asset-20260710150403-hx4hf \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 ```json
@@ -89,8 +89,8 @@ Place `asset_url` in the URL field that matches the media type. This example use
 reference:
 
 ```bash
-curl -X POST https://api.sandbase.ai/api/v3/contents/generations/tasks \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/api/v3/contents/generations/tasks \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "bytedance/seedance/2.5-official",

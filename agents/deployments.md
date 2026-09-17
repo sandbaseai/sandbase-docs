@@ -6,7 +6,7 @@ robots: noindex,follow
 
 # Services and Schedules
 
-This page is retained for existing links. SandBase now uses separate product terms for the two delivery modes:
+This page is retained for existing links. AGRouter now uses separate product terms for the two delivery modes:
 
 - [Services](/agents/services) publish Agents through the **Services API** (`/v1/endpoints`).
 - [Schedules](/agents/schedules) trigger repeatable work through the **Schedules API**, whose compatibility path remains `/v1/deployments`.

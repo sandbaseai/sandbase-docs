@@ -1,19 +1,19 @@
 ---
 title: FAQ
-description: Frequently asked questions about SandBase Setup, Store, Models, APIs, Agents, Services, Schedules, Sessions, and billing.
+description: Frequently asked questions about AGRouter Setup, Store, Models, APIs, Agents, Services, Schedules, Sessions, and billing.
 ---
 
 # Frequently Asked Questions
 
-## What is SandBase?
+## What is AGRouter?
 
-SandBase helps Agents connect to the real world.
+AGRouter helps Agents connect to the real world.
 
 You can use ready-made Models and APIs, install them into AI tools with Setup, or build reusable Agents and publish or schedule them.
 
-## Who is SandBase for?
+## Who is AGRouter for?
 
-SandBase is mainly for three groups:
+AGRouter is mainly for three groups:
 
 - **AI tool users** who want useful capabilities inside Codex, Claude, Cursor, or Kiro
 - **builders** who want to call Models and APIs directly
@@ -66,7 +66,7 @@ A Session is a persistent Agent interaction and its event history. A Service can
 
 ## How do I give an Agent access to external APIs?
 
-Add the required values under **Developer → Credentials**, then select those credentials when configuring the Agent's tools. SandBase injects selected values only at runtime, so secrets do not need to appear in prompts or source code.
+Add the required values under **Developer → Credentials**, then select those credentials when configuring the Agent's tools. AGRouter injects selected values only at runtime, so secrets do not need to appear in prompts or source code.
 
 ## Where do Models live?
 
@@ -80,7 +80,7 @@ Not always.
 
 Use Setup if you want capabilities inside your AI tool without writing code.
 
-Use API Reference if you want to call SandBase from your application.
+Use API Reference if you want to call AGRouter from your application.
 
 Use Build Agent if you want reusable multi-step work.
 
@@ -96,7 +96,7 @@ Authorization: Bearer sk-YOUR_KEY
 
 ## How does billing work?
 
-SandBase uses credits and usage-based billing.
+AGRouter uses credits and usage-based billing.
 
 Models, APIs, Agents, and runtime work may have different costs. Check the Console for current usage and pricing.
 

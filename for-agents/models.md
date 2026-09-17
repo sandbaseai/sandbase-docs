@@ -1,11 +1,11 @@
 ---
 title: AI-Readable Models & Pricing
-description: Discover current SandBase models, capabilities, schemas, and pricing through the Models API.
+description: Discover current AGRouter models, capabilities, schemas, and pricing through the Models API.
 ---
 
 # Models & Pricing
 
-All models are accessible with one SandBase API key. Model availability, schemas, capabilities, context limits,
+All models are accessible with one AGRouter API key. Model availability, schemas, capabilities, context limits,
 and pricing can change independently.
 
 ::: info Use live model metadata
@@ -17,7 +17,7 @@ pricing to another model.
 ## Catalog and detail responses
 
 `GET /v1/models` returns OpenAI-compatible identity records containing `id`, `object`, `created`, and `owned_by`.
-It intentionally omits SandBase capability, schema, and pricing metadata.
+It intentionally omits AGRouter capability, schema, and pricing metadata.
 
 `GET /v1/models/{id_or_name}` adds `unified_schema`, `supported_modes`, and `model_card`. Read detailed pricing from
 `model_card`; there is no top-level `pricing` object. Treat `capability_tags`, `supported_modes`, and
@@ -26,7 +26,7 @@ It intentionally omits SandBase capability, schema, and pricing metadata.
 ## Discover models
 
 ```bash
-curl 'https://api.sandbase.ai/v1/models?type=llm' \
+curl 'https://api.agrouter.ai/v1/models?type=llm' \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -42,7 +42,7 @@ infer its format or construct a different polling path from an ID prefix or comp
 Model names are vendor-qualified and may contain `/`:
 
 ```bash
-curl https://api.sandbase.ai/v1/models/openai/gpt-5.6-luna \
+curl https://api.agrouter.ai/v1/models/openai/gpt-5.6-luna \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -58,7 +58,7 @@ Before execution, inspect:
 For a completed or in-progress task, query the recorded cost instead of recomputing it from a stale table:
 
 ```bash
-curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
+curl https://api.agrouter.ai/v1/tasks/{task_id}/cost \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 

@@ -63,7 +63,7 @@ The CLI accepts natural language prompts and translates them into concrete code 
 </div>
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes \
+curl -X POST https://api.agrouter.ai/sandboxes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -81,7 +81,7 @@ curl -X POST https://api.sandbase.ai/sandboxes \
 {
   "sandboxID": "sbx_01abc...",
   "templateID": "claude",
-  "clientID": "SandBase",
+  "clientID": "AGRouter",
   "status": "running",
   "startedAt": "2024-07-01T12:00:00Z",
   "endAt": "2024-07-01T12:10:00Z"
@@ -93,7 +93,7 @@ curl -X POST https://api.sandbase.ai/sandboxes \
 Once the sandbox is running, invoke Claude Code via the [exec endpoint](/api-reference/sandboxes/exec):
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_01abc.../processes \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_01abc.../processes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -109,7 +109,7 @@ The `-p` flag runs Claude Code in **print mode** — it executes the prompt non-
 ```python
 import requests
 
-BASE = "https://api.sandbase.ai"
+BASE = "https://api.agrouter.ai"
 HEADERS = {"Authorization": "Bearer sk-sb-YOUR_KEY"}
 
 # 1. Create sandbox with Claude Code (~60ms)

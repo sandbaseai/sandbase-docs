@@ -1,6 +1,6 @@
 ---
 title: GPT Image 2 Native API Reference
-description: Generate images with GPT Image 2 through SandBase's native OpenAI Images API.
+description: Generate images with GPT Image 2 through AGRouter's native OpenAI Images API.
 aside: false
 outline: false
 apiReference:
@@ -29,8 +29,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |-
-        curl https://api.sandbase.ai/v1/images/generations \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+        curl https://api.agrouter.ai/v1/images/generations \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"model":"gpt-image-2","prompt":"A paper-cut city floating above the clouds","size":"1024x1024"}'
     - label: Python
@@ -38,7 +38,7 @@ apiReference:
       code: |-
         from openai import OpenAI
 
-        client = OpenAI(api_key="sk-...", base_url="https://api.sandbase.ai/v1")
+        client = OpenAI(api_key="sk-...", base_url="https://api.agrouter.ai/v1")
         result = client.images.generate(
             model="gpt-image-2",
             prompt="A paper-cut city floating above the clouds",
@@ -59,9 +59,9 @@ apiReference:
 
 ## Native protocol notes
 
-This model uses the OpenAI Images API contract, not the general SandBase `/v1/run` model endpoint. Requests are synchronous and return the generated image in `data` as `b64_json` or a URL.
+This model uses the OpenAI Images API contract, not the general AGRouter `/v1/run` model endpoint. Requests are synchronous and return the generated image in `data` as `b64_json` or a URL.
 
-Use the shared [image generation reference](/api-reference/images/generations) for authentication, response details, limits, and error handling. The SandBase catalog entry is `openai/gpt-image-2-official`; because this endpoint preserves the OpenAI Images protocol, send the provider model name `gpt-image-2` in the request body.
+Use the shared [image generation reference](/api-reference/images/generations) for authentication, response details, limits, and error handling. The AGRouter catalog entry is `openai/gpt-image-2-official`; because this endpoint preserves the OpenAI Images protocol, send the provider model name `gpt-image-2` in the request body.
 
 ## Official OpenAI resources
 

@@ -16,10 +16,10 @@ from e2b import Sandbox
 
 sandbox = Sandbox.create(
     metadata={"name": "My Sandbox"},
-    api_url="https://api.sandbase.ai",
+    api_url="https://api.agrouter.ai",
 )
 
-sandboxes = Sandbox.list(api_url="https://api.sandbase.ai")
+sandboxes = Sandbox.list(api_url="https://api.agrouter.ai")
 running = sandboxes[0]
 print("metadata:", running.metadata)
 print("id:", running.sandbox_id)
@@ -32,10 +32,10 @@ import { Sandbox } from 'e2b'
 
 const sandbox = await Sandbox.create({
   metadata: { name: 'My Sandbox' },
-  apiUrl: 'https://api.sandbase.ai',
+  apiUrl: 'https://api.agrouter.ai',
 })
 
-const sandboxes = await Sandbox.list({ apiUrl: 'https://api.sandbase.ai' })
+const sandboxes = await Sandbox.list({ apiUrl: 'https://api.agrouter.ai' })
 const running = sandboxes[0]
 console.log('metadata:', running.metadata)
 console.log('id:', running.sandboxId)
@@ -48,7 +48,7 @@ console.log('templateId:', running.templateId)
 ### REST API
 
 ```bash
-curl https://api.sandbase.ai/sandboxes \
+curl https://api.agrouter.ai/sandboxes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -71,11 +71,11 @@ Filter sandboxes by their current state using the `status` query parameter. Supp
 
 ```bash
 # Only running sandboxes
-curl "https://api.sandbase.ai/sandboxes?status=running" \
+curl "https://api.agrouter.ai/sandboxes?status=running" \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 
 # Only paused sandboxes
-curl "https://api.sandbase.ai/sandboxes?status=paused" \
+curl "https://api.agrouter.ai/sandboxes?status=paused" \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -86,7 +86,7 @@ from e2b import Sandbox, SandboxQuery, SandboxState
 
 paginator = Sandbox.list(
     SandboxQuery(state=[SandboxState.RUNNING, SandboxState.PAUSED]),
-    api_url="https://api.sandbase.ai",
+    api_url="https://api.agrouter.ai",
 )
 sandboxes = paginator.next_items()
 ```
@@ -96,7 +96,7 @@ import { Sandbox } from 'e2b'
 
 const paginator = Sandbox.list({
   query: { state: ['running', 'paused'] },
-  apiUrl: 'https://api.sandbase.ai',
+  apiUrl: 'https://api.agrouter.ai',
 })
 const sandboxes = await paginator.nextItems()
 ```
@@ -112,21 +112,21 @@ You can attach arbitrary key-value metadata when creating a sandbox, then read i
 ```python [Python]
 sandbox = Sandbox.create(
     metadata={"user_id": "123", "env": "dev"},
-    api_url="https://api.sandbase.ai",
+    api_url="https://api.agrouter.ai",
 )
 ```
 
 ```javascript [JavaScript]
 const sandbox = await Sandbox.create({
   metadata: { userId: '123', env: 'dev' },
-  apiUrl: 'https://api.sandbase.ai',
+  apiUrl: 'https://api.agrouter.ai',
 })
 ```
 
 :::
 
 ::: tip Roadmap
-Cursor pagination and server-side **filtering by metadata** key/value pairs are part of the E2B API and are on the SandBase roadmap. Today, listing returns the org's sandboxes and supports the `status` filter; filter by metadata client-side in the meantime.
+Cursor pagination and server-side **filtering by metadata** key/value pairs are part of the E2B API and are on the AGRouter roadmap. Today, listing returns the org's sandboxes and supports the `status` filter; filter by metadata client-side in the meantime.
 :::
 
 ## Next steps

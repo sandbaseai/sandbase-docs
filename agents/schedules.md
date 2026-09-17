@@ -1,6 +1,6 @@
 ---
 title: Schedules
-description: Configure manual or cron-based Agent runs and inspect each Schedule trigger through SandBase Sessions.
+description: Configure manual or cron-based Agent runs and inspect each Schedule trigger through AGRouter Sessions.
 ---
 
 # Schedules
@@ -20,8 +20,8 @@ The public DeploymentRun object has no `status` field. List endpoints accept `st
 ## Trigger manually
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/deployments/depl_01.../runs \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/deployments/depl_01.../runs \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{}'
 ```
@@ -31,8 +31,8 @@ Manual triggers do not accept input overrides; the Schedule's `initial_events` a
 ## Inspect trigger records
 
 ```bash
-curl "https://api.sandbase.ai/v1/deployment_runs?deployment_id=depl_01...&trigger_type=schedule" \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl "https://api.agrouter.ai/v1/deployment_runs?deployment_id=depl_01...&trigger_type=schedule" \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 Use `trigger_type=manual|schedule` and `status=pending|succeeded|failed` filters. Retrieve the returned `session_id` through the Sessions API after a successful trigger.

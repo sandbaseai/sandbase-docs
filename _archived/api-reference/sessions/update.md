@@ -41,7 +41,7 @@ from anthropic import Anthropic
 
 client = Anthropic(
     api_key="sk-sb-YOUR_KEY",
-    base_url="https://api.sandbase.ai"
+    base_url="https://api.agrouter.ai"
 )
 
 session = client.beta.sessions.update(
@@ -53,7 +53,7 @@ print(session.title)
 ```
 
 ```bash [cURL]
-curl -X POST https://api.sandbase.ai/v1/sessions/sess_01abc... \
+curl -X POST https://api.agrouter.ai/v1/sessions/sess_01abc... \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"title": "Updated research task", "metadata": {"priority": "high"}}'

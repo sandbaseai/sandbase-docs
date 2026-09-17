@@ -1,6 +1,6 @@
 ---
 title: Skills API
-description: Upload, create, and manage reusable Skills for SandBase Agents.
+description: Upload, create, and manage reusable Skills for AGRouter Agents.
 ---
 
 # Skills API
@@ -16,27 +16,27 @@ This example requires `curl`, `jq`, and `zip`. Keep API keys in environment vari
 A Hermes Skill ZIP must contain exactly one `SKILL.md`. Its YAML frontmatter must include a normalized runtime `name`.
 
 ```bash
-export SANDBASE_API_KEY='sk-YOUR_KEY'
-export SANDBASE_API_BASE='https://api.sandbase.ai'
+export AGROUTER_API_KEY='sk-YOUR_KEY'
+export AGROUTER_API_BASE='https://api.agrouter.ai'
 
-: "${SANDBASE_API_KEY:?SANDBASE_API_KEY is required}"
+: "${AGROUTER_API_KEY:?AGROUTER_API_KEY is required}"
 
-mkdir -p hello-sandbase
+mkdir -p hello-agrouter
 
-cat > hello-sandbase/SKILL.md <<'SKILL_EOF'
+cat > hello-agrouter/SKILL.md <<'SKILL_EOF'
 ---
-name: hello-sandbase
-description: Give a short SandBase greeting when the user asks for one.
+name: hello-agrouter
+description: Give a short AGRouter greeting when the user asks for one.
 ---
 
-# Hello SandBase
+# Hello AGRouter
 
-When the user asks for a SandBase greeting, reply with one concise sentence that starts with "Hello from SandBase".
+When the user asks for a AGRouter greeting, reply with one concise sentence that starts with "Hello from AGRouter".
 SKILL_EOF
 
 (
-  cd hello-sandbase
-  zip -q -X ../hello-sandbase.zip SKILL.md
+  cd hello-agrouter
+  zip -q -X ../hello-agrouter.zip SKILL.md
 )
 ```
 
@@ -48,9 +48,9 @@ Upload the ZIP to persistent Skill storage, then register the returned private o
 
 ```bash
 UPLOAD_RESPONSE="$(
-  curl -fsS -X POST "$SANDBASE_API_BASE/v1/skills/files" \
-    -H "Authorization: Bearer $SANDBASE_API_KEY" \
-    -F 'file=@hello-sandbase.zip'
+  curl -fsS -X POST "$AGROUTER_API_BASE/v1/skills/files" \
+    -H "Authorization: Bearer $AGROUTER_API_KEY" \
+    -F 'file=@hello-agrouter.zip'
 )"
 
 SKILL_FILE_URL="$(jq -er '.url' <<<"$UPLOAD_RESPONSE")"
@@ -59,16 +59,16 @@ SKILL_PAYLOAD="$(
   jq -nc \
     --arg url "$SKILL_FILE_URL" \
     '{
-      name: "hello-sandbase",
-      description: "A minimal Skill created through the SandBase API",
+      name: "hello-agrouter",
+      description: "A minimal Skill created through the AGRouter API",
       categories: ["quickstart"],
       skill_file_url: $url
     }'
 )"
 
 SKILL_RESPONSE="$(
-  curl -fsS -X POST "$SANDBASE_API_BASE/v1/skills" \
-    -H "Authorization: Bearer $SANDBASE_API_KEY" \
+  curl -fsS -X POST "$AGROUTER_API_BASE/v1/skills" \
+    -H "Authorization: Bearer $AGROUTER_API_KEY" \
     -H 'Content-Type: application/json' \
     --data "$SKILL_PAYLOAD"
 )"
@@ -95,14 +95,14 @@ ENDPOINT_PAYLOAD="$(
     }'
 )"
 
-curl -fsS -X POST "$SANDBASE_API_BASE/v1/endpoints" \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -fsS -X POST "$AGROUTER_API_BASE/v1/endpoints" \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H 'Content-Type: application/json' \
   --data "$ENDPOINT_PAYLOAD" \
   | jq .
 ```
 
-SandBase validates and installs the bundle before the Service invokes its Agent. Missing or duplicate `SKILL.md` files, invalid frontmatter names, unsafe archive paths, and unreadable bundles fail materialization instead of starting the Agent without the Skill.
+AGRouter validates and installs the bundle before the Service invokes its Agent. Missing or duplicate `SKILL.md` files, invalid frontmatter names, unsafe archive paths, and unreadable bundles fail materialization instead of starting the Agent without the Skill.
 
 ## Upload a Skill file
 
@@ -115,7 +115,7 @@ Send `multipart/form-data` with a required `file` field. The same endpoint accep
 
 ```json
 {
-  "url": "https://media.sandbase.ai/_private/your-org/skills/file-id/my-skill.zip",
+  "url": "https://media.agrouter.ai/_private/your-org/skills/file-id/my-skill.zip",
   "key": "_private/your-org/skills/file-id/my-skill.zip",
   "filename": "my-skill.zip",
   "size": 1234,
@@ -137,14 +137,14 @@ Skill archives can be up to 50 MB. JPEG, PNG, WebP, and GIF preview images can b
   "name": "my-skill",
   "description": "A reusable Skill",
   "categories": ["productivity"],
-  "skill_file_url": "https://media.sandbase.ai/_private/.../my-skill.zip",
+  "skill_file_url": "https://media.agrouter.ai/_private/.../my-skill.zip",
   "preview_image_urls": []
 }
 ```
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `name` | string | ✅ | Display name, up to 100 characters. SandBase derives a unique plugin slug from it. |
+| `name` | string | ✅ | Display name, up to 100 characters. AGRouter derives a unique plugin slug from it. |
 | `description` | string | ❌ | Description, up to 1,000 characters. |
 | `categories` | string[] | ❌ | Category labels. |
 | `skill_file_url` | string | Conditional | URL returned by `/v1/skills/files`. Required unless `git_url` is provided. |
@@ -185,8 +185,8 @@ Skill resource IDs are UUIDs. Agent and Service definitions use the separate `ve
 Delete the Quickstart Skill when you no longer need it:
 
 ```bash
-curl -fsS -X DELETE "$SANDBASE_API_BASE/v1/skills/$SKILL_ID" \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -fsS -X DELETE "$AGROUTER_API_BASE/v1/skills/$SKILL_ID" \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   | jq .
 ```
 

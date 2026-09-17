@@ -34,7 +34,7 @@ const forbidden = [
   [/\/v1\/environments\b/, 'non-public Environment management API'],
   [/\/v1\/embeds\b/, 'retired Embed Config API'],
   [/\/v1\/endpoints\/\{[^}]+\}\/mcp\b/, 'non-public Endpoint MCP transport'],
-  [/https:\/\/api\.sandbase\.ai\/sandboxes\b/, 'non-public Sandbox API'],
+  [/https:\/\/api\.agrouter\.ai\/sandboxes\b/, 'non-public Sandbox API'],
   [/\bEmbed Configs?\b/i, 'retired Embed Config product'],
   [/\bEndpoints API\b/, 'legacy product label; use Services API'],
   [/\bDeployments API\b/, 'legacy product label; use Schedules API'],
@@ -49,14 +49,14 @@ const forbidden = [
   [/\/v1\/tasks\/\{id\}\/cost/, 'incorrect task cost path parameter'],
   [/\/docs\/setup\/cli\b/, 'retired setup alias'],
   [/\/docs\/docs\//, 'duplicated docs base path'],
-  [/sandbaseai-cli-\d+\.\d+\.\d+\.tgz/, 'version-pinned CLI archive; use the guided installer'],
+  [/agrouterai-cli-\d+\.\d+\.\d+\.tgz/, 'version-pinned CLI archive; use the guided installer'],
   [/\bPlatform Groups?\b/, 'retired Platform Groups product label'],
   [/^## What are Environments\?$/m, 'internal Environment product navigation'],
   [/\]\(\/store\/models\/?(?:[)#])/, 'duplicate Models page link; use /models/'],
   [/\bNew accounts receive\b[^\n]*\bfree credits\b/i, 'time-sensitive signup credit claim'],
   [/\$\d+(?:\.\d+)?\s+minimum/i, 'time-sensitive minimum payment claim'],
   [/\b(?:Apple Pay|Google Pay)\b/, 'time-sensitive payment-method claim'],
-  [/\bSandBase auto-terminates at \d+s silence\b/i, 'undocumented fixed streaming timeout'],
+  [/\bAGRouter auto-terminates at \d+s silence\b/i, 'undocumented fixed streaming timeout'],
 ]
 
 let inspected = 0
@@ -100,7 +100,7 @@ for (const filename of [
   'guides/streaming.md',
 ]) {
   const source = readFileSync(filename, 'utf8')
-  assert.doesNotMatch(source, /(?:api_key\s*=|apiKey:|Authorization:\s*Bearer)\s*['"]?sk-/i, `${filename} must read API keys from SANDBASE_API_KEY`)
+  assert.doesNotMatch(source, /(?:api_key\s*=|apiKey:|Authorization:\s*Bearer)\s*['"]?sk-/i, `${filename} must read API keys from AGROUTER_API_KEY`)
 }
 
 const streamingLines = readFileSync('guides/streaming.md', 'utf8').split('\n').length
@@ -113,7 +113,7 @@ for (const link of ['./chat-completions', './anthropic-messages', './streaming',
 
 const organizationsGuide = readFileSync('admin/organizations.md', 'utf8')
 assert.doesNotMatch(organizationsGuide, /Console → Settings[\s\S]{0,80}Create Team/, 'Team creation must use the current Team or Create Team navigation')
-assert.match(organizationsGuide, /existing SandBase account/, 'Organization guide must explain the current member prerequisite')
+assert.match(organizationsGuide, /existing AGRouter account/, 'Organization guide must explain the current member prerequisite')
 
 const billingGuide = readFileSync('guides/billing.md', 'utf8')
 assert.doesNotMatch(billingGuide, /Console → Usage/, 'Usage is a tab under Console Activities')
@@ -150,12 +150,12 @@ assert.doesNotMatch(setupGuide, /^The installer requires Node\.js 20 or newer\./
 assert.match(setupGuide, /Developer → API Keys/, 'Setup removal must point to the current CLI Login key location')
 
 const firstCallGuide = readFileSync('getting-started/first-call.md', 'utf8')
-assert.doesNotMatch(firstCallGuide, /Every request to SandBase's LLM Gateway follows/, 'First call must not generalize one route to every LLM request')
+assert.doesNotMatch(firstCallGuide, /Every request to AGRouter's LLM Gateway follows/, 'First call must not generalize one route to every LLM request')
 assert.doesNotMatch(firstCallGuide, /The first chunk contains `delta\.role`/, 'Streaming guide must not require a provider-dependent first chunk')
 
 const storeGuide = readFileSync('store/index.md', 'utf8')
 for (const catalog of ['models', 'apis', 'agents', 'skills']) {
-  assert.ok(storeGuide.includes(`https://www.sandbase.ai/${catalog}`), `Store guide must link to the live ${catalog} catalog`)
+  assert.ok(storeGuide.includes(`https://www.agrouter.ai/${catalog}`), `Store guide must link to the live ${catalog} catalog`)
 }
 
 const modelReference = readFileSync('model-api-reference/index.md', 'utf8')
@@ -227,7 +227,7 @@ assert.match(seedanceAssetReference, /reference_image[\s\S]*reference_video[\s\S
 assert.match(seedanceAssetReference, /official-compatible Asset protocol/, 'Seedance Asset guide must describe the official-compatible protocol boundary')
 assert.match(seedanceAssetReference, /passed through unchanged/, 'Seedance Asset guide must state that asset references pass through unchanged')
 assert.doesNotMatch(seedanceAssetReference, /\/v1\/upload/, 'Seedance official Asset guide must not mix in the generic upload endpoint')
-assert.doesNotMatch(seedanceAssetReference, /SandBase Asset library/, 'Seedance Asset guide must not describe the compatible Asset protocol as a separate SandBase library')
+assert.doesNotMatch(seedanceAssetReference, /AGRouter Asset library/, 'Seedance Asset guide must not describe the compatible Asset protocol as a separate AGRouter library')
 assert.doesNotMatch(seedanceAssetReference, /POST \/api\/v3\/assets/, 'Seedance Asset guide must not expose the internal Asset gateway')
 
 for (const filename of ['seedance-2.5-official.md', 'seedance-2.0-official.md']) {

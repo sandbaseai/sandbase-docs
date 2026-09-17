@@ -1,6 +1,6 @@
 ---
 title: "Site Agent integration"
-description: Add an AI Copilot to any web application that can navigate pages, click buttons, and fill forms on behalf of users — powered by SandBase Agents.
+description: Add an AI Copilot to any web application that can navigate pages, click buttons, and fill forms on behalf of users — powered by AGRouter Agents.
 ---
 
 # Site Agent integration
@@ -14,14 +14,14 @@ Your Web App (browser)
 ├── Chat Widget          — floating bubble + chat panel
 └── Frontend Agent       — receives instructions, executes DOM actions
          ↕  Session (SSE down, POST up)
-SandBase Platform
+AGRouter Platform
 ├── Embed API            — session lifecycle, event streaming
 └── Cloud Agent (Hermes) — reasoning, planning, knowledge retrieval
 ```
 
 The architecture separates concerns:
 
-- **Cloud Agent** (runs in SandBase's AgentCore sandbox): thinks, plans, retrieves knowledge, issues action commands
+- **Cloud Agent** (runs in AGRouter's AgentCore sandbox): thinks, plans, retrieves knowledge, issues action commands
 - **Frontend Agent** (runs in the user's browser): receives commands, manipulates the DOM, reports results
 - **Session**: the bidirectional channel connecting them — SSE for downstream events, POST for upstream results
 
@@ -34,8 +34,8 @@ The Cloud Agent never touches your backend or database. It operates exclusively 
 ### 1. Create the Cloud Agent
 
 ```bash
-curl -X POST https://api.sandbase.ai/default/v1/agents \
-  -H "Authorization: Bearer $SANDBASE_KEY" \
+curl -X POST https://api.agrouter.ai/default/v1/agents \
+  -H "Authorization: Bearer $AGROUTER_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Site Copilot",
@@ -66,14 +66,14 @@ curl -X POST https://api.sandbase.ai/default/v1/agents \
 
 ```bash
 # Create environment
-ENV_ID=$(curl -s -X POST https://api.sandbase.ai/default/v1/environments \
-  -H "Authorization: Bearer $SANDBASE_KEY" \
+ENV_ID=$(curl -s -X POST https://api.agrouter.ai/default/v1/environments \
+  -H "Authorization: Bearer $AGROUTER_KEY" \
   -d '{"name":"copilot-env","config":{"type":"cloud","base_template":"hermes-agent"}}' \
   | jq -r '.id')
 
 # Create embed config → get publishable key
-curl -X POST https://api.sandbase.ai/default/v1/embeds \
-  -H "Authorization: Bearer $SANDBASE_KEY" \
+curl -X POST https://api.agrouter.ai/default/v1/embeds \
+  -H "Authorization: Bearer $AGROUTER_KEY" \
   -d "{
     \"agent_id\": \"YOUR_AGENT_ID\",
     \"environment_id\": \"$ENV_ID\",
@@ -110,8 +110,8 @@ export default function Layout() {
 
 ```html
 <script
-  src="https://cdn.sandbase.ai/site-agent/widget.js"
-  data-sandbase-key="pk-sb-xxxxxxxx"
+  src="https://cdn.agrouter.ai/site-agent/widget.js"
+  data-agrouter-key="pk-sb-xxxxxxxx"
   async
 ></script>
 ```
@@ -178,7 +178,7 @@ Uses an LLM to understand the DOM structure and intelligently locate elements. C
 
 ```env
 VITE_PAGE_AGENT_ENABLED=true
-VITE_PAGE_AGENT_BASE_URL=https://api.sandbase.ai/v1
+VITE_PAGE_AGENT_BASE_URL=https://api.agrouter.ai/v1
 VITE_PAGE_AGENT_API_KEY=sk-sb-xxx
 ```
 

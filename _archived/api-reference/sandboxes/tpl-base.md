@@ -49,7 +49,7 @@ The base template is intentionally minimal. Use `apt-get install` via the exec e
 </div>
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes \
+curl -X POST https://api.agrouter.ai/sandboxes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -64,7 +64,7 @@ curl -X POST https://api.sandbase.ai/sandboxes \
 {
   "sandboxID": "sbx_01abc...",
   "templateID": "base",
-  "clientID": "SandBase",
+  "clientID": "AGRouter",
   "status": "running",
   "startedAt": "2024-07-01T12:00:00Z",
   "endAt": "2024-07-01T12:05:00Z"
@@ -78,7 +78,7 @@ Once the sandbox is running, install packages and configure tools via the [exec 
 ### Install a language runtime
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_01abc.../processes \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_01abc.../processes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -90,7 +90,7 @@ curl -X POST https://api.sandbase.ai/sandboxes/sbx_01abc.../processes \
 ### Install Node.js
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_01abc.../processes \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_01abc.../processes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -102,7 +102,7 @@ curl -X POST https://api.sandbase.ai/sandboxes/sbx_01abc.../processes \
 ### Install custom tools
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_01abc.../processes \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_01abc.../processes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -116,7 +116,7 @@ curl -X POST https://api.sandbase.ai/sandboxes/sbx_01abc.../processes \
 ```python
 import requests
 
-BASE = "https://api.sandbase.ai"
+BASE = "https://api.agrouter.ai"
 HEADERS = {"Authorization": "Bearer sk-sb-YOUR_KEY"}
 
 # 1. Create a minimal sandbox (~60ms)

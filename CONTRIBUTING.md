@@ -1,6 +1,6 @@
-# Contributing to SandBase Docs
+# Contributing to AGRouter Docs
 
-Thanks for helping improve the SandBase developer documentation. Small fixes,
+Thanks for helping improve the AGRouter developer documentation. Small fixes,
 clarifications, examples, and translations are welcome.
 
 ## Before you start

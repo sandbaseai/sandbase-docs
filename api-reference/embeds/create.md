@@ -25,8 +25,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |
-        curl -X POST https://api.sandbase.ai/v1/embeds \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+        curl -X POST https://api.agrouter.ai/v1/embeds \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"agent_id":"agent_01...","environment_id":"env_01...","name":"Docs assistant","allowed_origins":["https://docs.example.com"]}'
   response:

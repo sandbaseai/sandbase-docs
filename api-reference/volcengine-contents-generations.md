@@ -10,7 +10,7 @@ apiReference:
   operation: Video
   method: POST
   path: /api/v3/contents/generations/tasks
-  description: Submit a Seedance video task. A successful submission returns HTTP 200 and a SandBase task id.
+  description: Submit a Seedance video task. A successful submission returns HTTP 200 and a AGRouter task id.
   groups:
     - title: Request body
       fields:
@@ -24,8 +24,8 @@ apiReference:
     - label: Text to video
       language: bash
       code: |-
-        curl -X POST https://api.sandbase.ai/api/v3/contents/generations/tasks \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+        curl -X POST https://api.agrouter.ai/api/v3/contents/generations/tasks \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{
             "model": "bytedance/seedance/2.0-official",
@@ -49,7 +49,7 @@ body rules, the task status vocabulary, usage reporting, and the error contract.
 
 Quick orientation:
 
-- Authenticate with `Authorization: Bearer $SANDBASE_API_KEY`. A task can only be read back by the organization **and**
+- Authenticate with `Authorization: Bearer $AGROUTER_API_KEY`. A task can only be read back by the organization **and**
   the API key that created it.
 - Supported `model` values are `bytedance/seedance/2.0-official` and `bytedance/seedance/2.5-official`. Matching is exact.
 - Retrieve a task with `GET /api/v3/contents/generations/tasks/{task_id}` and poll until `status` leaves `queued` and

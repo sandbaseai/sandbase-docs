@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /docs/
 
-Sitemap: https://www.sandbase.ai/docs/sitemap.xml
+Sitemap: https://www.agrouter.ai/docs/sitemap.xml

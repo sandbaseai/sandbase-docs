@@ -1,11 +1,11 @@
 ---
 title: Models API
-description: Discover SandBase model metadata, pricing, support status, and capabilities.
+description: Discover AGRouter model metadata, pricing, support status, and capabilities.
 ---
 
 # Models API
 
-Use the Models API to discover models before choosing an inference endpoint. The list operation is OpenAI-compatible and returns compact identity records. Retrieve one model for SandBase capability, schema, and pricing metadata.
+Use the Models API to discover models before choosing an inference endpoint. The list operation is OpenAI-compatible and returns compact identity records. Retrieve one model for AGRouter capability, schema, and pricing metadata.
 
 | Operation | Endpoint | Documentation |
 |---|---|---|

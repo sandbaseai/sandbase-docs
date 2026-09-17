@@ -65,7 +65,7 @@ The VNC stream is available on port `6080` inside the sandbox. Use the exec endp
 </div>
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes \
+curl -X POST https://api.agrouter.ai/sandboxes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -80,7 +80,7 @@ curl -X POST https://api.sandbase.ai/sandboxes \
 {
   "sandboxID": "sbx_01abc...",
   "templateID": "desktop",
-  "clientID": "SandBase",
+  "clientID": "AGRouter",
   "status": "running",
   "startedAt": "2024-07-01T12:00:00Z",
   "endAt": "2024-07-01T12:10:00Z"
@@ -93,7 +93,7 @@ Once the sandbox is running, connect to the VNC stream via the exec endpoint:
 
 ```bash
 # Get the VNC URL (noVNC web client on port 6080)
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_01abc.../processes \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_01abc.../processes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -110,7 +110,7 @@ You can also forward port `6080` to access the noVNC web client directly in your
 import requests
 import time
 
-BASE = "https://api.sandbase.ai"
+BASE = "https://api.agrouter.ai"
 HEADERS = {"Authorization": "Bearer sk-sb-YOUR_KEY"}
 
 # 1. Create desktop sandbox (~5s boot)
@@ -177,7 +177,7 @@ requests.delete(f"{BASE}/sandboxes/{sandbox_id}", headers=HEADERS)
 ```python
 import requests
 
-BASE = "https://api.sandbase.ai"
+BASE = "https://api.agrouter.ai"
 HEADERS = {"Authorization": "Bearer sk-sb-YOUR_KEY"}
 
 # 1. Create desktop sandbox

@@ -13,7 +13,7 @@ description: Create an execution environment defining the container, packages, a
 Create an environment. An environment defines the container configuration — packages and networking — that agent sessions run in.
 
 ::: info Claude API compatibility
-SandBase implements the `cloud` environment type from the [Claude Managed Agents](https://platform.claude.com/docs/en/api/python/beta/environments/create) Environment API. The `self_hosted` type and `scope` field are accepted for forward compatibility but not yet active.
+AGRouter implements the `cloud` environment type from the [Claude Managed Agents](https://platform.claude.com/docs/en/api/python/beta/environments/create) Environment API. The `self_hosted` type and `scope` field are accepted for forward compatibility but not yet active.
 :::
 
 ## Request Parameters
@@ -47,8 +47,8 @@ For a cloud environment, `config` has the following shape:
 | `networking` | object | Network access policy. See [Networking](#networking). |
 | `packages` | object | Packages to preinstall. See [Packages](#packages). |
 
-::: tip SandBase extension — `base_template`
-SandBase sandboxes are template-based. You may include an optional `base_template` field in the cloud config (e.g. `"code_interpreter"`, `"hermes-agent"`) to select the base image. If omitted, a default base is used and packages are layered on top. See [Templates](/api-reference/sandboxes/templates).
+::: tip AGRouter extension — `base_template`
+AGRouter sandboxes are template-based. You may include an optional `base_template` field in the cloud config (e.g. `"code_interpreter"`, `"hermes-agent"`) to select the base image. If omitted, a default base is used and packages are layered on top. See [Templates](/api-reference/sandboxes/templates).
 :::
 
 ### Networking
@@ -114,7 +114,7 @@ from anthropic import Anthropic
 
 client = Anthropic(
     api_key="sk-sb-YOUR_KEY",
-    base_url="https://api.sandbase.ai"
+    base_url="https://api.agrouter.ai"
 )
 
 env = client.beta.environments.create(
@@ -130,7 +130,7 @@ print(env.id)
 ```
 
 ```bash [cURL]
-curl -X POST https://api.sandbase.ai/v1/environments \
+curl -X POST https://api.agrouter.ai/v1/environments \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -195,7 +195,7 @@ Returns an [Environment object](#environment-object).
 | `updated_at` | string | RFC 3339 timestamp |
 
 ::: tip Roadmap
-Claude's Environment also supports a `self_hosted` config type and an organization/account `scope` field. These are not yet active in SandBase.
+Claude's Environment also supports a `self_hosted` config type and an organization/account `scope` field. These are not yet active in AGRouter.
 :::
 
 ## Errors

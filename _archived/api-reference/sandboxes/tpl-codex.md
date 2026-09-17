@@ -63,7 +63,7 @@ The CLI accepts natural language prompts and translates them into concrete code 
 </div>
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes \
+curl -X POST https://api.agrouter.ai/sandboxes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -81,7 +81,7 @@ curl -X POST https://api.sandbase.ai/sandboxes \
 {
   "sandboxID": "sbx_02def...",
   "templateID": "codex",
-  "clientID": "SandBase",
+  "clientID": "AGRouter",
   "status": "running",
   "startedAt": "2024-07-01T12:00:00Z",
   "endAt": "2024-07-01T12:05:00Z"
@@ -93,7 +93,7 @@ curl -X POST https://api.sandbase.ai/sandboxes \
 Once the sandbox is running, invoke Codex CLI via the [exec endpoint](/api-reference/sandboxes/exec):
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_02def.../processes \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_02def.../processes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -109,7 +109,7 @@ The `--quiet` flag runs Codex in non-interactive mode — it executes the prompt
 ```python
 import requests
 
-BASE = "https://api.sandbase.ai"
+BASE = "https://api.agrouter.ai"
 HEADERS = {"Authorization": "Bearer sk-sb-YOUR_KEY"}
 
 # 1. Create sandbox with Codex CLI (~60ms)

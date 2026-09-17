@@ -29,7 +29,7 @@ from anthropic import Anthropic
 
 client = Anthropic(
     api_key="sk-sb-YOUR_KEY",
-    base_url="https://api.sandbase.ai"
+    base_url="https://api.agrouter.ai"
 )
 
 result = client.beta.sessions.delete(
@@ -40,7 +40,7 @@ print(result.type)  # "session_deleted"
 ```
 
 ```bash [cURL]
-curl -X DELETE https://api.sandbase.ai/v1/sessions/sess_01abc... \
+curl -X DELETE https://api.agrouter.ai/v1/sessions/sess_01abc... \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 

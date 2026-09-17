@@ -6,7 +6,7 @@ title: Sandbox Runtime (envd)
 
 Observe the in-sandbox runtime service: check health, read resource usage
 metrics, and list the sandbox's environment variables. These endpoints are
-E2B-compatible and are served by the SandBase API under the
+E2B-compatible and are served by the AGRouter API under the
 `/sandboxes/:id` prefix.
 
 All endpoints require authentication and enforce org isolation: a sandbox
@@ -29,7 +29,7 @@ returned.
 ### Request Example
 
 ```bash
-curl -i -X GET https://api.sandbase.ai/sandboxes/sbx_01.../health \
+curl -i -X GET https://api.agrouter.ai/sandboxes/sbx_01.../health \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -78,7 +78,7 @@ can deserialize the response directly.
 ### Request Example
 
 ```bash
-curl -X GET https://api.sandbase.ai/sandboxes/sbx_01.../metrics \
+curl -X GET https://api.agrouter.ai/sandboxes/sbx_01.../metrics \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 
@@ -106,7 +106,7 @@ A flat object mapping variable names to their string values.
 ### Request Example
 
 ```bash
-curl -X GET https://api.sandbase.ai/sandboxes/sbx_01.../envs \
+curl -X GET https://api.agrouter.ai/sandboxes/sbx_01.../envs \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 

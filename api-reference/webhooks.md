@@ -1,11 +1,11 @@
 ---
 title: Webhooks
-description: Register and manage SandBase webhooks for Agent Session and asynchronous model events.
+description: Register and manage AGRouter webhooks for Agent Session and asynchronous model events.
 ---
 
 # Webhooks
 
-SandBase supports two outbound callback modes:
+AGRouter supports two outbound callback modes:
 
 - **Registered webhooks** are scoped to your organization, subscribe to Session or asynchronous Model events, and include an HMAC `X-Signature`.
 - **Per-task model callbacks** use `webhook_url` on one asynchronous image, video, or audio request. They do not require registration and do not include `X-Signature`.
@@ -17,18 +17,18 @@ Both modes use at-least-once delivery. Make handlers idempotent with the event I
 The Events API is the public API-key surface:
 
 ```text
-POST https://api.sandbase.ai/events/webhooks
+POST https://api.agrouter.ai/events/webhooks
 ```
 
-You can also create and manage webhooks from the [Console Webhooks page](https://www.sandbase.ai/console/webhooks).
+You can also create and manage webhooks from the [Console Webhooks page](https://www.agrouter.ai/console/webhooks).
 
 ```bash
-curl -X POST https://api.sandbase.ai/events/webhooks \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/events/webhooks \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Agent session monitor",
-    "url": "https://example.com/hooks/sandbase",
+    "url": "https://example.com/hooks/agrouter",
     "resourceType": "session",
     "events": ["agent.message", "session.error"]
   }'
@@ -41,7 +41,7 @@ curl -X POST https://api.sandbase.ai/events/webhooks \
 | `resourceType` | `session` \| `model` | Yes | Selects Agent Session events or the asynchronous Model events below. |
 | `events` | string[] | No | Empty or omitted means all current and future events in the selected resource type. |
 | `enabled` | boolean | No | Defaults to `true`. |
-| `signatureSecret` | string | No | Omit this field to let SandBase generate a high-entropy secret. Existing clients may continue to provide their own non-empty value. |
+| `signatureSecret` | string | No | Omit this field to let AGRouter generate a high-entropy secret. Existing clients may continue to provide their own non-empty value. |
 
 `template` is shown as **Coming soon** in the Console and cannot be registered. `model` subscriptions are available only for the asynchronous image, video, and audio terminal events listed below. The API rejects cross-resource events and unknown event names.
 
@@ -53,7 +53,7 @@ The Events API returns the registered webhook directly. The final `signatureSecr
 {
   "id": "wh_01...",
   "name": "Agent session monitor",
-  "url": "https://example.com/hooks/sandbase",
+  "url": "https://example.com/hooks/agrouter",
   "resourceType": "session",
   "events": ["agent.message", "session.error"],
   "enabled": true,
@@ -62,21 +62,21 @@ The Events API returns the registered webhook directly. The final `signatureSecr
 }
 ```
 
-The [Console Webhooks page](https://www.sandbase.ai/console/webhooks) shows the generated secret once after registration and requires you to save it before closing the dialog.
+The [Console Webhooks page](https://www.agrouter.ai/console/webhooks) shows the generated secret once after registration and requires you to save it before closing the dialog.
 
 ### List, edit, and delete
 
 ```text
-GET    https://api.sandbase.ai/events/webhooks
-PATCH  https://api.sandbase.ai/events/webhooks/{webhookID}
-DELETE https://api.sandbase.ai/events/webhooks/{webhookID}
+GET    https://api.agrouter.ai/events/webhooks
+PATCH  https://api.agrouter.ai/events/webhooks/{webhookID}
+DELETE https://api.agrouter.ai/events/webhooks/{webhookID}
 ```
 
 Use the same API-key authentication. A `PATCH` may include one or more of `name`, `url`, `resourceType`, `events`, and `enabled`; omitted fields remain unchanged. The complete resulting `resourceType` and `events` subscription must be valid. An empty `events` array still means all events in that resource type.
 
 ```bash
-curl -X PATCH https://api.sandbase.ai/events/webhooks/wh_01... \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X PATCH https://api.agrouter.ai/events/webhooks/wh_01... \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "events": ["agent.message", "agent.tool_use"],
@@ -84,31 +84,31 @@ curl -X PATCH https://api.sandbase.ai/events/webhooks/wh_01... \
   }'
 ```
 
-`signatureSecret` cannot be viewed or changed through `PATCH`; a request containing it is rejected. If the secret is lost, delete and recreate the webhook. You can also view, edit, enable or disable, and delete registrations from the [Console Webhooks page](https://www.sandbase.ai/console/webhooks).
+`signatureSecret` cannot be viewed or changed through `PATCH`; a request containing it is rejected. If the secret is lost, delete and recreate the webhook. You can also view, edit, enable or disable, and delete registrations from the [Console Webhooks page](https://www.agrouter.ai/console/webhooks).
 
 ## Per-task model callback
 
 For one asynchronous image, video, or audio task, add `webhook_url` to `POST /v1/run` instead of registering a new webhook:
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/run \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/run \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "example/async-image-model",
     "mode": "async",
     "prompt": "A lighthouse at night",
-    "webhook_url": "https://hooks.example.com/sandbase/task?token=opaque-token"
+    "webhook_url": "https://hooks.example.com/agrouter/task?token=opaque-token"
   }'
 ```
 
-The field is parsed and validated only when the selected model is image, video, or audio and the request resolves to asynchronous execution. In that case it must be a non-empty string containing a valid, safe public HTTPS URL; otherwise the request returns HTTP 400. For synchronous, streaming, LLM, or other unsupported requests, SandBase ignores `webhook_url` regardless of its JSON value: it schedules no callback, stores no callback URL, and does not forward the field to the model provider. Omitting the field preserves the existing polling flow.
+The field is parsed and validated only when the selected model is image, video, or audio and the request resolves to asynchronous execution. In that case it must be a non-empty string containing a valid, safe public HTTPS URL; otherwise the request returns HTTP 400. For synchronous, streaming, LLM, or other unsupported requests, AGRouter ignores `webhook_url` regardless of its JSON value: it schedules no callback, stores no callback URL, and does not forward the field to the model provider. Omitting the field preserves the existing polling flow.
 
-The target must be a public HTTPS URL. SandBase sends the same Model terminal envelope documented below, with `Content-Type: application/json` and `X-Event-ID`, for completed, failed, or timeout. It may retry a failed delivery, so deduplicate by `id` or `X-Event-ID` and return 2xx quickly.
+The target must be a public HTTPS URL. AGRouter sends the same Model terminal envelope documented below, with `Content-Type: application/json` and `X-Event-ID`, for completed, failed, or timeout. It may retry a failed delivery, so deduplicate by `id` or `X-Event-ID` and return 2xx quickly.
 
-A per-task callback has no shared SandBase secret and therefore does **not** include `X-Signature`. If your endpoint requires HMAC verification, omit `webhook_url` and register an organization Model Webhook instead. You may place an opaque capability token generated by your own system in the HTTPS URL query and validate it at your endpoint. Treat that URL as sensitive.
+A per-task callback has no shared AGRouter secret and therefore does **not** include `X-Signature`. If your endpoint requires HMAC verification, omit `webhook_url` and register an organization Model Webhook instead. You may place an opaque capability token generated by your own system in the HTTPS URL query and validate it at your endpoint. Treat that URL as sensitive.
 
-For each asynchronous model task, target selection is exclusive. If the request includes a valid `webhook_url`, SandBase sends that Prediction's terminal event only to the per-task URL and skips every registered organization Model Webhook for that event. If the request omits `webhook_url`, registered organization Model Webhooks continue to receive matching events normally. A per-task delivery failure retries the same task URL and never falls back to a registered webhook. This priority does not create, replace, disable, or modify any registration, and does not affect other Model or Session events.
+For each asynchronous model task, target selection is exclusive. If the request includes a valid `webhook_url`, AGRouter sends that Prediction's terminal event only to the per-task URL and skips every registered organization Model Webhook for that event. If the request omits `webhook_url`, registered organization Model Webhooks continue to receive matching events normally. A per-task delivery failure retries the same task URL and never falls back to a registered webhook. This priority does not create, replace, disable, or modify any registration, and does not affect other Model or Session events.
 
 ## Event types
 
@@ -136,7 +136,7 @@ Model webhooks are available only for asynchronous image, video, and audio gener
 
 ## Delivery payload
 
-SandBase sends `Content-Type: application/json` and the following JSON envelope. `data` is event-specific and can gain fields over time.
+AGRouter sends `Content-Type: application/json` and the following JSON envelope. `data` is event-specific and can gain fields over time.
 
 ### Session example
 
@@ -204,11 +204,11 @@ import crypto from 'node:crypto'
 import express from 'express'
 
 const app = express()
-const webhookSecret = process.env.SANDBASE_WEBHOOK_SECRET
-if (!webhookSecret) throw new Error('SANDBASE_WEBHOOK_SECRET is required')
+const webhookSecret = process.env.AGROUTER_WEBHOOK_SECRET
+if (!webhookSecret) throw new Error('AGROUTER_WEBHOOK_SECRET is required')
 const acceptedEventIDs = new Set() // Use a DB unique key in production.
 
-function enqueueSandBaseEvent(event) {
+function enqueueAGRouterEvent(event) {
   setImmediate(() => {
     console.log(`processing ${event.type} (${event.id})`)
     // Perform slow business work here or publish to your durable queue.
@@ -216,7 +216,7 @@ function enqueueSandBaseEvent(event) {
 }
 
 // This route must be registered before express.json() for the webhook path.
-app.post('/hooks/sandbase', express.raw({ type: 'application/json' }), (req, res) => {
+app.post('/hooks/agrouter', express.raw({ type: 'application/json' }), (req, res) => {
   const rawBody = req.body
   const signature = req.get('X-Signature') || ''
 
@@ -235,7 +235,7 @@ app.post('/hooks/sandbase', express.raw({ type: 'application/json' }), (req, res
   const event = JSON.parse(rawBody.toString('utf8'))
   if (acceptedEventIDs.has(event.id)) return res.sendStatus(204)
   acceptedEventIDs.add(event.id)
-  enqueueSandBaseEvent(event)
+  enqueueAGRouterEvent(event)
   return res.sendStatus(204)
 })
 
@@ -252,16 +252,16 @@ import threading
 from flask import Flask, abort, request
 
 app = Flask(__name__)
-webhook_secret = os.environ["SANDBASE_WEBHOOK_SECRET"].encode()
+webhook_secret = os.environ["AGROUTER_WEBHOOK_SECRET"].encode()
 accepted_event_ids = set()  # Use a DB unique key in production.
 accepted_event_ids_lock = threading.Lock()
 
-def process_sandbase_event(event):
+def process_agrouter_event(event):
     print(f"processing {event['type']} ({event['id']})")
     # Perform slow business work here or publish to your durable queue.
 
-@app.post("/hooks/sandbase")
-def sandbase_webhook():
+@app.post("/hooks/agrouter")
+def agrouter_webhook():
     raw_body = request.get_data(cache=True)
     received = request.headers.get("X-Signature", "")
     expected = hmac.new(webhook_secret, raw_body, hashlib.sha256).hexdigest()
@@ -274,7 +274,7 @@ def sandbase_webhook():
         if event["id"] in accepted_event_ids:
             return "", 204
         accepted_event_ids.add(event["id"])
-    threading.Thread(target=process_sandbase_event, args=(event,), daemon=True).start()
+    threading.Thread(target=process_agrouter_event, args=(event,), daemon=True).start()
     return "", 204
 ```
 

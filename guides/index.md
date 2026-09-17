@@ -1,19 +1,19 @@
 ---
 title: Guides
-description: Practical guides for using SandBase Models, APIs, Agents, Setup, billing, streaming, and production reliability.
+description: Practical guides for using AGRouter Models, APIs, Agents, Setup, billing, streaming, and production reliability.
 ---
 
 # Guides
 
-These guides cover common patterns for using SandBase in production.
+These guides cover common patterns for using AGRouter in production.
 
 ## Available Guides
 
 | Guide | Description |
 |-------|-------------|
-| [Chat Completions](./chat-completions) | Call SandBase through the OpenAI-compatible chat protocol |
+| [Chat Completions](./chat-completions) | Call AGRouter through the OpenAI-compatible chat protocol |
 | [OpenAI Responses](./openai-responses) | Call GPT models through the OpenAI-compatible Responses protocol |
-| [Anthropic Messages](./anthropic-messages) | Call SandBase through the Anthropic-compatible messages protocol |
+| [Anthropic Messages](./anthropic-messages) | Call AGRouter through the Anthropic-compatible messages protocol |
 | [Image and Video Models](./image-video) | Generate images and videos through the shared asynchronous Run API |
 | [API Catalog](/store/apis) | Browse API capabilities and their vendor-qualified endpoints |
 | [Streaming](./streaming) | Stream compatible Model output to your application |
@@ -26,4 +26,4 @@ These guides cover common patterns for using SandBase in production.
 - Use [Setup](/setup/) when the user wants tools inside Codex, Claude, Cursor, or Kiro.
 - Use [Models](/models/) or [APIs](/store/apis) when your app needs one capability.
 - Use [Build Agent](/agents/) when the work has multiple steps or should be reused.
-- Use [Activities](https://www.sandbase.ai/console/activities) in the Console to review requests and usage together.
+- Use [Activities](https://www.agrouter.ai/console/activities) in the Console to review requests and usage together.

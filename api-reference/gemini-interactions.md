@@ -12,7 +12,7 @@ apiReference:
   groups:
     - title: Request body
       fields:
-        - { name: model, type: string, required: true, description: Logical SandBase model name. }
+        - { name: model, type: string, required: true, description: Logical AGRouter model name. }
         - { name: input, type: string | object | array, required: true, description: Native Google Interaction input. }
         - { name: stream, type: boolean, required: false, description: Return Google Interactions SSE events when supported by the model. }
         - { name: background, type: boolean, required: false, description: Submit durably and return an immediately pollable Interaction. Cannot be combined with stream. }
@@ -27,8 +27,8 @@ apiReference:
     - label: Background request
       language: bash
       code: |-
-        curl -X POST https://api.sandbase.ai/v1beta/interactions \
-          -H "x-goog-api-key: $SANDBASE_API_KEY" \
+        curl -X POST https://api.agrouter.ai/v1beta/interactions \
+          -H "x-goog-api-key: $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{
             "model": "google/gemini-omni-flash-preview",
@@ -56,7 +56,7 @@ Use `x-goog-api-key`, `Authorization: Bearer …`, or the `key` query parameter,
 ## Supported models
 
 The Interactions endpoint is not a generic route for every model whose catalog name starts with `google/`. The model
-must have an Interactions-compatible provider mapping. SandBase currently documents these compatible models:
+must have an Interactions-compatible provider mapping. AGRouter currently documents these compatible models:
 
 - [Gemini Omni Flash Preview](/model-api-reference/official-native-api/google/gemini-omni-flash-preview)
 - [Gemini Omni 1.1 Flash Preview](/model-api-reference/official-native-api/google/gemini-omni-1.1-flash-preview)
@@ -71,16 +71,16 @@ Successful submissions return HTTP `200`, including background work and synchron
 
 - `completed`, `failed`, `cancelled`, and `incomplete` are terminal.
 - `in_progress` is still running. Poll `GET /v1beta/interactions/{id}`; the response can also include that path in the `Location` header.
-- `requires_action` is a protocol status, but SandBase does not currently expose the tool-confirmation endpoint needed to advance it.
+- `requires_action` is a protocol status, but AGRouter does not currently expose the tool-confirmation endpoint needed to advance it.
 
-The polling ID is the upstream Interaction `id` returned by `POST`, not a SandBase prediction ID. The same SandBase API key that created the Interaction must retrieve it.
+The polling ID is the upstream Interaction `id` returned by `POST`, not a AGRouter prediction ID. The same AGRouter API key that created the Interaction must retrieve it.
 
 ```bash
-curl https://api.sandbase.ai/v1beta/interactions/job_75b74acd12534b01baba820b \
-  -H "x-goog-api-key: $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1beta/interactions/job_75b74acd12534b01baba820b \
+  -H "x-goog-api-key: $AGROUTER_API_KEY"
 ```
 
-Non-terminal GET responses omit partial output and usage. Terminal responses can include inline image, audio, or video data and may be several megabytes. Download and persist required media promptly: after upstream retention expires, SandBase can return only a lossy terminal fallback with structure and metadata, not the original media bytes.
+Non-terminal GET responses omit partial output and usage. Terminal responses can include inline image, audio, or video data and may be several megabytes. Download and persist required media promptly: after upstream retention expires, AGRouter can return only a lossy terminal fallback with structure and metadata, not the original media bytes.
 
 ## Streaming
 
@@ -90,12 +90,12 @@ Streaming is model-dependent. An upstream provider can reject `stream: true` eve
 
 ## Current limits
 
-SandBase currently exposes only create and get:
+AGRouter currently exposes only create and get:
 
 - Agent Interactions are rejected; use `model`.
 - `background: true` and `stream: true` cannot be combined.
 - Interaction list, delete, and cancel are not exposed.
 - URI delivery and GET-based stream reconnection are not exposed.
-- `previous_interaction_id` requires a live provider-affinity mapping and upstream support. SandBase fails instead of silently switching providers when affinity is unavailable.
+- `previous_interaction_id` requires a live provider-affinity mapping and upstream support. AGRouter fails instead of silently switching providers when affinity is unavailable.
 
 Errors use the Google envelope `{ "error": { "code", "message", "status" } }`. Treat the HTTP status as stable; sanitized upstream text in `message` can change.

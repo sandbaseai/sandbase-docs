@@ -37,7 +37,7 @@ assert.ok(!/Supports streaming, function calling, vision, JSON mode/i.test(combi
 assert.ok(!/provide it to continue that Session/.test(combined), 'AI-readable docs must not omit Service and version checks for Session continuation')
 
 for (const required of [
-  'https://www.sandbase.ai/docs/openapi.yaml',
+  'https://www.agrouter.ai/docs/openapi.yaml',
   'GET /v1/models',
   'GET /v1/models/{id_or_name}',
   'GET /v1/run/{id}',

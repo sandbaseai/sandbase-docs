@@ -9,7 +9,7 @@ This page covers how to set environment variables in a sandbox and the default e
 
 ## Default environment variables
 
-When a sandbox is created, SandBase sets useful metadata as environment variables so processes inside the sandbox can detect their context:
+When a sandbox is created, AGRouter sets useful metadata as environment variables so processes inside the sandbox can detect their context:
 
 | Variable | Description |
 |----------|-------------|
@@ -20,13 +20,13 @@ When a sandbox is created, SandBase sets useful metadata as environment variable
 ::: code-group
 
 ```python [Python]
-sandbox = Sandbox.create(api_url="https://api.sandbase.ai")
+sandbox = Sandbox.create(api_url="https://api.agrouter.ai")
 result = sandbox.commands.run("echo $E2B_SANDBOX_ID")
 print(result.stdout)
 ```
 
 ```javascript [JavaScript]
-const sandbox = await Sandbox.create({ apiUrl: 'https://api.sandbase.ai' })
+const sandbox = await Sandbox.create({ apiUrl: 'https://api.agrouter.ai' })
 const result = await sandbox.commands.run('echo $E2B_SANDBOX_ID')
 console.log(result.stdout)
 ```
@@ -34,7 +34,7 @@ console.log(result.stdout)
 :::
 
 ::: tip Compatibility
-SandBase keeps the `E2B_*` variable names for drop-in compatibility with the E2B SDK and existing tooling.
+AGRouter keeps the `E2B_*` variable names for drop-in compatibility with the E2B SDK and existing tooling.
 :::
 
 ## Setting environment variables
@@ -50,14 +50,14 @@ Set environment variables that apply to all commands run in the sandbox.
 ```python [Python]
 sandbox = Sandbox.create(
     envs={"MY_VAR": "my_value"},
-    api_url="https://api.sandbase.ai",
+    api_url="https://api.agrouter.ai",
 )
 ```
 
 ```javascript [JavaScript]
 const sandbox = await Sandbox.create({
   envs: { MY_VAR: 'my_value' },
-  apiUrl: 'https://api.sandbase.ai',
+  apiUrl: 'https://api.agrouter.ai',
 })
 ```
 
@@ -68,7 +68,7 @@ const sandbox = await Sandbox.create({
 When creating a sandbox over REST, pass `envVars`:
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes \
+curl -X POST https://api.agrouter.ai/sandboxes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -85,12 +85,12 @@ Set environment variables scoped to a single command. These override a global va
 ::: code-group
 
 ```python [Python]
-sandbox = Sandbox.create(api_url="https://api.sandbase.ai")
+sandbox = Sandbox.create(api_url="https://api.agrouter.ai")
 sandbox.commands.run("echo $MY_VAR", envs={"MY_VAR": "123"})
 ```
 
 ```javascript [JavaScript]
-const sandbox = await Sandbox.create({ apiUrl: 'https://api.sandbase.ai' })
+const sandbox = await Sandbox.create({ apiUrl: 'https://api.agrouter.ai' })
 await sandbox.commands.run('echo $MY_VAR', { envs: { MY_VAR: '123' } })
 ```
 

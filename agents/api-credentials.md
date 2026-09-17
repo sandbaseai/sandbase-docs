@@ -1,6 +1,6 @@
 ---
 title: Credentials for Agent tools
-description: Securely store and scope API keys, tokens, and other credentials used by SandBase Agents and Services.
+description: Securely store and scope API keys, tokens, and other credentials used by AGRouter Agents and Services.
 ---
 
 # Credentials for Agent tools
@@ -9,7 +9,7 @@ Credentials are the API keys, tokens, connection strings, and other private valu
 
 ## How credentials work
 
-SandBase stores each credential as an encrypted, write-only value. The Console and public API expose its name, scope, status, and a masked hint—not the saved value. At execution time, the runtime resolves active credentials that match the Agent or Service configuration.
+AGRouter stores each credential as an encrypted, write-only value. The Console and public API expose its name, scope, status, and a masked hint—not the saved value. At execution time, the runtime resolves active credentials that match the Agent or Service configuration.
 
 ## Managing credentials
 

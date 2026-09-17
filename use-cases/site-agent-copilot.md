@@ -48,7 +48,7 @@ The user watches their page being operated in real-time, with elements briefly h
 └───────────────────────┬──────────────────────┘
                         │ Session
 ┌───────────────────────┴──────────────────────┐
-│  SandBase Cloud                               │
+│  AGRouter Cloud                               │
 │  Embed API → Cloud Agent (Hermes + Knowledge) │
 └──────────────────────────────────────────────┘
 ```
@@ -96,7 +96,7 @@ Full guide: **[Site Agent integration](/guides/site-agent-integration)**
 
 Quick version:
 
-1. Create a SandBase Agent with `frontend_action` tool + knowledge skills
+1. Create a AGRouter Agent with `frontend_action` tool + knowledge skills
 2. Create an Embed Config → get a publishable key
 3. Add the widget to your frontend (one React component or one `<script>` tag)
 4. Write a knowledge base describing your pages and operations
@@ -105,7 +105,7 @@ Time to first working demo: **~30 minutes**.
 
 ## Cost
 
-- **Cloud Agent reasoning**: standard SandBase model pricing (e.g., Claude Sonnet 4 at $3/$15 per 1M tokens)
+- **Cloud Agent reasoning**: standard AGRouter model pricing (e.g., Claude Sonnet 4 at $3/$15 per 1M tokens)
 - **Frontend Agent (DOMExecutor)**: free — runs entirely client-side
 - **Frontend Agent (PageAgentExecutor)**: ~$0.002 per action step (one LLM call for element location)
 

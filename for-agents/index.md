@@ -1,6 +1,6 @@
 ---
 title: AI-Readable Documentation
-description: Everything an AI agent needs to discover and use SandBase API — one-page summary.
+description: Everything an AI agent needs to discover and use AGRouter API — one-page summary.
 ---
 
 # AI-Friendly API Overview
@@ -9,16 +9,16 @@ description: Everything an AI agent needs to discover and use SandBase API — o
 `session_id` is the public identity for persistent Agent interaction. Direct Session creation and Service invocation create or continue that Session. Every Schedule (Deployment) trigger creates a separate public `drun_*` DeploymentRun and attempts to create one new Session. Runtime instances remain internal and are never returned.
 :::
 
-> A concise reference for both humans and AI agents. For plain-text versions optimized for LLM ingestion, see [`llms.txt`](https://www.sandbase.ai/docs/llms.txt).
+> A concise reference for both humans and AI agents. For plain-text versions optimized for LLM ingestion, see [`llms.txt`](https://www.agrouter.ai/docs/llms.txt).
 
-## What is SandBase?
+## What is AGRouter?
 
-SandBase is an AI agent infrastructure platform. One API key can access enabled Models and APIs across language, image, video, audio, search, and data, plus Agent workflows. Discover the current catalog instead of relying on a fixed count.
+AGRouter is an AI agent infrastructure platform. One API key can access enabled Models and APIs across language, image, video, audio, search, and data, plus Agent workflows. Discover the current catalog instead of relying on a fixed count.
 
 ## API Base URL
 
 ```
-https://api.sandbase.ai/v1
+https://api.agrouter.ai/v1
 ```
 
 ## Authentication
@@ -29,12 +29,12 @@ All requests require a Bearer token:
 Authorization: Bearer sk-YOUR_KEY
 ```
 
-Get your key at [Console → API Keys](https://www.sandbase.ai/console/keys).
+Get your key at [Console → API Keys](https://www.agrouter.ai/console/keys).
 
 ## Quick Example
 
 ```bash
-curl https://api.sandbase.ai/v1/chat/completions \
+curl https://api.agrouter.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -57,7 +57,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 ## Additional API Groups
 
-Beyond the core generation APIs, SandBase provides APIs for agent lifecycle management. See the [AI API Guide](./full) for common workflows and the [OpenAPI specification](https://www.sandbase.ai/docs/openapi.yaml) for the complete contract.
+Beyond the core generation APIs, AGRouter provides APIs for agent lifecycle management. See the [AI API Guide](./full) for common workflows and the [OpenAPI specification](https://www.agrouter.ai/docs/openapi.yaml) for the complete contract.
 
 | Group | Key routes | Purpose |
 |-------|---------------|---------|
@@ -80,7 +80,7 @@ Discover the current model ID with `GET /v1/models`, then inspect `GET /v1/model
 When an operation returns a task ID, inspect its recorded cost:
 
 ```bash
-curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
+curl https://api.agrouter.ai/v1/tasks/{task_id}/cost \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -97,12 +97,12 @@ exponential backoff with jitter. See the [Error Guide](./errors).
 - [AI API Guide](./full) — core workflows, request/response shapes, and curl examples
 - [Models & Pricing](./models) — live model discovery, pricing, and capability guidance
 - [Error Guide](./errors) — documented response shapes, HTTP handling, and retry safety
-- [OpenAPI Spec](https://www.sandbase.ai/docs/openapi.yaml) — machine-readable OpenAPI 3.1
+- [OpenAPI Spec](https://www.agrouter.ai/docs/openapi.yaml) — machine-readable OpenAPI 3.1
 
 ## Plain-Text Versions (for AI agents)
 
 | File | URL | Content |
 |------|-----|---------|
-| `llms.txt` | [/docs/llms.txt](https://www.sandbase.ai/docs/llms.txt) | Compact summary (~60 lines) |
-| `llms-full.txt` | [/docs/llms-full.txt](https://www.sandbase.ai/docs/llms-full.txt) | Expanded AI-oriented API guide |
-| `openapi.yaml` | [/docs/openapi.yaml](https://www.sandbase.ai/docs/openapi.yaml) | OpenAPI 3.1 machine-readable spec |
+| `llms.txt` | [/docs/llms.txt](https://www.agrouter.ai/docs/llms.txt) | Compact summary (~60 lines) |
+| `llms-full.txt` | [/docs/llms-full.txt](https://www.agrouter.ai/docs/llms-full.txt) | Expanded AI-oriented API guide |
+| `openapi.yaml` | [/docs/openapi.yaml](https://www.agrouter.ai/docs/openapi.yaml) | OpenAPI 3.1 machine-readable spec |

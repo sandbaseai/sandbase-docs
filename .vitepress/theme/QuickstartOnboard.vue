@@ -7,9 +7,9 @@
       </div>
       <p class="brief-lead">{{ copy.lead }}</p>
       <div class="brief-actions">
-        <a class="btn-primary" href="https://www.sandbase.ai/login" target="_blank" rel="noopener noreferrer">{{ copy.actions.account }}</a>
-        <a class="btn-ghost" href="https://www.sandbase.ai/console/members?create=1" target="_blank" rel="noopener noreferrer">{{ copy.actions.org }}</a>
-        <a class="btn-ghost" href="https://www.sandbase.ai/console/keys" target="_blank" rel="noopener noreferrer">{{ copy.actions.connect }}</a>
+        <a class="btn-primary" href="https://www.agrouter.ai/login" target="_blank" rel="noopener noreferrer">{{ copy.actions.account }}</a>
+        <a class="btn-ghost" href="https://www.agrouter.ai/console/members?create=1" target="_blank" rel="noopener noreferrer">{{ copy.actions.org }}</a>
+        <a class="btn-ghost" href="https://www.agrouter.ai/console/keys" target="_blank" rel="noopener noreferrer">{{ copy.actions.connect }}</a>
       </div>
       <p class="brief-skip">
         {{ copy.skip.before }}
@@ -61,7 +61,7 @@ const copyByLocale = {
       org: 'create an organization',
       orgHref: '#create-organization',
       mid: ' or ',
-      connect: 'connect SandBase',
+      connect: 'connect AGRouter',
       connectHref: '#connect',
       after: '.',
     },
@@ -89,7 +89,7 @@ const copyByLocale = {
       },
       {
         id: '03',
-        title: 'Connect SandBase',
+        title: 'Connect AGRouter',
         body: 'Call an API, try it on the website, connect an AI tool, or build an Agent.',
         href: '#connect',
         cta: 'See paths',
@@ -109,7 +109,7 @@ const copyByLocale = {
       org: '创建组织',
       orgHref: '#create-organization',
       mid: ' 或 ',
-      connect: '接入 SandBase',
+      connect: '接入 AGRouter',
       connectHref: '#connect',
       after: '。',
     },
@@ -137,7 +137,7 @@ const copyByLocale = {
       },
       {
         id: '03',
-        title: '接入 SandBase',
+        title: '接入 AGRouter',
         body: '从 API 调用、官网试用、接到 AI 工具，或搭建 Agent 里选一种。',
         href: '#connect',
         cta: '查看路径',

@@ -24,8 +24,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |
-        curl "https://api.sandbase.ai/v1/agents/agent_01HqR2k7.../versions/2" \
-          -H "Authorization: Bearer $SANDBASE_API_KEY"
+        curl "https://api.agrouter.ai/v1/agents/agent_01HqR2k7.../versions/2" \
+          -H "Authorization: Bearer $AGROUTER_API_KEY"
   response:
     status: 200 OK
     code: |

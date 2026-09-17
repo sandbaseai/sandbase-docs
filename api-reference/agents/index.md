@@ -21,7 +21,7 @@ Agent model IDs use the public `vendor/model` identity returned by the [Models A
 | `GET` | `/v1/agents/{agent_id}/versions` | [List versions](./versions) |
 | `GET` | `/v1/agents/{agent_id}/versions/{version}` | [Get one immutable version](./get-version) by resource ID or number. |
 
-All endpoints are organization-scoped and require a SandBase API key.
+All endpoints are organization-scoped and require a AGRouter API key.
 
 ## Lifecycle
 

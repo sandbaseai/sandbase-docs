@@ -1,10 +1,10 @@
-# SandBase
+# AGRouter
 
 > AI agent infrastructure platform for enabled language, image, video, audio, search, and data capabilities, plus Agent workflows. Use live discovery instead of a fixed catalog count.
 
 ## API Base URL
 
-https://api.sandbase.ai/v1
+https://api.agrouter.ai/v1
 
 ## Authentication
 
@@ -12,23 +12,23 @@ Bearer token: `Authorization: Bearer sk-YOUR_KEY`
 
 ## Connect AI Tools
 
-Guided Setup: https://www.sandbase.ai/console/setup
+Guided Setup: https://www.agrouter.ai/console/setup
 
 Choose a client in Setup and follow the exact guidance shown there. For a CLI-supported client such as Codex:
 
-`curl -fsSL https://sandbase.ai/install.sh | sh -s -- --client codex`
+`curl -fsSL https://agrouter.ai/install.sh | sh -s -- --client codex`
 
 Read-only installer client catalog:
 
-`curl -fsSL https://sandbase.ai/install.sh | sh -s -- --list-agents`
+`curl -fsSL https://agrouter.ai/install.sh | sh -s -- --list-agents`
 
 Diagnose a CLI-managed client:
 
-`npx -y @sandbaseai/cli doctor --client codex`
+`npx -y @agrouterai/cli doctor --client codex`
 
-Installation and authorization are not proof of connectivity. Verify the SandBase entry and tools in the target client, then complete one safe tool request.
+Installation and authorization are not proof of connectivity. Verify the AGRouter entry and tools in the target client, then complete one safe tool request.
 
-Open-source CLI: https://github.com/sandbaseai/cli
+Open-source CLI: https://github.com/agrouterai/cli
 
 ## Core APIs
 
@@ -68,10 +68,10 @@ model card, capabilities, input schema, and detailed pricing. Use GET /v1/tasks/
 
 ## Docs
 
-- Connect AI tools: https://www.sandbase.ai/docs/setup/
-- CLI source: https://github.com/sandbaseai/cli
-- AI API guide: https://www.sandbase.ai/docs/for-agents/full
-- Models & Pricing: https://www.sandbase.ai/docs/for-agents/models
-- Error guide: https://www.sandbase.ai/docs/for-agents/errors
-- OpenAPI spec: https://www.sandbase.ai/docs/openapi.yaml
-- Expanded LLM guide: https://www.sandbase.ai/docs/llms-full.txt
+- Connect AI tools: https://www.agrouter.ai/docs/setup/
+- CLI source: https://github.com/agrouterai/cli
+- AI API guide: https://www.agrouter.ai/docs/for-agents/full
+- Models & Pricing: https://www.agrouter.ai/docs/for-agents/models
+- Error guide: https://www.agrouter.ai/docs/for-agents/errors
+- OpenAPI spec: https://www.agrouter.ai/docs/openapi.yaml
+- Expanded LLM guide: https://www.agrouter.ai/docs/llms-full.txt

@@ -23,18 +23,18 @@ A Schedule uses a compatibility resource behind the `/v1/deployments` path. Each
 
 ```bash
 # Inspect a Session
-curl https://api.sandbase.ai/v1/sessions/sess_01... \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/v1/sessions/sess_01... \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 
 # Send another event
-curl -X POST https://api.sandbase.ai/v1/sessions/sess_01.../events \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/sessions/sess_01.../events \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"events":[{"type":"user.message","content":[{"type":"text","text":"Continue the analysis."}]}]}'
 
 # Replay persisted events over SSE
-curl -N https://api.sandbase.ai/v1/sessions/sess_01.../events/stream \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl -N https://api.agrouter.ai/v1/sessions/sess_01.../events/stream \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 ## Identity summary

@@ -48,14 +48,14 @@ apiReference:
           description: Full replacement handoff configuration list.
         - name: metadata
           type: object · null
-          description: Full replacement metadata object. Omitted metadata is preserved; null clears caller-owned metadata. Supplied metadata replaces caller-owned metadata rather than merging individual keys, while the platform-owned _sandbase namespace remains unchanged.
+          description: Full replacement metadata object. Omitted metadata is preserved; null clears caller-owned metadata. Supplied metadata replaces caller-owned metadata rather than merging individual keys, while the platform-owned _agrouter namespace remains unchanged.
   examples:
     - label: cURL
       language: bash
       code: |
         curl -X POST \
-          "https://api.sandbase.ai/v1/agents/agent_01HqR2k7..." \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+          "https://api.agrouter.ai/v1/agents/agent_01HqR2k7..." \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{
             "version": 1,

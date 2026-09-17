@@ -1,11 +1,11 @@
 ﻿---
 title: Available Templates
-description: Pre-built sandbox templates on SandBase — code_interpreter, claude, codex, hermes-agent, opencode, desktop, and base.
+description: Pre-built sandbox templates on AGRouter — code_interpreter, claude, codex, hermes-agent, opencode, desktop, and base.
 ---
 
 # Available Templates
 
-SandBase provides 7 pre-built templates for different use cases. Each template is a ready-to-use runtime environment with specific tools and libraries pre-installed.
+AGRouter provides 7 pre-built templates for different use cases. Each template is a ready-to-use runtime environment with specific tools and libraries pre-installed.
 
 ## Template Overview
 
@@ -47,7 +47,7 @@ import requests
 
 # Create a code_interpreter sandbox
 response = requests.post(
-    "https://api.sandbase.ai/sandboxes",
+    "https://api.agrouter.ai/sandboxes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={"templateID": "code_interpreter", "timeout": 300}
 )
@@ -55,7 +55,7 @@ sandbox_id = response.json()["sandboxID"]
 
 # Run data analysis
 exec_response = requests.post(
-    f"https://api.sandbase.ai/sandboxes/{sandbox_id}/processes",
+    f"https://api.agrouter.ai/sandboxes/{sandbox_id}/processes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={
         "cmd": "python3",
@@ -104,7 +104,7 @@ A sandbox running the Claude Code CLI — Anthropic's autonomous coding agent th
 ```python
 # Create a Claude Code sandbox
 response = requests.post(
-    "https://api.sandbase.ai/sandboxes",
+    "https://api.agrouter.ai/sandboxes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={
         "templateID": "claude",
@@ -118,7 +118,7 @@ sandbox_id = response.json()["sandboxID"]
 
 # Run Claude Code on a task
 exec_response = requests.post(
-    f"https://api.sandbase.ai/sandboxes/{sandbox_id}/processes",
+    f"https://api.agrouter.ai/sandboxes/{sandbox_id}/processes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={
         "cmd": "claude",
@@ -159,7 +159,7 @@ A sandbox running OpenAI's Codex CLI — an autonomous coding agent powered by O
 ```python
 # Create a Codex sandbox
 response = requests.post(
-    "https://api.sandbase.ai/sandboxes",
+    "https://api.agrouter.ai/sandboxes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={
         "templateID": "codex",
@@ -173,7 +173,7 @@ sandbox_id = response.json()["sandboxID"]
 
 # Run Codex on a task
 exec_response = requests.post(
-    f"https://api.sandbase.ai/sandboxes/{sandbox_id}/processes",
+    f"https://api.agrouter.ai/sandboxes/{sandbox_id}/processes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={
         "cmd": "codex",
@@ -216,7 +216,7 @@ A sandbox running [Hermes Agent](https://github.com/NousResearch/hermes-agent) �
 ```python
 # Create a Hermes sandbox
 response = requests.post(
-    "https://api.sandbase.ai/sandboxes",
+    "https://api.agrouter.ai/sandboxes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={
         "templateID": "hermes-agent",
@@ -230,7 +230,7 @@ sandbox_id = response.json()["sandboxID"]
 
 # Run Hermes on a task
 exec_response = requests.post(
-    f"https://api.sandbase.ai/sandboxes/{sandbox_id}/processes",
+    f"https://api.agrouter.ai/sandboxes/{sandbox_id}/processes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={
         "cmd": "hermes",
@@ -297,7 +297,7 @@ After creating a desktop sandbox, connect via the VNC URL provided in the sandbo
 
 ```python
 response = requests.post(
-    "https://api.sandbase.ai/sandboxes",
+    "https://api.agrouter.ai/sandboxes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={"templateID": "desktop", "timeout": 600}
 )
@@ -336,7 +336,7 @@ A minimal Ubuntu environment for custom workloads. Use this when you need a clea
 ```python
 # Create a base sandbox and install custom tools
 response = requests.post(
-    "https://api.sandbase.ai/sandboxes",
+    "https://api.agrouter.ai/sandboxes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={"templateID": "base", "timeout": 300}
 )
@@ -344,7 +344,7 @@ sandbox_id = response.json()["sandboxID"]
 
 # Install custom software
 requests.post(
-    f"https://api.sandbase.ai/sandboxes/{sandbox_id}/processes",
+    f"https://api.agrouter.ai/sandboxes/{sandbox_id}/processes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={
         "cmd": "bash",
@@ -364,7 +364,7 @@ requests.post(
 Retrieve the list of available templates via API:
 
 ```bash
-curl https://api.sandbase.ai/templates \
+curl https://api.agrouter.ai/templates \
   -H "Authorization: Bearer sk-sb-your-key"
 ```
 

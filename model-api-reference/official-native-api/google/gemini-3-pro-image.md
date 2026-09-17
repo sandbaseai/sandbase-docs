@@ -1,6 +1,6 @@
 ---
 title: "Gemini 3 Pro Image（Nano Banana Pro）Native API Reference"
-description: "Native Gemini GenerateContent API reference for google/gemini-3-pro-image (Nano Banana Pro) on SandBase."
+description: "Native Gemini GenerateContent API reference for google/gemini-3-pro-image (Nano Banana Pro) on AGRouter."
 aside: false
 outline: false
 apiReference:
@@ -8,7 +8,7 @@ apiReference:
   operation: Gemini GenerateContent
   method: POST
   path: /v1beta/models/gemini-3-pro-image:generateContent
-  description: Generate or edit images with Nano Banana Pro through the native Google Gemini protocol. SandBase preserves the provider request and response payload instead of converting it to Chat Completions.
+  description: Generate or edit images with Nano Banana Pro through the native Google Gemini protocol. AGRouter preserves the provider request and response payload instead of converting it to Chat Completions.
   groups:
     - title: Request body
       description: Send a native Gemini GenerateContent body. Provider-defined fields are passed through for this model.
@@ -21,8 +21,8 @@ apiReference:
       language: bash
       code: |-
         curl -X POST \
-          "https://api.sandbase.ai/v1beta/models/gemini-3-pro-image:generateContent" \
-          -H "x-goog-api-key: $SANDBASE_API_KEY" \
+          "https://api.agrouter.ai/v1beta/models/gemini-3-pro-image:generateContent" \
+          -H "x-goog-api-key: $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{
             "contents": [{

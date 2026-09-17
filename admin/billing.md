@@ -1,25 +1,25 @@
 ---
 title: Billing and credits
-description: Review the SandBase organization balance, buy or redeem credits, and understand API-key spending controls.
+description: Review the AGRouter organization balance, buy or redeem credits, and understand API-key spending controls.
 ---
 
 # Billing and credits
 
-This page covers billing management in the [SandBase Console](https://www.sandbase.ai/console). For rates and cost optimization, see [Pricing](/guides/billing).
+This page covers billing management in the [AGRouter Console](https://www.agrouter.ai/console). For rates and cost optimization, see [Pricing](/guides/billing).
 
-SandBase bills supported workloads from the organization balance. Current prices, credit offers, payment methods,
+AGRouter bills supported workloads from the organization balance. Current prices, credit offers, payment methods,
 minimum top-up amounts, and regional availability are shown in the Console and may change independently of this
 guide.
 
 ## Balance and credits
 
-Open [Console Credits](https://www.sandbase.ai/console/billing) to view the active organization's available balance,
+Open [Console Credits](https://www.agrouter.ai/console/billing) to view the active organization's available balance,
 credit limit, checkout options, coupons, and recent credit transactions. Treat the Console as the source of truth
 for promotions and checkout terms; do not automate its internal network requests.
 
 ## Add credits
 
-1. Open [Console Credits](https://www.sandbase.ai/console/billing).
+1. Open [Console Credits](https://www.agrouter.ai/console/billing).
 2. Under **Buy credits**, enter the USD credit amount.
 3. Choose **Continue with Airwallex**, then review and complete the hosted checkout.
 4. Confirm the updated balance or transaction status before starting a cost-sensitive workload.

@@ -1,6 +1,6 @@
-# SandBase - Expanded API Guide for AI Agents
+# AGRouter - Expanded API Guide for AI Agents
 
-> Common SandBase API workflows for AI agents. The complete machine-readable contract is https://www.sandbase.ai/docs/openapi.yaml. Base URL: https://api.sandbase.ai/v1
+> Common AGRouter API workflows for AI agents. The complete machine-readable contract is https://www.agrouter.ai/docs/openapi.yaml. Base URL: https://api.agrouter.ai/v1
 
 ## Authentication
 
@@ -18,33 +18,33 @@ Some billable operations return an x-task-id response header. Not every API oper
 
 ## Connect AI Tools
 
-Source: https://github.com/sandbaseai/cli
+Source: https://github.com/agrouterai/cli
 
 Use the guided Console flow to select an AI tool and see its current prerequisites, installation method, and verification steps:
 
-https://www.sandbase.ai/console/setup
+https://www.agrouter.ai/console/setup
 
 For a CLI-supported client such as Codex:
 
 ```sh
-curl -fsSL https://sandbase.ai/install.sh | sh -s -- --client codex
+curl -fsSL https://agrouter.ai/install.sh | sh -s -- --client codex
 ```
 
 Read-only installer client catalog:
 
 ```sh
-curl -fsSL https://sandbase.ai/install.sh | sh -s -- --list-agents
+curl -fsSL https://agrouter.ai/install.sh | sh -s -- --list-agents
 ```
 
 Diagnose a CLI-managed client:
 
 ```sh
-npx -y @sandbaseai/cli doctor --client codex
+npx -y @agrouterai/cli doctor --client codex
 ```
 
-Installation or authorization does not prove that the target client is connected. Inspect the SandBase entry and its discovered tools in the client, then complete one safe natural-language tool request.
+Installation or authorization does not prove that the target client is connected. Inspect the AGRouter entry and its discovered tools in the client, then complete one safe natural-language tool request.
 
-Connect AI tools: https://www.sandbase.ai/docs/setup/
+Connect AI tools: https://www.agrouter.ai/docs/setup/
 
 ---
 
@@ -54,7 +54,7 @@ OpenAI-compatible chat. Streaming, tools, vision, reasoning, and structured-outp
 
 Request:
 ```
-curl https://api.sandbase.ai/v1/chat/completions \
+curl https://api.agrouter.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -87,13 +87,13 @@ Anthropic-compatible Messages API. Caching and other optional features depend on
 
 Request:
 ```
-curl https://api.sandbase.ai/v1/messages \
+curl https://api.agrouter.ai/v1/messages \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "anthropic/claude-sonnet-5",
     "max_tokens": 1024,
-    "messages": [{"role": "user", "content": "What is SandBase?"}]
+    "messages": [{"role": "user", "content": "What is AGRouter?"}]
   }'
 ```
 
@@ -103,7 +103,7 @@ Response:
   "id": "msg_abc123",
   "type": "message",
   "role": "assistant",
-  "content": [{"type": "text", "text": "SandBase is..."}],
+  "content": [{"type": "text", "text": "AGRouter is..."}],
   "model": "anthropic/claude-sonnet-5",
   "stop_reason": "end_turn",
   "usage": {"input_tokens": 12, "output_tokens": 64}
@@ -119,7 +119,7 @@ Check response status: "completed" = done; "pending" or "running" = poll GET /v1
 
 Image example:
 ```
-curl https://api.sandbase.ai/v1/run \
+curl https://api.agrouter.ai/v1/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -135,13 +135,13 @@ Response (sync):
   "id": "f3d2e8a1-7c4b-4a12-9d2e-123456789abc",
   "status": "completed",
   "model": "bfl/flux-2/flash",
-  "outputs": [{"url": "https://cdn.sandbase.ai/outputs/f3d2e8a1-7c4b-4a12-9d2e-123456789abc.png", "content_type": "image/png"}]
+  "outputs": [{"url": "https://cdn.agrouter.ai/outputs/f3d2e8a1-7c4b-4a12-9d2e-123456789abc.png", "content_type": "image/png"}]
 }
 ```
 
 Video example (async):
 ```
-curl https://api.sandbase.ai/v1/run \
+curl https://api.agrouter.ai/v1/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "kwaivgi/kling-video/3.0/turbo/standard/text-to-video", "prompt": "A drone over mountains", "duration": 5}'
@@ -152,7 +152,7 @@ Poll: GET /v1/run/6a7b9c10-2d3e-4f50-8a61-23456789abcd until status = "completed
 
 Audio example:
 ```
-curl https://api.sandbase.ai/v1/run \
+curl https://api.agrouter.ai/v1/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "bytedance/seed-speech/tts/2.0", "text": "Hello world"}'
@@ -163,7 +163,7 @@ Response:
 {
   "id": "7b8c0d21-3e4f-5061-9b72-3456789abcde",
   "status": "completed",
-  "outputs": [{"url": "https://cdn.sandbase.ai/outputs/7b8c0d21-3e4f-5061-9b72-3456789abcde.mp3", "content_type": "audio/mpeg"}]
+  "outputs": [{"url": "https://cdn.agrouter.ai/outputs/7b8c0d21-3e4f-5061-9b72-3456789abcde.mp3", "content_type": "audio/mpeg"}]
 }
 ```
 
@@ -218,7 +218,7 @@ Create an agent.
 
 Request:
 ```
-curl -X POST https://api.sandbase.ai/v1/agents \
+curl -X POST https://api.agrouter.ai/v1/agents \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -246,11 +246,11 @@ Response:
 
 Invoke a Service by creating or continuing a Session and sending one message.
 
-Service invocation accepts an optional session_id. When omitted, SandBase creates a new persistent Session. A supplied Session must come from the same Service and match its current Agent-version binding. Invocation does not create a separate public Run identity.
+Service invocation accepts an optional session_id. When omitted, AGRouter creates a new persistent Session. A supplied Session must come from the same Service and match its current Agent-version binding. Invocation does not create a separate public Run identity.
 
 Request:
 ```
-curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
+curl -X POST https://api.agrouter.ai/v1/endpoints/ep_abc/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"input": "Summarize the latest AI news"}'
@@ -271,7 +271,7 @@ POST /v1/sessions creates the persistent public Session and returns session_id. 
 
 Request:
 ```
-curl -X POST https://api.sandbase.ai/v1/sessions \
+curl -X POST https://api.agrouter.ai/v1/sessions \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"agent": "agent_abc123", "title": "GitHub research", "initial_events":[{"type":"user.message","content":[{"type":"text","text":"Research AI coding tools"}]}]}'
@@ -359,7 +359,7 @@ Error bodies are protocol-specific. Core middleware may return {"error":"message
 | HTTP 400 | Invalid or unsupported input; fix the request using the endpoint and model schema |
 | HTTP 404 | Model or resource not found; verify current IDs before retrying |
 | HTTP 409 | Resource state conflict; read current state before deciding whether retry is safe |
-| HTTP 5xx | SandBase or upstream failure; retry only when the operation is safe to repeat |
+| HTTP 5xx | AGRouter or upstream failure; retry only when the operation is safe to repeat |
 
 Retry strategy: bounded exponential backoff plus random jitter.
 The API does not currently send Retry-After or X-RateLimit-* headers and has no published universal numeric default.
@@ -373,18 +373,18 @@ Do not retry unchanged 400, 401, 402, 403, or 404 requests. Check idempotency be
 - Token-priced models can include input, output, cache, or reasoning components when declared
 - Media and other models can use per-request, duration, resolution, or other model-specific units
 - Check cost: GET /v1/tasks/{task_id}/cost
-- API key spending controls: https://www.sandbase.ai/console/keys
-- Usage and cost: https://www.sandbase.ai/console/activities?tab=usage
-- Balance and credit transactions: https://www.sandbase.ai/console/billing
+- API key spending controls: https://www.agrouter.ai/console/keys
+- Usage and cost: https://www.agrouter.ai/console/activities?tab=usage
+- Balance and credit transactions: https://www.agrouter.ai/console/billing
 
 ---
 
 ## Links
 
-- Docs: https://www.sandbase.ai/docs/
-- Connect AI tools: https://www.sandbase.ai/docs/setup/
-- CLI source: https://github.com/sandbaseai/cli
-- AI-Friendly overview: https://www.sandbase.ai/docs/for-agents/
-- OpenAPI spec: https://www.sandbase.ai/docs/openapi.yaml
-- Console: https://www.sandbase.ai/console
-- API Keys: https://www.sandbase.ai/console/keys
+- Docs: https://www.agrouter.ai/docs/
+- Connect AI tools: https://www.agrouter.ai/docs/setup/
+- CLI source: https://github.com/agrouterai/cli
+- AI-Friendly overview: https://www.agrouter.ai/docs/for-agents/
+- OpenAPI spec: https://www.agrouter.ai/docs/openapi.yaml
+- Console: https://www.agrouter.ai/console
+- API Keys: https://www.agrouter.ai/console/keys

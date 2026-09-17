@@ -29,7 +29,7 @@ Your Web App
 ├── Chat Widget
 └── Frontend Agent — receives instructions and executes DOM actions
          ↕ Session: SSE downstream, POST upstream
-SandBase
+AGRouter
 ├── Session lifecycle and event streaming
 └── Cloud Agent — reasoning, planning, and knowledge retrieval
 ```

@@ -97,7 +97,7 @@ const pageCopied = ref(false)
 
 function curlRequestParts(reference: ApiReference) {
   const curl = reference.examples?.find((example) => /curl/i.test(example.label))?.code ?? ''
-  const url = curl.match(/https:\/\/[^\s"'\\]+/)?.[0] ?? `https://api.sandbase.ai${reference.path}`
+  const url = curl.match(/https:\/\/[^\s"'\\]+/)?.[0] ?? `https://api.agrouter.ai${reference.path}`
   const body = curl.match(/-d\s+'([\s\S]*?)'\s*$/)?.[1]
   return { method: reference.method.toUpperCase(), url, body }
 }
@@ -111,7 +111,7 @@ function pythonExample(reference: ApiReference): ApiExample {
   return {
     label: 'Python',
     language: 'python',
-    code: `import os\nimport requests\n${payload}\nresponse = requests.request(\n    "${method}",\n    "${url}",\n    headers={"Authorization": f"Bearer {os.environ['SANDBASE_API_KEY']}"}${payloadArg},\n)\nresponse.raise_for_status()\nprint(response.json())`,
+    code: `import os\nimport requests\n${payload}\nresponse = requests.request(\n    "${method}",\n    "${url}",\n    headers={"Authorization": f"Bearer {os.environ['AGROUTER_API_KEY']}"}${payloadArg},\n)\nresponse.raise_for_status()\nprint(response.json())`,
   }
 }
 
@@ -121,7 +121,7 @@ function typeScriptExample(reference: ApiReference): ApiExample {
   return {
     label: 'TypeScript',
     language: 'typescript',
-    code: `const response = await fetch('${url}', {\n  method: '${method}',\n  headers: {\n    Authorization: \`Bearer \${process.env.SANDBASE_API_KEY}\`,\n    'Content-Type': 'application/json',\n  }${bodyOption},\n});\n\nif (!response.ok) throw new Error(await response.text());\nconsole.log(await response.json());`,
+    code: `const response = await fetch('${url}', {\n  method: '${method}',\n  headers: {\n    Authorization: \`Bearer \${process.env.AGROUTER_API_KEY}\`,\n    'Content-Type': 'application/json',\n  }${bodyOption},\n});\n\nif (!response.ok) throw new Error(await response.text());\nconsole.log(await response.json());`,
   }
 }
 
@@ -143,9 +143,9 @@ const modelIdentifier = computed(() => spec.value.groups
   .find((field) => field.name === 'model')
   ?.default)
 const modelDetailUrl = computed(() => {
-  if (!modelIdentifier.value?.includes('/')) return 'https://www.sandbase.ai/models'
+  if (!modelIdentifier.value?.includes('/')) return 'https://www.agrouter.ai/models'
   const [vendor, ...modelSlugParts] = modelIdentifier.value.split('/')
-  return `https://www.sandbase.ai/model/${encodeURIComponent(vendor)}/${modelSlugParts.map(encodeURIComponent).join('/')}`
+  return `https://www.agrouter.ai/model/${encodeURIComponent(vendor)}/${modelSlugParts.map(encodeURIComponent).join('/')}`
 })
 const pageMarkdown = computed(() => apiReferenceMarkdown(spec.value, examples.value))
 

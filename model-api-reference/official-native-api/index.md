@@ -1,12 +1,12 @@
 ---
 title: Official Native API
-description: Use official provider-native protocols through SandBase, organized by provider and model.
+description: Use official provider-native protocols through AGRouter, organized by provider and model.
 ---
 
 # Official Native API
 
 Official Native APIs preserve a provider's request and response protocol for easier migration of existing integrations.
-Browse by provider, then choose the exact model. SandBase currently documents native protocols for ByteDance, Google,
+Browse by provider, then choose the exact model. AGRouter currently documents native protocols for ByteDance, Google,
 and OpenAI. Models listed here have a dedicated provider-native request path; other LLMs remain in the LLM Models
 section.
 
@@ -66,7 +66,7 @@ option. Pick `2.5-official` when you need 1080p.
 Authenticate every request with the same API key used to create the task:
 
 ```
-Authorization: Bearer $SANDBASE_API_KEY
+Authorization: Bearer $AGROUTER_API_KEY
 ```
 
 The `model` value must match one of the names in [Choosing a model](#choosing-a-model). Polling is the supported way to
@@ -77,8 +77,8 @@ receive results; do not rely on `callback_url` for this endpoint.
 Submit a task:
 
 ```bash
-curl -X POST https://api.sandbase.ai/api/v3/contents/generations/tasks \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/api/v3/contents/generations/tasks \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "bytedance/seedance/2.5-official",
@@ -99,8 +99,8 @@ curl -X POST https://api.sandbase.ai/api/v3/contents/generations/tasks \
 Poll the task with that id every 5 to 10 seconds until `status` is `succeeded`, `failed`, `expired`, or `cancelled`:
 
 ```bash
-curl https://api.sandbase.ai/api/v3/contents/generations/tasks/158d2649-e01d-45b9-b88a-ef3c450c601c \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/api/v3/contents/generations/tasks/158d2649-e01d-45b9-b88a-ef3c450c601c \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 ```json
@@ -110,7 +110,7 @@ curl https://api.sandbase.ai/api/v3/contents/generations/tasks/158d2649-e01d-45b
   "status": "succeeded",
   "created_at": 1787059000,
   "updated_at": 1787059150,
-  "content": { "video_url": "https://media.sandbase.ai/files/158d2649.../0.mp4" },
+  "content": { "video_url": "https://media.agrouter.ai/files/158d2649.../0.mp4" },
   "usage": { "completion_tokens": 108900, "total_tokens": 108900 }
 }
 ```
@@ -122,8 +122,8 @@ The generated video is available at `content.video_url`.
 Cancel a queued task, or remove a terminal task from subsequent lookups, with the same API key:
 
 ```bash
-curl -X DELETE https://api.sandbase.ai/api/v3/contents/generations/tasks/TASK_ID \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl -X DELETE https://api.agrouter.ai/api/v3/contents/generations/tasks/TASK_ID \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 The operation returns `204 No Content`. Running and already-cancelled tasks cannot be deleted; the API returns an
@@ -220,8 +220,8 @@ The examples below show request bodies. Send any of them to the create-task endp
 ### Direct a shot with image, video, and audio references
 
 ```bash
-curl -X POST https://api.sandbase.ai/api/v3/contents/generations/tasks \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/api/v3/contents/generations/tasks \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "bytedance/seedance/2.5-official",
@@ -318,9 +318,9 @@ import time
 
 import requests
 
-BASE_URL = "https://api.sandbase.ai/api/v3/contents/generations/tasks"
+BASE_URL = "https://api.agrouter.ai/api/v3/contents/generations/tasks"
 HEADERS = {
-    "Authorization": f"Bearer {os.environ['SANDBASE_API_KEY']}",
+    "Authorization": f"Bearer {os.environ['AGROUTER_API_KEY']}",
     "Content-Type": "application/json",
 }
 

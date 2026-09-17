@@ -1,9 +1,9 @@
 ---
 title: "OnPage Page Screenshot API Reference"
-description: "SandBase API operation page_screenshot."
+description: "AGRouter API operation page_screenshot."
 aside: false
 outline: false
-generatedBy: "sandbase-platform-api-reference"
+generatedBy: "agrouter-platform-api-reference"
 apiReference:
   title: "OnPage Page Screenshot"
   operation: "DataForSEO API Operation"
@@ -12,7 +12,7 @@ apiReference:
   description: "Capture a high-quality screenshot of a webpage with desktop, mobile, or tablet viewport settings."
   groups:
     - title: "Request body"
-      description: "Submit the public SandBase model identifier and screenshot options."
+      description: "Submit the public AGRouter model identifier and screenshot options."
       fields:
         - name: model
           type: string
@@ -78,7 +78,7 @@ apiReference:
         - name: id
           type: string
           required: true
-          description: "Opaque SandBase run identifier."
+          description: "Opaque AGRouter run identifier."
         - name: status
           type: string
           required: true
@@ -87,7 +87,7 @@ apiReference:
         - name: model
           type: string
           required: true
-          description: "Public SandBase model name used for this run."
+          description: "Public AGRouter model name used for this run."
         - name: outputs
           type: array<object>
           required: false
@@ -104,8 +104,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |-
-        curl -X POST https://api.sandbase.ai/v1/run \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+        curl -X POST https://api.agrouter.ai/v1/run \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{
             "model": "dataforseo/v3/on_page/page_screenshot",
@@ -120,7 +120,7 @@ apiReference:
         "id": "f3d2e8a1-7c4b-4a12-9d2e-123456789abc",
         "status": "completed",
         "model": "dataforseo/v3/on_page/page_screenshot",
-        "outputs": [{"data": {"screenshot_url": "https://media.sandbase.ai/files/..."}}]
+        "outputs": [{"data": {"screenshot_url": "https://media.agrouter.ai/files/..."}}]
       }
 seo:
   modelName: "OnPage Page Screenshot"

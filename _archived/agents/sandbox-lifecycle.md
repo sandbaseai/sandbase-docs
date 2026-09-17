@@ -1,6 +1,6 @@
 ---
 title: Sandbox Lifecycle
-description: Sandbox states, timeout behavior, keepalive, and maximum lifetime on SandBase.
+description: Sandbox states, timeout behavior, keepalive, and maximum lifetime on AGRouter.
 ---
 
 # Sandbox Lifecycle
@@ -36,7 +36,7 @@ import time
 
 # Create sandbox
 response = requests.post(
-    "https://api.sandbase.ai/sandboxes",
+    "https://api.agrouter.ai/sandboxes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={"templateID": "code_interpreter", "timeout": 300}
 )
@@ -53,7 +53,7 @@ Pause a sandbox to save its state without consuming compute resources. The files
 ```python
 # Pause the sandbox
 requests.post(
-    f"https://api.sandbase.ai/sandboxes/{sandbox_id}/pause",
+    f"https://api.agrouter.ai/sandboxes/{sandbox_id}/pause",
     headers={"Authorization": "Bearer sk-sb-your-key"}
 )
 ```
@@ -70,7 +70,7 @@ Resume a paused sandbox to continue where you left off:
 ```python
 # Resume the sandbox
 response = requests.post(
-    f"https://api.sandbase.ai/sandboxes/{sandbox_id}/resume",
+    f"https://api.agrouter.ai/sandboxes/{sandbox_id}/resume",
     headers={"Authorization": "Bearer sk-sb-your-key"}
 )
 # Sandbox is back in "running" state
@@ -88,7 +88,7 @@ A sandbox stops when:
 ```python
 # Explicitly stop a sandbox
 requests.post(
-    f"https://api.sandbase.ai/sandboxes/{sandbox_id}/shutdown",
+    f"https://api.agrouter.ai/sandboxes/{sandbox_id}/shutdown",
     headers={"Authorization": "Bearer sk-sb-your-key"}
 )
 ```
@@ -121,7 +121,7 @@ Specify a timeout when creating the sandbox:
 
 ```python
 response = requests.post(
-    "https://api.sandbase.ai/sandboxes",
+    "https://api.agrouter.ai/sandboxes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={
         "templateID": "code_interpreter",
@@ -147,7 +147,7 @@ To prevent a sandbox from timing out during long-running operations, use the kee
 ```python
 # Extend the sandbox timeout by refreshing it
 requests.post(
-    f"https://api.sandbase.ai/sandboxes/{sandbox_id}/refreshes",
+    f"https://api.agrouter.ai/sandboxes/{sandbox_id}/refreshes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={"duration": 300}  # Add 5 more minutes
 )
@@ -158,7 +158,7 @@ You can also update the timeout setting:
 ```python
 # Change the timeout duration
 requests.post(
-    f"https://api.sandbase.ai/sandboxes/{sandbox_id}/timeout",
+    f"https://api.agrouter.ai/sandboxes/{sandbox_id}/timeout",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={"timeout": 600}  # Set to 10 minutes
 )
@@ -182,7 +182,7 @@ For long-running workloads, pause the sandbox when idle and resume when needed. 
 ### Get Sandbox Details
 
 ```bash
-curl https://api.sandbase.ai/sandboxes/SANDBOX_ID \
+curl https://api.agrouter.ai/sandboxes/SANDBOX_ID \
   -H "Authorization: Bearer sk-sb-your-key"
 ```
 
@@ -204,14 +204,14 @@ Response:
 ### List All Sandboxes
 
 ```bash
-curl https://api.sandbase.ai/sandboxes \
+curl https://api.agrouter.ai/sandboxes \
   -H "Authorization: Bearer sk-sb-your-key"
 ```
 
 Filter by status:
 
 ```bash
-curl "https://api.sandbase.ai/sandboxes?status=running" \
+curl "https://api.agrouter.ai/sandboxes?status=running" \
   -H "Authorization: Bearer sk-sb-your-key"
 ```
 
@@ -276,7 +276,7 @@ Tag sandboxes with metadata to track their purpose:
 
 ```python
 response = requests.post(
-    "https://api.sandbase.ai/sandboxes",
+    "https://api.agrouter.ai/sandboxes",
     headers={"Authorization": "Bearer sk-sb-your-key"},
     json={
         "templateID": "code_interpreter",

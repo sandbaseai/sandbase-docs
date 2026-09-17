@@ -1,11 +1,11 @@
 ---
 title: Errors and retries
-description: Classify SandBase API failures, decide when a retry is safe, and preserve useful diagnostics without exposing secrets.
+description: Classify AGRouter API failures, decide when a retry is safe, and preserve useful diagnostics without exposing secrets.
 ---
 
 # Errors and retries
 
-Handle errors by HTTP status, endpoint family, and operation semantics. SandBase exposes several compatible protocols,
+Handle errors by HTTP status, endpoint family, and operation semantics. AGRouter exposes several compatible protocols,
 so there is no single error JSON shape shared by every endpoint.
 
 ## Read the endpoint's error shape
@@ -29,7 +29,7 @@ examples and the [OpenAPI specification](/openapi.yaml) for operation-specific r
 | `403` | Credential scope or resource access is insufficient | Use an authorized key or resource. |
 | `404` | Model, task, or platform resource was not found | Verify the identifier and organization. |
 | `409` | Resource state or concurrent operation conflict | Read the current state, then decide whether to retry. |
-| `429` | SandBase or an upstream provider limited the request | Honor `Retry-After` when present; otherwise back off with jitter. |
+| `429` | AGRouter or an upstream provider limited the request | Honor `Retry-After` when present; otherwise back off with jitter. |
 | `500` / `502` / `503` / `504` | Internal, upstream, or temporary availability failure | Retry only if repeating the operation is safe. |
 
 This table is a handling guide, not a promise that every endpoint emits every status.
@@ -47,8 +47,8 @@ import time
 from openai import APIStatusError, OpenAI
 
 client = OpenAI(
-    base_url="https://api.sandbase.ai/v1",
-    api_key=os.environ["SANDBASE_API_KEY"],
+    base_url="https://api.agrouter.ai/v1",
+    api_key=os.environ["AGROUTER_API_KEY"],
     max_retries=0,
 )
 

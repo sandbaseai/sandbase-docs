@@ -29,7 +29,7 @@ that does not belong to your org returns `404 sandbox not found`.
 ## Request Example
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_01.../processes \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_01.../processes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"cmd": "python3", "args": ["-c", "print(1+1)"]}'
@@ -71,7 +71,7 @@ example, the sandbox runtime was unreachable or the run timed out).
 
 The current endpoint runs a command to completion and returns its output in a
 single response. The following E2B `Process` streaming capabilities are not
-yet exposed by SandBase and are planned for a future release:
+yet exposed by AGRouter and are planned for a future release:
 
 - **Streaming start / connect** — stream `stdout`/`stderr` as the process
   runs, instead of waiting for completion (`Process/Start`, `Process/Connect`).

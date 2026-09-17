@@ -27,8 +27,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |-
-        curl "https://api.sandbase.ai/v1/deployment_runs?trigger_type=schedule&limit=20" \
-          -H "Authorization: Bearer $SANDBASE_API_KEY"
+        curl "https://api.agrouter.ai/v1/deployment_runs?trigger_type=schedule&limit=20" \
+          -H "Authorization: Bearer $AGROUTER_API_KEY"
   notes:
     - title: API resource names
       description: The product calls these Schedule runs. The compatibility API returns DeploymentRun objects with drun_* IDs.

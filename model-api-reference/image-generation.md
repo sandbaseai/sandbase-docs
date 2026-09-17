@@ -1,13 +1,13 @@
 ---
 title: Image Generation
-description: Browse SandBase Image Generation APIs by provider and open a model page for its exact request format.
+description: Browse AGRouter Image Generation APIs by provider and open a model page for its exact request format.
 ---
 
 # Image Generation
 
 Browse enabled image generation models by provider in the left navigation. Open an entry for its exact model identifier, supported capabilities, and a working request.
 
-Image Generation models use the SandBase generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive an opaque run ID, then poll `GET /v1/run/{id}` until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.
+Image Generation models use the AGRouter generation protocol declared in each model registry file. Most are asynchronous: submit a request, receive an opaque run ID, then poll `GET /v1/run/{id}` until the generation is completed, failed, or timed out. Check the selected model page's execution mode because synchronous models return their result in the initial response.
 
 ## Providers
 
@@ -234,7 +234,7 @@ Image Generation models use the SandBase generation protocol declared in each mo
 
 - [Longcat Multi Avatar](/model-api-reference/image-generation/meituan/longcat-multi-avatar/image-audio-to-video) — Longcat Multi Avatar Image Audio To Video by meituan - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Longcat Single Avatar](/model-api-reference/image-generation/meituan/longcat-single-avatar/audio-to-video) — Longcat Single Avatar Audio To Video by meituan - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [Longcat Image (meituan: longcat-image / edit)](/model-api-reference/image-generation/meituan/longcat-image/edit) — Longcat Image Edit by sandbase-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Longcat Image (meituan: longcat-image / edit)](/model-api-reference/image-generation/meituan/longcat-image/edit) — Longcat Image Edit by agrouter-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Longcat Image (meituan: longcat-image)](/model-api-reference/image-generation/meituan/longcat-image) — Longcat Image is meituan's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
 
 ### Meshy
@@ -306,14 +306,14 @@ Image Generation models use the SandBase generation protocol declared in each mo
 - [Reve 2.1 (Reve: 2.1 / edit)](/model-api-reference/image-generation/reve/2.1/edit) — 2.1 Edit by Reve - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Reve 2.1 (Reve: 2.1 / text-to-image)](/model-api-reference/image-generation/reve/2.1/text-to-image) — 2.1 is Reve's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
 
-### sandbase-ai
+### agrouter-ai
 
-- [Phota Text to Image](/model-api-reference/image-generation/sandbase-ai/phota) — Phota is sandbase-ai's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
-- [Hy Wu Edit](/model-api-reference/image-generation/sandbase-ai/hy-wu-edit) — Hy Wu Edit by sandbase-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
-- [Firered Image Edit V1.1](/model-api-reference/image-generation/sandbase-ai/firered-image-edit-v1.1) — Firered Image Edit V1.1 is sandbase-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
-- [try-on](/model-api-reference/image-generation/sandbase-ai/cat-vton) — Cat VTON by sandbase-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
-- [Sana](/model-api-reference/image-generation/sandbase-ai/sana) — Sana by sandbase-ai - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [Creative Upscaler](/model-api-reference/image-generation/sandbase-ai/creative-upscaler) — Creative Upscaler is sandbase-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
+- [Phota Text to Image](/model-api-reference/image-generation/agrouter-ai/phota) — Phota is agrouter-ai's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
+- [Hy Wu Edit](/model-api-reference/image-generation/agrouter-ai/hy-wu-edit) — Hy Wu Edit by agrouter-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Firered Image Edit V1.1](/model-api-reference/image-generation/agrouter-ai/firered-image-edit-v1.1) — Firered Image Edit V1.1 is agrouter-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
+- [try-on](/model-api-reference/image-generation/agrouter-ai/cat-vton) — Cat VTON by agrouter-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Sana](/model-api-reference/image-generation/agrouter-ai/sana) — Sana by agrouter-ai - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
+- [Creative Upscaler](/model-api-reference/image-generation/agrouter-ai/creative-upscaler) — Creative Upscaler is agrouter-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 
 ### Sonilo
 

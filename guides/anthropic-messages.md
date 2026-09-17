@@ -1,19 +1,19 @@
 ---
 title: Anthropic Messages
-description: Use Anthropic-compatible messages, content blocks, tools, thinking, and streaming with SandBase.
+description: Use Anthropic-compatible messages, content blocks, tools, thinking, and streaming with AGRouter.
 ---
 
 # Anthropic Messages
 
-SandBase provides an Anthropic-compatible endpoint at `POST /v1/messages`. Anthropic SDK applications can connect by changing the API key and base URL.
+AGRouter provides an Anthropic-compatible endpoint at `POST /v1/messages`. Anthropic SDK applications can connect by changing the API key and base URL.
 
 ```python
 import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key=os.environ["SANDBASE_API_KEY"],
-    base_url="https://api.sandbase.ai",
+    api_key=os.environ["AGROUTER_API_KEY"],
+    base_url="https://api.agrouter.ai",
 )
 ```
 
@@ -31,8 +31,8 @@ Add tool definitions in `tools` and control selection through `tool_choice`. Whe
 
 ## Streaming
 
-Set `stream: true` to receive Anthropic-style SSE events, including `message_start`, content-block events, `message_delta`, and `message_stop`. SandBase also forwards keepalive and provider-defined beta events. Consumers should ignore unknown event types for forward compatibility and handle protocol-level `error` events.
+Set `stream: true` to receive Anthropic-style SSE events, including `message_start`, content-block events, `message_delta`, and `message_stop`. AGRouter also forwards keepalive and provider-defined beta events. Consumers should ignore unknown event types for forward compatibility and handle protocol-level `error` events.
 
 ## Compatibility
 
-SandBase maps the public model name to the selected provider. Other compatible request fields and response bytes are preserved unless that provider has an explicit compatibility rule that removes an unsupported field or rejects the candidate. Provider-specific beta features may not be available on every model. For the complete request and response schema, see [Create Anthropic Message](/api-reference/anthropic-compat).
+AGRouter maps the public model name to the selected provider. Other compatible request fields and response bytes are preserved unless that provider has an explicit compatibility rule that removes an unsupported field or rejects the candidate. Provider-specific beta features may not be available on every model. For the complete request and response schema, see [Create Anthropic Message](/api-reference/anthropic-compat).

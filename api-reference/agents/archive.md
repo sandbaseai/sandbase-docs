@@ -21,8 +21,8 @@ apiReference:
       language: bash
       code: |
         curl -X POST \
-          "https://api.sandbase.ai/v1/agents/agent_01HqR2k7.../archive" \
-          -H "Authorization: Bearer $SANDBASE_API_KEY"
+          "https://api.agrouter.ai/v1/agents/agent_01HqR2k7.../archive" \
+          -H "Authorization: Bearer $AGROUTER_API_KEY"
     - label: Python
       language: python
       code: |

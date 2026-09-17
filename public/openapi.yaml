@@ -1,23 +1,23 @@
 openapi: 3.1.0
 info:
-  title: SandBase API
+  title: AGRouter API
   description: |
-    SandBase is an agent-native platform for connecting Agents to the real world.
+    AGRouter is an agent-native platform for connecting Agents to the real world.
     Use one account and one key to call Models, ready-made APIs, and Agent Services.
 
     ## Authentication
-    Public API requests require a SandBase API key. Use `Authorization: Bearer sk-YOUR_KEY` by default.
+    Public API requests require a AGRouter API key. Use `Authorization: Bearer sk-YOUR_KEY` by default.
     Anthropic Messages and Google Gemini-compatible operations also document their native SDK-compatible key locations.
 
     ## SDK Compatibility
-    - **LLM Gateway** (`/v1/chat/completions`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
-    - **Embeddings** (`/v1/embeddings`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
-    - **Images** (`/v1/images/generations`, `/v1/images/edits`): Use OpenAI SDK with `base_url="https://api.sandbase.ai/v1"`
-    - **Anthropic Messages** (`/v1/messages`): Use Anthropic SDK with `base_url="https://api.sandbase.ai"`
-    - **Google Gemini GenerateContent** (`/v1beta/models/{model}:generateContent`): Configure the Google Gen AI SDK to use `https://api.sandbase.ai`
-    - **Agents and Sessions** (`/v1/agents`, `/v1/sessions`): Use the documented SandBase HTTP resource APIs
+    - **LLM Gateway** (`/v1/chat/completions`): Use OpenAI SDK with `base_url="https://api.agrouter.ai/v1"`
+    - **Embeddings** (`/v1/embeddings`): Use OpenAI SDK with `base_url="https://api.agrouter.ai/v1"`
+    - **Images** (`/v1/images/generations`, `/v1/images/edits`): Use OpenAI SDK with `base_url="https://api.agrouter.ai/v1"`
+    - **Anthropic Messages** (`/v1/messages`): Use Anthropic SDK with `base_url="https://api.agrouter.ai"`
+    - **Google Gemini GenerateContent** (`/v1beta/models/{model}:generateContent`): Configure the Google Gen AI SDK to use `https://api.agrouter.ai`
+    - **Agents and Sessions** (`/v1/agents`, `/v1/sessions`): Use the documented AGRouter HTTP resource APIs
   version: 1.0.0
-  x-sandbase-session-contract:
+  x-agrouter-session-contract:
     status: active
     feature: persistent public Session identity
     description: >-
@@ -26,13 +26,13 @@ info:
       scheduled Deployment trigger creates a public drun_* DeploymentRun and attempts to create one new Session.
       Internal Runtime Session identities are never exposed.
   contact:
-    name: SandBase
-    url: https://www.sandbase.ai
+    name: AGRouter
+    url: https://www.agrouter.ai
   license:
     name: Proprietary
 
 servers:
-  - url: https://api.sandbase.ai
+  - url: https://api.agrouter.ai
     description: Production
 
 security:
@@ -82,9 +82,9 @@ paths:
       tags: [Chat Completions]
       summary: Create chat completion
       description: >-
-        OpenAI-compatible chat completions endpoint. SandBase uses model and stream for routing and preserves
+        OpenAI-compatible chat completions endpoint. AGRouter uses model and stream for routing and preserves
         additional provider-compatible fields when the selected route uses the same protocol. Support for
-        provider-specific fields can vary when SandBase translates between protocols.
+        provider-specific fields can vary when AGRouter translates between protocols.
       requestBody:
         required: true
         content:
@@ -132,7 +132,7 @@ paths:
       tags: [Responses]
       summary: Create a model response
       description: >-
-        OpenAI-compatible Responses API endpoint. SandBase validates model and stream for routing, rewrites model
+        OpenAI-compatible Responses API endpoint. AGRouter validates model and stream for routing, rewrites model
         to the selected provider mapping, and preserves other request fields. Responses are rebuilt from public
         OpenAI fields: unknown provider, routing, account, and billing extensions are removed. Unsafe responses fail
         closed instead of being forwarded.
@@ -192,7 +192,7 @@ paths:
       operationId: createEmbedding
       tags: [Embeddings]
       summary: Create embeddings
-      description: OpenAI-compatible embeddings endpoint for semantic search, RAG, clustering, and classification. SandBase validates the logical model and forwards provider-compatible embedding fields; model-specific constraints are defined by the selected model and upstream provider.
+      description: OpenAI-compatible embeddings endpoint for semantic search, RAG, clustering, and classification. AGRouter validates the logical model and forwards provider-compatible embedding fields; model-specific constraints are defined by the selected model and upstream provider.
       requestBody:
         required: true
         content:
@@ -327,7 +327,7 @@ paths:
       tags: [Messages]
       summary: Create message (Anthropic compatible)
       description: >-
-        Anthropic Messages-compatible endpoint. SandBase uses model and stream for routing, maps the public model
+        Anthropic Messages-compatible endpoint. AGRouter uses model and stream for routing, maps the public model
         name to the selected provider, and otherwise preserves the compatible request and response protocol.
         Provider compatibility rules may remove or reject unsupported beta fields before an upstream attempt.
       security:
@@ -450,7 +450,7 @@ paths:
       summary: Generate content with the Google Gemini protocol
       description: |
         Accepts a Google Gemini GenerateContent request and returns a Gemini-compatible response. A bare model name,
-        such as gemini-3.5-flash, is normalized to the SandBase catalog name google/gemini-3.5-flash. This endpoint
+        such as gemini-3.5-flash, is normalized to the AGRouter catalog name google/gemini-3.5-flash. This endpoint
         also accepts x-goog-api-key and the key query parameter for Google SDK compatibility, although headers are safer.
         Models with a native passthrough mapping preserve provider-defined request and response fields, including image
         response modalities. Other mappings may use the translated capability subset documented in the schema below.
@@ -511,7 +511,7 @@ paths:
               schema:
                 type: string
                 description: SSE data frames containing Gemini GenerateContentResponse objects.
-        '400': { description: Invalid JSON or an input field that SandBase cannot safely translate, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
+        '400': { description: Invalid JSON or an input field that AGRouter cannot safely translate, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
         '403': { description: 'API Key spending limit reached, organization disabled, or upstream permission rejected', content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
@@ -529,7 +529,7 @@ paths:
       tags: [Gemini]
       summary: Create a Google Gemini Interaction
       description: |
-        Proxies the Google Interactions protocol while routing the logical model through SandBase. Successful requests
+        Proxies the Google Interactions protocol while routing the logical model through AGRouter. Successful requests
         always return HTTP 200. Check status: an in_progress response is pollable and is not a completed result.
         Set stream=true for SSE, or background=true for a durable background submission; they cannot both be true.
       security:
@@ -573,7 +573,7 @@ paths:
       tags: [Gemini]
       summary: Get a Google Gemini Interaction
       description: |
-        Retrieves the Interaction created by the same SandBase API key. Non-terminal responses omit partial output and
+        Retrieves the Interaction created by the same AGRouter API key. Non-terminal responses omit partial output and
         usage. When upstream media has expired, a terminal fallback can preserve structure and metadata without the
         original media bytes; download terminal media promptly rather than treating this endpoint as durable storage.
       security:
@@ -585,7 +585,7 @@ paths:
           in: path
           required: true
           schema: { type: string, minLength: 1 }
-          description: Upstream Interaction ID returned by POST. It is not a SandBase prediction ID.
+          description: Upstream Interaction ID returned by POST. It is not a AGRouter prediction ID.
       responses:
         '200': { description: Current or terminal Interaction, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiInteraction' } } } }
         '400': { description: Empty Interaction ID, content: { application/json: { schema: { $ref: '#/components/schemas/GeminiError' } } } }
@@ -2520,7 +2520,7 @@ paths:
       tags: [Schedules]
       summary: Test the saved Feishu notification target
       description: |
-        Sends a fixed SandBase test notification to the Feishu webhook already saved on this Deployment.
+        Sends a fixed AGRouter test notification to the Feishu webhook already saved on this Deployment.
         The request body must be absent or an empty JSON object. This endpoint never accepts a webhook URL or custom message.
       parameters:
         - $ref: '#/components/parameters/DeploymentId'
@@ -3036,7 +3036,7 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-      description: SandBase API key. Treat the complete credential as an opaque secret.
+      description: AGRouter API key. Treat the complete credential as an opaque secret.
     AnthropicApiKey:
       type: apiKey
       in: header
@@ -3059,7 +3059,7 @@ components:
       in: path
       required: true
       schema: { type: string, minLength: 1 }
-      description: Bare Gemini model name, such as gemini-3.5-flash. SandBase adds the google/ catalog prefix.
+      description: Bare Gemini model name, such as gemini-3.5-flash. AGRouter adds the google/ catalog prefix.
     EndpointId:
       name: id
       in: path
@@ -3258,7 +3258,7 @@ components:
       properties:
         model:
           type: string
-          description: Current model or API capability identifier from the SandBase catalog.
+          description: Current model or API capability identifier from the AGRouter catalog.
         mode:
           type: string
           enum: [auto, sync, async, stream]
@@ -3348,7 +3348,7 @@ components:
         url:
           type: string
           minLength: 1
-          description: Source URL forwarded to the asset provider. SandBase requires a non-empty string; the provider must be able to fetch it.
+          description: Source URL forwarded to the asset provider. AGRouter requires a non-empty string; the provider must be able to fetch it.
         asset_type:
           type: string
           enum: [Image, Video, Audio]
@@ -3395,7 +3395,7 @@ components:
       properties:
         id:
           type: string
-          description: SandBase task ID.
+          description: AGRouter task ID.
         status:
           type: string
           enum: [pending, running, completed, failed, timeout]
@@ -3482,7 +3482,7 @@ components:
           description: Logical model name used in inference requests.
         object: { type: string, const: model }
         created: { type: integer, description: Unix creation timestamp. }
-        owned_by: { type: string, description: Representative enabled provider or sandbase. }
+        owned_by: { type: string, description: Representative enabled provider or agrouter. }
 
     ModelDetail:
       type: object
@@ -3617,7 +3617,7 @@ components:
       type: object
       required: [model]
       additionalProperties: true
-      description: OpenAI-compatible request. SandBase rewrites model for the selected provider and preserves other fields.
+      description: OpenAI-compatible request. AGRouter rewrites model for the selected provider and preserves other fields.
       properties:
         model:
           type: string
@@ -3683,7 +3683,7 @@ components:
       type: object
       additionalProperties: false
       description: >-
-        Public OpenAI Responses fields retained by SandBase. Provider-specific top-level fields are removed;
+        Public OpenAI Responses fields retained by AGRouter. Provider-specific top-level fields are removed;
         output items remain provider-compatible free-form objects.
       properties:
         id: { type: string }
@@ -3837,7 +3837,7 @@ components:
         extra_body:
           type: object
           additionalProperties: true
-          description: Provider-specific parameters used when SandBase translates the request between protocols.
+          description: Provider-specific parameters used when AGRouter translates the request between protocols.
         n:
           type: integer
           default: 1
@@ -4067,7 +4067,7 @@ components:
         model:
           type: string
           minLength: 1
-          description: Logical SandBase model name. The response echoes this name instead of an upstream model identifier.
+          description: Logical AGRouter model name. The response echoes this name instead of an upstream model identifier.
         input:
           description: Google Interactions input; it can be text, an object, or an array of typed input items.
         stream:
@@ -4080,7 +4080,7 @@ components:
           description: Requests durable background execution and an immediately pollable in_progress Interaction.
         previous_interaction_id:
           type: string
-          description: Previous Interaction ID. SandBase keeps the request on the same upstream provider when the mapping is still available.
+          description: Previous Interaction ID. AGRouter keeps the request on the same upstream provider when the mapping is still available.
         store:
           type: boolean
           description: Forwarded upstream. Stored upstream state may be required for previous_interaction_id.
@@ -4106,7 +4106,7 @@ components:
         object: { type: string, const: interaction }
         model:
           type: string
-          description: Logical SandBase model name supplied by the client.
+          description: Logical AGRouter model name supplied by the client.
         role: { type: string }
         status:
           type: string
@@ -4285,7 +4285,7 @@ components:
           description: Text, token IDs, or a batch of texts or token-ID arrays to embed. Provider limits apply.
           oneOf:
             - type: string
-              example: "SandBase provides a unified API for AI models, agents, and developer tools."
+              example: "AGRouter provides a unified API for AI models, agents, and developer tools."
             - type: array
               items:
                 type: string
@@ -4303,7 +4303,7 @@ components:
         dimensions:
           type: integer
           minimum: 1
-          description: Optional output dimension when supported by the selected model. SandBase does not impose a universal dimension list.
+          description: Optional output dimension when supported by the selected model. AGRouter does not impose a universal dimension list.
           example: 1024
         encoding_format:
           type: string
@@ -4404,7 +4404,7 @@ components:
           type: boolean
           const: false
           default: false
-          description: Streaming is not supported by this SandBase endpoint.
+          description: Streaming is not supported by this AGRouter endpoint.
         mode:
           type: string
           const: sync
@@ -4456,7 +4456,7 @@ components:
           type: boolean
           const: false
           default: false
-          description: Streaming is not supported by this SandBase endpoint.
+          description: Streaming is not supported by this AGRouter endpoint.
         mode:
           type: string
           const: sync
@@ -4959,7 +4959,7 @@ components:
         metadata:
           type: [object, 'null']
           additionalProperties: true
-          description: Application-defined JSON metadata. The reserved _sandbase namespace is stripped from public requests.
+          description: Application-defined JSON metadata. The reserved _agrouter namespace is stripped from public requests.
 
     UpdateAgentRequest:
       type: object
@@ -5000,7 +5000,7 @@ components:
           description: Reserved. Omit, send null, or send an empty object; any non-empty object returns unsupported_feature.
         metadata:
           type: [object, 'null']
-          description: Full replacement for caller-owned metadata. The reserved _sandbase namespace cannot be changed through this API.
+          description: Full replacement for caller-owned metadata. The reserved _agrouter namespace cannot be changed through this API.
 
     Agent:
       type: object
@@ -5101,7 +5101,7 @@ components:
         initial_event:
           type: array
           deprecated: true
-          description: SandBase legacy alias for initial_events; do not combine both fields.
+          description: AGRouter legacy alias for initial_events; do not combine both fields.
           maxItems: 50
           items:
             $ref: '#/components/schemas/SessionEventInput'
@@ -5217,8 +5217,8 @@ components:
           user.custom_tool_result: '#/components/schemas/UserCustomToolResultEventInput'
           user.tool_result: '#/components/schemas/UserToolResultEventInput'
           user.define_outcome: '#/components/schemas/UserDefineOutcomeEventInput'
-          interrupt.response: '#/components/schemas/SandBaseInterruptResponseEventInput'
-          system.message: '#/components/schemas/SandBaseSystemMessageEventInput'
+          interrupt.response: '#/components/schemas/AGRouterInterruptResponseEventInput'
+          system.message: '#/components/schemas/AGRouterSystemMessageEventInput'
       oneOf:
         - $ref: '#/components/schemas/UserMessageEventInput'
         - $ref: '#/components/schemas/UserInterruptEventInput'
@@ -5226,8 +5226,8 @@ components:
         - $ref: '#/components/schemas/UserCustomToolResultEventInput'
         - $ref: '#/components/schemas/UserToolResultEventInput'
         - $ref: '#/components/schemas/UserDefineOutcomeEventInput'
-        - $ref: '#/components/schemas/SandBaseInterruptResponseEventInput'
-        - $ref: '#/components/schemas/SandBaseSystemMessageEventInput'
+        - $ref: '#/components/schemas/AGRouterInterruptResponseEventInput'
+        - $ref: '#/components/schemas/AGRouterSystemMessageEventInput'
 
     UserMessageEventInput:
       type: object
@@ -5292,20 +5292,20 @@ components:
         rubric: { $ref: '#/components/schemas/OutcomeRubric' }
         max_iterations: { type: integer, minimum: 1, maximum: 20, default: 3 }
 
-    SandBaseInterruptResponseEventInput:
+    AGRouterInterruptResponseEventInput:
       type: object
       additionalProperties: false
-      description: SandBase extension; not part of the Claude Managed Agents event input union.
+      description: AGRouter extension; not part of the Claude Managed Agents event input union.
       required: [type, interrupt_id, response]
       properties:
         type: { type: string, enum: [interrupt.response] }
         interrupt_id: { type: string }
         response: { type: object, additionalProperties: true }
 
-    SandBaseSystemMessageEventInput:
+    AGRouterSystemMessageEventInput:
       type: object
       additionalProperties: false
-      description: SandBase extension for a privileged mid-conversation system message.
+      description: AGRouter extension for a privileged mid-conversation system message.
       required: [type, content]
       properties:
         type: { type: string, enum: [system.message] }

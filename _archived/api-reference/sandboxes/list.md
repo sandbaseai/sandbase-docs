@@ -20,7 +20,7 @@ List sandboxes for your organization, optionally filtered by status. E2B-compati
 ## Example
 
 ```bash
-curl "https://api.sandbase.ai/sandboxes?status=running" \
+curl "https://api.agrouter.ai/sandboxes?status=running" \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 

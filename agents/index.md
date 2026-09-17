@@ -1,6 +1,6 @@
 ---
 title: Build Agent
-description: Define, test, publish, and schedule reusable Agents in SandBase.
+description: Define, test, publish, and schedule reusable Agents in AGRouter.
 ---
 
 # Build Agent
@@ -24,7 +24,7 @@ It is a saved configuration that answers four questions:
 
 ## Build first, connect later
 
-SandBase separates building from delivery:
+AGRouter separates building from delivery:
 
 1. **Build Agent** — define and test the Agent.
 2. **Services** — expose a tested Agent to an application or another supported client.

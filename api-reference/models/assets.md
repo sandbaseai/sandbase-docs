@@ -26,7 +26,7 @@ Registers a publicly accessible file URL into the asset library and returns an `
 
 ```http
 POST /v1/assets
-Authorization: Bearer $SANDBASE_API_KEY
+Authorization: Bearer $AGROUTER_API_KEY
 Content-Type: application/json
 ```
 
@@ -94,7 +94,7 @@ Retrieves a signed download URL for a registered asset by its external ID. Used 
 
 ```http
 GET /v1/assets/asset-20260710150403-hx4hf
-Authorization: Bearer $SANDBASE_API_KEY
+Authorization: Bearer $AGROUTER_API_KEY
 ```
 
 | Parameter | Location | Description |

@@ -1,6 +1,6 @@
 ---
 title: Get an asynchronous run
-description: Poll a SandBase asynchronous model or API run and retrieve its current or terminal result.
+description: Poll a AGRouter asynchronous model or API run and retrieve its current or terminal result.
 aside: false
 outline: false
 apiReference:
@@ -17,8 +17,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |-
-        curl https://api.sandbase.ai/v1/run/opaque-run-id \
-          -H "Authorization: Bearer $SANDBASE_API_KEY"
+        curl https://api.agrouter.ai/v1/run/opaque-run-id \
+          -H "Authorization: Bearer $AGROUTER_API_KEY"
   response:
     status: 200 OK
     code: |-
@@ -26,7 +26,7 @@ apiReference:
         "id": "opaque-run-id",
         "model": "openai/gpt-image-2",
         "status": "completed",
-        "outputs": [{"url":"https://media.sandbase.ai/files/result.png","content_type":"image/png"}]
+        "outputs": [{"url":"https://media.agrouter.ai/files/result.png","content_type":"image/png"}]
       }
 ---
 

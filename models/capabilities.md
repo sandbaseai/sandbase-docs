@@ -1,6 +1,6 @@
 ---
 title: Capabilities
-description: Discover current SandBase model capabilities from the live catalog and generated model references.
+description: Discover current AGRouter model capabilities from the live catalog and generated model references.
 ---
 
 # Capabilities
@@ -9,7 +9,7 @@ Model capabilities change as models and provider routes are updated. Use the liv
 
 ## Current sources of truth
 
-1. Browse [Models](https://www.sandbase.ai/models) to compare currently available models.
+1. Browse [Models](https://www.agrouter.ai/models) to compare currently available models.
 2. Open the [Model API Reference](/model-api-reference/) for model-specific request fields and declared capabilities.
 3. Call [`GET /v1/models`](/api-reference/models/list) when an integration needs to discover enabled model IDs programmatically.
 4. Call [`GET /v1/models/{id_or_name}`](/api-reference/models/get) before depending on detailed capability or pricing metadata. For a logical model name, keep the full `vendor/model` path (for example, `/v1/models/{vendor}/{model}`).

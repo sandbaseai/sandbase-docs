@@ -17,8 +17,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |
-        curl https://api.sandbase.ai/v1/embeds/emb_12345678-abc \
-          -H "Authorization: Bearer $SANDBASE_API_KEY"
+        curl https://api.agrouter.ai/v1/embeds/emb_12345678-abc \
+          -H "Authorization: Bearer $AGROUTER_API_KEY"
 ---
 
 <ApiReferencePage />

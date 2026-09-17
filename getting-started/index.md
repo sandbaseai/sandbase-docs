@@ -1,15 +1,15 @@
 ---
 title: Getting Started
-description: Learn how SandBase helps you use Models, APIs, and Agents through API calls, the website, Setup, or Build Agent.
+description: Learn how AGRouter helps you use Models, APIs, and Agents through API calls, the website, Setup, or Build Agent.
 ---
 
-# Getting Started with SandBase
+# Getting Started with AGRouter
 
-SandBase helps your Agent connect to the real world.
+AGRouter helps your Agent connect to the real world.
 
 Start with [Quickstart](/getting-started/quickstart) if you are new: create an account, set up an organization, then make one real request.
 
-After that, you can use SandBase in four ways:
+After that, you can use AGRouter in four ways:
 
 | Path | Best for | What you get |
 |---|---|---|
@@ -51,9 +51,9 @@ After it works, you can:
 
 If you do not have an account yet, start with [Quickstart](/getting-started/quickstart).
 
-If you want to call one capability from code, browse the live [Model Store](https://www.sandbase.ai/models) or [API Store](https://www.sandbase.ai/apis), then use the matching documentation and request example.
+If you want to call one capability from code, browse the live [Model Store](https://www.agrouter.ai/models) or [API Store](https://www.agrouter.ai/apis), then use the matching documentation and request example.
 
-If you want to try a capability in the browser first, open a Store detail page on [sandbase.ai](https://www.sandbase.ai/models).
+If you want to try a capability in the browser first, open a Store detail page on [agrouter.ai](https://www.agrouter.ai/models).
 
 If you want tools in your AI app, start with [Setup](/setup/).
 

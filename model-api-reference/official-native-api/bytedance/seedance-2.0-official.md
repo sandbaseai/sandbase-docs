@@ -43,8 +43,8 @@ workflow, including image, video, and audio roles.
 ## Create a task
 
 ```bash
-curl -X POST https://api.sandbase.ai/api/v3/contents/generations/tasks \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/api/v3/contents/generations/tasks \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "bytedance/seedance/2.0-official",
@@ -69,8 +69,8 @@ The create response contains the task identifier:
 Poll the task every 5 to 10 seconds with the same API key:
 
 ```bash
-curl https://api.sandbase.ai/api/v3/contents/generations/tasks/158d2649-e01d-45b9-b88a-ef3c450c601c \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
+curl https://api.agrouter.ai/api/v3/contents/generations/tasks/158d2649-e01d-45b9-b88a-ef3c450c601c \
+  -H "Authorization: Bearer $AGROUTER_API_KEY"
 ```
 
 While generation is in progress, `status` is `queued` or `running`. A completed task returns the generated video in
@@ -82,7 +82,7 @@ While generation is in progress, `status` is `queued` or `running`. A completed 
   "model": "bytedance/seedance/2.0-official",
   "status": "succeeded",
   "content": {
-    "video_url": "https://media.sandbase.ai/files/158d2649.../0.mp4"
+    "video_url": "https://media.agrouter.ai/files/158d2649.../0.mp4"
   },
   "usage": {
     "completion_tokens": 72600,

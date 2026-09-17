@@ -1,6 +1,6 @@
 ---
-title: SandBase AI API Guide
-description: Expanded SandBase API guide for AI agents, with core workflows, request examples, and links to the authoritative OpenAPI specification.
+title: AGRouter AI API Guide
+description: Expanded AGRouter API guide for AI agents, with core workflows, request examples, and links to the authoritative OpenAPI specification.
 ---
 
 # AI API Guide
@@ -9,7 +9,7 @@ description: Expanded SandBase API guide for AI agents, with core workflows, req
 `session_id` is the persistent public identity for Agent interaction. Service invocation creates or continues a Session. Every Schedule (Deployment) trigger creates a public `drun_*` DeploymentRun and attempts to create one new Session. Internal Runtime Session IDs are not exposed.
 :::
 
-> A single-page guide to the most common API workflows. For the complete machine-readable contract, use the [OpenAPI specification](https://www.sandbase.ai/docs/openapi.yaml). Plain-text version: [`llms-full.txt`](https://www.sandbase.ai/docs/llms-full.txt).
+> A single-page guide to the most common API workflows. For the complete machine-readable contract, use the [OpenAPI specification](https://www.agrouter.ai/docs/openapi.yaml). Plain-text version: [`llms-full.txt`](https://www.agrouter.ai/docs/llms-full.txt).
 
 ## Authentication
 
@@ -19,7 +19,7 @@ All requests require:
 Authorization: Bearer sk-YOUR_KEY
 ```
 
-Base URL: `https://api.sandbase.ai/v1`
+Base URL: `https://api.agrouter.ai/v1`
 
 ---
 
@@ -49,7 +49,7 @@ Base URL: `https://api.sandbase.ai/v1`
 OpenAI-compatible. Streaming, tools, vision, reasoning, and structured-output support depend on the selected model and its declared schema.
 
 ```bash
-curl https://api.sandbase.ai/v1/chat/completions \
+curl https://api.agrouter.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -101,13 +101,13 @@ curl https://api.sandbase.ai/v1/chat/completions \
 Anthropic-compatible Messages API. Caching and other optional features depend on the selected model and request schema.
 
 ```bash
-curl https://api.sandbase.ai/v1/messages \
+curl https://api.agrouter.ai/v1/messages \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "anthropic/claude-sonnet-5",
     "max_tokens": 1024,
-    "messages": [{"role": "user", "content": "What is SandBase?"}]
+    "messages": [{"role": "user", "content": "What is AGRouter?"}]
   }'
 ```
 
@@ -119,7 +119,7 @@ curl https://api.sandbase.ai/v1/messages \
   "type": "message",
   "role": "assistant",
   "content": [
-    { "type": "text", "text": "SandBase is an AI agent infrastructure platform..." }
+    { "type": "text", "text": "AGRouter is an AI agent infrastructure platform..." }
   ],
   "model": "anthropic/claude-sonnet-5",
   "stop_reason": "end_turn",
@@ -140,7 +140,7 @@ The `/v1/run` endpoint is a **unified generation endpoint** — the `model` fiel
 > - `"pending"` or `"running"` → poll `GET /v1/run/{id}` every 2–5s until a terminal status (`completed`, `failed`, or `timeout`).
 
 ```bash
-curl https://api.sandbase.ai/v1/run \
+curl https://api.agrouter.ai/v1/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -159,7 +159,7 @@ curl https://api.sandbase.ai/v1/run \
   "model": "bfl/flux-2/flash",
   "created_at": "2026-08-02T12:00:00Z",
   "outputs": [{
-    "url": "https://cdn.sandbase.ai/outputs/f3d2e8a1-7c4b-4a12-9d2e-123456789abc.png",
+    "url": "https://cdn.agrouter.ai/outputs/f3d2e8a1-7c4b-4a12-9d2e-123456789abc.png",
     "content_type": "image/png",
     "width": 1024,
     "height": 1024
@@ -176,7 +176,7 @@ curl https://api.sandbase.ai/v1/run \
 Check the selected model's `execution_mode`. When submission returns `pending` or `running`, poll `GET /v1/run/{id}` until a terminal status.
 
 ```bash
-curl https://api.sandbase.ai/v1/run \
+curl https://api.agrouter.ai/v1/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -204,7 +204,7 @@ curl https://api.sandbase.ai/v1/run \
   "id": "6a7b9c10-2d3e-4f50-8a61-23456789abcd",
   "status": "completed",
   "outputs": [{
-    "url": "https://cdn.sandbase.ai/outputs/6a7b9c10-2d3e-4f50-8a61-23456789abcd.mp4",
+    "url": "https://cdn.agrouter.ai/outputs/6a7b9c10-2d3e-4f50-8a61-23456789abcd.mp4",
     "content_type": "video/mp4",
     "duration": 5
   }]
@@ -218,7 +218,7 @@ curl https://api.sandbase.ai/v1/run \
 ### POST /v1/run
 
 ```bash
-curl https://api.sandbase.ai/v1/run \
+curl https://api.agrouter.ai/v1/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -236,7 +236,7 @@ curl https://api.sandbase.ai/v1/run \
   "model": "bytedance/seed-speech/tts/2.0",
   "created_at": "2026-08-02T12:00:00Z",
   "outputs": [{
-    "url": "https://cdn.sandbase.ai/outputs/7b8c0d21-3e4f-5061-9b72-3456789abcde.mp3",
+    "url": "https://cdn.agrouter.ai/outputs/7b8c0d21-3e4f-5061-9b72-3456789abcde.mp3",
     "content_type": "audio/mpeg",
     "duration_seconds": 3.2
   }]
@@ -257,7 +257,7 @@ Returns enabled logical models in the OpenAI-compatible model-list format. The e
 defaults to `type=llm`. Detailed capabilities and pricing are intentionally omitted.
 
 ```bash
-curl https://api.sandbase.ai/v1/models \
+curl https://api.agrouter.ai/v1/models \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -271,7 +271,7 @@ The response contains `object: "list"` and a `data` array. Each item contains `i
 ### GET /v1/models/{id_or_name}
 
 ```bash
-curl https://api.sandbase.ai/v1/models/openai/gpt-5.6-luna \
+curl https://api.agrouter.ai/v1/models/openai/gpt-5.6-luna \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -287,7 +287,7 @@ The detail response adds `unified_schema`, `supported_modes`, and `model_card`. 
 Check the recorded cost of a task using the task ID returned by the API operation.
 
 ```bash
-curl https://api.sandbase.ai/v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost \
+curl https://api.agrouter.ai/v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -323,7 +323,7 @@ curl https://api.sandbase.ai/v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost 
 ### POST /v1/agents — Create Agent
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/agents \
+curl -X POST https://api.agrouter.ai/v1/agents \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -353,21 +353,21 @@ curl -X POST https://api.sandbase.ai/v1/agents \
 ### GET /v1/agents — List Agents
 
 ```bash
-curl https://api.sandbase.ai/v1/agents \
+curl https://api.agrouter.ai/v1/agents \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 ### GET /v1/agents/{id} — Get Agent
 
 ```bash
-curl https://api.sandbase.ai/v1/agents/agent_abc123 \
+curl https://api.agrouter.ai/v1/agents/agent_abc123 \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 ### POST /v1/agents/{id} — Update Agent
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123 \
+curl -X POST https://api.agrouter.ai/v1/agents/agent_abc123 \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "anthropic/claude-sonnet-5"}'
@@ -376,14 +376,14 @@ curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123 \
 ### POST /v1/agents/{id}/archive — Archive Agent
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123/archive \
+curl -X POST https://api.agrouter.ai/v1/agents/agent_abc123/archive \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 ### GET /v1/agents/{id}/versions — List Versions
 
 ```bash
-curl https://api.sandbase.ai/v1/agents/agent_abc123/versions \
+curl https://api.agrouter.ai/v1/agents/agent_abc123/versions \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -396,7 +396,7 @@ curl https://api.sandbase.ai/v1/agents/agent_abc123/versions \
 Creates or continues a Session and sends one message. Omit `session_id` to create a Session. A supplied Session must have been created by the same Service and still match its Agent-version binding.
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
+curl -X POST https://api.agrouter.ai/v1/endpoints/ep_abc/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"input": "Summarize the latest news about AI agents"}'
@@ -421,10 +421,10 @@ curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
 
 ### POST /v1/sessions — Create Session
 
-Create a version-pinned Agent Session. SandBase resolves the Agent's runtime binding internally. Use singular `initial_events` to submit the first message with creation.
+Create a version-pinned Agent Session. AGRouter resolves the Agent's runtime binding internally. Use singular `initial_events` to submit the first message with creation.
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/sessions \
+curl -X POST https://api.agrouter.ai/v1/sessions \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -460,7 +460,7 @@ If native runtime delivery returns `502` with a top-level `session_id`, its outc
 Send `user.message` to start or continue an idle Session, or `user.interrupt` to interrupt a running turn.
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
+curl -X POST https://api.agrouter.ai/v1/sessions/sess_xyz789/events \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"events":[{"type":"user.message","content":[{"type":"text","text":"Focus on AI coding assistants specifically"}]}]}'
@@ -481,7 +481,7 @@ curl -X POST https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
 ### GET /v1/sessions — List Sessions
 
 ```bash
-curl https://api.sandbase.ai/v1/sessions \
+curl https://api.agrouter.ai/v1/sessions \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -503,14 +503,14 @@ curl https://api.sandbase.ai/v1/sessions \
 ### GET /v1/sessions/{id} — Get Session
 
 ```bash
-curl https://api.sandbase.ai/v1/sessions/sess_xyz789 \
+curl https://api.agrouter.ai/v1/sessions/sess_xyz789 \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
 ### GET /v1/sessions/{id}/events — List Events
 
 ```bash
-curl https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
+curl https://api.agrouter.ai/v1/sessions/sess_xyz789/events \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -540,7 +540,7 @@ curl https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
 Replays persisted events, then continues streaming newly persisted events. While idle, the server may send `: heartbeat` comment frames. The connection remains open until the client disconnects, the request context is cancelled, or a write fails; Session terminal state does not produce a separate close event.
 
 ```bash
-curl -N https://api.sandbase.ai/v1/sessions/sess_xyz789/events/stream \
+curl -N https://api.agrouter.ai/v1/sessions/sess_xyz789/events/stream \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -561,7 +561,7 @@ data: {"id":"sevt_002","type":"session.status_idle","stop_reason":{"type":"end_t
 Create a Schedule through the compatibility `/v1/deployments` resource. Every manual or cron trigger creates a distinct `drun_*` DeploymentRun and attempts to create one new Session.
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/deployments \
+curl -X POST https://api.agrouter.ai/v1/deployments \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -594,7 +594,7 @@ curl -X POST https://api.sandbase.ai/v1/deployments \
 ### GET /v1/deployments/{id}/runs — List DeploymentRuns
 
 ```bash
-curl https://api.sandbase.ai/v1/deployments/depl_abc123/runs \
+curl https://api.agrouter.ai/v1/deployments/depl_abc123/runs \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -607,7 +607,7 @@ Each returned object has `id` (`drun_*`), `type`, `deployment_id`, `agent`, `tri
 ### GET /v1/skills — List Skills
 
 ```bash
-curl https://api.sandbase.ai/v1/skills \
+curl https://api.agrouter.ai/v1/skills \
   -H "Authorization: Bearer sk-YOUR_KEY"
 ```
 
@@ -643,9 +643,9 @@ curl https://api.sandbase.ai/v1/skills \
 
 ### Budget control
 
-- Set an optional spending limit when creating or editing a standard key under [Developer → API Keys](https://www.sandbase.ai/console/keys).
+- Set an optional spending limit when creating or editing a standard key under [Developer → API Keys](https://www.agrouter.ai/console/keys).
 - Monitor requests and cost under **Console → Activities → Usage**.
-- Review balance and credit transactions on the [Console Credits](https://www.sandbase.ai/console/billing) page.
+- Review balance and credit transactions on the [Console Credits](https://www.agrouter.ai/console/billing) page.
 
 ---
 
@@ -653,4 +653,4 @@ curl https://api.sandbase.ai/v1/skills \
 
 - [Models & Pricing](./models) — live model discovery, capabilities, and pricing guidance
 - [Error Guide](./errors) — documented response shapes, HTTP handling, and retry safety
-- [OpenAPI Spec](https://www.sandbase.ai/docs/openapi.yaml) — machine-readable schema
+- [OpenAPI Spec](https://www.agrouter.ai/docs/openapi.yaml) — machine-readable schema

@@ -5,7 +5,7 @@ title: File Operations
 # File Operations
 
 Read, write, list, upload, download, and delete files inside a running
-sandbox. These endpoints are E2B-compatible and are served by the SandBase
+sandbox. These endpoints are E2B-compatible and are served by the AGRouter
 API under the `/sandboxes/:id/filesystem` prefix.
 
 All endpoints require authentication and enforce org isolation: a sandbox
@@ -83,7 +83,7 @@ be base64-encoded (E2B compatible).
 ### Request Example
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_01.../filesystem \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_01.../filesystem \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"path": "/home/user/main.py", "content": "cHJpbnQoIkhlbGxvIik="}'
@@ -109,7 +109,7 @@ too large to base64-encode inline.
 ### Request Example
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_01.../filesystem/upload \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_01.../filesystem/upload \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -F "path=/home/user/data.csv" \
   -F "file=@./data.csv"
@@ -139,7 +139,7 @@ Download a file as raw binary. The response streams the file content with a
 ### Request Example
 
 ```bash
-curl -X GET "https://api.sandbase.ai/sandboxes/sbx_01.../filesystem/download?path=/home/user/data.csv" \
+curl -X GET "https://api.agrouter.ai/sandboxes/sbx_01.../filesystem/download?path=/home/user/data.csv" \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -o data.csv
 ```
@@ -197,7 +197,7 @@ Create a directory. Parent directories are created as needed.
 ### Request Example
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_01.../filesystem/mkdir \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_01.../filesystem/mkdir \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"path": "/home/user/project/src"}'
@@ -231,7 +231,7 @@ Move or rename a file or directory.
 ### Request Example
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_01.../filesystem/move \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_01.../filesystem/move \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"source": "/home/user/old.txt", "destination": "/home/user/new.txt"}'
@@ -258,7 +258,7 @@ curl -X POST https://api.sandbase.ai/sandboxes/sbx_01.../filesystem/move \
 
 ## Roadmap
 
-The following E2B envd filesystem operations are not yet exposed by SandBase
+The following E2B envd filesystem operations are not yet exposed by AGRouter
 and are planned for a future release:
 
 - **Compose** — zero-copy concatenation of multiple files into one.

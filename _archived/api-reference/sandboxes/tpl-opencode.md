@@ -65,7 +65,7 @@ The CLI accepts natural language prompts and translates them into code changes u
 </div>
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes \
+curl -X POST https://api.agrouter.ai/sandboxes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -83,7 +83,7 @@ curl -X POST https://api.sandbase.ai/sandboxes \
 {
   "sandboxID": "sbx_03ghi...",
   "templateID": "opencode",
-  "clientID": "SandBase",
+  "clientID": "AGRouter",
   "status": "running",
   "startedAt": "2024-07-01T12:00:00Z",
   "endAt": "2024-07-01T12:05:00Z"
@@ -95,7 +95,7 @@ curl -X POST https://api.sandbase.ai/sandboxes \
 Once the sandbox is running, invoke OpenCode via the [exec endpoint](/api-reference/sandboxes/exec):
 
 ```bash
-curl -X POST https://api.sandbase.ai/sandboxes/sbx_03ghi.../processes \
+curl -X POST https://api.agrouter.ai/sandboxes/sbx_03ghi.../processes \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -111,7 +111,7 @@ The `-p` flag runs OpenCode in **prompt mode** — it executes the prompt non-in
 ```python
 import requests
 
-BASE = "https://api.sandbase.ai"
+BASE = "https://api.agrouter.ai"
 HEADERS = {"Authorization": "Bearer sk-sb-YOUR_KEY"}
 
 # 1. Create sandbox with OpenCode CLI (~60ms)

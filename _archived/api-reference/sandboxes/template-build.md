@@ -1,14 +1,14 @@
 ---
 title: Template Build API
-description: E2B-compatible Template API for SandBase. Read available templates and (internal) build custom templates via the v3 flow.
+description: E2B-compatible Template API for AGRouter. Read available templates and (internal) build custom templates via the v3 flow.
 ---
 
 # Template API
 
-SandBase provides an E2B-compatible Template API. There are two parts:
+AGRouter provides an E2B-compatible Template API. There are two parts:
 
 - **Reading templates** — list templates, get details, and resolve aliases. Public, used when creating sandboxes.
-- **Building custom templates (v3)** — create and build custom templates. Used internally by the SandBase team / E2B CLI; not required for everyday sandbox usage.
+- **Building custom templates (v3)** — create and build custom templates. Used internally by the AGRouter team / E2B CLI; not required for everyday sandbox usage.
 
 ::: tip Which do I need?
 If you only create sandboxes from existing templates (e.g. `Sandbox.create("hermes-agent")`), you only need the **read** endpoints below. The **build** flow is for producing new custom templates and aligns with the E2B v3 build pipeline.
@@ -17,7 +17,7 @@ If you only create sandboxes from existing templates (e.g. `Sandbox.create("herm
 ## Base URL
 
 ```
-https://api.sandbase.ai
+https://api.agrouter.ai
 ```
 
 ## Authentication
@@ -161,10 +161,10 @@ The v3 build flow aligns with the E2B CLI/SDK build pipeline. It separates templ
 ```
 
 ::: tip Use the E2B CLI
-The simplest way to build is the E2B CLI pointed at SandBase — it orchestrates all four steps for you:
+The simplest way to build is the E2B CLI pointed at AGRouter — it orchestrates all four steps for you:
 
 ```bash
-export E2B_API_URL=https://api.sandbase.ai
+export E2B_API_URL=https://api.agrouter.ai
 export E2B_API_KEY=sk-sb-YOUR_KEY
 e2b template build --name my-agent --dockerfile ./Dockerfile
 ```
@@ -371,7 +371,7 @@ DELETE /templates/tags                delete tags
 from e2b import Sandbox
 
 # Create a sandbox from any template
-sandbox = Sandbox("hermes-agent", api_url="https://api.sandbase.ai")
+sandbox = Sandbox("hermes-agent", api_url="https://api.agrouter.ai")
 ```
 
 ### JavaScript (E2B SDK)
@@ -380,7 +380,7 @@ sandbox = Sandbox("hermes-agent", api_url="https://api.sandbase.ai")
 import { Sandbox } from 'e2b'
 
 const sandbox = await Sandbox.create('hermes-agent', {
-  apiUrl: 'https://api.sandbase.ai',
+  apiUrl: 'https://api.agrouter.ai',
 })
 ```
 

@@ -26,20 +26,20 @@ const props = withDefaults(defineProps<{ locale?: 'en' | 'zh'; group?: 'all' | '
 const copyByLocale = {
   en: {
     items: [
-      { tag: 'Models', title: 'Language models', body: 'Filter the LLM catalog by provider, capability, context, and price.', href: 'https://www.sandbase.ai/models', external: true },
-      { tag: 'Multimodal', title: 'Image and video', body: 'Filter text-to-image, image-to-video, and other visual models.', href: 'https://www.sandbase.ai/models/image-video', external: true },
-      { tag: 'APIs', title: 'API resources', body: 'Filter search, social, and data APIs by platform.', href: 'https://www.sandbase.ai/apis', external: true },
-      { tag: 'Billing', title: 'Billing and credits', body: 'Check balance, top up, and review billing records.', href: 'https://www.sandbase.ai/console/billing', external: true },
-      { tag: 'Usage', title: 'Usage analytics', body: 'See recent call volume and cost for the active organization.', href: 'https://www.sandbase.ai/console/analytics?tab=overview&range=7d&type=all', external: true },
+      { tag: 'Models', title: 'Language models', body: 'Filter the LLM catalog by provider, capability, context, and price.', href: 'https://www.agrouter.ai/models', external: true },
+      { tag: 'Multimodal', title: 'Image and video', body: 'Filter text-to-image, image-to-video, and other visual models.', href: 'https://www.agrouter.ai/models/image-video', external: true },
+      { tag: 'APIs', title: 'API resources', body: 'Filter search, social, and data APIs by platform.', href: 'https://www.agrouter.ai/apis', external: true },
+      { tag: 'Billing', title: 'Billing and credits', body: 'Check balance, top up, and review billing records.', href: 'https://www.agrouter.ai/console/billing', external: true },
+      { tag: 'Usage', title: 'Usage analytics', body: 'See recent call volume and cost for the active organization.', href: 'https://www.agrouter.ai/console/analytics?tab=overview&range=7d&type=all', external: true },
     ],
   },
   zh: {
     items: [
-      { tag: 'Models', title: '大语言模型', body: '按提供商、能力、上下文和价格筛选语言模型。', href: 'https://www.sandbase.ai/models', external: true },
-      { tag: 'Multimodal', title: '图像 / 视频模型', body: '筛选文生图、图生视频等多模态模型。', href: 'https://www.sandbase.ai/models/image-video', external: true },
-      { tag: 'APIs', title: 'API 资源', body: '按平台和数据源筛选可用 API。', href: 'https://www.sandbase.ai/apis', external: true },
-      { tag: 'Billing', title: '账单和充值', body: '查看余额、充值和账单记录。', href: 'https://www.sandbase.ai/console/billing', external: true },
-      { tag: 'Usage', title: '用量', body: '查看当前组织的近期调用量和成本。', href: 'https://www.sandbase.ai/console/analytics?tab=overview&range=7d&type=all', external: true },
+      { tag: 'Models', title: '大语言模型', body: '按提供商、能力、上下文和价格筛选语言模型。', href: 'https://www.agrouter.ai/models', external: true },
+      { tag: 'Multimodal', title: '图像 / 视频模型', body: '筛选文生图、图生视频等多模态模型。', href: 'https://www.agrouter.ai/models/image-video', external: true },
+      { tag: 'APIs', title: 'API 资源', body: '按平台和数据源筛选可用 API。', href: 'https://www.agrouter.ai/apis', external: true },
+      { tag: 'Billing', title: '账单和充值', body: '查看余额、充值和账单记录。', href: 'https://www.agrouter.ai/console/billing', external: true },
+      { tag: 'Usage', title: '用量', body: '查看当前组织的近期调用量和成本。', href: 'https://www.agrouter.ai/console/analytics?tab=overview&range=7d&type=all', external: true },
     ],
   },
 } as const

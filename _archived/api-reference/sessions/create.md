@@ -13,7 +13,7 @@ description: Create a new agent session — a running instance of an agent withi
 Create a new session. A session is a running instance of an agent within an environment, maintaining state across multiple interactions.
 
 ::: info Claude API compatibility
-SandBase implements a subset of the [Claude Managed Agents](https://platform.claude.com/docs/en/api/python/beta/sessions/create) Session API. The fields documented below are supported today. Additional Claude fields are noted as roadmap items.
+AGRouter implements a subset of the [Claude Managed Agents](https://platform.claude.com/docs/en/api/python/beta/sessions/create) Session API. The fields documented below are supported today. Additional Claude fields are noted as roadmap items.
 :::
 
 ## Request Parameters
@@ -56,7 +56,7 @@ from anthropic import Anthropic
 
 client = Anthropic(
     api_key="sk-sb-YOUR_KEY",
-    base_url="https://api.sandbase.ai"
+    base_url="https://api.agrouter.ai"
 )
 
 session = client.beta.sessions.create(
@@ -71,7 +71,7 @@ import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
   apiKey: 'sk-sb-YOUR_KEY',
-  baseURL: 'https://api.sandbase.ai',
+  baseURL: 'https://api.agrouter.ai',
 });
 
 const session = await client.beta.sessions.create({
@@ -82,7 +82,7 @@ console.log(session.id);
 ```
 
 ```bash [cURL]
-curl -X POST https://api.sandbase.ai/v1/sessions \
+curl -X POST https://api.agrouter.ai/v1/sessions \
   -H "Authorization: Bearer sk-sb-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -145,7 +145,7 @@ Returns a [Session object](#session-object).
 The session references its agent by `agent_id` and the resolved `agent_version`. To fetch the full agent configuration, call [Get Agent](/api-reference/agents/get) with `?version={agent_version}`.
 
 ::: info Difference from Claude
-Claude embeds a full resolved `agent` snapshot object inside the session. SandBase currently returns `agent_id` + `agent_version` references instead — fetch the agent separately if you need its configuration. A future release may embed the snapshot.
+Claude embeds a full resolved `agent` snapshot object inside the session. AGRouter currently returns `agent_id` + `agent_version` references instead — fetch the agent separately if you need its configuration. A future release may embed the snapshot.
 :::
 
 ### Usage Object
@@ -157,7 +157,7 @@ Claude embeds a full resolved `agent` snapshot object inside the session. SandBa
 ```
 
 ::: tip Roadmap
-Claude's Session object also includes `stats`, `resources`, `outcome_evaluations`, `vault_ids`, and a richer `usage` (cache breakdown). These are not yet returned by SandBase and will be added in later phases. Clients should tolerate their absence.
+Claude's Session object also includes `stats`, `resources`, `outcome_evaluations`, `vault_ids`, and a richer `usage` (cache breakdown). These are not yet returned by AGRouter and will be added in later phases. Clients should tolerate their absence.
 :::
 
 ## Errors

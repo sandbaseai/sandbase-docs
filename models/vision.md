@@ -1,6 +1,6 @@
 ---
 title: Vision
-description: Send image inputs to currently available SandBase vision models.
+description: Send image inputs to currently available AGRouter vision models.
 ---
 
 # Vision
@@ -9,7 +9,7 @@ Vision models accept images together with text. Availability, image limits, acce
 
 ## Choose a vision model
 
-- Browse [Models](https://www.sandbase.ai/models) and filter for the required image-input capability.
+- Browse [Models](https://www.agrouter.ai/models) and filter for the required image-input capability.
 - Verify the exact model ID and request fields in the [Model API Reference](/model-api-reference/llm-models).
 - Use [`GET /v1/models`](/api-reference/models/list) and the detailed model endpoint when selecting a model programmatically.
 
@@ -20,8 +20,8 @@ Do not maintain a fixed list of vision models in application code. A model can b
 For an OpenAI-compatible vision model, send text and image content parts in the same message. Replace `$MODEL_ID` with an enabled model ID whose model card declares image-input support.
 
 ```bash
-curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl https://api.agrouter.ai/v1/chat/completions \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "'"$MODEL_ID"'",

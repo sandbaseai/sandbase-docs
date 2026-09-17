@@ -14,8 +14,8 @@ Create one when the Agent and its input contract are tested and an external call
 ## Invoke a Service
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/endpoints/ep_01.../run \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl -X POST https://api.agrouter.ai/v1/endpoints/ep_01.../run \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"input":"Prepare a sourced customer brief."}'
 ```

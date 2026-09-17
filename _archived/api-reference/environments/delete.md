@@ -27,7 +27,7 @@ from anthropic import Anthropic
 
 client = Anthropic(
     api_key="sk-sb-YOUR_KEY",
-    base_url="https://api.sandbase.ai"
+    base_url="https://api.agrouter.ai"
 )
 
 result = client.beta.environments.delete(
@@ -38,7 +38,7 @@ print(result.type)  # "environment_deleted"
 ```
 
 ```bash [cURL]
-curl -X DELETE https://api.sandbase.ai/v1/environments/env_011CZkZ9X2dpNyB7HsEFoRfW \
+curl -X DELETE https://api.agrouter.ai/v1/environments/env_011CZkZ9X2dpNyB7HsEFoRfW \
   -H "Authorization: Bearer sk-sb-YOUR_KEY"
 ```
 

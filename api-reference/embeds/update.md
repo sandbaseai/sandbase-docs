@@ -27,8 +27,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |
-        curl -X PATCH https://api.sandbase.ai/v1/embeds/emb_12345678-abc \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+        curl -X PATCH https://api.agrouter.ai/v1/embeds/emb_12345678-abc \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"title":"Ask our docs","enabled":true}'
 ---

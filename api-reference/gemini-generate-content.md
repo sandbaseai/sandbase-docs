@@ -1,6 +1,6 @@
 ---
 title: Google Gemini GenerateContent
-description: Call SandBase with the native Google Gemini GenerateContent protocol.
+description: Call AGRouter with the native Google Gemini GenerateContent protocol.
 aside: false
 outline: false
 apiReference:
@@ -12,7 +12,7 @@ apiReference:
   groups:
     - title: Path parameters
       fields:
-        - { name: model, type: string, required: true, description: "Bare Google model name, such as gemini-3.5-flash. SandBase resolves it as google/{model}." }
+        - { name: model, type: string, required: true, description: "Bare Google model name, such as gemini-3.5-flash. AGRouter resolves it as google/{model}." }
     - title: Request body
       fields:
         - { name: contents, type: array, required: false, description: Gemini conversation contents made of role and parts. }
@@ -27,8 +27,8 @@ apiReference:
       language: bash
       code: |-
         curl -X POST \
-          "https://api.sandbase.ai/v1beta/models/gemini-3.5-flash:generateContent" \
-          -H "x-goog-api-key: $SANDBASE_API_KEY" \
+          "https://api.agrouter.ai/v1beta/models/gemini-3.5-flash:generateContent" \
+          -H "x-goog-api-key: $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"contents":[{"role":"user","parts":[{"text":"Explain immutable infrastructure in one sentence."}]}]}'
   response:
@@ -57,16 +57,16 @@ apiReference:
 
 ## Authentication
 
-Google-compatible requests can carry the SandBase API key in `x-goog-api-key`, `Authorization: Bearer …`, or the `key` query parameter, in that priority order. Prefer a header: query-string credentials can appear in proxy logs and browser history.
+Google-compatible requests can carry the AGRouter API key in `x-goog-api-key`, `Authorization: Bearer …`, or the `key` query parameter, in that priority order. Prefer a header: query-string credentials can appear in proxy logs and browser history.
 
 ## Streaming
 
-Replace the method suffix with `:streamGenerateContent`. Without a query parameter, SandBase returns Google-compatible response objects as a streamed JSON array. Add `?alt=sse` for Server-Sent Events:
+Replace the method suffix with `:streamGenerateContent`. Without a query parameter, AGRouter returns Google-compatible response objects as a streamed JSON array. Add `?alt=sse` for Server-Sent Events:
 
 ```bash
 curl -N -X POST \
-  "https://api.sandbase.ai/v1beta/models/gemini-3.5-flash:streamGenerateContent?alt=sse" \
-  -H "x-goog-api-key: $SANDBASE_API_KEY" \
+  "https://api.agrouter.ai/v1beta/models/gemini-3.5-flash:streamGenerateContent?alt=sse" \
+  -H "x-goog-api-key: $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"contents":[{"role":"user","parts":[{"text":"Write a short greeting."}]}]}'
 ```
@@ -78,13 +78,13 @@ These image models have dedicated native GenerateContent mappings:
 - [Gemini 3 Pro Image（Nano Banana Pro）](/model-api-reference/official-native-api/google/gemini-3-pro-image)
 - [Gemini 3.1 Flash Image（Nano Banana 2）](/model-api-reference/official-native-api/google/gemini-3.1-flash-image)
 
-For these mappings, SandBase forwards the request and response payloads without converting them through Chat
+For these mappings, AGRouter forwards the request and response payloads without converting them through Chat
 Completions. This preserves image parts, response modalities, and provider-defined fields. Use the bare model name in
 the URL; for example, `google/gemini-3.1-flash-image` becomes `gemini-3.1-flash-image` in the path.
 
 ## Routing and translation boundaries
 
-SandBase selects only providers that support the requested native Gemini protocol. If the selected model has no
+AGRouter selects only providers that support the requested native Gemini protocol. If the selected model has no
 compatible native mapping, the request fails instead of falling back to a provider with a different protocol.
 
 Models that use the translated GenerateContent path support text, function calls and responses, inline `image/*` data,

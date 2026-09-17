@@ -1,11 +1,11 @@
 ---
 title: API Errors
-description: Handle SandBase API errors by HTTP status, endpoint family, documented response shape, and retry safety.
+description: Handle AGRouter API errors by HTTP status, endpoint family, documented response shape, and retry safety.
 ---
 
 # API Errors
 
-SandBase uses standard HTTP status codes, but it does not expose one universal error body. Branch on the HTTP status first, then parse the response schema documented for the endpoint you called. Do not require every error to contain `code`, `param`, `message`, or `request_id`.
+AGRouter uses standard HTTP status codes, but it does not expose one universal error body. Branch on the HTTP status first, then parse the response schema documented for the endpoint you called. Do not require every error to contain `code`, `param`, `message`, or `request_id`.
 
 ## Response shapes
 
@@ -47,7 +47,7 @@ Use the [OpenAPI specification](/openapi.yaml) for the exact status codes and sc
 | `409` | Resource state conflict | Read the latest state before deciding whether a retry is safe. |
 | `422` | Semantically invalid resource input | Correct the documented field values. |
 | `429` | Per-key or platform-wide request protection | Retry with bounded backoff and jitter when the operation is safe to repeat. |
-| `500`, `502`, `503`, `504` | SandBase or upstream failure | Retry only when the operation is safe to repeat. |
+| `500`, `502`, `503`, `504` | AGRouter or upstream failure | Retry only when the operation is safe to repeat. |
 
 Not every endpoint documents every status in this table. The operation's OpenAPI response map is authoritative.
 
@@ -61,13 +61,13 @@ Documented authentication messages include:
 - `API key has expired`
 - `insufficient_scope`
 
-Use `Authorization: Bearer $SANDBASE_API_KEY` for standard endpoints. `POST /v1/messages` also accepts `x-api-key`; protocol-compatible Google endpoints document their own supported key headers.
+Use `Authorization: Bearer $AGROUTER_API_KEY` for standard endpoints. `POST /v1/messages` also accepts `x-api-key`; protocol-compatible Google endpoints document their own supported key headers.
 
 A revoked key cannot be re-enabled. Create a replacement, update the consuming application, verify it, and then remove any remaining references to the old key.
 
 ## Rate limits
 
-Documented flat messages include `API key rate limit exceeded` and `global rate limit exceeded`. SandBase does not publish one universal numeric limit because the effective limit can vary by key and platform capacity.
+Documented flat messages include `API key rate limit exceeded` and `global rate limit exceeded`. AGRouter does not publish one universal numeric limit because the effective limit can vary by key and platform capacity.
 
 If a response includes `Retry-After`, respect it. Otherwise use bounded exponential backoff with jitter. See [Rate limits](/guides/rate-limiting) for request-smoothing patterns.
 
@@ -95,7 +95,7 @@ After a stream starts, an error may arrive in that protocol's stream format inst
 
 Record the endpoint, HTTP status, selected model or resource ID, timestamp, and any safe request identifier returned by the server. Never log authorization headers, API keys, credential values, or sensitive prompt content.
 
-Use [Console → Activities](https://www.sandbase.ai/console/activities) to inspect organization request history. When reporting a persistent failure, include sanitized request metadata and the smallest reproducible request.
+Use [Console → Activities](https://www.agrouter.ai/console/activities) to inspect organization request history. When reporting a persistent failure, include sanitized request metadata and the smallest reproducible request.
 
 ## See also
 

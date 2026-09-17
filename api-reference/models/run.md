@@ -1,6 +1,6 @@
 ---
 title: Run a model or API capability
-description: Submit a SandBase model or API capability through the unified run endpoint.
+description: Submit a AGRouter model or API capability through the unified run endpoint.
 aside: false
 outline: false
 apiReference:
@@ -8,7 +8,7 @@ apiReference:
   operation: Models
   method: POST
   path: /v1/run
-  description: Execute an enabled SandBase model or API capability. The request fields are capability-specific; use the model detail page or Store for the selected capability schema.
+  description: Execute an enabled AGRouter model or API capability. The request fields are capability-specific; use the model detail page or Store for the selected capability schema.
   groups:
     - title: Request body
       fields:
@@ -20,8 +20,8 @@ apiReference:
     - label: cURL
       language: bash
       code: |-
-        curl -X POST https://api.sandbase.ai/v1/run \
-          -H "Authorization: Bearer $SANDBASE_API_KEY" \
+        curl -X POST https://api.agrouter.ai/v1/run \
+          -H "Authorization: Bearer $AGROUTER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"model":"openai/gpt-image-2","prompt":"A studio product photo on a clean white background"}'
   response:
@@ -44,4 +44,4 @@ Capability-specific request fields and output shapes are defined on the selected
 
 ## Webhook callbacks
 
-Set `webhook_url` only for supported asynchronous image, video, or audio tasks. SandBase sends the final run event to the HTTPS endpoint after completion or failure; the callback is a delivery hint, not a replacement for `GET /v1/run/{id}`. Always keep polling the run endpoint for authoritative status and retry safely when a callback is delayed or duplicated. Synchronous model responses and provider-native endpoints do not use this callback field.
+Set `webhook_url` only for supported asynchronous image, video, or audio tasks. AGRouter sends the final run event to the HTTPS endpoint after completion or failure; the callback is a delivery hint, not a replacement for `GET /v1/run/{id}`. Always keep polling the run endpoint for authoritative status and retry safely when a callback is delayed or duplicated. Synchronous model responses and provider-native endpoints do not use this callback field.

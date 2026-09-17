@@ -1,6 +1,6 @@
 ---
 title: OpenAI Responses
-description: Use the OpenAI-compatible Responses API with GPT models through SandBase.
+description: Use the OpenAI-compatible Responses API with GPT models through AGRouter.
 ---
 
 # OpenAI Responses
@@ -10,8 +10,8 @@ Use `input` for prompts or structured content and read generated items from
 `output`.
 
 ```bash
-curl https://api.sandbase.ai/v1/responses \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+curl https://api.agrouter.ai/v1/responses \
+  -H "Authorization: Bearer $AGROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "openai/<gpt-model>",

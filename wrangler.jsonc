@@ -1,23 +1,23 @@
 {
-  "name": "sandbase-docs",
+  "name": "agrouter-docs",
   "compatibility_date": "2026-08-26",
   "main": "./worker/index.js",
   "routes": [
     {
-      "pattern": "sandbase.ai/docs",
-      "zone_name": "sandbase.ai"
+      "pattern": "agrouter.ai/docs",
+      "zone_name": "agrouter.ai"
     },
     {
-      "pattern": "sandbase.ai/docs/*",
-      "zone_name": "sandbase.ai"
+      "pattern": "agrouter.ai/docs/*",
+      "zone_name": "agrouter.ai"
     },
     {
-      "pattern": "www.sandbase.ai/docs",
-      "zone_name": "sandbase.ai"
+      "pattern": "www.agrouter.ai/docs",
+      "zone_name": "agrouter.ai"
     },
     {
-      "pattern": "www.sandbase.ai/docs/*",
-      "zone_name": "sandbase.ai"
+      "pattern": "www.agrouter.ai/docs/*",
+      "zone_name": "agrouter.ai"
     }
   ],
   "assets": {
