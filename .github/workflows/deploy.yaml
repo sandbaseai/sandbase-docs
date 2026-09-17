@@ -33,11 +33,11 @@ jobs:
         run: |
           set -euo pipefail
           if [ "$GITHUB_EVENT_NAME" = push ]; then
-            git fetch --no-tags origin main:refs/remotes/origin/main
+            git fetch --no-tags origin agrouter:refs/remotes/origin/agrouter
             release_commit="$(git rev-list -n1 "$GITHUB_REF")"
-            git merge-base --is-ancestor "$release_commit" origin/main
-          elif [ "$GITHUB_REF" != refs/heads/main ]; then
-            echo "Production dispatch must run from main."
+            git merge-base --is-ancestor "$release_commit" origin/agrouter
+          elif [ "$GITHUB_REF" != refs/heads/agrouter ]; then
+            echo "Production dispatch must run from agrouter."
             exit 1
           fi
 
