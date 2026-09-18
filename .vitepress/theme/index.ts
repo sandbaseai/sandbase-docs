@@ -25,6 +25,17 @@ export default {
     app.component('QuickstartOnboard', QuickstartOnboard)
     app.component('QuickstartResources', QuickstartResources)
 
+    if (typeof window !== 'undefined') {
+      // Default landing page is the Official Native API reference. Redirect the
+      // docs root (and its /docs/index alias) there before the homepage renders.
+      const landing = '/docs/model-api-reference/official-native-api/'
+      const path = window.location.pathname
+      if (path === '/docs' || path === '/docs/' || path === '/docs/index' || path === '/') {
+        window.location.replace(landing)
+        return
+      }
+    }
+
     // Sync theme with main site: read localStorage 'theme' key set by AGRouter-dashboard
     if (typeof window !== 'undefined') {
       const siteTheme = localStorage.getItem('theme')

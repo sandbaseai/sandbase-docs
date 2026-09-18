@@ -9,6 +9,13 @@ export default {
       return Response.redirect(url, 308)
     }
 
+    // The docs landing page is the Official Native API reference. Redirect the
+    // root (and its legacy /docs/index alias) there instead of the homepage.
+    if (url.pathname === `${DOCS_PREFIX}/` || url.pathname === `${DOCS_PREFIX}/index`) {
+      url.pathname = `${DOCS_PREFIX}/model-api-reference/official-native-api/`
+      return Response.redirect(url, 302)
+    }
+
     if (!url.pathname.startsWith(`${DOCS_PREFIX}/`)) {
       return new Response('Not Found', { status: 404 })
     }

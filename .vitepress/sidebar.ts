@@ -6,15 +6,15 @@ import {
 
 // ─── Model API Reference ─────────────────────────────────────
 
-function modelApiReferenceSidebar(items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] {
+function modelApiReferenceSidebar(_items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] {
+  // Model API Reference navigation is provided by the custom Official Native API
+  // sidebar (OfficialNativeApiSidebar.vue), which also lists the OpenAI and
+  // Anthropic LLM models. Only the external quick links remain in the config
+  // sidebar so the sidebar container (and its custom slot) still renders.
   return [
     { text: 'Status', link: 'https://status.agrouter.ai' },
     { text: 'Community', link: 'https://www.agrouter.ai/community' },
     { text: 'Blog', link: 'https://www.agrouter.ai/blog' },
-    {
-      text: 'Model API Reference',
-      items: [...items],
-    },
   ]
 }
 
