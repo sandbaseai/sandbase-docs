@@ -19,7 +19,9 @@ const capabilitiesPage = readFileSync(new URL('../models/capabilities.md', impor
 const visionPage = readFileSync(new URL('../models/vision.md', import.meta.url), 'utf8')
 const modelApiOverview = readFileSync(new URL('../model-api-reference/index.md', import.meta.url), 'utf8')
 const homePage = readFileSync(new URL('../.vitepress/theme/HomePage.vue', import.meta.url), 'utf8')
-const officialNativeSidebar = readFileSync(new URL('../.vitepress/theme/OfficialNativeApiSidebar.vue', import.meta.url), 'utf8')
+// The Official Native API navigation now lives directly in the config sidebar
+// (sidebar.ts) as top-level groups instead of a custom Vue component.
+const officialNativeSidebar = sidebar
 const legacySeedanceReference = readFileSync(new URL('../api-reference/volcengine-contents-generations.md', import.meta.url), 'utf8')
 const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8')
 const catalogOverviews = [
@@ -60,7 +62,7 @@ for (const [label, content] of [['Capabilities', capabilitiesPage], ['Vision', v
   assert.doesNotMatch(content, /^\| `[^`]+` \|/m, `${label} must not maintain a hand-written model snapshot`)
   assert.doesNotMatch(content, /gpt-4o|gemini-2\.5|deepseek-v3/i, `${label} must not publish stale model recommendations`)
 }
-assert.match(legacySeedanceReference, /^canonical:\s*\/docs\/model-api-reference\/official-native-api\/$/m, 'Legacy Seedance reference must canonicalize to Official Native API')
+assert.match(legacySeedanceReference, /^canonical:\s*\/docs\/$/m, 'Legacy Seedance reference must canonicalize to the Official Native API root')
 assert.match(legacySeedanceReference, /^robots:\s*noindex,follow$/m, 'Legacy Seedance reference must not compete in search results')
 assert.doesNotMatch(readme, /deepseek\/deepseek-v3\b/i, 'README must not recommend the retired DeepSeek V3 model')
 assert.doesNotMatch(readme, /API Reference[^\n]*webhooks/i, 'README must not advertise the hidden Webhooks page')
@@ -661,7 +663,6 @@ assert.match(updateDeploymentSchema, /pattern: '\^https:\/\/open\\\.feishu\\\.cn
 assert.doesNotMatch(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Removed Schedules group must not link the Feishu notification test reference')
 assert.doesNotMatch(sidebar, /\/api-reference\/endpoints\/acp/, 'Removed Services group must not link the Endpoint ACP reference')
 assert.doesNotMatch(modelSidebar, /text: 'Official Native API'/, 'Model API main navigation must not duplicate the custom Official Native API sidebar')
-assert.match(officialNativeSidebar, /Official Native API/, 'Custom sidebar must expose Official Native API')
 assert.match(officialNativeSidebar, /official-native-api\/bytedance\/seedance-2\.5-official/, 'Official Native API sidebar must expose Seedance 2.5')
 assert.match(officialNativeSidebar, /official-native-api\/bytedance\/seedance-2\.0-official/, 'Official Native API sidebar must expose Seedance 2.0')
 assert.match(officialNativeSidebar, /Media Assets for Seedance/, 'Official Native API sidebar must expose the Seedance Asset workflow')

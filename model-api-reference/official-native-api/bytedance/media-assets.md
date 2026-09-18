@@ -157,4 +157,4 @@ contains a `video_url` uses the video-to-video billing rate.
 
 For request parameters, polling, task statuses, and billing, continue with
 [Seedance 2.5 Official](./seedance-2.5-official), [Seedance 2.0 Official](./seedance-2.0-official), or the complete
-[Official Native API overview](/model-api-reference/official-native-api).
+[Official Native API overview](/).

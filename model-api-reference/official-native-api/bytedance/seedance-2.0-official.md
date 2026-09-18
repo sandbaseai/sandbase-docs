@@ -92,7 +92,7 @@ While generation is in progress, `status` is `queued` or `running`. A completed 
 ```
 
 Stop polling when `status` is `succeeded`, `failed`, `expired`, or `cancelled`. See
-[Official Native API](/model-api-reference/official-native-api) for every input workflow, parameter, response field,
+[Official Native API](/) for every input workflow, parameter, response field,
 status, and error.
 
 ## Official ByteDance resources

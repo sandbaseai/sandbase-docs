@@ -300,7 +300,9 @@ export default defineConfig({
       '/model-api-reference/platform-apis/': platformApiReferenceFallbackSidebar,
       '/model-api-reference/': fullModelApiReferenceSidebar,
       '/api-reference/': apiReferenceSidebar,
-      '/': docsSidebar,
+      // The docs root now serves the Official Native API overview, so the root
+      // (and fallback) routes use the same Official Native API navigation.
+      '/': fullModelApiReferenceSidebar,
     },
 
     search: {

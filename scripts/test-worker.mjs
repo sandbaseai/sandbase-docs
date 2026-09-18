@@ -17,12 +17,4 @@ assert.equal(rewritten.headers.get('Location'), '/docs/models/supported')
 const outside = await worker.fetch(new Request('https://www.agrouter.ai/models/supported'), { ASSETS: redirectingAssets })
 assert.equal(outside.status, 404)
 
-const rootLanding = await worker.fetch(new Request('https://www.agrouter.ai/docs/'), { ASSETS: redirectingAssets })
-assert.equal(rootLanding.status, 302)
-assert.equal(new URL(rootLanding.headers.get('Location')).pathname, '/docs/model-api-reference/official-native-api/')
-
-const indexAlias = await worker.fetch(new Request('https://www.agrouter.ai/docs/index'), { ASSETS: redirectingAssets })
-assert.equal(indexAlias.status, 302)
-assert.equal(new URL(indexAlias.headers.get('Location')).pathname, '/docs/model-api-reference/official-native-api/')
-
-console.log('Worker routing: ok (docs mount preserved, root lands on Official Native API)')
+console.log('Worker routing: ok (docs mount preserved across asset redirects)')
