@@ -305,24 +305,16 @@ assert.equal((modelSidebar.match(/text: 'Inference APIs'/g) ?? []).length, 0, 'M
 assert.doesNotMatch(sidebar, /text: 'Embed Configs'/, 'Platform API sidebar must not expose the unmaintained Embed Config module')
 assert.doesNotMatch(platformSidebar, /text: 'Models'/, 'Platform API sidebar must direct model discovery to the standalone Model API Reference')
 assert.doesNotMatch(platformSidebar, /text: 'Agent APIs'/, 'Platform API sidebar must use resource names without redundant API suffixes')
-assert.equal((platformSidebar.match(/text: 'Sessions'/g) ?? []).length, 1, 'Sessions must be one top-level Platform API resource group')
-assert.match(platformSidebar, /text: 'Services'/, 'Platform API sidebar must use the Services product name')
+// The agent-platform resource groups (Agents, Sessions, Services, Schedules,
+// Skills, Credentials) have been removed from the AGRouter Platform API sidebar.
+assert.doesNotMatch(platformSidebar, /text: 'Agents'/, 'Removed Agents group must not appear in the Platform API sidebar')
+assert.doesNotMatch(platformSidebar, /text: 'Sessions'/, 'Removed Sessions group must not appear in the Platform API sidebar')
+assert.doesNotMatch(platformSidebar, /text: 'Services'/, 'Removed Services group must not appear in the Platform API sidebar')
 assert.doesNotMatch(platformSidebar, /text: 'Endpoints'/, 'Platform API sidebar must not expose the legacy Endpoints product name')
-assert.match(platformSidebar, /text: 'Schedules'/, 'Platform API sidebar must use the Schedules product name')
+assert.doesNotMatch(platformSidebar, /text: 'Schedules'/, 'Removed Schedules group must not appear in the Platform API sidebar')
 assert.doesNotMatch(platformSidebar, /text: 'Deployments'/, 'Platform API sidebar must not expose the compatibility Deployment resource as the product name')
-for (const anchor of [
-  'create-a-credential',
-  'list-credentials',
-  'get-a-credential',
-  'update-a-credential',
-  'rotate-a-credential',
-]) {
-  assert.match(
-    platformSidebar,
-    new RegExp(`/api-reference/credentials/#${anchor}`),
-    `Credentials sidebar must expose the ${anchor} operation`,
-  )
-}
+assert.doesNotMatch(platformSidebar, /text: 'Skills'/, 'Removed Skills group must not appear in the Platform API sidebar')
+assert.doesNotMatch(platformSidebar, /text: 'Credentials'/, 'Removed Credentials group must not appear in the Platform API sidebar')
 assert.match(openapi, /^  \/v1\/endpoints\/\{[^}]+\}\/mcp:$/m, 'Endpoint MCP transport must be documented')
 assert.match(openapi, /^    post:/m, 'Endpoint MCP transport must support POST')
 assert.match(openapi, /^    delete:/m, 'Endpoint MCP transport must support DELETE')
@@ -666,8 +658,8 @@ assert.match(updateDeploymentSchema, /initial_events:\n\s+type: array\n\s+minIte
 assert.match(updateDeploymentSchema, /notification_settings:\n\s+type: \[object, 'null'\]/, 'Deployment notifications must allow null to clear the saved target')
 assert.match(updateDeploymentSchema, /required: \[feishu_webhook_url\]/, 'A non-null notification_settings object must contain only its implemented webhook field')
 assert.match(updateDeploymentSchema, /pattern: '\^https:\/\/open\\\.feishu\\\.cn\/open-apis\/bot\/v2\/hook\//, 'Deployment notifications must publish the enforced Feishu webhook origin and path')
-assert.match(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Sidebar must link to the Feishu notification test reference')
-assert.match(sidebar, /\/api-reference\/endpoints\/acp/, 'Sidebar must link to the Endpoint ACP reference')
+assert.doesNotMatch(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Removed Schedules group must not link the Feishu notification test reference')
+assert.doesNotMatch(sidebar, /\/api-reference\/endpoints\/acp/, 'Removed Services group must not link the Endpoint ACP reference')
 assert.doesNotMatch(modelSidebar, /text: 'Official Native API'/, 'Model API main navigation must not duplicate the custom Official Native API sidebar')
 assert.match(officialNativeSidebar, /Official Native API/, 'Custom sidebar must expose Official Native API')
 assert.match(officialNativeSidebar, /official-native-api\/bytedance\/seedance-2\.5-official/, 'Official Native API sidebar must expose Seedance 2.5')
@@ -691,7 +683,7 @@ const scheduleOverview = readFileSync(new URL('../api-reference/deployments/inde
 assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/runs/, 'Schedule overview must document the preferred plural trigger path')
 assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/run` remains a compatibility alias/, 'Schedule overview must label the singular trigger path as compatibility-only')
 for (const anchor of ['create-a-service', 'list-services', 'get-a-service', 'update-a-service', 'delete-a-service', 'invoke-with-rest']) {
-  assert.match(sidebar, new RegExp(`/api-reference/endpoints/#${anchor}`), `Sidebar must expose the Service ${anchor} operation`)
+  assert.doesNotMatch(sidebar, new RegExp(`/api-reference/endpoints/#${anchor}`), `Removed Services group must not expose the ${anchor} operation`)
 }
 const deploymentSchema = openapi.match(/^    Deployment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
