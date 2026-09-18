@@ -292,9 +292,7 @@ export default defineConfig({
     logoLink: { link: 'https://www.agrouter.ai', target: '_blank', rel: 'noopener noreferrer' },
 
     nav: [
-      { text: 'Docs', link: '/', activeMatch: '^/(?!api-reference/|model-api-reference/)' },
       { text: 'Model API Reference', link: '/model-api-reference/', activeMatch: '^/model-api-reference/' },
-      { text: 'Platform API', link: '/api-reference/', activeMatch: '^/api-reference/' },
       { text: 'Console', link: 'https://www.agrouter.ai/console', target: '_blank', rel: 'noopener noreferrer' },
     ],
 
