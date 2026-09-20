@@ -1,6 +1,6 @@
 ---
 title: Quickstart
-description: Create a AGRouter account, set up an organization, then call an API, try it on the website, connect an AI tool, or build an Agent.
+description: Create an AGRouter account, set up an organization, then call a model, try it on the website, or connect an AI tool.
 pageClass: quickstart-page
 ---
 
@@ -53,7 +53,6 @@ Choose this if you are adding one capability to your app.
 2. Filter the Store and open a detail page:
    - [Language models](https://www.agrouter.ai/models){target="_blank"} — filter by provider, capabilities, context, and price
    - [Image and video models](https://www.agrouter.ai/models/image-video){target="_blank"} — filter multimodal models such as text-to-image, image-to-image, text-to-video, and image-to-video
-   - [APIs](https://www.agrouter.ai/apis){target="_blank"} — filter API resources by platform and data source
 3. Copy the request and call it with your AGRouter API key.
 
 Example Model call:
@@ -74,13 +73,11 @@ Learn more: [First API Call](/getting-started/first-call).
 
 ### 3.2 Use AGRouter on the website {#use-on-website}
 
-Choose this if you want to try a Model, API, or Agent in the browser first — no client install and no code.
+Choose this if you want to try a Model in the browser first — no client install and no code.
 
 1. Sign in, then open the Store:
    - [Language models](https://www.agrouter.ai/models){target="_blank"}
    - [Image and video models](https://www.agrouter.ai/models/image-video){target="_blank"}
-   - [APIs](https://www.agrouter.ai/apis){target="_blank"}
-   - [Agents](https://www.agrouter.ai/agents){target="_blank"}
 2. Filter and open a detail page.
 3. Run one request on that page and confirm a result comes back.
 
@@ -88,7 +85,7 @@ Learn more: [Store](/store/).
 
 ### 3.3 Use AGRouter in your AI tool {#use-in-ai-tool}
 
-Choose this if you use Codex, Claude, Cursor, Kiro, or another supported client and want Models, APIs, and Services inside that app.
+Choose this if you use Codex, Claude, Cursor, Kiro, or another supported client and want Models and Services inside that app.
 
 1. Open [Setup](https://www.agrouter.ai/console/setup){target="_blank"}.
 2. Choose your AI tool and review its prerequisites.
@@ -98,31 +95,14 @@ Choose this if you use Codex, Claude, Cursor, Kiro, or another supported client 
 
 To change what the connected tool can discover, open [Workspace Services](https://www.agrouter.ai/console/setup/installed){target="_blank"}.
 
-For example, after adding a web search API, you can ask:
-
-> Research this company and give me a sourced customer brief.
-
 Learn more: [Connect AI tools](/setup/).
-
-### 3.4 Build an Agent {#build-agent}
-
-Choose this if the work has multiple steps or should be reused.
-
-1. Open [Build Agent](https://www.agrouter.ai/console/agents){target="_blank"}.
-2. Define the Agent instructions.
-3. Pick a Model.
-4. Add APIs and Skills.
-5. Test a run.
-6. Publish a selected version as a Service, or create a Schedule.
-
-Learn more: [Build Agent](/agents/).
 
 ## 4. Confirm it works {#confirm-it-works}
 
 You are ready when all of the following are true:
 
 - The Console header shows the organization you intend to use.
-- You completed one path: an API call, a run on the website, a connected AI tool, or an Agent.
+- You completed one path: an API call, a run on the website, or a connected AI tool.
 - One request succeeds.
 
 If the request fails, check the active organization, the key, and [Errors](/guides/error-handling). Add credits in [Billing](https://www.agrouter.ai/console/billing){target="_blank"} when the workspace has no remaining balance.
@@ -138,7 +118,6 @@ After you sign in, review spend for the active organization:
 <QuickstartResources group="catalog" />
 
 - [API keys](/getting-started/api-keys) — create and rotate organization keys
-- [Store](/store/) — try Models, APIs, and Agents on the website
+- [Store](/store/) — try Models on the website
 - [Setup](/setup/) — install capabilities into AI tools
-- [Build Agent](/agents/) — create reusable Agents
-- [API Reference](/api-reference/) — integrate with code
+- [First API Call](/getting-started/first-call) — call a model from code

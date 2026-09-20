@@ -70,7 +70,6 @@ const copyByLocale = {
       { tag: 'A', href: '#call-api', title: 'Call an API', body: 'Send a request from your app' },
       { tag: 'B', href: '#use-on-website', title: 'Use on the website', body: 'Try it in the Store first' },
       { tag: 'C', href: '#use-in-ai-tool', title: 'Use in an AI tool', body: 'Connect the client you already use' },
-      { tag: 'D', href: '#build-agent', title: 'Build an Agent', body: 'Compose a reusable workflow' },
     ],
     steps: [
       {
@@ -90,7 +89,7 @@ const copyByLocale = {
       {
         id: '03',
         title: 'Connect AGRouter',
-        body: 'Call an API, try it on the website, connect an AI tool, or build an Agent.',
+        body: 'Call an API, try it on the website, or connect an AI tool.',
         href: '#connect',
         cta: 'See paths',
       },
@@ -118,7 +117,6 @@ const copyByLocale = {
       { tag: 'A', href: '#call-api', title: '调用 API', body: '用 Key 从代码发起请求' },
       { tag: 'B', href: '#use-on-website', title: '在官网使用', body: '先在 Store 详情页试用' },
       { tag: 'C', href: '#use-in-ai-tool', title: '在 AI 中使用', body: '接到现有 AI 客户端' },
-      { tag: 'D', href: '#build-agent', title: '搭建 Agent', body: '组合成可复用工作流' },
     ],
     steps: [
       {
@@ -138,7 +136,7 @@ const copyByLocale = {
       {
         id: '03',
         title: '接入 AGRouter',
-        body: '从 API 调用、官网试用、接到 AI 工具，或搭建 Agent 里选一种。',
+        body: '从 API 调用、官网试用，或接到 AI 工具里选一种。',
         href: '#connect',
         cta: '查看路径',
       },

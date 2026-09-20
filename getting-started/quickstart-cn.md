@@ -1,6 +1,6 @@
 ---
 title: 快速上手
-description: 注册 AGRouter 账号、创建组织，然后调用 API、在官网试用、接入 AI 工具，或搭建 Agent。
+description: 注册 AGRouter 账号、创建组织，然后调用模型、在官网试用，或接入 AI 工具。
 pageClass: quickstart-page
 prev: false
 next: false
@@ -55,7 +55,6 @@ API Key、用量和账单都属于组织。一个人试用时，留在 personal 
 2. 在 Store 里筛选能力，打开详情页：
    - [大语言模型](https://www.agrouter.ai/models){target="_blank"} — 按提供商、能力、上下文和价格筛选
    - [图像 / 视频模型](https://www.agrouter.ai/models/image-video){target="_blank"} — 筛选文生图、图生图、文生视频、图生视频等多模态模型
-   - [APIs](https://www.agrouter.ai/apis){target="_blank"} — 按平台和数据源筛选 API 资源
 3. 复制请求，用你的 AGRouter API key 调用。
 
 Model 调用示例：
@@ -81,8 +80,6 @@ curl https://api.agrouter.ai/v1/chat/completions \
 1. 登录后打开 Store：
    - [大语言模型](https://www.agrouter.ai/models){target="_blank"}
    - [图像 / 视频模型](https://www.agrouter.ai/models/image-video){target="_blank"}
-   - [APIs](https://www.agrouter.ai/apis){target="_blank"}
-   - [Agents](https://www.agrouter.ai/agents){target="_blank"}
 2. 筛选并打开详情页。
 3. 在页面上发起一次请求，确认返回结果。
 
@@ -90,7 +87,7 @@ curl https://api.agrouter.ai/v1/chat/completions \
 
 ### 3.3 在 AI 中使用 {#use-in-ai-tool}
 
-适合已经在用 Codex、Claude、Cursor、Kiro 或其他受支持客户端，希望在这个应用里直接使用 Models、APIs 和 Services。
+适合已经在用 Codex、Claude、Cursor、Kiro 或其他受支持客户端，希望在这个应用里直接使用 Models 和 Services。
 
 1. 打开 [Setup](https://www.agrouter.ai/console/setup){target="_blank"}。
 2. 选择你的 AI 工具，并查看它的前置条件。
@@ -100,31 +97,14 @@ curl https://api.agrouter.ai/v1/chat/completions \
 
 要调整已连接工具能发现哪些能力，打开 [Workspace Services](https://www.agrouter.ai/console/setup/installed){target="_blank"}。
 
-例如，接入网页搜索 API 后，可以这样问：
-
-> 调研这家公司，并给出有来源的客户简报。
-
 了解更多：[Connect AI tools](/setup/)。
-
-### 3.4 搭建 Agent {#build-agent}
-
-适合多步骤、需要复用的工作。
-
-1. 打开 [Build Agent](https://www.agrouter.ai/console/agents){target="_blank"}。
-2. 编写 Agent 指令。
-3. 选择 Model。
-4. 添加 APIs 和 Skills。
-5. 测试一次运行。
-6. 把选定版本发布为 Service，或创建 Schedule。
-
-了解更多：[Build Agent](/agents/)。
 
 ## 4. 确认已可用 {#confirm-it-works}
 
 同时满足下面几点，就可以开始用了：
 
 - Console 顶部显示的是你打算使用的组织。
-- 完成了其中一种接入：API 调用、官网试用、AI 工具，或 Agent。
+- 完成了其中一种接入：API 调用、官网试用，或 AI 工具。
 - 一次请求成功。
 
 如果失败，检查当前组织、Key，以及 [Errors](/guides/error-handling)。workspace 没有余额时，到 [账单和充值](https://www.agrouter.ai/console/billing){target="_blank"} 充值。
@@ -140,7 +120,6 @@ curl https://api.agrouter.ai/v1/chat/completions \
 <QuickstartResources locale="zh" group="catalog" />
 
 - [API keys](/getting-started/api-keys) — 创建和轮换组织 Key
-- [Store](/store/) — 在官网试用 Models、APIs 和 Agents
+- [Store](/store/) — 在官网试用 Models
 - [Setup](/setup/) — 把能力装进 AI 工具
-- [Build Agent](/agents/) — 创建可复用的 Agent
-- [API Reference](/api-reference/) — 用代码接入
+- [First API Call](/getting-started/first-call) — 用代码调用模型

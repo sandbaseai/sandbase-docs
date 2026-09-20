@@ -116,6 +116,7 @@ const googleModels: DefaultTheme.SidebarItem[] = [
 
 const modelApiReferenceNav: DefaultTheme.SidebarItem[] = [
   { text: 'Overview', link: '/' },
+  { text: 'Quickstart', link: '/getting-started/quickstart' },
   { text: 'OpenAI', collapsed: true, items: openaiModels },
   { text: 'Anthropic', collapsed: true, items: anthropicModels },
   { text: 'ByteDance', collapsed: true, items: bytedanceModels },
