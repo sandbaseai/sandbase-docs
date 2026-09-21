@@ -413,6 +413,8 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "ByteDance",
         collapsed: true,
         items: [
+          { text: "ByteDance: Seed-2.1-Pro", link: "/model-api-reference/llm-models/bytedance/seed-2.1-pro" },
+          { text: "ByteDance: Seed-2.1-Turbo", link: "/model-api-reference/llm-models/bytedance/seed-2.1-turbo" },
           { text: "ByteDance: UI-TARS 7B", link: "/model-api-reference/llm-models/bytedance/ui-tars-1.5-7b" },
         ],
       },

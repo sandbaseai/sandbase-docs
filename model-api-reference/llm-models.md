@@ -107,6 +107,8 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 
 ### ByteDance
 
+- [ByteDance: Seed-2.1-Pro](/model-api-reference/llm-models/bytedance/seed-2.1-pro) — Doubao-Seed-2.1-Pro is ByteDance's flagship Seed 2.1 model, built for coding and agentic workloads with strong reasoning, tool use and multimodal understanding. It supports a long input window of up to 1M tokens and is served through Volcengine Ark.
+- [ByteDance: Seed-2.1-Turbo](/model-api-reference/llm-models/bytedance/seed-2.1-turbo) — Doubao-Seed-2.1-Turbo is the latency-optimized member of ByteDance's Seed 2.1 family, built for high-throughput interactive and agentic workloads. It supports tool use and multimodal understanding with an input window of up to 256K tokens, and is served through Volcengine Ark.
 - [ByteDance: UI-TARS 7B](/model-api-reference/llm-models/bytedance/ui-tars-1.5-7b) — UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based environments, including desktop interfaces, web browsers, mobile systems, and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement learning-based reasoning, enabling robust action planning and execution across virtual interfaces.
 
 ### ByteDance Seed
