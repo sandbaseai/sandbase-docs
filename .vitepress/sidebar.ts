@@ -24,7 +24,6 @@ export const platformApiReferenceFallbackSidebar = modelApiReferenceSidebar(plat
 export const docsSidebar: DefaultTheme.SidebarItem[] = [
   {
     text: 'AI-Friendly Docs',
-    collapsed: true,
     items: [
       { text: 'AI-Readable Overview', link: '/for-agents/' },
       { text: 'AI API Guide', link: '/for-agents/full' },
@@ -34,7 +33,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
   },
   {
     text: 'First steps',
-    collapsed: false,
     items: [
       { text: 'Overview', link: '/getting-started/' },
       { text: 'Quickstart', link: '/getting-started/quickstart' },
@@ -44,7 +42,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
   },
   {
     text: 'Models & APIs',
-    collapsed: false,
     items: [
       { text: 'Store', link: '/store/' },
       { text: 'APIs', link: '/store/apis' },
@@ -56,7 +53,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
   },
   {
     text: 'Guides',
-    collapsed: false,
     items: [
       { text: 'Overview', link: '/guides/' },
       { text: 'Chat Completions', link: '/guides/chat-completions' },
@@ -71,7 +67,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
   },
   {
     text: 'Build agents',
-    collapsed: false,
     items: [
       { text: 'Overview', link: '/agents/' },
       { text: 'Define agent', link: '/agents/agent-api' },
@@ -81,7 +76,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
   },
   {
     text: 'Agent operations',
-    collapsed: false,
     items: [
       { text: 'Services', link: '/agents/services' },
       { text: 'Schedules', link: '/agents/schedules' },
@@ -90,7 +84,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
   },
   {
     text: 'Workspace',
-    collapsed: false,
     items: [
       { text: 'Overview', link: '/admin/' },
       { text: 'API Keys', link: '/getting-started/api-keys' },
