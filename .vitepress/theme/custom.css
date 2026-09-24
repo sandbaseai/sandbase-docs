@@ -1907,38 +1907,33 @@ html {
   border-top: 0;
 }
 
-/* Leaf links: hairline rail on the left. */
+/* Leaf links: plain text, no rail, no pills, no radius (matches the
+   reference, which has no border lines beside the links). */
 .VPSidebarItem.level-1 > .item .link,
 .VPSidebarItem.level-2 > .item .link,
 .VPSidebarItem.level-3 > .item .link {
-  border-left: 1px solid var(--color-line);
+  border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   color: var(--color-ink-muted);
-  transition: border-color 150ms ease, color 150ms ease;
+  transition: color 150ms ease;
 }
 .VPSidebarItem.level-1 > .item .link:hover,
 .VPSidebarItem.level-2 > .item .link:hover,
-.VPSidebarItem.level-3 > .item .link:hover {
-  border-left-color: var(--color-ink) !important;
-  background: transparent !important;
-  color: var(--color-ink) !important;
-}
+.VPSidebarItem.level-3 > .item .link:hover,
 .VPSidebarItem.level-1 > .item .link:hover > .text,
 .VPSidebarItem.level-2 > .item .link:hover > .text,
 .VPSidebarItem.level-3 > .item .link:hover > .text {
+  background: transparent !important;
   color: var(--color-ink) !important;
 }
 
-/* Active leaf link: accent rail segment, ink text, medium weight. */
-.VPSidebarItem.is-active > .item .link {
-  border-left-color: var(--color-accent) !important;
+/* Active leaf link: ink text, medium weight — no bar, no border, no pill. */
+.VPSidebarItem.is-active > .item .link,
+.VPSidebarItem.is-active > .item .link > .text {
   background: transparent !important;
   color: var(--color-ink) !important;
   font-weight: 500;
-}
-.VPSidebarItem.is-active > .item .link > .text {
-  color: var(--color-ink) !important;
 }
 .VPSidebarItem.is-active > .item .link::before {
   display: none !important;
@@ -1947,4 +1942,9 @@ html {
   outline: 2px solid var(--color-accent);
   outline-offset: -2px;
   background: transparent !important;
+}
+
+/* The reference has no divider between the sidebar and the content. */
+.VPSidebar {
+  border-right: 0 !important;
 }

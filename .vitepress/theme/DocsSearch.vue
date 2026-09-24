@@ -41,19 +41,19 @@ function openSearch() {
   gap: 0.625rem;
   margin-bottom: 1.5rem;
   padding: 0.5rem 0.75rem;
-  border: 1px solid var(--color-line);
-  border-radius: 0;
-  background: var(--color-surface);
+  border: 0;
+  border-radius: 8px;
+  background: var(--color-surface-alt);
   color: var(--color-ink-subtle);
   font-family: var(--font-family-body);
   font-size: 0.9375rem;
   line-height: 1.4375rem;
   text-align: left;
   cursor: pointer;
-  transition: border-color 150ms ease, color 150ms ease;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 .docs-search:hover {
-  border-color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-surface-alt) 82%, var(--color-ink));
   color: var(--color-ink);
 }
 .docs-search:focus-visible {
