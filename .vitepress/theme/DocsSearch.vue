@@ -43,7 +43,7 @@ function openSearch() {
   padding: 0.5rem 0.75rem;
   border: 0;
   border-radius: 8px;
-  background: var(--color-surface-alt);
+  background: var(--color-surface);
   color: var(--color-ink-subtle);
   font-family: var(--font-family-body);
   font-size: 0.9375rem;
@@ -53,7 +53,7 @@ function openSearch() {
   transition: background-color 150ms ease, color 150ms ease;
 }
 .docs-search:hover {
-  background: color-mix(in srgb, var(--color-surface-alt) 82%, var(--color-ink));
+  background: var(--color-surface-alt);
   color: var(--color-ink);
 }
 .docs-search:focus-visible {

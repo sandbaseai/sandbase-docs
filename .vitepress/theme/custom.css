@@ -1907,33 +1907,47 @@ html {
   border-top: 0;
 }
 
-/* Leaf links: plain text, no rail, no pills, no radius (matches the
-   reference, which has no border lines beside the links). */
+/* Menu rail: a single subtle vertical line beside each link list (the ONLY
+   lines in the sidebar). The active link shows an accent segment over it. */
+.VPSidebarItem .items {
+  border-left: 1px solid var(--color-line);
+}
 .VPSidebarItem.level-1 > .item .link,
 .VPSidebarItem.level-2 > .item .link,
 .VPSidebarItem.level-3 > .item .link {
-  border: 0 !important;
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   color: var(--color-ink-muted);
-  transition: color 150ms ease;
+  transition: color 150ms ease, border-color 150ms ease;
 }
 .VPSidebarItem.level-1 > .item .link:hover,
 .VPSidebarItem.level-2 > .item .link:hover,
-.VPSidebarItem.level-3 > .item .link:hover,
-.VPSidebarItem.level-1 > .item .link:hover > .text,
-.VPSidebarItem.level-2 > .item .link:hover > .text,
-.VPSidebarItem.level-3 > .item .link:hover > .text {
+.VPSidebarItem.level-3 > .item .link:hover {
+  border-left-color: var(--sb-line-strong) !important;
   background: transparent !important;
   color: var(--color-ink) !important;
 }
+.VPSidebarItem.level-1 > .item .link:hover > .text,
+.VPSidebarItem.level-2 > .item .link:hover > .text,
+.VPSidebarItem.level-3 > .item .link:hover > .text {
+  color: var(--color-ink) !important;
+}
 
-/* Active leaf link: ink text, medium weight — no bar, no border, no pill. */
-.VPSidebarItem.is-active > .item .link,
-.VPSidebarItem.is-active > .item .link > .text {
+/* Active leaf link: accent rail segment, ink text, medium weight. */
+.VPSidebarItem.is-active > .item .link {
+  margin-left: -1px;
+  border-left: 1px solid var(--color-accent) !important;
   background: transparent !important;
   color: var(--color-ink) !important;
   font-weight: 500;
+}
+.VPSidebarItem.is-active > .item .link > .text {
+  color: var(--color-ink) !important;
 }
 .VPSidebarItem.is-active > .item .link::before {
   display: none !important;
@@ -1944,7 +1958,20 @@ html {
   background: transparent !important;
 }
 
-/* The reference has no divider between the sidebar and the content. */
+/* No horizontal lines anywhere in the sidebar (groups are spaced, not ruled),
+   and no divider between the sidebar and content. */
+.VPSidebar,
+.VPSidebarItem,
+.VPSidebarItem > .item,
+.VPSidebarItem.level-0,
+.VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+.VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+  margin-top: 1.5rem;
+  padding-top: 0 !important;
+}
 .VPSidebar {
   border-right: 0 !important;
 }
