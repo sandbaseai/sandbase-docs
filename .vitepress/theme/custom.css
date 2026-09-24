@@ -59,6 +59,27 @@
 
   --vp-font-family-base: 'Clash Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Roboto, sans-serif;
   --vp-font-family-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', Consolas, monospace;
+
+  /* Aliases matching the sandbase.ai main site so the ported header/footer
+     stylesheets work verbatim. These resolve to the --sb-* tokens above and
+     therefore switch automatically between light and dark. */
+  --color-canvas: var(--sb-canvas);
+  --color-surface: var(--sb-surface);
+  --color-surface-alt: var(--sb-surface-alt);
+  --color-line: var(--sb-line);
+  --color-ink: var(--sb-ink);
+  --color-ink-muted: var(--sb-ink-muted);
+  --color-ink-subtle: var(--sb-ink-subtle);
+  --color-accent: var(--sb-accent);
+  --color-panel: var(--sb-panel);
+  --color-panel-fg: var(--sb-panel-fg);
+  --color-tint-cyan: var(--sb-tint);
+  --color-positive: #3f7a1a;
+  --font-family-heading: var(--vp-font-family-base);
+  --font-family-body: var(--vp-font-family-base);
+  --font-family-mono: var(--vp-font-family-mono);
+  --shadow-lg: 0 12px 28px rgba(15, 12, 26, 0.14);
+  --page-inset: max(clamp(1.25rem, 5.5556vw, 5rem), calc((100% - 90rem) / 2 + 5rem));
 }
 
 .dark {
@@ -100,6 +121,9 @@
   --sb-code-border: var(--sb-line);
   --sb-code-block-bg: var(--sb-panel);
   --vp-code-block-bg: var(--sb-panel);
+
+  --color-positive: #d9ff43;
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.6);
 }
 
 /* ─── Developer-doc sidebar: compact, structured, keyboard friendly ─── */
@@ -1841,4 +1865,21 @@ html {
     grid-template-columns: 1fr;
     gap: 32px;
   }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Replace the default VitePress nav with the custom SandBase site header
+   (rendered via the layout-top slot). The default nav stays in the component
+   tree (so its search hotkey and the mobile sidebar plumbing keep working) but
+   is hidden; content is already offset by --vp-nav-height, which the fixed
+   custom header fills. The mobile docs-sidebar toggle lives in VPLocalNav,
+   which is independent of VPNav and remains visible.
+   ══════════════════════════════════════════════════════════════════════════ */
+.VPNav {
+  display: none !important;
+}
+
+/* VPLocalNav (mobile sidebar + outline bar) sits directly below the header. */
+.VPLocalNav {
+  border-bottom: 1px solid var(--sb-line);
 }
