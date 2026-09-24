@@ -24,7 +24,7 @@ function openSearch() {
 
 <template>
   <button type="button" class="docs-search" aria-label="Search docs" aria-keyshortcuts="Meta+K Control+K" @click="openSearch">
-    <svg class="docs-search-icon" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+    <svg class="docs-search-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
       <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
       <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </svg>
@@ -41,8 +41,8 @@ function openSearch() {
   gap: 0.625rem;
   margin-bottom: 1.5rem;
   padding: 0.5rem 0.75rem;
-  border: 0;
-  border-radius: 8px;
+  border: 1px solid var(--color-line);
+  border-radius: 0;
   background: var(--color-surface);
   color: var(--color-ink-subtle);
   font-family: var(--font-family-body);
@@ -50,10 +50,10 @@ function openSearch() {
   line-height: 1.4375rem;
   text-align: left;
   cursor: pointer;
-  transition: background-color 150ms ease, color 150ms ease;
+  transition: border-color 150ms ease, color 150ms ease;
 }
 .docs-search:hover {
-  background: var(--color-surface-alt);
+  border-color: var(--sb-line-strong);
   color: var(--color-ink);
 }
 .docs-search:focus-visible {
