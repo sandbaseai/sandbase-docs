@@ -310,6 +310,18 @@ function toggleTheme() {
     justify-self: end;
   }
 }
+
+/* The docs keep a persistent fixed sidebar on the left. A full-width footer at
+   the bottom of the layout would sit partly behind it, so from >=960px inset
+   the footer content to clear the sidebar and align with the content column
+   (mirrors the .VPContent.has-sidebar padding math in custom.css). */
+@media (min-width: 960px) {
+  .sf-container {
+    margin-inline: 0;
+    padding-left: calc(var(--vp-sidebar-width, 272px) + var(--sb-layout-gutter, 0px) + 32px);
+    padding-right: max(48px, var(--sb-layout-gutter, 0px));
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .sf-link,
   .sf-theme {
