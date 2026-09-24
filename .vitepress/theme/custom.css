@@ -1975,3 +1975,12 @@ html {
 .VPSidebar {
   border-right: 0 !important;
 }
+
+/* VitePress wraps each top-level section in <div class="group"> and draws a
+   horizontal divider via `.group + .group { border-top }`. The reference has
+   no horizontal dividers, so remove it and separate sections by space only. */
+.VPSidebar .group + .group {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0.5rem;
+}
