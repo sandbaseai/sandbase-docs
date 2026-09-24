@@ -120,7 +120,11 @@ function toggleTheme() {
 <style scoped>
 .sf-footer {
   position: relative;
-  z-index: 20;
+  /* Sit above the fixed docs sidebar (desktop z-index 25) so the full-width
+     footer paints edge-to-edge over the sidebar's lower portion at the bottom
+     of the page, instead of being clipped by it. Stays below the mobile
+     sidebar drawer (60) and its backdrop (50). */
+  z-index: 45;
   width: 100%;
   background: var(--color-canvas);
   color: var(--color-ink);
@@ -308,18 +312,6 @@ function toggleTheme() {
   }
   .sf-nav {
     justify-self: end;
-  }
-}
-
-/* The docs keep a persistent fixed sidebar on the left. A full-width footer at
-   the bottom of the layout would sit partly behind it, so from >=960px inset
-   the footer content to clear the sidebar and align with the content column
-   (mirrors the .VPContent.has-sidebar padding math in custom.css). */
-@media (min-width: 960px) {
-  .sf-container {
-    margin-inline: 0;
-    padding-left: calc(var(--vp-sidebar-width, 272px) + var(--sb-layout-gutter, 0px) + 32px);
-    padding-right: max(48px, var(--sb-layout-gutter, 0px));
   }
 }
 @media (prefers-reduced-motion: reduce) {
