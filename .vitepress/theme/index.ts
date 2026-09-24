@@ -9,6 +9,7 @@ import OfficialNativeApiSidebar from './OfficialNativeApiSidebar.vue'
 import PlatformApiLanding from './PlatformApiLanding.vue'
 import SiteHeader from './SiteHeader.vue'
 import SiteFooter from './SiteFooter.vue'
+import DocsSearch from './DocsSearch.vue'
 import './custom.css'
 
 export default {
@@ -19,6 +20,9 @@ export default {
       // sandbase.ai site header, and render the site footer full-width at the
       // bottom. The default nav is hidden via custom.css but stays mounted so
       // its search hotkey and mobile sidebar plumbing keep working.
+      // The docs sidebar leads with a "Search docs" button (matching the
+      // reference design) that triggers VitePress's local search.
+      'sidebar-nav-before': () => h(DocsSearch),
       'sidebar-nav-after': () => [h(PlatformApiSidebar), h(OfficialNativeApiSidebar)],
       'layout-top': () => h(SiteHeader),
       'layout-bottom': () => h(SiteFooter),
