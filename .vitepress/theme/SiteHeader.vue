@@ -11,6 +11,7 @@ import BrandMark from './BrandMark.vue'
  */
 const SITE = 'https://www.sandbase.ai'
 const loginHref = `${SITE}/login`
+const consoleHref = `${SITE}/console`
 
 const exploreGroups = [
   {
@@ -61,6 +62,7 @@ const solutionOpen = ref(false)
 const drawerOpen = ref(false)
 const mobileExploreOpen = ref(false)
 const mobileSolutionOpen = ref(false)
+const loggedIn = ref(false)
 
 let exploreTimer: ReturnType<typeof setTimeout> | null = null
 let solutionTimer: ReturnType<typeof setTimeout> | null = null
@@ -95,6 +97,21 @@ function onKeydown(event: KeyboardEvent) {
   }
 }
 
+function syncAuthState() {
+  try {
+    // The docs and dashboard are served from the same origin, so the token the
+    // dashboard stores is also the most direct source of truth here. We only
+    // inspect its presence; the credential is never parsed, copied, or sent.
+    loggedIn.value = Boolean(window.localStorage.getItem('token'))
+  } catch {
+    loggedIn.value = false
+  }
+}
+
+function onVisibilityChange() {
+  if (document.visibilityState === 'visible') syncAuthState()
+}
+
 watch(
   () => route.path,
   () => {
@@ -108,9 +125,20 @@ watch(drawerOpen, (open) => {
   document.body.style.overflow = open ? 'hidden' : ''
 })
 
-onMounted(() => document.addEventListener('keydown', onKeydown))
+onMounted(() => {
+  syncAuthState()
+  document.addEventListener('keydown', onKeydown)
+  document.addEventListener('visibilitychange', onVisibilityChange)
+  window.addEventListener('focus', syncAuthState)
+  window.addEventListener('pageshow', syncAuthState)
+  window.addEventListener('storage', syncAuthState)
+})
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', onKeydown)
+  document.removeEventListener('visibilitychange', onVisibilityChange)
+  window.removeEventListener('focus', syncAuthState)
+  window.removeEventListener('pageshow', syncAuthState)
+  window.removeEventListener('storage', syncAuthState)
   if (typeof document !== 'undefined') document.body.style.overflow = ''
 })
 </script>
@@ -118,14 +146,14 @@ onBeforeUnmount(() => {
 <template>
   <header class="sh-header">
     <div class="sh-bar">
-      <a class="sh-logo" :href="SITE" aria-label="SandBase home">
+      <a class="sh-logo" :href="SITE" target="_self" aria-label="SandBase home">
         <span class="sh-logo-mark" aria-hidden="true"><BrandMark /></span>
         <span class="sh-wordmark">SandBase</span>
       </a>
 
       <nav class="sh-desktop-nav" aria-label="Primary navigation">
         <div class="sh-explore" @mouseenter="openExplore" @mouseleave="scheduleExploreClose">
-          <a class="sh-nav-link" :href="`${SITE}/models`">Explore</a>
+          <a class="sh-nav-link" :href="`${SITE}/models`" target="_self">Explore</a>
           <button
             type="button"
             class="sh-explore-trigger"
@@ -139,7 +167,7 @@ onBeforeUnmount(() => {
           <div v-show="exploreOpen" class="sh-explore-menu" role="menu" aria-label="Explore" @mouseenter="openExplore" @mouseleave="scheduleExploreClose">
             <section v-for="group in exploreGroups" :key="group.label">
               <p>{{ group.label }}</p>
-              <a v-for="item in group.items" :key="item.href" :href="item.href" role="menuitem">
+              <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" role="menuitem">
                 <strong>{{ item.label }}</strong>
                 <span>{{ item.description }}</span>
               </a>
@@ -148,7 +176,7 @@ onBeforeUnmount(() => {
           </div>
         </div>
 
-        <a class="sh-nav-link" :href="`${SITE}/agents`">Agents</a>
+        <a class="sh-nav-link" :href="`${SITE}/agents`" target="_self">Agents</a>
 
         <div class="sh-solution" @mouseenter="openSolution" @mouseleave="scheduleSolutionClose">
           <button
@@ -164,7 +192,7 @@ onBeforeUnmount(() => {
           <div v-show="solutionOpen" class="sh-solution-menu" role="menu" aria-label="Solutions" @mouseenter="openSolution" @mouseleave="scheduleSolutionClose">
             <section v-for="group in solutionGroups" :key="group.label">
               <p>{{ group.label }}</p>
-              <a v-for="item in group.items" :key="item.href" :href="item.href" role="menuitem">
+              <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" role="menuitem">
                 <strong>{{ item.label }}</strong>
                 <span>{{ item.description }}</span>
               </a>
@@ -174,15 +202,20 @@ onBeforeUnmount(() => {
         </div>
 
         <a class="sh-nav-link" href="/docs/">Docs</a>
-        <a class="sh-nav-link" :href="`${SITE}/pricing`">Pricing</a>
+        <a class="sh-nav-link" :href="`${SITE}/pricing`" target="_self">Pricing</a>
       </nav>
 
       <div class="sh-actions">
         <a class="sh-github" :href="`https://github.com/sandbaseai`" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" /></svg>
         </a>
-        <a class="sh-signin" :href="loginHref">Sign in</a>
-        <a class="sh-start" :href="loginHref">Start building</a>
+        <template v-if="loggedIn">
+          <a class="sh-start" :href="consoleHref" target="_self">Console</a>
+        </template>
+        <template v-else>
+          <a class="sh-signin" :href="loginHref" target="_self">Sign in</a>
+          <a class="sh-start" :href="loginHref" target="_self">Start building</a>
+        </template>
       </div>
 
       <button
@@ -206,11 +239,11 @@ onBeforeUnmount(() => {
           </button>
           <div v-if="mobileExploreOpen" class="sh-mobile-sublinks">
             <template v-for="group in exploreGroups" :key="group.label">
-              <a v-for="item in group.items" :key="item.href" :href="item.href" @click="drawerOpen = false">{{ item.label }}</a>
+              <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" @click="drawerOpen = false">{{ item.label }}</a>
             </template>
           </div>
 
-          <a class="sh-mobile-link" :href="`${SITE}/agents`" @click="drawerOpen = false">Agents</a>
+          <a class="sh-mobile-link" :href="`${SITE}/agents`" target="_self" @click="drawerOpen = false">Agents</a>
 
           <button type="button" class="sh-mobile-expand" :aria-expanded="mobileSolutionOpen" @click="mobileSolutionOpen = !mobileSolutionOpen">
             Solutions
@@ -219,17 +252,20 @@ onBeforeUnmount(() => {
           <div v-if="mobileSolutionOpen" class="sh-mobile-solution">
             <section v-for="group in solutionGroups" :key="group.label">
               <p>{{ group.label }}</p>
-              <a v-for="item in group.items" :key="item.href" :href="item.href" @click="drawerOpen = false">{{ item.label }}</a>
+              <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" @click="drawerOpen = false">{{ item.label }}</a>
             </section>
           </div>
 
           <a class="sh-mobile-link" href="/docs/" @click="drawerOpen = false">Docs</a>
-          <a class="sh-mobile-link" :href="`${SITE}/pricing`" @click="drawerOpen = false">Pricing</a>
+          <a class="sh-mobile-link" :href="`${SITE}/pricing`" target="_self" @click="drawerOpen = false">Pricing</a>
         </nav>
         <div class="sh-drawer-actions">
           <a class="sh-signin" href="https://github.com/sandbaseai" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a class="sh-signin" :href="loginHref" @click="drawerOpen = false">Sign in</a>
-          <a class="sh-start" :href="loginHref" @click="drawerOpen = false">Start building</a>
+          <a v-if="loggedIn" class="sh-start" :href="consoleHref" target="_self" @click="drawerOpen = false">Console</a>
+          <template v-else>
+            <a class="sh-signin" :href="loginHref" target="_self" @click="drawerOpen = false">Sign in</a>
+            <a class="sh-start" :href="loginHref" target="_self" @click="drawerOpen = false">Start building</a>
+          </template>
         </div>
       </div>
     </div>
