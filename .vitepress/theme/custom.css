@@ -74,6 +74,7 @@
   --color-panel: var(--sb-panel);
   --color-panel-fg: var(--sb-panel-fg);
   --color-tint-cyan: var(--sb-tint);
+  --color-tint-blue: #8b6fff;
   --color-positive: #3f7a1a;
   --font-family-heading: var(--vp-font-family-base);
   --font-family-body: var(--vp-font-family-base);
@@ -123,6 +124,7 @@
   --vp-code-block-bg: var(--sb-panel);
 
   --color-positive: #d9ff43;
+  --color-tint-blue: #d9ff43;
   --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.6);
 }
 
@@ -1273,7 +1275,7 @@ html {
      (the reference leaves a clear gap under the header). */
   .VPSidebar {
     padding-left: var(--sb-layout-gutter) !important;
-    padding-top: calc(var(--vp-nav-height) + 40px) !important;
+    padding-top: calc(var(--vp-nav-height) + 48px) !important;
     width: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
   }
 
@@ -1968,6 +1970,13 @@ html {
   border-right: 0 !important;
 }
 
+/* The stock sticky curtain is meant to blend the sidebar beneath VitePress's
+   own nav. Our custom header replaces that nav, and the curtain overlaps the
+   first 8px of the search control, hiding its top border. */
+.VPSidebar .curtain {
+  display: none !important;
+}
+
 /* VitePress wraps each top-level section in <div class="group"> and draws a
    horizontal divider via `.group + .group { border-top }`. The reference has
    no horizontal dividers, so remove it and separate sections by space only. */
@@ -1979,8 +1988,12 @@ html {
 
 /* "On this page" outline: the reference has no left divider rail and no active
    marker bar — just plain links. Remove both. */
-.VPDocAsideOutline {
+.VPDocAsideOutline,
+.VPDocAsideOutline .content {
   border-left: 0 !important;
+}
+.VPDocAsideOutline .content {
+  padding-left: 0 !important;
 }
 .VPDocAsideOutline .outline-marker {
   display: none !important;
