@@ -1,39 +1,129 @@
-/* SandBase docs palette — documentation-first neutrals. Brand green is a
-   semantic accent, never the default text or surface color. */
+/* Clash Grotesk — the SandBase brand typeface, shared with the main site. */
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('/docs/ClashGrotesk-Variable.woff2') format('woff2');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* ─── SandBase design system ───────────────────────────────────────────────
+   Ported from the sandbase /docs reference design and the sandbase.ai main
+   site. The whole theme is token-driven: change these values and the palette
+   cascades through VitePress's own `--vp-c-*` variables. The look is an
+   editorial "pixel poster": near-zero radius, hairline borders, a violet
+   (light) / lime (dark) accent, and monospace uppercase micro-labels. */
 :root {
-  --vp-c-brand-1: #303238;
-  --vp-c-brand-2: #1f2126;
-  --vp-c-brand-3: #15171b;
-  --vp-c-brand-soft: rgba(31, 33, 38, 0.065);
-  --sb-accent-green: #16815b;
+  --sb-canvas: #f2f0f3;
+  --sb-surface: #ffffff;
+  --sb-surface-alt: #e7e4ea;
+  --sb-line: #dbd8df;
+  --sb-line-strong: #0e0b1a;
+  --sb-ink: #0e0b1a;
+  --sb-ink-muted: #5d5969;
+  --sb-ink-subtle: #757183;
+  --sb-accent: #5e3fff;
+  --sb-accent-hover: #4a2fe0;
+  --sb-accent-contrast: #ffffff;
+  --sb-tint: #d9ff43;            /* pixel accent / corner marks / CTA hover */
+  --sb-tint-fg: #0e0b1a;
+  --sb-panel: #0e0b1a;           /* dark code panel */
+  --sb-panel-fg: #f2f0f3;
+  --sb-panel-label: #8a8698;
 
-  --sb-code-text: #344054;
-  --sb-code-bg: #f1f3f5;
-  --sb-code-border: #e4e7ec;
-  --sb-code-block-bg: #f8f9fa;
+  /* Map onto VitePress core tokens so the palette propagates everywhere. */
+  --vp-c-bg: var(--sb-canvas);
+  --vp-c-bg-alt: var(--sb-canvas);
+  --vp-c-bg-soft: var(--sb-surface-alt);
+  --vp-c-bg-elv: var(--sb-surface);
+  --vp-c-text-1: var(--sb-ink);
+  --vp-c-text-2: var(--sb-ink-muted);
+  --vp-c-text-3: var(--sb-ink-subtle);
+  --vp-c-divider: var(--sb-line);
+  --vp-c-border: var(--sb-line);
+  --vp-c-gutter: var(--sb-line);
+  --vp-c-brand-1: var(--sb-accent);
+  --vp-c-brand-2: var(--sb-accent-hover);
+  --vp-c-brand-3: var(--sb-accent);
+  --vp-c-brand-soft: color-mix(in srgb, var(--sb-accent) 12%, transparent);
+  --sb-accent-green: var(--sb-accent);   /* legacy alias reused across this file */
 
-  /* Fonts — unified Inter stack (matches platform.claude.com) */
-  --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Roboto, sans-serif;
+  --sb-code-text: var(--sb-ink);         /* inline code chips read on surface-alt */
+  --sb-code-bg: var(--sb-surface-alt);   /* inline code chips */
+  --sb-code-border: var(--sb-line);
+  --sb-code-block-bg: var(--sb-panel);   /* fenced code = dark panel */
+  --vp-code-block-bg: var(--sb-panel);
+  --vp-code-copy-code-bg: rgba(255, 255, 255, 0.09);
+  --vp-code-copy-code-hover-bg: rgba(255, 255, 255, 0.18);
+  --vp-code-copy-code-active-text: var(--sb-panel-fg);
+
+  --vp-font-family-base: 'Clash Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Roboto, sans-serif;
   --vp-font-family-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', Consolas, monospace;
+
+  /* Aliases matching the sandbase.ai main site so the ported header/footer
+     stylesheets work verbatim. These resolve to the --sb-* tokens above and
+     therefore switch automatically between light and dark. */
+  --color-canvas: var(--sb-canvas);
+  --color-surface: var(--sb-surface);
+  --color-surface-alt: var(--sb-surface-alt);
+  --color-line: var(--sb-line);
+  --color-ink: var(--sb-ink);
+  --color-ink-muted: var(--sb-ink-muted);
+  --color-ink-subtle: var(--sb-ink-subtle);
+  --color-accent: var(--sb-accent);
+  --color-panel: var(--sb-panel);
+  --color-panel-fg: var(--sb-panel-fg);
+  --color-tint-cyan: var(--sb-tint);
+  --color-positive: #3f7a1a;
+  --font-family-heading: var(--vp-font-family-base);
+  --font-family-body: var(--vp-font-family-base);
+  --font-family-mono: var(--vp-font-family-mono);
+  --shadow-lg: 0 12px 28px rgba(15, 12, 26, 0.14);
+  --page-inset: max(clamp(1.25rem, 5.5556vw, 5rem), calc((100% - 90rem) / 2 + 5rem));
 }
 
 .dark {
-  --vp-c-brand-1: #e3e5e8;
-  --vp-c-brand-2: #f1f2f4;
-  --vp-c-brand-3: #ffffff;
-  --vp-c-brand-soft: rgba(255, 255, 255, 0.08);
-  --sb-accent-green: #68d6a8;
+  --sb-canvas: #0e0b1a;
+  --sb-surface: #241d44;
+  --sb-surface-alt: #2e2656;
+  --sb-line: #332d4f;
+  --sb-line-strong: #f2f0f3;
+  --sb-ink: #f2f0f3;
+  --sb-ink-muted: #a29ea9;
+  --sb-ink-subtle: #8a8698;
+  --sb-accent: #d9ff43;
+  --sb-accent-hover: #e6ff70;
+  --sb-accent-contrast: #0e0b1a;
+  --sb-tint: #8b6fff;
+  --sb-tint-fg: #ffffff;
+  --sb-panel: #1e1936;
+  --sb-panel-fg: #f2f0f3;
+  --sb-panel-label: #a9a5b8;
 
-  --sb-code-text: #d6dce5;
-  --sb-code-bg: #232832;
-  --sb-code-border: #343b48;
-  --sb-code-block-bg: #171b22;
+  --vp-c-bg: var(--sb-canvas);
+  --vp-c-bg-alt: var(--sb-canvas);
+  --vp-c-bg-soft: var(--sb-surface);
+  --vp-c-bg-elv: var(--sb-surface);
+  --vp-c-text-1: var(--sb-ink);
+  --vp-c-text-2: var(--sb-ink-muted);
+  --vp-c-text-3: var(--sb-ink-subtle);
+  --vp-c-divider: var(--sb-line);
+  --vp-c-border: var(--sb-line);
+  --vp-c-gutter: var(--sb-line);
+  --vp-c-brand-1: var(--sb-accent);
+  --vp-c-brand-2: var(--sb-accent-hover);
+  --vp-c-brand-3: var(--sb-accent);
+  --vp-c-brand-soft: color-mix(in srgb, var(--sb-accent) 16%, transparent);
+  --sb-accent-green: var(--sb-accent);
 
-  /* Dark background matching main site */
-  --vp-c-bg: #0f1117;
-  --vp-c-bg-alt: #161922;
-  --vp-c-bg-elv: #1c1f2b;
-  --vp-c-bg-soft: #1c1f2b;
+  --sb-code-text: var(--sb-ink);
+  --sb-code-bg: var(--sb-surface-alt);
+  --sb-code-border: var(--sb-line);
+  --sb-code-block-bg: var(--sb-panel);
+  --vp-code-block-bg: var(--sb-panel);
+
+  --color-positive: #d9ff43;
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.6);
 }
 
 /* ─── Developer-doc sidebar: compact, structured, keyboard friendly ─── */
@@ -459,9 +549,9 @@
 
 /* Custom container (tip, warning, danger) colors */
 :root {
-  --vp-custom-block-tip-border: #cfd3d8;
-  --vp-custom-block-tip-bg: rgba(31, 33, 38, 0.035);
-  --vp-custom-block-tip-text: #303238;
+  --vp-custom-block-tip-border: var(--sb-line);
+  --vp-custom-block-tip-bg: var(--sb-surface);
+  --vp-custom-block-tip-text: var(--sb-ink);
 
   --vp-custom-block-warning-border: #e5a50a;
   --vp-custom-block-warning-bg: rgba(229, 165, 10, 0.08);
@@ -581,10 +671,10 @@ html {
 
 /* ─── Reference-document layout: dense, quiet, and scan-first ─── */
 :root {
-  --vp-nav-height: 64px;
+  --vp-nav-height: 72px;
   --vp-sidebar-width: 244px;
   --vp-layout-max-width: 1680px;
-  --sb-doc-rule: color-mix(in srgb, var(--vp-c-divider) 72%, transparent);
+  --sb-doc-rule: var(--sb-line);
 }
 
 /* Light-only surface tints. These MUST stay scoped to `:not(.dark)`: a bare
@@ -592,8 +682,8 @@ html {
    it would clobber the dark surfaces and tint the sidebar, table rows, and
    inline code light while in dark mode. */
 :root:not(.dark) {
-  --vp-c-bg-alt: #f8f9f8;
-  --vp-c-bg-soft: #f4f6f5;
+  --vp-c-bg-alt: var(--sb-canvas);
+  --vp-c-bg-soft: var(--sb-surface-alt);
 }
 
 .VPNav {
@@ -663,7 +753,6 @@ html {
 .VPDocAside {
   width: 300px !important;
   padding-left: 28px;
-  border-left: 1px solid var(--sb-doc-rule);
 }
 
 .VPDoc .aside {
@@ -1166,41 +1255,34 @@ html {
    the navigation rail keeps a stable width and the page always retains a
    right margin across every viewport wider than the mobile breakpoint. */
 :root {
-  --sb-layout-gutter: max(0px, calc((100vw - var(--vp-layout-max-width)) / 2));
+  /* Fluid side margin like the reference (page-inset): scales with the
+     viewport, ~24px on small screens up to 80px, then grows to centre the
+     shell once the viewport exceeds the max layout width. This keeps balanced
+     left/right gutters at every width instead of pinning the sidebar to the
+     window edge. */
+  --sb-page-inset: clamp(1.5rem, 5.5556vw, 5rem);
+  --sb-layout-gutter: max(
+    var(--sb-page-inset),
+    calc((100vw - var(--vp-layout-max-width)) / 2 + var(--sb-page-inset))
+  );
 }
 
 @media (min-width: 960px) {
-  /* Rail box = intended width + centring gutter, keeping a fixed 32px inner
-     indent. Usable rail width therefore stays constant instead of shrinking
-     to nothing in the 1440–1680px range. */
+  /* Sidebar content begins at the page inset (balanced left gutter) and sits
+     a comfortable distance below the fixed header so it isn't clipped by it
+     (the reference leaves a clear gap under the header). */
   .VPSidebar {
-    padding-left: calc(32px + var(--sb-layout-gutter)) !important;
+    padding-left: var(--sb-layout-gutter) !important;
+    padding-top: calc(var(--vp-nav-height) + 40px) !important;
     width: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
   }
 
-  /* Content is inset by the rail on the left and always keeps a right gutter
-     (at least 48px), so the outline rail never touches the window edge. */
+  /* Content clears the sidebar on the left and keeps the same inset on the
+     right, so the outline column ends the same distance from the window edge
+     as the sidebar starts from the left. */
   .VPContent.has-sidebar {
     padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
-    padding-right: max(48px, var(--sb-layout-gutter)) !important;
-  }
-
-  /* The nav bar reuses the same collapsing formula for its logo slot, action
-     area, and divider. Re-align all three with the guarded gutter so the logo
-     tracks the rail and the right-hand icons keep the same margin as the
-     content/outline below (otherwise the GitHub icon sits flush to the edge). */
-  .VPNavBar.has-sidebar .title {
-    padding-left: calc(32px + var(--sb-layout-gutter)) !important;
-    width: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
-  }
-
-  .VPNavBar.has-sidebar .content {
-    padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
-    padding-right: max(48px, var(--sb-layout-gutter)) !important;
-  }
-
-  .VPNavBar.has-sidebar .divider {
-    padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
+    padding-right: var(--sb-layout-gutter) !important;
   }
 }
 
@@ -1411,4 +1493,495 @@ html {
 .quickstart-page .vp-doc div[class*='language-'] {
   margin: 24px 0 32px;
   border-radius: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SandBase design layer
+   Header, footer, code panels, and pixel-poster typography ported from the
+   sandbase.ai main site and the sandbase /docs reference design. Appended last
+   so these rules win over the earlier documentation-neutral defaults.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Header / top navigation (mirrors the sandbase.ai site header) ─────── */
+.VPNav {
+  border-bottom: 1px solid var(--sb-line);
+}
+
+.VPNavBar {
+  background: color-mix(in srgb, var(--sb-canvas) 92%, transparent) !important;
+  backdrop-filter: saturate(1.1) blur(12px);
+}
+
+/* Brand: logo mark + Clash Grotesk wordmark. */
+.VPNavBarTitle .title {
+  gap: 0.6rem !important;
+  color: var(--sb-ink) !important;
+  font-family: var(--vp-font-family-base);
+  font-size: 1.5rem !important;
+  font-weight: 550 !important;
+  letter-spacing: -0.018em !important;
+  line-height: 1.1 !important;
+}
+
+.dark .VPNavBarTitle .title {
+  color: var(--sb-ink) !important;
+}
+
+.VPNavBar .VPImage.logo {
+  width: 22px;
+  height: 27px;
+  border-radius: 0;
+}
+
+/* Primary nav links: ink by default, accent on hover / when active. */
+.VPNavBarMenuLink,
+.VPNavBarMenuGroup .text {
+  color: var(--sb-ink) !important;
+  font-family: var(--vp-font-family-base);
+  font-size: 15px !important;
+  font-weight: 450 !important;
+  letter-spacing: 0.005em;
+}
+
+.VPNavBarMenuLink:hover,
+.VPNavBarMenuLink.active,
+.VPNavBarMenuGroup:hover .text,
+.VPNavBarMenuGroup.active .text {
+  color: var(--sb-accent) !important;
+}
+
+/* The final nav item ("Start building") reads as the primary CTA button. */
+.VPNavBarMenu .VPNavBarMenuLink[href*="/console"] {
+  align-self: center;
+  margin-left: 8px;
+  padding: 9px 18px !important;
+  line-height: 1 !important;
+  border-radius: 4px;
+  background: var(--sb-ink);
+  color: var(--sb-canvas) !important;
+  font-weight: 500 !important;
+  transition: background-color 0.16s ease, color 0.16s ease;
+}
+
+.VPNavBarMenu .VPNavBarMenuLink[href*="/console"]:hover {
+  background: var(--sb-tint);
+  color: var(--sb-tint-fg) !important;
+}
+
+/* No external-link arrow on the solid CTA button. */
+.VPNavBarMenu .VPNavBarMenuLink[href*="/console"].vp-external-link-icon::after,
+.VPNavBarMenu .VPNavBarMenuLink[href*="/console"] .vpi-external-link-icon {
+  display: none !important;
+}
+
+/* Search trigger + appearance toggle: hairline, square-ish, on-canvas. */
+.VPNavBarSearch .DocSearch-Button,
+.VPNavBarSearchButton {
+  border-radius: 4px;
+}
+
+/* ─── Sidebar: on-canvas rail with monospace section labels ─────────────── */
+.VPSidebar {
+  background: var(--sb-canvas) !important;
+  border-right: 1px solid var(--sb-line);
+}
+
+.VPSidebar .curtain {
+  background: var(--sb-canvas) !important;
+}
+
+/* Top-level section headers become uppercase monospace micro-labels. */
+.VPSidebarItem.level-0 > .item .text {
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+  color: var(--sb-ink-subtle) !important;
+}
+
+.VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+  border-top: 1px solid var(--sb-line);
+}
+
+/* Active leaf link: accent left rule + ink text (no heavy pill). */
+.VPSidebarItem.is-active > .item .link {
+  background: transparent;
+  color: var(--sb-ink) !important;
+  font-weight: 550;
+}
+
+.VPSidebarItem.is-active > .item .link::before {
+  background: var(--sb-accent);
+}
+
+/* ─── "On this page" outline: monospace label ───────────────────────────── */
+.VPDocAsideOutline .outline-title {
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sb-ink-subtle);
+}
+
+.VPDocAsideOutline .outline-link.active {
+  color: var(--sb-accent);
+}
+
+/* ─── Fenced code: dark panel with a monospace language label ───────────── */
+.vp-doc div[class*='language-'],
+.vp-doc:not(:has(.api-reference-page)) div[class*='language-'] {
+  border: 1px solid var(--sb-line);
+  border-radius: 4px;
+  background: var(--sb-panel);
+}
+
+.vp-doc [class*='language-'] .lang {
+  color: var(--sb-panel-label);
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.vp-doc [class*='language-'] code {
+  color: var(--sb-panel-fg);
+}
+
+/* Keep code readable at all widths (undo the hover-to-reveal scroll trick). */
+.vp-doc div[class*="language-"] pre {
+  overflow-x: auto;
+}
+
+/* ─── Inline code chips ─────────────────────────────────────────────────── */
+.vp-doc p > code,
+.vp-doc li > code,
+.vp-doc td > code,
+.vp-doc dd > code {
+  border-radius: 4px;
+}
+
+/* ─── Custom blocks: hairline, near-square ──────────────────────────────── */
+.vp-doc .custom-block,
+.vp-doc:not(:has(.api-reference-page)) .custom-block {
+  border-radius: 4px;
+}
+
+/* ─── Pixel-square list bullets in the accent colour (prose only) ───────── */
+.vp-doc:not(:has(.api-reference-page)) ul {
+  list-style: none;
+  padding-left: 1.2rem;
+}
+
+.vp-doc:not(:has(.api-reference-page)) ul > li {
+  position: relative;
+}
+
+.vp-doc:not(:has(.api-reference-page)) ul > li:not(.task-list-item)::before {
+  content: '';
+  position: absolute;
+  left: -1.05rem;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  background: var(--sb-accent);
+}
+
+/* ─── Tables: monospace uppercase headers ───────────────────────────────── */
+.vp-doc table th {
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sb-ink-subtle);
+}
+
+/* ─── Focus ring uses the accent, matching the reference design ─────────── */
+:root {
+  --vp-c-brand-1: var(--sb-accent);
+}
+*:focus-visible {
+  outline-color: var(--sb-accent);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Footer (mirrors the sandbase.ai site footer)
+   Brand + tagline + social row · four navigation columns · bottom rule with
+   copyright and service status.
+   ══════════════════════════════════════════════════════════════════════════ */
+.sb-contact-footer {
+  display: block;
+  gap: 0;
+  margin-top: 64px;
+  padding: 48px 0 28px;
+  border-top: 1px solid var(--sb-line);
+}
+
+.sb-contact-main {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 2.1fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.sb-contact-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 22rem;
+  min-width: 0;
+}
+
+.sb-contact-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--sb-ink);
+  text-decoration: none;
+}
+
+.dark .sb-contact-logo {
+  color: var(--sb-ink);
+}
+
+.sb-contact-mark {
+  display: grid;
+  width: 22px;
+  height: 27px;
+  flex: none;
+  overflow: visible;
+  border-radius: 0;
+  color: inherit;
+}
+
+.sb-contact-wordmark {
+  font-family: var(--vp-font-family-base);
+  font-size: 1.4rem;
+  font-weight: 550;
+  letter-spacing: -0.018em;
+  line-height: 1;
+}
+
+.sb-contact-tagline {
+  margin: 0;
+  max-width: 24rem;
+  color: var(--sb-ink-muted);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.sb-contact-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 2px;
+}
+
+.sb-contact-link {
+  color: var(--sb-ink-muted);
+}
+
+.sb-contact-link:hover {
+  color: var(--sb-accent);
+  transform: translateY(-1px);
+}
+
+.sb-footer-column h2 {
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sb-ink-subtle);
+}
+
+.sb-footer-column a {
+  color: var(--sb-ink-muted);
+  font-size: 14px;
+  font-weight: 450;
+}
+
+.sb-footer-column a:hover {
+  color: var(--sb-accent);
+}
+
+.sb-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--sb-line);
+}
+
+.sb-footer-copy {
+  margin: 0;
+  color: var(--sb-ink-subtle);
+  font-size: 13px;
+}
+
+.sb-footer-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sb-ink-muted);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.sb-footer-status:hover {
+  color: var(--sb-ink);
+}
+
+.sb-footer-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: light-dark(#3f7a1a, #d9ff43);
+}
+
+:root:not(.dark) .sb-footer-status-dot {
+  background: #3f7a1a;
+}
+
+.dark .sb-footer-status-dot {
+  background: #d9ff43;
+}
+
+@media (max-width: 959px) {
+  .sb-contact-main {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Replace the default VitePress nav with the custom SandBase site header
+   (rendered via the layout-top slot). The default nav stays in the component
+   tree (so its search hotkey and the mobile sidebar plumbing keep working) but
+   is hidden; content is already offset by --vp-nav-height, which the fixed
+   custom header fills. The mobile docs-sidebar toggle lives in VPLocalNav,
+   which is independent of VPNav and remains visible.
+   ══════════════════════════════════════════════════════════════════════════ */
+.VPNav {
+  display: none !important;
+}
+
+/* VPLocalNav (mobile sidebar + outline bar) sits directly below the header. */
+.VPLocalNav {
+  border-bottom: 1px solid var(--sb-line);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Docs sidebar — match the sandbase /docs reference design's link rail.
+   Group titles are uppercase monospace micro-labels; leaf links form a
+   vertical hairline rail with an accent segment when active and a stronger
+   segment on hover (no pills, no radius). Appended last to win over the
+   earlier documentation-neutral sidebar rules.
+   ══════════════════════════════════════════════════════════════════════════ */
+.VPSidebarItem.level-0 > .item .text {
+  font-family: var(--font-family-mono) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+  color: var(--color-ink-subtle) !important;
+}
+
+/* Separate top-level groups by space only (the reference has no dividers). */
+.VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+  margin-top: 1.5rem;
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* Menu rail: a single subtle vertical line beside each link list (the ONLY
+   lines in the sidebar). The active link shows an accent segment over it. */
+.VPSidebarItem .items {
+  border-left: 1px solid var(--color-line);
+}
+.VPSidebarItem.level-1 > .item .link,
+.VPSidebarItem.level-2 > .item .link,
+.VPSidebarItem.level-3 > .item .link {
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--color-ink-muted);
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.VPSidebarItem.level-1 > .item .link:hover,
+.VPSidebarItem.level-2 > .item .link:hover,
+.VPSidebarItem.level-3 > .item .link:hover {
+  border-left-color: var(--sb-line-strong) !important;
+  background: transparent !important;
+  color: var(--color-ink) !important;
+}
+.VPSidebarItem.level-1 > .item .link:hover > .text,
+.VPSidebarItem.level-2 > .item .link:hover > .text,
+.VPSidebarItem.level-3 > .item .link:hover > .text {
+  color: var(--color-ink) !important;
+}
+
+/* Active leaf link: accent rail segment, ink text, medium weight. */
+.VPSidebarItem.is-active > .item .link {
+  margin-left: -1px;
+  border-left: 1px solid var(--color-accent) !important;
+  background: transparent !important;
+  color: var(--color-ink) !important;
+  font-weight: 500;
+}
+.VPSidebarItem.is-active > .item .link > .text {
+  color: var(--color-ink) !important;
+}
+.VPSidebarItem.is-active > .item .link::before {
+  display: none !important;
+}
+.VPSidebarItem > .item .link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+  background: transparent !important;
+}
+
+/* No horizontal lines anywhere in the sidebar (groups are spaced, not ruled),
+   and no divider between the sidebar and content. */
+.VPSidebar,
+.VPSidebarItem,
+.VPSidebarItem > .item,
+.VPSidebarItem.level-0,
+.VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+.VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+  margin-top: 1.5rem;
+  padding-top: 0 !important;
+}
+.VPSidebar {
+  border-right: 0 !important;
+}
+
+/* VitePress wraps each top-level section in <div class="group"> and draws a
+   horizontal divider via `.group + .group { border-top }`. The reference has
+   no horizontal dividers, so remove it and separate sections by space only. */
+.VPSidebar .group + .group {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0.5rem;
+}
+
+/* "On this page" outline: the reference has no left divider rail and no active
+   marker bar — just plain links. Remove both. */
+.VPDocAsideOutline {
+  border-left: 0 !important;
+}
+.VPDocAsideOutline .outline-marker {
+  display: none !important;
 }

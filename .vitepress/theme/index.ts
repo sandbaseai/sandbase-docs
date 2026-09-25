@@ -2,20 +2,30 @@ import DefaultTheme from 'vitepress/theme'
 import { h } from 'vue'
 import HomePage from './HomePage.vue'
 import ApiReferencePage from './ApiReferencePage.vue'
-import ContactFooter from './ContactFooter.vue'
 import QuickstartOnboard from './QuickstartOnboard.vue'
 import QuickstartResources from './QuickstartResources.vue'
 import PlatformApiSidebar from './PlatformApiSidebar.vue'
 import OfficialNativeApiSidebar from './OfficialNativeApiSidebar.vue'
 import PlatformApiLanding from './PlatformApiLanding.vue'
+import SiteHeader from './SiteHeader.vue'
+import SiteFooter from './SiteFooter.vue'
+import DocsSearch from './DocsSearch.vue'
 import './custom.css'
 
 export default {
   ...DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
+      // Replace VitePress's default top nav with a 1:1 replica of the
+      // sandbase.ai site header, and render the site footer full-width at the
+      // bottom. The default nav is hidden via custom.css but stays mounted so
+      // its search hotkey and mobile sidebar plumbing keep working.
+      // The docs sidebar leads with a "Search docs" button (matching the
+      // reference design) that triggers VitePress's local search.
+      'sidebar-nav-before': () => h(DocsSearch),
       'sidebar-nav-after': () => [h(PlatformApiSidebar), h(OfficialNativeApiSidebar)],
-      'doc-after': () => h(ContactFooter),
+      'layout-top': () => h(SiteHeader),
+      'layout-bottom': () => h(SiteFooter),
     })
   },
   enhanceApp({ app }) {

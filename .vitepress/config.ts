@@ -237,6 +237,13 @@ export default defineConfig({
   ignoreDeadLinks: true,
   appearance: true,
   cleanUrls: true,
+
+  // The SandBase design presents code on a dark "panel" surface in both light
+  // and dark appearance. Pin the syntax theme to a dark palette so code blocks
+  // read as the signature dark panels on every background.
+  markdown: {
+    theme: { light: 'github-dark', dark: 'github-dark' },
+  },
   // Frontmatter titles are already curated for SEO; avoid appending a second
   // brand suffix that can push rendered titles beyond search-result limits.
   titleTemplate: false,
@@ -295,7 +302,9 @@ export default defineConfig({
       { text: 'Docs', link: '/', activeMatch: '^/(?!api-reference/|model-api-reference/)' },
       { text: 'Model API Reference', link: '/model-api-reference/', activeMatch: '^/model-api-reference/' },
       { text: 'Platform API', link: '/api-reference/', activeMatch: '^/api-reference/' },
-      { text: 'Console', link: 'https://www.sandbase.ai/console', target: '_blank', rel: 'noopener noreferrer' },
+      { text: 'Pricing', link: 'https://www.sandbase.ai/pricing', target: '_blank', rel: 'noopener noreferrer' },
+      // Rendered as the primary "Start building" CTA button (see custom.css).
+      { text: 'Start building', link: 'https://www.sandbase.ai/console', target: '_blank', rel: 'noopener noreferrer' },
     ],
 
     sidebar: {
