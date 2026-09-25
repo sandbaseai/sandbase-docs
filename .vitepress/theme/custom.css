@@ -1268,9 +1268,12 @@ html {
 }
 
 @media (min-width: 960px) {
-  /* Sidebar content begins at the page inset (balanced left gutter). */
+  /* Sidebar content begins at the page inset (balanced left gutter) and sits
+     a comfortable distance below the fixed header so it isn't clipped by it
+     (the reference leaves a clear gap under the header). */
   .VPSidebar {
     padding-left: var(--sb-layout-gutter) !important;
+    padding-top: calc(var(--vp-nav-height) + 40px) !important;
     width: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
   }
 
@@ -1972,4 +1975,13 @@ html {
   border-top: 0 !important;
   padding-top: 0 !important;
   margin-top: 0.5rem;
+}
+
+/* "On this page" outline: the reference has no left divider rail and no active
+   marker bar — just plain links. Remove both. */
+.VPDocAsideOutline {
+  border-left: 0 !important;
+}
+.VPDocAsideOutline .outline-marker {
+  display: none !important;
 }
