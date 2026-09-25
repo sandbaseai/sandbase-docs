@@ -243,7 +243,6 @@ onBeforeUnmount(() => {
   inset: 0 0 auto;
   width: 100%;
   background: var(--color-canvas);
-  border-bottom: 1px solid var(--color-line);
 }
 
 .sh-bar {

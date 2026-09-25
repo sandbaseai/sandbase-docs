@@ -753,7 +753,6 @@ html {
 .VPDocAside {
   width: 300px !important;
   padding-left: 28px;
-  border-left: 1px solid var(--sb-doc-rule);
 }
 
 .VPDoc .aside {
@@ -1256,41 +1255,31 @@ html {
    the navigation rail keeps a stable width and the page always retains a
    right margin across every viewport wider than the mobile breakpoint. */
 :root {
-  --sb-layout-gutter: max(0px, calc((100vw - var(--vp-layout-max-width)) / 2));
+  /* Fluid side margin like the reference (page-inset): scales with the
+     viewport, ~24px on small screens up to 80px, then grows to centre the
+     shell once the viewport exceeds the max layout width. This keeps balanced
+     left/right gutters at every width instead of pinning the sidebar to the
+     window edge. */
+  --sb-page-inset: clamp(1.5rem, 5.5556vw, 5rem);
+  --sb-layout-gutter: max(
+    var(--sb-page-inset),
+    calc((100vw - var(--vp-layout-max-width)) / 2 + var(--sb-page-inset))
+  );
 }
 
 @media (min-width: 960px) {
-  /* Rail box = intended width + centring gutter, keeping a fixed 32px inner
-     indent. Usable rail width therefore stays constant instead of shrinking
-     to nothing in the 1440–1680px range. */
+  /* Sidebar content begins at the page inset (balanced left gutter). */
   .VPSidebar {
-    padding-left: calc(32px + var(--sb-layout-gutter)) !important;
+    padding-left: var(--sb-layout-gutter) !important;
     width: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
   }
 
-  /* Content is inset by the rail on the left and always keeps a right gutter
-     (at least 48px), so the outline rail never touches the window edge. */
+  /* Content clears the sidebar on the left and keeps the same inset on the
+     right, so the outline column ends the same distance from the window edge
+     as the sidebar starts from the left. */
   .VPContent.has-sidebar {
     padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
-    padding-right: max(48px, var(--sb-layout-gutter)) !important;
-  }
-
-  /* The nav bar reuses the same collapsing formula for its logo slot, action
-     area, and divider. Re-align all three with the guarded gutter so the logo
-     tracks the rail and the right-hand icons keep the same margin as the
-     content/outline below (otherwise the GitHub icon sits flush to the edge). */
-  .VPNavBar.has-sidebar .title {
-    padding-left: calc(32px + var(--sb-layout-gutter)) !important;
-    width: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
-  }
-
-  .VPNavBar.has-sidebar .content {
-    padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
-    padding-right: max(48px, var(--sb-layout-gutter)) !important;
-  }
-
-  .VPNavBar.has-sidebar .divider {
-    padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
+    padding-right: var(--sb-layout-gutter) !important;
   }
 }
 

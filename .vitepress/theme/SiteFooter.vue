@@ -129,7 +129,6 @@ function toggleTheme() {
   background: var(--color-canvas);
   color: var(--color-ink);
   line-height: 1.5rem;
-  border-top: 1px solid var(--color-line);
 }
 .sf-container {
   margin-inline: var(--page-inset);
