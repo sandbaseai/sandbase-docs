@@ -39,7 +39,7 @@ function openSearch() {
   width: 100%;
   align-items: center;
   gap: 0.625rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--color-line);
   border-radius: 0;

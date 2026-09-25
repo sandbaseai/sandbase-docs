@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useData } from 'vitepress'
 import BrandMark from './BrandMark.vue'
+import SocialIcon from './SocialIcon.vue'
 
 /**
  * Faithful replica of the sandbase.ai site footer. Markup and styling mirror
@@ -27,9 +29,9 @@ const footerSections = [
     title: 'Solutions',
     links: [
       { href: `${SITE}/solutions`, label: 'All Solutions' },
+      { href: `${SITE}/solutions/language-models`, label: 'Language Models' },
       { href: `${SITE}/solutions/build-agent`, label: 'Build Agent' },
-      { href: `${SITE}/solutions/service`, label: 'Service' },
-      { href: `${SITE}/solutions/schedule`, label: 'Schedule' },
+      { href: `${SITE}/solutions/schedule-agent-work`, label: 'Schedule Agent Work' },
     ],
   },
   {
@@ -52,15 +54,52 @@ const footerSections = [
 ]
 
 const socialLinks = [
-  { href: 'https://github.com/sandbaseai', label: 'GitHub' },
-  { href: 'https://discord.com/invite/4hXv2f5Q9f', label: 'Discord' },
-  { href: 'https://x.com/sandbaseai', label: 'X.com' },
-  { href: 'https://www.linkedin.com/company/sandbaseai', label: 'LinkedIn' },
+  { href: 'https://github.com/sandbaseai', label: 'GitHub', icon: 'github' },
+  { href: 'https://discord.com/invite/4hXv2f5Q9f', label: 'Discord', icon: 'discord' },
+  { href: 'https://x.com/sandbaseai', label: 'X.com', icon: 'x' },
+  { href: 'https://www.linkedin.com/company/sandbaseai', label: 'LinkedIn', icon: 'linkedin' },
+] as const
+
+type Theme = 'system' | 'light' | 'dark'
+
+const themeOptions: readonly { value: Theme; label: string }[] = [
+  { value: 'system', label: 'System' },
+  { value: 'light', label: 'Light' },
+  { value: 'dark', label: 'Dark' },
 ]
 
 const { isDark } = useData()
-function toggleTheme() {
-  isDark.value = !isDark.value
+const theme = ref<Theme>('system')
+let systemTheme: MediaQueryList | undefined
+
+function applyTheme(next: Theme) {
+  theme.value = next
+  if (next === 'system') {
+    localStorage.removeItem('theme')
+    isDark.value = systemTheme?.matches ?? false
+  } else {
+    localStorage.setItem('theme', next)
+    isDark.value = next === 'dark'
+  }
+}
+
+function followSystemTheme(event: MediaQueryListEvent) {
+  if (theme.value === 'system') isDark.value = event.matches
+}
+
+onMounted(() => {
+  systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+  const storedTheme = localStorage.getItem('theme')
+  applyTheme(storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'system')
+  systemTheme.addEventListener('change', followSystemTheme)
+})
+
+onBeforeUnmount(() => {
+  systemTheme?.removeEventListener('change', followSystemTheme)
+})
+
+function chooseTheme(next: Theme) {
+  if (next !== theme.value) applyTheme(next)
 }
 </script>
 
@@ -76,7 +115,10 @@ function toggleTheme() {
           <p>{{ tagline }}</p>
           <ul class="sf-socials">
             <li v-for="item in socialLinks" :key="item.href">
-              <a :href="item.href" target="_blank" rel="noopener noreferrer" class="sf-link">{{ item.label }}</a>
+              <a :href="item.href" target="_blank" rel="noopener noreferrer" class="sf-link sf-social-link">
+                <SocialIcon :name="item.icon" />
+                <span>{{ item.label }}</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -107,10 +149,20 @@ function toggleTheme() {
             <span aria-hidden="true" class="sf-status-dot" />
             All systems operational
           </a>
-          <button type="button" class="sf-theme" :aria-pressed="isDark" @click="toggleTheme">
-            <span class="sf-theme-label">Colour theme</span>
-            <span class="sf-theme-value">{{ isDark ? 'Dark' : 'Light' }}</span>
-          </button>
+          <div class="sf-theme" role="radiogroup" aria-label="Colour theme">
+            <button
+              v-for="option in themeOptions"
+              :key="option.value"
+              type="button"
+              role="radio"
+              :aria-checked="theme === option.value"
+              :class="['sf-theme-option', { 'is-active': theme === option.value }]"
+              @click="chooseTheme(option.value)"
+            >
+              <span class="sf-theme-marker" aria-hidden="true" />
+              {{ option.label }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -186,6 +238,11 @@ function toggleTheme() {
   flex-wrap: wrap;
   column-gap: 1.25rem;
   row-gap: 0.5rem;
+}
+.sf-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .sf-link {
   color: var(--color-ink);
@@ -264,26 +321,38 @@ function toggleTheme() {
   background: var(--color-positive);
 }
 .sf-theme {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+.sf-theme-option {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid var(--color-line);
-  padding: 0.375rem 0.75rem;
+  border: 0;
+  padding: 0;
   background: transparent;
   color: var(--color-ink-muted);
-  font-family: var(--font-family-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font: inherit;
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: color 0.15s ease;
 }
-.sf-theme:hover {
+.sf-theme-option:hover,
+.sf-theme-option.is-active {
   color: var(--color-ink);
-  border-color: var(--color-ink-muted);
 }
-.sf-theme-value {
-  color: var(--color-accent);
+.sf-theme-option:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.sf-theme-marker {
+  width: 7px;
+  height: 7px;
+  background: var(--color-line);
+  transition: background-color 0.15s ease;
+}
+.sf-theme-option.is-active .sf-theme-marker {
+  background: var(--color-accent);
 }
 
 @media (min-width: 640px) {
@@ -315,7 +384,8 @@ function toggleTheme() {
 }
 @media (prefers-reduced-motion: reduce) {
   .sf-link,
-  .sf-theme {
+  .sf-theme-option,
+  .sf-theme-marker {
     transition: none;
   }
 }

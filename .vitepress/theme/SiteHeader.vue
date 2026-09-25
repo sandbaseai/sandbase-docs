@@ -260,7 +260,7 @@ onBeforeUnmount(() => {
   display: inline-flex;
   grid-column: 1;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.625rem;
   justify-self: start;
   color: var(--color-ink);
   text-decoration: none;
