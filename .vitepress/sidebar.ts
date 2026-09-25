@@ -4,20 +4,10 @@ import {
   platformApiReferenceFallbackSidebarItems,
 } from './modelApiReferenceSidebar.generated'
 
-const fixedDocsEntrypoints: DefaultTheme.SidebarItem = {
-  text: 'Documentation',
-  items: [
-    { text: 'Docs', link: '/' },
-    { text: 'Model API Reference', link: '/model-api-reference/' },
-    { text: 'Platform API', link: '/api-reference/' },
-  ],
-}
-
 // ─── Model API Reference ─────────────────────────────────────
 
 function modelApiReferenceSidebar(items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] {
   return [
-    fixedDocsEntrypoints,
     { text: 'Status', link: 'https://status.sandbase.ai' },
     { text: 'Community', link: 'https://www.sandbase.ai/community' },
     { text: 'Blog', link: 'https://www.sandbase.ai/blog' },
@@ -32,7 +22,6 @@ export const fullModelApiReferenceSidebar = modelApiReferenceSidebar(modelApiRef
 export const platformApiReferenceFallbackSidebar = modelApiReferenceSidebar(platformApiReferenceFallbackSidebarItems)
 
 export const docsSidebar: DefaultTheme.SidebarItem[] = [
-  fixedDocsEntrypoints,
   {
     text: 'AI-Friendly Docs',
     items: [
@@ -107,7 +96,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
 ]
 
 export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
-  fixedDocsEntrypoints,
   {
     text: 'Using the API',
     items: [

@@ -10,6 +10,7 @@ import PlatformApiLanding from './PlatformApiLanding.vue'
 import SiteHeader from './SiteHeader.vue'
 import SiteFooter from './SiteFooter.vue'
 import DocsSearch from './DocsSearch.vue'
+import DocsSectionTabs from './DocsSectionTabs.vue'
 import './custom.css'
 
 export default {
@@ -22,7 +23,7 @@ export default {
       // its search hotkey and mobile sidebar plumbing keep working.
       // The docs sidebar leads with a "Search docs" button (matching the
       // reference design) that triggers VitePress's local search.
-      'sidebar-nav-before': () => h(DocsSearch),
+      'sidebar-nav-before': () => [h(DocsSearch), h(DocsSectionTabs)],
       'sidebar-nav-after': () => [h(PlatformApiSidebar), h(OfficialNativeApiSidebar)],
       'layout-top': () => h(SiteHeader),
       'layout-bottom': () => h(SiteFooter),
