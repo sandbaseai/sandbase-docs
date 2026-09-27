@@ -71,6 +71,8 @@ Documented flat messages include `API key rate limit exceeded` and `global rate 
 
 If a response includes `Retry-After`, respect it. Otherwise use bounded exponential backoff with jitter. See [Rate limits](/guides/rate-limiting) for request-smoothing patterns.
 
+Video submissions have two additional checks. `organization concurrency limit exceeded` (`429`) means your organization already has as many tasks in progress as its account level allows; it clears when a running task finishes. `insufficient credit for estimated video cost` (`402`) means the estimated cost is more than your balance plus credit line; top up before retrying. See [Concurrency limits](/guides/concurrency-limits).
+
 ## Retry safety
 
 Use this decision order:

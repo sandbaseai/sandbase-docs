@@ -70,5 +70,9 @@ An API operation may return HTTP `402` when the organization cannot fund the req
 compatibility surface, so handle the HTTP status and documented error object rather than matching one message
 string. After resolving billing in the Console, retry according to the operation's idempotency and recovery rules.
 
+Video submissions are also checked against their estimated cost before they start. A single top-up of $10 or more
+raises your account level, which allows more video tasks to run at the same time. See
+[Concurrency limits](/guides/concurrency-limits).
+
 See [Models and Pricing](/for-agents/models), [Task Cost](/api-reference/tasks/cost), and
 [Errors](/api-reference/errors) for the current public contracts.
