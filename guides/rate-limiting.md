@@ -88,6 +88,12 @@ async def run_one(client, prompt):
 Concurrency is not the same as requests per minute. Tune both against observed latency and the capacity assigned to
 your application.
 
+::: tip Video tasks
+Video submissions are also limited by how many tasks your organization can run at once, based on its account level.
+That `429` says `organization concurrency limit exceeded` and clears when a running task finishes, not on a timer. See
+[Concurrency limits](/guides/concurrency-limits).
+:::
+
 ## Related guidance
 
 - [Error handling](/guides/error-handling)

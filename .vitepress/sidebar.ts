@@ -62,6 +62,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Streaming', link: '/guides/streaming' },
       { text: 'Errors', link: '/guides/error-handling' },
       { text: 'Rate limits', link: '/guides/rate-limiting' },
+      { text: 'Concurrency limits', link: '/guides/concurrency-limits' },
       { text: 'Pricing', link: '/guides/billing' },
     ],
   },
