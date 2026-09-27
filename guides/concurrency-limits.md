@@ -1,6 +1,6 @@
 ---
 title: Concurrency limits
-description: How SandBase limits the number of video tasks your organization can run at the same time, how the limit scales with your account level, and how to handle 429 and 402 responses on video submissions.
+description: How many video tasks your organization can run at once, how the limit scales with your account level, and how to handle 429 and 402 on video submissions.
 ---
 
 # Concurrency limits
