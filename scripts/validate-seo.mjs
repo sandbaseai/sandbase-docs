@@ -3,7 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import YAML from 'yaml'
 
-const roots = ['admin', 'agents', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'setup', 'store', 'model-api-reference']
+const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'setup', 'store', 'model-api-reference']
 const excluded = [
   'agents/endpoint-quickstart.md',
   'api-reference/embeds/',
