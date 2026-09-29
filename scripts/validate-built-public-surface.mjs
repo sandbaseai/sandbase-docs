@@ -82,6 +82,14 @@ function inspect(directory) {
     }
     for (const [pattern, label] of forbidden) {
       if (label === 'Endpoint MCP transport' && (/^(?:api-reference\/endpoints\/(?:index|mcp)|agents\/services)\.html$/.test(relative) || /(?:api-reference_endpoints_(?:index|mcp)|agents_services)\.md\./.test(relative))) continue
+      if (label === 'Sandbox API') {
+        // The experimental documentation routes and their dedicated lazy UI chunk are public.
+        // Keep all former Sandbox API reference pages and unrelated bundles protected.
+        if (/^assets\/(?:chunks\/)?SandboxPlayground\.[^/]+\.js$/.test(relative)) continue
+        const withoutGuideLinks = content.replace(/\/(?:docs\/)?sandbox\/(?:(?:playground|quickstart|index)(?:\.html)?)?(?=["'<\s?#])/g, '/experimental-guide')
+        assert.doesNotMatch(withoutGuideLinks, pattern, `${relative} must not publish the hidden ${label}`)
+        continue
+      }
       assert.doesNotMatch(content, pattern, `${relative} must not publish the hidden ${label}`)
     }
   }

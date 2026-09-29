@@ -1,8 +1,10 @@
+import { sandboxProxy, PREFIX } from './sandbox-proxy.js'
 const DOCS_PREFIX = '/docs'
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
+    if (url.pathname.startsWith(PREFIX + "/")) return sandboxProxy(request)
 
     if (url.pathname === DOCS_PREFIX) {
       url.pathname = `${DOCS_PREFIX}/`

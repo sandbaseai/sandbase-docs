@@ -1129,7 +1129,10 @@ function inspectPublishedSources(directory) {
         assert.doesNotMatch(content, /Contains exactly one item whose only field is data\./, `${relative} must not apply the Platform API data envelope to media outputs`)
       }
     }
+    // Only the explicitly published experimental Sandbox guide/playground may link this section.
+    if (!['sandbox/index.md', 'sandbox/playground.md'].includes(relative)) {
     assert.doesNotMatch(content, /\/(?:v1\/)?sandboxes?(?:\/|\{|:|\b)/i, `${relative} must not expose sandbox API paths`)
+    }
     if (!['api-reference/endpoints/index.md', 'api-reference/endpoints/mcp.md', 'agents/services.md'].includes(relative)) {
       assert.doesNotMatch(content, /\/v1\/endpoints\/[^\s`"']+\/mcp\b/i, `${relative} must not expose Endpoint MCP transport`)
     }

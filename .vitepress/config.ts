@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import sandboxDev from './sandbox-dev.mjs'
 import {
   apiReferenceSidebar,
   docsSidebar,
@@ -210,6 +211,7 @@ function genericPageHead(pageData: any) {
 }
 
 export default defineConfig({
+  vite: { plugins: [sandboxDev()], server: { watch: { ignored: ['**/.vitepress/dist/**'] } } },
   base: docsBase,
   // Keep internal/withdrawn API material in the repository without publishing it.
   srcExclude: [

@@ -1875,6 +1875,7 @@ html {
 
 /* VPLocalNav (mobile sidebar + outline bar) sits directly below the header. */
 .VPLocalNav {
+  top: var(--vp-nav-height) !important;
   border-bottom: 1px solid var(--sb-line);
 }
 
@@ -1997,4 +1998,21 @@ html {
 }
 .VPDocAsideOutline .outline-marker {
   display: none !important;
+}
+
+/* The Playground is a workspace, so it needs more room than prose pages. */
+.Layout.sandbox-playground-page .VPDoc .content-container {
+  max-width: 1440px !important;
+  width: 100%;
+}
+.sandbox-playground-page .VPDoc > .container > .content {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  width: 100%;
+}
+@media (max-width: 639px) {
+  .sandbox-playground-page .VPDoc > .container > .content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }

@@ -28,3 +28,19 @@ then verify `https://www.sandbase.ai/docs/health` with retries.
 Use the Cloudflare dashboard's Worker deployment history to roll back to a
 previous version. Verify `/docs/health` and a representative API-reference URL
 after the rollback.
+
+## Sandbox Playground
+
+`/docs/sandbox/playground` uses the stateless Worker route `/docs/_sandbox/*`.
+Deploy the Worker and its static assets together. Static-only Nginx hosting
+cannot execute the Playground proxy. No Sandbox service key or new Secret
+binding is required: each visitor provides their own key, kept in page memory
+and forwarded only to the fixed Sandbox service. Do not enable request-body
+or credential-header logging for this route. The proxy disables caching,
+rejects cross-origin browser callers, and supports only its explicit routes.
+
+`npm run dev` and `npm run preview` install the same proxy handler locally.
+Where Node requires the machine's existing HTTP proxy, use Node 24+ with
+`NODE_USE_ENV_PROXY=1`; do not bake a local proxy address into the Worker.
+Run `npm run test:sandbox-playground` before release. Production read-only
+checks do not establish real lifecycle, command, file or billing acceptance.

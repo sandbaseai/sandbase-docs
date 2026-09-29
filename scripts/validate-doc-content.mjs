@@ -3,7 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { parse as parseYaml } from 'yaml'
 
-const roots = ['admin', 'agents', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'setup', 'store']
+const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'setup', 'store']
 const excluded = [
   'agents/deployments.md',
   'agents/endpoint-quickstart.md',
