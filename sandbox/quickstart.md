@@ -56,11 +56,15 @@ The examples read process environment variables. A `.env` file works only if you
 Use your SandBase key to list the templates visible to your organization:
 
 ```bash
-curl --fail --silent --show-error https://sandbox.sandbase.ai/templates \
+curl --fail --silent --show-error 'https://sandbox.sandbase.ai/v2/templates?limit=100' \
   -H "X-API-Key: $E2B_API_KEY"
 ```
 
-Choose an enabled template from the response and copy its `templateID`:
+Choose a template with `buildStatus: "ready"` and copy its `templateID`. Display names are provided in `names` or `aliases`; if both are empty, use the ID. The `public` field distinguishes public templates from private templates visible to your organization.
+
+The response is an array. If the response headers include `X-Next-Token`, pass its value as the `nextToken` query parameter to retrieve the next page.
+
+Set the selected template ID:
 
 ```bash
 export SANDBASE_TEMPLATE_ID="YOUR_TEMPLATE_ID"

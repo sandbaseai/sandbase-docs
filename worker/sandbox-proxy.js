@@ -3,7 +3,7 @@ export const PREFIX = '/docs/_sandbox'
 const UPSTREAM = 'https://sandbox.sandbase.ai'
 const ID = '[a-zA-Z0-9_-]{1,128}'
 const routes = [
-  ['GET', /^\/templates$/], ['GET', /^\/v2\/templates$/],
+  ['GET', /^\/v2\/templates$/],
   ['GET|POST', /^\/v2\/sandboxes$/],
   ['POST', new RegExp(`^/v2/sandboxes/${ID}/connect$`)],
   ['GET|DELETE', new RegExp(`^/sandboxes/${ID}$`)],

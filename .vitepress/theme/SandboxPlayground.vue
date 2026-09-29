@@ -64,16 +64,18 @@ async function list() {
 }
 async function connect() { await act('Load templates and instances', async () => {
   connectionID.value = crypto.randomUUID(); connected.value = true
-  const [first, available] = await Promise.all([api('/control/v2/templates?limit=100'), control('/templates')])
-  const catalog = await readResponse(first); let next = first.headers.get('X-Next-Token'), pages = 1
+  const first = await api('/control/v2/templates?limit=100')
+  const catalog = await readResponse(first)
+  if (!Array.isArray(catalog)) throw new Error('invalid_templates')
+  let next = first.headers.get('X-Next-Token'), pages = 1
   while (next && pages++ < 10) {
     const page = await api('/control/v2/templates?' + new URLSearchParams({ limit: '100', nextToken: next }))
-    catalog.push(...await readResponse(page)); next = page.headers.get('X-Next-Token')
+    const rows = await readResponse(page)
+    if (!Array.isArray(rows)) throw new Error('invalid_templates')
+    catalog.push(...rows); next = page.headers.get('X-Next-Token')
   }
   if (next) notice.value = 'Showing the first 1,000 templates, not the full organization total.'
-  if (!Array.isArray(catalog) || !Array.isArray(available)) throw new Error('invalid_templates')
-  const enabled = new Map(available.map(t => [idOf(t) || t.templateID, t]))
-  templates.value = catalog.map(t => ({ ...enabled.get(t.templateID), ...t, label: templateLabel({ ...enabled.get(t.templateID), ...t }), runnable: enabled.has(t.templateID) }))
+  templates.value = catalog.map(t => ({ ...t, label: templateLabel(t), runnable: t.buildStatus === 'ready' }))
   catalogLoaded.value = true
   template.value = templates.value.find(t => t.runnable)?.templateID || ''
   await list()
@@ -193,7 +195,7 @@ onBeforeUnmount(() => { window.removeEventListener('pagehide', forget); forget()
     <div class="sp-layout">
       <aside class="sp-resources">
         <h3>Environment <small>{{ counts }}</small></h3>
-        <label>Template<select v-model="template" :disabled="busy || !connected"><option value="">Choose a template</option><option v-for="t in templates" :key="t.templateID" :value="t.templateID" :disabled="!t.runnable">{{ t.public ? 'Public' : 'Private' }} · {{ t.label }}{{ t.runnable ? '' : ' (unavailable)' }}</option></select></label>
+        <label>Template<select v-model="template" :disabled="busy || !connected"><option value="">Choose a template</option><option v-for="t in templates" :key="t.templateID" :value="t.templateID" :disabled="!t.runnable">{{ t.public ? 'Public' : 'Private' }} · {{ t.label }}{{ t.runnable ? '' : ` (${t.buildStatus || 'unavailable'})` }}</option></select></label>
         <label>Timeout (30–600 seconds)<input v-model="ttl" type="number" min="30" max="600" :disabled="busy" /></label>
         <label class="sp-check"><input v-model="accepted" type="checkbox" /> I understand that real resources may incur charges. I will delete them after use.</label>
         <button class="sp-primary" :disabled="busy || !connected || !template || !accepted || !!pendingCreate || Number(ttl) < 30 || Number(ttl) > 600" @click="create">＋ Create sandbox</button>
