@@ -55,7 +55,8 @@ export async function sandboxProxy(request, fetcher = fetch) {
       const [, id, action] = match, token = request.headers.get('X-Access-Token')
       if (!token || token.length > 8192) return error(401, 'connect_required')
       // Recheck the supplied customer's ownership before forwarding to any data host.
-      const check = await fetcher(`${UPSTREAM}/sandboxes/${id}`, { headers: { 'X-API-Key': key }, redirect: 'error', signal: AbortSignal.timeout(15000) })
+      const check = await fetcher(`${UPSTREAM}/sandboxes/${id}`, { headers: { 'X-API-Key': key }, redirect: 'manual', signal: AbortSignal.timeout(15000) })
+      if (check.status >= 300 && check.status < 400) { await check.body?.cancel(); return error(502, 'upstream_redirect_rejected') }
       if (!check.ok) { await check.body?.cancel(); return error(check.status, 'sandbox_access_denied') }
       const info = await check.json()
       if (info.state !== 'running') return error(409, 'sandbox_not_running')
@@ -78,7 +79,8 @@ export async function sandboxProxy(request, fetcher = fetch) {
         }
       }
     }
-    const upstream = await fetcher(target, { method, headers, body, redirect: 'error', signal: AbortSignal.timeout(35000) })
+    const upstream = await fetcher(target, { method, headers, body, redirect: 'manual', signal: AbortSignal.timeout(35000) })
+    if (upstream.status >= 300 && upstream.status < 400) { await upstream.body?.cancel(); return error(502, 'upstream_redirect_rejected') }
     if (!upstream.ok) { await upstream.body?.cancel(); return error(upstream.status, `upstream_http_${upstream.status}`) }
     const outHeaders = new Headers(responseHeaders)
     outHeaders.set('Content-Type', upstream.headers.get('Content-Type') || 'application/octet-stream')

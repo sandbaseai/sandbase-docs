@@ -12,7 +12,7 @@ test('proxy forwards only fixed control routes and never forwards cookies', asyn
   let seen
   const r = await sandboxProxy(req('/control/v2/templates', { headers: { Cookie: 'private-cookie' } }), async (url, options) => { seen = { url, options }; return Response.json([{ templateID: 'one' }]) })
   assert.equal(seen.url, 'https://sandbox.sandbase.ai/v2/templates'); assert.equal(seen.options.headers.get('X-API-Key'), key)
-  assert.equal(seen.options.headers.get('Cookie'), null); assert.equal(seen.options.redirect, 'error'); assert.equal(r.headers.get('Cache-Control'), 'no-store')
+  assert.equal(seen.options.headers.get('Cookie'), null); assert.equal(seen.options.redirect, 'manual'); assert.equal(r.headers.get('Cache-Control'), 'no-store')
   assert.equal((await r.json())[0].templateID, 'one')
 })
 test('rejects cross-site calls, missing auth, unexpected routes and query injection before network', async () => {
@@ -164,4 +164,24 @@ test('template picker uses only v2, follows pagination, and selects only ready b
   assert.equal(paths.length, 3)
   const denied = await sandboxProxy(req('/control/templates'), () => { throw new Error('legacy upstream must not be called') })
   assert.equal(denied.status, 404)
+})
+
+
+test('redirects are rejected on control, access checks and data requests without forwarding Location', async () => {
+  for (const path of ['/control/v2/templates', '/data/sbx-owned/files?path=/tmp/x']) {
+    for (const status of [301, 302, 303, 307, 308]) {
+      const stages = path.startsWith('/data/') ? [1, 2] : [1]
+      for (const redirectAt of stages) {
+        let calls = 0
+        const r = await sandboxProxy(req(path, { headers: { 'X-Access-Token': 'synthetic-token' } }), async (_url, options) => {
+          assert.equal(options.redirect, 'manual')
+          if (++calls < redirectAt) return Response.json({ state: 'running' })
+          return new Response('private upstream body', { status, headers: { Location: 'https://untrusted.example/', 'Set-Cookie': 'private' } })
+        })
+        assert.equal(r.status, 502); assert.equal(calls, redirectAt)
+        assert.equal(r.headers.get('Location'), null); assert.equal(r.headers.get('Set-Cookie'), null)
+        assert.deepEqual(await r.json(), { error: { code: 'upstream_redirect_rejected' } })
+      }
+    }
+  }
 })
