@@ -7,6 +7,7 @@ const templates = ref([]), template = ref(''), instances = ref([]), selected = r
 const tab = ref('command'), command = ref('uname -a'), output = ref(''), events = ref([]), notice = ref('')
 const filePath = ref('/tmp/sandbase-playground.txt'), content = ref('Hello from Sandbox Playground'), fileStatus = ref('')
 const evidence = ref('Not loaded'), observation = ref('metrics'), ttl = ref(120), requestExample = ref('Connect to view a request example.')
+const eventNotice = ref('Refresh to load lifecycle events for the selected instance.')
 const pendingCreate = ref(''), observedPause = new Set(), restored = new Set(), saved = new Map(), tokens = new Map()
 const connectionID = ref(''); let controller
 const responseSignals = new WeakMap()
@@ -82,12 +83,17 @@ async function connect() { await act('Load templates and instances', async () =>
 }) }
 function forget() {
   controller?.abort(); controller = null; busy.value = false
-  template.value = ''; connectionID.value = ''; accepted.value = false; command.value = 'uname -a'; content.value = ''; filePath.value = '/tmp/sandbase-playground.txt'; fileStatus.value = ''; requestExample.value = 'Connect to view a request example.'
+  eventNotice.value = ''; template.value = ''; connectionID.value = ''; accepted.value = false; command.value = 'uname -a'; content.value = ''; filePath.value = '/tmp/sandbase-playground.txt'; fileStatus.value = ''; requestExample.value = 'Connect to view a request example.'
   tokens.clear(); catalogLoaded.value = false; key.value = ''; connected.value = false; selected.value = null; instances.value = []; templates.value = []; events.value = []; output.value = ''; evidence.value = ''; saved.clear(); observedPause.clear(); restored.clear(); pendingCreate.value = ''; notice.value = 'Key, connection tokens, and page activity cleared. Requests already sent may still complete. Your sandboxes have not been deleted.'
 }
-async function select(value) { await act('Load instance', async () => {
-  selected.value = await control(`/sandboxes/${idOf(value)}`); output.value = ''; fileStatus.value = ''; evidence.value = 'Not loaded'; await loadEvents()
-}) }
+function select(value) {
+  if (busy.value || idOf(value) === id.value) return
+  selected.value = value
+  output.value = ''; content.value = ''; fileStatus.value = ''; evidence.value = 'Not loaded'; events.value = []
+  requestExample.value = 'Choose an operation to view its request example.'
+  eventNotice.value = 'Refresh to load lifecycle events for this instance.'
+  notice.value = `Selected ${idOf(value)}. ${owned.value ? 'Ready for this instance’s available operations.' : 'Read-only instance. Only instances created in this page session can be changed.'}`
+}
 async function create() { if (!accepted.value || pendingCreate.value) return
   await act('Create sandbox', async () => {
     const attempt = crypto.randomUUID(); pendingCreate.value = attempt
@@ -159,9 +165,19 @@ async function file(write) { if (!runnable.value) return
   })
 }
 async function loadEvents() {
-  const rows = await control(`/events/sandboxes/${id.value}?limit=100`)
-  for (const event of Array.isArray(rows) ? rows : []) if (!events.value.some(x => x.id === event.id && x.source === 'Sandbox lifecycle')) events.value.unshift({ id: event.id, type: event.type, source: 'Sandbox lifecycle', time: event.timestamp, data: safe(event) })
-  events.value = events.value.slice(0, 100)
+  const signal = controller?.signal
+  eventNotice.value = 'Loading lifecycle events…'
+  try {
+    const rows = await control(`/events/sandboxes/${id.value}?limit=100`)
+    if (!Array.isArray(rows)) throw new Error('invalid_events')
+    for (const event of rows) if (!events.value.some(x => x.id === event.id && x.source === 'Sandbox lifecycle')) events.value.unshift({ id: event.id, type: event.type, source: 'Sandbox lifecycle', time: event.timestamp, data: safe(event) })
+    events.value = events.value.slice(0, 100)
+    eventNotice.value = rows.length ? '' : 'No lifecycle events returned yet.'
+  } catch (e) {
+    if (signal?.aborted) throw e
+    eventNotice.value = `Lifecycle events unavailable (${safe(e.message)}). Your selection and completed operations are unchanged.`
+    if (notice.value === 'Refresh events…') notice.value = 'Events could not be loaded. Your instance selection is unchanged.'
+  }
 }
 async function observe() { if (!id.value) return
   await act('Load observations', async () => {
@@ -201,8 +217,8 @@ onBeforeUnmount(() => { window.removeEventListener('pagehide', forget); forget()
         <button class="sp-primary" :disabled="busy || !connected || !template || !accepted || !!pendingCreate || Number(ttl) < 30 || Number(ttl) > 600" @click="create">＋ Create sandbox</button>
         <p v-if="pendingCreate" class="sp-warn">Creation result is unknown. Refresh and reconcile this marker before creating again: {{ pendingCreate }}</p>
         <h3>Instances <button :disabled="busy || !connected" @click="act('Refresh', list)">Refresh</button></h3>
-        <p v-if="!instances.length" class="sp-muted">No instances loaded</p>
-        <button v-for="s in instances" :key="idOf(s)" class="sp-instance" :class="{ chosen: idOf(s) === id }" :disabled="busy" @click="select(s)">{{ idOf(s) }}<small>{{ s.state }} · {{ s.metadata?.docsPlayground === connectionID ? 'Created here' : 'Read-only' }}</small></button>
+        <p class="sp-muted">{{ busy ? 'An operation is in progress. Selection unlocks when it finishes.' : 'Click an instance to select it. Refresh to update its status.' }}</p><p v-if="!instances.length" class="sp-muted">No instances loaded</p>
+        <button v-for="s in instances" :key="idOf(s)" class="sp-instance" :class="{ chosen: idOf(s) === id }" :aria-pressed="idOf(s) === id" :title="busy ? 'Wait for the current operation to finish' : 'Select ' + idOf(s)" :disabled="busy" @click="select(s)"><span class="sp-instance-id">{{ idOf(s) }}</span><span v-if="idOf(s) === id" class="sp-selected">✓ Selected</span><small>{{ s.state }} · {{ s.metadata?.docsPlayground === connectionID ? 'Created here' : 'Read-only' }}</small></button>
       </aside>
       <section class="sp-work">
         <div class="sp-current"><strong>{{ id || 'Select an instance' }}</strong><span>{{ selected?.state || 'Disconnected' }}</span></div>
@@ -213,7 +229,7 @@ onBeforeUnmount(() => { window.removeEventListener('pagehide', forget); forget()
         <div v-if="tab === 'observe'"><p class="sp-muted">Missing evidence does not mean zero usage. Machine-time records are not final billing.</p><label>Observation type<select v-model="observation" :disabled="busy"><option value="metrics">CPU / memory metrics</option><option value="logs">Instance logs</option><option value="usage">Machine-time evidence</option></select></label><button :disabled="busy || !id" @click="observe">Load</button><pre>{{ evidence }}</pre></div>
         <details class="sp-request"><summary>Request example (credentials omitted)</summary><pre>{{ requestExample }}</pre></details>
       </section>
-      <aside class="sp-events"><h3>Events <button :disabled="busy || !id" @click="act('Refresh events', loadEvents)">Refresh</button></h3><p class="sp-muted">Refresh lifecycle events manually. Process output arrives as a live stream. Each event is labeled by source.</p><p v-if="!events.length" class="sp-muted">Events appear here as you work.</p><article v-for="event in events" :key="event.source + event.id"><small>{{ event.source }} · {{ event.time }}</small><strong>{{ event.type }}</strong><details><summary>Event data</summary><pre>{{ event.data }}</pre></details></article></aside>
+      <aside class="sp-events"><h3>Events <button :disabled="busy || !id" @click="act('Refresh events', loadEvents)">Refresh</button></h3><p class="sp-muted">Refresh lifecycle events manually. Process output arrives as a live stream. Each event is labeled by source.</p><p v-if="eventNotice" class="sp-muted" role="status">{{ eventNotice }}</p><article v-for="event in events" :key="event.source + event.id"><small>{{ event.source }} · {{ event.time }}</small><strong>{{ event.type }}</strong><details><summary>Event data</summary><pre>{{ event.data }}</pre></details></article></aside>
     </div>
     <p class="sp-foot">Leaving this page does not delete sandboxes. Delete instances created here, including paused ones. After a refresh, use your organization tools to clean up.</p>
   </div>
@@ -265,6 +281,9 @@ onBeforeUnmount(() => { window.removeEventListener('pagehide', forget); forget()
 .sp-check input { margin-right: 6px; }
 .sp .sp-instance { display: block; text-align: left; width: 100%; margin-top: 8px; overflow-wrap: anywhere; font: 11px/1.5 var(--vp-font-family-mono); }
 .sp-instance small { display: block; margin-top: 6px; color: var(--vp-c-text-2); font: 10px var(--vp-font-family-base); }
+.sp .sp-instance:hover:not(:disabled) { border-color: var(--accent); }
+.sp-instance-id { display: block; }
+.sp-selected { display: block; margin-top: 6px; color: var(--accent); font: 11px var(--vp-font-family-base); }
 .sp-instance.chosen { border-color: var(--accent); background: var(--vp-c-brand-soft); }
 .sp.sp .sp-resources > h3:not(:first-child) { margin-top: 24px; }
 .sp-current { display: flex; justify-content: space-between; gap: 10px; overflow-wrap: anywhere; margin-bottom: 16px; }
