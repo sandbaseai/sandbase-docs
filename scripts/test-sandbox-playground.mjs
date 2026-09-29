@@ -10,20 +10,20 @@ const headers = { 'X-API-Key': key, 'X-Sandbox-Playground': '1', Origin: origin 
 const req = (path, options = {}) => new Request(base + path, { ...options, headers: { ...headers, ...options.headers } })
 test('proxy forwards only fixed control routes and never forwards cookies', async () => {
   let seen
-  const r = await sandboxProxy(req('/control/templates', { headers: { Cookie: 'private-cookie' } }), async (url, options) => { seen = { url, options }; return Response.json([{ templateID: 'one' }]) })
-  assert.equal(seen.url, 'https://sandbox.sandbase.ai/templates'); assert.equal(seen.options.headers.get('X-API-Key'), key)
+  const r = await sandboxProxy(req('/control/v2/templates', { headers: { Cookie: 'private-cookie' } }), async (url, options) => { seen = { url, options }; return Response.json([{ templateID: 'one' }]) })
+  assert.equal(seen.url, 'https://sandbox.sandbase.ai/v2/templates'); assert.equal(seen.options.headers.get('X-API-Key'), key)
   assert.equal(seen.options.headers.get('Cookie'), null); assert.equal(seen.options.redirect, 'error'); assert.equal(r.headers.get('Cache-Control'), 'no-store')
   assert.equal((await r.json())[0].templateID, 'one')
 })
 test('rejects cross-site calls, missing auth, unexpected routes and query injection before network', async () => {
   let calls = 0; const never = () => { calls++; throw Error() }
-  for (const request of [req('/control/templates', { headers: { Origin: 'https://evil.example' } }), new Request(base + '/control/templates'), req('/control/templates?url=https://evil.example'), req('/control/templates', { method: 'DELETE' }), req('/data/evil.example/files?path=/tmp/x')]) assert.ok((await sandboxProxy(request, never)).status >= 400)
+  for (const request of [req('/control/v2/templates', { headers: { Origin: 'https://evil.example' } }), new Request(base + '/control/v2/templates'), req('/control/v2/templates?url=https://evil.example'), req('/control/v2/templates', { method: 'DELETE' }), req('/data/evil.example/files?path=/tmp/x')]) assert.ok((await sandboxProxy(request, never)).status >= 400)
   assert.equal(calls, 0)
 })
 test('no redirects, raw upstream errors, cookies or secret logging in error response', async () => {
-  const r = await sandboxProxy(req('/control/templates'), async () => new Response(key, { status: 500 }))
+  const r = await sandboxProxy(req('/control/v2/templates'), async () => new Response(key, { status: 500 }))
   assert.equal(r.status, 500); assert.ok(!(await r.text()).includes(key))
-  const failed = await sandboxProxy(req('/control/templates'), async () => { throw Error(key) }); assert.ok(!(await failed.text()).includes(key))
+  const failed = await sandboxProxy(req('/control/v2/templates'), async () => { throw Error(key) }); assert.ok(!(await failed.text()).includes(key))
 })
 test('command requires customer ownership and running state; API key never reaches data host', async () => {
   const seen = []; const request = () => req('/data/sbx-owned/command', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Access-Token': 'synthetic-token' }, body: JSON.stringify({ command: 'pwd' }) })
@@ -95,7 +95,7 @@ async function playgroundHarness(fetcher) {
   const source = readFileSync(new URL('../.vitepress/theme/SandboxPlayground.vue', import.meta.url), 'utf8')
     .split('<script setup>')[1].split('</script>')[0].replace(/^import .*$/gm, '')
   return new Function('ref', 'computed', 'onMounted', 'onBeforeUnmount', 'window', 'templateLabel', 'redact', 'readCommandStream', 'fetch',
-    source + '\nreturn { key, connected, accepted, busy, create, forget, act, selected, tokens, events, output, content, requestExample, notice, pageWindow: window };')(
+    source + '\nreturn { key, connected, accepted, busy, create, forget, act, selected, tokens, events, output, content, requestExample, notice, connect, templates, template, catalogLoaded, pageWindow: window };')(
     ref, computed, fn => fn(), () => {}, new EventTarget(), templateLabel, redact, readCommandStream, fetcher)
 }
 
@@ -137,4 +137,31 @@ test('pagehide clears credentials before a page can enter the browser back-forwa
   ui.key.value = 'navigation-key'; ui.tokens.set('instance', 'navigation-token')
   ui.pageWindow.dispatchEvent(new Event('pagehide'))
   assert.equal(ui.key.value, ''); assert.equal(ui.tokens.size, 0)
+})
+
+
+test('template picker uses only v2, follows pagination, and selects only ready builds', async () => {
+  const paths = []
+  const ui = await playgroundHarness(async path => {
+    paths.push(path)
+    if (path === '/docs/_sandbox/control/v2/templates?limit=100') return Response.json([
+      { templateID: 'pending', names: ['Building'], public: false, buildStatus: 'building' },
+      { templateID: 'unnamed-ready', names: [], aliases: [], public: true, buildStatus: 'ready' },
+    ], { headers: { 'X-Next-Token': 'page-2' } })
+    if (path === '/docs/_sandbox/control/v2/templates?limit=100&nextToken=page-2') return Response.json([
+      { templateID: 'private-ready', names: ['Private workspace'], public: false, buildStatus: 'ready' },
+      { templateID: 'failed', aliases: ['Failed build'], public: false, buildStatus: 'failed' },
+    ])
+    if (path.startsWith('/docs/_sandbox/control/v2/sandboxes?')) return Response.json([])
+    throw new Error('unexpected route: ' + path)
+  })
+  ui.key.value = 'fixture-key'; await ui.connect()
+  assert.equal(ui.catalogLoaded.value, true)
+  assert.equal(ui.templates.value.length, 4)
+  assert.equal(ui.template.value, 'unnamed-ready')
+  assert.deepEqual(ui.templates.value.map(t => t.runnable), [false, true, true, false])
+  assert.deepEqual(ui.templates.value.map(t => t.label), ['Building', 'unnamed-ready', 'Private workspace', 'Failed build'])
+  assert.equal(paths.length, 3)
+  const denied = await sandboxProxy(req('/control/templates'), () => { throw new Error('legacy upstream must not be called') })
+  assert.equal(denied.status, 404)
 })
