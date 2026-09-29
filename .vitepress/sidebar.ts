@@ -69,8 +69,8 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
   {
     text: 'Sandbox',
     items: [
-      { text: 'Quickstart / E2B SDK', link: '/sandbox/quickstart' },
       { text: 'Overview & capabilities', link: '/sandbox/' },
+      { text: 'Quickstart / E2B SDK', link: '/sandbox/quickstart' },
       { text: 'Playground (Experimental)', link: '/sandbox/playground' },
     ],
   },
