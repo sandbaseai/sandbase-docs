@@ -1,5 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
-import { h } from 'vue'
+import { h, defineAsyncComponent } from 'vue'
 import HomePage from './HomePage.vue'
 import ApiReferencePage from './ApiReferencePage.vue'
 import QuickstartOnboard from './QuickstartOnboard.vue'
@@ -30,6 +30,7 @@ export default {
     })
   },
   enhanceApp({ app }) {
+    app.component('SandboxPlayground', defineAsyncComponent(() => import('./SandboxPlayground.vue')))
     app.component('HomePage', HomePage)
     app.component('ApiReferencePage', ApiReferencePage)
     app.component('PlatformApiLanding', PlatformApiLanding)
