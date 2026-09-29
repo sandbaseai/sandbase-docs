@@ -159,8 +159,16 @@ onBeforeUnmount(() => { controller?.abort(); tokens.clear(); key.value = '' })
   <div class="sp">
     <header class="sp-hero"><div><span class="sp-kicker">SANDBOX / DEVELOPER LAB</span><h2>Run once. See every step.</h2><p>Create, execute, pause, and resume. See the results as you go.</p></div><span class="sp-badge">Experimental</span></header>
     <div class="sp-auth">
-      <label>Your API key<input v-model="key" :disabled="connected || busy" type="password" autocomplete="off" placeholder="API key with Sandbox access" /></label>
-      <button :disabled="!key.trim() || busy || connected" @click="connect">Connect</button><button :disabled="busy || !connected" @click="forget">Clear credentials</button>
+      <div class="sp-auth-heading">
+        <label for="sandbox-api-key">Your API key</label>
+        <span>No API key? <a href="https://www.sandbase.ai/console/keys" target="_blank" rel="noopener noreferrer">Console → API Keys ↗</a></span>
+      </div>
+      <div class="sp-auth-row">
+        <input id="sandbox-api-key" v-model="key" :disabled="connected || busy" type="password" autocomplete="off" placeholder="API key with Sandbox access" />
+        <button :disabled="!key.trim() || busy || connected" @click="connect">Connect</button>
+        <button :disabled="busy || !connected" @click="forget">Clear credentials</button>
+      </div>
+      <small>Sign in or sign up in the Console, then create an API key to try the Playground.</small>
       <small>sandbox.sandbase.ai · Your key stays in page memory and is forwarded by the docs proxy. Re-enter it after a refresh.</small>
     </div>
     <p class="sp-notice" role="status">{{ notice || 'Connect your organization to begin. Operations use real resources and your own API key.' }}</p>
@@ -211,9 +219,15 @@ onBeforeUnmount(() => { controller?.abort(); tokens.clear(); key.value = '' })
 .sp-hero p, .sp-muted, .sp-auth small { color: var(--vp-c-text-2); }
 .sp-kicker { font: 10px var(--vp-font-family-mono); letter-spacing: 1.5px; color: var(--accent); }
 .sp-badge { flex-shrink: 0; border: 1px solid var(--vp-c-divider); border-radius: 20px; padding: 3px 10px; font-size: 11px; }
-.sp-auth { padding: 16px 24px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.sp-auth label { flex: 1; min-width: 200px; }
-.sp-auth small { flex-basis: 100%; font-size: 11px; }
+.sp-auth { padding: 20px 24px; display: grid; gap: 10px; }
+.sp-auth-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 20px; flex-wrap: wrap; }
+.sp .sp-auth-heading label { margin: 0; }
+.sp-auth-heading span { font-size: 12px; color: var(--vp-c-text-2); }
+.sp .sp-auth-heading a { color: var(--accent); font-size: inherit; }
+.sp-auth-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: stretch; gap: 10px; }
+.sp .sp-auth-row input:not([type=checkbox]) { margin: 0; height: 40px; }
+.sp .sp-auth-row button { height: 40px; white-space: nowrap; }
+.sp-auth small { font-size: 11px; }
 .sp label { display: block; margin: 10px 0; color: var(--vp-c-text-2); font-size: 12px; }
 .sp input:not([type=checkbox]), .sp textarea, .sp select { width: 100%; min-width: 0; display: block; margin-top: 6px; padding: 8px 10px; border: 1px solid var(--vp-c-divider); background: var(--vp-c-bg); border-radius: 6px; color: var(--vp-c-text-1); font: inherit; }
 .sp textarea { font: 12px/1.7 var(--vp-font-family-mono); resize: vertical; }
@@ -256,6 +270,8 @@ onBeforeUnmount(() => { controller?.abort(); tokens.clear(); key.value = '' })
   .sp-work, .sp-events { padding: 16px; }
 }
 @container playground (max-width: 520px) {
+  .sp-auth-row { grid-template-columns: 1fr 1fr; }
+  .sp-auth-row input { grid-column: 1 / -1; }
   .sp-layout { grid-template-columns: minmax(0, 1fr); }
   .sp-resources { display: block; }
   .sp-events { border-left: 0; border-top: 1px solid var(--vp-c-divider); max-height: 360px; }
