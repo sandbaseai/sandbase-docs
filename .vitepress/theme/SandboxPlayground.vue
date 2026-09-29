@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { templateLabel, redact, readCommandStream } from './sandbox-client.mjs'
 const key = ref(''), connected = ref(false), busy = ref(false), accepted = ref(false)
 const catalogLoaded = ref(false)
@@ -9,6 +9,14 @@ const filePath = ref('/tmp/sandbase-playground.txt'), content = ref('Hello from 
 const evidence = ref('Not loaded'), observation = ref('metrics'), ttl = ref(120), requestExample = ref('Connect to view a request example.')
 const pendingCreate = ref(''), observedPause = new Set(), restored = new Set(), saved = new Map(), tokens = new Map()
 const connectionID = ref(''); let controller
+const responseSignals = new WeakMap()
+async function readResponse(response, format = 'json') {
+  const signal = responseSignals.get(response)
+  signal?.throwIfAborted()
+  const value = await response[format]()
+  signal?.throwIfAborted()
+  return value
+}
 const idOf = x => x?.sandboxID || x?.sandboxId || x?.id
 const id = computed(() => idOf(selected.value))
 const owned = computed(() => selected.value?.metadata?.docsPlayground === connectionID.value)
@@ -18,31 +26,35 @@ const secrets = () => [key.value, ...tokens.values()]
 const safe = value => redact(value, secrets())
 function record(type, source, data) { events.value.unshift({ id: crypto.randomUUID(), type, source, time: new Date().toLocaleTimeString(), data: safe(data) }); events.value = events.value.slice(0, 100) }
 async function api(path, method = 'GET', body, dataToken) {
+  const signal = controller?.signal
+  signal?.throwIfAborted()
   const headers = { 'X-API-Key': key.value, 'X-Sandbox-Playground': '1' }
   if (dataToken) headers['X-Access-Token'] = dataToken
   if (body && !(body instanceof FormData)) { headers['Content-Type'] = 'application/json'; body = JSON.stringify(body) }
-  const response = await fetch(`/docs/_sandbox${path}`, { method, headers, body, cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer', signal: controller?.signal })
+  const response = await fetch(`/docs/_sandbox${path}`, { method, headers, body, cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer', signal })
+  signal?.throwIfAborted()
+  responseSignals.set(response, signal)
   if (!response.ok) { const error = await response.json().catch(() => ({})); throw new Error(error.error?.code || `http_${response.status}`) }
   return response
 }
 async function control(path, method = 'GET', body) {
-  requestExample.value = `${method} https://sandbox.sandbase.ai${path}\nX-API-Key: <YOUR_API_KEY>${body ? '\n\n' + JSON.stringify(body, null, 2) : ''}`
+  requestExample.value = path.startsWith('/sandbox-gateway/') ? 'Usage details are shown in the Observe tab.' : `${method} https://sandbox.sandbase.ai${path}\nX-API-Key: <YOUR_API_KEY>${body ? '\n\n' + JSON.stringify(body, null, 2) : ''}`
   const response = await api('/control' + path, method, body)
-  return response.status === 204 ? null : response.json()
+  return response.status === 204 ? null : readResponse(response)
 }
 async function act(label, fn) {
   if (busy.value) return
-  busy.value = true; controller = new AbortController(); notice.value = label + '…'
-  try { await fn(); if (notice.value === label + '…') notice.value = label + ' completed.' }
-  catch (e) { notice.value = `Not completed: ${safe(e.message)}. The result may be unknown. Refresh to reconcile before retrying.`; record('request.failed', 'Playground', { action: label, code: e.message }) }
-  finally { busy.value = false; controller = null }
+  busy.value = true; const active = new AbortController(); controller = active; notice.value = label + '…'
+  try { await fn(); if (active.signal.aborted) return; if (notice.value === label + '…') notice.value = label + ' completed.' }
+  catch (e) { if (active.signal.aborted) return; notice.value = `Not completed: ${safe(e.message)}. The result may be unknown. Refresh to reconcile before retrying.`; record('request.failed', 'Playground', { action: label, code: e.message }) }
+  finally { if (controller === active) { busy.value = false; controller = null } }
 }
 async function list() {
   const rows = []; let next = '', pages = 0
   do {
     const query = new URLSearchParams({ limit: '100', state: 'running,paused' }); if (next) query.set('nextToken', next)
     const response = await api('/control/v2/sandboxes?' + query)
-    const page = await response.json(); if (!Array.isArray(page)) throw new Error('invalid_list')
+    const page = await readResponse(response); if (!Array.isArray(page)) throw new Error('invalid_list')
     rows.push(...page); next = response.headers.get('X-Next-Token') || ''
   } while (next && ++pages < 10)
   instances.value = rows
@@ -53,10 +65,10 @@ async function list() {
 async function connect() { await act('Load templates and instances', async () => {
   connectionID.value = crypto.randomUUID(); connected.value = true
   const [first, available] = await Promise.all([api('/control/v2/templates?limit=100'), control('/templates')])
-  const catalog = await first.json(); let next = first.headers.get('X-Next-Token'), pages = 1
+  const catalog = await readResponse(first); let next = first.headers.get('X-Next-Token'), pages = 1
   while (next && pages++ < 10) {
     const page = await api('/control/v2/templates?' + new URLSearchParams({ limit: '100', nextToken: next }))
-    catalog.push(...await page.json()); next = page.headers.get('X-Next-Token')
+    catalog.push(...await readResponse(page)); next = page.headers.get('X-Next-Token')
   }
   if (next) notice.value = 'Showing the first 1,000 templates, not the full organization total.'
   if (!Array.isArray(catalog) || !Array.isArray(available)) throw new Error('invalid_templates')
@@ -67,8 +79,9 @@ async function connect() { await act('Load templates and instances', async () =>
   await list()
 }) }
 function forget() {
-  if (busy.value) return
-  tokens.clear(); catalogLoaded.value = false; key.value = ''; connected.value = false; selected.value = null; instances.value = []; templates.value = []; events.value = []; output.value = ''; evidence.value = ''; saved.clear(); observedPause.clear(); restored.clear(); pendingCreate.value = ''; notice.value = 'Page credentials cleared. Leaving this page does not delete sandboxes. Clean up your resources.'
+  controller?.abort(); controller = null; busy.value = false
+  template.value = ''; connectionID.value = ''; accepted.value = false; command.value = 'uname -a'; content.value = ''; filePath.value = '/tmp/sandbase-playground.txt'; fileStatus.value = ''; requestExample.value = 'Connect to view a request example.'
+  tokens.clear(); catalogLoaded.value = false; key.value = ''; connected.value = false; selected.value = null; instances.value = []; templates.value = []; events.value = []; output.value = ''; evidence.value = ''; saved.clear(); observedPause.clear(); restored.clear(); pendingCreate.value = ''; notice.value = 'Key, connection tokens, and page activity cleared. Requests already sent may still complete. Your sandboxes have not been deleted.'
 }
 async function select(value) { await act('Load instance', async () => {
   selected.value = await control(`/sandboxes/${idOf(value)}`); output.value = ''; fileStatus.value = ''; evidence.value = 'Not loaded'; await loadEvents()
@@ -103,13 +116,15 @@ async function lifecycle(action) {
 }
 async function run() { if (!runnable.value) return
   await act('Run command', async () => {
+    const signal = controller.signal
     let stdout = '', stderr = '', exit
     const stdoutDecoder = new TextDecoder(), stderrDecoder = new TextDecoder()
     const bytes = value => Uint8Array.from(atob(value), c => c.charCodeAt(0))
     output.value = ''; record('command.started', 'Playground', { sandboxId: id.value })
-    requestExample.value = 'POST https://49983-<sandboxID>.sandbox.sandbase.ai/process.Process/Start\nX-Access-Token: <SESSION_TOKEN>\nContent-Type: application/connect+json\n\nConnect streaming protocol; commands have a 25-second limit.'
+    requestExample.value = `// E2B JavaScript SDK\nawait sandbox.commands.run(${JSON.stringify(safe(command.value))}, { timeoutMs: 25_000 });`
     const response = await api(`/data/${id.value}/command`, 'POST', { command: command.value }, tokens.get(id.value))
     await readCommandStream(response.body, event => {
+      signal.throwIfAborted()
       if (event.data?.stdout) stdout += stdoutDecoder.decode(bytes(event.data.stdout), { stream: true })
       if (event.data?.stderr) stderr += stderrDecoder.decode(bytes(event.data.stderr), { stream: true })
       // Hold a trailing credential-length window so split tokens never flash in the DOM.
@@ -119,6 +134,7 @@ async function run() { if (!runnable.value) return
       if (event.data) record('process.output', 'Sandbox process', { stdoutBytes: stdout.length, stderrBytes: stderr.length })
       if (event.end) { exit = event.end.exitCode ?? 0; stdout += stdoutDecoder.decode(); stderr += stderrDecoder.decode() }
     })
+    signal.throwIfAborted()
     output.value = safe(stdout + (stderr ? '\n[stderr]\n' + stderr : '') + `\n[exit ${exit}]`)
     record('command.completed', 'Playground', { exitCode: exit }); notice.value = `Command finished with exit code ${exit}.`
   })
@@ -132,7 +148,7 @@ async function file(write) { if (!runnable.value) return
       const form = new FormData(); form.append('file', new Blob([content.value], { type: 'text/plain' }), 'playground.txt')
       await api(path, 'POST', form, tokens.get(id.value))
     }
-    const result = await api(path, 'GET', undefined, tokens.get(id.value)); const text = await result.text()
+    const result = await api(path, 'GET', undefined, tokens.get(id.value)); const text = await readResponse(result, 'text')
     if (text.length > 65536) throw new Error('file_too_large')
     if (write && text !== content.value) throw new Error('readback_mismatch')
     if (write) { saved.set(slot, text); restored.delete(id.value); fileStatus.value = 'Write and readback match ✓' }
@@ -142,17 +158,19 @@ async function file(write) { if (!runnable.value) return
 }
 async function loadEvents() {
   const rows = await control(`/events/sandboxes/${id.value}?limit=100`)
-  for (const event of Array.isArray(rows) ? rows : []) if (!events.value.some(x => x.id === event.id && x.source === 'Gateway lifecycle')) events.value.unshift({ id: event.id, type: event.type, source: 'Gateway lifecycle', time: event.timestamp, data: safe(event) })
+  for (const event of Array.isArray(rows) ? rows : []) if (!events.value.some(x => x.id === event.id && x.source === 'Sandbox lifecycle')) events.value.unshift({ id: event.id, type: event.type, source: 'Sandbox lifecycle', time: event.timestamp, data: safe(event) })
   events.value = events.value.slice(0, 100)
 }
 async function observe() { if (!id.value) return
   await act('Load observations', async () => {
+    const signal = controller.signal
     const paths = { metrics: `/sandboxes/${id.value}/metrics`, logs: `/v2/sandboxes/${id.value}/logs?limit=100`, usage: `/sandbox-gateway/sandboxes/${id.value}/usage` }
     evidence.value = 'Loading…'
-    try { evidence.value = safe(await control(paths[observation.value])) } catch (e) { evidence.value = 'Unavailable · No observation evidence received'; throw e }
+    try { evidence.value = safe(await control(paths[observation.value])) } catch (e) { if (signal.aborted) throw e; evidence.value = 'Unavailable · No observation evidence received'; throw e }
   })
 }
-onBeforeUnmount(() => { controller?.abort(); tokens.clear(); key.value = '' })
+onMounted(() => window.addEventListener('pagehide', forget))
+onBeforeUnmount(() => { window.removeEventListener('pagehide', forget); forget() })
 </script>
 
 <template>
@@ -166,10 +184,10 @@ onBeforeUnmount(() => { controller?.abort(); tokens.clear(); key.value = '' })
       <div class="sp-auth-row">
         <input id="sandbox-api-key" v-model="key" :disabled="connected || busy" type="password" autocomplete="off" placeholder="API key with Sandbox access" />
         <button :disabled="!key.trim() || busy || connected" @click="connect">Connect</button>
-        <button :disabled="busy || !connected" @click="forget">Clear credentials</button>
+        <button :disabled="!key && !connected && !busy" @click="forget">Clear key</button>
       </div>
       <small>Sign in or sign up in the Console, then create an API key to try the Playground.</small>
-      <small>sandbox.sandbase.ai · Your key stays in page memory and is forwarded by the docs proxy. Re-enter it after a refresh.</small>
+      <small>Your key stays in this page’s memory only. This Playground does not save it in browser storage, add it to URLs, or record it in page activity. Clear it at any time with “Clear key”; refreshing or leaving this page also clears it.</small>
     </div>
     <p class="sp-notice" role="status">{{ notice || 'Connect your organization to begin. Operations use real resources and your own API key.' }}</p>
     <div class="sp-layout">
@@ -193,7 +211,7 @@ onBeforeUnmount(() => { controller?.abort(); tokens.clear(); key.value = '' })
         <div v-if="tab === 'observe'"><p class="sp-muted">Missing evidence does not mean zero usage. Machine-time records are not final billing.</p><label>Observation type<select v-model="observation" :disabled="busy"><option value="metrics">CPU / memory metrics</option><option value="logs">Instance logs</option><option value="usage">Machine-time evidence</option></select></label><button :disabled="busy || !id" @click="observe">Load</button><pre>{{ evidence }}</pre></div>
         <details class="sp-request"><summary>Request example (credentials omitted)</summary><pre>{{ requestExample }}</pre></details>
       </section>
-      <aside class="sp-events"><h3>Events <button :disabled="busy || !id" @click="act('Refresh events', loadEvents)">Refresh</button></h3><p class="sp-muted">Refresh gateway events manually. Process output arrives as a live stream. Each event is labeled by source.</p><p v-if="!events.length" class="sp-muted">Events appear here as you work.</p><article v-for="event in events" :key="event.source + event.id"><small>{{ event.source }} · {{ event.time }}</small><strong>{{ event.type }}</strong><details><summary>Event data</summary><pre>{{ event.data }}</pre></details></article></aside>
+      <aside class="sp-events"><h3>Events <button :disabled="busy || !id" @click="act('Refresh events', loadEvents)">Refresh</button></h3><p class="sp-muted">Refresh lifecycle events manually. Process output arrives as a live stream. Each event is labeled by source.</p><p v-if="!events.length" class="sp-muted">Events appear here as you work.</p><article v-for="event in events" :key="event.source + event.id"><small>{{ event.source }} · {{ event.time }}</small><strong>{{ event.type }}</strong><details><summary>Event data</summary><pre>{{ event.data }}</pre></details></article></aside>
     </div>
     <p class="sp-foot">Leaving this page does not delete sandboxes. Delete instances created here, including paused ones. After a refresh, use your organization tools to clean up.</p>
   </div>

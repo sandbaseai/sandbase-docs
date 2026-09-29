@@ -87,3 +87,54 @@ test('stateless lifecycle and file relay keep renewed tokens and bytes correct',
   const read = await sandboxProxy(req('/data/fixture/files?path=/tmp/test', { headers: { 'X-Access-Token': token } }), fetcher); assert.equal(await read.text(), '中文 retained'); assert.equal(token, 'token-new')
   assert.equal(paths.filter(p => p === '/v2/sandboxes').length, 1)
 })
+
+// Execute the actual component script with Vue refs and a controlled transport.
+// Deliberately let a response finish after abort to exercise stale-response guards.
+async function playgroundHarness(fetcher) {
+  const { ref, computed } = await import('vue')
+  const source = readFileSync(new URL('../.vitepress/theme/SandboxPlayground.vue', import.meta.url), 'utf8')
+    .split('<script setup>')[1].split('</script>')[0].replace(/^import .*$/gm, '')
+  return new Function('ref', 'computed', 'onMounted', 'onBeforeUnmount', 'window', 'templateLabel', 'redact', 'readCommandStream', 'fetch',
+    source + '\nreturn { key, connected, accepted, busy, create, forget, act, selected, tokens, events, output, content, requestExample, notice, pageWindow: window };')(
+    ref, computed, fn => fn(), () => {}, new EventTarget(), templateLabel, redact, readCommandStream, fetcher)
+}
+
+test('Clear key clears an unconnected key and all editable page content', async () => {
+  const ui = await playgroundHarness(() => { throw new Error('unexpected network') })
+  ui.key.value = 'unsubmitted-key'; ui.content.value = 'private file'; ui.output.value = 'private output'
+  ui.forget()
+  assert.equal(ui.key.value, ''); assert.equal(ui.content.value, ''); assert.equal(ui.output.value, '')
+  assert.equal(ui.connected.value, false); assert.equal(ui.tokens.size, 0)
+})
+
+test('Clear key aborts an in-flight create and rejects a late body without disturbing a new session', async () => {
+  let signal, releaseBody, readingBody
+  const started = new Promise(resolve => { readingBody = resolve })
+  const ui = await playgroundHarness(async (_url, init) => {
+    signal = init.signal
+    return { ok: true, status: 200, json: () => { readingBody(); return new Promise(resolve => { releaseBody = resolve }) } }
+  })
+  ui.key.value = 'old-key'; ui.accepted.value = true
+  const old = ui.create(); await started
+  ui.forget()
+  assert.equal(signal.aborted, true); assert.equal(ui.key.value, ''); assert.equal(ui.busy.value, false)
+  const clearedNotice = ui.notice.value
+  let releaseNew
+  ui.key.value = 'new-key'
+  const newer = ui.act('New session', () => new Promise(resolve => { releaseNew = resolve }))
+  releaseBody({ sandboxID: 'late-instance', envdAccessToken: 'late-token' })
+  await old
+  assert.equal(ui.selected.value, null); assert.equal(ui.tokens.size, 0); assert.deepEqual(ui.events.value, [])
+  assert.equal(ui.key.value, 'new-key'); assert.equal(ui.busy.value, true); assert.equal(ui.notice.value, 'New session…')
+  assert.match(clearedNotice, /Requests already sent may still complete/)
+  releaseNew(); await newer
+  assert.equal(ui.busy.value, false)
+})
+
+
+test('pagehide clears credentials before a page can enter the browser back-forward cache', async () => {
+  const ui = await playgroundHarness(() => { throw new Error('unexpected network') })
+  ui.key.value = 'navigation-key'; ui.tokens.set('instance', 'navigation-token')
+  ui.pageWindow.dispatchEvent(new Event('pagehide'))
+  assert.equal(ui.key.value, ''); assert.equal(ui.tokens.size, 0)
+})

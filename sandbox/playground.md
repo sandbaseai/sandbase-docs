@@ -14,10 +14,16 @@ Try the Sandbox API with your own key. Operations connect to **sandbox.sandbase.
   <SandboxPlayground />
 </ClientOnly>
 
-## Credentials and resources
+## Your key stays under your control
 
-Your API key and connection tokens stay in page memory. They are never saved to browser storage, URLs, or request examples. The same-origin docs proxy forwards requests to the fixed Sandbox domain without a shared platform key or credential logging.
+- **Page memory only.** This Playground does not save your API key or connection tokens to browser storage or cookies, put them in URLs, or record them in page activity or request examples.
+- **Clear at any time.** Select **Clear key** to remove the key, connection tokens, and displayed activity, even while a request is running. Refreshing or leaving this page also clears them. You will need to enter your key again to reconnect.
+- **Used only for your requests.** Your key is transmitted to SandBase to authenticate the Sandbox operations you request. Clearing this page does not revoke the key; revoke it in [Console → API Keys](https://www.sandbase.ai/console/keys) if needed.
 
-Leaving or refreshing this page does not delete resources. Delete your instances before clearing credentials. If a creation result is unknown, reconcile the attempt marker before creating another instance.
+These promises cover this Playground’s handling of credentials. They do not mean Sandbox activity or service-side usage records are erased. Avoid entering secrets in commands or files, whose contents can remain in your sandbox.
+
+## Clean up resources separately
+
+Clearing your key does not cancel an operation already received by the service or delete a sandbox. Delete instances when finished. If a creation result is unknown, check your instances before creating another. Keep any instance IDs you need for cleanup before clearing this page.
 
 [Overview and capabilities](./index) · [Quickstart / E2B SDK](./quickstart)

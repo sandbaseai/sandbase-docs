@@ -39,7 +39,7 @@ If you already store the key in `SANDBASE_API_KEY`, reuse it:
 export E2B_API_KEY="$SANDBASE_API_KEY"
 ```
 
-You do not need an E2B or Novita provider key. Use a regular SandBase key eligible for Sandbox access; a key restricted to another capability may be rejected. See [API keys](/getting-started/api-keys).
+You only need your SandBase API key. Use a regular SandBase key eligible for Sandbox access; a key restricted to another capability may be rejected. See [API keys](/getting-started/api-keys).
 
 ### Can existing E2B code stay unchanged?
 
@@ -242,7 +242,7 @@ Reconnect returns a fresh SDK object and session credentials. Use that object fo
 
 After your application is listening inside the sandbox, use `sandbox.getHost(port)` in JavaScript or `sandbox.get_host(port)` in Python to obtain its host. Application traffic requires the `e2b-traffic-access-token` header, using `sandbox.trafficAccessToken` or `sandbox.traffic_access_token` from the current connection.
 
-The host alone does not authorize access. Your HTTP or WebSocket client must send the header; simply opening the URL in a browser tab does not add it. Treat traffic tokens and signed file URLs as credentials, and keep them out of logs and shared links. Port access depends on the deployment's data plane and the selected provider's capabilities.
+The host alone does not authorize access. Your HTTP or WebSocket client must send the header; simply opening the URL in a browser tab does not add it. Treat traffic tokens and signed file URLs as credentials, and keep them out of logs and shared links. Port access must be supported by the selected sandbox environment.
 
 ## Troubleshooting
 
@@ -250,7 +250,7 @@ The host alone does not authorize access. Your HTTP or WebSocket client must sen
 |---|---|
 | Authentication or scope error | SandBase key validity, organization access, and key scope |
 | Template not found | The exact enabled template ID/name and its visibility to your organization |
-| Create succeeds but commands/files fail | Sandbox wildcard DNS, TLS, gateway routing, and current session credentials |
+| Create succeeds but commands/files fail | Your network connection and current session credentials; reconnect and contact support if the issue persists |
 | Requests go to the wrong service | `E2B_API_URL`, `E2B_DOMAIN`, and any hardcoded SDK options that override them |
 | Access fails after pause | Reconnect and use the newly returned SDK object |
 | Application port rejects a request | Application readiness and the current traffic token header |

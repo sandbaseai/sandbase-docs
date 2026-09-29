@@ -25,7 +25,7 @@ Refreshing clears page credentials and local operation history; it does not dele
 | --- | --- |
 | Create, list, pause, resume, extend timeout, delete | Available; mutation controls apply only to instances created in this page session |
 | Commands and text files | Available; commands run for up to 25 seconds, with file editing limited to `/tmp/` and 32 KiB |
-| Lifecycle events, logs, metrics, machine time | Available when supported by the provider; inspect returned evidence |
+| Lifecycle events, logs, metrics, machine time | Availability varies by environment; inspect the returned results |
 | AI chat and conversation context | Not integrated; requires model configuration and an Agent workload |
 | PTY, application ports, webhooks, template builds | Not available in this interface |
 | Snapshots and fork | Not available in this Playground |
@@ -34,10 +34,10 @@ Shell interaction is not AI chat. Instance recovery, file persistence, process s
 
 ## Understanding events
 
-**Gateway lifecycle** entries are native server events fetched on refresh and may arrive with a delay. **Sandbox process** entries describe process starts and streamed output. **Playground** entries record local request completion or failure; they are not gateway events.
+**Sandbox lifecycle** entries are native server events fetched on refresh and may arrive with a delay. **Sandbox process** entries describe process starts and streamed output. **Playground** entries record local request completion or failure; they are not service lifecycle events.
 
 An empty list does not prove zero usage, and missing events do not prove an operation failed. Machine-time evidence is not a final bill. Reconcile instances after a timeout or interrupted connection before trying another create request.
 
 ## Template visibility
 
-Templates can be public or private to your organization. Counts are not fixed. Entries without names remain visible, with aliases or IDs used as fallback labels. Publication state, organization ownership, and routing availability determine which templates are returned and can be used to create an instance.
+Templates can be public or private to your organization. Counts are not fixed. Entries without names remain visible, with aliases or IDs used as fallback labels. Your organization’s access and template availability determine which templates you can see and use.
