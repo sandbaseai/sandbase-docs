@@ -95,7 +95,7 @@ async function playgroundHarness(fetcher) {
   const source = readFileSync(new URL('../.vitepress/theme/SandboxPlayground.vue', import.meta.url), 'utf8')
     .split('<script setup>')[1].split('</script>')[0].replace(/^import .*$/gm, '')
   return new Function('ref', 'computed', 'onMounted', 'onBeforeUnmount', 'window', 'templateLabel', 'redact', 'readCommandStream', 'fetch',
-    source + '\nreturn { key, connected, accepted, busy, create, forget, act, selected, tokens, events, output, content, requestExample, notice, connect, templates, template, catalogLoaded, pageWindow: window };')(
+    source + '\nreturn { key, connected, accepted, busy, create, forget, act, selected, tokens, events, output, content, requestExample, notice, connect, templates, template, catalogLoaded, select, instances, loadEvents, eventNotice, connectionID, pageWindow: window };')(
     ref, computed, fn => fn(), () => {}, new EventTarget(), templateLabel, redact, readCommandStream, fetcher)
 }
 
@@ -184,4 +184,30 @@ test('redirects are rejected on control, access checks and data requests without
       }
     }
   }
+})
+
+
+test('instance selection is immediate and independent of detail or event endpoints', async () => {
+  let calls = 0
+  const ui = await playgroundHarness(() => { calls++; throw new Error('network must not be needed for selection') })
+  ui.connectionID.value = 'page'
+  const first = { sandboxID: 'one', state: 'running', metadata: { docsPlayground: 'page' } }
+  const second = { sandboxID: 'two', state: 'running', metadata: { docsPlayground: 'page' } }
+  ui.tokens.set('one', 'one-token'); ui.tokens.set('two', 'two-token')
+  ui.select(first); ui.output.value = 'first output'; ui.content.value = 'first file'
+  ui.select(second)
+  assert.equal(ui.selected.value.sandboxID, 'two'); assert.equal(calls, 0)
+  assert.equal(ui.output.value, ''); assert.equal(ui.content.value, '')
+  assert.equal(ui.tokens.get('two'), 'two-token'); assert.match(ui.notice.value, /Selected two/)
+  ui.busy.value = true; ui.select(first); assert.equal(ui.selected.value.sandboxID, 'two')
+})
+
+test('event 404 does not undo selection or mark a completed creation as failed', async () => {
+  const ui = await playgroundHarness(async () => Response.json({ error: { code: 'upstream_http_404' } }, { status: 404 }))
+  ui.select({ sandboxID: 'one', state: 'running' })
+  await ui.act('Create sandbox', ui.loadEvents)
+  assert.equal(ui.selected.value.sandboxID, 'one'); assert.equal(ui.notice.value, 'Create sandbox completed.')
+  assert.match(ui.eventNotice.value, /Lifecycle events unavailable/); assert.equal(ui.busy.value, false)
+  await ui.act('Refresh events', ui.loadEvents)
+  assert.match(ui.notice.value, /selection is unchanged/)
 })
