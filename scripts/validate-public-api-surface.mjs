@@ -1,3 +1,4 @@
+import { maskApprovedSandboxPageHrefs, sandboxAPIPath } from './public-sandbox-page-links.mjs'
 import assert from 'node:assert/strict'
 import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -1131,7 +1132,7 @@ function inspectPublishedSources(directory) {
     }
     // Only the explicitly published experimental Sandbox guide/playground may link this section.
     if (!['sandbox/index.md', 'sandbox/playground.md'].includes(relative)) {
-    assert.doesNotMatch(content, /\/(?:v1\/)?sandboxes?(?:\/|\{|:|\b)/i, `${relative} must not expose sandbox API paths`)
+    assert.doesNotMatch(maskApprovedSandboxPageHrefs(content), sandboxAPIPath, `${relative} must not expose sandbox API paths`)
     }
     if (!['api-reference/endpoints/index.md', 'api-reference/endpoints/mcp.md', 'agents/services.md'].includes(relative)) {
       assert.doesNotMatch(content, /\/v1\/endpoints\/[^\s`"']+\/mcp\b/i, `${relative} must not expose Endpoint MCP transport`)
