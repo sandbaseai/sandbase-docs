@@ -1,6 +1,6 @@
 ---
 title: Sandbox Overview and Capabilities
-description: Explore Sandbox creation, commands, files, pause and resume, and lifecycle events through the experimental Playground, with clear capability and resource boundaries.
+description: Create sandboxes with the E2B SDK or SandBase Console, inspect status, logs, and metrics, and explore the separate experimental Playground.
 ---
 
 # Sandbox overview and capabilities
@@ -9,7 +9,9 @@ Sandbox provides isolated environments for running commands, executing code, and
 
 [Quickstart / E2B SDK](./quickstart) · [Open Playground (Experimental)](./playground)
 
-## A five-minute walkthrough
+Use the [official E2B SDK](./quickstart) to integrate Sandbox into your application. Sign in to the [Sandbox Console](https://www.sandbase.ai/console/sandboxes) to create sandboxes and view instance status, logs, and metrics. See the [Sandbox product overview](https://www.sandbase.ai/landing/sandbox) for an introduction. The walkthrough and support table below describe the separate Experimental Playground.
+
+## A five-minute Playground walkthrough
 
 1. Enter an [API key](/getting-started/api-keys) with Sandbox permissions. Connecting only reads templates and instances.
 2. Choose an available template, acknowledge the resource notice, and create a short-lived instance.
