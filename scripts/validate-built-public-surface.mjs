@@ -1,3 +1,4 @@
+import { maskApprovedSandboxPageHrefs, sandboxAPIPath } from './public-sandbox-page-links.mjs'
 import assert from 'node:assert/strict'
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
@@ -40,7 +41,7 @@ assert.match(legacySeedance, /<meta name="robots" content="noindex,follow">/, 'L
 const forbidden = [
   [/\/v1\/generations(?:\/|\b)/i, 'withdrawn generation API'],
   [/\/v1\/blog\/assets(?:\/|\b)/i, 'internal Blog publishing storage API'],
-  [/\/(?:v1\/)?sandboxes?(?:\/|%7b|\{|:|\b)/i, 'Sandbox API'],
+  [sandboxAPIPath, 'Sandbox API'],
   [/\/events\/webhooks(?:\/|\b)/i, 'Sandbox event webhook API'],
   [/\/v1\/endpoints\/[A-Za-z0-9_{}%.-]+\/mcp\b/i, 'Endpoint MCP transport'],
   [/\/v1\/endpoint_runtime_profiles\b/i, 'Endpoint runtime-profile discovery'],
@@ -86,7 +87,7 @@ function inspect(directory) {
         // The experimental documentation routes and their dedicated lazy UI chunk are public.
         // Keep all former Sandbox API reference pages and unrelated bundles protected.
         if (/^assets\/(?:chunks\/)?SandboxPlayground\.[^/]+\.js$/.test(relative)) continue
-        const withoutGuideLinks = content.replace(/\/(?:docs\/)?sandbox\/(?:(?:playground|quickstart|index)(?:\.html)?)?(?=["'<\s?#])/g, '/experimental-guide')
+        const withoutGuideLinks = maskApprovedSandboxPageHrefs(content).replace(/\/(?:docs\/)?sandbox\/(?:(?:playground|quickstart|index)(?:\.html)?)?(?=["'<\s?#])/g, '/experimental-guide')
         assert.doesNotMatch(withoutGuideLinks, pattern, `${relative} must not publish the hidden ${label}`)
         continue
       }
