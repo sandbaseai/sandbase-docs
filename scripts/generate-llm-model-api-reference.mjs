@@ -420,6 +420,7 @@ function endpointFor(model, category) {
   if (category.key === 'api') return `/v1/api/${model.name}`
   if (['image', 'video', 'audio'].includes(category.key)) return '/v1/run'
   if (isGeminiInteractionsModel(model)) return '/v1beta/interactions'
+  if (model.vendor_slug === 'openai') return '/v1/responses'
   return model.vendor_slug === 'anthropic' ? '/v1/messages' : '/v1/chat/completions'
 }
 
@@ -493,6 +494,8 @@ function loadModels(root, filter, category) {
         __category: category.key,
       }
     })
+    // Gemini Interactions models are documented only under official-native-api.
+    .filter((model) => !(category.key === 'llm' && isGeminiInteractionsModel(model)))
     .filter((model) => isEnabled(model) && isPubliclyDocumented(model) && filter(model))
 }
 
@@ -1757,7 +1760,7 @@ const sidebarItems = [
     ...category.sortedGroups.map((group) => [
       `      // Duplicate model names are qualified with provider and operation path for navigation clarity.`,
       '    {',
-      `      text: ${tsString(group.vendor)},`,
+      `      text: ${tsString(vendorLabel(group.vendor))},`,
       '      collapsed: true,',
       '      items: [',
       ...group.models.map((model) => `        ${sidebarItem(model, category, duplicateTitlesFor(category.models))},`),
