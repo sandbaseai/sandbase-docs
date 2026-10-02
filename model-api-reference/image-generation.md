@@ -61,12 +61,11 @@ Image Generation models use the SandBase generation protocol declared in each mo
 - [Seedream v5.0 Lite](/model-api-reference/image-generation/bytedance/seedream/5.0/lite) — Seedream 5.0 Lite — Fast Text-to-Image API The lightweight version of Seedream 5.0, delivering high-quality, low-latency AI image generation from text prompts. Ideal for real-time creative tools, e-commerce visuals, and high-volume AIGC pipelines.
 - [Seedream v4.5](/model-api-reference/image-generation/bytedance/seedream/4.5) — A new-generation image creation model from ByteDance, Seedream 4.5 integrates text-to-image generation and image editing into a single unified architecture, delivering high-fidelity visuals, precise prompt control, and seamless creative workflows for professional AIGC applications.
 - [Seedream v4.5 Image Editing](/model-api-reference/image-generation/bytedance/seedream/4.5/edit) — A new-generation image creation model from ByteDance, Seedream 4.5 integrates text-to-image generation and image editing into a single unified architecture, delivering high-fidelity visuals, precise prompt control, and seamless creative workflows for professional AIGC applications.
-- [SeedVR2 (ByteDance: seedvr / upscale / video)](/model-api-reference/image-generation/bytedance/seedvr/upscale/video) — Seedvr Upscale Video by ByteDance - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 - [SeedVR2 (ByteDance: seedvr / upscale / image)](/model-api-reference/image-generation/bytedance/seedvr/upscale/image) — Seedvr Upscale Image by ByteDance - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [ByteDance Seedream v4 Edit](/model-api-reference/image-generation/bytedance/seedream/4.0/edit) — Seedream 4.0 Edit is ByteDance's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [ByteDance Seedream v4](/model-api-reference/image-generation/bytedance/seedream/4.0) — Seedream 4.0 by ByteDance - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Dreamina 3.1](/model-api-reference/image-generation/bytedance/dreamina/3.1) — Dreamina 3.1 by ByteDance - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- …and 1 more models in the sidebar.
+- [Seedream v5.0 Lite Editing](/model-api-reference/image-generation/bytedance/seedream/5.0/lite/edit) — Seedream 5.0 Lite — Fast Text-to-Image API The lightweight version of Seedream 5.0, delivering high-quality, low-latency AI image generation from text prompts. Ideal for real-time creative tools, e-commerce visuals, and high-volume AIGC pipelines.
 
 ### Recraft
 
@@ -115,7 +114,7 @@ Image Generation models use the SandBase generation protocol declared in each mo
 - [Qwen Image 2 (Alibaba: qwen-image-2 / pro / text-to-image)](/model-api-reference/image-generation/alibaba/qwen-image-2/pro/text-to-image) — Qwen Image 2 Pro by Alibaba - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Qwen Image 2 Pro](/model-api-reference/image-generation/alibaba/qwen-image-2/pro) — Alibaba Qwen Image 2 Pro text-to-image model with enhanced quality and configurable output format.
 - [Qwen Image 2 (Alibaba: qwen-image-2)](/model-api-reference/image-generation/alibaba/qwen-image-2) — Alibaba Qwen Image 2 text-to-image model with high-quality generation and configurable output format.
-- …and 57 more models in the sidebar.
+- …and 56 more models in the sidebar.
 
 ### Baidu
 
@@ -209,34 +208,22 @@ Image Generation models use the SandBase generation protocol declared in each mo
 
 ### KwaiVGI
 
-- [Kling Video V3 Standard](/model-api-reference/image-generation/kwaivgi/kling-video/v3/standard/motion-control) — Kling Video V3 Standard by KwaiVGI - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [Kling Video V3 Pro](/model-api-reference/image-generation/kwaivgi/kling-video/v3/pro/motion-control) — Kling Video V3 Pro is KwaiVGI's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
-- [Kling Video O3 Pro (KwaiVGI: kling-video / o3 / pro / edit)](/model-api-reference/image-generation/kwaivgi/kling-video/o3/pro/edit) — Kling Video O3 Pro is KwaiVGI's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
-- [Kling Video O3 Pro (KwaiVGI: kling-video / o3 / pro / video-to-video)](/model-api-reference/image-generation/kwaivgi/kling-video/o3/pro/video-to-video) — Kling Video O3 Pro by KwaiVGI - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [Kling Video O3 Standard (KwaiVGI: kling-video / o3 / standard / edit)](/model-api-reference/image-generation/kwaivgi/kling-video/o3/standard/edit) — Kling Video O3 Standard by KwaiVGI - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [Kling Video O3 Standard (KwaiVGI: kling-video / o3 / standard / video-to-video)](/model-api-reference/image-generation/kwaivgi/kling-video/o3/standard/video-to-video) — Kling Video O3 Standard is KwaiVGI's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [Kling Image V3](/model-api-reference/image-generation/kwaivgi/kling-image/v3) — Kling Image V3 by KwaiVGI - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Kling Image V3 Edit](/model-api-reference/image-generation/kwaivgi/kling-image/v3/edit) — Kling Image V3 Edit is KwaiVGI's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Kling Image (KwaiVGI: kling-image / o3 / edit)](/model-api-reference/image-generation/kwaivgi/kling-image/o3/edit) — Kling Image O3 Edit is KwaiVGI's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Kling Image (KwaiVGI: kling-image / o3)](/model-api-reference/image-generation/kwaivgi/kling-image/o3) — Kling Image O3 by KwaiVGI - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [Kling Video V2.6 Standard](/model-api-reference/image-generation/kwaivgi/kling-video/v2.6/standard/motion-control) — Kling Video V2.6 Standard by KwaiVGI - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [Kling Video V2.6 Pro](/model-api-reference/image-generation/kwaivgi/kling-video/v2.6/pro/motion-control) — Kling Video V2.6 Pro is KwaiVGI's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
-- …and 9 more models in the sidebar.
+- [Kling O1 Image](/model-api-reference/image-generation/kwaivgi/kling-image/o1) — Kling Image O1 by KwaiVGI - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Kling Kolors Virtual TryOn v1.5](/model-api-reference/image-generation/kwaivgi/kolors-tryon) — Kolors Tryon by KwaiVGI - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Kolors Image to Image](/model-api-reference/image-generation/kwaivgi/kolors/image-to-image) — Kolors is KwaiVGI's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
+- [Kolors](/model-api-reference/image-generation/kwaivgi/kolors) — Kolors by KwaiVGI - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 
 ### Lightricks
 
-- [Ltx 2.3 Quality](/model-api-reference/image-generation/lightricks/ltx-2.3-quality/audio-to-video) — Ltx 2.3 Quality Audio To Video by Lightricks - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [LTX-2.3 22B Video to Video Trainer](/model-api-reference/image-generation/lightricks/ltx23-v2v-trainer) — Ltx23 V2v Trainer by Lightricks - advanced AI model for training. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [LTX-2.3 22B Video Trainer](/model-api-reference/image-generation/lightricks/ltx23-video-trainer) — Ltx23 Video Trainer by Lightricks - advanced AI model for training. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [LTX-2 19B Distilled](/model-api-reference/image-generation/lightricks/ltx-2-19b/distilled/audio-to-video) — Ltx 2 19b Distilled Audio To Video by Lightricks - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [LTX-2 19B (Lightricks: ltx-2-19b / audio-to-video)](/model-api-reference/image-generation/lightricks/ltx-2-19b/audio-to-video) — Ltx 2 19b Audio To Video by Lightricks - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [LTX-2 19B (Lightricks: ltx-2-19b / video-to-video)](/model-api-reference/image-generation/lightricks/ltx-2-19b/video-to-video) — Ltx 2 19b Video To Video by Lightricks - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [LTX-2 19B (Lightricks: ltx-2-19b / extend-video)](/model-api-reference/image-generation/lightricks/ltx-2-19b/extend-video) — Ltx 2 19b Extend Video by Lightricks - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 
 ### meituan
 
-- [Longcat Multi Avatar](/model-api-reference/image-generation/meituan/longcat-multi-avatar/image-audio-to-video) — Longcat Multi Avatar Image Audio To Video by meituan - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [Longcat Single Avatar](/model-api-reference/image-generation/meituan/longcat-single-avatar/audio-to-video) — Longcat Single Avatar Audio To Video by meituan - advanced AI model for audio-to-video. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Longcat Image (meituan: longcat-image / edit)](/model-api-reference/image-generation/meituan/longcat-image/edit) — Longcat Image Edit by sandbase-ai - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Longcat Image (meituan: longcat-image)](/model-api-reference/image-generation/meituan/longcat-image) — Longcat Image is meituan's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
 
@@ -255,7 +242,6 @@ Image Generation models use the SandBase generation protocol declared in each mo
 
 ### Meta
 
-- [Sam 3 1 (Meta: sam-3-1 / video)](/model-api-reference/image-generation/meta/sam-3-1/video) — Sam 3 1 Video is Meta's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [Sam 3 1 (Meta: sam-3-1 / image-rle)](/model-api-reference/image-generation/meta/sam-3-1/image-rle) — Sam 3 1 Image Rle is Meta's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Sam 3 1 (Meta: sam-3-1 / image)](/model-api-reference/image-generation/meta/sam-3-1/image) — Sam 3 1 Image is Meta's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [SAM 3 3D Align](/model-api-reference/image-generation/meta/sam-3/3d-align) — Sam 3 3d Align by Meta - advanced AI model for 3d-to-3d. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
@@ -263,7 +249,6 @@ Image Generation models use the SandBase generation protocol declared in each mo
 - [Sam 3 (Meta: sam-3 / 3d-objects)](/model-api-reference/image-generation/meta/sam-3/3d-objects) — Sam 3 3d Objects by Meta - convert 2D images into 3D models with AI. Generate textured 3D assets from single photos for games, AR/VR, e-commerce, and digital content creation.
 - [Sam 3 (Meta: sam-3 / image-rle)](/model-api-reference/image-generation/meta/sam-3/image-rle) — Sam 3 Image Rle is Meta's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [SAM 3 Embed](/model-api-reference/image-generation/meta/sam-3/image/embed) — Sam 3 Image Embed by Meta - advanced AI model for vision. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [Sam 3 (Meta: sam-3 / video-rle)](/model-api-reference/image-generation/meta/sam-3/video-rle) — Sam 3 Video Rle is Meta's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [SAM 3 Image](/model-api-reference/image-generation/meta/sam-3/image) — Sam 3 Image is Meta's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Demucs](/model-api-reference/image-generation/meta/demucs) — Demucs by Meta - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 
@@ -283,7 +268,6 @@ Image Generation models use the SandBase generation protocol declared in each mo
 
 ### Mirelo
 
-- [Mirelo SFX1.6 (Mirelo: sfx1.6 / video-to-video)](/model-api-reference/image-generation/mirelo/sfx1.6/video-to-video) — Sfx1.6 Video To Video is Mirelo's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [Mirelo SFX1.6 (Mirelo: sfx1.6 / inpaint-audio)](/model-api-reference/image-generation/mirelo/sfx1.6/inpaint-audio) — Sfx1.6 Inpaint Audio by Mirelo - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Mirelo SFX1.6 (Mirelo: sfx1.6 / extend-audio)](/model-api-reference/image-generation/mirelo/sfx1.6/extend-audio) — Sfx1.6 Extend Audio by Mirelo - advanced AI model for audio-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 
@@ -291,7 +275,6 @@ Image Generation models use the SandBase generation protocol declared in each mo
 
 - [Cosmos 3 Super](/model-api-reference/image-generation/nvidia/cosmos-3-super/text-to-image) — Cosmos 3 Super by NVIDIA - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Nemotron 3 Nano Omni (NVIDIA: nemotron-3-nano-omni / vision)](/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/vision) — Nemotron 3 Nano Omni Vision by NVIDIA - advanced AI model for image-to-text. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [Nemotron 3 Nano Omni (NVIDIA: nemotron-3-nano-omni / video)](/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/video) — Nemotron 3 Nano Omni Video by NVIDIA - advanced AI model for video-to-text. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 - [Nemotron 3 Nano Omni (NVIDIA: nemotron-3-nano-omni / audio)](/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/audio) — Nemotron 3 Nano Omni Audio by NVIDIA - advanced AI model for audio-to-text. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
 
 ### patina
@@ -302,10 +285,6 @@ Image Generation models use the SandBase generation protocol declared in each mo
 ### pixal3d
 
 - [Pixal3d](/model-api-reference/image-generation/pixal3d/pixal3d) — Pixal3d is pixal3d's image-to-3D AI model. Transform photographs into production-ready 3D meshes with accurate geometry and texture mapping.
-
-### PixVerse
-
-- [PixVerse V6 Extend](/model-api-reference/image-generation/pixverse/v6/extend) — V6 Extend is PixVerse's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 
 ### Reve
 
@@ -322,11 +301,6 @@ Image Generation models use the SandBase generation protocol declared in each mo
 - [Sana](/model-api-reference/image-generation/sandbase-ai/sana) — Sana by sandbase-ai - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Creative Upscaler](/model-api-reference/image-generation/sandbase-ai/creative-upscaler) — Creative Upscaler is sandbase-ai's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 
-### Sonilo
-
-- [V1.1 Video to Sound Effects](/model-api-reference/image-generation/sonilo/1.1/video-to-sound-effects) — 1.1 Video To Sound Effects by Sonilo - advanced AI model for video-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-- [V1.1](/model-api-reference/image-generation/sonilo/1.1/video-to-music) — 1.1 Video To Music by Sonilo - advanced AI model for video-to-audio. Delivers high-quality results with fast inference, suitable for both creative and production workflows.
-
 ### Stability AI
 
 - [Stable Diffusion 3.5 Large](/model-api-reference/image-generation/stability-ai/sd/3.5-large) — Sd 3.5 Large by stability-ai - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
@@ -342,14 +316,6 @@ Image Generation models use the SandBase generation protocol declared in each mo
 - [Stable Diffusion XL (Stability AI: fast-sdxl / image-to-image)](/model-api-reference/image-generation/stability-ai/fast-sdxl/image-to-image) — Fast Sdxl by Stability AI - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Stable Diffusion v1.5](/model-api-reference/image-generation/stability-ai/stable-diffusion-v15) — Stable Diffusion V15 by Stability AI - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - …and 3 more models in the sidebar.
-
-### Sync Labs
-
-- [sync-3 Lipsync](/model-api-reference/image-generation/sync/lipsync/v3) — Lipsync V3 by Sync Labs - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [Sync React-1](/model-api-reference/image-generation/sync/lipsync/react-1) — Lipsync React 1 is Sync Labs's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
-- [Sync Lipsync](/model-api-reference/image-generation/sync/lipsync/v2/pro) — Lipsync V2 Pro by Sync Labs - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [Sync Lipsync 2.0](/model-api-reference/image-generation/sync/lipsync/v2) — Lipsync V2 by Sync Labs - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- [sync.so -- lipsync 1.9.0-beta](/model-api-reference/image-generation/sync/sync-lipsync) — Sync Lipsync by Sync Labs - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
 
 ### Tencent
 
@@ -395,10 +361,6 @@ Image Generation models use the SandBase generation protocol declared in each mo
 - [Tripo P1 Text to 3D](/model-api-reference/image-generation/tripo3d/tripo-p1/text-to-3d) — Tripo P1 is Tripo3D's text-to-3D AI model. Turn written descriptions into textured 3D objects with realistic geometry and materials.
 - [Tripo P1 Image to 3D](/model-api-reference/image-generation/tripo3d/tripo-p1/image-to-3d) — Tripo P1 by Tripo3D - convert 2D images into 3D models with AI. Generate textured 3D assets from single photos for games, AR/VR, e-commerce, and digital content creation.
 
-### VEED
-
-- [Subtitles](/model-api-reference/image-generation/veed/subtitles) — Subtitles is VEED's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
-
 ### Vidu
 
 - [Vidu Q2 Reference to Image](/model-api-reference/image-generation/vidu/q2/reference-to-image) — Vidu Q2 Reference To Image by Shengshu - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
@@ -409,9 +371,7 @@ Image Generation models use the SandBase generation protocol declared in each mo
 
 - [Grok Imagine Image Quality](/model-api-reference/image-generation/xai/grok-imagine-image/quality) — Grok Imagine Image Quality by xAI - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
 - [Grok Imagine Image Quality Edit](/model-api-reference/image-generation/xai/grok-imagine-image/quality/edit) — Grok Imagine Image Quality Edit is xAI's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
-- [Grok Imagine Video Extend](/model-api-reference/image-generation/xai/grok-imagine-video/extend) — Grok Imagine Video Extend is xAI's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 - [Grok Imagine Image Edit](/model-api-reference/image-generation/xai/grok-imagine-image/edit) — Grok Imagine Image Edit is xAI's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
-- [Grok Imagine Video Edit](/model-api-reference/image-generation/xai/grok-imagine-video/edit) — Grok Imagine Video Edit is xAI's video-to-video AI model. Transform, enhance, and edit video content using text prompts - from style changes to object manipulation and scene modification.
 
 ### zhipu
 

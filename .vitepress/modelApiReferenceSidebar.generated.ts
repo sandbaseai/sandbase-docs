@@ -1016,7 +1016,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Seedream v5.0 Lite", link: "/model-api-reference/image-generation/bytedance/seedream/5.0/lite" },
           { text: "Seedream v4.5", link: "/model-api-reference/image-generation/bytedance/seedream/4.5" },
           { text: "Seedream v4.5 Image Editing", link: "/model-api-reference/image-generation/bytedance/seedream/4.5/edit" },
-          { text: "SeedVR2 (ByteDance: seedvr / upscale / video)", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/video" },
           { text: "SeedVR2 (ByteDance: seedvr / upscale / image)", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/image" },
           { text: "Bytedance Seedream v4 Edit", link: "/model-api-reference/image-generation/bytedance/seedream/4.0/edit" },
           { text: "Bytedance Seedream v4", link: "/model-api-reference/image-generation/bytedance/seedream/4.0" },
@@ -1142,7 +1141,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Wan 2.2 5B Text to Image", link: "/model-api-reference/image-generation/alibaba/wan/2.2/5b/text-to-image" },
           { text: "Wan 2.2 Text to Image", link: "/model-api-reference/image-generation/alibaba/wan/2.2/text-to-image" },
           { text: "Qwen Image", link: "/model-api-reference/image-generation/alibaba/qwen-image" },
-          { text: "Vace", link: "/model-api-reference/image-generation/alibaba/wan-vace" },
           { text: "Face Swap", link: "/model-api-reference/image-generation/alibaba/face-swap" },
           { text: "Head Swap", link: "/model-api-reference/image-generation/alibaba/head-swap" },
           { text: "Qwen Image Edit Exp0622", link: "/model-api-reference/image-generation/alibaba/qwen-image-edit-exp0622" },
@@ -1378,23 +1376,10 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "KwaiVGI",
         collapsed: true,
         items: [
-          { text: "Kling Video V3 Standard", link: "/model-api-reference/image-generation/kwaivgi/kling-video/v3/standard/motion-control" },
-          { text: "Kling Video V3 Pro", link: "/model-api-reference/image-generation/kwaivgi/kling-video/v3/pro/motion-control" },
-          { text: "Kling Video O3 Pro (KwaiVGI: kling-video / o3 / pro / edit)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/pro/edit" },
-          { text: "Kling Video O3 Pro (KwaiVGI: kling-video / o3 / pro / video-to-video)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/pro/video-to-video" },
-          { text: "Kling Video O3 Standard (KwaiVGI: kling-video / o3 / standard / edit)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/standard/edit" },
-          { text: "Kling Video O3 Standard (KwaiVGI: kling-video / o3 / standard / video-to-video)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o3/standard/video-to-video" },
           { text: "Kling Image V3", link: "/model-api-reference/image-generation/kwaivgi/kling-image/v3" },
           { text: "Kling Image V3 Edit", link: "/model-api-reference/image-generation/kwaivgi/kling-image/v3/edit" },
           { text: "Kling Image (KwaiVGI: kling-image / o3 / edit)", link: "/model-api-reference/image-generation/kwaivgi/kling-image/o3/edit" },
           { text: "Kling Image (KwaiVGI: kling-image / o3)", link: "/model-api-reference/image-generation/kwaivgi/kling-image/o3" },
-          { text: "Kling Video V2.6 Standard", link: "/model-api-reference/image-generation/kwaivgi/kling-video/v2.6/standard/motion-control" },
-          { text: "Kling Video V2.6 Pro", link: "/model-api-reference/image-generation/kwaivgi/kling-video/v2.6/pro/motion-control" },
-          { text: "Kling Video Create Voice", link: "/model-api-reference/image-generation/kwaivgi/kling-video/create-voice" },
-          { text: "Kling Video O1 Standard (KwaiVGI: kling-video / o1 / standard / video-to-video)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/standard/video-to-video" },
-          { text: "Kling Video O1 Standard (KwaiVGI: kling-video / o1 / standard / edit)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/standard/edit" },
-          { text: "Kling Video O1 Pro (KwaiVGI: kling-video / o1 / pro / edit)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/pro/edit" },
-          { text: "Kling Video O1 Pro (KwaiVGI: kling-video / o1 / pro / video-to-video)", link: "/model-api-reference/image-generation/kwaivgi/kling-video/o1/pro/video-to-video" },
           { text: "Kling O1 Image", link: "/model-api-reference/image-generation/kwaivgi/kling-image/o1" },
           { text: "Kling Kolors Virtual TryOn v1.5", link: "/model-api-reference/image-generation/kwaivgi/kolors-tryon" },
           { text: "Kolors Image to Image", link: "/model-api-reference/image-generation/kwaivgi/kolors/image-to-image" },
@@ -1406,13 +1391,8 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Lightricks",
         collapsed: true,
         items: [
-          { text: "Ltx 2.3 Quality", link: "/model-api-reference/image-generation/lightricks/ltx-2.3-quality/audio-to-video" },
           { text: "LTX-2.3 22B Video to Video Trainer", link: "/model-api-reference/image-generation/lightricks/ltx23-v2v-trainer" },
           { text: "LTX-2.3 22B Video Trainer", link: "/model-api-reference/image-generation/lightricks/ltx23-video-trainer" },
-          { text: "LTX-2 19B Distilled", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/distilled/audio-to-video" },
-          { text: "LTX-2 19B (Lightricks: ltx-2-19b / audio-to-video)", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/audio-to-video" },
-          { text: "LTX-2 19B (Lightricks: ltx-2-19b / video-to-video)", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/video-to-video" },
-          { text: "LTX-2 19B (Lightricks: ltx-2-19b / extend-video)", link: "/model-api-reference/image-generation/lightricks/ltx-2-19b/extend-video" },
         ],
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
@@ -1420,8 +1400,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "meituan",
         collapsed: true,
         items: [
-          { text: "Longcat Multi Avatar", link: "/model-api-reference/image-generation/meituan/longcat-multi-avatar/image-audio-to-video" },
-          { text: "Longcat Single Avatar", link: "/model-api-reference/image-generation/meituan/longcat-single-avatar/audio-to-video" },
           { text: "Longcat Image (meituan: longcat-image / edit)", link: "/model-api-reference/image-generation/meituan/longcat-image/edit" },
           { text: "Longcat Image (meituan: longcat-image)", link: "/model-api-reference/image-generation/meituan/longcat-image" },
         ],
@@ -1448,7 +1426,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Meta",
         collapsed: true,
         items: [
-          { text: "Sam 3 1 (Meta: sam-3-1 / video)", link: "/model-api-reference/image-generation/meta/sam-3-1/video" },
           { text: "Sam 3 1 (Meta: sam-3-1 / image-rle)", link: "/model-api-reference/image-generation/meta/sam-3-1/image-rle" },
           { text: "Sam 3 1 (Meta: sam-3-1 / image)", link: "/model-api-reference/image-generation/meta/sam-3-1/image" },
           { text: "SAM 3 3D Align", link: "/model-api-reference/image-generation/meta/sam-3/3d-align" },
@@ -1456,7 +1433,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Sam 3 (Meta: sam-3 / 3d-objects)", link: "/model-api-reference/image-generation/meta/sam-3/3d-objects" },
           { text: "Sam 3 (Meta: sam-3 / image-rle)", link: "/model-api-reference/image-generation/meta/sam-3/image-rle" },
           { text: "SAM 3 Embed", link: "/model-api-reference/image-generation/meta/sam-3/image/embed" },
-          { text: "Sam 3 (Meta: sam-3 / video-rle)", link: "/model-api-reference/image-generation/meta/sam-3/video-rle" },
           { text: "SAM 3 Image", link: "/model-api-reference/image-generation/meta/sam-3/image" },
           { text: "Demucs", link: "/model-api-reference/image-generation/meta/demucs" },
         ],
@@ -1492,7 +1468,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Mirelo",
         collapsed: true,
         items: [
-          { text: "Mirelo SFX1.6 (Mirelo: sfx1.6 / video-to-video)", link: "/model-api-reference/image-generation/mirelo/sfx1.6/video-to-video" },
           { text: "Mirelo SFX1.6 (Mirelo: sfx1.6 / inpaint-audio)", link: "/model-api-reference/image-generation/mirelo/sfx1.6/inpaint-audio" },
           { text: "Mirelo SFX1.6 (Mirelo: sfx1.6 / extend-audio)", link: "/model-api-reference/image-generation/mirelo/sfx1.6/extend-audio" },
         ],
@@ -1504,7 +1479,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         items: [
           { text: "Cosmos 3 Super", link: "/model-api-reference/image-generation/nvidia/cosmos-3-super/text-to-image" },
           { text: "Nemotron 3 Nano Omni (NVIDIA: nemotron-3-nano-omni / vision)", link: "/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/vision" },
-          { text: "Nemotron 3 Nano Omni (NVIDIA: nemotron-3-nano-omni / video)", link: "/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/video" },
           { text: "Nemotron 3 Nano Omni (NVIDIA: nemotron-3-nano-omni / audio)", link: "/model-api-reference/image-generation/nvidia/nemotron-3-nano-omni/audio" },
         ],
       },
@@ -1523,14 +1497,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         collapsed: true,
         items: [
           { text: "Pixal3d", link: "/model-api-reference/image-generation/pixal3d/pixal3d" },
-        ],
-      },
-        // Duplicate model names are qualified with provider and operation path for navigation clarity.
-      {
-        text: "PixVerse",
-        collapsed: true,
-        items: [
-          { text: "PixVerse V6 Extend", link: "/model-api-reference/image-generation/pixverse/v6/extend" },
         ],
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
@@ -1558,15 +1524,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
-        text: "Sonilo",
-        collapsed: true,
-        items: [
-          { text: "V1.1 Video to Sound Effects", link: "/model-api-reference/image-generation/sonilo/1.1/video-to-sound-effects" },
-          { text: "V1.1", link: "/model-api-reference/image-generation/sonilo/1.1/video-to-music" },
-        ],
-      },
-        // Duplicate model names are qualified with provider and operation path for navigation clarity.
-      {
         text: "Stability AI",
         collapsed: true,
         items: [
@@ -1585,18 +1542,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Stable Diffusion XL (Stability AI: fast-sdxl / inpainting)", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl/inpainting" },
           { text: "ControlNet SDXL (Stability AI: fast-sdxl-controlnet-canny)", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl-controlnet-canny" },
           { text: "ControlNet SDXL (Stability AI: fast-sdxl-controlnet-canny / image-to-image)", link: "/model-api-reference/image-generation/stability-ai/fast-sdxl-controlnet-canny/image-to-image" },
-        ],
-      },
-        // Duplicate model names are qualified with provider and operation path for navigation clarity.
-      {
-        text: "Sync Labs",
-        collapsed: true,
-        items: [
-          { text: "sync-3 Lipsync", link: "/model-api-reference/image-generation/sync/lipsync/v3" },
-          { text: "Sync React-1", link: "/model-api-reference/image-generation/sync/lipsync/react-1" },
-          { text: "Sync Lipsync", link: "/model-api-reference/image-generation/sync/lipsync/v2/pro" },
-          { text: "Sync Lipsync 2.0", link: "/model-api-reference/image-generation/sync/lipsync/v2" },
-          { text: "sync.so -- lipsync 1.9.0-beta", link: "/model-api-reference/image-generation/sync/sync-lipsync" },
         ],
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
@@ -1671,14 +1616,6 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
-        text: "VEED",
-        collapsed: true,
-        items: [
-          { text: "Subtitles", link: "/model-api-reference/image-generation/veed/subtitles" },
-        ],
-      },
-        // Duplicate model names are qualified with provider and operation path for navigation clarity.
-      {
         text: "Vidu",
         collapsed: true,
         items: [
@@ -1694,9 +1631,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         items: [
           { text: "Grok Imagine Image Quality", link: "/model-api-reference/image-generation/xai/grok-imagine-image/quality" },
           { text: "Grok Imagine Image Quality Edit", link: "/model-api-reference/image-generation/xai/grok-imagine-image/quality/edit" },
-          { text: "Grok Imagine Video Extend", link: "/model-api-reference/image-generation/xai/grok-imagine-video/extend" },
           { text: "Grok Imagine Image Edit", link: "/model-api-reference/image-generation/xai/grok-imagine-image/edit" },
-          { text: "Grok Imagine Video Edit", link: "/model-api-reference/image-generation/xai/grok-imagine-video/edit" },
         ],
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
@@ -1753,6 +1688,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Seedance 1.0 Pro Fast I2V", link: "/model-api-reference/video-generation/bytedance/seedance/1.0/pro/fast/image-to-video" },
           { text: "Seedance 1.0 Pro Fast T2V", link: "/model-api-reference/video-generation/bytedance/seedance/1.0/pro/fast/text-to-video" },
           { text: "Bytedance OmniHuman v1.5", link: "/model-api-reference/video-generation/bytedance/omnihuman/1.5" },
+          { text: "SeedVR2", link: "/model-api-reference/video-generation/bytedance/seedvr/upscale/video" },
           { text: "Video Stylize", link: "/model-api-reference/video-generation/bytedance/video-stylize" },
           { text: "OmniHuman 1.0", link: "/model-api-reference/video-generation/bytedance/omnihuman/1.0" },
           { text: "Seedance 1.0 Pro (ByteDance: seedance / 1.0 / pro / text-to-video)", link: "/model-api-reference/video-generation/bytedance/seedance/1.0/pro/text-to-video" },
@@ -1863,6 +1799,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         collapsed: true,
         items: [
           { text: "VEED Lipsync (VEED: lipsync / 2.0)", link: "/model-api-reference/video-generation/veed/lipsync/2.0" },
+          { text: "Subtitles", link: "/model-api-reference/video-generation/veed/subtitles" },
           { text: "VEED Fabric 1.0 Text to Video", link: "/model-api-reference/video-generation/veed/fabric-1.0/text-to-video" },
           { text: "VEED Video Background Removal Fast", link: "/model-api-reference/video-generation/veed/video-bg-removal/fast" },
           { text: "VEED Video Background Removal", link: "/model-api-reference/video-generation/veed/video-bg-removal" },
@@ -1934,6 +1871,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Wan 2.1 VACE Depth", link: "/model-api-reference/video-generation/alibaba/wan/2.1/vace/depth" },
           { text: "Wan 2.1 VACE", link: "/model-api-reference/video-generation/alibaba/wan/2.1/vace" },
           { text: "Wan-2.1 First-Last-Frame-to-Video", link: "/model-api-reference/video-generation/alibaba/wan/2.1/flf-to-video" },
+          { text: "Vace", link: "/model-api-reference/video-generation/alibaba/wan-vace" },
           { text: "Wan-2.1 Text-to-Video with LoRAs", link: "/model-api-reference/video-generation/alibaba/wan/2.1/text-to-video/lora" },
           { text: "Wan Effects", link: "/model-api-reference/video-generation/alibaba/wan/effects" },
           { text: "Wan-2.1 Image-to-Video with LoRAs", link: "/model-api-reference/video-generation/alibaba/wan/2.1/image-to-video/lora" },
@@ -2010,6 +1948,8 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Kling Video O3 4k (KwaiVGI: kling-video / o3 / 4k / text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/4k/text-to-video" },
           { text: "Kling Video V3 4k (KwaiVGI: kling-video / v3 / 4k / image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/4k/image-to-video" },
           { text: "Kling Video V3 4k (KwaiVGI: kling-video / v3 / 4k / text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/4k/text-to-video" },
+          { text: "Kling Video V3 Standard (KwaiVGI: kling-video / v3 / standard / motion-control)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/standard/motion-control" },
+          { text: "Kling Video V3 Pro (KwaiVGI: kling-video / v3 / pro / motion-control)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/pro/motion-control" },
           { text: "Kling Video V3 Pro (KwaiVGI: kling-video / v3 / pro / image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/pro/image-to-video" },
           { text: "Kling Video V3 Standard (KwaiVGI: kling-video / v3 / standard / image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/standard/image-to-video" },
           { text: "Kling Video V3 Pro (KwaiVGI: kling-video / v3 / pro / text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/pro/text-to-video" },
@@ -2017,17 +1957,28 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Kling Video O3 Standard (KwaiVGI: kling-video / o3 / standard / image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/image-to-video" },
           { text: "Kling Video O3 Pro (KwaiVGI: kling-video / o3 / pro / reference-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/reference-to-video" },
           { text: "Kling Video V3 Standard (KwaiVGI: kling-video / v3 / standard / text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v3/standard/text-to-video" },
+          { text: "Kling Video O3 Pro (KwaiVGI: kling-video / o3 / pro / edit)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/edit" },
           { text: "Kling Video O3 Standard (KwaiVGI: kling-video / o3 / standard / reference-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/reference-to-video" },
           { text: "Kling Video O3 Pro (KwaiVGI: kling-video / o3 / pro / text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/text-to-video" },
+          { text: "Kling Video O3 Pro (KwaiVGI: kling-video / o3 / pro / video-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/pro/video-to-video" },
           { text: "Kling Video O3 Standard (KwaiVGI: kling-video / o3 / standard / text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/text-to-video" },
+          { text: "Kling Video O3 Standard (KwaiVGI: kling-video / o3 / standard / edit)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/edit" },
+          { text: "Kling Video O3 Standard (KwaiVGI: kling-video / o3 / standard / video-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o3/standard/video-to-video" },
+          { text: "Kling Video V2.6 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.6/standard/motion-control" },
+          { text: "Kling Video V2.6 Pro (KwaiVGI: kling-video / v2.6 / pro / motion-control)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.6/pro/motion-control" },
+          { text: "Kling Video Create Voice", link: "/model-api-reference/video-generation/kwaivgi/kling-video/create-voice" },
           { text: "Kling Video O1 Standard (KwaiVGI: kling-video / o1 / standard / reference-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/standard/reference-to-video" },
           { text: "Kling Video O1 Standard (KwaiVGI: kling-video / o1 / standard / image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/standard/image-to-video" },
+          { text: "Kling Video O1 Standard (KwaiVGI: kling-video / o1 / standard / video-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/standard/video-to-video" },
+          { text: "Kling Video O1 Standard (KwaiVGI: kling-video / o1 / standard / edit)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/standard/edit" },
           { text: "Kling AI Avatar v2 Pro", link: "/model-api-reference/video-generation/kwaivgi/kling-video/ai-avatar/2.0/pro" },
           { text: "Kling AI Avatar v2 Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/ai-avatar/2.0/standard" },
           { text: "Kling Video V2.6 Pro (KwaiVGI: kling-video / v2.6 / pro / text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.6/pro/text-to-video" },
           { text: "Kling Video V2.6 Pro (KwaiVGI: kling-video / v2.6 / pro / image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.6/pro/image-to-video" },
           { text: "Kling Video O1 Pro (KwaiVGI: kling-video / o1 / pro / image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/pro/image-to-video" },
           { text: "Kling Video O1 Pro (KwaiVGI: kling-video / o1 / pro / reference-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/pro/reference-to-video" },
+          { text: "Kling Video O1 Pro (KwaiVGI: kling-video / o1 / pro / edit)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/pro/edit" },
+          { text: "Kling Video O1 Pro (KwaiVGI: kling-video / o1 / pro / video-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/o1/pro/video-to-video" },
           { text: "Kling Video V2.5 Turbo Standard", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.5-turbo/standard/image-to-video" },
           { text: "Kling Video V2.5 Turbo Pro (KwaiVGI: kling-video / v2.5-turbo / pro / image-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.5-turbo/pro/image-to-video" },
           { text: "Kling Video V2.5 Turbo Pro (KwaiVGI: kling-video / v2.5-turbo / pro / text-to-video)", link: "/model-api-reference/video-generation/kwaivgi/kling-video/v2.5-turbo/pro/text-to-video" },
@@ -2071,6 +2022,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Ltx 2.3", link: "/model-api-reference/video-generation/lightricks/ltx-2.3/reframe" },
           { text: "Ltx 2.3 Quality (Lightricks: ltx-2.3-quality / extend-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/extend-video" },
           { text: "Ltx 2.3 Quality (Lightricks: ltx-2.3-quality / hdr)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/hdr" },
+          { text: "Ltx 2.3 Quality (Lightricks: ltx-2.3-quality / audio-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/audio-to-video" },
           { text: "Ltx 2.3 Quality (Lightricks: ltx-2.3-quality / image-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/image-to-video" },
           { text: "Ltx 2.3 Quality (Lightricks: ltx-2.3-quality / text-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-quality/text-to-video" },
           { text: "LTX-2.3 22B Distilled (Lightricks: ltx-2.3-22b / distilled / reference-video-to-video / lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2.3-22b/distilled/reference-video-to-video/lora" },
@@ -2105,8 +2057,11 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "LTX 2.0 Pro Extend", link: "/model-api-reference/video-generation/lightricks/ltx-2.0-pro/extend" },
           { text: "LTX 2.0 Pro Audio to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.0-pro/audio-to-video" },
           { text: "LTX-2 19B (Lightricks: ltx-2-19b / audio-to-video / lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/audio-to-video/lora" },
+          { text: "LTX-2 19B Distilled (Lightricks: ltx-2-19b / distilled / audio-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/audio-to-video" },
+          { text: "LTX-2 19B (Lightricks: ltx-2-19b / audio-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/audio-to-video" },
           { text: "LTX-2 19B Distilled (Lightricks: ltx-2-19b / distilled / video-to-video / lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/video-to-video/lora" },
           { text: "LTX-2 19B (Lightricks: ltx-2-19b / video-to-video / lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/video-to-video/lora" },
+          { text: "LTX-2 19B (Lightricks: ltx-2-19b / video-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/video-to-video" },
           { text: "LTX-2 19B Distilled (Lightricks: ltx-2-19b / distilled / extend-video / lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/extend-video/lora" },
           { text: "LTX-2 19B Distilled (Lightricks: ltx-2-19b / distilled / extend-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/extend-video" },
           { text: "LTX-2 19B Distilled (Lightricks: ltx-2-19b / distilled / image-to-video / lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/image-to-video/lora" },
@@ -2115,6 +2070,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "LTX-2 19B Distilled (Lightricks: ltx-2-19b / distilled / text-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/distilled/text-to-video" },
           { text: "LTX-2 19B (Lightricks: ltx-2-19b / extend-video / lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/extend-video/lora" },
           { text: "LTX-2 19B (Lightricks: ltx-2-19b / image-to-video / lora)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/image-to-video/lora" },
+          { text: "LTX-2 19B (Lightricks: ltx-2-19b / extend-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/extend-video" },
           { text: "LTX-2 19B (Lightricks: ltx-2-19b / text-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/text-to-video" },
           { text: "LTX-2 19B (Lightricks: ltx-2-19b / image-to-video)", link: "/model-api-reference/video-generation/lightricks/ltx-2-19b/image-to-video" },
           { text: "LTX 2.0 Fast Text to Video", link: "/model-api-reference/video-generation/lightricks/ltx-2.0-fast/text-to-video" },
@@ -2142,7 +2098,9 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "meituan",
         collapsed: true,
         items: [
+          { text: "Longcat Multi Avatar", link: "/model-api-reference/video-generation/meituan/longcat-multi-avatar/image-audio-to-video" },
           { text: "LongCat Single Avatar", link: "/model-api-reference/video-generation/meituan/longcat-single-avatar/image-audio-to-video" },
+          { text: "Longcat Single Avatar", link: "/model-api-reference/video-generation/meituan/longcat-single-avatar/audio-to-video" },
           { text: "LongCat Video (meituan: longcat-video / text-to-video / 720p)", link: "/model-api-reference/video-generation/meituan/longcat-video/text-to-video/720p" },
           { text: "LongCat Video (meituan: longcat-video / image-to-video)", link: "/model-api-reference/video-generation/meituan/longcat-video/image-to-video" },
           { text: "LongCat Video (meituan: longcat-video / image-to-video-480p)", link: "/model-api-reference/video-generation/meituan/longcat-video/image-to-video-480p" },
@@ -2159,7 +2117,17 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         collapsed: true,
         items: [
           { text: "SAM 3.1 Video", link: "/model-api-reference/video-generation/meta/sam-3-1/video-rle" },
-          { text: "Sam 3", link: "/model-api-reference/video-generation/meta/sam-3/video" },
+          { text: "Sam 3 1", link: "/model-api-reference/video-generation/meta/sam-3-1/video" },
+          { text: "Sam 3 (Meta: sam-3 / video-rle)", link: "/model-api-reference/video-generation/meta/sam-3/video-rle" },
+          { text: "Sam 3 (Meta: sam-3 / video)", link: "/model-api-reference/video-generation/meta/sam-3/video" },
+        ],
+      },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
+      {
+        text: "Mirelo",
+        collapsed: true,
+        items: [
+          { text: "Mirelo SFX1.6", link: "/model-api-reference/video-generation/mirelo/sfx1.6/video-to-video" },
         ],
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
@@ -2168,6 +2136,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         collapsed: true,
         items: [
           { text: "Cosmos 3 Super Image to Video", link: "/model-api-reference/video-generation/nvidia/cosmos-3-super/image-to-video" },
+          { text: "Nemotron 3 Nano Omni", link: "/model-api-reference/video-generation/nvidia/nemotron-3-nano-omni/video" },
         ],
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
@@ -2188,6 +2157,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "PixVerse C1 Image to Video", link: "/model-api-reference/video-generation/pixverse/c1/image-to-video" },
           { text: "PixVerse C1 Transition", link: "/model-api-reference/video-generation/pixverse/c1/transition" },
           { text: "PixVerse V6 Transition", link: "/model-api-reference/video-generation/pixverse/v6/transition" },
+          { text: "PixVerse V6 Extend", link: "/model-api-reference/video-generation/pixverse/v6/extend" },
           { text: "PixVerse V6 Image to Video", link: "/model-api-reference/video-generation/pixverse/v6/image-to-video" },
           { text: "PixVerse V6 Text to Video", link: "/model-api-reference/video-generation/pixverse/v6/text-to-video" },
           { text: "PixVerse V5.6 Transition", link: "/model-api-reference/video-generation/pixverse/v5.6/transition" },
@@ -2231,7 +2201,9 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         collapsed: true,
         items: [
           { text: "V1.1 Video to Video Music", link: "/model-api-reference/video-generation/sonilo/1.1/video-to-video-music" },
+          { text: "V1.1 Video to Sound Effects", link: "/model-api-reference/video-generation/sonilo/1.1/video-to-sound-effects" },
           { text: "V1.1 Video to Video Sound Effects", link: "/model-api-reference/video-generation/sonilo/1.1/video-to-video-sound-effects" },
+          { text: "V1.1", link: "/model-api-reference/video-generation/sonilo/1.1/video-to-music" },
         ],
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
@@ -2249,6 +2221,11 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         collapsed: true,
         items: [
           { text: "sync-3 Avatar Image to Video", link: "/model-api-reference/video-generation/sync/sync-lipsync/3.0/image-to-video" },
+          { text: "sync-3 Lipsync", link: "/model-api-reference/video-generation/sync/lipsync/v3" },
+          { text: "Sync React-1", link: "/model-api-reference/video-generation/sync/lipsync/react-1" },
+          { text: "Sync Lipsync", link: "/model-api-reference/video-generation/sync/lipsync/v2/pro" },
+          { text: "Sync Lipsync 2.0", link: "/model-api-reference/video-generation/sync/lipsync/v2" },
+          { text: "sync.so -- lipsync 1.9.0-beta", link: "/model-api-reference/video-generation/sync/sync-lipsync" },
         ],
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
@@ -2308,6 +2285,8 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         items: [
           { text: "Grok Imagine Video 1.5", link: "/model-api-reference/video-generation/xai/grok-imagine-video/1.5/image-to-video" },
           { text: "Grok Imagine Video Reference to Video", link: "/model-api-reference/video-generation/xai/grok-imagine-video/reference-to-video" },
+          { text: "Grok Imagine Video Extend", link: "/model-api-reference/video-generation/xai/grok-imagine-video/extend" },
+          { text: "Grok Imagine Video Edit", link: "/model-api-reference/video-generation/xai/grok-imagine-video/edit" },
           { text: "Grok Imagine Video (xAI: grok-imagine-video / image-to-video)", link: "/model-api-reference/video-generation/xai/grok-imagine-video/image-to-video" },
           { text: "Grok Imagine Video (xAI: grok-imagine-video / text-to-video)", link: "/model-api-reference/video-generation/xai/grok-imagine-video/text-to-video" },
         ],
