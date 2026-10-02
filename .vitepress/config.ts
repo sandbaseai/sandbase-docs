@@ -1,3 +1,6 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 import sandboxDev from './sandbox-dev.mjs'
 import {
@@ -9,6 +12,29 @@ import {
 
 const siteOrigin = 'https://www.sandbase.ai'
 const docsBase = '/docs/'
+
+// Compatibility pages for moved model references declare `robots: noindex`.
+// Collect them once so the sitemap never advertises a moved URL.
+function noindexModelReferenceUrls() {
+  const docsRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+  const root = path.join(docsRoot, 'model-api-reference')
+  const urls = new Set<string>()
+  const walk = (directory: string) => {
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      const filename = path.join(directory, entry.name)
+      if (entry.isDirectory()) walk(filename)
+      else if (entry.name.endsWith('.md')) {
+        const frontmatter = fs.readFileSync(filename, 'utf8').match(/^---\n([\s\S]*?)\n---/)?.[1] ?? ''
+        if (/^robots:\s*["']?noindex/m.test(frontmatter)) {
+          urls.add(path.relative(docsRoot, filename).split(path.sep).join('/').replace(/\.md$/, ''))
+        }
+      }
+    }
+  }
+  walk(root)
+  return urls
+}
+const noindexModelReferences = noindexModelReferenceUrls()
 
 // Keep rendered document titles within a search-friendly length even when a
 // generated page title is long. Frontmatter titles remain descriptive; the
@@ -261,6 +287,7 @@ export default defineConfig({
         'store/models',
         'api-reference/volcengine-contents-generations',
       ].includes(item.url.replace(/^\//, '')))
+      .filter((item) => !noindexModelReferences.has(item.url.replace(/^\//, '')))
       .map((item) => ({
         ...item,
         url: `${docsBase}${item.url.replace(/^\//, '')}`,

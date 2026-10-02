@@ -37,6 +37,13 @@ assert.match(storeModelsAlias, /<link rel="canonical" href="https:\/\/www\.sandb
 
 const legacySeedance = readFileSync(path.join(dist, 'api-reference', 'volcengine-contents-generations.html'), 'utf8')
 assert.match(legacySeedance, /<meta name="robots" content="noindex,follow">/, 'Legacy Seedance page must remain noindex')
+// Video models formerly listed under Image Generation keep their old URLs as
+// noindex aliases that canonicalize to the Video Generation reference.
+const movedVideoAlias = readFileSync(path.join(dist, 'model-api-reference', 'image-generation', 'veed', 'subtitles.html'), 'utf8')
+assert.match(movedVideoAlias, /<meta name="robots" content="noindex,follow">/, 'Moved video model alias must be noindex')
+assert.match(movedVideoAlias, /<link rel="canonical" href="https:\/\/www\.sandbase\.ai\/docs\/model-api-reference\/video-generation\/veed\/subtitles">/, 'Moved video model alias must canonicalize to Video Generation')
+assert.ok(!sitemap.includes('/docs/model-api-reference/image-generation/veed/subtitles</loc>'), 'Moved video model alias must not be in the sitemap')
+assert.ok(sitemap.includes('/docs/model-api-reference/video-generation/veed/subtitles</loc>'), 'Moved video model reference must be in the sitemap')
 
 const forbidden = [
   [/\/v1\/generations(?:\/|\b)/i, 'withdrawn generation API'],
