@@ -72,6 +72,9 @@ Video Generation models use the SandBase generation protocol declared in each mo
 
 ### MiniMax
 
+- [H3 Max Reference to Video](/model-api-reference/video-generation/minimax/h3-max/reference-to-video) — H3 Max is MiniMax's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
+- [H3 Max Image to Video](/model-api-reference/video-generation/minimax/h3-max/image-to-video) — H3 Max is MiniMax's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
+- [MiniMax H3 Max Text to Video](/model-api-reference/video-generation/minimax/h3-max/text-to-video) — H3 Max by MiniMax - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
 - [MiniMax H3 Video Regeneration](/model-api-reference/video-generation/minimax/h3/video-regeneration) — Regenerate a single base video from a text prompt as a 2K MiniMax H3 video.
 - [MiniMax H3 (Text to Video)](/model-api-reference/video-generation/minimax/h3/text-to-video) — Generate native-stereo 2K video from text with MiniMax H3.
 - [MiniMax H3 (Image to Video)](/model-api-reference/video-generation/minimax/h3/image-to-video) — Generate native-stereo 2K video from a first frame and optional last frame with MiniMax H3.
@@ -81,10 +84,7 @@ Video Generation models use the SandBase generation protocol declared in each mo
 - [MiniMax Hailuo 2.3 [Standard] (Image to Video)](/model-api-reference/video-generation/minimax/hailuo/2.3/standard/image-to-video) — Hailuo 2.3 Standard by MiniMax - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
 - [MiniMax Hailuo 2.3 Fast [Pro] (Image to Video)](/model-api-reference/video-generation/minimax/hailuo/2.3-fast/pro/image-to-video) — Hailuo 2.3 Fast Pro by MiniMax - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
 - [MiniMax Hailuo 2.3 [Standard] (Text to Video)](/model-api-reference/video-generation/minimax/hailuo/2.3/standard/text-to-video) — Hailuo 2.3 Standard is MiniMax's text-to-video AI model. Turn written scripts and prompts into professional-quality video clips with realistic motion, lighting, and scene composition.
-- [MiniMax Hailuo 2.3 [Pro] (Text to Video)](/model-api-reference/video-generation/minimax/hailuo/2.3/pro/text-to-video) — Hailuo 2.3 Pro by MiniMax - generate cinematic videos from text descriptions with AI. Create high-quality video content with natural motion, camera control, and optional audio generation.
-- [MiniMax Hailuo 02 Fast (Image to Video)](/model-api-reference/video-generation/minimax/hailuo/02-fast/image-to-video) — Hailuo 02 Fast is MiniMax's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
-- [MiniMax Hailuo 02 [Standard] (Image to Video)](/model-api-reference/video-generation/minimax/hailuo/02/standard/image-to-video) — Hailuo 02 Standard is MiniMax's image-to-video AI model. Bring static images to life with fluid animation, consistent character motion, and professional-grade video output.
-- …and 10 more models in the sidebar.
+- …and 13 more models in the sidebar.
 
 ### Pika
 
@@ -114,6 +114,8 @@ Video Generation models use the SandBase generation protocol declared in each mo
 
 ### Alibaba
 
+- [Wan 3.0 Prime](/model-api-reference/video-generation/alibaba/wan/3.0/prime/video) — Wan 3.0 Prime by Alibaba - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion and camera movement.
+- [Wan 3.0 Video](/model-api-reference/video-generation/alibaba/wan/3.0/video) — Alibaba Wan 3.0 Video generates videos up to 30 seconds from text and unified image, video, audio, file, or link media inputs.
 - [Happy Horse 1.1 Image to Video](/model-api-reference/video-generation/alibaba/happy-horse/1.1/image-to-video) — Happy Horse 1.1 by Alibaba - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
 - [Happy Horse 1.1 Reference to Video](/model-api-reference/video-generation/alibaba/happy-horse/1.1/reference-to-video) — Happy Horse 1.1 by Alibaba - animate still images into dynamic videos with AI. Transform photos into cinematic clips with natural motion, camera movement, and optional audio generation.
 - [Happy Horse 1.1 Text to Video](/model-api-reference/video-generation/alibaba/happy-horse/1.1/text-to-video) — Happy Horse 1.1 is Alibaba's text-to-video AI model. Turn written scripts and prompts into professional-quality video clips with realistic motion, lighting, and scene composition.
@@ -124,9 +126,7 @@ Video Generation models use the SandBase generation protocol declared in each mo
 - [Wan 2.7 Text to Video](/model-api-reference/video-generation/alibaba/wan/2.7/text-to-video) — Alibaba Wan 2.7 text-to-video model with cinematic visuals, native audio generation, and configurable duration and resolution.
 - [Wan 2.7 Reference to Video](/model-api-reference/video-generation/alibaba/wan/2.7/reference-to-video) — Alibaba Wan 2.7 reference-to-video model generating video guided by reference content.
 - [Wan 2.7 Edit Video](/model-api-reference/video-generation/alibaba/wan/2.7/edit-video) — Alibaba Wan 2.7 video editing model.
-- [Wan 2.7 Image to Video](/model-api-reference/video-generation/alibaba/wan/2.7/image-to-video) — Alibaba Wan 2.7 image-to-video model transforming still images into video with native audio generation.
-- [Wan Motion](/model-api-reference/video-generation/alibaba/wan/motion) — Wan Motion by Alibaba - AI-powered video editing and transformation. Apply style transfer, motion control, lip-sync, and visual effects to existing videos with natural language instructions.
-- …and 50 more models in the sidebar.
+- …and 52 more models in the sidebar.
 
 ### Bria
 

@@ -15,14 +15,17 @@ Image Generation models use the SandBase generation protocol declared in each mo
 
 - [GPT Image 2 Official API](/model-api-reference/image-generation/openai/gpt-image-2-official) — GPT Image 2 through the OpenAI Images API contract.
 - [GPT Image 2 Official Edit API](/model-api-reference/image-generation/openai/gpt-image-2-official/edit) — GPT Image 2 editing through the OpenAI Images API contract.
+- [GPT Image 2.5 Flare](/model-api-reference/image-generation/openai/gpt-image-2.5-flare) — GPT Image 2.5 Flare is optimized for fast, high-quality image generation for everyday creative workflows.
+- [GPT Image 2.5 Flare Edit](/model-api-reference/image-generation/openai/gpt-image-2.5-flare/edit) — GPT Image 2.5 Flare Edit is optimized for fast, high-quality image editing and multi-image composition.
+- [GPT Image 2.5 Sunburst](/model-api-reference/image-generation/openai/gpt-image-2.5-sunburst) — GPT Image 2.5 Sunburst prioritizes visual fidelity and precision for complex image generation workflows.
+- [GPT Image 2.5 Sunburst Edit](/model-api-reference/image-generation/openai/gpt-image-2.5-sunburst/edit) — GPT Image 2.5 Sunburst Edit prioritizes precision and visual fidelity for complex image editing workflows.
 - [GPT Image 2](/model-api-reference/image-generation/openai/gpt-image-2) — GPT Image 2, OpenAI's available image model, is capable of making fine-grained, detailed edits to images.
 - [GPT Image 2 Editing](/model-api-reference/image-generation/openai/gpt-image-2/edit) — GPT Image 2 Editing supports image editing and multi-image synthesis with high-quality results.
 - [GPT-Image 1.5](/model-api-reference/image-generation/openai/gpt-image-1.5/edit) — Gpt Image 1.5 Edit by OpenAI - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [GPT Image 1.5](/model-api-reference/image-generation/openai/gpt-image-1.5) — Gpt Image 1.5 is OpenAI's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
 - [GPT Image 1 Mini Edit](/model-api-reference/image-generation/openai/gpt-image-1-mini/edit) — Gpt Image 1 Mini Edit is OpenAI's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [GPT Image 1 Mini](/model-api-reference/image-generation/openai/gpt-image-1-mini) — Gpt Image 1 Mini by OpenAI - generate stunning images from text prompts with state-of-the-art AI. Supports multiple aspect ratios, styles, and high-resolution output for creative and commercial use.
-- [GPT Image 1](/model-api-reference/image-generation/openai/gpt-image-1) — Gpt Image 1 is OpenAI's advanced text-to-image AI model. Create photorealistic images, illustrations, and concept art from natural language descriptions with exceptional detail and prompt adherence.
-- [GPT Image 1 Edit](/model-api-reference/image-generation/openai/gpt-image-1/edit) — Gpt Image 1 Edit by OpenAI - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- …and 2 more models in the sidebar.
 
 ### Google
 
@@ -269,6 +272,10 @@ Image Generation models use the SandBase generation protocol declared in each mo
 - [MAI Image 2.5 Pro (Edit)](/model-api-reference/image-generation/microsoft/mai-image-2.5-pro/edit) — Mai Image 2.5 Pro Edit by Microsoft - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 - [Mai Image 2.5](/model-api-reference/image-generation/microsoft/mai-image-2.5/edit) — Mai Image 2.5 Edit by Microsoft - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
 
+### Midjourney
+
+- [Midjourney V8.1](/model-api-reference/image-generation/midjourney/midjourney-v8.1) — Midjourney V8.1 text-to-image generation through Evolink.ai.
+
 ### MiniMax
 
 - [Minimax Image Subject Reference](/model-api-reference/image-generation/minimax/image-01/subject-reference) — Image 01 Subject Reference by MiniMax - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
@@ -362,6 +369,14 @@ Image Generation models use the SandBase generation protocol declared in each mo
 
 ### Topaz Labs
 
+- [Topaz Adjust Image](/model-api-reference/image-generation/topaz/adjust/image) — Adjust Image by Topaz Labs - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Topaz Sharpen Image](/model-api-reference/image-generation/topaz/sharpen/image) — Sharpen Image is Topaz Labs's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
+- [Topaz Denoise Image](/model-api-reference/image-generation/topaz/denoise/image) — Denoise Image is Topaz Labs's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
+- [Topaz Restore Image](/model-api-reference/image-generation/topaz/restore/image) — Restore Image is Topaz Labs's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
+- [Topaz Upscale Image Transparent](/model-api-reference/image-generation/topaz/upscale/image/transparent) — Upscale Image Transparent is Topaz Labs's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
+- [Topaz Upscale Image Creative](/model-api-reference/image-generation/topaz/upscale/image/creative) — Upscale Image Creative by Topaz Labs - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Topaz Upscale Image Generative](/model-api-reference/image-generation/topaz/upscale/image/generative) — Upscale Image Generative by Topaz Labs - AI-powered image editing, style transfer, and transformation. Edit photos with natural language instructions, remove backgrounds, change styles, and enhance images effortlessly.
+- [Topaz Upscale Image Precision](/model-api-reference/image-generation/topaz/upscale/image/precision) — Upscale Image Precision is Topaz Labs's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 - [Topaz Upscale](/model-api-reference/image-generation/topaz/upscale/image) — Upscale Image is Topaz Labs's intelligent image editing model. Transform, retouch, and reimagine existing images using text prompts - from background replacement to artistic style conversion.
 
 ### trellis

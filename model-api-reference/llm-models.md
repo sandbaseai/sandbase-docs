@@ -13,6 +13,7 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 
 ### OpenAI
 
+- [GPT-6 Astra](/model-api-reference/llm-models/openai/gpt-6-astra) — GPT-6 Astra is OpenAI's flagship model for demanding end-to-end work. It is suited for advanced analysis, software engineering, deep research, scientific work, computer use, and document creation.
 - [GPT-5.6 Luna Pro](/model-api-reference/llm-models/openai/gpt-5.6-luna-pro) — GPT-5.6 Luna Pro is the same underlying model as GPT-5.6 Luna, served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.
 - [GPT-5.6 Luna](/model-api-reference/llm-models/openai/gpt-5.6-luna) — GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for...
 - [GPT-5.6 Terra Pro](/model-api-reference/llm-models/openai/gpt-5.6-terra-pro) — GPT-5.6 Terra Pro is the same underlying model as GPT-5.6 Terra, served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.
@@ -24,11 +25,11 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 - [GPT-5.5](/model-api-reference/llm-models/openai/gpt-5.5) — GPT-5.5 is OpenAI’s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token context window (922K input, 128K output) with support for text and image inputs, enabling large-scale reasoning, coding, and multimodal workflows within a single system.
 - [GPT-5.4 Image 2](/model-api-reference/llm-models/openai/gpt-5.4-image-2) — GPT-5.4 Image 2 combines OpenAI's GPT-5.4 model with state-of-the-art image generation capabilities from GPT Image 2. It enables rich multimodal workflows, allowing users to seamlessly move between reasoning, coding, and visual generation within the same interaction.
 - [GPT-5.4 Nano](/model-api-reference/llm-models/openai/gpt-5.4-nano) — GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency use cases such as classification, data extraction, ranking, and sub-agent execution.
-- [GPT-5.4 Mini](/model-api-reference/llm-models/openai/gpt-5.4-mini) — GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding, and tool use, while reducing latency and cost for large-scale deployments.
-- …and 57 more models in the sidebar.
+- …and 58 more models in the sidebar.
 
 ### Anthropic
 
+- [Claude Fable 5.1](/model-api-reference/llm-models/anthropic/claude-fable-5.1) — Claude Fable 5.1 improves on Claude Fable 5 across the board, with the biggest gains in agentic coding, long-running agentic workflows, and knowledge work: long code refactors, front-end and visual...
 - [Claude Opus 5](/model-api-reference/llm-models/anthropic/claude-opus-5) — Claude Opus 5 is the most powerful model in the Claude 5 family from Anthropic. It excels at complex reasoning, analysis, and creative tasks with superior accuracy and nuance. It supports text, image, and file inputs with text output, reasoning support and a 1M-token context window.
 - [Claude Sonnet 5](/model-api-reference/llm-models/anthropic/claude-sonnet-5) — Claude Sonnet 5 is a Sonnet-class model for high-quality coding, agentic workflows, reasoning, vision, structured outputs, and tool use.
 - [Claude Fable 5](/model-api-reference/llm-models/anthropic/claude-fable-5) — Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token context window. It is suited for long-running, complex, and asynchronous tasks that previously required frequent human check-ins.
@@ -40,11 +41,11 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 - [Claude Sonnet 4.6](/model-api-reference/llm-models/anthropic/claude-sonnet-4.6) — Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with memory, polished document creation, and confident computer use for web QA and workflow automation.
 - [Claude Opus 4.6](/model-api-reference/llm-models/anthropic/claude-opus-4.6) — Opus 4.6 is Anthropic’s strongest model for coding and long-running professional tasks. It is built for agents that operate across entire workflows rather than single prompts, making it especially effective for large codebases, complex refactors, and multi-step debugging that unfolds over time. The model shows deeper contextual understanding, stronger problem decomposition, and greater reliability on hard engineering tasks than prior generations.
 - [Claude Opus 4.5](/model-api-reference/llm-models/anthropic/claude-opus-4.5) — Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and reasoning benchmarks, and improved robustness to prompt injection. The model is designed to operate efficiently across varied effort levels, enabling developers to trade off speed, depth, and token usage depending on task requirements. It comes with a new parameter to control token efficiency, which can be accessed using the OpenRouter Verbosity parameter with low, medium, or high.
-- [Claude Haiku 4.5](/model-api-reference/llm-models/anthropic/claude-haiku-4.5) — Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance across reasoning, coding, and computer-use tasks, Haiku 4.5 brings frontier-level capability to real-time and high-volume applications.
-- …and 8 more models in the sidebar.
+- …and 9 more models in the sidebar.
 
 ### Google
 
+- [Gemini 3.8 Flash](/model-api-reference/llm-models/google/gemini-3.8-flash) — Gemini 3.8 Flash is Google's most intelligent Flash model with significant gains from 3.7 Flash across software engineering, agentic tasks, and multi-step reasoning.
 - [Gemini 3.7 Flash](/model-api-reference/llm-models/google/gemini-3.7-flash) — Gemini 3.7 Flash is a multimodal model from Google for fast agentic workflows, coding, and complex multi-step reasoning. It is designed for responsive performance and reliable multi-step execution.
 - [Gemini 3.5 Flash Lite](/model-api-reference/llm-models/google/gemini-3.5-flash-lite) — Gemini 3.5 Flash Lite is a high-efficiency multimodal model from Google with upgraded agentic capabilities. It is suited for focused subagent tasks in complex multi-agent workflows.
 - [Gemini 3.6 Flash](/model-api-reference/llm-models/google/gemini-3.6-flash) — Gemini 3.6 Flash is a high-efficiency multimodal model from Google for coding, agentic workflows, and web and app development. It produces polished outputs with fewer unnecessary edits.
@@ -60,6 +61,8 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 
 ### DeepSeek
 
+- [DeepSeek V4.1 Flash](/model-api-reference/llm-models/deepseek/deepseek-v4.1-flash) — DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on output from a 552B-parameter backbone, an asymmetric split that keeps per-token compute low relative to the model's total size. Image understanding is native to the architecture, with visual and text embeddings trained jointly from the start of pre-training rather than added afterward as in the earlier experimental V4 Flash Vision Exp.
+- [DeepSeek V4 Flash Vision Exp (Experimental)](/model-api-reference/llm-models/deepseek/deepseek-v4-flash-vision-exp) — DeepSeek V4 Flash Vision Exp is an experimental multimodal understanding model that accepts mixed text and image input and produces text output. It supports OpenAI-compatible image URL and base64 data URL content parts while retaining the text, reasoning, tool-calling, and JSON-output capabilities of DeepSeek V4 Flash.
 - [DeepSeek V4 Flash 0731](/model-api-reference/llm-models/deepseek/deepseek-v4-flash-0731) — DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows.
 - [DeepSeek V4 Pro](/model-api-reference/llm-models/deepseek/deepseek-v4-pro) — DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding, and long-horizon agent workflows, with strong performance across knowledge, math, and software engineering benchmarks.
 - [DeepSeek V4 Flash](/model-api-reference/llm-models/deepseek/deepseek-v4-flash) — DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and high-throughput workloads, while maintaining strong reasoning and coding performance.
@@ -70,12 +73,11 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 - [DeepSeek V3.1](/model-api-reference/llm-models/deepseek/deepseek-chat-v3.1) — DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context training process, reaching up to 128K tokens, and uses FP8 microscaling for efficient inference. Users can control the reasoning behaviour with the `reasoning` `enabled` boolean. Learn more in our docs
 - [R1 0528](/model-api-reference/llm-models/deepseek/deepseek-r1-0528) — May 28th update to the original DeepSeek R1 Performance on par with OpenAI o1, but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass.
 - [DeepSeek V3 0324](/model-api-reference/llm-models/deepseek/deepseek-chat-v3-0324) — DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the available iteration of the flagship chat model family from the DeepSeek team.
-- [R1 Distill Qwen 32B](/model-api-reference/llm-models/deepseek/deepseek-r1-distill-qwen-32b) — DeepSeek R1 Distill Qwen 32B is a distilled large language model based on Qwen 2.5 32B, using outputs from DeepSeek R1. It outperforms OpenAI's o1-mini across various benchmarks, achieving new state-of-the-art results for dense models.\n\nOther benchmark results include:\n\n- AIME 2024 pass@1: 72.6\n- MATH-500 pass@1: 94.3\n- CodeForces Rating: 1691\n\nThe model leverages fine-tuning from DeepSeek R1's outputs, enabling competitive performance comparable to larger frontier models.
-- [R1 Distill Llama 70B](/model-api-reference/llm-models/deepseek/deepseek-r1-distill-llama-70b) — DeepSeek R1 Distill Llama 70B is a distilled large language model based on Llama-3.3-70B-Instruct, using outputs from DeepSeek R1. The model combines advanced distillation techniques to achieve high performance across multiple benchmarks, including:
-- …and 2 more models in the sidebar.
+- …and 4 more models in the sidebar.
 
 ### Alibaba
 
+- [Qwen: Qwen3.8 27B](/model-api-reference/llm-models/alibaba/qwen3.8-27b) — The Qwen3.8 27B native vision-language dense model builds upon the 3.6-27B version, with key improvements in coding and office productivity capabilities across both text and visual modalities. It enables more reliable end-to-end completion of complex tasks, delivering consistently trustworthy results.
 - [Qwen: Qwen3.8 2.4T A95B](/model-api-reference/llm-models/alibaba/qwen3.8-2.4t-a95b) — Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen, with 95 billion active parameters out of 2.4 trillion total. It is the open-weight variant of Qwen3.8 Max.
 - [Qwen: Qwen3.8 Max](/model-api-reference/llm-models/alibaba/qwen3.8-max) — Qwen3.8 Max is the flagship model in Alibaba's Qwen3.8 series and the general-availability successor to Qwen3.8 Max Preview. It is a multimodal reasoning model intended for complex reasoning and visual understanding.
 - [Qwen: Qwen3.7 Plus](/model-api-reference/llm-models/alibaba/qwen3.7-plus) — Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It supports text and image input with text output, building on the series' text capabilities with a comprehensive upgrade to its...
@@ -87,8 +89,7 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 - [Qwen: Qwen3.6 27B](/model-api-reference/llm-models/alibaba/qwen3.6-27b) — Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...
 - [Qwen: Qwen3.6 Plus](/model-api-reference/llm-models/alibaba/qwen3.6-plus) — Qwen 3.6 Plus builds on a hybrid architecture that combines efficient linear attention with sparse mixture-of-experts routing, enabling strong scalability and high-performance inference. Compared to the 3.5 series, it delivers...
 - [Qwen: Qwen3.5-9B](/model-api-reference/llm-models/alibaba/qwen3.5-9b) — Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design...
-- [Qwen: Qwen3.5-35B-A3B](/model-api-reference/llm-models/alibaba/qwen3.5-35b-a3b) — The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...
-- …and 42 more models in the sidebar.
+- …and 43 more models in the sidebar.
 
 ### Meta
 
@@ -368,6 +369,7 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 
 ### Tencent
 
+- [Hy4 preview](/model-api-reference/llm-models/tencent/hy4-preview) — Tencent: Hy4 preview is a mixture-of-experts model from Tencent, with 49B active parameters out of 770B total. It is designed for coding agents, complex tool-use workflows, and productivity tasks that...
 - [Hy3](/model-api-reference/llm-models/tencent/hy3) — Hy3 is a 295B-parameter Mixture-of-Experts model from Tencent (21B active, 192 experts with top-8 routing) built for reasoning, agentic workflows, and real-world production use. It supports configurable reasoning effort.
 - [Hy3 preview](/model-api-reference/llm-models/tencent/hy3-preview) — Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to balance speed and depth depending on the task, while delivering strong code generation and reliable performance across multi-step, real-world workflows.
 - [Hunyuan A13B Instruct](/model-api-reference/llm-models/tencent/hunyuan-a13b-instruct) — Hunyuan-A13B is a 13B active parameter Mixture-of-Experts (MoE) language model developed by Tencent, with a total parameter count of 80B and support for reasoning via Chain-of-Thought. It offers competitive benchmark performance across mathematics, science, coding, and multi-turn reasoning tasks, while maintaining high inference efficiency via Grouped Query Attention (GQA) and quantization support (FP8, GPTQ, etc.).
@@ -379,12 +381,17 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 - [TheDrummer: UnslopNemo 12B](/model-api-reference/llm-models/thedrummer/unslopnemo-12b) — UnslopNemo v4.1 is the available addition from the creator of Rocinante, designed for adventure writing and role-play scenarios.
 - [TheDrummer: Rocinante 12B](/model-api-reference/llm-models/thedrummer/rocinante-12b) — Rocinante 12B is designed for engaging storytelling and rich prose.
 
+### TypeSafe
+
+- [Jev 1.13](/model-api-reference/llm-models/typesafe/jev-1.13) — Jev 1.13 is TypeSafe's System One model for structured decisions from state and typed questions.
+
 ### Undi95
 
 - [ReMM SLERP 13B](/model-api-reference/llm-models/undi95/remm-slerp-l2-13b) — A recreation trial of the original MythoMax-L2-B13 but with updated models. #merge
 
 ### Upstage
 
+- [Solar Pro 4](/model-api-reference/llm-models/upstage/solar-pro4) — Solar Pro 4 is Upstage's cost-efficient large language model, featuring a 524K context window. It is built for long-horizon tasks and agentic workflows, with strong capabilities in office productivity, document-intensive...
 - [Solar Pro 3](/model-api-reference/llm-models/upstage/solar-pro-3) — Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized for Korean with English and Japanese support.
 
 ### Writer
@@ -400,6 +407,7 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 
 ### Z-Ai
 
+- [Z.ai: GLM 5.3](/model-api-reference/llm-models/z-ai/glm-5.3) — GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...
 - [Z.ai: GLM 5.2](/model-api-reference/llm-models/z-ai/glm-5.2) — GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...
 - [Z.ai: GLM 5.1](/model-api-reference/llm-models/z-ai/glm-5.1) — GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on a single task for more than 8 hours, autonomously planning, executing, and improving itself throughout the process, ultimately delivering complete, engineering-grade results.
 - [Z.ai: GLM 5V Turbo](/model-api-reference/llm-models/z-ai/glm-5v-turbo) — GLM-5V-Turbo is Z.ai’s first native multimodal agent foundation model, built for vision-based coding and agent-driven tasks. It natively handles image, video, and text inputs, excels at long-horizon planning, complex coding, and task execution, and works seamlessly with agents to complete the full loop of “perceive → plan → execute“.
@@ -411,9 +419,8 @@ Claude / Anthropic models use the SandBase-compatible `/v1/messages` protocol. O
 - [Z.ai: GLM 4.6](/model-api-reference/llm-models/z-ai/glm-4.6) — Compared with GLM-4.5, this generation brings several key improvements:
 - [Z.ai: GLM 4.5V](/model-api-reference/llm-models/z-ai/glm-4.5v) — GLM-4.5V is a vision-language foundation model for multimodal agent applications. Built on a Mixture-of-Experts (MoE) architecture with 106B parameters and 12B activated parameters, it achieves state-of-the-art results in video understanding, image Q&A, OCR, and document parsing, with strong gains in front-end web coding, grounding, and spatial reasoning. It offers a hybrid inference mode: a "thinking mode" for deep reasoning and a "non-thinking mode" for fast responses. Reasoning behavior can be toggled via the `reasoning` `enabled` boolean. Learn more in our docs
 - [Z.ai: GLM 4.5](/model-api-reference/llm-models/z-ai/glm-4.5) — GLM-4.5 is our available flagship foundation model, purpose-built for agent-based applications. It leverages a Mixture-of-Experts (MoE) architecture and supports a context length of up to 128k tokens. GLM-4.5 delivers significantly enhanced capabilities in reasoning, code generation, and agent alignment. It supports a hybrid inference mode with two options, a "thinking mode" designed for complex reasoning and tool use, and a "non-thinking mode" optimized for instant responses. Users can control the reasoning behaviour with the `reasoning` `enabled` boolean. Learn more in our docs
-- [Z.ai: GLM 4.5 Air](/model-api-reference/llm-models/z-ai/glm-4.5-air) — GLM-4.5-Air is the lightweight variant of our available flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter size. GLM-4.5-Air also supports hybrid inference modes, offering a "thinking mode" for advanced reasoning and tool use, and a "non-thinking mode" for real-time interaction. Users can control the reasoning behaviour with the `reasoning` `enabled` boolean. Learn more in our docs
-- …and 1 more models in the sidebar.
+- …and 2 more models in the sidebar.
 
 ## Capability coverage
 
-`audio_input`, `chat`, `function_calling`, `reasoning`, `structured_output`, `vision`
+`audio_input`, `chat`, `decisions`, `function_calling`, `reasoning`, `structured_output`, `vision`

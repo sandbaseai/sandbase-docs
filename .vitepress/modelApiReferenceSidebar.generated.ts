@@ -171,6 +171,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "OpenAI",
         collapsed: true,
         items: [
+          { text: "GPT-6 Astra", link: "/model-api-reference/llm-models/openai/gpt-6-astra" },
           { text: "GPT-5.6 Luna Pro", link: "/model-api-reference/llm-models/openai/gpt-5.6-luna-pro" },
           { text: "GPT-5.6 Luna", link: "/model-api-reference/llm-models/openai/gpt-5.6-luna" },
           { text: "GPT-5.6 Terra Pro", link: "/model-api-reference/llm-models/openai/gpt-5.6-terra-pro" },
@@ -247,6 +248,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Anthropic",
         collapsed: true,
         items: [
+          { text: "Claude Fable 5.1", link: "/model-api-reference/llm-models/anthropic/claude-fable-5.1" },
           { text: "Claude Opus 5", link: "/model-api-reference/llm-models/anthropic/claude-opus-5" },
           { text: "Claude Sonnet 5", link: "/model-api-reference/llm-models/anthropic/claude-sonnet-5" },
           { text: "Claude Fable 5", link: "/model-api-reference/llm-models/anthropic/claude-fable-5" },
@@ -274,10 +276,10 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Google",
         collapsed: true,
         items: [
+          { text: "Gemini 3.8 Flash", link: "/model-api-reference/llm-models/google/gemini-3.8-flash" },
           { text: "Gemini 3.7 Flash", link: "/model-api-reference/llm-models/google/gemini-3.7-flash" },
           { text: "Gemini 3.5 Flash Lite", link: "/model-api-reference/llm-models/google/gemini-3.5-flash-lite" },
           { text: "Gemini 3.6 Flash", link: "/model-api-reference/llm-models/google/gemini-3.6-flash" },
-          { text: "Gemini Omni Flash Preview", link: "/model-api-reference/llm-models/google/gemini-omni-flash-preview" },
           { text: "Nano Banana 2 (Gemini 3.1 Flash Image)", link: "/model-api-reference/llm-models/google/gemini-3.1-flash-image" },
           { text: "Nano Banana Pro (Gemini 3 Pro Image)", link: "/model-api-reference/llm-models/google/gemini-3-pro-image" },
           { text: "Gemini 3.5 Flash", link: "/model-api-reference/llm-models/google/gemini-3.5-flash" },
@@ -312,6 +314,8 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "DeepSeek",
         collapsed: true,
         items: [
+          { text: "DeepSeek V4.1 Flash", link: "/model-api-reference/llm-models/deepseek/deepseek-v4.1-flash" },
+          { text: "DeepSeek V4 Flash Vision Exp (Experimental)", link: "/model-api-reference/llm-models/deepseek/deepseek-v4-flash-vision-exp" },
           { text: "DeepSeek V4 Flash 0731", link: "/model-api-reference/llm-models/deepseek/deepseek-v4-flash-0731" },
           { text: "DeepSeek V4 Pro", link: "/model-api-reference/llm-models/deepseek/deepseek-v4-pro" },
           { text: "DeepSeek V4 Flash", link: "/model-api-reference/llm-models/deepseek/deepseek-v4-flash" },
@@ -333,6 +337,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Alibaba",
         collapsed: true,
         items: [
+          { text: "Qwen: Qwen3.8 27B", link: "/model-api-reference/llm-models/alibaba/qwen3.8-27b" },
           { text: "Qwen: Qwen3.8 2.4T A95B", link: "/model-api-reference/llm-models/alibaba/qwen3.8-2.4t-a95b" },
           { text: "Qwen: Qwen3.8 Max", link: "/model-api-reference/llm-models/alibaba/qwen3.8-max" },
           { text: "Qwen: Qwen3.7 Plus", link: "/model-api-reference/llm-models/alibaba/qwen3.7-plus" },
@@ -853,6 +858,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Tencent",
         collapsed: true,
         items: [
+          { text: "Hy4 preview", link: "/model-api-reference/llm-models/tencent/hy4-preview" },
           { text: "Hy3", link: "/model-api-reference/llm-models/tencent/hy3" },
           { text: "Hy3 preview", link: "/model-api-reference/llm-models/tencent/hy3-preview" },
           { text: "Hunyuan A13B Instruct", link: "/model-api-reference/llm-models/tencent/hunyuan-a13b-instruct" },
@@ -871,6 +877,14 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
+        text: "TypeSafe",
+        collapsed: true,
+        items: [
+          { text: "Jev 1.13", link: "/model-api-reference/llm-models/typesafe/jev-1.13" },
+        ],
+      },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
+      {
         text: "Undi95",
         collapsed: true,
         items: [
@@ -882,6 +896,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Upstage",
         collapsed: true,
         items: [
+          { text: "Solar Pro 4", link: "/model-api-reference/llm-models/upstage/solar-pro4" },
           { text: "Solar Pro 3", link: "/model-api-reference/llm-models/upstage/solar-pro-3" },
         ],
       },
@@ -909,6 +924,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Z-Ai",
         collapsed: true,
         items: [
+          { text: "Z.ai: GLM 5.3", link: "/model-api-reference/llm-models/z-ai/glm-5.3" },
           { text: "Z.ai: GLM 5.2", link: "/model-api-reference/llm-models/z-ai/glm-5.2" },
           { text: "Z.ai: GLM 5.1", link: "/model-api-reference/llm-models/z-ai/glm-5.1" },
           { text: "Z.ai: GLM 5V Turbo", link: "/model-api-reference/llm-models/z-ai/glm-5v-turbo" },
@@ -938,6 +954,10 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         items: [
           { text: "GPT Image 2 Official API", link: "/model-api-reference/image-generation/openai/gpt-image-2-official" },
           { text: "GPT Image 2 Official Edit API", link: "/model-api-reference/image-generation/openai/gpt-image-2-official/edit" },
+          { text: "GPT Image 2.5 Flare", link: "/model-api-reference/image-generation/openai/gpt-image-2.5-flare" },
+          { text: "GPT Image 2.5 Flare Edit", link: "/model-api-reference/image-generation/openai/gpt-image-2.5-flare/edit" },
+          { text: "GPT Image 2.5 Sunburst", link: "/model-api-reference/image-generation/openai/gpt-image-2.5-sunburst" },
+          { text: "GPT Image 2.5 Sunburst Edit", link: "/model-api-reference/image-generation/openai/gpt-image-2.5-sunburst/edit" },
           { text: "GPT Image 2", link: "/model-api-reference/image-generation/openai/gpt-image-2" },
           { text: "GPT Image 2 Editing", link: "/model-api-reference/image-generation/openai/gpt-image-2/edit" },
           { text: "GPT-Image 1.5", link: "/model-api-reference/image-generation/openai/gpt-image-1.5/edit" },
@@ -992,14 +1012,14 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Seedream 5.0 Pro Image Editing", link: "/model-api-reference/image-generation/bytedance/seedream/5.0/pro/edit" },
           { text: "Seedream 5.0 Pro Text to Image", link: "/model-api-reference/image-generation/bytedance/seedream/5.0/pro" },
           { text: "SeedVR2 (ByteDance: seedvr / upscale / image / seamless)", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/image/seamless" },
-          { text: "ByteDance Seed 2.0 Mini", link: "/model-api-reference/image-generation/bytedance/seed/v2/mini" },
+          { text: "Bytedance Seed 2.0 Mini", link: "/model-api-reference/image-generation/bytedance/seed/v2/mini" },
           { text: "Seedream v5.0 Lite", link: "/model-api-reference/image-generation/bytedance/seedream/5.0/lite" },
           { text: "Seedream v4.5", link: "/model-api-reference/image-generation/bytedance/seedream/4.5" },
           { text: "Seedream v4.5 Image Editing", link: "/model-api-reference/image-generation/bytedance/seedream/4.5/edit" },
           { text: "SeedVR2 (ByteDance: seedvr / upscale / video)", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/video" },
           { text: "SeedVR2 (ByteDance: seedvr / upscale / image)", link: "/model-api-reference/image-generation/bytedance/seedvr/upscale/image" },
-          { text: "ByteDance Seedream v4 Edit", link: "/model-api-reference/image-generation/bytedance/seedream/4.0/edit" },
-          { text: "ByteDance Seedream v4", link: "/model-api-reference/image-generation/bytedance/seedream/4.0" },
+          { text: "Bytedance Seedream v4 Edit", link: "/model-api-reference/image-generation/bytedance/seedream/4.0/edit" },
+          { text: "Bytedance Seedream v4", link: "/model-api-reference/image-generation/bytedance/seedream/4.0" },
           { text: "Dreamina 3.1", link: "/model-api-reference/image-generation/bytedance/dreamina/3.1" },
           { text: "Seedream v5.0 Lite Editing", link: "/model-api-reference/image-generation/bytedance/seedream/5.0/lite/edit" },
         ],
@@ -1452,6 +1472,14 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
       {
+        text: "Midjourney",
+        collapsed: true,
+        items: [
+          { text: "Midjourney V8.1", link: "/model-api-reference/image-generation/midjourney/midjourney-v8.1" },
+        ],
+      },
+        // Duplicate model names are qualified with provider and operation path for navigation clarity.
+      {
         text: "MiniMax",
         collapsed: true,
         items: [
@@ -1606,6 +1634,14 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Topaz Labs",
         collapsed: true,
         items: [
+          { text: "Topaz Adjust Image", link: "/model-api-reference/image-generation/topaz/adjust/image" },
+          { text: "Topaz Sharpen Image", link: "/model-api-reference/image-generation/topaz/sharpen/image" },
+          { text: "Topaz Denoise Image", link: "/model-api-reference/image-generation/topaz/denoise/image" },
+          { text: "Topaz Restore Image", link: "/model-api-reference/image-generation/topaz/restore/image" },
+          { text: "Topaz Upscale Image Transparent", link: "/model-api-reference/image-generation/topaz/upscale/image/transparent" },
+          { text: "Topaz Upscale Image Creative", link: "/model-api-reference/image-generation/topaz/upscale/image/creative" },
+          { text: "Topaz Upscale Image Generative", link: "/model-api-reference/image-generation/topaz/upscale/image/generative" },
+          { text: "Topaz Upscale Image Precision", link: "/model-api-reference/image-generation/topaz/upscale/image/precision" },
           { text: "Topaz Upscale", link: "/model-api-reference/image-generation/topaz/upscale/image" },
         ],
       },
@@ -1700,6 +1736,9 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "Seedance 2.5 Image to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.5/image-to-video" },
           { text: "Seedance 2.5 Reference to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.5/reference-to-video" },
           { text: "Seedance 2.5 Text to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.5/text-to-video" },
+          { text: "Seedance 2.0 Mini", link: "/model-api-reference/video-generation/bytedance/seedance/2.0/mini/reference-to-video" },
+          { text: "Seedance 2.0 Mini Image to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.0/mini/image-to-video" },
+          { text: "Seedance 2.0 Mini Text to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.0/mini/text-to-video" },
           { text: "Seedance 2.0 Text to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.0/text-to-video" },
           { text: "Seedance 2.0 Reference to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.0/reference-to-video" },
           { text: "Seedance 2.0 Fast Text to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.0/fast/text-to-video" },
@@ -1709,14 +1748,11 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
           { text: "DreamActor 2.0", link: "/model-api-reference/video-generation/bytedance/dreamactor/2.0" },
           { text: "Seedance v1.5 Pro Text to Video", link: "/model-api-reference/video-generation/bytedance/seedance/1.5/pro/text-to-video" },
           { text: "Seedance v1.5 Pro Image to Video", link: "/model-api-reference/video-generation/bytedance/seedance/1.5/pro/image-to-video" },
-          { text: "Seedance 2.0 Mini Text to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.0/mini/text-to-video" },
-          { text: "Seedance 2.0 Mini Image to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.0/mini/image-to-video" },
-          { text: "Seedance 2.0 Mini Reference to Video", link: "/model-api-reference/video-generation/bytedance/seedance/2.0/mini/reference-to-video" },
           { text: "Lynx", link: "/model-api-reference/video-generation/bytedance/lynx" },
-          { text: "ByteDance Video Upscaler", link: "/model-api-reference/video-generation/bytedance/upscaler/video" },
+          { text: "Bytedance Video Upscaler", link: "/model-api-reference/video-generation/bytedance/upscaler/video" },
           { text: "Seedance 1.0 Pro Fast I2V", link: "/model-api-reference/video-generation/bytedance/seedance/1.0/pro/fast/image-to-video" },
           { text: "Seedance 1.0 Pro Fast T2V", link: "/model-api-reference/video-generation/bytedance/seedance/1.0/pro/fast/text-to-video" },
-          { text: "ByteDance OmniHuman v1.5", link: "/model-api-reference/video-generation/bytedance/omnihuman/1.5" },
+          { text: "Bytedance OmniHuman v1.5", link: "/model-api-reference/video-generation/bytedance/omnihuman/1.5" },
           { text: "Video Stylize", link: "/model-api-reference/video-generation/bytedance/video-stylize" },
           { text: "OmniHuman 1.0", link: "/model-api-reference/video-generation/bytedance/omnihuman/1.0" },
           { text: "Seedance 1.0 Pro (ByteDance: seedance / 1.0 / pro / text-to-video)", link: "/model-api-reference/video-generation/bytedance/seedance/1.0/pro/text-to-video" },
@@ -1777,6 +1813,9 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "MiniMax",
         collapsed: true,
         items: [
+          { text: "H3 Max Reference to Video", link: "/model-api-reference/video-generation/minimax/h3-max/reference-to-video" },
+          { text: "H3 Max Image to Video", link: "/model-api-reference/video-generation/minimax/h3-max/image-to-video" },
+          { text: "MiniMax H3 Max Text to Video", link: "/model-api-reference/video-generation/minimax/h3-max/text-to-video" },
           { text: "MiniMax H3 Video Regeneration", link: "/model-api-reference/video-generation/minimax/h3/video-regeneration" },
           { text: "MiniMax H3 (Text to Video)", link: "/model-api-reference/video-generation/minimax/h3/text-to-video" },
           { text: "MiniMax H3 (Image to Video)", link: "/model-api-reference/video-generation/minimax/h3/image-to-video" },
@@ -1840,6 +1879,8 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Alibaba",
         collapsed: true,
         items: [
+          { text: "Wan 3.0 Prime", link: "/model-api-reference/video-generation/alibaba/wan/3.0/prime/video" },
+          { text: "Wan 3.0 Video", link: "/model-api-reference/video-generation/alibaba/wan/3.0/video" },
           { text: "Happy Horse 1.1 Image to Video", link: "/model-api-reference/video-generation/alibaba/happy-horse/1.1/image-to-video" },
           { text: "Happy Horse 1.1 Reference to Video", link: "/model-api-reference/video-generation/alibaba/happy-horse/1.1/reference-to-video" },
           { text: "Happy Horse 1.1 Text to Video", link: "/model-api-reference/video-generation/alibaba/happy-horse/1.1/text-to-video" },
@@ -2307,7 +2348,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "Google",
         collapsed: true,
         items: [
-          { text: "Gemini 3.1 Flash Tts", link: "/model-api-reference/audio-generation/google/gemini-3.1-flash-tts" },
+          { text: "Gemini 3.1 Flash TTS", link: "/model-api-reference/audio-generation/google/gemini-3.1-flash-tts" },
           { text: "Gemini TTS", link: "/model-api-reference/audio-generation/google/gemini-tts" },
           { text: "Lyria2", link: "/model-api-reference/audio-generation/google/lyria-2" },
         ],
@@ -2382,7 +2423,7 @@ export const modelApiReferenceSidebarItems: DefaultTheme.SidebarItem[] = [
         text: "ByteDance",
         collapsed: true,
         items: [
-          { text: "ByteDance Seed Speech Text to Speech", link: "/model-api-reference/audio-generation/bytedance/seed-speech/tts/2.0" },
+          { text: "Bytedance Seed Speech Text to Speech", link: "/model-api-reference/audio-generation/bytedance/seed-speech/tts/2.0" },
         ],
       },
         // Duplicate model names are qualified with provider and operation path for navigation clarity.
