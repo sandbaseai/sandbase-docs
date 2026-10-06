@@ -43,7 +43,7 @@ curl -X POST https://api.sandbase.ai/events/webhooks \
 | `enabled` | boolean | No | Defaults to `true`. |
 | `signatureSecret` | string | No | Omit this field to let SandBase generate a high-entropy secret. Existing clients may continue to provide their own non-empty value. |
 
-The `session`, `sandbox`, and `template` resource types are retired: creating a webhook with any of them returns HTTP 400. Existing registrations of these types are listed for cleanup only: a `PATCH` on them also returns HTTP 400, so delete them instead. `model` subscriptions are available only for the asynchronous image, video, and audio terminal events listed below. The API rejects events from other resource types and unknown event names.
+The `session`, `sandbox`, and `template` resource types are retired: creating a webhook with any of them returns HTTP 400. Existing registrations of these types are listed for cleanup: a `PATCH` on them returns HTTP 400 unless the same request changes `resourceType` to `model` (and the resulting subscription is valid), so delete them or convert them to `model`. `model` subscriptions are available only for the asynchronous image, video, and audio terminal events listed below. The API rejects events from other resource types and unknown event names.
 
 ### Successful response
 
