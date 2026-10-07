@@ -1,13 +1,13 @@
 ---
 title: Webhooks
-description: Register and manage SandBase webhooks for Agent Session and asynchronous model events.
+description: Register and manage SandBase webhooks for asynchronous model events.
 ---
 
 # Webhooks
 
 SandBase supports two outbound callback modes:
 
-- **Registered webhooks** are scoped to your organization, subscribe to Session or asynchronous Model events, and include an HMAC `X-Signature`.
+- **Registered webhooks** are scoped to your organization, subscribe to asynchronous Model events, and include an HMAC `X-Signature`.
 - **Per-task model callbacks** use `webhook_url` on one asynchronous image, video, or audio request. They do not require registration and do not include `X-Signature`.
 
 Both modes use at-least-once delivery. Make handlers idempotent with the event ID.
@@ -27,10 +27,10 @@ curl -X POST https://api.sandbase.ai/events/webhooks \
   -H "Authorization: Bearer $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Agent session monitor",
+    "name": "Model generation monitor",
     "url": "https://example.com/hooks/sandbase",
-    "resourceType": "session",
-    "events": ["agent.message", "session.error"]
+    "resourceType": "model",
+    "events": ["model.generation.completed", "model.generation.failed"]
   }'
 ```
 
@@ -38,12 +38,12 @@ curl -X POST https://api.sandbase.ai/events/webhooks \
 |---|---|---:|---|
 | `name` | string | Yes | A human-readable name. |
 | `url` | string | Yes | A valid HTTP(S) endpoint. Use HTTPS in production. |
-| `resourceType` | `session` \| `model` | Yes | Selects Agent Session events or the asynchronous Model events below. |
+| `resourceType` | `model` | Yes | Selects the asynchronous Model events below. `model` is the only supported value. |
 | `events` | string[] | No | Empty or omitted means all current and future events in the selected resource type. |
 | `enabled` | boolean | No | Defaults to `true`. |
 | `signatureSecret` | string | No | Omit this field to let SandBase generate a high-entropy secret. Existing clients may continue to provide their own non-empty value. |
 
-`template` is shown as **Coming soon** in the Console and cannot be registered. `model` subscriptions are available only for the asynchronous image, video, and audio terminal events listed below. The API rejects cross-resource events and unknown event names.
+The `session`, `sandbox`, and `template` resource types are retired: creating a webhook with any of them returns HTTP 400. Existing registrations of these types are listed for cleanup: a `PATCH` on them returns HTTP 400 unless the same request changes `resourceType` to `model` (and the resulting subscription is valid), so delete them or convert them to `model`. `model` subscriptions are available only for the asynchronous image, video, and audio terminal events listed below. The API rejects events from other resource types and unknown event names.
 
 ### Successful response
 
@@ -52,10 +52,10 @@ The Events API returns the registered webhook directly. The final `signatureSecr
 ```json
 {
   "id": "wh_01...",
-  "name": "Agent session monitor",
+  "name": "Model generation monitor",
   "url": "https://example.com/hooks/sandbase",
-  "resourceType": "session",
-  "events": ["agent.message", "session.error"],
+  "resourceType": "model",
+  "events": ["model.generation.completed", "model.generation.failed"],
   "enabled": true,
   "createdAt": "2026-07-15T12:00:00Z",
   "signatureSecret": "whsec_<one-time-value>"
@@ -79,7 +79,7 @@ curl -X PATCH https://api.sandbase.ai/events/webhooks/wh_01... \
   -H "Authorization: Bearer $SANDBASE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "events": ["agent.message", "agent.tool_use"],
+    "events": ["model.generation.completed", "model.generation.timeout"],
     "enabled": true
   }'
 ```
@@ -104,25 +104,13 @@ curl -X POST https://api.sandbase.ai/v1/run \
 
 The field is parsed and validated only when the selected model is image, video, or audio and the request resolves to asynchronous execution. In that case it must be a non-empty string containing a valid, safe public HTTPS URL; otherwise the request returns HTTP 400. For synchronous, streaming, LLM, or other unsupported requests, SandBase ignores `webhook_url` regardless of its JSON value: it schedules no callback, stores no callback URL, and does not forward the field to the model provider. Omitting the field preserves the existing polling flow.
 
-The target must be a public HTTPS URL. SandBase sends the same Model terminal envelope documented below, with `Content-Type: application/json` and `X-Event-ID`, for completed, failed, or timeout. It may retry a failed delivery, so deduplicate by `id` or `X-Event-ID` and return 2xx quickly.
+The target must be a public HTTPS URL. SandBase sends the same Model terminal envelope documented below, with `Content-Type: application/json` and `X-Event-ID`, for completed, failed, timeout, or cancelled. It may retry a failed delivery, so deduplicate by `id` or `X-Event-ID` and return 2xx quickly.
 
 A per-task callback has no shared SandBase secret and therefore does **not** include `X-Signature`. If your endpoint requires HMAC verification, omit `webhook_url` and register an organization Model Webhook instead. You may place an opaque capability token generated by your own system in the HTTPS URL query and validate it at your endpoint. Treat that URL as sensitive.
 
-For each asynchronous model task, target selection is exclusive. If the request includes a valid `webhook_url`, SandBase sends that Prediction's terminal event only to the per-task URL and skips every registered organization Model Webhook for that event. If the request omits `webhook_url`, registered organization Model Webhooks continue to receive matching events normally. A per-task delivery failure retries the same task URL and never falls back to a registered webhook. This priority does not create, replace, disable, or modify any registration, and does not affect other Model or Session events.
+For each asynchronous model task, target selection is exclusive. If the request includes a valid `webhook_url`, SandBase sends that Prediction's terminal event only to the per-task URL and skips every registered organization Model Webhook for that event. If the request omits `webhook_url`, registered organization Model Webhooks continue to receive matching events normally. A per-task delivery failure retries the same task URL and never falls back to a registered webhook. This priority does not create, replace, disable, or modify any registration, and does not affect other Model events.
 
 ## Event types
-
-### Session
-
-| Event | Description |
-|---|---|
-| `user.message` | A user message is written to a Session. |
-| `agent.message` | An Agent message is written to a Session. |
-| `agent.tool_use` | An Agent invokes a tool. |
-| `agent.tool_result` | A tool result is recorded. |
-| `session.status_running` | A Session enters the running state. |
-| `session.status_idle` | A Session returns to the idle state. |
-| `session.error` | A Session records an error. |
 
 ### Model generation
 
@@ -133,26 +121,11 @@ Model webhooks are available only for asynchronous image, video, and audio gener
 | `model.generation.completed` | An asynchronous image, video, or audio generation completed. |
 | `model.generation.failed` | An asynchronous image, video, or audio generation failed. |
 | `model.generation.timeout` | An asynchronous image, video, or audio generation timed out. |
+| `model.generation.cancelled` | An asynchronous image, video, or audio generation was cancelled. |
 
 ## Delivery payload
 
 SandBase sends `Content-Type: application/json` and the following JSON envelope. `data` is event-specific and can gain fields over time.
-
-### Session example
-
-```json
-{
-  "id": "sevt_01...",
-  "resourceType": "session",
-  "resourceID": "sess_01...",
-  "agentID": "agent_01...",
-  "type": "agent.message",
-  "data": {
-    "content": [{ "type": "text", "text": "Hello" }]
-  },
-  "createdAt": "2026-07-14T09:30:38Z"
-}
-```
 
 ### Model completion example
 
@@ -179,10 +152,9 @@ Failure and timeout events omit outputs and contain only the sanitized error cat
 | Field | Description |
 |---|---|
 | `id` | Unique event ID. Use this, or `X-Event-ID`, as your idempotency key. |
-| `resourceType` | `session` or `model`. |
-| `resourceID` | The affected Session or Prediction ID. |
-| `agentID` | The associated Agent ID when the event has one; omitted otherwise. |
-| `type` | Event type from the tables above. |
+| `resourceType` | `model`. |
+| `resourceID` | The affected Prediction ID. |
+| `type` | Event type from the table above. |
 | `data` | Event-specific data. |
 | `createdAt` | Event creation time in RFC 3339 UTC. |
 
@@ -291,6 +263,3 @@ X-Signature = hex(HMAC-SHA256(signatureSecret, rawRequestBody))
 - A response in the `2xx` range within 10 seconds is successful.
 - Network errors, timeouts, and non-2xx responses are failures. The existing event dispatcher may retry failed delivery; receivers must tolerate duplicate delivery.
 - Return a 2xx response after durable acceptance, then perform slow work asynchronously. The examples use in-memory deduplication only to stay runnable; production receivers must replace it with a database unique key or durable queue. Do not assume exactly-once delivery or event ordering.
-
-
-For session event delivery and lifecycle semantics, see [Sessions](/api-reference/sessions/).
