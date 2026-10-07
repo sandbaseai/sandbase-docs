@@ -1,6 +1,6 @@
 ---
 title: List Agent Versions
-description: List immutable historical versions of an Agent, including version IDs and creation metadata for rollback and auditing.
+description: List immutable Agent version snapshots.
 aside: false
 outline: false
 apiReference:
@@ -8,80 +8,81 @@ apiReference:
   operation: Agents
   method: GET
   path: /v1/agents/{agent_id}/versions
-  description: List immutable agent configuration snapshots, ordered from newest version to oldest.
+  description: List version snapshots with offset pagination. Each item contains the saved configuration document, checksum, optional note, and an RFC 3339 created_at.
   groups:
     - title: Path parameters
       fields:
         - name: agent_id
           type: string
           required: true
-          description: Unique agent identifier beginning with agent_.
+          description: Agent ID (agt_ prefix).
     - title: Query parameters
       fields:
         - name: limit
           type: integer
-          description: Number of versions to return. Accepts values from 1 to 100.
+          required: false
+          description: Page size. Values above 200 are capped at 200.
           default: "20"
-        - name: page
-          type: string
-          description: Opaque cursor returned in a previous response's next_page field.
+        - name: offset
+          type: integer
+          required: false
+          description: Number of records to skip.
+          default: "0"
   examples:
     - label: cURL
       language: bash
-      code: |
-        curl "https://api.sandbase.ai/v1/agents/agent_01HqR2k7.../versions" \
+      code: |-
+        curl -X GET "https://api.sandbase.ai/v1/agents/agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60/versions?limit=20&offset=0" \
           -H "Authorization: Bearer $SANDBASE_API_KEY"
     - label: Python
       language: python
-      code: |
-        page = client.beta.agents.versions.list(
-            agent_id="agent_01HqR2k7..."
+      code: |-
+        import os
+        import requests
+
+        headers = {
+            "Authorization": f"Bearer {os.environ['SANDBASE_API_KEY']}",
+        }
+
+        response = requests.request(
+            "GET",
+            "https://api.sandbase.ai/v1/agents/agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60/versions?limit=20&offset=0",
+            headers=headers,
         )
-        for item in page.data:
-            print(item.version, item.created_at)
+        response.raise_for_status()
+        print(response.json())
     - label: TypeScript
       language: typescript
-      code: |
-        const page = await client.beta.agents.versions.list(
-          'agent_01HqR2k7...'
-        );
-        page.data.forEach((item) => console.log(item.version));
+      code: |-
+        const response = await fetch('https://api.sandbase.ai/v1/agents/agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60/versions?limit=20&offset=0', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${process.env.SANDBASE_API_KEY}`,
+          },
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+        console.log(await response.json());
   response:
     status: 200 OK
-    code: |
+    code: |-
       {
         "data": [
           {
-            "id": "agent_01HqR2k7...",
-            "type": "agent",
             "version": 2,
-            "name": "Research Assistant",
-            "description": "A general-purpose research Agent.",
-            "model": {"id": "anthropic/claude-sonnet-5", "effort": {"type": "high"}, "speed": "standard"},
-            "system": "Always cite sources.",
-            "tools": [],
-            "mcp_servers": [],
-            "skills": [],
-            "handoffs": [],
-            "metadata": {},
-            "created_at": "2026-05-29T11:00:00Z",
-            "updated_at": "2026-05-29T11:00:00Z",
-            "archived_at": null
+            "agent": {
+              "name": "Research assistant",
+              "model": "deepseek/deepseek-v4-flash",
+              "instructions": "Answer in five bullet points with cited sources."
+            },
+            "checksum": "d04d38eb890a1273fa7965a6a7cdc2426232326e43b901d1aad3ed669455acbf",
+            "created_at": "2026-10-06T08:00:00.000Z"
           }
-        ]
+        ],
+        "total": 2,
+        "limit": 20,
+        "offset": 0
       }
-  notes:
-    - title: Immutable Agent projections
-      description: Each item is the full Agent projection at that immutable version. No-op updates do not create a version.
-    - title: Pagination
-      description: When another page is available, the response includes next_page. The field is absent on the final page.
-  errors:
-    - status: 401
-      type: authentication_error
-      description: The API key is missing or invalid.
-    - status: 404
-      type: not_found
-      description: The agent does not exist.
 ---
 
 <ApiReferencePage />

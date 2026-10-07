@@ -15,10 +15,10 @@ Core middleware and several `/v1/*` endpoints return a flat error:
 {"error":"API key rate limit exceeded"}
 ```
 
-Agent resource APIs can return a typed error object:
+Agents platform resources (`/v1/agents*`, `/v1/services*`, `/v1/schedules*`, `/v1/mcp-connections*`, `/v1/secrets*`, `/v1/skills*`) return an OpenAI-style object with a stable `code`. See [Agents platform errors](#agents-platform-errors):
 
 ```json
-{"error":{"type":"invalid_request","message":"invalid request body"}}
+{"error":{"type":"invalid_request_error","code":"invalid_request","param":null,"message":"invalid request"}}
 ```
 
 OpenAI-compatible endpoints retain an OpenAI-compatible envelope. `POST /v1/messages` retains an Anthropic-compatible envelope:
@@ -88,6 +88,36 @@ A suitable delay is:
 ```text
 delay = min(base_delay * 2^attempt, max_delay) + random_jitter
 ```
+
+## Agents platform errors
+
+Agents, Sessions, Services, Schedules, Skills, MCP connections, and Secrets return one envelope. For most codes, `message` is a fixed, safe sentence; `invalid_request` may carry a short explanation, such as which input shape or option is not supported. Branch on `code`, not on `message`.
+
+```json
+{"error":{"type":"invalid_request_error","code":"conflict","param":null,"message":"conflicting request"}}
+```
+
+`type` is `authentication_error` for 401, `server_error` for 5xx, and `invalid_request_error` otherwise.
+
+| HTTP | `code` | Meaning | What to do |
+|---|---|---|---|
+| 400 | `invalid_request` | Malformed or unknown fields, failed validation, or an unsupported option | Fix the request; do not retry unchanged |
+| 400 | `skill_not_found` | A referenced Skill or version is not available | Fix the Agent's `skills` |
+| 401 | `unauthorized` | Missing, invalid, or conflicting API key headers | Check `Authorization` / `X-API-Key` |
+| 402 | `spending_limit_exceeded` | Key spending limit or organization balance exhausted | Add credits or raise the limit |
+| 403 | `insufficient_scope` | The key is scoped and cannot use Agents resources | Use a standard Console-created key |
+| 403 | `org_disabled` | The organization is not permitted to run Agents | Contact support |
+| 404 | `not_found` | The resource does not exist in your organization | Check the ID |
+| 409 | `conflict` | Stale `row_version`, a state that does not allow the change, or an `Idempotency-Key` reused with a different body | Read the resource again, then decide |
+| 409 | `session_input_pending` | Earlier input is still being delivered | Wait; do not resend with a new key |
+| 409 | `session_input_expired` | Input admission expired | Inspect history before sending again |
+| 409 | `session_environment_unavailable` | The execution environment is unavailable | Wait or create a new Session |
+| 429 | `concurrency_limit` | A Service or Schedule already has a pending Run | Wait for it to finish or cancel it |
+| 429 | `quota_exceeded` | Agents quota exceeded | Retry later |
+| 502 | `executor_rejected`, `executor_contract_error` | The execution layer rejected the request or answered unexpectedly | Check the Agent configuration, then retry |
+| 503 | `executor_unavailable`, `storage_unavailable`, `skill_unavailable`, `tenant_unavailable`, `tenant_provisioning_failed`, `authorization_unavailable`, `admission_unavailable`, `internal_error` | A dependency is temporarily unavailable | Retry with backoff and the same `Idempotency-Key` |
+
+`skill_runtime_incompatible` can also appear; it is returned as 503 with the message `internal error`.
 
 ## Streaming failures
 

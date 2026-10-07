@@ -244,13 +244,9 @@ export default defineConfig({
     'README.md',
     'CONTRIBUTING.md',
     'DEPLOYMENT.md',
+    // Retired Embed, Environment, Endpoint, Deployment, and Site Agent pages live here.
     '_archived/**',
-    // This legacy guide uses dashboard-only /default/v1 routes and an unpublished embed API.
-    'guides/site-agent-integration.md',
-    'use-cases/**',
     'api-reference/webhooks.md',
-    'api-reference/embeds/**',
-    'api-reference/environments/**',
     'agents/endpoint-quickstart.md',
     'admin/api-keys.md',
     'setup/cli.md',
@@ -284,6 +280,9 @@ export default defineConfig({
       // canonicalized/noindexed in favor of Official Native API.
       .filter((item) => ![
         'agents/deployments',
+        'api-reference/endpoints/',
+        'api-reference/deployments/',
+        'api-reference/credentials/',
         'store/models',
         'api-reference/volcengine-contents-generations',
       ].includes(item.url.replace(/^\//, '')))
@@ -303,7 +302,7 @@ export default defineConfig({
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap' }],
     ['meta', { property: 'og:title', content: 'SandBase Docs - Connect Your Agent to the Real World' }],
-    ['meta', { property: 'og:description', content: 'Learn how to use Setup, call Models and APIs, build Agents, publish Services, create Schedules, and review Sessions in SandBase.' }],
+    ['meta', { property: 'og:description', content: 'Learn how to use Setup, call Models and APIs, build Agents, deploy Services, create Schedules, and review Sessions in SandBase.' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'SandBase' }],
     ['meta', { property: 'og:image', content: 'https://www.sandbase.ai/og-default.png' }],

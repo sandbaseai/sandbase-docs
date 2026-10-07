@@ -1,15 +1,13 @@
 ---
 title: Services and Schedules
-description: Compatibility guide linking the current Services and Schedules documentation.
+description: The Endpoints and Deployments APIs have been retired. Use Services and Schedules.
 robots: noindex,follow
 ---
 
 # Services and Schedules
 
-This page is retained for existing links. SandBase now uses separate product terms for the two delivery modes:
+This page is kept for existing links. The Endpoints and Deployments APIs have been retired. Use Services and Schedules:
 
-- [Services](/agents/services) publish Agents through the **Services API** (`/v1/endpoints`).
-- [Schedules](/agents/schedules) trigger repeatable work through the **Schedules API**, whose compatibility path remains `/v1/deployments`.
-- [Sessions](/agents/sessions) contain persistent Agent interaction and event history.
-
-The Service API path remains `/v1/endpoints`; Deployment, DeploymentRun, and Session resource names remain unchanged.
+- [Services](/agents/services) invoke a pinned Agent version on demand. Each invocation returns a Run.
+- [Schedules](/agents/schedules) run a pinned Agent version on a cron expression or on demand.
+- [Sessions](/agents/sessions) hold the conversation and output of every Run.

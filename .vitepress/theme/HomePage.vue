@@ -17,7 +17,7 @@
           <span class="map-index">01</span>
           <div>
             <strong>Use in my AI tool</strong>
-            <p>Choose Models, APIs, or published Agents. Run setup once. Use them in Codex, Claude, Cursor, or Kiro.</p>
+            <p>Choose Models, APIs, or Agent Services. Run setup once. Use them in Codex, Claude, Cursor, or Kiro.</p>
           </div>
         </div>
         <div class="map-row">
@@ -31,7 +31,7 @@
           <span class="map-index">03</span>
           <div>
             <strong>Build an Agent</strong>
-            <p>Define the Agent, test runs, then publish it for API access or schedule it.</p>
+            <p>Define the Agent, test it in a Session, then deploy it as a Service or Schedule.</p>
           </div>
         </div>
       </div>
@@ -86,7 +86,7 @@
         <a href="https://www.sandbase.ai/console/setup" target="_self" class="choose-card featured">
           <div class="choose-card-icon">01</div>
           <h3>Setup</h3>
-          <p>Add Models, APIs, and published Agents to the AI app you already use.</p>
+          <p>Add Models, APIs, and Agent Services to the AI app you already use.</p>
           <ul class="choose-card-links">
             <li>Choose tools</li>
             <li>Run one setup command</li>
@@ -106,10 +106,10 @@
         <a href="/docs/agents/" class="choose-card">
           <div class="choose-card-icon">03</div>
           <h3>Build an Agent</h3>
-          <p>Turn instructions, Models, APIs, and Skills into repeatable work.</p>
+          <p>Turn instructions, Models, Skills, and MCP tools into repeatable work.</p>
           <ul class="choose-card-links">
             <li>Define and test</li>
-            <li>Publish as an API</li>
+            <li>Deploy as a Service</li>
             <li>Schedule recurring runs</li>
           </ul>
         </a>
@@ -120,7 +120,7 @@
     <section class="journey-section">
       <p class="section-label">CONSOLE FLOW</p>
       <h2 class="section-title">Build the Agent first. Connect it when it is ready.</h2>
-      <p class="section-desc">Agents are where you define and test the work. Published Agents and Schedules are ways to make that work usable outside the builder.</p>
+      <p class="section-desc">Agents are where you define and test the work. Services and Schedules run a pinned Agent version outside the builder, and every Run is recorded as a Session.</p>
 
       <div class="journey-steps">
         <div class="journey-step">
@@ -132,17 +132,17 @@
           </div>
         </div>
         <div class="journey-step">
-          <div><span class="step-num">2</span><h4>Publish Agent</h4></div>
+          <div><span class="step-num">2</span><h4>Deploy as a Service</h4></div>
           <div class="step-links">
             <a href="https://www.sandbase.ai/console/endpoints" target="_self">Services</a>
-            <a href="/docs/api-reference/endpoints/">Services API</a>
+            <a href="/docs/api-reference/services/">Services API</a>
           </div>
         </div>
         <div class="journey-step">
           <div><span class="step-num">3</span><h4>Schedule Agent</h4></div>
           <div class="step-links">
             <a href="https://www.sandbase.ai/console/deployments" target="_self">Schedules</a>
-            <a href="/docs/api-reference/deployments/">Schedule docs</a>
+            <a href="/docs/api-reference/schedules/">Schedules API</a>
             <a href="https://www.sandbase.ai/console/runs" target="_self">Runs</a>
           </div>
         </div>
@@ -169,16 +169,16 @@
           <code>/v1/models · /v1/chat/completions</code>
           <p>List models, inspect pricing and capabilities, and call them directly.</p>
         </a>
-        <a href="/docs/api-reference/endpoints/" class="model-card">
+        <a href="/docs/api-reference/services/" class="model-card">
           <span class="model-badge">SERVICES</span>
           <h3>Services</h3>
-          <code>/v1/endpoints</code>
-          <p>Publish a tested Agent so apps and API clients can invoke it.</p>
+          <code>/v1/services</code>
+          <p>Deploy a tested Agent version so apps and API clients can invoke it and track each Run.</p>
         </a>
-        <a href="/docs/api-reference/deployments/" class="model-card">
+        <a href="/docs/api-reference/schedules/" class="model-card">
           <span class="model-badge">SCHEDULES</span>
           <h3>Schedules</h3>
-          <code>/v1/deployments</code>
+          <code>/v1/schedules</code>
           <p>Run an existing Agent on a recurring schedule and review each result.</p>
         </a>
       </div>

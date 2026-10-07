@@ -38,9 +38,9 @@ const footerSections = [
     title: 'Build',
     links: [
       { href: `${SITE}/console/agents`, label: 'Build Agent' },
-      { href: `${SITE}/console/endpoints`, label: 'Published Agents' },
+      { href: `${SITE}/console/endpoints`, label: 'Services' },
       { href: `${SITE}/console/deployments`, label: 'Schedules' },
-      { href: `${SITE}/console/sessions`, label: 'Runs' },
+      { href: `${SITE}/console/sessions`, label: 'Sessions' },
     ],
   },
   {

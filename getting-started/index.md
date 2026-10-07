@@ -16,7 +16,7 @@ After that, you can use SandBase in four ways:
 | **Call Models and APIs** | Developers and builders | A working request you can call from your application |
 | **Use on the website** | Trying a capability in the browser | A Store detail page you can run without writing code |
 | **Setup** | People using Codex, Claude, Cursor, or Kiro | Useful Models, APIs, and Services inside your AI app |
-| **Build Agent** | FDEs and teams building reusable workflows | An Agent you can test, publish, or schedule |
+| **Build Agent** | FDEs and teams building reusable workflows | An Agent you can test, deploy as a Service, or schedule |
 
 ## Core ideas
 
@@ -39,13 +39,13 @@ Use it when you want tools available inside Codex, Claude, Cursor, or Kiro witho
 
 Build Agent is where you define and test your own Agent.
 
-An Agent combines a Model, instructions, APIs, Skills, and credentials into one reusable unit.
+An Agent combines a Model, instructions, Skills, and MCP tools into one reusable, versioned unit.
 
 After it works, you can:
 
-- publish it as a callable Service
+- deploy a tested version as a callable Service
 - schedule it to run later or on a recurring cadence
-- review Sessions and Schedule trigger records in the Console
+- review each Run and its Session in the Console
 
 ## Where should I start?
 

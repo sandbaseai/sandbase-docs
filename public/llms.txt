@@ -41,26 +41,27 @@ Open-source CLI: https://github.com/sandbaseai/cli
 - GET /v1/tasks/{id}/cost - Get task cost and usage
 
 ## Agent Lifecycle
-
-- POST /v1/agents - Create an agent
-- POST /v1/agents/{id} - Update an agent and create a version
-- POST /v1/agents/{id}/archive - Archive an agent
-- POST /v1/endpoints/{id}/run - Invoke a Service through its compatibility route and create or continue a Session
-- POST /v1/sessions - Create agent session directly
-- POST /v1/sessions/{id}/events - Send messages to running session
-- GET /v1/sessions/{id}/events/stream - Replay persisted session events (SSE)
-- POST /v1/deployments - Create a Schedule (Deployment)
-- POST /v1/deployments/{id}/runs - Create a manual DeploymentRun
-- GET /v1/deployment_runs - List DeploymentRuns across Schedules
-
-## Session Contract
-
-- session_id is the only public identity for persistent Agent interaction.
-- Service invocation accepts an optional session_id. Omit it to create a Session; a supplied Session must come from the same Service and match its current Agent-version binding.
-- Every manual or scheduled Deployment trigger creates a distinct drun_* DeploymentRun and attempts to create exactly one new Session.
-- A DeploymentRun links to session_id when Session creation succeeds; failed trigger records have no Session.
-- Service acceptance returns session_id and an events array. It does not create a DeploymentRun or expose an internal Runtime Session identity.
-
+Agents platform resources accept `Authorization: Bearer` or `X-API-Key` and return {"error":{"type","code","param","message"}}.
+- POST /v1/agents - Create a saved, versioned Agent (agt_)
+- POST /v1/agents/{agent_id} - Update an Agent (SDK style); PATCH /v1/agents/{agent_id} updates with row_version
+- POST /v1/agents/{agent_id}/archive - Archive an Agent; DELETE /v1/agents/{agent_id} also archives
+- POST /v1/agents/sessions - Create a Session (ses_) for a saved Agent
+- GET /v1/agents/sessions/{session_id}/events - Live-only event stream (SSE); open it before sending input
+- POST /v1/agents/sessions/{session_id}/events - Send one agent.session.input.message or agent.session.input.cancel event (202)
+- GET /v1/agents/sessions/{session_id}/items - Read Session history
+- POST /v1/services - Create a Service (svc_) pinned to an Agent version; Idempotency-Key required
+- POST /v1/services/{service_id}/invoke - Start a Run (run_); returns 202 with status pending
+- POST /v1/schedules - Create a cron Schedule (sch_); Idempotency-Key required
+- POST /v1/schedules/{schedule_id}/runs - Trigger a manual Schedule Run
+- POST /v1/skills - Upload a Skill ZIP (skl_)
+- POST /v1/mcp-connections - Register a remote HTTPS MCP server (mcp_)
+- POST /v1/secrets - Store a write-only MCP Bearer token (sec_)
+## Session and Run Contract
+- A Session runs one saved Agent version and freezes its Skills and MCP connections when it starts.
+- Each Service invocation and each Schedule firing or manual trigger creates one Run, and each Run creates its own Session reported in session_id.
+- Run status is pending, succeeded, failed, cancelled, or (Schedules only) skipped. Failed and skipped Runs carry error_code.
+- Only one Run per Service or Schedule can be pending; another invocation returns 429 concurrency_limit.
+- Internal Runtime Session identities are never exposed.
 ## Pricing
 
 Pricing formulas and billing units differ by model. Use GET /v1/models for discovery and GET /v1/models/{id_or_name} for the current

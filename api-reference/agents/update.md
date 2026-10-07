@@ -1,6 +1,6 @@
 ---
 title: Update Agent
-description: Update an agent and create a new version.
+description: Partially update an Agent with the OpenAI SDK-style POST update.
 aside: false
 outline: false
 apiReference:
@@ -8,117 +8,167 @@ apiReference:
   operation: Agents
   method: POST
   path: /v1/agents/{agent_id}
-  description: Update an Agent configuration. Every effective change creates a new immutable version; a no-op returns the current version unchanged. Existing Sessions keep the version they started with. Unknown request fields are accepted and ignored.
+  description: SDK-style partial update. Supplied fields replace the saved values and create a new version; omitted fields keep their values. No row_version is needed. description and note are not accepted here; use Replace (PATCH) for them. Archived Agents return 404.
   groups:
     - title: Path parameters
       fields:
         - name: agent_id
           type: string
           required: true
-          description: Unique agent identifier beginning with agent_.
-    - title: Request body
+          description: Agent ID (agt_ prefix).
+    - title: Headers
       fields:
-        - name: version
-          type: integer
+        - name: Idempotency-Key
+          type: string
           required: false
-          description: Optional current Agent version for optimistic locking. When omitted, the server applies the update to the version it just loaded.
+          description: Optional. When omitted the service generates one, so a retried request can create a duplicate. Send your own stable key for retries.
+    - title: Request body
+      description: Any subset of these fields. Other fields return 400.
+      fields:
         - name: model
           type: string
-          description: Replacement model identifier. Omit to preserve the current value.
+          required: false
+          description: Model ID from the Models API, up to 200 characters.
         - name: name
           type: string
-          description: Replacement name. Omit to preserve the current value.
-        - name: description
+          required: false
+          description: Display name, up to 128 characters.
+        - name: instructions
           type: string
-          description: Replacement description. Send an empty string to clear it; null is treated as omitted and preserves the current value.
-        - name: system
+          required: false
+          description: System instructions, up to 256 KiB.
+        - name: runtime_profile
           type: string
-          description: Replacement system instructions. Send an empty string to clear them; null is treated as omitted and preserves the current value.
-        - name: tools
-          type: array · null
-          description: Full replacement tool list. Send an empty array or null to clear all tools.
-        - name: mcp_servers
-          type: array · null
-          description: Full replacement MCP server configuration list.
+          required: false
+          description: "Execution runtime: codex (default), claude, or mcode."
         - name: skills
-          type: array · null
-          description: Full replacement Skill list.
-        - name: handoffs
-          type: array · null
-          description: Full replacement handoff configuration list.
+          type: array
+          required: false
+          description: 'Skill references: {"skill_id": "skl_…", "version": null | "<version>"}. null uses the Skill default version, resolved when a Session starts.'
+        - name: mcp_connections
+          type: array
+          required: false
+          description: "MCP references: {connection_id, server_label, allowed_tools, required}. Up to 32; server_label must be unique in the Agent."
+        - name: tools
+          type: array
+          required: false
+          description: Up to 64 function tools plus at most one web_search tool. Sessions currently require web_search mode disabled, and client-side function results are not supported yet.
+        - name: text
+          type: object
+          required: false
+          description: format.type text or json_schema (with an object schema); verbosity low, medium, or high.
+        - name: reasoning
+          type: object
+          required: false
+          description: effort none, minimal, low, medium, high, xhigh, or max; summary concise, detailed, or auto.
+        - name: service_tier
+          type: string
+          required: false
+          description: auto (default), default, flex, priority, or fast.
         - name: metadata
-          type: object · null
-          description: Full replacement metadata object. Omitted metadata is preserved; null clears caller-owned metadata. Supplied metadata replaces caller-owned metadata rather than merging individual keys, while the platform-owned _sandbase namespace remains unchanged.
+          type: object
+          required: false
+          description: Up to 16 string pairs; keys up to 64 and values up to 512 characters.
   examples:
     - label: cURL
       language: bash
-      code: |
-        curl -X POST \
-          "https://api.sandbase.ai/v1/agents/agent_01HqR2k7..." \
+      code: |-
+        curl -X POST https://api.sandbase.ai/v1/agents/agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60 \
           -H "Authorization: Bearer $SANDBASE_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{
-            "version": 1,
-            "system": "Research carefully and always cite sources."
+            "instructions": "Answer in five bullet points with cited sources."
           }'
-    - label: Python
+    - label: Python (OpenAI SDK)
       language: python
-      code: |
+      code: |-
+        # Verified with openai-python 3.13.0 and 3.24.0. See /agents/openai-compatibility.
+        import os
+        from openai import OpenAI
+
+        client = OpenAI(api_key=os.environ["SANDBASE_API_KEY"], base_url="https://api.sandbase.ai/v1")
         agent = client.beta.agents.update(
-            agent_id="agent_01HqR2k7...",
-            version=1,
-            system="Research carefully and always cite sources.",
+            "agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60",
+            instructions="Answer in five bullet points with cited sources.",
         )
         print(agent.version)
+    - label: Python
+      language: python
+      code: |-
+        import os
+        import requests
+
+        headers = {
+            "Authorization": f"Bearer {os.environ['SANDBASE_API_KEY']}",
+        }
+
+        response = requests.request(
+            "POST",
+            "https://api.sandbase.ai/v1/agents/agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60",
+            headers=headers,
+            json={
+                "instructions": "Answer in five bullet points with cited sources."
+            },
+        )
+        response.raise_for_status()
+        print(response.json())
     - label: TypeScript
       language: typescript
-      code: |
-        const agent = await client.beta.agents.update(
-          'agent_01HqR2k7...',
-          {
-            version: 1,
-            system: 'Research carefully and always cite sources.',
+      code: |-
+        const response = await fetch('https://api.sandbase.ai/v1/agents/agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${process.env.SANDBASE_API_KEY}`,
+            'Content-Type': 'application/json',
           },
-        );
-        console.log(agent.version);
+          body: JSON.stringify({
+            "instructions": "Answer in five bullet points with cited sources."
+          }),
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+        console.log(await response.json());
   response:
     status: 200 OK
-    code: |
+    code: |-
       {
-        "id": "agent_01HqR2k7...",
-        "type": "agent",
+        "id": "agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60",
+        "object": "agent",
+        "name": "Research assistant",
+        "model": "deepseek/deepseek-v4-flash",
+        "instructions": "Answer in five bullet points with cited sources.",
+        "tools": [],
+        "text": {
+          "format": {
+            "type": "text"
+          },
+          "verbosity": "medium"
+        },
+        "reasoning": {
+          "effort": null,
+          "summary": null
+        },
+        "service_tier": "auto",
+        "multi_agent": {
+          "enabled": false,
+          "max_concurrent_subagents": null
+        },
+        "visibility": "private",
+        "status": "active",
         "version": 2,
-        "name": "Research Assistant",
+        "row_version": 2,
+        "projection_status": "ready",
+        "runtime_profile": "codex",
         "description": "",
-        "model": {"id": "anthropic/claude-sonnet-5", "effort": {"type": "high"}, "speed": "standard"},
-        "system": "Research carefully and always cite sources.",
-        "tools": [{"type":"agent_toolset_20260401"}],
-        "mcp_servers": null,
-        "skills": null,
-        "handoffs": null,
-        "metadata": null,
-        "created_at": "2026-05-29T10:00:00Z",
-        "updated_at": "2026-05-29T11:00:00Z",
+        "metadata": {
+          "team": "research"
+        },
+        "mcp_connections": [],
+        "skills": [],
+        "created_at": 1791273600,
+        "updated_at": 1791273600,
         "archived_at": null
       }
-  notes:
-    - title: Optimistic locking
-      description: When version is supplied, a stale value returns 409 conflict. Fetch the current Agent, reapply the change, and retry with the latest version.
-    - title: Array replacement
-      description: Array fields are not merged. Read the current agent and send the complete intended list when changing tools, MCP servers, Skills, or handoffs.
-  errors:
-    - status: 400
-      type: invalid_request
-      description: One or more fields have invalid values.
-    - status: 401
-      type: authentication_error
-      description: The API key is missing or invalid.
-    - status: 404
-      type: not_found
-      description: The agent does not exist.
-    - status: 409
-      type: conflict
-      description: The supplied version does not match the current agent version.
 ---
 
 <ApiReferencePage />

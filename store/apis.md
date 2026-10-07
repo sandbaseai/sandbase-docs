@@ -5,7 +5,7 @@ description: Browse ready-to-use APIs for search, scrape, data, media, SaaS, and
 
 # API Catalog
 
-APIs give your Agent access to the real world.
+APIs give your application and connected AI tools access to the real world.
 
 Use APIs for things like:
 
@@ -18,11 +18,12 @@ Use APIs for things like:
 
 ## How APIs are used
 
-You can use an API in three ways:
+You can use an API in two ways:
 
 1. **Call it directly** from your application.
 2. **Add it to Workspace Services** so a connected AI tool can discover it.
-3. **Add it to an Agent** when the Agent needs tools.
+
+Store APIs are not attached to Agents as tools. An Agent reaches external systems through [MCP connections](/agents/mcp-tools#mcp-connections) and reusable [Skills](/agents/mcp-tools).
 
 ## API vs Model
 
@@ -30,7 +31,7 @@ Models think and generate.
 
 APIs fetch data, take actions, or call external systems.
 
-Both can be used by an Agent.
+An Agent uses a Model directly; external tools come from its MCP connections.
 
 ## Next steps
 

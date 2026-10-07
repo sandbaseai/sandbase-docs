@@ -72,7 +72,7 @@ For model-specific parameters, response fields, limits, and working examples, op
 
 In Build Agent, the Model is one part of the Agent.
 
-The Agent can also include APIs, Skills, instructions, and credentials.
+The Agent also includes instructions, Skills, and [MCP connections](/agents/mcp-tools#mcp-connections).
 
 ## Model capabilities
 

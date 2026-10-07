@@ -7,10 +7,7 @@ const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'get
 const excluded = [
   'agents/deployments.md',
   'agents/endpoint-quickstart.md',
-  'api-reference/embeds/',
-  'api-reference/environments/',
   'api-reference/webhooks.md',
-  'guides/site-agent-integration.md',
   'setup/cli.md',
   'setup/groups.md',
 ]
@@ -34,6 +31,8 @@ const forbidden = [
   [/\/v1\/environments\b/, 'non-public Environment management API'],
   [/\/v1\/embeds\b/, 'retired Embed Config API'],
   [/\/v1\/endpoints\/\{[^}]+\}\/mcp\b/, 'non-public Endpoint MCP transport'],
+  [/\b(?:GET|POST|PUT|PATCH|DELETE) \/v1\/(?:sessions|endpoints|deployments|deployment_runs|credentials|skills\/files)\b/, 'retired Agents route; use the sandbase-agents resources'],
+  [/\bdrun_|\bdepl_|\binitial_events\b|"user\.message"/, 'retired Deployment or Session contract'],
   [/https:\/\/api\.sandbase\.ai\/sandboxes\b/, 'non-public Sandbox API'],
   [/\bEmbed Configs?\b/i, 'retired Embed Config product'],
   [/\bEndpoints API\b/, 'legacy product label; use Services API'],
@@ -63,7 +62,6 @@ let inspected = 0
 for (const filename of files) {
   const source = readFileSync(filename, 'utf8')
   for (const [pattern, label] of forbidden) {
-    if (label === 'non-public Endpoint MCP transport' && ['api-reference/endpoints/index.md', 'api-reference/endpoints/mcp.md', 'agents/services.md'].includes(filename)) continue
     assert.ok(!pattern.test(source), `${filename} exposes ${label}: ${pattern}`)
   }
   inspected += 1
@@ -133,17 +131,21 @@ assert.match(agentOverview, /pinned to that version/, 'Agent guide must explain 
 const credentialGuide = readFileSync('agents/api-credentials.md', 'utf8')
 assert.match(credentialGuide, /Developer → Credentials/, 'Credential guide must use current Console navigation')
 assert.doesNotMatch(credentialGuide, /Agents → \[Your Agent\] → Credentials/, 'Credential guide must not use retired Agent-level navigation')
-assert.match(credentialGuide, /Workspace[\s\S]+Agent[\s\S]+Service/, 'Credential guide must describe the current scope choices')
+assert.match(credentialGuide, /mcp_bearer/, 'Credential guide must describe MCP Bearer Secrets')
+assert.match(credentialGuide, /not environment variables/, 'Credential guide must not imply runtime environment injection')
 
 const servicesGuide = readFileSync('agents/services.md', 'utf8')
-assert.match(servicesGuide, /202 Accepted/, 'Services guide must document asynchronous REST acceptance')
-assert.match(servicesGuide, /same Service/, 'Services guide must explain Session continuation binding')
+assert.match(servicesGuide, /202 Accepted/, 'Services guide must document asynchronous invocation')
+assert.match(servicesGuide, /Idempotency-Key/, 'Services guide must document idempotent invocation')
+assert.doesNotMatch(servicesGuide, /session_id`? to continue|continue (?:a|the) Session/i, 'Services no longer continue Sessions')
 
 const schedulesGuide = readFileSync('agents/schedules.md', 'utf8')
-assert.match(schedulesGuide, /public DeploymentRun object has no `status` field/, 'Schedules guide must match the public DeploymentRun schema')
-assert.match(schedulesGuide, /status=pending\|succeeded\|failed/, 'Schedules guide must document trigger-outcome status filters')
+assert.match(schedulesGuide, /`cron`/, 'Schedules guide must document cron timing')
+assert.match(schedulesGuide, /`timezone`/, 'Schedules guide must document the timezone')
+assert.match(schedulesGuide, /skipped/, 'Schedules guide must document skipped Runs')
 const sessionsGuide = readFileSync('agents/sessions.md', 'utf8')
-assert.match(sessionsGuide, /does not expose a `status` field/, 'Sessions guide must not invent a DeploymentRun response status')
+assert.match(sessionsGuide, /\/v1\/agents\/sessions/, 'Sessions guide must use the current Session path')
+assert.match(sessionsGuide, /live-only/, 'Sessions guide must explain that the native stream is live-only')
 
 const setupGuide = readFileSync('setup/index.md', 'utf8')
 assert.doesNotMatch(setupGuide, /^The installer requires Node\.js 20 or newer\./m, 'Setup prerequisites must remain client-specific')

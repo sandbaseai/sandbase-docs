@@ -59,8 +59,9 @@ curl https://api.sandbase.ai/v1/messages \
 ```
 
 ::: tip
-Only `POST /v1/messages` reads `x-api-key`, and it takes priority when both supported headers are present. Use the
-Bearer header for every other public endpoint.
+Only `POST /v1/messages` reads `x-api-key` among the model gateways, and it takes priority when both supported headers
+are present. [Agents platform resources](/api-reference/authentication#agents-platform-resources) also accept
+`X-API-Key`. Use the Bearer header for every other public endpoint.
 :::
 
 ## Key permissions

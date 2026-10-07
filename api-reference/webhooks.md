@@ -293,4 +293,4 @@ X-Signature = hex(HMAC-SHA256(signatureSecret, rawRequestBody))
 - Return a 2xx response after durable acceptance, then perform slow work asynchronously. The examples use in-memory deduplication only to stay runnable; production receivers must replace it with a database unique key or durable queue. Do not assume exactly-once delivery or event ordering.
 
 
-For session event delivery and lifecycle semantics, see [Session events](/api-reference/sessions/list-events).
+For session event delivery and lifecycle semantics, see [Sessions](/api-reference/sessions/).
