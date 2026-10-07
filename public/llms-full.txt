@@ -10,7 +10,8 @@ All requests require: Authorization: Bearer sk-YOUR_KEY
 
 - Task: A billable execution record. Not every API operation creates one.
 - Run: A model generation request via POST /v1/run. May be synchronous or asynchronous.
-- Session: An agent execution via POST /v1/sessions. Stateful multi-turn workflow.
+- Session: An Agent execution via POST /v1/agents/sessions. Stateful multi-turn workflow.
+- Service or Schedule Run: One invocation of a Service or firing of a Schedule (run_*). Each Run creates one Session.
 
 Some billable operations return an x-task-id response header. Not every API operation creates a task.
 
@@ -212,123 +213,80 @@ Response:
 
 ---
 
+## Agents platform conventions
+
+Agents, Sessions, Services, Schedules, Skills, MCP connections, and Secrets live under https://api.sandbase.ai/v1. Send Authorization: Bearer sk-YOUR_KEY or X-API-Key: sk-YOUR_KEY (same value if both). OpenAI-Beta is optional; if sent it must be agents=v1. Bodies are strict JSON up to 1 MiB. Errors use {"error":{"type":"invalid_request_error","code":"conflict","param":null,"message":"conflicting request"}}; branch on code. row_version is the compare-and-set token; on 409, read again. IDs: agt_ (Agent), ses_ (Session), svc_ (Service), sch_ (Schedule), run_ (Run), skl_ (Skill), mcp_ (MCP connection), sec_ (Secret), fil_ (attachment).
+
 ## POST /v1/agents
 
-Create an agent.
-
-Request:
-```
+```bash
 curl -X POST https://api.sandbase.ai/v1/agents \
   -H "Authorization: Bearer sk-YOUR_KEY" \
+  -H "Idempotency-Key: create-research-agent-1" \
   -H "Content-Type: application/json" \
-  -d '{
-    "name": "Research Assistant",
-    "model": "openai/gpt-5.4",
-    "system": "You are a research assistant.",
-    "tools": [{"type": "agent_toolset_20260401"}]
-  }'
+  -d '{"name": "Research assistant", "model": "deepseek/deepseek-v4-flash", "instructions": "Research the question and cite sources."}'
 ```
 
-Response:
-```
-{"id": "agent_abc123", "type": "agent", "name": "Research Assistant", "version": 1}
-```
+Required: model. Optional: name, instructions, description, runtime_profile (codex, claude, mcode), skills, mcp_connections, tools, text, reasoning, service_tier, metadata, note. Returns 201 with id, version, row_version, status, projection_status. Start Sessions when projection_status is ready. web_search must use mode disabled; client-side function results (requires_action) are not supported.
 
-## GET /v1/agents - List agents
-## GET /v1/agents/{id} - Get agent
-## POST /v1/agents/{id} - Update agent
-## POST /v1/agents/{id}/archive - Archive agent
-## GET /v1/agents/{id}/versions - List versions
+## GET /v1/agents - List agents (status=active|archived|all, cursor pagination)
+## GET /v1/agents/{agent_id} - Get agent
+## POST /v1/agents/{agent_id} - Partial update without row_version; creates a version
+## PATCH /v1/agents/{agent_id} - Update with row_version (compare-and-set)
+## POST /v1/agents/{agent_id}/archive - Archive agent ({"row_version"}); DELETE /v1/agents/{agent_id} also archives
+## GET /v1/agents/{agent_id}/versions - List versions
+## POST /v1/agents/catalog/{agent_id}/clone - Copy a public catalog Agent into your organization
 
 ---
 
-## POST /v1/endpoints/{id}/run
+## POST /v1/agents/sessions
 
-Invoke a Service by creating or continuing a Session and sending one message.
-
-Service invocation accepts an optional session_id. When omitted, SandBase creates a new persistent Session. A supplied Session must come from the same Service and match its current Agent-version binding. Invocation does not create a separate public Run identity.
-
-Request:
-```
-curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
+```bash
+curl -X POST https://api.sandbase.ai/v1/agents/sessions \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"input": "Summarize the latest AI news"}'
+  -d '{"agent_id": "agt_..."}'
 ```
 
-Default response (`202 Accepted`):
+Creates a Session for a saved Agent and freezes its version, Skills, and MCP connections. Optional: version, title, input, model, metadata, model_provider (omit to use your calling key). Sessions always run in the SandBase hosted cloud; the OpenAI SDK requires environment={"type": "openai_hosted"}, which SandBase accepts. Returns 201 with status (idle, in_progress, failed), lifecycle_status (active, archived), failure, source (direct, service, schedule).
+
+## GET /v1/agents/sessions/{session_id}/events - Live-only SSE; open before sending input; Last-Event-ID returns 400
+## POST /v1/agents/sessions/{session_id}/events - Send exactly one event; returns 202 with no body
+
+```json
+{"events": [{"type": "agent.session.input.message", "input": "Summarize the findings."}]}
 ```
-{"session_id":"sess_abc123","events":[{"id":"sevt_abc123","type":"user.message","processed_at":"2026-08-03T10:00:00Z"}]}
-```
+
+409 session_input_pending means earlier input is still being delivered: wait, and do not resend with a new Idempotency-Key.
+
+## GET /v1/agents/sessions/{session_id}/items - Read conversation history
+## GET /v1/agents/sessions/{session_id}/turns - Read turns
+## POST /v1/agents/sessions/{session_id}/cancel - Cancel the running turn (Idempotency-Key required)
 
 ---
 
-## POST /v1/sessions
+## POST /v1/services
 
-Create an Agent Session. `agent` is required; runtime binding is resolved internally from the Agent. Use `initial_events` to send the first message during creation.
+Create a Service pinned to an Agent version. Idempotency-Key is required. Body: name, agent_id, agent_version (optional; defaults to the current version), input, description, model.
 
-POST /v1/sessions creates the persistent public Session and returns session_id. Events, SSE, archive, and delete all address that same Session. Archived history remains readable but rejects new events; deleted Sessions return 404.
+## POST /v1/services/{service_id}/invoke
 
-Request:
-```
-curl -X POST https://api.sandbase.ai/v1/sessions \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"agent": "agent_abc123", "title": "GitHub research", "initial_events":[{"type":"user.message","content":[{"type":"text","text":"Research AI coding tools"}]}]}'
-```
-
-Response:
-```
-{"id":"sess_xyz789","type":"session","agent_id":"agent_abc123","status":"idle"}
-```
-
-## POST /v1/sessions/{id}/events
-
-Send a message to start or continue an idle Session, or send `user.interrupt` to interrupt a running turn.
-
-Request: {"events":[{"type":"user.message","content":[{"type":"text","text":"Focus on AI coding tools"}]}]}
-Response: {"data":[{"id":"sevt_001","type":"user.message","processed_at":"2026-08-03T10:00:00Z"}]}
-
-## GET /v1/sessions - List sessions
-## GET /v1/sessions/{id} - Get session details
-## GET /v1/sessions/{id}/events - List all events
-
-## GET /v1/sessions/{id}/events/stream
-
-Replay persisted events and then stream newly persisted events. While idle, the server may send `: heartbeat` comments. The connection remains open until the client disconnects, the request context is cancelled, or a write fails; terminal Session state does not emit a separate close event.
-
-Event format:
-```
-data: {"id":"sevt_001","type":"agent.message","content":[{"type":"text","text":"I'll search GitHub..."}],"processed_at":"2026-08-03T10:00:01Z"}
-: heartbeat
-data: {"id":"sevt_002","type":"session.status_idle","stop_reason":{"type":"end_turn"},"processed_at":"2026-08-03T10:00:02Z"}
-```
+Returns 202 with a Run: id, status (pending, succeeded, failed, cancelled), session_id (null until the Session exists), error_code. Idempotency-Key is required; the same key and body return the same Run. Only one Run can be pending (429 concurrency_limit). Poll GET /v1/services/{service_id}/runs/{run_id}, then read GET /v1/agents/sessions/{session_id}/items.
 
 ---
 
-## POST /v1/deployments
+## POST /v1/schedules
 
-Create a Schedule through the `/v1/deployments` compatibility resource. Each trigger creates a distinct drun_* DeploymentRun and attempts to create exactly one new sess_* Session.
+Create a cron Schedule. Idempotency-Key and non-empty input are required. schedule is {"cron": "0 9 * * 1-5", "timezone": "Asia/Shanghai"}; timezone defaults to UTC. The model credential is stored encrypted for scheduled Runs.
 
-Request:
-```
-{"name":"Daily summary","agent_id":"agent_abc123","initial_events":[{"type":"user.message","content":[{"type":"text","text":"Generate the daily summary"}]}],"schedule":{"type":"cron","expression":"0 9 * * *","timezone":"America/New_York"}}
-```
-
-Response:
-```
-{"id": "depl_abc123", "status": "active", "next_run_at": "2026-08-03T09:00:00-04:00"}
-```
-
-## POST /v1/deployments/{id}/runs - Create a manual DeploymentRun
-## GET /v1/deployments/{id}/runs - List DeploymentRuns for one Deployment
-## GET /v1/deployment_runs - List DeploymentRuns; supports trigger_type=manual|schedule and status=pending|succeeded|failed filters
-
-The public DeploymentRun object contains id, type, deployment_id, agent, trigger_context, nullable session_id, nullable error, and created_at. Its current response shape does not include a status field.
+## POST /v1/schedules/{schedule_id}/runs - Trigger a manual Run (202)
+## GET /v1/schedules/{schedule_id}/runs - List Runs; trigger_source is manual or scheduled; status can also be skipped when a firing finds a pending Run
 
 ---
 
-## GET /v1/skills - List available skills
+## POST /v1/skills - Upload one ZIP part named files (5 MiB) whose single top-level folder contains SKILL.md with name and description (a SKILL.md at the ZIP root returns 400)
+## POST /v1/mcp-connections - Register a remote HTTPS MCP server; Idempotency-Key required
+## POST /v1/secrets - Store a write-only mcp_bearer token bound to one server_url; Idempotency-Key required. Secrets are not environment variables.
 
 ---
 

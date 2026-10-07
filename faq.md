@@ -9,7 +9,7 @@ description: Frequently asked questions about SandBase Setup, Store, Models, API
 
 SandBase helps Agents connect to the real world.
 
-You can use ready-made Models and APIs, install them into AI tools with Setup, or build reusable Agents and publish or schedule them.
+You can use ready-made Models and APIs, install them into AI tools with Setup, or build reusable Agents and deploy them as Services or Schedules.
 
 ## Who is SandBase for?
 
@@ -40,17 +40,17 @@ It manages Models, APIs, and Services. Skills are used inside Build Agent, not u
 
 Build Agent is where you define and test an Agent.
 
-An Agent combines instructions, a Model, APIs, Skills, and credentials into one reusable workflow.
+An Agent combines instructions, a Model, Skills, and MCP tools into one reusable, versioned workflow.
 
 ## Is an Agent different from an API?
 
-An Agent can be used like an API after you publish it.
+An Agent can be used like an API after you deploy it as a Service.
 
-Before publishing, it is a configuration you can edit and test. After publishing, it becomes callable by your app or Setup.
+Before that, it is a configuration you can edit and test in Sessions. A Service pins one tested version, so your app or Setup can call it while you keep editing the Agent.
 
 ## What are Services?
 
-Services are tested Agents made available outside Build Agent through a stable callable surface. The compatibility API path remains `/v1/endpoints`.
+Services make a tested Agent version callable outside Build Agent through `/v1/services`. Each invocation returns a Run.
 
 Use them when your app, your users, or your AI tools need to call an Agent.
 
@@ -60,13 +60,13 @@ Schedules run an existing Agent later or repeatedly.
 
 They do not create Agents from scratch. Build and test the Agent first, then schedule it.
 
-## What are Sessions and DeploymentRuns?
+## What are Sessions and Runs?
 
-A Session is a persistent Agent interaction and its event history. A Service can create or continue a Session. Each Schedule trigger creates a distinct DeploymentRun (`drun_*`) which links to a new Session when Session creation succeeds.
+A Session is one Agent execution with its conversation, tool activity, and output. A Run (`run_*`) is one Service invocation or Schedule firing; each Run creates its own Session and reports it in `session_id`.
 
 ## How do I give an Agent access to external APIs?
 
-Add the required values under **Developer → Credentials**, then select those credentials when configuring the Agent's tools. SandBase injects selected values only at runtime, so secrets do not need to appear in prompts or source code.
+Connect the external system as an MCP server and add it to the Agent's MCP connections. If the server needs a Bearer token, store it with the [Secrets API](/api-reference/secrets/) as a write-only Secret bound to that server URL. Tokens are sent only to that server and never appear in prompts or the Agent runtime. See [Credentials for MCP tools](/agents/api-credentials).
 
 ## Where do Models live?
 

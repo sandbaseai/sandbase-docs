@@ -30,6 +30,14 @@ for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYME
 
 const deploymentAlias = readFileSync(path.join(dist, 'agents', 'deployments.html'), 'utf8')
 assert.match(deploymentAlias, /<meta name="robots" content="noindex,follow">/, 'Legacy deployment guide must be noindex')
+for (const retiredResource of ['endpoints', 'deployments', 'credentials']) {
+  const page = readFileSync(path.join(dist, 'api-reference', retiredResource, 'index.html'), 'utf8')
+  assert.match(page, /<meta name="robots" content="noindex,follow">/, `Retired ${retiredResource} notice must be noindex`)
+  assert.ok(!sitemap.includes(`/docs/api-reference/${retiredResource}/</loc>`), `Retired ${retiredResource} notice must not be in the sitemap`)
+}
+for (const archived of ['guides/site-agent-integration.html', 'use-cases', 'api-reference/embeds', 'api-reference/environments', 'api-reference/endpoints/mcp.html', 'api-reference/endpoints/acp.html', 'api-reference/deployments/create.html', 'api-reference/sessions/list-events.html']) {
+  assert.ok(!existsSync(path.join(dist, archived)), `${archived} must not be published`)
+}
 
 const storeModelsAlias = readFileSync(path.join(dist, 'store', 'models.html'), 'utf8')
 assert.match(storeModelsAlias, /<meta name="robots" content="noindex,follow">/, 'Legacy Store Models alias must be noindex')
@@ -52,7 +60,7 @@ const forbidden = [
   [/\/events\/webhooks(?:\/|\b)/i, 'Sandbox event webhook API'],
   [/\/v1\/endpoints\/[A-Za-z0-9_{}%.-]+\/mcp\b/i, 'Endpoint MCP transport'],
   [/\/v1\/endpoint_runtime_profiles\b/i, 'Endpoint runtime-profile discovery'],
-  [/\/v1\/mcp(?:\/|\b)/i, 'generic MCP transport or discovery'],
+  [/\/v1\/mcp(?!-connections)(?:\/|\b)/i, 'generic MCP transport or discovery'],
   [/\/v1\/mcp\/(?:servers|[A-Za-z0-9_{}%.-]+\/config)\b/i, 'MCP discovery or runtime config'],
   [/\/mcp\/[A-Za-z0-9_{}%.-]+\/sse\b/i, 'MCP SSE proxy'],
   [/\/v1\/skills\/[A-Za-z0-9_{}%.-]+\/mcp-publications\b/i, 'Skill MCP publication creation'],
@@ -89,7 +97,6 @@ function inspect(directory) {
       }
     }
     for (const [pattern, label] of forbidden) {
-      if (label === 'Endpoint MCP transport' && (/^(?:api-reference\/endpoints\/(?:index|mcp)|agents\/services)\.html$/.test(relative) || /(?:api-reference_endpoints_(?:index|mcp)|agents_services)\.md\./.test(relative))) continue
       if (label === 'Sandbox API') {
         // The experimental documentation routes and their dedicated lazy UI chunk are public.
         // Keep all former Sandbox API reference pages and unrelated bundles protected.

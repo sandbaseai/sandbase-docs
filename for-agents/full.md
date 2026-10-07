@@ -5,8 +5,8 @@ description: Expanded SandBase API guide for AI agents, with core workflows, req
 
 # AI API Guide
 
-::: info Session contract
-`session_id` is the persistent public identity for Agent interaction. Service invocation creates or continues a Session. Every Schedule (Deployment) trigger creates a public `drun_*` DeploymentRun and attempts to create one new Session. Internal Runtime Session IDs are not exposed.
+::: info Session and Run contract
+A Session (`ses_*`) runs one saved Agent version and is created with `POST /v1/agents/sessions`. Invoking a Service or firing a Schedule creates a Run (`run_*`) that creates its own Session, reported in `session_id`. Internal Runtime Session IDs are not exposed.
 :::
 
 > A single-page guide to the most common API workflows. For the complete machine-readable contract, use the [OpenAPI specification](https://www.sandbase.ai/docs/openapi.yaml). Plain-text version: [`llms-full.txt`](https://www.sandbase.ai/docs/llms-full.txt).
@@ -29,9 +29,10 @@ Base URL: `https://api.sandbase.ai/v1`
 |------|---------|
 | **Task** | A billable execution record for operations such as model inference. Not every API operation creates one. |
 | **Run** | A media generation request via `POST /v1/run`. May be sync or async. Poll with `GET /v1/run/{id}`. |
-| **Session** | An agent execution via `POST /v1/sessions`. A sequence of steps (tool calls, LLM reasoning). Query with `GET /v1/sessions/{id}`. |
+| **Session** | An Agent execution via `POST /v1/agents/sessions`, holding the conversation, tool activity, and output. Query with `GET /v1/agents/sessions/{session_id}`. |
+| **Service or Schedule Run** | One invocation of a Service or firing of a Schedule (`run_*`). Query with `GET /v1/services/{service_id}/runs/{run_id}` or `GET /v1/schedules/{schedule_id}/runs/{run_id}`; it links to one Session. |
 
-> **run vs session**: "Run" (`/v1/run`) is for model generation tasks. "Session" (`/v1/sessions`) is for persistent Agent interactions. Run IDs are opaque and must not be parsed. A Schedule trigger additionally creates a `drun_*` DeploymentRun.
+> **run vs session**: A model "run" (`/v1/run`) is a model generation task. A "Session" (`/v1/agents/sessions`) is an Agent execution. A Service or Schedule Run (`run_*`) is a separate resource that creates one Session. All IDs are opaque and must not be parsed.
 >
 > **task vs run**: A "run" or "session" is the request you make; a "task" is a billable execution record. Use
 > `GET /v1/tasks/{task_id}/cost` when an operation returns a task ID. Not every API operation creates a task.
@@ -318,6 +319,24 @@ curl https://api.sandbase.ai/v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost 
 <!-- PLATFORM APIs                                            -->
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 
+## Agents platform conventions
+
+- Base URL `https://api.sandbase.ai/v1`. Send `Authorization: Bearer sk-YOUR_KEY` or `X-API-Key: sk-YOUR_KEY` (same value if both). `OpenAI-Beta` is optional; if sent it must be `agents=v1`. The official OpenAI SDK (`client.beta.agents`, `client.skills`) works with `base_url="https://api.sandbase.ai/v1"`; differences are listed in [OpenAI compatibility](/agents/openai-compatibility).
+
+- Bodies are strict JSON up to 1 MiB; unknown fields return 400.
+
+- Errors: `{"error":{"type":"invalid_request_error","code":"conflict","param":null,"message":"conflicting request"}}`. Branch on `code`; see the [Error Guide](./errors#agents-platform-errors).
+
+- `row_version` is the compare-and-set token for PATCH, archive, restore, pause, timing, and rotate. On 409, read again.
+
+- Cursor lists (Agents, Sessions, items, turns, Skills): `limit` 1-100, `after`, `order`; response `{object:"list", data, has_more, first_id, last_id}`.
+
+- Offset lists (Agent versions, Services, Schedules, Runs, attachments, MCP connections, Secrets): `limit`, `offset`; response `{data, total, limit, offset}`.
+
+- IDs: Agent `agt_`, Session `ses_`, Service `svc_`, Schedule `sch_`, Run `run_`, Skill `skl_`, MCP connection `mcp_`, Secret `sec_`, attachment `fil_`. Treat them as opaque.
+
+---
+
 ## Agents
 
 ### POST /v1/agents — Create Agent
@@ -325,309 +344,161 @@ curl https://api.sandbase.ai/v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/agents \
   -H "Authorization: Bearer sk-YOUR_KEY" \
+  -H "Idempotency-Key: create-research-agent-1" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Research Assistant",
-    "model": "openai/gpt-5.6-luna",
-    "system": "You are a research assistant. Use tools to find and summarize information.",
-    "tools": [{"type": "agent_toolset_20260401"}]
+    "name": "Research assistant",
+    "model": "deepseek/deepseek-v4-flash",
+    "instructions": "Research the question and cite sources."
   }'
 ```
 
-**Response:**
-
-```json
-{
-  "id": "agent_abc123",
-  "name": "Research Assistant",
-    "model": "openai/gpt-5.6-luna",
-  "system": "You are a research assistant...",
-  "tools": [
-    { "type": "agent_toolset_20260401" }
-  ],
-  "created_at": "2026-08-02T12:00:00Z",
-  "version": 1
-}
-```
+Required: `model`. Optional: `name`, `instructions`, `description`, `runtime_profile` (`codex` default, `claude`, `mcode`), `skills` (`[{"skill_id","version"}]`), `mcp_connections` (`[{"connection_id","server_label","allowed_tools","required"}]`), `tools`, `text`, `reasoning`, `service_tier`, `metadata`, `note`. Returns `201` with `id` (`agt_`), `version`, `row_version`, `status`, and `projection_status`; start Sessions when `projection_status` is `ready`. `web_search` tools must use `mode: "disabled"`, and client-side function results (`requires_action`) are not supported.
 
 ### GET /v1/agents — List Agents
 
-```bash
-curl https://api.sandbase.ai/v1/agents \
-  -H "Authorization: Bearer sk-YOUR_KEY"
-```
+Query `status` (`active` default, `archived`, `all`) plus cursor pagination.
 
-### GET /v1/agents/{id} — Get Agent
+### GET /v1/agents/{agent_id} — Get Agent
 
-```bash
-curl https://api.sandbase.ai/v1/agents/agent_abc123 \
-  -H "Authorization: Bearer sk-YOUR_KEY"
-```
+### POST /v1/agents/{agent_id} — Update Agent (SDK style)
 
-### POST /v1/agents/{id} — Update Agent
+Partial update of `name`, `instructions`, `model`, `metadata`, `service_tier`, `tools`, `text`, `reasoning`, `runtime_profile`, `mcp_connections`, `skills`. No `row_version`; creates a new version.
 
-```bash
-curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123 \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"model": "anthropic/claude-sonnet-5"}'
-```
+### PATCH /v1/agents/{agent_id} — Update Agent (compare-and-set)
 
-### POST /v1/agents/{id}/archive — Archive Agent
+Same fields plus `description` and `note`; `row_version` is required. Explicit `null` returns 400.
 
-```bash
-curl -X POST https://api.sandbase.ai/v1/agents/agent_abc123/archive \
-  -H "Authorization: Bearer sk-YOUR_KEY"
-```
+### Versions, archive, restore, catalog
 
-### GET /v1/agents/{id}/versions — List Versions
+- `GET /v1/agents/{agent_id}/versions` and `GET /v1/agents/{agent_id}/versions/{version}` read immutable snapshots.
 
-```bash
-curl https://api.sandbase.ai/v1/agents/agent_abc123/versions \
-  -H "Authorization: Bearer sk-YOUR_KEY"
-```
+- `POST /v1/agents/{agent_id}/archive`, `POST /v1/agents/{agent_id}/unarchive` take `{"row_version"}`. `DELETE /v1/agents/{agent_id}` also archives.
 
----
+- `POST /v1/agents/{agent_id}/restore` takes `{"source_version","row_version"}`.
 
-## Services
-
-### POST /v1/endpoints/{id}/run — Invoke Service
-
-Creates or continues a Session and sends one message. Omit `session_id` to create a Session. A supplied Session must have been created by the same Service and still match its Agent-version binding.
-
-```bash
-curl -X POST https://api.sandbase.ai/v1/endpoints/ep_abc/run \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"input": "Summarize the latest news about AI agents"}'
-```
-
-**Response (`202 Accepted`):**
-
-```json
-{
-  "session_id": "sess_abc123",
-  "events": [{
-    "id": "sevt_abc123",
-    "type": "user.message",
-    "processed_at": "2026-08-03T12:00:01Z"
-  }]
-}
-```
+- `GET /v1/agents/catalog` lists public Agents; `POST /v1/agents/catalog/{agent_id}/clone` copies one into your organization (`201`, new `agt_`).
 
 ---
 
 ## Sessions
 
-### POST /v1/sessions — Create Session
+A Session runs one saved Agent version. Paths are under `/v1/agents/sessions`. The Agent version, Skill versions, and MCP connections are frozen at creation.
 
-Create a version-pinned Agent Session. SandBase resolves the Agent's runtime binding internally. Use singular `initial_events` to submit the first message with creation.
+### POST /v1/agents/sessions — Create Session
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/sessions \
+curl -X POST https://api.sandbase.ai/v1/agents/sessions \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
-  -d '{
-    "agent": "agent_abc123",
-    "title": "GitHub research",
-    "initial_events": [{
-      "type": "user.message",
-      "content": [{"type": "text", "text": "Research AI coding assistants"}]
-    }]
-  }'
+  -d '{"agent_id": "agt_..."}'
 ```
 
-**Response:**
+Required: `agent_id`. Optional: `version`, `title`, `input` (a string, or an array with exactly one user message containing one `input_text` part), `model` or `agent.model`, `metadata`, `model_provider` (`{"type":"custom","base_url":"https://...","api_key":"..."}`; omitted means your calling key). `stream: true` and inline Agents return 400. Sessions always run in SandBase's hosted cloud, so there is no environment to choose; the OpenAI SDK still requires `environment={"type": "openai_hosted"}`. Returns `201` with `status` (`idle`, `in_progress`, `failed`), `lifecycle_status` (`active`, `archived`), `failure`, `source` (`direct`, `service`, `schedule`), and `row_version`.
 
-```json
-{
-  "id": "sess_xyz789",
-  "type": "session",
-  "agent": {
-    "id": "agent_abc123",
-    "type": "agent",
-    "version": 3
-  },
-  "status": "idle",
-  "created_at": "2026-08-03T12:00:00Z"
-}
-```
+### GET /v1/agents/sessions/{session_id}/events — Stream Events (SSE)
 
-If native runtime delivery returns `502` with a top-level `session_id`, its outcome is unknown. Retrieve that Session and inspect or stream its Events before continuing. Do not blindly create another Session and resend the message.
+Live-only. Open it before sending input. `Last-Event-ID` or `after` returns 400; events are not replayed. Event `type` values start with `agent.session.`.
 
-### POST /v1/sessions/{id}/events — Send Events
-
-Send `user.message` to start or continue an idle Session, or `user.interrupt` to interrupt a running turn.
+### POST /v1/agents/sessions/{session_id}/events — Send Input
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
+curl -X POST https://api.sandbase.ai/v1/agents/sessions/ses_.../events \
   -H "Authorization: Bearer sk-YOUR_KEY" \
+  -H "Idempotency-Key: input-1" \
   -H "Content-Type: application/json" \
-  -d '{"events":[{"type":"user.message","content":[{"type":"text","text":"Focus on AI coding assistants specifically"}]}]}'
+  -d '{"events": [{"type": "agent.session.input.message", "input": "Summarize the findings."}]}'
 ```
 
-**Response:**
+Exactly one event per request: `agent.session.input.message` or `agent.session.input.cancel`. Returns `202` with no body. Extension form: `{"input": "...", "file_ids": ["fil_..."]}` (up to 10 ready attachments). `409 session_input_pending` means earlier input is still being delivered; wait and do not resend with a new key.
 
-```json
-{
-  "data": [{
-    "id": "sevt_001",
-    "type": "user.message",
-    "processed_at": "2026-08-03T12:00:01Z"
-  }]
-}
-```
+### History and other Session operations
 
-### GET /v1/sessions — List Sessions
+- `GET /v1/agents/sessions` (query `lifecycle_status`, `agent_id`), `GET /v1/agents/sessions/{session_id}`.
+
+- `GET /v1/agents/sessions/{session_id}/items`, `GET /v1/agents/sessions/{session_id}/turns`, `GET /v1/agents/sessions/{session_id}/turns/{turn_id}` read history.
+
+- `POST /v1/agents/sessions/{session_id}` replaces `metadata`; `PATCH /v1/agents/sessions/{session_id}` renames with `{"title","row_version"}`.
+
+- `POST /v1/agents/sessions/{session_id}/cancel` (requires `Idempotency-Key`) cancels the running turn.
+
+- `DELETE /v1/agents/sessions/{session_id}` archives; `POST /v1/agents/sessions/{session_id}/unarchive` restores.
+
+- `POST /v1/agents/sessions/{session_id}/files` uploads one attachment (multipart `file`, 5 MiB, `Idempotency-Key` required).
+
+- `POST /v1/agents/sessions/{session_id}/reconnect` returns `stream_url` for `GET /v1/agents/sessions/{session_id}/events/stream`, which sends `session.snapshot` and then live events.
+
+---
+
+## Services
+
+A Service pins an Agent version. Each invocation creates a Run (`run_`) that creates its own Session.
+
+### POST /v1/services — Create Service
 
 ```bash
-curl https://api.sandbase.ai/v1/sessions \
-  -H "Authorization: Bearer sk-YOUR_KEY"
+curl -X POST https://api.sandbase.ai/v1/services \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
+  -H "Idempotency-Key: weekly-brief-service" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Weekly brief", "agent_id": "agt_...", "input": "Summarize this week in AI agents."}'
 ```
 
-**Response:**
+`Idempotency-Key` is required. Omitted `agent_version` pins the current version. `schedule` and `model_provider` are rejected.
 
-```json
-{
-  "data": [
-    {
-      "id": "sess_xyz789",
-      "agent_id": "agent_abc123",
-      "status": "idle",
-      "created_at": "2026-08-03T12:00:00Z"
-    }
-  ]
-}
-```
-
-### GET /v1/sessions/{id} — Get Session
+### POST /v1/services/{service_id}/invoke — Invoke Service
 
 ```bash
-curl https://api.sandbase.ai/v1/sessions/sess_xyz789 \
-  -H "Authorization: Bearer sk-YOUR_KEY"
+curl -X POST https://api.sandbase.ai/v1/services/svc_.../invoke \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
+  -H "Idempotency-Key: weekly-brief-2026-w41" \
+  -H "Content-Type: application/json" \
+  -d '{}'
 ```
 
-### GET /v1/sessions/{id}/events — List Events
-
-```bash
-curl https://api.sandbase.ai/v1/sessions/sess_xyz789/events \
-  -H "Authorization: Bearer sk-YOUR_KEY"
-```
-
-**Response:**
-
-```json
-{
-  "data": [
-    {
-      "id": "sevt_001",
-      "type": "agent.message",
-      "content": [{"type":"text","text":"I'll search GitHub for trending repositories..."}],
-      "processed_at": "2026-08-02T12:00:05Z"
-    },
-    {
-      "id": "sevt_002",
-      "type": "agent.tool_use",
-      "content": {"name":"github.search_repositories","input":{"query":"trending today"}},
-      "processed_at": "2026-08-02T12:00:06Z"
-    }
-  ]
-}
-```
-
-### GET /v1/sessions/{id}/events/stream — Stream Events (SSE)
-
-Replays persisted events, then continues streaming newly persisted events. While idle, the server may send `: heartbeat` comment frames. The connection remains open until the client disconnects, the request context is cancelled, or a write fails; Session terminal state does not produce a separate close event.
-
-```bash
-curl -N https://api.sandbase.ai/v1/sessions/sess_xyz789/events/stream \
-  -H "Authorization: Bearer sk-YOUR_KEY"
-```
-
-**Event format:**
-
-```
-data: {"id":"sevt_001","type":"agent.message","content":[{"type":"text","text":"I'll search GitHub for trending repositories..."}],"processed_at":"2026-08-03T12:00:02Z"}
-: heartbeat
-data: {"id":"sevt_002","type":"session.status_idle","stop_reason":{"type":"end_turn"},"processed_at":"2026-08-03T12:00:03Z"}
-```
+Returns `202` with a Run: `id`, `status` (`pending`, `succeeded`, `failed`, `cancelled`), `session_id` (null until the Session exists), `error_code`, `trigger_source`. Optional body fields `input`, `model`, `model_provider` apply to this Run. Same key and body return the same Run; a different body returns 409. A second pending Run returns `429 concurrency_limit`. Poll `GET /v1/services/{service_id}/runs/{run_id}`, then read `GET /v1/agents/sessions/{session_id}/items`. Cancel with `POST /v1/services/{service_id}/runs/{run_id}/cancel`.
 
 ---
 
 ## Schedules
 
-### POST /v1/deployments — Create Schedule
-
-Create a Schedule through the compatibility `/v1/deployments` resource. Every manual or cron trigger creates a distinct `drun_*` DeploymentRun and attempts to create one new Session.
+### POST /v1/schedules — Create Schedule
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/deployments \
+curl -X POST https://api.sandbase.ai/v1/schedules \
   -H "Authorization: Bearer sk-YOUR_KEY" \
+  -H "Idempotency-Key: daily-digest-schedule" \
   -H "Content-Type: application/json" \
-  -d '{
-    "name": "Daily team summary",
-    "agent_id": "agent_abc123",
-    "initial_events": [{
-      "type": "user.message",
-      "content": [{"type":"text","text":"Generate daily summary of team activity"}]
-    }],
-    "schedule": {
-      "type": "cron",
-      "expression": "0 9 * * *",
-      "timezone": "America/New_York"
-    }
-  }'
+  -d '{"name": "Daily digest", "agent_id": "agt_...", "input": "Summarize yesterday in AI agents.", "schedule": {"cron": "0 9 * * 1-5", "timezone": "Asia/Shanghai"}}'
 ```
 
-**Response:**
+`Idempotency-Key` and non-empty `input` are required. `cron` has five fields; `timezone` is IANA and defaults to `UTC`. The model credential (`model_provider` or your calling key) is stored encrypted for scheduled Runs.
 
-```json
-{
-  "id": "depl_abc123",
-  "agent_id": "agent_abc123",
-  "schedule": {"type":"cron","expression":"0 9 * * *","timezone":"America/New_York"},
-  "status": "active",
-  "next_run_at": "2026-08-03T09:00:00-04:00"
-}
-```
+### POST /v1/schedules/{schedule_id}/runs — Trigger a Run
 
-### GET /v1/deployments/{id}/runs — List DeploymentRuns
-
-```bash
-curl https://api.sandbase.ai/v1/deployments/depl_abc123/runs \
-  -H "Authorization: Bearer sk-YOUR_KEY"
-```
-
-Each returned object has `id` (`drun_*`), `type`, `deployment_id`, `agent`, `trigger_context`, nullable `session_id`, nullable `error`, and `created_at`. Use the linked Session for subsequent Agent events. A pending nested record returns `409 deployment_trigger_in_progress` from the get endpoint.
+Returns `202` with a manual Run. Scheduled firings create Runs with `trigger_source: "scheduled"`; a firing that finds a pending Run records `status: "skipped"` with `error_code: "concurrency_limit"`. List with `GET /v1/schedules/{schedule_id}/runs`. Change timing with `PUT /v1/schedules/{schedule_id}/timing`.
 
 ---
 
-## Skills
+## Skills, MCP Connections, and Secrets
 
-### GET /v1/skills — List Skills
+### POST /v1/skills — Create Skill
 
 ```bash
-curl https://api.sandbase.ai/v1/skills \
-  -H "Authorization: Bearer sk-YOUR_KEY"
+curl -X POST https://api.sandbase.ai/v1/skills \
+  -H "Authorization: Bearer sk-YOUR_KEY" \
+  -F "files=@release-notes.zip;type=application/zip"
 ```
 
-**Response:**
+One ZIP part `files` (5 MiB). The ZIP must contain one top-level folder with `SKILL.md` (`name` and `description` frontmatter) inside it, for example `zip -r release-notes.zip release-notes/`; a `SKILL.md` at the ZIP root returns `400 invalid_request`. A Skill referenced by any Agent version (including archived Agents) cannot be deleted (`409`); disable it with `POST /v1/skills/{skill_id}` and `{"status": "disabled"}` instead. Returns `201` with `id` (`skl_`) and `default_version`. Add versions with `POST /v1/skills/{skill_id}/versions`; list with `GET /v1/skills`. Reference from an Agent as `{"skill_id": "skl_...", "version": null}`.
 
-```json
-{
-  "data": [
-    {
-      "id": "skill_web_scrape",
-      "name": "Web Scraper",
-      "description": "Extract content from URLs",
-      "input_schema": {
-        "type": "object",
-        "properties": { "url": { "type": "string" } }
-      }
-    }
-  ]
-}
-```
+### POST /v1/mcp-connections — Register an MCP server
+
+Body `{"name", "server_url" (HTTPS), "secret_id"?}`; `Idempotency-Key` required. Reference from an Agent's `mcp_connections`. Disabling it blocks new Sessions and further input.
+
+### POST /v1/secrets — Store an MCP Bearer token
+
+Body `{"name", "kind": "mcp_bearer", "server_url", "token"}`; `Idempotency-Key` required. The token is write-only and bound to that exact URL. Secrets are not environment variables. Rotate with `POST /v1/secrets/{secret_id}/rotate`; revoke with `DELETE /v1/secrets/{secret_id}` (204).
 
 ---
 

@@ -1,103 +1,130 @@
 ---
 title: List Agents
-description: List agents for your organization with cursor pagination.
+description: List Agents with cursor pagination.
 aside: false
 outline: false
 apiReference:
   title: List Agents
   operation: Agents
-  signature: AgentListPage agents().list(params = AgentListParams.none())
   method: GET
   path: /v1/agents
-  description: List agents owned by your organization, ordered from most recently created. The response includes an opaque cursor when another page is available.
+  description: "List Agents owned by your organization. Results use cursor pagination: pass last_id as after while has_more is true."
   groups:
     - title: Query parameters
-      description: All parameters are optional.
-      schema: AgentListParams params
       fields:
+        - name: status
+          type: string
+          required: false
+          description: active, archived, or all. Other values return 400.
+          default: active
         - name: limit
           type: integer
-          description: Number of agents to return. Accepts values from 1 to 100.
+          required: false
+          description: Page size from 1 to 100. Values outside the range return 400.
           default: "20"
-        - name: page
+        - name: after
           type: string
-          description: Opaque cursor returned in a previous response's next_page field.
-        - name: include_archived
-          type: boolean
-          description: Include agents that have been archived.
-          default: "false"
-        - name: created_at[gte]
-          type: string · RFC 3339
-          description: Return agents created at or after this timestamp.
-        - name: created_at[lte]
-          type: string · RFC 3339
-          description: Return agents created at or before this timestamp.
+          required: false
+          description: Cursor. Pass last_id from the previous page.
+        - name: order
+          type: string
+          required: false
+          description: asc or desc by creation time.
+          default: desc
   examples:
     - label: cURL
       language: bash
-      code: |
-        curl "https://api.sandbase.ai/v1/agents?limit=20" \
+      code: |-
+        curl -X GET "https://api.sandbase.ai/v1/agents?status=active&limit=20" \
           -H "Authorization: Bearer $SANDBASE_API_KEY"
+    - label: Python (OpenAI SDK)
+      language: python
+      code: |-
+        # Verified with openai-python 3.13.0 and 3.24.0. See /agents/openai-compatibility.
+        import os
+        from openai import OpenAI
+
+        client = OpenAI(api_key=os.environ["SANDBASE_API_KEY"], base_url="https://api.sandbase.ai/v1")
+        for agent in client.beta.agents.list(limit=20):
+            print(agent.id, agent.name)
     - label: Python
       language: python
-      code: |
-        from anthropic import Anthropic
+      code: |-
+        import os
+        import requests
 
-        client = Anthropic(
-            api_key="sk-YOUR_KEY",
-            base_url="https://api.sandbase.ai",
+        headers = {
+            "Authorization": f"Bearer {os.environ['SANDBASE_API_KEY']}",
+        }
+
+        response = requests.request(
+            "GET",
+            "https://api.sandbase.ai/v1/agents?status=active&limit=20",
+            headers=headers,
         )
-
-        page = client.beta.agents.list(limit=20)
-        for agent in page.data:
-            print(agent.id, agent.name)
+        response.raise_for_status()
+        print(response.json())
     - label: TypeScript
       language: typescript
-      code: |
-        import Anthropic from '@anthropic-ai/sdk';
-
-        const client = new Anthropic({
-          apiKey: process.env.SANDBASE_API_KEY,
-          baseURL: 'https://api.sandbase.ai',
+      code: |-
+        const response = await fetch('https://api.sandbase.ai/v1/agents?status=active&limit=20', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${process.env.SANDBASE_API_KEY}`,
+          },
         });
 
-        const page = await client.beta.agents.list({ limit: 20 });
-        page.data.forEach((agent) => console.log(agent.id, agent.name));
+        if (!response.ok) throw new Error(await response.text());
+        console.log(await response.json());
   response:
     status: 200 OK
-    code: |
+    code: |-
       {
+        "object": "list",
         "data": [
           {
-            "id": "agent_01HqR2k7...",
-            "type": "agent",
-            "version": 1,
-            "name": "Research Assistant",
-            "description": "A general-purpose research Agent.",
-            "model": {"id": "anthropic/claude-sonnet-5", "effort": {"type": "high"}, "speed": "standard"},
-            "system": "You are a research assistant...",
+            "id": "agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60",
+            "object": "agent",
+            "name": "Research assistant",
+            "model": "deepseek/deepseek-v4-flash",
+            "instructions": "Answer with cited sources.",
             "tools": [],
-            "mcp_servers": [],
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "reasoning": {
+              "effort": null,
+              "summary": null
+            },
+            "service_tier": "auto",
+            "multi_agent": {
+              "enabled": false,
+              "max_concurrent_subagents": null
+            },
+            "visibility": "private",
+            "status": "active",
+            "version": 1,
+            "row_version": 1,
+            "projection_status": "ready",
+            "runtime_profile": "codex",
+            "description": "",
+            "metadata": {
+              "team": "research"
+            },
+            "mcp_connections": [],
             "skills": [],
-            "handoffs": [],
-            "metadata": {},
-            "archived_at": null,
-            "created_at": "2026-05-29T10:00:00Z",
-            "updated_at": "2026-05-29T10:00:00Z"
+            "created_at": 1791273600,
+            "updated_at": 1791273600,
+            "archived_at": null
           }
         ],
-        "next_page": "page_eyJjIjoi..."
+        "has_more": false,
+        "first_id": "agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60",
+        "last_id": "agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60"
       }
-  notes:
-    - title: Pagination
-      description: Results are ordered by created_at descending. Pass next_page back as page; when next_page is absent, you have reached the final page.
-  errors:
-    - status: 400
-      type: invalid_request
-      description: The page cursor is malformed.
-    - status: 401
-      type: authentication_error
-      description: The API key is missing or invalid.
 ---
 
 <ApiReferencePage />

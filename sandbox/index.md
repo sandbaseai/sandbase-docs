@@ -43,3 +43,7 @@ An empty list does not prove zero usage, and missing events do not prove an oper
 ## Template visibility
 
 Templates can be public or private to your organization. Counts are not fixed. Entries without names remain visible, with aliases or IDs used as fallback labels. Your organization’s access and template availability determine which templates you can see and use.
+
+## Sandboxes and Agent Sessions
+
+Agents Sessions run in SandBase's hosted cloud. They are separate from the Sandbox instances you create with the E2B SDK, and the Agents API does not expose Sandbox instances. See [Sessions](/agents/sessions).

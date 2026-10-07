@@ -113,9 +113,9 @@ curl https://api.sandbase.ai/v1/chat/completions \
 1. 打开 [Build Agent](https://www.sandbase.ai/console/agents){target="_blank"}。
 2. 编写 Agent 指令。
 3. 选择 Model。
-4. 添加 APIs 和 Skills。
-5. 测试一次运行。
-6. 把选定版本发布为 Service，或创建 Schedule。
+4. 添加 Skills 和 MCP 工具。
+5. 在 Session 中测试。
+6. 把测试通过的版本部署为 Service 或 Schedule。
 
 了解更多：[Build Agent](/agents/)。
 

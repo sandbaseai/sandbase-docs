@@ -23,6 +23,16 @@ const forbidden = [
   ['anthropic/claude-sonnet-4-20250514', 'stale example model'],
   ['bfl/flux-1/schnell', 'stale example model'],
   ['GET /v1/models/{name}', 'incorrect model detail path parameter'],
+  ['/v1/sessions', 'retired Session path; use /v1/agents/sessions'],
+  ['/v1/deployments', 'retired Deployment API; use /v1/schedules'],
+  ['/v1/deployment_runs', 'retired DeploymentRun API'],
+  ['/v1/endpoints', 'retired Endpoint API; use /v1/services'],
+  ['/v1/credentials', 'retired Credentials API; use /v1/secrets'],
+  ['/v1/skills/files', 'retired Skill file upload'],
+  ['drun_', 'retired DeploymentRun ID prefix'],
+  ['depl_', 'retired Deployment ID prefix'],
+  ['initial_events', 'retired Deployment field'],
+  ['user.message', 'retired Session event type'],
 ]
 
 for (const [needle, label] of forbidden) {
@@ -42,6 +52,9 @@ for (const required of [
   'GET /v1/models/{id_or_name}',
   'GET /v1/run/{id}',
   'GET /v1/tasks/{id}/cost',
+  'POST /v1/agents/sessions',
+  'POST /v1/services/{service_id}/invoke',
+  'POST /v1/schedules',
 ]) {
   assert.ok(combined.includes(required), `AI-readable documentation must include ${required}`)
 }
