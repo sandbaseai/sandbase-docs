@@ -1,6 +1,6 @@
 ---
 title: Create Agent
-description: Create a reusable, versioned agent configuration.
+description: Create a saved, versioned Agent with POST /v1/agents.
 aside: false
 outline: false
 apiReference:
@@ -8,127 +8,229 @@ apiReference:
   operation: Agents
   method: POST
   path: /v1/agents
-  description: Create a reusable Agent configuration that bundles a catalog model, instructions, capabilities, and metadata. Model IDs use vendor/model form. Unknown request fields are accepted and ignored.
+  description: "Create a saved Agent at version 1. The body is strict JSON: unknown fields return 400. multi_agent must be omitted or null."
   groups:
+    - title: Headers
+      fields:
+        - name: Idempotency-Key
+          type: string
+          required: false
+          description: Optional. When omitted the service generates one, so a retried request can create a duplicate. Send your own stable key for retries.
     - title: Request body
-      description: Send a JSON object with the agent configuration.
+      description: JSON object.
       fields:
         - name: model
-          type: string | object
+          type: string
           required: true
-          description: Available vendor/model identifier or {id, effort?, speed?}. Responses always use the structured object.
+          description: Model ID from the Models API, up to 200 characters.
+          default: deepseek/deepseek-v4-flash
         - name: name
           type: string
-          required: true
-          description: Human-readable Agent name.
-        - name: description
+          required: false
+          description: Display name, up to 128 characters.
+        - name: instructions
           type: string
-          description: Short explanation of the Agent's purpose. Null is accepted as an empty string on creation.
-        - name: system
+          required: false
+          description: System instructions, up to 256 KiB.
+        - name: runtime_profile
           type: string
-          description: System instructions that define the Agent's behavior. Null is accepted as an empty string on creation.
-        - name: tools
-          type: array
-          description: Built-in toolset and custom tool configurations. Omission installs the default Agent toolset; explicit null does not.
-        - name: mcp_servers
-          type: array
-          description: MCP server configurations available to the Agent runtime.
+          required: false
+          description: "Execution runtime: codex (default), claude, or mcode."
         - name: skills
           type: array
-          description: Skills available to the Agent runtime.
-        - name: handoffs
+          required: false
+          description: 'Skill references: {"skill_id": "skl_…", "version": null | "<version>"}. null uses the Skill default version, resolved when a Session starts.'
+        - name: mcp_connections
           type: array
-          description: Agent handoff configurations.
+          required: false
+          description: "MCP references: {connection_id, server_label, allowed_tools, required}. Up to 32; server_label must be unique in the Agent."
+        - name: tools
+          type: array
+          required: false
+          description: Up to 64 function tools plus at most one web_search tool. Sessions currently require web_search mode disabled, and client-side function results are not supported yet.
+        - name: text
+          type: object
+          required: false
+          description: format.type text or json_schema (with an object schema); verbosity low, medium, or high.
+        - name: reasoning
+          type: object
+          required: false
+          description: effort none, minimal, low, medium, high, xhigh, or max; summary concise, detailed, or auto.
+        - name: service_tier
+          type: string
+          required: false
+          description: auto (default), default, flex, priority, or fast.
         - name: metadata
           type: object
-          description: Application-defined JSON metadata. The platform-owned _sandbase namespace is stripped from public requests.
+          required: false
+          description: Up to 16 string pairs; keys up to 64 and values up to 512 characters.
+        - name: description
+          type: string
+          required: false
+          description: Longer description, up to 4096 characters.
+        - name: note
+          type: string
+          required: false
+          description: Change note recorded on version 1.
     - title: Agent object
-      description: Fields returned for an agent resource.
+      description: Returned by create, get, update, archive, unarchive, restore, and clone.
       fields:
         - name: id
           type: string
           required: true
-          description: Stable identifier beginning with agent_.
+          description: Agent ID with the agt_ prefix.
+        - name: object
+          type: string
+          required: true
+          description: Always agent.
         - name: version
           type: integer
           required: true
-          description: Configuration version, beginning at 1 and incrementing after a successful change.
-        - name: archived_at
-          type: string · null
-          description: RFC 3339 timestamp set after the agent is archived.
-        - name: created_at
-          type: string · RFC 3339
+          description: Current version. Every effective write creates a new version.
+        - name: row_version
+          type: integer
           required: true
-          description: Time the agent was created.
-        - name: updated_at
-          type: string · RFC 3339
+          description: Compare-and-set token for PATCH, archive, unarchive, and restore.
+        - name: status
+          type: string
           required: true
-          description: Time the current version was last updated.
+          description: active or archived.
+        - name: projection_status
+          type: string
+          required: true
+          description: Execution readiness of the current version. Sessions, Services, and Schedules need ready; a new Agent can briefly report pending.
+        - name: runtime_profile
+          type: string
+          required: true
+          description: codex, claude, or mcode.
+        - name: visibility
+          type: string
+          required: true
+          description: private for your Agents; public for catalog entries.
+        - name: created_at · updated_at · archived_at
+          type: integer · null
+          required: true
+          description: Unix seconds. archived_at is null while active.
   examples:
     - label: cURL
       language: bash
-      code: |
+      code: |-
         curl -X POST https://api.sandbase.ai/v1/agents \
           -H "Authorization: Bearer $SANDBASE_API_KEY" \
+          -H "Idempotency-Key: create-research-agent-1" \
           -H "Content-Type: application/json" \
           -d '{
-            "model": "anthropic/claude-sonnet-5",
-            "name": "Research Assistant",
-            "system": "Research carefully and cite sources.",
-            "tools": [{"type": "agent_toolset_20260401"}]
+            "name": "Research assistant",
+            "model": "deepseek/deepseek-v4-flash",
+            "instructions": "Answer with cited sources.",
+            "metadata": {
+              "team": "research"
+            }
           }'
+    - label: Python (OpenAI SDK)
+      language: python
+      code: |-
+        # Verified with openai-python 3.13.0 and 3.24.0. See /agents/openai-compatibility.
+        import os
+        from openai import OpenAI
+
+        client = OpenAI(api_key=os.environ["SANDBASE_API_KEY"], base_url="https://api.sandbase.ai/v1")
+        agent = client.beta.agents.create(
+            model="deepseek/deepseek-v4-flash",
+            name="Research assistant",
+            instructions="Answer with cited sources.",
+            metadata={"team": "research"},
+        )
+        print(agent.id, agent.version)
     - label: Python
       language: python
-      code: |
-        agent = client.beta.agents.create(
-            model="anthropic/claude-sonnet-5",
-            name="Research Assistant",
-            system="Research carefully and cite sources.",
-            tools=[{"type": "agent_toolset_20260401"}],
+      code: |-
+        import os
+        import requests
+
+        headers = {
+            "Authorization": f"Bearer {os.environ['SANDBASE_API_KEY']}",
+            "Idempotency-Key": "create-research-agent-1",
+        }
+
+        response = requests.request(
+            "POST",
+            "https://api.sandbase.ai/v1/agents",
+            headers=headers,
+            json={
+                "name": "Research assistant",
+                "model": "deepseek/deepseek-v4-flash",
+                "instructions": "Answer with cited sources.",
+                "metadata": {
+                    "team": "research"
+                }
+            },
         )
-        print(agent.id)
+        response.raise_for_status()
+        print(response.json())
     - label: TypeScript
       language: typescript
-      code: |
-        const agent = await client.beta.agents.create({
-          model: 'anthropic/claude-sonnet-5',
-          name: 'Research Assistant',
-          system: 'Research carefully and cite sources.',
-          tools: [{ type: 'agent_toolset_20260401' }],
+      code: |-
+        const response = await fetch('https://api.sandbase.ai/v1/agents', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${process.env.SANDBASE_API_KEY}`,
+            'Idempotency-Key': 'create-research-agent-1',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            "name": "Research assistant",
+            "model": "deepseek/deepseek-v4-flash",
+            "instructions": "Answer with cited sources.",
+            "metadata": {
+              "team": "research"
+            }
+          }),
         });
-        console.log(agent.id);
+
+        if (!response.ok) throw new Error(await response.text());
+        console.log(await response.json());
   response:
-    status: 200 OK
-    code: |
+    status: 201 Created
+    code: |-
       {
-        "id": "agent_01HqR2k7...",
-        "type": "agent",
+        "id": "agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60",
+        "object": "agent",
+        "name": "Research assistant",
+        "model": "deepseek/deepseek-v4-flash",
+        "instructions": "Answer with cited sources.",
+        "tools": [],
+        "text": {
+          "format": {
+            "type": "text"
+          },
+          "verbosity": "medium"
+        },
+        "reasoning": {
+          "effort": null,
+          "summary": null
+        },
+        "service_tier": "auto",
+        "multi_agent": {
+          "enabled": false,
+          "max_concurrent_subagents": null
+        },
+        "visibility": "private",
+        "status": "active",
         "version": 1,
-        "name": "Research Assistant",
+        "row_version": 1,
+        "projection_status": "ready",
+        "runtime_profile": "codex",
         "description": "",
-        "model": {"id": "anthropic/claude-sonnet-5"},
-        "system": "Research carefully and cite sources.",
-        "tools": [{ "type": "agent_toolset_20260401" }],
-        "mcp_servers": null,
-        "skills": null,
-        "handoffs": null,
-        "metadata": null,
-        "archived_at": null,
-        "created_at": "2026-05-29T10:00:00Z",
-        "updated_at": "2026-05-29T10:00:00Z"
+        "metadata": {
+          "team": "research"
+        },
+        "mcp_connections": [],
+        "skills": [],
+        "created_at": 1791273600,
+        "updated_at": 1791273600,
+        "archived_at": null
       }
-  notes:
-    - title: Model choice
-      description: SandBase is multi-model. The model field accepts any available model identifier from the SandBase catalog.
-    - title: Tool execution
-      description: Built-in tools run inside the managed agent runtime. Custom tools are executed by your client after an agent.custom_tool_use event.
-  errors:
-    - status: 400
-      type: invalid_request
-      description: A required field is missing or a field has an invalid value.
-    - status: 401
-      type: authentication_error
-      description: The API key is missing or invalid.
 ---
 
 <ApiReferencePage />

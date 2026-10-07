@@ -111,11 +111,11 @@ Choose this if the work has multiple steps or should be reused.
 1. Open [Build Agent](https://www.sandbase.ai/console/agents){target="_blank"}.
 2. Define the Agent instructions.
 3. Pick a Model.
-4. Add APIs and Skills.
-5. Test a run.
-6. Publish a selected version as a Service, or create a Schedule.
+4. Add Skills and MCP tools.
+5. Test it in a Session.
+6. Deploy the tested version as a Service or Schedule.
 
-Learn more: [Build Agent](/agents/).
+Learn more: [Build Agent](/agents/). To do the same from code with the official OpenAI SDK, see [OpenAI compatibility](/agents/openai-compatibility).
 
 ## 4. Confirm it works {#confirm-it-works}
 

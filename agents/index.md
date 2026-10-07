@@ -1,84 +1,76 @@
 ---
 title: Build Agent
-description: Define, test, publish, and schedule reusable Agents in SandBase.
+description: Define, test, and deploy reusable, versioned Agents in SandBase as Sessions, Services, and Schedules.
 ---
 
 # Build Agent
 
-Build Agent is where you define and test an Agent.
+Build Agent is where you define and test an Agent, then decide how it runs.
 
-An Agent is a reusable workflow. It can use a Model, instructions, APIs, Skills, and credentials to do real work.
+An Agent is a saved, versioned configuration: a Model, instructions, a runtime profile, Skills, and MCP connections to external tools. Saving an Agent does not run it.
 
 ## What an Agent is
 
-An Agent is not just a prompt.
-
-It is a saved configuration that answers four questions:
-
-| Question | Example |
+| Question | Where it lives |
 |---|---|
-| What should it do? | Research a company and return a sourced report |
-| How should it think? | Use a reasoning Model with clear instructions |
-| What can it use? | Search API, scrape API, internal Skills |
-| How does it run? | Manual test, Service, or Schedule |
+| What should it do? | `instructions` |
+| Which model does the work? | `model`, a model ID from the [Models API](/api-reference/models/) |
+| What does it know how to do? | [Skills](/agents/mcp-tools#skills), versioned instruction bundles |
+| Which external tools can it call? | [MCP connections](/agents/mcp-tools#mcp-connections), with [credentials](/agents/api-credentials) when the server needs a token |
+| How does it run? | A Session, a Service, or a Schedule |
 
-## Build first, connect later
+Every effective change creates a new immutable version. You can list versions and restore an earlier one at any time.
 
-SandBase separates building from delivery:
+## Three ways to run an Agent
 
-1. **Build Agent** — define and test the Agent.
-2. **Services** — expose a tested Agent to an application or another supported client.
-3. **Schedules** — run a tested Agent on a timer.
-4. **Sessions** — inspect persistent Agent interaction and event history.
+| Mode | Use it when | What you get |
+|---|---|---|
+| [Session](/agents/sessions) | You want an interactive conversation or a test run | A `ses_` Session you send input to and stream events from |
+| [Service](/agents/services) | An app or another tool should invoke the Agent on demand | A `run_` Run per invocation, each with its own Session |
+| [Schedule](/agents/schedules) | The Agent should run on a cron schedule | A `run_` Run per firing or manual trigger, each with its own Session |
 
-This keeps the workflow easy to understand: build the Agent once, then decide how it should be used.
+Services and Schedules are pinned to an Agent version when you create them (the current version if you do not choose one). They stay pinned to that version until you update their `agent_version`, so you can keep editing the Agent without changing what is deployed.
 
-## Agent lifecycle: Draft → Test → Service or Schedule → Session
+## Agent lifecycle: Draft → Test in a Session → Deploy → Inspect Runs
 
 ### 1. Draft
 
-Create an Agent with a clear name, outcome, Model, instructions, and expected output. Add APIs when it needs data or actions, Skills when it needs reusable know-how, and credentials when an API requires authentication.
+Create an Agent in the Console under **Build → Agents**, or with [`POST /v1/agents`](/agents/agent-api). Start with the smallest useful workflow and add Skills and MCP connections only when the instructions need them.
 
-Start with the smallest useful workflow. A focused Agent is easier to test, observe, and reuse than one broad prompt that tries to do everything.
+### 2. Test in a Session
 
-### 2. Test
+Create a Session for the Agent, send representative input, and read the output, tool activity, and errors. Test missing input, unavailable tools, empty results, and output-format requirements, not only the happy path.
 
-Run the draft in the Console with representative input. Inspect the final output, tool calls, timing, errors, and cost. Refine instructions and tools until both successful and failure cases behave predictably.
+### 3. Deploy as a Service or Schedule
 
-Do not publish a draft just because one happy-path test succeeded. Test missing input, unavailable tools, empty results, and output-format requirements.
+Create a Service when an application or MCP client should call the tested version. Create a Schedule when it should run repeatedly. Both are pinned to the version you tested.
 
-### 3. Publish
+### 4. Inspect Runs and Sessions
 
-Publish a tested Agent version as a Service when an application or another supported client needs a stable callable interface. The Service stays pinned to that version until you deliberately upgrade it, while the Agent can continue to evolve separately.
-
-### 4. Schedule
-
-Create a Schedule when the Agent should run later or repeatedly. Choose the Agent/version, cadence, input, and delivery behavior. A Schedule does not require a Service. Use Schedules for recurring reports, monitoring, synchronization, and routine operations.
-
-### 5. Inspect Sessions
-
-A direct or Service interaction is represented by a Session. Every Schedule trigger creates a separate DeploymentRun record and, on success, a new Session. Inspect Session events for Agent input, output, tool activity, and errors.
+Every Service invocation and every Schedule firing creates a Run. A Run has a `status` (`pending`, `succeeded`, `failed`, `cancelled`, or `skipped` for Schedules) and a `session_id` that you can open with the Sessions API to read the full conversation.
 
 ## Production checklist
 
-- instructions define the expected result and failure behavior
-- only necessary APIs and Skills are enabled
-- required credentials are configured in **Developer → Credentials**, rather than copied into prompts or Agent instructions
-- representative inputs and failure cases have been tested
-- a stable version is published before external use
-- scheduled work has an owner and a clear destination
-- Sessions and Schedule trigger records are reviewed after launch
+- `model` uses a current model ID from the Models API.
+- Skills are pinned to a version when behavior must not change silently.
+- MCP connections expose only the tools the Agent needs, using `allowed_tools`.
+- Tokens are stored as [Secrets](/agents/api-credentials), never written into instructions, input, or metadata.
+- Service and Schedule writes send an `Idempotency-Key`, and retries reuse it.
+- Run `status` and `error_code` are checked after launch, and scheduled work has an owner.
 
-## Store Agents
+## Catalog Agents
 
-Store Agents are examples and best practices.
+The public [Agent catalog](/api-reference/agents/catalog) lists Agents published by SandBase. You can read a catalog Agent, but to change it, clone it into your organization first with `POST /v1/agents/catalog/{agent_id}/clone`. The clone is a new private Agent that you own and can deploy.
 
-You can test a public Agent, but if you need to change it, clone it into your workspace first. The cloned version becomes your Agent.
+::: tip Using the OpenAI SDK
+Agents, Sessions, and Skills follow the OpenAI Agents API, so the official OpenAI SDK works with `base_url="https://api.sandbase.ai/v1"`. See [OpenAI compatibility](/agents/openai-compatibility) for verified examples and differences.
+:::
 
 ## Next steps
 
 - [Define an Agent](/agents/agent-api)
-- [Tools and credentials](/agents/mcp-tools)
+- [OpenAI compatibility](/agents/openai-compatibility)
+- [Skills and MCP tools](/agents/mcp-tools)
 - [Sessions](/agents/sessions)
 - [Services](/agents/services)
 - [Schedules](/agents/schedules)

@@ -69,11 +69,7 @@ function operationParameters(pathItem, operation, document) {
 
 const apiReferenceKeys = []
 const inlineApiReferences = []
-for (const file of walk('api-reference').filter((entry) =>
-  entry.endsWith('.md')
-  && !entry.startsWith('api-reference/embeds/')
-  && !entry.startsWith('api-reference/environments/')
-)) {
+for (const file of walk('api-reference').filter((entry) => entry.endsWith('.md'))) {
   const source = readFileSync(file, 'utf8')
   const match = source.match(/^apiReferenceKey:\s*["']([^"']+)["']\s*$/m)
   if (match) apiReferenceKeys.push([file, match[1]])

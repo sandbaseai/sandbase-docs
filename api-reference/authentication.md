@@ -44,7 +44,24 @@ Gemini GenerateContent and Interactions operations accept `x-goog-api-key`, `Aut
 ### Extraction Logic
 
 Standard endpoints read `Authorization: Bearer <key>` only. The Anthropic Messages middleware reads `x-api-key`
-first and then falls back to the Bearer header. A missing supported credential returns `401 Unauthorized`.
+first and then falls back to the Bearer header. Agents platform resources are the other exception: they accept
+`Authorization: Bearer` or `X-API-Key` (see below). A missing supported credential returns `401 Unauthorized`.
+
+### Agents platform resources
+
+`/v1/agents*` (including `/v1/agents/sessions*`), `/v1/services*`, `/v1/schedules*`, `/v1/mcp-connections*`,
+`/v1/secrets*`, and `/v1/skills*` accept the key in either header:
+
+```bash
+curl https://api.sandbase.ai/v1/agents \
+  -H "X-API-Key: $SANDBASE_API_KEY"
+```
+
+- If both `Authorization: Bearer` and `X-API-Key` are sent, they must carry the same key; different values return `401 unauthorized`. Repeating either header also returns 401.
+- `OpenAI-Beta` is optional. If present, it must be `agents=v1`.
+- Read requests need the `agents.read` permission and writes need `agents.write`. Standard Console-created keys have both. Scoped SandBase-issued keys, such as CLI Login keys, return `403 insufficient_scope`.
+- `402 spending_limit_exceeded` means the key's spending limit or the organization balance is exhausted.
+- Failures use the [Agents error envelope](/api-reference/errors#agents-platform-errors), not the flat `{"error": "…"}` form shown below.
 
 ## API key format
 
@@ -129,6 +146,7 @@ Keys can optionally have an expiration date. Expired keys return `401 Unauthoriz
 | `POST /v1/messages` | API Key (Bearer or x-api-key) | Anthropic Messages |
 | `/v1beta/models/*` | API Key (x-goog-api-key, Bearer, or query key) | Gemini GenerateContent |
 | `/v1beta/interactions*` | API Key (x-goog-api-key, Bearer, or query key) | Gemini Interactions |
+| `/v1/agents*`, `/v1/services*`, `/v1/schedules*`, `/v1/mcp-connections*`, `/v1/secrets*`, `/v1/skills*` | API Key (Bearer or X-API-Key) | Agents platform resources |
 
 The SandBase Console uses a separate browser authentication flow. Its internal requests are not supported public
 endpoints and must not be used by integrations.

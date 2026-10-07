@@ -35,26 +35,26 @@ Use Models for language, image, video, and audio workloads. Use APIs when the ap
 
 ### Agents
 
-An Agent is a reusable, versioned configuration containing a Model, instructions, APIs, Skills, and credentials. Define it once, test it, and then choose how it should run.
+An Agent is a reusable, versioned configuration containing a Model, instructions, Skills, and MCP connections. Define it once, test it in a Session, and then choose how it should run.
 
 - [Understand Agents](/agents/)
 - [Define an Agent](/agents/agent-api)
-- [Add APIs, Skills, and credentials](/agents/mcp-tools)
+- [Add Skills and MCP tools](/agents/mcp-tools)
 
 ### Services and Sessions
 
-A Service exposes a tested Agent to applications. Its compatibility API path is `/v1/endpoints`; invoking it creates or continues a Session whose `session_id` identifies the durable interaction.
+A Service makes a pinned, tested Agent version callable by applications and AI tools. Each invocation through `/v1/services` creates a Run, and each Run creates its own Session with the full conversation.
 
 - [Services guide](/agents/services)
-- [Services API](/api-reference/endpoints/)
+- [Services API](/api-reference/services/)
 - [Sessions API](/api-reference/sessions/)
 
 ### Schedules and run history
 
-Schedules execute an Agent later or repeatedly. Their API resource is a Deployment. Every trigger creates a distinct `drun_*` DeploymentRun and, on successful Session creation, links it to a new `sess_*` Session.
+Schedules run a pinned Agent version on a cron expression or on demand through `/v1/schedules`. Every firing or manual trigger creates a Run with its own `ses_*` Session, so you can review each result.
 
 - [Schedules guide](/agents/schedules)
-- [Schedules API](/api-reference/deployments/)
+- [Schedules API](/api-reference/schedules/)
 - [Sessions guide](/agents/sessions)
 
 ## First steps
@@ -62,7 +62,7 @@ Schedules execute an Agent later or repeatedly. Their API resource is a Deployme
 1. Create an organization and [API key](/getting-started/api-keys).
 2. Choose a Model, API, or Agent from the [Store](/store/).
 3. Make a direct request or define and test an Agent.
-4. Publish the Agent as a Service when an application needs to invoke it.
+4. Deploy the tested Agent version as a Service when an application needs to invoke it.
 5. Add a Schedule when the work should run automatically.
 6. Review Sessions, errors, latency, and cost in the Console.
 

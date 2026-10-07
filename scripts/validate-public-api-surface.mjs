@@ -1,6 +1,6 @@
 import { maskApprovedSandboxPageHrefs, sandboxAPIPath } from './public-sandbox-page-links.mjs'
 import assert from 'node:assert/strict'
-import { readdirSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parse } from 'yaml'
@@ -130,16 +130,22 @@ const requiredPublicPaths = [
   '/v1/images/edits:',
   '/v1/assets:',
   '/v1/assets/{id}:',
-  '/v1/skills/files:',
+  '/v1/agents:',
+  '/v1/agents/{agent_id}:',
+  '/v1/agents/catalog:',
+  '/v1/agents/sessions:',
+  '/v1/agents/sessions/{session_id}/events:',
+  '/v1/services:',
+  '/v1/services/{service_id}/invoke:',
+  '/v1/schedules:',
+  '/v1/schedules/{schedule_id}/runs:',
+  '/v1/schedules/{schedule_id}/timing:',
+  '/v1/secrets:',
+  '/v1/secrets/{secret_id}/rotate:',
+  '/v1/mcp-connections:',
+  '/v1/mcp-connections/{connection_id}/enable:',
   '/v1/skills:',
-  '/v1/skills/{id}:',
-  '/v1/credentials:',
-  '/v1/credentials/{id}:',
-  '/v1/credentials/{id}/rotate:',
-  '/v1/deployments/{id}/pause:',
-  '/v1/deployments/{id}/unpause:',
-  '/v1/deployments/{id}/archive:',
-  '/v1/deployments/{id}/notifications/feishu/test:',
+  '/v1/skills/{skill_id}/versions:',
 ]
 
 for (const requiredPath of requiredPublicPaths) {
@@ -152,7 +158,8 @@ for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
     const operation = pathItem[method]
     if (!operation) continue
     for (const [status, response] of Object.entries(operation.responses)) {
-      if (Number(status) >= 200 && Number(status) < 300 && status !== '204') {
+      // x-sandbase-empty-body marks implemented 2xx acknowledgements that carry no body.
+      if (Number(status) >= 200 && Number(status) < 300 && status !== '204' && response['x-sandbase-empty-body'] !== true) {
         assert.ok(
           Object.values(response.content ?? {}).some((media) => media.schema),
           `${method.toUpperCase()} ${publicPath} ${status} must document its implemented success envelope`,
@@ -184,117 +191,11 @@ const jsonErrorSchema = (method, publicPath, status) =>
 const jsonSuccessSchema = (method, publicPath, status = '200') =>
   openapiDocument.paths[publicPath]?.[method]?.responses?.[status]?.content?.['application/json']?.schema
 
-for (const publicPath of ['/v1/sessions', '/v1/sessions/{id}/events', '/v1/deployments']) {
-  assert.ok(
-    jsonSuccessSchema('get', publicPath)?.required?.includes('data'),
-    `GET ${publicPath} must require the always-emitted data collection`,
-  )
-}
-
-for (const status of ['400', '500', '503']) {
-  assert.equal(
-    jsonErrorSchema('post', '/v1/skills/files', status)?.$ref,
-    '#/components/schemas/TaskCostError',
-    `Skill file upload ${status} must document its implemented flat error envelope`,
-  )
-}
-for (const [method, publicPath, statuses] of [
-  ['post', '/v1/skills', ['400', '500']],
-  ['get', '/v1/skills', ['500']],
-  ['get', '/v1/skills/{id}', ['404', '500']],
-  ['put', '/v1/skills/{id}', ['400', '404', '500']],
-  ['delete', '/v1/skills/{id}', ['404', '500']],
-]) {
-  for (const status of statuses) {
-    assert.equal(
-      jsonErrorSchema(method, publicPath, status)?.$ref,
-      '#/components/schemas/APIError',
-      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
-    )
-  }
-}
-assert.deepEqual(
-  jsonErrorSchema('post', '/v1/skills', '401')?.oneOf?.map((schema) => schema.$ref),
-  ['#/components/schemas/TaskCostError', '#/components/schemas/APIError'],
-  'Skill creation must document both middleware and creator-context authentication envelopes',
-)
-for (const [method, publicPath, statuses] of [
-  ['post', '/v1/credentials', ['400', '500']],
-  ['get', '/v1/credentials', ['500']],
-  ['get', '/v1/credentials/{id}', ['404', '500']],
-  ['patch', '/v1/credentials/{id}', ['400', '404', '500']],
-  ['post', '/v1/credentials/{id}/rotate', ['400', '404', '500']],
-]) {
-  for (const status of statuses) {
-    assert.equal(
-      jsonErrorSchema(method, publicPath, status)?.$ref,
-      '#/components/schemas/LegacyResourceError',
-      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented legacy error envelope`,
-    )
-  }
-}
-for (const [method, publicPath, statuses] of [
-  ['post', '/v1/deployments', ['400', '404', '415', '422', '500']],
-  ['get', '/v1/deployments', ['400', '500']],
-  ['get', '/v1/deployments/{id}', ['404', '500']],
-  ['patch', '/v1/deployments/{id}', ['400', '404', '409', '422', '500']],
-  ['post', '/v1/deployments/{id}', ['400', '404', '409', '422', '500']],
-  ['delete', '/v1/deployments/{id}', ['404', '409', '500']],
-]) {
-  for (const status of statuses) {
-    assert.equal(
-      jsonErrorSchema(method, publicPath, status)?.$ref,
-      '#/components/schemas/APIError',
-      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
-    )
-  }
-}
-for (const [method, publicPath, statuses] of [
-  ['post', '/v1/deployments/{id}/run', ['400', '404', '409', '500', '503']],
-  ['post', '/v1/deployments/{id}/pause', ['404', '409', '500']],
-  ['post', '/v1/deployments/{id}/unpause', ['404', '409', '500']],
-  ['post', '/v1/deployments/{id}/archive', ['404', '409', '500']],
-  ['post', '/v1/deployments/{id}/notifications/feishu/test', ['400', '404', '409', '502']],
-  ['post', '/v1/deployments/{id}/runs', ['400', '404', '409', '500', '503']],
-  ['get', '/v1/deployments/{id}/runs', ['400', '500', '503']],
-  ['get', '/v1/deployments/{id}/runs/{drun_id}', ['404', '409', '503']],
-  ['get', '/v1/deployment_runs', ['400', '500', '503']],
-  ['get', '/v1/deployment_runs/{id}', ['404', '503']],
-]) {
-  for (const status of statuses) {
-    assert.equal(
-      jsonErrorSchema(method, publicPath, status)?.$ref,
-      '#/components/schemas/APIError',
-      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
-    )
-  }
-}
-for (const [method, publicPath, statuses] of [
-  ['patch', '/v1/endpoints/{id}', ['400', '404', '409', '422', '500']],
-  ['post', '/v1/endpoints/{id}', ['400', '404', '409', '422', '500']],
-  ['delete', '/v1/endpoints/{id}', ['404', '500']],
-]) {
-  for (const status of statuses) {
-    assert.equal(
-      jsonErrorSchema(method, publicPath, status)?.$ref,
-      '#/components/schemas/APIError',
-      `${method.toUpperCase()} ${publicPath} ${status} must document its implemented typed error envelope`,
-    )
-  }
-}
-for (const status of ['404', '409', '500']) {
-  assert.equal(
-    jsonErrorSchema('delete', '/v1/sessions/{id}', status)?.$ref,
-    '#/components/schemas/SessionAPIError',
-    `DELETE /v1/sessions/{id} ${status} must document its implemented typed error envelope`,
-  )
-}
 assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded from the public build')
-assert.match(config, /'guides\/site-agent-integration\.md'/, 'Legacy Site Agent guide must stay excluded from the public build')
-assert.match(config, /'use-cases\/\*\*'/, 'Legacy Site Agent use cases must stay excluded from the public build')
+for (const archivedSource of ['guides/site-agent-integration.md', 'use-cases', 'api-reference/embeds', 'api-reference/environments', 'api-reference/endpoints/mcp.md', 'api-reference/endpoints/acp.md']) {
+  assert.ok(!existsSync(path.join(root, archivedSource)), `${archivedSource} is retired and must live under _archived/`)
+}
 assert.match(config, /'api-reference\/webhooks\.md'/, 'Sandbox event webhook reference must stay excluded from the public build')
-assert.match(config, /'api-reference\/embeds\/\*\*'/, 'Unmaintained Embed Config pages must stay excluded from the public build')
-assert.match(config, /'api-reference\/environments\/\*\*'/, 'Internal Environment API pages must stay excluded from the public build')
 assert.match(config, /'agents\/endpoint-quickstart\.md'/, 'Retired Service quickstart must stay excluded from the public build')
 assert.match(config, /'admin\/api-keys\.md'/, 'Duplicate API Keys guide must stay excluded from the public build')
 assert.match(config, /'setup\/cli\.md'/, 'Duplicate CLI setup page must stay excluded from the public build')
@@ -311,22 +212,18 @@ assert.match(platformSidebar, /text: 'Services'/, 'Platform API sidebar must use
 assert.doesNotMatch(platformSidebar, /text: 'Endpoints'/, 'Platform API sidebar must not expose the legacy Endpoints product name')
 assert.match(platformSidebar, /text: 'Schedules'/, 'Platform API sidebar must use the Schedules product name')
 assert.doesNotMatch(platformSidebar, /text: 'Deployments'/, 'Platform API sidebar must not expose the compatibility Deployment resource as the product name')
-for (const anchor of [
-  'create-a-credential',
-  'list-credentials',
-  'get-a-credential',
-  'update-a-credential',
-  'rotate-a-credential',
+for (const [resource, anchors] of [
+  ['mcp-connections', ['create-a-connection', 'list-connections', 'get-a-connection', 'replace-a-connection', 'enable-a-connection', 'disable-a-connection']],
+  ['secrets', ['create-a-secret', 'list-secrets', 'get-a-secret', 'rotate-a-secret', 'revoke-a-secret']],
 ]) {
-  assert.match(
-    platformSidebar,
-    new RegExp(`/api-reference/credentials/#${anchor}`),
-    `Credentials sidebar must expose the ${anchor} operation`,
-  )
+  const overview = readFileSync(new URL(`../api-reference/${resource}/index.md`, import.meta.url), 'utf8')
+  for (const anchor of anchors) {
+    assert.match(platformSidebar, new RegExp(`/api-reference/${resource}/#${anchor}`), `${resource} sidebar must expose the ${anchor} operation`)
+    assert.match(overview, new RegExp(`^## ${anchor.replace(/-/g, ' ')}$`, 'mi'), `${resource} overview must keep the ${anchor} anchor`)
+  }
 }
-assert.match(openapi, /^  \/v1\/endpoints\/\{[^}]+\}\/mcp:$/m, 'Endpoint MCP transport must be documented')
-assert.match(openapi, /^    post:/m, 'Endpoint MCP transport must support POST')
-assert.match(openapi, /^    delete:/m, 'Endpoint MCP transport must support DELETE')
+assert.doesNotMatch(platformSidebar, /text: 'Credentials'|\/api-reference\/(?:credentials|endpoints|deployments)\//, 'Platform API sidebar must not link retired resources')
+assert.doesNotMatch(openapi, /^  \/v1\/(?:endpoints|deployments|deployment_runs|sessions|credentials|skills\/files)(?:[/{:]|$)/m, 'Retired Agents resources must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/endpoint_runtime_profiles:$/m, 'Endpoint runtime profiles that reveal MCP transport must not be public')
 assert.doesNotMatch(openapi, /^\s+mcp_url:$/m, 'Endpoint MCP transport URL must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/generations(?:\/\{[^}]+\})?:$/m, 'Withdrawn generation paths must not be public')
@@ -584,91 +481,81 @@ for (const content of [apiKeyGuide, authenticationReference]) {
   assert.match(content, /64 hexadecimal characters/, 'API key docs must describe the current sk- key format')
   assert.match(content, /(?:Existing|Legacy) `sk-sb-\.\.\.` keys remain/, 'API key docs must preserve legacy-key guidance')
 }
-const agentListPage = openapi.match(/^    AgentListPage:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(agentListPage, /required: \[data\]/, 'Agent list responses must require data')
-assert.doesNotMatch(agentListPage, /required: \[[^\]]*next_page/, 'Agent list next_page must be optional on the final page')
-const nestedDeploymentRuns = openapi.match(/^  \/v1\/deployments\/\{id\}\/runs:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-assert.match(nestedDeploymentRuns, /name: limit[\s\S]*?name: page/, 'Nested DeploymentRun lists must document implemented cursor pagination')
-assert.match(nestedDeploymentRuns, /next_page:\n\s+type: string/, 'Nested DeploymentRun lists must document their emitted cursor')
-const triggerDeploymentRun = nestedDeploymentRuns.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-assert.match(triggerDeploymentRun, /EmptyObjectRequest/, 'Deployment triggers must document their empty-object-only request body')
-for (const status of ['200', '400', '401', '402', '403', '404', '409', '500', '503']) {
-  assert.match(triggerDeploymentRun, new RegExp(`'${status}':`), `Deployment triggers must document ${status} responses`)
+// --- Agents platform (sandbase-agents) contract -------------------------------
+const resolveSchema = (schema) => schema?.$ref ? schema.$ref.replace(/^#\//, '').split('/').reduce((current, segment) => current?.[segment], openapiDocument) : schema
+const agentsPlatformPrefix = /^\/v1\/(?:agents|services|schedules|secrets|mcp-connections|skills)(?:\/|$)/
+const agentsSchema = (name) => openapi.match(new RegExp(`^    ${name}:\\n[\\s\\S]*?(?=^    [A-Za-z#])`, 'm'))?.[0] ?? ''
+let agentsOperationCount = 0
+for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
+  if (!agentsPlatformPrefix.test(publicPath)) continue
+  for (const method of publicMethods) {
+    const operation = pathItem[method]
+    if (!operation) continue
+    agentsOperationCount += 1
+    assert.deepEqual(operation.security, [{ BearerAuth: [] }, { AgentsApiKey: [] }], `${method.toUpperCase()} ${publicPath} must document Bearer and X-API-Key authentication`)
+    for (const [status, response] of Object.entries(operation.responses)) {
+      if (Number(status) < 400) continue
+      assert.equal(
+        response.content?.['application/json']?.schema?.$ref,
+        '#/components/schemas/AgentsError',
+        `${method.toUpperCase()} ${publicPath} ${status} must document the Agents error envelope`,
+      )
+    }
+  }
 }
-const listNestedDeploymentRuns = nestedDeploymentRuns.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
-assert.match(listNestedDeploymentRuns, /required: \[data\]/, 'Nested DeploymentRun lists must require data')
-for (const status of ['200', '400', '401', '402', '403', '500', '503']) {
-  assert.match(listNestedDeploymentRuns, new RegExp(`'${status}':`), `Nested DeploymentRun lists must document ${status} responses`)
+assert.ok(agentsOperationCount >= 90, `Agents platform OpenAPI must cover every public route (found ${agentsOperationCount})`)
+assert.match(openapi, /AgentsApiKey:\n\s+type: apiKey\n\s+in: header\n\s+name: X-API-Key/, 'AgentsApiKey must describe the X-API-Key header')
+for (const [method, publicPath] of [
+  ['get', '/v1/agents'], ['get', '/v1/agents/sessions'], ['get', '/v1/agents/sessions/{session_id}/items'],
+  ['get', '/v1/agents/sessions/{session_id}/turns'], ['get', '/v1/skills'], ['get', '/v1/agents/catalog'],
+]) {
+  const schema = resolveSchema(jsonSuccessSchema(method, publicPath))
+  assert.ok(schema?.allOf?.some((part) => part.$ref === '#/components/schemas/AgentsCursorList') || schema === openapiDocument.components.schemas.AgentsCursorList, `GET ${publicPath} must use the cursor list envelope`)
 }
-assert.doesNotMatch(listNestedDeploymentRuns, /'404':/, 'Nested DeploymentRun lists return an empty page for an unknown Deployment')
-const triggerDeploymentRunAlias = openapi.match(/^  \/v1\/deployments\/\{id\}\/run:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-assert.match(triggerDeploymentRunAlias, /EmptyObjectRequest/, 'The Deployment trigger alias must preserve the empty-object-only request body')
-for (const status of ['200', '400', '401', '402', '403', '404', '409', '500', '503']) {
-  assert.match(triggerDeploymentRunAlias, new RegExp(`'${status}':`), `The Deployment trigger alias must document ${status} responses`)
+for (const publicPath of ['/v1/services', '/v1/schedules', '/v1/services/{service_id}/runs', '/v1/schedules/{schedule_id}/runs', '/v1/secrets', '/v1/mcp-connections', '/v1/agents/{agent_id}/versions']) {
+  const schema = resolveSchema(jsonSuccessSchema('get', publicPath))
+  assert.ok(schema?.allOf?.some((part) => part.$ref === '#/components/schemas/AgentsOffsetList'), `GET ${publicPath} must use the offset list envelope`)
 }
-const nestedDeploymentRun = openapi.match(/^  \/v1\/deployments\/\{id\}\/runs\/\{drun_id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '409', '503']) {
-  assert.match(nestedDeploymentRun, new RegExp(`'${status}':`), `Nested DeploymentRun reads must document ${status} responses`)
+assert.match(agentsSchema('AgentsCursorList'), /required: \[object, data, has_more, first_id, last_id\]/, 'Cursor lists must require the emitted envelope')
+assert.match(agentsSchema('AgentsOffsetList'), /required: \[data, total, limit, offset\]/, 'Offset lists must require the emitted envelope')
+assert.match(agentsSchema('AgentsError'), /required: \[type, code, param, message\]/, 'Agents errors must document the emitted envelope')
+assert.match(agentsSchema('Agent'), /runtime_profile: \{ type: string, enum: \[codex, claude, mcode\] \}/, 'Agent runtime profiles must match the implementation')
+assert.match(agentsSchema('Session'), /status: \{ type: string, enum: \[idle, in_progress, requires_action, failed\]/, 'Session status must match the implementation')
+assert.match(agentsSchema('Session'), /lifecycle_status: \{ type: string, enum: \[active, archived\] \}/, 'Session lifecycle must match the implementation')
+assert.doesNotMatch(agentsSchema('SessionCreateRequest'), /initial_events|environment_id/, 'Session creation must not expose retired fields')
+assert.match(agentsSchema('AgentRun'), /enum: \[pending, succeeded, failed, cancelled, skipped\]/, 'Run status must match the implementation')
+assert.doesNotMatch(agentsSchema('ServiceCreateRequest'), /^        (?:schedule|model_provider):/m, 'Service creation rejects schedule and model_provider')
+assert.match(agentsSchema('ScheduleCreateRequest'), /required: \[name, agent_id, input, schedule\]/, 'Schedule creation must require input and timing')
+assert.match(agentsSchema('SecretCreateRequest'), /kind: \{ type: string, const: mcp_bearer \}/, 'Secrets only support MCP Bearer tokens')
+assert.doesNotMatch(agentsSchema('Secret'), /^        token:/m, 'Secret responses must never expose the token')
+for (const [method, publicPath] of [['delete', '/v1/secrets/{secret_id}'], ['delete', '/v1/mcp-connections/{connection_id}']]) {
+  const response = openapiDocument.paths[publicPath]?.[method]?.responses?.['204']
+  assert.ok(response && !response.content, `${method.toUpperCase()} ${publicPath} must document its empty 204 response`)
 }
-const deploymentsPath = openapi.match(/^  \/v1\/deployments:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-assert.match(deploymentsPath, /name: status\n\s+in: query\n\s+style: form\n\s+explode: true\n\s+schema:\n\s+type: array/, 'Deployment status filters must be repeatable')
-const deploymentRunsPath = openapi.match(/^  \/v1\/deployment_runs:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const field of ['trigger_type', 'status']) {
-  assert.match(deploymentRunsPath, new RegExp(`name: ${field}\\n\\s+in: query[\\s\\S]*?type: array`), `DeploymentRun ${field} filters must be repeatable`)
+assert.equal(openapiDocument.paths['/v1/agents/sessions/{session_id}/events']?.post?.responses?.['202']?.['x-sandbase-empty-body'], true, 'Session input acceptance has no body')
+for (const publicPath of ['/v1/agents/sessions/{session_id}/events', '/v1/agents/sessions/{session_id}/events/stream']) {
+  assert.ok(openapiDocument.paths[publicPath]?.get?.responses?.['200']?.content?.['text/event-stream'], `GET ${publicPath} must document SSE output`)
 }
-for (const field of ['created_at_gt', 'created_at_gte', 'created_at_lt', 'created_at_lte']) {
-  assert.match(deploymentRunsPath, new RegExp(`name: ${field}, in: query, deprecated: true`), `DeploymentRun lists must document the ${field} compatibility filter`)
+for (const [method, publicPath] of [
+  ['post', '/v1/services'], ['post', '/v1/schedules'], ['post', '/v1/services/{service_id}/invoke'], ['post', '/v1/schedules/{schedule_id}/runs'],
+  ['post', '/v1/secrets'], ['post', '/v1/mcp-connections'], ['post', '/v1/agents/sessions/{session_id}/cancel'], ['post', '/v1/agents/sessions/{session_id}/files'],
+]) {
+  assert.ok(
+    (openapiDocument.paths[publicPath]?.[method]?.parameters ?? []).some((parameter) => parameter.$ref === '#/components/parameters/IdempotencyKeyRequired'),
+    `${method.toUpperCase()} ${publicPath} must require Idempotency-Key`,
+  )
 }
-for (const status of ['200', '400', '401', '402', '403', '500', '503']) {
-  assert.match(deploymentRunsPath, new RegExp(`'${status}':`), `Global DeploymentRun lists must document ${status} responses`)
+for (const status of ['429']) {
+  for (const publicPath of ['/v1/services/{service_id}/invoke', '/v1/schedules/{schedule_id}/runs']) {
+    assert.ok(openapiDocument.paths[publicPath].post.responses[status], `POST ${publicPath} must document ${status} concurrency_limit`)
+  }
 }
-const globalDeploymentRun = openapi.match(/^  \/v1\/deployment_runs\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '503']) {
-  assert.match(globalDeploymentRun, new RegExp(`'${status}':`), `Global DeploymentRun reads must document ${status} responses`)
-}
-assert.doesNotMatch(globalDeploymentRun, /'409':/, 'Global DeploymentRun reads return pending records instead of a conflict')
-const emptyObjectRequest = openapi.match(/^    EmptyObjectRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(emptyObjectRequest, /maxProperties: 0/, 'Deployment triggers must reject request fields')
-const deploymentRunSchema = openapi.match(/^    DeploymentRun:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(deploymentRunSchema, /trigger_context:\n\s+oneOf:\n\s+- type: 'null'/, 'DeploymentRun trigger context must tolerate invalid legacy JSON projected as null')
-assert.doesNotMatch(deploymentRunSchema, /^        status:/m, 'DeploymentRun responses must not expose internal creation status')
-const deploymentsPathForCreate = openapi.match(/^  \/v1\/deployments:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const createDeploymentOperation = deploymentsPathForCreate.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-for (const mediaType of ['application/json', 'application/yaml', 'application/x-yaml']) {
-  assert.match(createDeploymentOperation, new RegExp(mediaType.replace('/', '\\/') + ':'), `Deployment creation must document ${mediaType}`)
-}
-for (const status of ['200', '400', '401', '402', '403', '404', '415', '422', '500']) {
-  assert.match(createDeploymentOperation, new RegExp(`'${status}':`), `Deployment creation must document ${status} responses`)
-}
-assert.match(createDeploymentOperation, /CreateDeclarativeDeploymentRequest/, 'Deployment creation must document declarative runtime definitions')
-const declarativeDeploymentRequest = openapi.match(/^    CreateDeclarativeDeploymentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(declarativeDeploymentRequest, /required: \[name, runtime, initial_events\]/, 'Declarative Deployments must require runtime and initial events')
-assert.doesNotMatch(declarativeDeploymentRequest, /mcp_servers:|protocols:/, 'Declarative Deployment creation must not expose hidden transports')
-assert.doesNotMatch(declarativeDeploymentRequest, /metadata:/, 'Declarative Deployment creation must not document ignored metadata')
-const advancedDeploymentRequest = openapi.match(/^    CreateDeploymentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(advancedDeploymentRequest, /anyOf:[\s\S]*?- required: \[agent_id\][\s\S]*?- required: \[agent\]/, 'Advanced Deployment creation must allow the implemented Agent compatibility alias')
-for (const field of ['agent_version', 'timeout_policy']) {
-  assert.match(advancedDeploymentRequest, new RegExp(`^        ${field}:`, 'm'), `Advanced Deployment creation must document ${field}`)
-}
-for (const field of ['resources', 'vault_ids']) {
-  assert.match(advancedDeploymentRequest, new RegExp(`${field}: \\{ type: array, maxItems: 0`), `Advanced Deployment creation must reject non-empty ${field}`)
-}
-const feishuTestPath = openapi.match(/^  \/v1\/deployments\/\{id\}\/notifications\/feishu\/test:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-assert.match(feishuTestPath, /maxProperties: 0/, 'Feishu notification tests must reject custom request fields')
-assert.match(feishuTestPath, /This endpoint never accepts a webhook URL or custom message/, 'Feishu notification tests must document the saved-target-only boundary')
-for (const status of ['200', '400', '401', '402', '403', '404', '409', '502']) {
-  assert.match(feishuTestPath, new RegExp(`'${status}':`), `Feishu notification test must document ${status} responses`)
-}
-const updateDeploymentSchema = openapi.match(/^    UpdateDeploymentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-for (const field of ['resources', 'vault_ids']) {
-  assert.doesNotMatch(updateDeploymentSchema, new RegExp(`^        ${field}:`, 'm'), `Deployment updates must not advertise always-rejected ${field}`)
-}
-assert.match(updateDeploymentSchema, /initial_events:\n\s+type: array\n\s+minItems: 1/, 'Deployment updates must require non-empty initial events')
-assert.match(updateDeploymentSchema, /notification_settings:\n\s+type: \[object, 'null'\]/, 'Deployment notifications must allow null to clear the saved target')
-assert.match(updateDeploymentSchema, /required: \[feishu_webhook_url\]/, 'A non-null notification_settings object must contain only its implemented webhook field')
-assert.match(updateDeploymentSchema, /pattern: '\^https:\/\/open\\\.feishu\\\.cn\/open-apis\/bot\/v2\/hook\//, 'Deployment notifications must publish the enforced Feishu webhook origin and path')
-assert.match(sidebar, /\/api-reference\/deployments\/test-feishu-notification/, 'Sidebar must link to the Feishu notification test reference')
-assert.match(sidebar, /\/api-reference\/endpoints\/acp/, 'Sidebar must link to the Endpoint ACP reference')
+assert.doesNotMatch(openapi, /environment_id|environment_binding/, 'Public OpenAPI must not expose internal Environment bindings')
+const agentReferenceText = ['create', 'get', 'list', 'update', 'replace', 'get-version', 'versions']
+  .map((page) => readFileSync(new URL(`../api-reference/agents/${page}.md`, import.meta.url), 'utf8'))
+  .join('\n')
+assert.doesNotMatch(agentReferenceText, /"model":\s*(?:"|\{"id":\s*")claude-sonnet-4/, 'Agent examples must use implemented vendor/model identities')
+assert.doesNotMatch(agentReferenceText, /\bagent_[0-9a-f]{8}\b|"system":/, 'Agent examples must use the current agt_ IDs and instructions field')
 assert.doesNotMatch(modelSidebar, /text: 'Official Native API'/, 'Model API main navigation must not duplicate the custom Official Native API sidebar')
 assert.match(officialNativeSidebar, /Official Native API/, 'Custom sidebar must expose Official Native API')
 assert.match(officialNativeSidebar, /official-native-api\/bytedance\/seedance-2\.5-official/, 'Official Native API sidebar must expose Seedance 2.5')
@@ -688,147 +575,6 @@ assert.match(officialNativeSidebar, /GPT Image 2\.5 Flare/, 'Official Native API
 assert.match(officialNativeSidebar, /official-native-api\/openai\/gpt-image-2\.5-flare/, 'Official Native API sidebar must link GPT Image 2.5 Flare')
 assert.match(officialNativeSidebar, /GPT Image 2\.5 Sunburst/, 'Official Native API sidebar must expose GPT Image 2.5 Sunburst')
 assert.match(officialNativeSidebar, /official-native-api\/openai\/gpt-image-2\.5-sunburst/, 'Official Native API sidebar must link GPT Image 2.5 Sunburst')
-const scheduleOverview = readFileSync(new URL('../api-reference/deployments/index.md', import.meta.url), 'utf8')
-assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/runs/, 'Schedule overview must document the preferred plural trigger path')
-assert.match(scheduleOverview, /POST \/v1\/deployments\/\{deployment_id\}\/run` remains a compatibility alias/, 'Schedule overview must label the singular trigger path as compatibility-only')
-for (const anchor of ['create-a-service', 'list-services', 'get-a-service', 'update-a-service', 'delete-a-service', 'invoke-with-rest']) {
-  assert.match(sidebar, new RegExp(`/api-reference/endpoints/#${anchor}`), `Sidebar must expose the Service ${anchor} operation`)
-}
-const deploymentSchema = openapi.match(/^    Deployment:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
-  if (!publicPath.startsWith('/v1/deployment')) continue
-  for (const method of publicMethods) {
-    const operation = pathItem[method]
-    if (!operation) continue
-    assert.equal(
-      operation.responses['401'].content?.['application/json']?.schema?.$ref,
-      '#/components/schemas/TaskCostError',
-      `${method.toUpperCase()} ${publicPath} must document the implemented string-error authentication envelope`,
-    )
-  }
-}
-assert.match(deploymentSchema, /required: \[id, type, name, description, metadata, resources, vault_ids, agent, agent_id, agent_version, schedule, timeout_policy, status, version, next_run_at, creation_mode, created_at, updated_at\]/, 'Deployment responses must require fields emitted by every list and detail projection')
-assert.doesNotMatch(deploymentSchema, /environment_id|environment_binding/, 'Public Schedule responses must not expose internal Environment bindings')
-const deploymentResourcePath = openapi.match(/^  \/v1\/deployments\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['400', '401', '402', '403', '404', '409', '422', '500']) {
-  assert.match(deploymentResourcePath, new RegExp(`'${status}':`), `Deployment resource operations must collectively document ${status}`)
-}
-for (const suffix of ['pause', 'unpause', 'archive']) {
-  const lifecyclePath = openapi.match(new RegExp(`^  /v1/deployments/\\{id\\}/${suffix}:\\n[\\s\\S]*?(?=^  /)`, 'm'))?.[0] ?? ''
-  for (const status of ['200', '401', '402', '403', '404', '409', '500']) {
-    assert.match(lifecyclePath, new RegExp(`'${status}':`), `Deployment ${suffix} must document ${status}`)
-  }
-}
-const agentSchema = openapi.match(/^    Agent:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-for (const field of ['tools', 'mcp_servers', 'skills', 'handoffs']) {
-  assert.match(agentSchema, new RegExp(`${field}:\\n\\s+type: \\[array, 'null'\\]`), `Agent ${field} must allow the serializer's null output`)
-}
-assert.match(agentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Agent metadata must allow the serializer\'s null output')
-assert.doesNotMatch(agentSchema, /^        (?:runtime_profile|multiagent):/m, 'Agent responses must not advertise fields omitted by the serializer')
-assert.match(agentSchema, /required: \[id, type, name, description, model, system, tools, mcp_servers, skills, handoffs, metadata, version, created_at, updated_at, archived_at\]/, 'Agent responses must require every field always emitted by the serializer')
-assert.match(agentSchema, /effort:\n\s+description: Optional model runtime hint preserved/, 'Agent model effort responses must allow the implemented pass-through value')
-assert.match(agentSchema, /id:\n\s+type: string\n\s+pattern: '\^agent_\[0-9a-f\]\{8\}-\[0-9a-f\]\{3\}\$'/, 'Agent IDs must document the implemented generated shape')
-const updateAgentSchema = openapi.match(/^    UpdateAgentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-for (const field of ['tools', 'skills', 'mcp_servers', 'handoffs']) {
-  assert.match(updateAgentSchema, new RegExp(`${field}:\\n\\s+type: \\[array, 'null'\\]`), `Agent update ${field} must allow explicit null replacement`)
-}
-assert.match(updateAgentSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Agent update metadata must allow explicit null replacement')
-assert.match(updateAgentSchema, /additionalProperties: true/, 'Agent updates must allow ignored compatibility fields')
-assert.match(updateAgentSchema, /name:\n\s+type: \[string, 'null'\]/, 'Agent updates must allow null scalar fields to preserve their values')
-const createAgentSchema = openapi.match(/^    CreateAgentRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(createAgentSchema, /additionalProperties: true/, 'Agent creation must allow ignored compatibility fields')
-assert.match(createAgentSchema, /pattern: '\^\[A-Za-z0-9\]/, 'Agent model identities must require implemented vendor/model syntax')
-assert.match(createAgentSchema, /tools:\n\s+type: \[array, 'null'\]/, 'Agent creation must distinguish omitted default tools from explicit null')
-assert.doesNotMatch(createAgentSchema, /maxItems: (?:20|128)|maxLength: (?:256|2048|100000)/, 'Agent creation must not advertise limits that are not enforced')
-const agentsPath = openapi.match(/^  \/v1\/agents:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const createAgent = agentsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '402', '403', '422', '500']) {
-  assert.match(createAgent, new RegExp(`'${status}':`), `Agent creation must document ${status} responses`)
-}
-const listAgents = agentsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '402', '403', '500']) {
-  assert.match(listAgents, new RegExp(`'${status}':`), `Agent listing must document ${status} responses`)
-}
-const agentPath = openapi.match(/^  \/v1\/agents\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
-  assert.match(agentPath.match(/^    get:\n[\s\S]*?(?=^    post:)/m)?.[0] ?? '', new RegExp(`'${status}':`), `Agent reads must document ${status} responses`)
-}
-const updateAgent = agentPath.match(/^    post:\n[\s\S]*/m)?.[0] ?? ''
-assert.match(updateAgent, /a no-op returns the current Agent without incrementing/, 'Agent updates must document no-op version semantics')
-for (const status of ['200', '400', '401', '402', '403', '404', '409', '422', '500']) {
-  assert.match(updateAgent, new RegExp(`'${status}':`), `Agent updates must document ${status} responses`)
-}
-const archiveAgentPath = openapi.match(/^  \/v1\/agents\/\{id\}\/archive:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '409', '500']) {
-  assert.match(archiveAgentPath, new RegExp(`'${status}':`), `Agent archival must document ${status} responses`)
-}
-const agentVersionsPath = openapi.match(/^  \/v1\/agents\/\{id\}\/versions:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
-  assert.match(agentVersionsPath, new RegExp(`'${status}':`), `Agent version listing must document ${status} responses`)
-}
-const agentVersionPath = openapi.match(/^  \/v1\/agents\/\{id\}\/versions\/\{version\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(agentVersionPath, new RegExp(`'${status}':`), `Agent version reads must document ${status} responses`)
-}
-const updateAgentReference = readFileSync(new URL('../api-reference/agents/update.md', import.meta.url), 'utf8')
-assert.match(updateAgentReference, /null is treated as omitted and preserves the current value/, 'Agent string updates must document their implemented null semantics')
-assert.doesNotMatch(updateAgentReference, /Send null or an empty string to clear/, 'Agent string updates must not claim null clears pointer fields')
-const agentReferenceText = ['create', 'get', 'list', 'update', 'get-version', 'versions']
-  .map((page) => readFileSync(new URL(`../api-reference/agents/${page}.md`, import.meta.url), 'utf8'))
-  .join('\n')
-assert.doesNotMatch(agentReferenceText, /"model":\s*(?:"|\{"id":\s*")claude-sonnet-4/, 'Agent examples must use implemented vendor/model identities')
-const sessionSchema = openapi.match(/^    Session:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(sessionSchema, /metadata:\n\s+type: \[object, 'null'\]/, 'Session metadata must allow the serializer\'s null output')
-assert.match(sessionSchema, /required: \[[^\]]*title[^\]]*metadata[^\]]*archived_at[^\]]*updated_at[^\]]*\]/, 'Session responses must require fields always emitted by the serializer')
-assert.match(sessionSchema, /source:\n\s+type: string\n\s+enum: \[direct, endpoint, deployment, store_trial\]/, 'Session source must include Service store trials')
-const sessionEventSchema = openapi.match(/^    SessionEvent:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(sessionEventSchema, /required: \[id, type, processed_at, created_at\]/, 'Session Events must require the serializer\'s created_at field')
-const sessionEventStream = openapi.match(/^  \/v1\/sessions\/\{id\}\/events\/stream:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-assert.match(sessionEventStream, /does not synthesize preview deltas/, 'Session event_delta must not promise unimplemented preview deltas')
-const sessionStreamReference = generatedReferenceSpecs.match(/"sessions\/stream": \{[\s\S]*?(?=\n  \},\n  "skills\/create")/)?.[0] ?? ''
-assert.match(sessionStreamReference, /id: sevt_01/, 'Session SSE examples must include the emitted id field')
-assert.match(sessionStreamReference, /created_at/, 'Session SSE examples must include the emitted created_at field')
-const credentialSchema = openapi.match(/^    Credential:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(credentialSchema, /id: \{ type: string, pattern: '\^sec_' \}/, 'Managed Credential IDs must use the implemented sec_ prefix')
-assert.match(credentialSchema, /required: \[[^\]]*last_used_at[^\]]*cooldown_until[^\]]*failure_count[^\]]*\]/, 'Credential responses must require fields always emitted by the serializer')
-assert.doesNotMatch(credentialSchema, /^        (?:value|value_encrypted):/m, 'Credential responses must never expose plaintext or encrypted values')
-const createCredentialSchema = openapi.match(/^    CreateCredentialRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(createCredentialSchema, /strategy: \{ type: string, enum: \[round_robin\]/, 'Credential creation must document the only implemented strategy')
-assert.match(createCredentialSchema, /weight: \{ type: integer, minimum: 1/, 'Credential creation must require a positive weight')
-assert.match(createCredentialSchema, /Defaults to the submitted scope_name and secret_key joined by a colon/, 'Credential creation must document its derived group key')
-const credentialsPath = openapi.match(/^  \/v1\/credentials:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const createCredential = credentialsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-for (const status of ['201', '400', '401', '402', '403', '500']) {
-  assert.match(createCredential, new RegExp(`'${status}':`), `Credential creation must document ${status} responses`)
-}
-const listCredentials = credentialsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '500']) {
-  assert.match(listCredentials, new RegExp(`'${status}':`), `Credential listing must document ${status} responses`)
-}
-const credentialPath = openapi.match(/^  \/v1\/credentials\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-assert.doesNotMatch(credentialPath, /^    delete:/m, 'Credentials do not implement deletion')
-const getCredential = credentialPath.match(/^    get:\n[\s\S]*?(?=^    patch:)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(getCredential, new RegExp(`'${status}':`), `Credential reads must document ${status} responses`)
-}
-const updateCredential = credentialPath.match(/^    patch:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
-  assert.match(updateCredential, new RegExp(`'${status}':`), `Credential updates must document ${status} responses`)
-}
-const rotateCredential = openapi.match(/^  \/v1\/credentials\/\{id\}\/rotate:\n[\s\S]*?(?=^  \/|^components:)/m)?.[0] ?? ''
-assert.match(rotateCredential, /pattern: '\^sec_'/, 'Credential rotation IDs must use the implemented sec_ prefix')
-assert.match(rotateCredential, /reset failure_count to 0 and clear cooldown_until/, 'Credential rotation must document health-state reset semantics')
-for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
-  assert.match(rotateCredential, new RegExp(`'${status}':`), `Credential rotation must document ${status} responses`)
-}
-const skillSchema = openapi.match(/^    Skill:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(skillSchema, /id: \{ type: string, format: uuid \}/, 'Skill resources must document their UUID identity')
-assert.match(skillSchema, /required: \[[^\]]*icon_url[^\]]*preview_urls[^\]]*\]/, 'Skill responses must require fields always emitted by every projection')
-const skillUploadPath = openapi.match(/^  \/v1\/skills\/files:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-assert.match(skillUploadPath, /preview image[\s\S]*?10 MB/, 'Skill uploads must document supported preview images and their size limit')
-const skillReferences = generatedReferenceSpecs.match(/"skills\/create": \{[\s\S]*?(?=\n  "inference\/responses")/)?.[0] ?? ''
-assert.doesNotMatch(skillReferences, /skill_01/, 'Skill reference examples must not invent a skill_ ID prefix')
-assert.match(skillReferences, /550e8400-e29b-41d4-a716-446655440000/, 'Skill reference examples must use a UUID')
 const modelDetailSchema = openapi.match(/^    ModelDetail:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
 assert.match(modelDetailSchema, /id:\n\s+type: string\n\s+format: uuid/, 'Model detail IDs must document the implemented UUID identity')
 assert.match(modelDetailSchema, /required: \[[^\]]*run_count[^\]]*sort_order[^\]]*created_at[^\]]*examples[^\]]*\]/, 'Model details must require fields always emitted by the serializer')
@@ -876,7 +622,7 @@ const accountHistorySchema = openapi.match(/^    AccountHistoryItem:\n[\s\S]*?(?
 for (const field of ['latency_ms', 'user_cost', 'cache_creation_tokens', 'api_key_prefix']) {
   assert.match(accountHistorySchema, new RegExp(`required: \\[[^\\]]*${field}`), `Account history must require emitted ${field}`)
 }
-const accountHistoryReference = generatedReferenceSpecs.match(/"account\/history": \{[\s\S]*?(?=\n  "endpoints\/acp")/)?.[0] ?? ''
+const accountHistoryReference = generatedReferenceSpecs.match(/"account\/history": \{[\s\S]*?(?=\n  "models\/audio")/)?.[0] ?? ''
 assert.match(accountHistoryReference, /"name": "timezone"/, 'Account history reference must list the timezone compatibility parameter')
 assert.match(accountHistoryReference, /Timestamps remain UTC/, 'Account history reference must not imply timezone conversion')
 assert.doesNotMatch(accountHistoryReference, /openai\/gpt-4o"/, 'Account history reference must not use the retired default GPT-4o example')
@@ -888,180 +634,8 @@ for (const status of ['200', '401', '403', '404']) {
 }
 assert.match(taskCostPath, /'403':[\s\S]*APIKeyScopeError/, 'Task cost scope failures must use their implemented nested error shape')
 assert.doesNotMatch(taskCostPath, /'500':/, 'Task cost lookup does not expose an internal-error branch')
-const sessionsPath = openapi.match(/^  \/v1\/sessions:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const createSession = sessionsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-assert.match(createSession, /Unknown top-level fields are rejected/, 'Session creation must document strict unknown-field handling')
-assert.match(createSession, /unsupported_feature, agent_runtime_environment_mismatch/, 'Session creation must document every implemented 422 class')
-for (const status of ['200', '400', '401', '402', '403', '404', '422', '500', '502', '503']) {
-  assert.match(createSession, new RegExp(`'${status}':`), `Session creation must document ${status} responses`)
-}
-const listSessions = sessionsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '402', '403', '500']) {
-  assert.match(listSessions, new RegExp(`'${status}':`), `Session listing must document ${status} responses`)
-}
-const sessionPath = openapi.match(/^  \/v1\/sessions\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const getSession = sessionPath.match(/^    get:\n[\s\S]*?(?=^    post:)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(getSession, new RegExp(`'${status}':`), `Session reads must document ${status} responses`)
-}
-const updateSession = sessionPath.match(/^    post:\n[\s\S]*?(?=^    delete:)/m)?.[0] ?? ''
-assert.match(updateSession, /shallow-merge metadata/, 'Session updates must document metadata merge semantics')
-assert.match(updateSession, /null removes a key/, 'Session updates must document metadata key deletion')
-assert.match(updateSession, /additionalProperties: true/, 'Session updates must allow ignored compatibility fields')
-for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
-  assert.match(updateSession, new RegExp(`'${status}':`), `Session updates must document ${status} responses`)
-}
-const deleteSession = sessionPath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '409', '500']) {
-  assert.match(deleteSession, new RegExp(`'${status}':`), `Session deletion must document ${status} responses`)
-}
-const archiveSessionPath = openapi.match(/^  \/v1\/sessions\/\{id\}\/archive:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(archiveSessionPath, new RegExp(`'${status}':`), `Session archival must document ${status} responses`)
-}
-const sessionEventsPath = openapi.match(/^  \/v1\/sessions\/\{id\}\/events:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '402', '403', '404', '409', '422', '500']) {
-  assert.match(sessionEventsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? '', new RegExp(`'${status}':`), `Session Event send must document ${status} responses`)
-}
-for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
-  assert.match(sessionEventsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? '', new RegExp(`'${status}':`), `Session Event listing must document ${status} responses`)
-}
-const sessionStreamPath = openapi.match(/^  \/v1\/sessions\/\{id\}\/events\/stream:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
-  assert.match(sessionStreamPath, new RegExp(`'${status}':`), `Session Event streaming must document ${status} responses`)
-}
-const publicSessionSchema = openapi.match(/^    Session:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(publicSessionSchema, /SessionAgentProjection/, 'Session responses must use the implemented full-or-minimal Agent projection')
-const sessionAgentProjection = openapi.match(/^    SessionAgentProjection:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(sessionAgentProjection, /legacy or unavailable snapshots fall back/, 'Session Agent projection must document its fallback behavior')
-assert.match(sessionAgentProjection, /required: \[id, type, version\]/, 'Session Agent fallback must require every serializer field')
 assert.doesNotMatch(openapi, /^  \/v1\/skills\/\{id\}\/mcp-publications:$/m, 'Skill MCP publication management must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/skill-mcp(?:-publications)?(?:\/|:)/m, 'Skill MCP transports and publications must not be public')
-const skillFilesPath = openapi.match(/^  \/v1\/skills\/files:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['201', '400', '401', '402', '403', '500', '503']) {
-  assert.match(skillFilesPath, new RegExp(`'${status}':`), `Skill file uploads must document ${status} responses`)
-}
-const skillsPath = openapi.match(/^  \/v1\/skills:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const createSkill = skillsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-assert.match(createSkill, /SkillCreated/, 'Skill creation must use its compact response projection')
-for (const status of ['201', '400', '401', '402', '403', '500']) {
-  assert.match(createSkill, new RegExp(`'${status}':`), `Skill creation must document ${status} responses`)
-}
-const listSkills = skillsPath.match(/^    get:\n[\s\S]*/m)?.[0] ?? ''
-assert.match(listSkills, /SkillListItem/, 'Skill lists must use their list-item response projection')
-for (const status of ['200', '401', '402', '403', '500']) {
-  assert.match(listSkills, new RegExp(`'${status}':`), `Skill lists must document ${status} responses`)
-}
-const skillPath = openapi.match(/^  \/v1\/skills\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const getSkill = skillPath.match(/^    get:\n[\s\S]*?(?=^    put:)/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(getSkill, new RegExp(`'${status}':`), `Skill reads must document ${status} responses`)
-}
-const updateSkill = skillPath.match(/^    put:\n[\s\S]*?(?=^    delete:)/m)?.[0] ?? ''
-assert.match(updateSkill, /Omitted name, description, and categories are cleared/, 'Skill PUT must document its replacement-style display fields')
-for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
-  assert.match(updateSkill, new RegExp(`'${status}':`), `Skill updates must document ${status} responses`)
-}
-const deleteSkill = skillPath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(deleteSkill, new RegExp(`'${status}':`), `Skill deletion must document ${status} responses`)
-}
-const skillCreatedSchema = openapi.match(/^    SkillCreated:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(skillCreatedSchema, /required: \[id, name, display_name, vendor_slug, plugin_slug, icon_url, preview_urls, created_at\]/, 'Skill creation responses must require exactly their emitted fields')
-const skillListItemSchema = openapi.match(/^    SkillListItem:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(skillListItemSchema, /required: \[id, name, display_name, vendor_slug, plugin_slug, description, icon_url, preview_urls, created_at, updated_at\]/, 'Skill list items must require every emitted field')
-const publicSkillSchema = openapi.match(/^    Skill:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(publicSkillSchema, /required: \[id, name, display_name, vendor_slug, plugin_slug, description, categories, icon_url, preview_urls, skill_file_url, git_url, created_at, updated_at\]/, 'Skill detail responses must require every emitted field')
-const createSkillSchema = openapi.match(/^    CreateSkillRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.doesNotMatch(createSkillSchema, /format: uri/, 'Skill registration does not validate submitted source strings as URLs')
-const updateSkillSchema = openapi.match(/^    UpdateSkillRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(updateSkillSchema, /Omitted name, description, and categories are cleared/, 'Skill update schemas must document mixed replacement semantics')
-assert.doesNotMatch(updateSkillSchema, /^        git_url:/m, 'Skill updates must not advertise the ignored git_url field')
-const endpointSchema = openapi.match(/^    Endpoint:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-for (const field of ['session_metadata', 'memory_config', 'resource_config', 'vault_config']) {
-  assert.match(endpointSchema, new RegExp(`${field}:\\n\\s+type: \\[object, 'null'\\]`), `Endpoint ${field} must allow the serializer's null output`)
-}
-assert.match(endpointSchema, /store_status:\n\s+type: string\n\s+enum: \[private, pending_review, public, suspended\]/, 'Endpoint responses must document the serializer\'s store status')
-assert.match(endpointSchema, /required: \[id, type, name, slug, agent_id, agent_version, protocols, config, session_metadata, memory_config, resource_config, vault_config, status, store_status, creation_mode, run_url, acp_url, created_at, updated_at\]/, 'Endpoint responses must require every field always emitted by the serializer')
-assert.doesNotMatch(endpointSchema, /environment_id|environment_binding/, 'Public Service responses must not expose internal Environment bindings')
-assert.match(endpointSchema, /config:\n\s+type: \[object, 'null'\]/, 'Endpoint responses must document advanced config and declarative null output')
-assert.match(endpointSchema, /acp_url:[\s\S]*?presence does not mean ACP is enabled/, 'Endpoint ACP URLs must not imply the protocol is enabled')
-assert.doesNotMatch(endpointSchema, /^        mcp_url:/m, 'Endpoint responses must not document the hidden MCP transport URL')
-assert.doesNotMatch(endpointSchema, /protocols:[\s\S]*?enum: \[rest, acp\]/, 'Endpoint responses must not claim internal transport values are normalized to the public request enum')
-for (const schemaName of ['CreateDeclarativeEndpointRequest', 'CreateAdvancedEndpointRequest']) {
-  const schema = openapi.match(new RegExp(`^    ${schemaName}:\\n[\\s\\S]*?(?=^    [A-Za-z])`, 'm'))?.[0] ?? ''
-  assert.match(schema, /required: \[[^\]]*protocols[^\]]*\]/, `${schemaName} must require explicit public protocols to avoid hidden transport defaults`)
-  assert.match(schema, /protocols:\n\s+type: array\n\s+minItems: 1\n\s+uniqueItems: true/, `${schemaName} must require a non-empty unique protocol list`)
-  assert.match(schema, /enum: \[rest, mcp, acp\]/, `${schemaName} must expose only public invocation transports`)
-  assert.doesNotMatch(schema, /default: \[rest\]/, `${schemaName} must not claim an unimplemented REST-only server default`)
-  assert.doesNotMatch(schema, /environment_id/, `${schemaName} must not expose the withdrawn Environment field`)
-}
-for (const schemaName of ['UpdateEndpointRequest', 'CreateSessionRequest', 'UpdateDeploymentRequest', 'CreateDeploymentRequest']) {
-  const schema = openapi.match(new RegExp(`^    ${schemaName}:\\n[\\s\\S]*?(?=^    [A-Za-z])`, 'm'))?.[0] ?? ''
-  assert.doesNotMatch(schema, /environment_id/, `${schemaName} must not expose the withdrawn Environment field`)
-}
-const endpointsPath = openapi.match(/^  \/v1\/endpoints:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const createEndpointOperation = endpointsPath.match(/^    post:\n[\s\S]*?(?=^    get:)/m)?.[0] ?? ''
-assert.match(createEndpointOperation, /responses:\n\s+'201':/, 'Endpoint creation must document its implemented 201 response')
-assert.doesNotMatch(createEndpointOperation, /responses:\n\s+'200':/, 'Endpoint creation must not document an unimplemented 200 response')
-for (const status of ['400', '401', '402', '403', '404', '409', '415', '422', '500']) {
-  assert.match(createEndpointOperation, new RegExp(`'${status}':`), `Endpoint creation must document ${status} responses`)
-}
-const listEndpointOperation = endpointsPath.match(/^    get:\n[\s\S]*$/m)?.[0] ?? ''
-for (const status of ['200', '400', '401', '402', '403', '500']) {
-  assert.match(listEndpointOperation, new RegExp(`'${status}':`), `Endpoint listing must document ${status} responses`)
-}
-const endpointResourcePath = openapi.match(/^  \/v1\/endpoints\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-const getEndpointOperation = endpointResourcePath.match(/^    get:\n[\s\S]*?(?=^    patch:)/m)?.[0] ?? ''
-assert.match(getEndpointOperation, /EndpointId/, 'Endpoint reads must use the Endpoint path parameter')
-assert.doesNotMatch(getEndpointOperation, /EnvironmentId|Environment updated/, 'Endpoint reads must not inherit Environment contracts')
-for (const status of ['200', '401', '402', '403', '404']) {
-  assert.match(getEndpointOperation, new RegExp(`'${status}':`), `Endpoint reads must document ${status} responses`)
-}
-for (const method of ['patch', 'post']) {
-  const next = method === 'patch' ? 'post' : 'delete'
-  const operation = endpointResourcePath.match(new RegExp(`^    ${method}:\\n[\\s\\S]*?(?=^    ${next}:)`, 'm'))?.[0] ?? ''
-  assert.match(operation, /UpdateEndpointRequest/, `${method.toUpperCase()} Endpoint updates must use the implemented request schema`)
-  assert.doesNotMatch(operation, /UpdateEnvironmentRequest|Environment updated/, `${method.toUpperCase()} Endpoint updates must not inherit Environment contracts`)
-  for (const status of ['200', '400', '401', '402', '403', '404', '409', '422', '500']) {
-    assert.match(operation, new RegExp(`'${status}':`), `${method.toUpperCase()} Endpoint updates must document ${status} responses`)
-  }
-  assert.match(operation, /'401':[\s\S]*?TaskCostError/, `${method.toUpperCase()} Endpoint updates must document the implemented string-error envelope for authentication failures`)
-}
-const deleteEndpointOperation = endpointResourcePath.match(/^    delete:\n[\s\S]*/m)?.[0] ?? ''
-assert.match(deleteEndpointOperation, /required: \[id, deleted\]/, 'Endpoint deletion must use its implemented response projection')
-assert.doesNotMatch(deleteEndpointOperation, /environment_deleted|EnvironmentId/, 'Endpoint deletion must not inherit Environment contracts')
-for (const status of ['200', '401', '402', '403', '404', '500']) {
-  assert.match(deleteEndpointOperation, new RegExp(`'${status}':`), `Endpoint deletion must document ${status} responses`)
-}
-assert.match(deleteEndpointOperation, /'401':[\s\S]*?TaskCostError/, 'Endpoint deletion must document the implemented string-error envelope for authentication failures')
-const endpointACPPath = openapi.match(/^  \/v1\/endpoints\/\{id\}\/acp:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-assert.match(endpointACPPath, /ACPRequest/, 'Endpoint ACP must document its JSON-RPC request envelope')
-assert.match(endpointACPPath, /application\/x-ndjson:/, 'Endpoint ACP must document prompt streaming as NDJSON')
-for (const status of ['200', '400', '401', '402', '403', '404', '500']) {
-  assert.match(endpointACPPath, new RegExp(`'${status}':`), `Endpoint ACP must document ${status} responses`)
-}
-const acpRequestSchema = openapi.match(/^    ACPRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(acpRequestSchema, /enum: \[initialize, session\/new, session\/prompt, session\/cancel\]/, 'Endpoint ACP must document every implemented method')
-const acpResponseSchema = openapi.match(/^    ACPResponse:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(acpResponseSchema, /oneOf:\n\s+- required: \[result\]\n\s+- required: \[error\]/, 'Endpoint ACP must distinguish JSON-RPC success and error responses')
-const endpointRunPath = openapi.match(/^  \/v1\/endpoints\/\{id\}\/run:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
-for (const status of ['202', '400', '401', '402', '403', '404', '409', '500', '503']) {
-  assert.match(endpointRunPath, new RegExp(`'${status}':`), `Endpoint REST invocation must document ${status} responses`)
-}
-for (const status of ['422', '502']) {
-  assert.doesNotMatch(endpointRunPath, new RegExp(`'${status}':`), `Endpoint REST invocation must not document unimplemented direct ${status} responses`)
-}
-assert.match(endpointRunPath, /When both input and content are supplied, content takes precedence/, 'Endpoint REST invocation must document implemented input precedence')
-const endpointInvokeRequest = openapi.match(/^    EndpointInvokeRequest:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(endpointInvokeRequest, /- type: object\n\s+additionalProperties: true/, 'Endpoint REST invocation must allow a single content block object')
-const endpointInvokeAccepted = openapi.match(/^    EndpointInvokeAccepted:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(endpointInvokeAccepted, /EndpointAcceptedEvent/, 'Endpoint REST acceptance must use its emitted compact event projection')
-const endpointAcceptedEvent = openapi.match(/^    EndpointAcceptedEvent:\n[\s\S]*?(?=^    [A-Za-z])/m)?.[0] ?? ''
-assert.match(endpointAcceptedEvent, /required: \[id, type, processed_at\]/, 'Endpoint REST accepted events must require exactly their emitted identity fields')
-for (const field of ['memory_config', 'resource_config', 'vault_config']) {
-  assert.match(endpointSchema, new RegExp(`${field}:[\\s\\S]*?not currently applied to Session execution`), `Endpoint ${field} must be documented as reserved`)
-}
 const assetRegistrationPath = openapi.match(/^  \/v1\/assets:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.match(assetRegistrationPath, /responses:\n\s+'200':/, 'Asset registration must document the implemented 200 response')
 assert.doesNotMatch(assetRegistrationPath, /\s+'201':/, 'Asset registration must not document an unimplemented 201 response')
@@ -1095,7 +669,6 @@ assert.doesNotMatch(openapi, /^  \/default\/v1(?:\/|:)/m, 'Internal Console path
 
 const unpublishedFiles = new Set([
   'api-reference/webhooks.md',
-  'guides/site-agent-integration.md',
 ])
 
 function inspectPublishedSources(directory) {
@@ -1108,7 +681,7 @@ function inspectPublishedSources(directory) {
     }
     if (!/\.(?:md|mdx|txt)$/.test(entry.name)) continue
     const relative = path.relative(root, filename)
-    if (unpublishedFiles.has(relative) || relative.startsWith('use-cases/') || relative.startsWith('api-reference/embeds/') || relative.startsWith('api-reference/environments/')) continue
+    if (unpublishedFiles.has(relative)) continue
     const content = readFileSync(filename, 'utf8')
     assert.doesNotMatch(content, /sk-sb-(?:YOUR|your|xxx)/, `${relative} must use the current sk- placeholder for new API keys`)
     assert.doesNotMatch(content, /\/default\/v1(?:\/|\b)/, `${relative} must not expose internal Console API paths`)
@@ -1134,11 +707,12 @@ function inspectPublishedSources(directory) {
     if (!['sandbox/index.md', 'sandbox/playground.md'].includes(relative)) {
     assert.doesNotMatch(maskApprovedSandboxPageHrefs(content), sandboxAPIPath, `${relative} must not expose sandbox API paths`)
     }
-    if (!['api-reference/endpoints/index.md', 'api-reference/endpoints/mcp.md', 'agents/services.md'].includes(relative)) {
-      assert.doesNotMatch(content, /\/v1\/endpoints\/[^\s`"']+\/mcp\b/i, `${relative} must not expose Endpoint MCP transport`)
+    assert.doesNotMatch(content, /\/v1\/endpoints\/[^\s`"']+\/mcp\b/i, `${relative} must not expose Endpoint MCP transport`)
+    if (relative !== 'scripts/validate-public-api-surface.mjs') {
+      assert.doesNotMatch(content, /(?:GET|POST|PUT|PATCH|DELETE) \/v1\/(?:sessions|endpoints|deployments|deployment_runs|credentials|skills\/files)\b/, `${relative} must not document retired Agents routes as current`)
     }
     assert.doesNotMatch(content, /\/v1\/endpoint_runtime_profiles\b/i, `${relative} must not expose Endpoint runtime profiles that reveal MCP transport`)
-    assert.doesNotMatch(content, /\/v1\/mcp(?:\/|\b)/i, `${relative} must not expose the generic MCP transport or its discovery routes`)
+    assert.doesNotMatch(content, /\/v1\/mcp(?!-connections)(?:\/|\b)/i, `${relative} must not expose the generic MCP transport or its discovery routes`)
     assert.doesNotMatch(content, /\/v1\/mcp\/(?:servers|[^\s/]+\/config)\b/i, `${relative} must not expose MCP discovery or runtime config routes`)
     assert.doesNotMatch(content, /\/mcp\/[^\s/]+\/sse\b/i, `${relative} must not expose the MCP SSE proxy`)
     assert.doesNotMatch(content, /\/v1\/skills\/[^\s/]+\/mcp-publications\b/i, `${relative} must not expose Skill MCP publication creation`)
