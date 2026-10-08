@@ -56,6 +56,10 @@ const googleModels = [
     text: 'Gemini 3.1 Flash Image（Nano Banana 2）',
     link: '/model-api-reference/official-native-api/google/gemini-3.1-flash-image',
   },
+  {
+    text: 'Gemini Nano Banana 2.1（Nano Banana 2.1）',
+    link: '/model-api-reference/official-native-api/google/gemini-nano-banana-2.1',
+  },
 ]
 
 function normalize(path: string) {
