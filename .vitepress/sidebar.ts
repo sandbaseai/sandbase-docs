@@ -112,6 +112,7 @@ const googleModels: DefaultTheme.SidebarItem[] = [
   { text: 'Gemini Omni 1.1 Flash Preview', link: '/model-api-reference/official-native-api/google/gemini-omni-1.1-flash-preview' },
   { text: 'Gemini 3 Pro Image（Nano Banana Pro）', link: '/model-api-reference/official-native-api/google/gemini-3-pro-image' },
   { text: 'Gemini 3.1 Flash Image（Nano Banana 2）', link: '/model-api-reference/official-native-api/google/gemini-3.1-flash-image' },
+  { text: 'Gemini Nano Banana 2.1（Nano Banana 2.1）', link: '/model-api-reference/official-native-api/google/gemini-nano-banana-2.1' },
 ]
 
 const modelApiReferenceNav: DefaultTheme.SidebarItem[] = [
