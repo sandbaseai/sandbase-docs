@@ -83,6 +83,20 @@ Add the source image as an `inlineData` part next to the text instruction. Use t
 }
 ```
 
+## Billing
+
+Usage is billed per token at Google's standard list price:
+
+| Token type | Price (USD / 1M tokens) |
+|---|---|
+| Input (text and image) | $2.00 |
+| Output text and thinking | $12.00 |
+| Output image | $120.00 |
+
+One output image uses 1120 tokens at 1K and 2K and 2000 tokens at 4K, about $0.134 and $0.24 per image. Image tokens
+are taken from `usageMetadata.candidatesTokensDetails` (`modality: IMAGE`); the remaining output tokens are billed at
+the text rate.
+
 ## Response handling
 
 Read generated media from the returned candidate parts. Because this model uses native passthrough, provider-defined
