@@ -6,7 +6,7 @@ description: Run a saved Agent version, send input, stream events, and read Sess
 
 A Session runs one saved [Agent](/api-reference/agents/) version in SandBase's hosted cloud; there is no execution environment to choose. Session IDs use the `ses_` prefix. Sessions are a sub-resource of Agents: every path starts with `/v1/agents/sessions`.
 
-The standard operations follow the OpenAI Agents protocol (`client.beta.agents.sessions`); see [OpenAI compatibility](/agents/openai-compatibility) for what the official SDK can and cannot do. SandBase extensions add renaming, archive state, cancellation, attachments, and a reconnectable product stream.
+The standard operations follow the OpenAI Agents protocol (`client.beta.agents.sessions`); see [OpenAI compatibility](/agents/openai-compatibility) for what the official SDK can and cannot do. SandBase extensions add renaming, archive state, cancellation, attachments, workspace file metadata, immutable artifacts, and a reconnectable product stream.
 
 ::: info Where Sessions come from
 You create a Session directly with `POST /v1/agents/sessions`, or a [Service](/api-reference/services/) invocation or [Schedule](/api-reference/schedules/) Run creates one for you. The Session reports `source` (`direct`, `service`, or `schedule`) and `source_id`, and the Run reports the Session in `session_id`.
@@ -14,7 +14,7 @@ You create a Session directly with `POST /v1/agents/sessions`, or a [Service](/a
 
 ## Recommended flow
 
-1. [Create a Session](./create) for a saved Agent. The Agent version, Skill versions, and MCP connections are frozen at this point.
+1. [Create a Session](./create) for a saved Agent. The Session freezes the selected Agent version and MCP connections, and uses the Skill versions already pinned to that Agent version.
 2. [Open the event stream](./stream) with `GET /v1/agents/sessions/{session_id}/events`. The stream is live-only, so open it before you send input.
 3. [Send input](./send-events) with `POST /v1/agents/sessions/{session_id}/events` and an `agent.session.input.message` event. The call returns 202.
 4. Read results from the stream, or afterwards from [items](./items) and [turns](./turns).
@@ -43,6 +43,9 @@ You create a Session directly with `POST /v1/agents/sessions`, or a [Service](/a
 | `GET` | `/v1/agents/sessions/{session_id}/files` | [List attachments](./list-files) |
 | `GET` | `/v1/agents/sessions/{session_id}/files/{file_id}/content` | [Download an attachment](./download-file) |
 | `DELETE` | `/v1/agents/sessions/{session_id}/files/{file_id}` | [Delete an attachment](./delete-file) |
+| `GET` | `/v1/agents/sessions/{session_id}/workspace-files` | [List workspace file metadata](./list-workspace-files) |
+| `GET` | `/v1/agents/sessions/{session_id}/artifacts` | [List immutable artifacts](./list-artifacts) |
+| `GET` | `/v1/agents/sessions/{session_id}/artifacts/{artifact_id}/content` | [Download an artifact](./download-artifact) |
 
 ## Status fields
 
@@ -82,4 +85,6 @@ Sending input can also return `409 session_input_pending` (earlier input is stil
 
 ## Pagination
 
-Sessions, items, and turns use cursor pagination (`limit` 1-100, `after`, `order`). Attachments use offset pagination (`limit` 1-100, `offset`).
+Sessions, items, turns, and artifacts use cursor pagination (`limit` 1-100, `after`, `order`). Attachments use offset pagination (`limit` 1-100, `offset`).
+
+Workspace files use `page` / `next` pagination instead. See [List workspace files](./list-workspace-files).

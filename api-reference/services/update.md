@@ -8,7 +8,7 @@ apiReference:
   operation: Services
   method: PATCH
   path: /v1/services/{service_id}
-  description: Compare-and-set update. Only name, description, agent_id, agent_version, input, and row_version are accepted; explicit null returns 400. Changing agent_id without agent_version pins that Agent's current version.
+  description: Compare-and-set update. Only name, description, agent_id, agent_version, model, input, and row_version are accepted; explicit null returns 400. Changing agent_id without agent_version pins that Agent's current version.
   groups:
     - title: Path parameters
       fields:
@@ -39,6 +39,10 @@ apiReference:
           type: integer
           required: false
           description: Pin a different version.
+        - name: model
+          type: string
+          required: false
+          description: Model override for future Runs, up to 200 characters. Omit to preserve the current override; send an empty string to use the pinned Agent model. null is rejected. Existing Runs keep their frozen model.
         - name: input
           type: string
           required: false
@@ -52,7 +56,8 @@ apiReference:
           -H "Content-Type: application/json" \
           -d '{
             "row_version": 1,
-            "agent_version": 4
+            "agent_version": 4,
+            "model": "deepseek/deepseek-v4-flash"
           }'
     - label: Python
       language: python
@@ -70,7 +75,8 @@ apiReference:
             headers=headers,
             json={
                 "row_version": 1,
-                "agent_version": 4
+                "agent_version": 4,
+                "model": "deepseek/deepseek-v4-flash"
             },
         )
         response.raise_for_status()
@@ -86,7 +92,8 @@ apiReference:
           },
           body: JSON.stringify({
             "row_version": 1,
-            "agent_version": 4
+            "agent_version": 4,
+            "model": "deepseek/deepseek-v4-flash"
           }),
         });
 
@@ -102,6 +109,7 @@ apiReference:
         "description": "",
         "agent_id": "agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d5e3b4c60",
         "agent_version": 4,
+        "model": "deepseek/deepseek-v4-flash",
         "input": "Summarize this week in AI agents.",
         "status": "active",
         "row_version": 2,

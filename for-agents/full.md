@@ -430,6 +430,12 @@ Exactly one event per request: `agent.session.input.message` or `agent.session.i
 
 ---
 
+### Workspace files and output artifacts
+
+- `GET /v1/agents/sessions/{session_id}/workspace-files` lists current file metadata under `path` (default `/workspace`). Query `limit` (1-100, default 20), `order` (`asc` default or `desc`), and `page` (the previous `next` cursor). Returns `{object:"page", data:[{path,size_bytes}], next, has_more}`. An invalid cursor requires restarting from page one.
+- `GET /v1/agents/sessions/{session_id}/artifacts` lists immutable outputs captured under `/workspace/outputs/`. Query `limit` (default 20), `order` (`desc` default), and `after` (use `last_id` when `has_more` is true).
+- `GET /v1/agents/sessions/{session_id}/artifacts/{artifact_id}/content` downloads a complete artifact using its returned opaque `art_` ID. Downloads have a 200 MiB limit; `Range` is unsupported (`416`). Workspace metadata, uploaded attachments, and captured artifacts are separate resources.
+
 ## Services
 
 A Service pins an Agent version. Each invocation creates a Run (`run_`) that creates its own Session.
@@ -525,3 +531,12 @@ Body `{"name", "kind": "mcp_bearer", "server_url", "token"}`; `Idempotency-Key` 
 - [Models & Pricing](./models) — live model discovery, capabilities, and pricing guidance
 - [Error Guide](./errors) — documented response shapes, HTTP handling, and retry safety
 - [OpenAPI Spec](https://www.sandbase.ai/docs/openapi.yaml) — machine-readable schema
+
+
+## Agent Skill version bindings
+
+Saving an Agent pins each new Skill reference to an explicit version. For a new binding, `version: null` selects the current default at save time. For an existing binding, `version: null` retains its pinned version. Changing a Skill default does not upgrade saved Agents or existing Sessions; save an explicit version on the Agent to upgrade future Sessions.
+
+## Updating Service and Schedule models
+
+`PATCH /v1/services/{service_id}` and `PATCH /v1/schedules/{schedule_id}` accept `model` with the required current `row_version`. Omit `model` to keep the saved override, send an empty string to clear it and use the pinned Agent model, or send a model ID to replace it. Explicit null is rejected.

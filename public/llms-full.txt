@@ -263,6 +263,16 @@ Creates a Session for a saved Agent and freezes its version, Skills, and MCP con
 ## GET /v1/agents/sessions/{session_id}/turns - Read turns
 ## POST /v1/agents/sessions/{session_id}/cancel - Cancel the running turn (Idempotency-Key required)
 
+## GET /v1/agents/sessions/{session_id}/workspace-files - List current workspace file metadata
+
+Query: path (default /workspace), limit (1-100, default 20), order (asc default or desc), page (opaque next cursor). Returns object=page, data with path and size_bytes, next, has_more. This read-only listing does not download file content.
+
+## GET /v1/agents/sessions/{session_id}/artifacts - List captured output artifacts
+## GET /v1/agents/sessions/{session_id}/artifacts/{artifact_id}/content - Download an artifact
+
+Artifacts are immutable outputs captured under /workspace/outputs/, separate from uploaded attachments. List with limit (1-100, default 20), order (desc default or asc), after (returned artifact ID). Use last_id while has_more is true. Download the returned opaque art_ ID as a complete file; Range is unsupported (416), with a 200 MiB download limit.
+
+
 ---
 
 ## POST /v1/services
@@ -346,3 +356,12 @@ Do not retry unchanged 400, 401, 402, 403, or 404 requests. Check idempotency be
 - OpenAPI spec: https://www.sandbase.ai/docs/openapi.yaml
 - Console: https://www.sandbase.ai/console
 - API Keys: https://www.sandbase.ai/console/keys
+
+
+## Agent Skill version bindings
+
+Saving an Agent pins each new Skill reference to an explicit version. For a new binding, `version: null` selects the current default at save time. For an existing binding, `version: null` retains its pinned version. Changing a Skill default does not upgrade saved Agents or existing Sessions; save an explicit version on the Agent to upgrade future Sessions.
+
+## Updating Service and Schedule models
+
+`PATCH /v1/services/{service_id}` and `PATCH /v1/schedules/{schedule_id}` accept `model` with the required current `row_version`. Omit `model` to keep the saved override, send an empty string to clear it and use the pinned Agent model, or send a model ID to replace it. Explicit null is rejected.

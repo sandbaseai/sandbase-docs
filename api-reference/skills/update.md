@@ -22,19 +22,19 @@ apiReference:
         - name: default_version
           type: string
           required: false
-          description: Version used by Agents that reference the Skill with version null.
+          description: Default used when first attaching this Skill without an explicit version. Existing Agent bindings keep their pinned versions.
         - name: status
           type: string
           required: false
           description: active or disabled.
         - name: metadata
-          type: object
+          type: object | null
           required: false
-          description: Market metadata. Requires row_version.
+          description: Presentation metadata under the market namespace only (up to 16 KiB). Requires row_version; replaces the metadata object. Unknown namespaces or fields return 400. See the metadata example below.
         - name: row_version
           type: integer
           required: false
-          description: Compare-and-set token.
+          description: Current row_version from Get Skill. A stale value returns 409 conflict; required when metadata is present.
   examples:
     - label: cURL
       language: bash
@@ -111,3 +111,24 @@ apiReference:
 ---
 
 <ApiReferencePage />
+
+## Metadata example
+
+Send the current `row_version` together with the complete metadata object:
+
+```json
+{
+  "row_version": 3,
+  "metadata": {
+    "market": {
+      "display_name": "Release notes",
+      "categories": ["development"],
+      "tags": ["releases"],
+      "required_endpoints": ["github.issues"],
+      "servers": ["github"]
+    }
+  }
+}
+```
+
+Market metadata describes the Skill for display. It does not install a server, grant credentials, or change the Agent's MCP selection. `metadata: {}` or `metadata: null` clears it; both still require `row_version`.

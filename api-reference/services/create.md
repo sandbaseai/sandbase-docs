@@ -42,7 +42,7 @@ apiReference:
         - name: model
           type: string
           required: false
-          description: Default model override.
+          description: Model override for Runs, up to 200 characters. Omit or send an empty string to use the pinned Agent model. Each Run freezes its selected model.
   examples:
     - label: cURL
       language: bash

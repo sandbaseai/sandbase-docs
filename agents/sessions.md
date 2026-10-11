@@ -135,3 +135,15 @@ Treat IDs as opaque strings.
 - [OpenAI compatibility](/agents/openai-compatibility)
 - [Services](/agents/services)
 - [Schedules](/agents/schedules)
+
+## Workspace files and generated artifacts
+
+These three resources serve different purposes:
+
+| Resource | Use it for | Pagination |
+|---|---|---|
+| [Attachments](/api-reference/sessions/list-files) | Files you uploaded and can reference in input with a `file_id` | `limit` / `offset` |
+| [Workspace files](/api-reference/sessions/list-workspace-files) | Current file paths and sizes in a workspace directory | `page` / `next` |
+| [Artifacts](/api-reference/sessions/list-artifacts) | Immutable generated outputs available for download | `after` / `last_id` |
+
+List artifacts to obtain an `art_` ID, then pass that exact ID to [Download Artifact](/api-reference/sessions/download-artifact). A workspace path or attachment `file_id` cannot substitute for it. Workspace listing returns metadata only and is not an arbitrary-path download API. Artifacts can be downloaded as complete files up to 200 MiB; partial `Range` downloads are unsupported.

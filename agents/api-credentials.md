@@ -23,11 +23,12 @@ Create, rotate, and revoke Secrets with the Secrets API. This guide documents th
 Create a Secret. `Idempotency-Key` is required for every Secret write.
 
 ```bash
-curl -X POST https://api.sandbase.ai/v1/secrets \
-  -H "Authorization: Bearer $SANDBASE_API_KEY" \
-  -H "Idempotency-Key: github-mcp-token" \
-  -H "Content-Type: application/json" \
-  -d '{"name": "GitHub MCP token", "kind": "mcp_bearer", "server_url": "https://mcp.example.com/github", "token": "'"$GITHUB_MCP_TOKEN"'"}'
+python3 -c 'import json, os; print(json.dumps({"name": "GitHub MCP token", "kind": "mcp_bearer", "server_url": "https://mcp.example.com/github", "token": os.environ["GITHUB_MCP_TOKEN"]}))' | \
+  curl -X POST https://api.sandbase.ai/v1/secrets \
+    -H "Authorization: Bearer $SANDBASE_API_KEY" \
+    -H "Idempotency-Key: github-mcp-token" \
+    -H "Content-Type: application/json" \
+    --data-binary @-
 ```
 
 The response is `201 Created` with a `sec_` ID and `status` (`pending` while the token is stored, then `active`). Use the ID as `secret_id` when you [create the MCP connection](/api-reference/mcp-connections/#create-a-connection).

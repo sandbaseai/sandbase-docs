@@ -2196,6 +2196,237 @@ paths:
         '403': { description: 'insufficient_scope (scoped key) or org_disabled', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
         '404': { description: 'not_found: the resource does not exist in this organization', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
         '503': { description: 'authorization_unavailable, admission_unavailable, executor_unavailable, storage_unavailable, or internal_error', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
+  /v1/agents/sessions/{session_id}/workspace-files:
+    parameters:
+      - $ref: "#/components/parameters/SessionIdPath"
+    get:
+      operationId: listSessionWorkspaceFiles
+      tags:
+        - Sessions
+      summary: List workspace files
+      description: Read immediate file metadata under a normalized /workspace path. This is a read-only directory listing, not an attachment or artifact download. Use next as page with the same path, order and limit; restart from the first page if the cursor expires.
+      security:
+        - BearerAuth: []
+        - AgentsApiKey: []
+      parameters:
+        - name: path
+          in: query
+          required: false
+          description: Normalized absolute directory path under /workspace. No traversal, backslashes, or trailing slash.
+          schema:
+            type: string
+            maxLength: 4096
+            default: /workspace
+        - name: limit
+          in: query
+          required: false
+          description: Page size.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: order
+          in: query
+          required: false
+          description: Sort by path.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+        - name: page
+          in: query
+          required: false
+          description: Opaque next cursor; omit for the first page.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+      responses:
+        "200":
+          description: List workspace files
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionWorkspacePage"
+        "400":
+          description: invalid_request or workspace_cursor_invalid; restart pagination for an invalid cursor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "401":
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        '402': { description: 'spending_limit_exceeded: API key spending limit or organization balance exhausted', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
+        "403":
+          description: insufficient_scope or org_disabled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "404":
+          description: "not_found: resource not found in this organization"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "409":
+          description: workspace_provisioning or workspace_environment_missing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "503":
+          description: workspace_unavailable, authorization_unavailable, or storage_unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+  /v1/agents/sessions/{session_id}/artifacts:
+    parameters:
+      - $ref: '#/components/parameters/SessionIdPath'
+    get:
+      operationId: listSessionArtifacts
+      tags:
+        - Sessions
+      summary: List session artifacts
+      description: List immutable outputs captured under /workspace/outputs/. Use returned opaque artifact IDs for after and downloads; do not construct IDs from paths.
+      security:
+        - BearerAuth: []
+        - AgentsApiKey: []
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: Page size.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: order
+          in: query
+          required: false
+          description: Artifact order.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+        - name: after
+          in: query
+          required: false
+          description: Artifact ID from the preceding page; use last_id when has_more is true.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List session artifacts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionArtifactList"
+        "400":
+          description: "invalid_request: invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "401":
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        '402': { description: 'spending_limit_exceeded: API key spending limit or organization balance exhausted', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
+        "403":
+          description: insufficient_scope or org_disabled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "404":
+          description: "not_found: resource not found in this organization"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "503":
+          description: executor_unavailable, authorization_unavailable, or storage_unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+  /v1/agents/sessions/{session_id}/artifacts/{artifact_id}/content:
+    parameters:
+      - $ref: '#/components/parameters/SessionIdPath'
+      - name: artifact_id
+        in: path
+        required: true
+        description: Opaque art_ ID returned by the artifact list for this Session.
+        schema:
+          type: string
+    get:
+      operationId: downloadSessionArtifact
+      tags:
+        - Sessions
+      summary: Download session artifact
+      description: Download a complete immutable artifact, up to 200 MiB. No query parameters. Range is unsupported and returns 416 after access checks. Content-Type follows the file extension, with application/octet-stream as fallback.
+      security:
+        - BearerAuth: []
+        - AgentsApiKey: []
+      responses:
+        "200":
+          description: Complete artifact bytes; Content-Disposition is attachment and Cache-Control is no-store.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "400":
+          description: "invalid_request: invalid query parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "401":
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        '402': { description: 'spending_limit_exceeded: API key spending limit or organization balance exhausted', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
+        "403":
+          description: insufficient_scope or org_disabled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "404":
+          description: "not_found: resource not found in this organization"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "416":
+          description: "invalid_request: Range downloads are unsupported"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
+        "503":
+          description: executor_unavailable, authorization_unavailable, or storage_unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentsError"
   # --- Services -----------------------------------------------
   /v1/services:
     post:
@@ -2276,7 +2507,7 @@ paths:
       operationId: updateService
       tags: [Services]
       summary: Update service
-      description: 'Compare-and-set update of name, description, agent_id, agent_version, or input. Explicit null values are rejected. Changing agent_id without agent_version pins that Agent''s current version.'
+      description: 'Compare-and-set update of name, description, agent_id, agent_version, input, or model. An empty model clears the saved override; omission preserves it. Explicit null values are rejected. Changing agent_id without agent_version pins that Agent''s current version.'
       security:
         - BearerAuth: []
         - AgentsApiKey: []
@@ -2676,7 +2907,7 @@ paths:
       operationId: updateSchedule
       tags: [Schedules]
       summary: Update schedule
-      description: 'Compare-and-set update of name, description, agent_id, agent_version, or input. Explicit null values are rejected. Changing agent_id without agent_version pins that Agent''s current version.'
+      description: 'Compare-and-set update of name, description, agent_id, agent_version, input, or model. An empty model clears the saved override; omission preserves it. Explicit null values are rejected. Changing agent_id without agent_version pins that Agent''s current version.'
       security:
         - BearerAuth: []
         - AgentsApiKey: []
@@ -3746,7 +3977,7 @@ components:
       in: path
       required: true
       schema: { type: string }
-      description: MCP connection ID (`mcp_` prefix).
+      description: MCP connection ID (`mcp_` prefix), or builtin:sandbase for the built-in SandBase server.
     SecretIdPath:
       name: secret_id
       in: path
@@ -5258,14 +5489,14 @@ components:
       additionalProperties: false
       required: [skill_id]
       properties:
-        skill_id: { type: string, description: "Skill ID (`skl_` prefix) owned by your organization." }
-        version: { type: [string, 'null'], description: "Pinned Skill version. null uses the default version, resolved when a Session is created." }
+        skill_id: { type: string, description: "Skill ID (`skl_` prefix) owned by your organization or available from the public Skills catalog." }
+        version: { type: [string, 'null'], description: "Pinned Skill version. For a new binding, null resolves the current default when the Agent is saved. For an existing binding, null retains its pinned version; pass an explicit version to upgrade." }
     AgentMCPConnectionRef:
       type: object
       additionalProperties: false
       required: [connection_id, server_label]
       properties:
-        connection_id: { type: string, description: "MCP connection ID (`mcp_` prefix)." }
+        connection_id: { type: string, description: "MCP connection ID (`mcp_` prefix), or builtin:sandbase for the built-in SandBase server." }
         server_label: { type: string, pattern: '^[a-zA-Z][a-zA-Z0-9_-]{0,63}$', description: "Label unique within the Agent." }
         allowed_tools: { type: [array, 'null'], maxItems: 256, items: { type: string, minLength: 1, maxLength: 128 }, description: "null allows every tool; an empty array allows none." }
         required: { type: boolean, description: "Whether the Session must load this server." }
@@ -5336,7 +5567,7 @@ components:
         text: { $ref: '#/components/schemas/AgentText' }
         reasoning: { $ref: '#/components/schemas/AgentReasoning' }
         skills: { type: array, items: { $ref: '#/components/schemas/AgentSkillRef' } }
-        mcp_connections: { type: array, maxItems: 32, items: { $ref: '#/components/schemas/AgentMCPConnectionRef' } }
+        mcp_connections: { type: array, maxItems: 32, items: { $ref: '#/components/schemas/AgentMCPConnectionRef' }, description: 'Omission selects builtin:sandbase on create. An explicit array replaces the selection; [] disables all MCP tools. Null is rejected.' }
     AgentCreateRequest:
       allOf:
         - $ref: '#/components/schemas/AgentConfigFields'
@@ -5668,6 +5899,86 @@ components:
         model: { type: string, maxLength: 200 }
         schedule: { $ref: '#/components/schemas/ScheduleSpec' }
         model_provider: { $ref: '#/components/schemas/ModelProvider' }
+    SessionWorkspacePage:
+      type: object
+      required:
+        - object
+        - data
+        - next
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - page
+        data:
+          type: array
+          items:
+            type: object
+            required:
+              - path
+              - size_bytes
+            properties:
+              path:
+                type: string
+              size_bytes:
+                type: integer
+                minimum: 0
+        next:
+          type: [string, 'null']
+        has_more:
+          type: boolean
+    SessionArtifact:
+      type: object
+      required:
+        - object
+        - id
+        - session_id
+        - path
+        - size_bytes
+        - created_at
+      properties:
+        object:
+          type: string
+          enum:
+            - agent.session.artifact
+        id:
+          type: string
+          description: Opaque art_ handle bound to this organization and Session.
+        session_id:
+          type: string
+        path:
+          type: string
+          description: Captured output path under /workspace/outputs/.
+        size_bytes:
+          type: integer
+          minimum: 0
+        created_at:
+          type: integer
+          description: Unix seconds.
+    SessionArtifactList:
+      type: object
+      required:
+        - object
+        - data
+        - has_more
+        - first_id
+        - last_id
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/SessionArtifact"
+        has_more:
+          type: boolean
+        first_id:
+          type: [string, 'null']
+        last_id:
+          type: [string, 'null']
     RunSourcePatch:
       type: object
       additionalProperties: false
@@ -5678,6 +5989,7 @@ components:
         agent_id: { type: string }
         agent_version: { type: integer, minimum: 1 }
         input: { type: string, maxLength: 262144 }
+        model: { type: string, maxLength: 200, description: "Model override. Empty string clears the override; omission preserves it. Null is rejected." }
         row_version: { type: integer, minimum: 1 }
     ScheduleTimingRequest:
       type: object
@@ -5860,7 +6172,7 @@ components:
       properties:
         default_version: { type: string }
         status: { type: string, enum: [active, disabled] }
-        metadata: { type: object, description: "Market metadata. Requires row_version." }
+        metadata: { type: [object, 'null'], description: "Market metadata. Requires row_version; null or an empty object clears it." }
         row_version: { type: integer, minimum: 1 }
     Skill:
       type: object

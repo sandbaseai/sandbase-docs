@@ -232,8 +232,10 @@ SandBase runs every Session in its hosted cloud; there is no environment to choo
 | `sessions.items.list`, `sessions.turns.list / retrieve` | Compatible | Cursor pagination with `limit` 1-100, `after`, `order`. |
 | `client.skills` and `skills.versions` | Compatible, except version delete | `skills.versions.delete` returns `404`. |
 | Error envelope | Compatible | `{"error": {"type", "code", "param", "message"}}`; SDK exceptions expose it as `exc.body`. |
-| Agent versions, restore, archive, catalog, Session rename/archive/reconnect/files | SandBase only | See the [Agents](/api-reference/agents/) and [Sessions](/api-reference/sessions/) API reference. |
+| Agent versions, restore, archive, catalog, Session rename/archive/reconnect/files/workspace-files/artifacts | SandBase only | See the [Agents](/api-reference/agents/) and [Sessions](/api-reference/sessions/) API reference. |
 | Services, Schedules, MCP connections, Secrets | SandBase only | Use HTTP or `client.post` / `client.get`. |
+
+SandBase exposes [artifact listing](/api-reference/sessions/list-artifacts) and [content downloads](/api-reference/sessions/download-artifact) over HTTP. Artifact IDs are opaque and Session-scoped. This does not imply support for every SDK artifact method; a separate artifact metadata endpoint is not exposed.
 
 ### Not supported
 
@@ -250,7 +252,7 @@ These OpenAI SDK calls fail against SandBase. The message is the actual `error.m
 | `agents.create(..., tools=[{"type": "mcp", ...}])`; `tool_search`, `programmatic_tool_calling`, and `computer_use` tools | `400 invalid_request`. Only `function` and one `web_search` tool are accepted |
 | `events.create` with a `tool_result` or computer-use approval event | `400 invalid_request`. Sessions that reach `requires_action` are not supported |
 | `events.create` with more than one event | `400`: `exactly one text input or cancel event is supported per request` |
-| `sessions.artifacts`, `sessions.traces`, `sessions.subagents`, `environments.templates` | `404 not_found` (openai-python 3.13.0 has no `traces`) |
+| `sessions.traces`, `sessions.subagents`, `environments.templates` | `404 not_found` (openai-python 3.13.0 has no `traces`) |
 | `beta.agents.vaults` | `404` with a plain-text body (`404 page not found`), not the JSON error envelope |
 | `skills.versions.delete` | `404 not_found` |
 
