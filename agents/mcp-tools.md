@@ -26,8 +26,8 @@ Most useful Agents combine both: an MCP server fetches data or takes actions, an
 }
 ```
 
-- `"version": null` uses the Skill's `default_version`. A string such as `"2"` pins one version.
-- The version is resolved and frozen when each Session starts. Changing the default later affects new Sessions only.
+- On first attachment, `"version": null` resolves the Skill's current `default_version` when the Agent is saved. A string such as `"2"` selects that version explicitly.
+- The saved Agent pins the version. Changing the Skill default does not upgrade existing Agents or their new Sessions. Update the Agent with an explicit version to upgrade; sending `null` for an existing binding retains its pinned version.
 - Upload a new version with `POST /v1/skills/{skill_id}/versions`, and switch the default with `default=true` or `POST /v1/skills/{skill_id}`.
 - A disabled Skill makes new Sessions of Agents that reference it fail with `400 skill_not_found`.
 
@@ -63,12 +63,27 @@ You can also browse public Skills in the [Skills catalog](/api-reference/skills/
 
 | Field | Meaning |
 |---|---|
-| `connection_id` | `mcp_` connection ID in your organization |
+| `connection_id` | `mcp_` connection ID in your organization, or `builtin:sandbase` for the built-in SandBase server |
 | `server_label` | Starts with a letter; letters, digits, `_`, and `-`; up to 64 characters; unique within the Agent |
-| `allowed_tools` | `null` allows every tool the server offers; `[]` allows none; a list allows only those names |
+| `allowed_tools` | Omitted or `null` allows every tool the server offers; `[]` allows none; a list allows only those names (up to 256 names, each nonblank and at most 128 bytes) |
 | `required` | Whether the Session must load this server |
 
-An Agent can reference up to 32 connections. The connection must be `active` when a Session starts.
+An Agent can reference up to 32 connections. Organization connections must be `active` when a Session starts.
+
+### Built-in SandBase tools
+
+Creating an Agent without `mcp_connections` selects the built-in SandBase server. To explicitly keep it alongside your own server, include this entry in the array:
+
+```json
+{
+  "connection_id": "builtin:sandbase",
+  "server_label": "sandbase_builtin",
+  "allowed_tools": null,
+  "required": true
+}
+```
+
+An explicit array replaces the whole selection; the custom-only example above excludes the built-in server. Send `[]` to disable all MCP tools. Omitting the field on an Agent update preserves the existing selection; `null` returns `400`. The built-in entry does not require creating an MCP connection or Secret. Do not send the retired `use_sandbase_mcp` field.
 
 ::: info Differs from OpenAI
 OpenAI's Agents API declares MCP servers inline as `tools: [{"type": "mcp", ...}]`. SandBase returns `400` for that form: register the server as a connection resource and reference it in `mcp_connections`. The OpenAI SDK has no methods for `/v1/mcp-connections` or `/v1/secrets`, so call them with `client.post(...)` and pass `mcp_connections` through `extra_body` (Python) or the request body (Node.js). See [OpenAI compatibility](/agents/openai-compatibility#mcp-connections-with-the-sdk).

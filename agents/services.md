@@ -73,3 +73,7 @@ A Service can post Run results to a Feishu or Lark bot. Save the webhook with `P
 - [Services API reference](/api-reference/services/)
 - [Schedules](/agents/schedules)
 - [Sessions](/agents/sessions)
+
+## Change the model for future Runs
+
+Use the [update endpoint](/api-reference/services/update) with the latest `row_version` and a `model` string. Omit `model` to keep the current override, or send `""` to return to the pinned Agent model. `null` is rejected. A Run-specific model takes precedence over the saved override; changing the resource does not change an existing Run.

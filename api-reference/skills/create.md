@@ -15,7 +15,7 @@ apiReference:
         - name: Idempotency-Key
           type: string
           required: false
-          description: Optional. When omitted the service generates one, so a retried request can create a duplicate. Send your own stable key for retries.
+          description: Optional, 1-128 bytes without leading or trailing whitespace. When omitted the service generates one, so a retried request can create a duplicate. Send your own stable key for retries.
     - title: Request body
       description: multipart/form-data.
       fields:

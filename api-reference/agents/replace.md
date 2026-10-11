@@ -48,7 +48,7 @@ apiReference:
         - name: skills
           type: array
           required: false
-          description: 'Skill references: {"skill_id": "skl_…", "version": null | "<version>"}. null uses the Skill default version, resolved when a Session starts.'
+          description: 'Skill references: {"skill_id": "skl_…", "version": null | "<version>"}. Up to 32. On a new binding, null pins the current default when the Agent is saved. For an existing binding, null preserves its pinned version; supply an explicit version to upgrade.'
         - name: mcp_connections
           type: array
           required: false

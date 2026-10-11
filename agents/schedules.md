@@ -74,3 +74,7 @@ Schedules support the same Feishu or Lark notifications as [Services](/api-refer
 - [Schedules API reference](/api-reference/schedules/)
 - [Services](/agents/services)
 - [Sessions](/agents/sessions)
+
+## Change the model for future Runs
+
+Use the [update endpoint](/api-reference/schedules/update) with the latest `row_version` and a `model` string. Omit `model` to keep the current override, or send `""` to return to the pinned Agent model. `null` is rejected. A Run-specific model takes precedence over the saved override; changing the resource does not change an existing Run.

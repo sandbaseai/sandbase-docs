@@ -52,15 +52,31 @@ A Skill is a versioned ZIP bundle of instructions and resources that an Agent ca
      -d '{"skills": [{"skill_id": "skl_3c5e7a9b-1d4f-5a6c-8e2b-4d6f8a0c2e57", "version": null}]}'
    ```
 
-`"version": null` follows the Skill's `default_version`; a string pins one version. The version is resolved and frozen when each Session starts, and the Session reports it in `environment.skills`.
+When first attaching a Skill, `"version": null` (or an omitted `version`) resolves its current `default_version` when the Agent is saved. The saved Agent contains an explicit version. Changing the Skill default does not upgrade an existing Agent. To upgrade, update its `skills` array with an explicit version such as `"2"`; submitting `null` for an existing binding retains its pinned version. Each Session uses the saved Agent version and reports the resolved Skills in `environment.skills`.
+
+An Agent supports up to 32 Skills. Skill IDs and Skill names must be unique within its selection.
 
 ## Versions
 
 - Uploading to `POST /v1/skills/{skill_id}/versions` adds the next version. Send the form field `default=true` to make it the default.
 - `POST /v1/skills/{skill_id}` with `default_version` switches the default without uploading.
 - `status` is `active` or `disabled`. New Sessions of an Agent that references a disabled Skill fail with `400 skill_not_found`; Sessions that already froze a version keep it.
-- A Skill that any Agent version references cannot be deleted (409). Disable it instead, or remove it from your Agents first.
+- A Skill that any Agent version references cannot be deleted (409). Disable it instead. Removing it from the latest Agent version does not remove references in historical versions.
 
 ## Pagination and errors
 
 Lists use cursor pagination with `limit` 0-100, `after`, and `order`. Errors use the [Agents error envelope](/api-reference/errors#agents-platform-errors).
+
+## Download a bundle
+
+Content endpoints return `application/zip`, not JSON. Save the response to a file:
+
+```bash
+curl --fail https://api.sandbase.ai/v1/skills/skl_3c5e7a9b-1d4f-5a6c-8e2b-4d6f8a0c2e57/versions/2/content \
+  -H "Authorization: Bearer $SANDBASE_API_KEY" \
+  --output release-notes-v2.zip
+```
+
+Use `/v1/skills/{skill_id}/content` for the current default version. For public catalog bundles, use `/v1/skills/catalog/{skill_id}/versions/{version}/content`.
+
+Version lists use the same cursor parameters as Skill lists. Pass the returned `last_id` (for example, `skl_…:2`) as `after`; do not pass the bare version number.

@@ -52,7 +52,7 @@ The body is strict JSON (up to 1 MiB). Unknown fields return 400.
 | `instructions` | No | Up to 256 KiB |
 | `description` | No | Up to 4096 characters |
 | `runtime_profile` | No | `codex` (default), `claude`, or `mcode` |
-| `skills` | No | `[{"skill_id": "skl_…", "version": null}]`; see [Skills](/agents/mcp-tools#skills) |
+| `skills` | No | Up to 32 references. A new binding with `version: null` pins the current default when saved; existing bindings retain their pinned version. Supply an explicit version to upgrade; see [Skills](/agents/mcp-tools#skills) |
 | `mcp_connections` | No | Up to 32 references; see [MCP connections](/agents/mcp-tools#mcp-connections) |
 | `tools` | No | Up to 64 `function` tools and at most one `web_search` tool |
 | `text` | No | `format.type` `text` or `json_schema` (object schema); `verbosity` `low`, `medium`, or `high` |

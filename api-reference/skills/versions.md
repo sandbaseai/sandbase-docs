@@ -21,7 +21,7 @@ apiReference:
         - name: Idempotency-Key
           type: string
           required: false
-          description: Optional. When omitted the service generates one, so a retried request can create a duplicate. Send your own stable key for retries.
+          description: Optional, 1-128 bytes without leading or trailing whitespace. When omitted the service generates one, so a retried request can create a duplicate. Send your own stable key for retries.
     - title: Request body
       description: multipart/form-data.
       fields:
@@ -32,7 +32,7 @@ apiReference:
         - name: default
           type: string
           required: false
-          description: true or false.
+          description: true makes this the default for future attachments; false or omitted keeps the current default. Existing Agent bindings are unchanged.
   examples:
     - label: cURL
       language: bash
@@ -112,3 +112,9 @@ apiReference:
 ---
 
 <ApiReferencePage />
+
+## List and download versions
+
+`GET /v1/skills/{skill_id}/versions` accepts `limit` (0-100, default 20), `order` (`asc` or `desc`, default `desc`), and `after`. Its response contains `object: "list"`, `data`, `has_more`, `first_id`, and `last_id`. Pass `last_id` unchanged as the next `after`; it is a Skill-prefixed version ID, not the bare version number.
+
+`GET /v1/skills/{skill_id}/versions/{version}` returns one version object. The corresponding `/content` endpoint returns ZIP bytes; see the [download example](./#download-a-bundle).
