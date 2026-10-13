@@ -181,7 +181,7 @@ curl https://api.sandbase.ai/v1/run \
   -H "Authorization: Bearer sk-YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "kwaivgi/kling-video/3.0/turbo/standard/text-to-video",
+    "model": "kwaivgi/kling-video/v3/standard/text-to-video",
     "prompt": "A drone flying over mountains at golden hour",
     "duration": 5
   }'
@@ -193,7 +193,7 @@ curl https://api.sandbase.ai/v1/run \
 {
   "id": "6a7b9c10-2d3e-4f50-8a61-23456789abcd",
   "status": "running",
-  "model": "kwaivgi/kling-video/3.0/turbo/standard/text-to-video",
+  "model": "kwaivgi/kling-video/v3/standard/text-to-video",
   "created_at": "2026-08-02T12:00:00Z"
 }
 ```

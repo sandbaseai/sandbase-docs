@@ -2,18 +2,18 @@
 export default {
   "platform": "Agent Body",
   "slug": "agentbody",
-  "operationCount": 9,
+  "operationCount": 6,
   "groups": [
     {
       "key": "users",
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "LinkedIn Profile",
+          "text": "Agent Body LinkedIn Profile Lookup",
           "link": "/model-api-reference/platform-apis/agentbody/linkedin-profile"
         },
         {
-          "text": "YouTube Channel Email",
+          "text": "Agent Body YouTube Channel Email",
           "link": "/model-api-reference/platform-apis/agentbody/youtube-channel-email"
         }
       ]
@@ -23,31 +23,19 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "YouTube Transcript",
+          "text": "Agent Body YouTube Transcript",
           "link": "/model-api-reference/platform-apis/agentbody/youtube-transcript"
         },
         {
-          "text": "TikTok Transcript",
-          "link": "/model-api-reference/platform-apis/agentbody/tiktok-transcript"
-        },
-        {
-          "text": "TikTok Transcribe",
-          "link": "/model-api-reference/platform-apis/agentbody/tiktok-transcribe"
-        },
-        {
-          "text": "Document Parse",
+          "text": "Agent Body Document Parser",
           "link": "/model-api-reference/platform-apis/agentbody/document-parse"
         },
         {
-          "text": "Humanize Writing",
-          "link": "/model-api-reference/platform-apis/agentbody/humanize-writing"
-        },
-        {
-          "text": "LinkedIn Email",
+          "text": "Agent Body LinkedIn Email",
           "link": "/model-api-reference/platform-apis/agentbody/linkedin-email"
         },
         {
-          "text": "LinkedIn Phone",
+          "text": "Agent Body LinkedIn Phone Lookup",
           "link": "/model-api-reference/platform-apis/agentbody/linkedin-phone"
         }
       ]

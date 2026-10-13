@@ -23,7 +23,7 @@ export default {
           "link": "/model-api-reference/platform-apis/exa/contents"
         },
         {
-          "text": "Exa Answer",
+          "text": "Exa Question Answering",
           "link": "/model-api-reference/platform-apis/exa/answer"
         }
       ]

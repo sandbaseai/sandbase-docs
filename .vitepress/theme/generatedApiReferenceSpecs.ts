@@ -416,7 +416,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "name": "model",
             "type": "string",
             "required": true,
-            "description": "Current model identifier, for example kwaivgi/kling-video/3.0/turbo/standard/text-to-video."
+            "description": "Current model identifier, for example kwaivgi/kling-video/v3/standard/text-to-video."
           },
           {
             "name": "prompt",
@@ -449,15 +449,15 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
       {
         "label": "cURL",
         "language": "bash",
-        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\",\"prompt\":\"A cat playing piano\",\"duration\":5}'"
+        "code": "curl -X POST https://api.sandbase.ai/v1/run \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"kwaivgi/kling-video/v3/standard/text-to-video\",\"prompt\":\"A cat playing piano\",\"duration\":5}'"
       },
       {
         "label": "Python",
         "language": "python",
-        "code": "# 1. Submit generation request\nresponse = client.post(\"/v1/run\", json={\n    \"model\": \"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\",\n    \"prompt\": \"A cat playing piano\",\n    \"duration\": 5,\n    \"webhook_url\": \"https://hooks.example.com/sandbase/task?token=opaque-token\"\n})\ngeneration_id = response.json()[\"id\"]\n\n# 2. SandBase posts the terminal event to webhook_url.\n# You may still poll the existing result endpoint as a fallback.\nimport time\nwhile True:\n    result = client.get(f\"/v1/run/{generation_id}\").json()\n    if result[\"status\"] in (\"completed\", \"failed\", \"timeout\"):\n        print(result)\n        break\n    time.sleep(5)"
+        "code": "# 1. Submit generation request\nresponse = client.post(\"/v1/run\", json={\n    \"model\": \"kwaivgi/kling-video/v3/standard/text-to-video\",\n    \"prompt\": \"A cat playing piano\",\n    \"duration\": 5,\n    \"webhook_url\": \"https://hooks.example.com/sandbase/task?token=opaque-token\"\n})\ngeneration_id = response.json()[\"id\"]\n\n# 2. SandBase posts the terminal event to webhook_url.\n# You may still poll the existing result endpoint as a fallback.\nimport time\nwhile True:\n    result = client.get(f\"/v1/run/{generation_id}\").json()\n    if result[\"status\"] in (\"completed\", \"failed\", \"timeout\"):\n        print(result)\n        break\n    time.sleep(5)"
       }
     ],
-    "response": { "status": "202 Accepted", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"pending\",\n  \"model\": \"kwaivgi/kling-video/3.0/turbo/standard/text-to-video\"\n}" }
+    "response": { "status": "202 Accepted", "code": "{\n  \"id\": \"run_01...\",\n  \"status\": \"pending\",\n  \"model\": \"kwaivgi/kling-video/v3/standard/text-to-video\"\n}" }
   },
   "images/generations": {
     "title": "Generate Image",

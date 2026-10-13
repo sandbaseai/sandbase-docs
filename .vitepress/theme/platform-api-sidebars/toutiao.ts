@@ -9,7 +9,7 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get comments of specified post",
+          "text": "Toutiao Post Comments",
           "link": "/model-api-reference/platform-apis/toutiao/app/comments"
         }
       ]
@@ -19,12 +19,12 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get information of specified video",
-          "link": "/model-api-reference/platform-apis/toutiao/app/video-info"
+          "text": "Toutiao Specified Video Details",
+          "link": "/model-api-reference/platform-apis/toutiao/web/video-info"
         },
         {
-          "text": "Get information of specified video",
-          "link": "/model-api-reference/platform-apis/toutiao/web/video-info"
+          "text": "Toutiao Video Information",
+          "link": "/model-api-reference/platform-apis/toutiao/app/video-info"
         }
       ]
     },
@@ -33,12 +33,12 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Get information of specified user",
-          "link": "/model-api-reference/platform-apis/toutiao/app/user-info"
+          "text": "Toutiao Profile User ID",
+          "link": "/model-api-reference/platform-apis/toutiao/app/user-id"
         },
         {
-          "text": "Get user_id from user profile",
-          "link": "/model-api-reference/platform-apis/toutiao/app/user-id"
+          "text": "Toutiao User Profile",
+          "link": "/model-api-reference/platform-apis/toutiao/app/user-info"
         }
       ]
     },
@@ -47,11 +47,11 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Get information of specified article",
+          "text": "Toutiao Article Details (App)",
           "link": "/model-api-reference/platform-apis/toutiao/app/article-info"
         },
         {
-          "text": "Get information of specified article",
+          "text": "Toutiao Article Details (Web)",
           "link": "/model-api-reference/platform-apis/toutiao/web/article-info"
         }
       ]

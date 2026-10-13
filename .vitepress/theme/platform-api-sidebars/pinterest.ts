@@ -33,7 +33,7 @@ export default {
           "link": "/model-api-reference/platform-apis/pinterest/pin"
         },
         {
-          "text": "Pinterest Board",
+          "text": "Pinterest Board Pins",
           "link": "/model-api-reference/platform-apis/pinterest/board"
         }
       ]

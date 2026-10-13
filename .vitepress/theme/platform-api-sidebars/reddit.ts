@@ -2,47 +2,43 @@
 export default {
   "platform": "Reddit",
   "slug": "reddit",
-  "operationCount": 27,
+  "operationCount": 24,
   "groups": [
     {
       "key": "search",
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Fetch Reddit APP Dynamic Search Results",
-          "link": "/model-api-reference/platform-apis/reddit/app/dynamic-search"
-        },
-        {
-          "text": "Fetch Reddit APP Games Feed",
+          "text": "Reddit App Games Feed",
           "link": "/model-api-reference/platform-apis/reddit/app/games-feed"
         },
         {
-          "text": "Fetch Reddit APP Home Feed",
+          "text": "Reddit App Home Feed",
           "link": "/model-api-reference/platform-apis/reddit/app/home-feed"
         },
         {
-          "text": "Fetch Reddit APP News Feed",
+          "text": "Reddit App News Feed",
           "link": "/model-api-reference/platform-apis/reddit/app/news-feed"
         },
         {
-          "text": "Fetch Reddit APP Popular Feed",
+          "text": "Reddit App Popular Feed",
           "link": "/model-api-reference/platform-apis/reddit/app/popular-feed"
         },
         {
-          "text": "Fetch Reddit APP Search Typeahead Suggestions",
+          "text": "Reddit App Search Typeahead",
           "link": "/model-api-reference/platform-apis/reddit/app/search-typeahead"
         },
         {
-          "text": "Fetch Reddit APP Subreddit Feed",
-          "link": "/model-api-reference/platform-apis/reddit/app/subreddit-feed"
-        },
-        {
-          "text": "Fetch Reddit APP Topic Feed",
-          "link": "/model-api-reference/platform-apis/reddit/app/topic-feed"
-        },
-        {
-          "text": "Fetch Reddit APP Trending Searches",
+          "text": "Reddit App Trending Searches",
           "link": "/model-api-reference/platform-apis/reddit/app/trending-searches"
+        },
+        {
+          "text": "Reddit Search",
+          "link": "/model-api-reference/platform-apis/reddit/app/dynamic-search"
+        },
+        {
+          "text": "Reddit Subreddit Feed",
+          "link": "/model-api-reference/platform-apis/reddit/app/subreddit-feed"
         }
       ]
     },
@@ -51,23 +47,19 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Fetch Reddit Answers Generated Comments",
-          "link": "/model-api-reference/platform-apis/reddit/app/generated-comments"
-        },
-        {
-          "text": "Fetch Reddit APP Comment Replies (Sub-comments)",
+          "text": "Reddit App Comment Replies",
           "link": "/model-api-reference/platform-apis/reddit/app/comment-replies"
         },
         {
-          "text": "Fetch Reddit APP Community Highlights",
-          "link": "/model-api-reference/platform-apis/reddit/app/community-highlights"
-        },
-        {
-          "text": "Fetch Reddit APP Post Comments",
+          "text": "Reddit App Post Comments",
           "link": "/model-api-reference/platform-apis/reddit/app/post-comments"
         },
         {
-          "text": "Fetch User Comments",
+          "text": "Reddit Community Highlights",
+          "link": "/model-api-reference/platform-apis/reddit/app/community-highlights"
+        },
+        {
+          "text": "Reddit User Comments",
           "link": "/model-api-reference/platform-apis/reddit/app/user-comments"
         }
       ]
@@ -77,27 +69,23 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Fetch Reddit Answers Generated Posts",
-          "link": "/model-api-reference/platform-apis/reddit/app/generated-posts"
-        },
-        {
-          "text": "Fetch Reddit APP Subreddit Post Channels",
+          "text": "Reddit App Subreddit Post Channels",
           "link": "/model-api-reference/platform-apis/reddit/app/subreddit-post-channels"
         },
         {
-          "text": "Fetch Reddit Post Details in Batch (Max 5)",
+          "text": "Reddit Batch Post Details",
           "link": "/model-api-reference/platform-apis/reddit/app/post-details-batch"
         },
         {
-          "text": "Fetch Reddit Post Details in Large Batch (Max 30)",
-          "link": "/model-api-reference/platform-apis/reddit/app/post-details-batch-large"
-        },
-        {
-          "text": "Fetch Single Reddit Post Details",
+          "text": "Reddit Post Details",
           "link": "/model-api-reference/platform-apis/reddit/app/post-details"
         },
         {
-          "text": "Fetch User Posts",
+          "text": "Reddit Post Details Large Batch",
+          "link": "/model-api-reference/platform-apis/reddit/app/post-details-batch-large"
+        },
+        {
+          "text": "Reddit User Posts",
           "link": "/model-api-reference/platform-apis/reddit/app/user-posts"
         }
       ]
@@ -107,16 +95,26 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Fetch Reddit APP User Profile",
+          "text": "Reddit App User Profile",
           "link": "/model-api-reference/platform-apis/reddit/app/user-profile"
         },
         {
-          "text": "Fetch User Public Trophies",
-          "link": "/model-api-reference/platform-apis/reddit/app/user-trophies"
+          "text": "Reddit User Active Subreddits",
+          "link": "/model-api-reference/platform-apis/reddit/app/user-active-subreddits"
         },
         {
-          "text": "Fetch User's Active Subreddits",
-          "link": "/model-api-reference/platform-apis/reddit/app/user-active-subreddits"
+          "text": "Reddit User Public Trophies",
+          "link": "/model-api-reference/platform-apis/reddit/app/user-trophies"
+        }
+      ]
+    },
+    {
+      "key": "utilities",
+      "label": "Utilities",
+      "operations": [
+        {
+          "text": "Reddit Subreddit Mute Status",
+          "link": "/model-api-reference/platform-apis/reddit/app/check-subreddit-muted"
         }
       ]
     },
@@ -125,20 +123,16 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Check if Subreddit is Muted",
-          "link": "/model-api-reference/platform-apis/reddit/app/check-subreddit-muted"
-        },
-        {
-          "text": "Fetch Reddit APP Subreddit Info",
+          "text": "Reddit App Subreddit Info",
           "link": "/model-api-reference/platform-apis/reddit/app/subreddit-info"
         },
         {
-          "text": "Fetch Reddit APP Subreddit Rules and Style Info",
-          "link": "/model-api-reference/platform-apis/reddit/app/subreddit-style"
+          "text": "Reddit App Subreddit Settings",
+          "link": "/model-api-reference/platform-apis/reddit/app/subreddit-settings"
         },
         {
-          "text": "Fetch Reddit APP Subreddit Settings",
-          "link": "/model-api-reference/platform-apis/reddit/app/subreddit-settings"
+          "text": "Reddit Subreddit Rules and Style Info",
+          "link": "/model-api-reference/platform-apis/reddit/app/subreddit-style"
         }
       ]
     }

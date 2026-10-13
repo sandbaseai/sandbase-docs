@@ -9,7 +9,7 @@ export default {
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Search Videos Within a WeChat Channel",
+          "text": "WeChat Channels In-Channel Video Search",
           "link": "/model-api-reference/platform-apis/wechat-channels/v2/search-channel-videos"
         }
       ]
@@ -19,7 +19,7 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get WeChat Channels Video Comments",
+          "text": "WeChat Channels Video Comments",
           "link": "/model-api-reference/platform-apis/wechat-channels/v2/video-comments"
         }
       ]
@@ -29,11 +29,11 @@ export default {
       "label": "Live",
       "operations": [
         {
-          "text": "Get WeChat Channels Live Detail",
+          "text": "WeChat Channels Stream Detail",
           "link": "/model-api-reference/platform-apis/wechat-channels/v2/live-detail"
         },
         {
-          "text": "Get WeChat Channels Live History",
+          "text": "WeChat Channels Stream Replay History",
           "link": "/model-api-reference/platform-apis/wechat-channels/v2/live-history"
         }
       ]
@@ -43,20 +43,20 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Generate WeChat Channels Video Share URL",
-          "link": "/model-api-reference/platform-apis/wechat-channels/v2/video-share-url"
-        },
-        {
-          "text": "Get WeChat Channels Collection Videos",
+          "text": "WeChat Channels Collection Videos",
           "link": "/model-api-reference/platform-apis/wechat-channels/v2/collection-videos"
         },
         {
-          "text": "Get WeChat Channels User Videos",
+          "text": "WeChat Channels User Videos",
           "link": "/model-api-reference/platform-apis/wechat-channels/v2/user-videos"
         },
         {
-          "text": "Get WeChat Channels Video Detail",
+          "text": "WeChat Channels Video Detail",
           "link": "/model-api-reference/platform-apis/wechat-channels/v2/video-detail"
+        },
+        {
+          "text": "WeChat Channels Video Share URL",
+          "link": "/model-api-reference/platform-apis/wechat-channels/v2/video-share-url"
         }
       ]
     },
@@ -65,19 +65,19 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Convert Channel ID to Finder Username",
-          "link": "/model-api-reference/platform-apis/wechat-channels/v2/channel-id-to-username"
-        },
-        {
-          "text": "Get WeChat Channels Account Info",
+          "text": "WeChat Channels Account Info",
           "link": "/model-api-reference/platform-apis/wechat-channels/v2/channel-info"
         },
         {
-          "text": "Get WeChat Channels User Collections",
+          "text": "WeChat Channels ID to Username",
+          "link": "/model-api-reference/platform-apis/wechat-channels/v2/channel-id-to-username"
+        },
+        {
+          "text": "WeChat Channels User Collections",
           "link": "/model-api-reference/platform-apis/wechat-channels/v2/user-collections"
         },
         {
-          "text": "Get WeChat Channels User Profile & Stats",
+          "text": "WeChat Channels User Profile",
           "link": "/model-api-reference/platform-apis/wechat-channels/v2/user-profile"
         }
       ]

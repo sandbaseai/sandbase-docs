@@ -9,35 +9,35 @@ export default {
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Get hashtag detail",
-          "link": "/model-api-reference/platform-apis/pipixia/app/hashtag-detail"
-        },
-        {
-          "text": "Get hashtag post list",
-          "link": "/model-api-reference/platform-apis/pipixia/app/hashtag-post-list"
-        },
-        {
-          "text": "Get home feed",
+          "text": "Pipixia App Home Feed",
           "link": "/model-api-reference/platform-apis/pipixia/app/home-feed"
         },
         {
-          "text": "Get home short drama feed",
+          "text": "Pipixia Hashtag Details",
+          "link": "/model-api-reference/platform-apis/pipixia/app/hashtag-detail"
+        },
+        {
+          "text": "Pipixia Hashtag Post List",
+          "link": "/model-api-reference/platform-apis/pipixia/app/hashtag-post-list"
+        },
+        {
+          "text": "Pipixia Home Short Drama Feed",
           "link": "/model-api-reference/platform-apis/pipixia/app/home-short-drama-feed"
         },
         {
-          "text": "Get hot search board detail",
-          "link": "/model-api-reference/platform-apis/pipixia/app/hot-search-board-detail"
-        },
-        {
-          "text": "Get hot search board list",
+          "text": "Pipixia Hot Search",
           "link": "/model-api-reference/platform-apis/pipixia/app/hot-search-board-list"
         },
         {
-          "text": "Get hot search words",
+          "text": "Pipixia Hot Search Board Detail",
+          "link": "/model-api-reference/platform-apis/pipixia/app/hot-search-board-detail"
+        },
+        {
+          "text": "Pipixia Hot Search Words",
           "link": "/model-api-reference/platform-apis/pipixia/app/hot-search-words"
         },
         {
-          "text": "Search API",
+          "text": "Pipixia Search",
           "link": "/model-api-reference/platform-apis/pipixia/app/search"
         }
       ]
@@ -47,7 +47,7 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get post comment list",
+          "text": "Pipixia Post Comments",
           "link": "/model-api-reference/platform-apis/pipixia/app/post-comment-list"
         }
       ]
@@ -57,20 +57,20 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get post statistics",
-          "link": "/model-api-reference/platform-apis/pipixia/app/post-statistics"
-        },
-        {
-          "text": "Get single video data",
+          "text": "Pipixia Post Detail",
           "link": "/model-api-reference/platform-apis/pipixia/app/post-detail"
         },
         {
-          "text": "Get user post list",
-          "link": "/model-api-reference/platform-apis/pipixia/app/user-post-list"
+          "text": "Pipixia Post Statistics",
+          "link": "/model-api-reference/platform-apis/pipixia/app/post-statistics"
         },
         {
-          "text": "Increase post view count",
+          "text": "Pipixia Post View Count Increment",
           "link": "/model-api-reference/platform-apis/pipixia/app/increase-post-view-count"
+        },
+        {
+          "text": "Pipixia User Post List",
+          "link": "/model-api-reference/platform-apis/pipixia/app/user-post-list"
         }
       ]
     },
@@ -79,15 +79,15 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Get user follower list",
+          "text": "Pipixia User Follower List",
           "link": "/model-api-reference/platform-apis/pipixia/app/user-follower-list"
         },
         {
-          "text": "Get user following list",
+          "text": "Pipixia User Following List",
           "link": "/model-api-reference/platform-apis/pipixia/app/user-following-list"
         },
         {
-          "text": "Get user information",
+          "text": "Pipixia User Information",
           "link": "/model-api-reference/platform-apis/pipixia/app/user-info"
         }
       ]
@@ -97,7 +97,7 @@ export default {
       "label": "Utilities",
       "operations": [
         {
-          "text": "Generate short URL",
+          "text": "Pipixia Short URL Conversion",
           "link": "/model-api-reference/platform-apis/pipixia/app/short-url"
         }
       ]

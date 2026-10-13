@@ -9,12 +9,12 @@ export default {
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "WeChat Channels Video Search",
-          "link": "/model-api-reference/platform-apis/wechat-search/v2/search-videos"
+          "text": "WeChat Search",
+          "link": "/model-api-reference/platform-apis/wechat-search/v2/search"
         },
         {
-          "text": "WeChat Universal Search",
-          "link": "/model-api-reference/platform-apis/wechat-search/v2/search"
+          "text": "WeChat Search for Channels Videos",
+          "link": "/model-api-reference/platform-apis/wechat-search/v2/search-videos"
         }
       ]
     }

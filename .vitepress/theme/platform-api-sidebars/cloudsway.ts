@@ -9,7 +9,7 @@ export default {
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Cloudsway Search",
+          "text": "Cloudsway Web Search",
           "link": "/model-api-reference/platform-apis/cloudsway/search"
         }
       ]

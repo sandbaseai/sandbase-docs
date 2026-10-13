@@ -11,9 +11,11 @@ import {
   assertUniquePlatformModels,
   classifyPlatformModel,
   cleanLegacyPlatformOverview,
+  cleanManagedModelPages,
   cleanManagedPlatformPages,
   isPubliclyDocumented,
   normalizePlatformClassifierText,
+  platformDescription,
   platformGeneratedMarker,
   platformFields,
   platformReference,
@@ -175,7 +177,7 @@ describe('Platform API reference generator', () => {
     assert.match(config, /sameAs: modelDetailUrl/)
 
     const operation = fs.readFileSync(path.join(platformRoot, 'cloudsway', 'search.md'), 'utf8')
-    assert.match(operation, /^  endpoint: "\/v1\/run"$/m)
+    assert.match(operation, /^  endpoint: "\/v1\/api\/cloudsway\/search"$/m)
     assert.match(operation, /^  category: "APIs"$/m)
   })
 
@@ -297,9 +299,9 @@ describe('Platform API reference generator', () => {
       generatedPlatformData(platform).groups.map((group) => [group.label, group.operations.length]),
     ]))
     assert.deepEqual(snapshot, {
-      tiktok: [['Ads', 12], ['Creator Analytics', 14], ['Search & Discovery', 34], ['Comments & Engagement', 7], ['Live', 15], ['Commerce', 14], ['Messaging', 1], ['Content & Video', 22], ['Users & Accounts', 18], ['Utilities', 21], ['Other', 2]],
-      youtube: [['Search & Discovery', 11], ['Comments & Community', 5], ['Videos & Media', 15], ['Channels & Users', 7]],
-      dataforseo: [['SERP', 26], ['Keywords', 8], ['Backlinks', 8], ['Business Data', 6], ['App Data', 5], ['Merchant', 4], ['On-Page', 6], ['Domain Analytics', 6], ['Content Analysis', 4], ['Labs', 12]],
+      tiktok: [['Ads', 11], ['Creator Analytics', 14], ['Search & Discovery', 31], ['Comments & Engagement', 5], ['Live', 15], ['Commerce', 8], ['Messaging', 1], ['Content & Video', 20], ['Users & Accounts', 16], ['Utilities', 21], ['Other', 2]],
+      youtube: [['Search & Discovery', 10], ['Comments & Community', 5], ['Videos & Media', 11], ['Channels & Users', 7]],
+      dataforseo: [['SERP', 26], ['Keywords', 8], ['Backlinks', 7], ['Business Data', 2], ['Merchant', 4], ['On-Page', 5], ['Domain Analytics', 6], ['Content Analysis', 4], ['Labs', 12]],
       firecrawl: [['Crawl', 1], ['Scrape', 2], ['Search', 1], ['Map', 1]],
     })
   })
@@ -340,13 +342,18 @@ describe('Platform API reference generator', () => {
   })
 
   test('keeps required media arrays as arrays in generated model examples', () => {
-    const page = fs.readFileSync(path.join(docsRoot, 'model-api-reference', 'video-generation', 'minimax', 'h3', 'video-regeneration.md'), 'utf8')
-    const encoded = page.match(/^apiReferenceJson: (.+)$/m)?.[1]
-    assert.ok(encoded)
-    const reference = JSON.parse(JSON.parse(encoded))
-    for (const example of reference.examples) {
-      assert.match(example.code, /["']?videos["']?\s*[:=]\s*\[/, `${example.language} must submit videos as an array`)
+    const readReference = (...segments) => {
+      const page = fs.readFileSync(path.join(docsRoot, 'model-api-reference', ...segments), 'utf8')
+      const encoded = page.match(/^apiReferenceJson: (.+)$/m)?.[1]
+      assert.ok(encoded, segments.join('/'))
+      return JSON.parse(JSON.parse(encoded))
     }
+    const imageReference = readReference('video-generation', 'xai', 'grok-imagine-video', '1.5', 'reference-to-video.md')
+    assert.ok(imageReference.groups[0].fields.some((field) => field.name === 'images' && field.required))
+    for (const example of imageReference.examples) {
+      assert.match(example.code, /["']?images["']?\s*[:=]\s*\[/, `${example.language} must submit required images as an array`)
+    }
+    const reference = readReference('video-generation', 'minimax', 'h3', 'reference-to-video.md')
     const responseFields = reference.groups.find((group) => group.title === 'Response Schema').fields
     assert.deepEqual(
       responseFields.filter((field) => field.name.startsWith('usage.')).map((field) => field.name).sort(),
@@ -496,6 +503,42 @@ describe('Platform API reference generator', () => {
     assert.throws(() => assertUniquePlatformModels([{ ...model, name: 'wrong/name' }], { slug: 'platform-apis' }), /name must equal vendor_slug\/model_slug/)
   })
 
+  test('hides models the public catalog hides', () => {
+    assert.equal(isPubliclyDocumented({ name: 'vendor/model', capability_tags: ['chat'] }), true)
+    assert.equal(isPubliclyDocumented({ name: 'vidu/q3/image-to-video-exp0622' }), false)
+    assert.equal(isPubliclyDocumented({ name: 'vendor/model', display_name: 'Model Exp0622' }), false)
+    assert.equal(isPubliclyDocumented({ name: 'openai/gpt-image-2-official', capability_tags: ['text-to-image', ' Protocol-Ingress-Only '] }), false)
+    assert.equal(isPubliclyDocumented({ name: 'vendor/model', description: 'This model is no longer available online.' }), false)
+  })
+  test('removes only generated model pages for the category', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'sandbase-model-pages-'))
+    const category = { key: 'video', slug: 'video-generation' }
+    const page = (key) => `---\ntitle: "x"\napiReferenceKey: "${key}"\n---\n\n<ApiReferencePage />\n`
+    const kept = path.join(root, 'vendor', 'kept.md')
+    const orphan = path.join(root, 'vendor', 'old', 'orphan.md')
+    const otherCategory = path.join(root, 'vendor', 'other.md')
+    const redirect = path.join(root, 'vendor', 'moved.md')
+    fs.mkdirSync(path.dirname(orphan), { recursive: true })
+    fs.writeFileSync(kept, page('video/vendor/kept'))
+    fs.writeFileSync(orphan, page('video/vendor/old/orphan'))
+    fs.writeFileSync(otherCategory, page('image/vendor/other'))
+    fs.writeFileSync(redirect, '---\ntitle: "Moved"\ncanonical: /docs/elsewhere\n---\n# This page has moved\n')
+    assert.equal(cleanManagedModelPages(category, new Set([path.resolve(kept)]), root), 1)
+    assert.equal(fs.existsSync(kept), true)
+    assert.equal(fs.existsSync(orphan), false)
+    assert.equal(fs.existsSync(path.dirname(orphan)), false)
+    assert.equal(fs.existsSync(otherCategory), true)
+    assert.equal(fs.existsSync(redirect), true)
+  })
+  test('keeps maintained per-call price notes on Platform API descriptions', () => {
+    const notes = JSON.parse(fs.readFileSync(path.join(docsRoot, 'scripts', 'platform-api-price-notes.json'), 'utf8'))
+    const [name, note] = Object.entries(notes)[0]
+    const [vendor_slug, ...rest] = name.split('/')
+    const model = { name, vendor_slug, model_slug: rest.join('/'), description: 'Fetch data' }
+    assert.equal(platformDescription(model), `Fetch data. ${note}`)
+    assert.equal(platformDescription({ ...model, description: `Fetch data. ${note}` }), `Fetch data. ${note}`)
+    assert.equal(platformDescription({ ...model, name: 'vendor/without-note' }), 'Fetch data')
+  })
   test('removes only managed orphan pages and refuses unknown files', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'sandbase-platform-pages-'))
     const expected = path.join(root, 'vendor', 'kept.md')

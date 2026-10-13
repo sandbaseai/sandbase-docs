@@ -2,35 +2,35 @@
 export default {
   "platform": "Bilibili",
   "slug": "bilibili",
-  "operationCount": 41,
+  "operationCount": 38,
   "groups": [
     {
       "key": "search",
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Get general search data",
-          "link": "/model-api-reference/platform-apis/bilibili/web/general-search"
-        },
-        {
-          "text": "Get home feed",
+          "text": "Bilibili App Home Feed",
           "link": "/model-api-reference/platform-apis/bilibili/app/home-feed"
         },
         {
-          "text": "Get hot search data",
-          "link": "/model-api-reference/platform-apis/bilibili/web/hot-search"
-        },
-        {
-          "text": "Get popular feed",
+          "text": "Bilibili App Popular Feed",
           "link": "/model-api-reference/platform-apis/bilibili/app/popular-feed"
         },
         {
-          "text": "search all",
+          "text": "Bilibili App Search All",
           "link": "/model-api-reference/platform-apis/bilibili/app/search-all"
         },
         {
-          "text": "search by type",
+          "text": "Bilibili Hot Searches",
+          "link": "/model-api-reference/platform-apis/bilibili/web/hot-search"
+        },
+        {
+          "text": "Bilibili Search by Type",
           "link": "/model-api-reference/platform-apis/bilibili/app/search-by-type"
+        },
+        {
+          "text": "Bilibili Web General Search",
+          "link": "/model-api-reference/platform-apis/bilibili/web/general-search"
         }
       ]
     },
@@ -39,20 +39,16 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get comments on the specified video",
-          "link": "/model-api-reference/platform-apis/bilibili/web/video-comments"
-        },
-        {
-          "text": "Get reply detail",
-          "link": "/model-api-reference/platform-apis/bilibili/app/reply-detail"
-        },
-        {
-          "text": "Get reply to the specified comment",
+          "text": "Bilibili Comment Replies",
           "link": "/model-api-reference/platform-apis/bilibili/web/comment-reply"
         },
         {
-          "text": "Get video comments",
+          "text": "Bilibili Video Comments (App)",
           "link": "/model-api-reference/platform-apis/bilibili/app/video-comments"
+        },
+        {
+          "text": "Bilibili Video Comments (Web)",
+          "link": "/model-api-reference/platform-apis/bilibili/web/video-comments"
         }
       ]
     },
@@ -61,20 +57,16 @@ export default {
       "label": "Live",
       "operations": [
         {
-          "text": "Get a list of all live areas",
-          "link": "/model-api-reference/platform-apis/bilibili/web/all-live-areas"
-        },
-        {
-          "text": "Get information of specified live room",
+          "text": "Bilibili Live Room Details",
           "link": "/model-api-reference/platform-apis/bilibili/web/live-room-detail"
         },
         {
-          "text": "Get live streamers of specified live area",
-          "link": "/model-api-reference/platform-apis/bilibili/web/live-streamers"
+          "text": "Bilibili Room Stream Data",
+          "link": "/model-api-reference/platform-apis/bilibili/web/live-videos"
         },
         {
-          "text": "Get live video data of specified room",
-          "link": "/model-api-reference/platform-apis/bilibili/web/live-videos"
+          "text": "Bilibili Streaming Areas",
+          "link": "/model-api-reference/platform-apis/bilibili/web/all-live-areas"
         }
       ]
     },
@@ -83,64 +75,60 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get comprehensive popular video information",
-          "link": "/model-api-reference/platform-apis/bilibili/web/com-popular"
-        },
-        {
-          "text": "Get single video data",
+          "text": "Bilibili App Single Video Details",
           "link": "/model-api-reference/platform-apis/bilibili/app/one-video"
         },
         {
-          "text": "Get single video data",
-          "link": "/model-api-reference/platform-apis/bilibili/web/one-video"
+          "text": "Bilibili Comprehensive Popular Videos",
+          "link": "/model-api-reference/platform-apis/bilibili/web/com-popular"
         },
         {
-          "text": "Get single video data V2",
-          "link": "/model-api-reference/platform-apis/bilibili/web/one-video-v2"
-        },
-        {
-          "text": "Get single video data V3",
+          "text": "Bilibili Single Video Details",
           "link": "/model-api-reference/platform-apis/bilibili/web/one-video-v3"
         },
         {
-          "text": "Get single video detail",
-          "link": "/model-api-reference/platform-apis/bilibili/web/video-detail"
-        },
-        {
-          "text": "Get single video play info",
+          "text": "Bilibili Single Video Play Info",
           "link": "/model-api-reference/platform-apis/bilibili/web/video-play-info"
         },
         {
-          "text": "Get user homepage video data",
+          "text": "Bilibili User Collection Folder Videos",
+          "link": "/model-api-reference/platform-apis/bilibili/web/user-collection-videos"
+        },
+        {
+          "text": "Bilibili User Post Videos",
           "link": "/model-api-reference/platform-apis/bilibili/web/user-post-videos"
         },
         {
-          "text": "Get user videos",
+          "text": "Bilibili User Videos",
           "link": "/model-api-reference/platform-apis/bilibili/app/user-videos"
         },
         {
-          "text": "Get Video Danmaku",
+          "text": "Bilibili Video Danmaku",
           "link": "/model-api-reference/platform-apis/bilibili/web/video-danmaku"
         },
         {
-          "text": "Get Video Parts By bvid",
+          "text": "Bilibili Video Details",
+          "link": "/model-api-reference/platform-apis/bilibili/web/one-video"
+        },
+        {
+          "text": "Bilibili Video Details (V2)",
+          "link": "/model-api-reference/platform-apis/bilibili/web/one-video-v2"
+        },
+        {
+          "text": "Bilibili Video Parts",
           "link": "/model-api-reference/platform-apis/bilibili/web/video-parts"
         },
         {
-          "text": "Get video playurl",
+          "text": "Bilibili Video Playback URL",
           "link": "/model-api-reference/platform-apis/bilibili/web/video-playurl"
         },
         {
-          "text": "Get video subtitle info",
+          "text": "Bilibili Video Subtitle Details",
           "link": "/model-api-reference/platform-apis/bilibili/web/video-subtitle"
         },
         {
-          "text": "Get VIP video playurl",
-          "link": "/model-api-reference/platform-apis/bilibili/web/vip-video-playurl"
-        },
-        {
-          "text": "Gets video data from a collection folder",
-          "link": "/model-api-reference/platform-apis/bilibili/web/user-collection-videos"
+          "text": "Bilibili Web Video Details",
+          "link": "/model-api-reference/platform-apis/bilibili/web/video-detail"
         }
       ]
     },
@@ -149,42 +137,32 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Extract user ID",
-          "link": "/model-api-reference/platform-apis/bilibili/web/get-user-id"
-        },
-        {
-          "text": "Get dynamic information of specified user",
-          "link": "/model-api-reference/platform-apis/bilibili/web/user-dynamic"
-        },
-        {
-          "text": "Get information of specified user",
-          "link": "/model-api-reference/platform-apis/bilibili/web/user-profile"
-        },
-        {
-          "text": "Get UP stat (total views and likes)",
-          "link": "/model-api-reference/platform-apis/bilibili/web/user-up-stat"
-        },
-        {
-          "text": "Get user collection folders",
-          "link": "/model-api-reference/platform-apis/bilibili/web/collect-folders"
-        },
-        {
-          "text": "Get user info",
+          "text": "Bilibili App User Info",
           "link": "/model-api-reference/platform-apis/bilibili/app/user-info"
         },
         {
-          "text": "Get user relation stat (following and followers)",
-          "link": "/model-api-reference/platform-apis/bilibili/web/user-relation-stat"
-        }
-      ]
-    },
-    {
-      "key": "utilities",
-      "label": "Utilities",
-      "operations": [
+          "text": "Bilibili Creator View and Like Statistics",
+          "link": "/model-api-reference/platform-apis/bilibili/web/user-up-stat"
+        },
         {
-          "text": "Generate aid by bvid",
-          "link": "/model-api-reference/platform-apis/bilibili/web/bv-to-aid"
+          "text": "Bilibili User Collection Folders",
+          "link": "/model-api-reference/platform-apis/bilibili/web/collect-folders"
+        },
+        {
+          "text": "Bilibili User Dynamics",
+          "link": "/model-api-reference/platform-apis/bilibili/web/user-dynamic"
+        },
+        {
+          "text": "Bilibili User ID Extraction",
+          "link": "/model-api-reference/platform-apis/bilibili/web/get-user-id"
+        },
+        {
+          "text": "Bilibili User Profile",
+          "link": "/model-api-reference/platform-apis/bilibili/web/user-profile"
+        },
+        {
+          "text": "Bilibili User Relation Statistics",
+          "link": "/model-api-reference/platform-apis/bilibili/web/user-relation-stat"
         }
       ]
     },
@@ -193,19 +171,23 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Get bangumi tab",
+          "text": "Bilibili App Bangumi Tab",
           "link": "/model-api-reference/platform-apis/bilibili/app/bangumi-tab"
         },
         {
-          "text": "Get cinema tab",
+          "text": "Bilibili App Cinema Tab",
           "link": "/model-api-reference/platform-apis/bilibili/app/cinema-tab"
         },
         {
-          "text": "Get dynamic detail",
+          "text": "Bilibili BV to AID Converter",
+          "link": "/model-api-reference/platform-apis/bilibili/web/bv-to-aid"
+        },
+        {
+          "text": "Bilibili Dynamic Detail",
           "link": "/model-api-reference/platform-apis/bilibili/web/dynamic-detail"
         },
         {
-          "text": "Get dynamic detail v2",
+          "text": "Bilibili Dynamic Details (V2)",
           "link": "/model-api-reference/platform-apis/bilibili/web/dynamic-detail-v2"
         }
       ]

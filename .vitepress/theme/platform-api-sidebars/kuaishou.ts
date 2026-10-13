@@ -2,51 +2,43 @@
 export default {
   "platform": "Kuaishou",
   "slug": "kuaishou",
-  "operationCount": 38,
+  "operationCount": 36,
   "groups": [
     {
       "key": "search",
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Comprehensive search",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/search-comprehensive"
-        },
-        {
-          "text": "Kuaishou hot search person board",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/hot-search-person"
-        },
-        {
-          "text": "Search image",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/search-image"
-        },
-        {
-          "text": "Search live",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/search-live"
-        },
-        {
-          "text": "Search music",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/search-music"
-        },
-        {
-          "text": "Search tag",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/search-tag"
-        },
-        {
-          "text": "Search user V2",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/search-user-v2"
-        },
-        {
-          "text": "Search video V2",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/search-video-v2"
-        },
-        {
-          "text": "Selection feed",
+          "text": "Kuaishou App Selection Feed",
           "link": "/model-api-reference/platform-apis/kuaishou/app/selection-feed"
         },
         {
-          "text": "Tag feed",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/tag-feed"
+          "text": "Kuaishou Comprehensive Search",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/search-comprehensive"
+        },
+        {
+          "text": "Kuaishou Hot Search Person Board",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/hot-search-person"
+        },
+        {
+          "text": "Kuaishou Image Post Search",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/search-image"
+        },
+        {
+          "text": "Kuaishou Livestream Search",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/search-live"
+        },
+        {
+          "text": "Kuaishou Music Search",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/search-music"
+        },
+        {
+          "text": "Kuaishou User Search (V2)",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/search-user-v2"
+        },
+        {
+          "text": "Kuaishou Video Search (V2)",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/search-video-v2"
         }
       ]
     },
@@ -55,20 +47,20 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Fetch video comments",
-          "link": "/model-api-reference/platform-apis/kuaishou/web/one-video-comment"
-        },
-        {
-          "text": "Fetch video sub comments",
-          "link": "/model-api-reference/platform-apis/kuaishou/web/one-video-sub-comment"
-        },
-        {
-          "text": "Get single video comment data",
+          "text": "Kuaishou Video Comments (App)",
           "link": "/model-api-reference/platform-apis/kuaishou/app/video-comment"
         },
         {
-          "text": "Video sub comments",
+          "text": "Kuaishou Video Comments (Web)",
+          "link": "/model-api-reference/platform-apis/kuaishou/web/one-video-comment"
+        },
+        {
+          "text": "Kuaishou Video Sub Comments (App)",
           "link": "/model-api-reference/platform-apis/kuaishou/app/video-sub-comments"
+        },
+        {
+          "text": "Kuaishou Video Sub Comments (Web)",
+          "link": "/model-api-reference/platform-apis/kuaishou/web/one-video-sub-comment"
         }
       ]
     },
@@ -77,16 +69,16 @@ export default {
       "label": "Live",
       "operations": [
         {
-          "text": "Fetch user live replay",
-          "link": "/model-api-reference/platform-apis/kuaishou/web/user-live-replay"
+          "text": "Kuaishou Stream Top List",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/live-top-list"
         },
         {
-          "text": "Get user live info",
+          "text": "Kuaishou User Broadcast Details",
           "link": "/model-api-reference/platform-apis/kuaishou/app/user-live-info"
         },
         {
-          "text": "Kuaishou live top list",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/live-top-list"
+          "text": "Kuaishou User Broadcast Replay",
+          "link": "/model-api-reference/platform-apis/kuaishou/web/user-live-replay"
         }
       ]
     },
@@ -95,40 +87,40 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Fetch single video by URL",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/one-video-by-url"
-        },
-        {
-          "text": "Fetch single video by URL",
-          "link": "/model-api-reference/platform-apis/kuaishou/web/one-video-by-url"
-        },
-        {
-          "text": "Get single video data V1",
-          "link": "/model-api-reference/platform-apis/kuaishou/web/one-video"
-        },
-        {
-          "text": "Get single video data V2",
-          "link": "/model-api-reference/platform-apis/kuaishou/web/one-video-v2"
-        },
-        {
-          "text": "Get user hot post data",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/user-hot-post"
-        },
-        {
-          "text": "Kuaishou batch video query API",
+          "text": "Kuaishou Batch Video Details",
           "link": "/model-api-reference/platform-apis/kuaishou/app/videos-batch"
         },
         {
-          "text": "Music ranking",
+          "text": "Kuaishou Music Ranking",
           "link": "/model-api-reference/platform-apis/kuaishou/app/music-ranking"
         },
         {
-          "text": "User video list V2",
+          "text": "Kuaishou Single Video by URL",
+          "link": "/model-api-reference/platform-apis/kuaishou/web/one-video-by-url"
+        },
+        {
+          "text": "Kuaishou Single Video Details",
+          "link": "/model-api-reference/platform-apis/kuaishou/web/one-video"
+        },
+        {
+          "text": "Kuaishou Single Video Details (V2)",
+          "link": "/model-api-reference/platform-apis/kuaishou/web/one-video-v2"
+        },
+        {
+          "text": "Kuaishou User Hot Posts",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/user-hot-post"
+        },
+        {
+          "text": "Kuaishou User Video List (V2)",
           "link": "/model-api-reference/platform-apis/kuaishou/app/user-post-v2"
         },
         {
-          "text": "Video detailsV1",
+          "text": "Kuaishou Video Details (V1)",
           "link": "/model-api-reference/platform-apis/kuaishou/app/one-video"
+        },
+        {
+          "text": "Kuaishou Video Details by URL",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/one-video-by-url"
         }
       ]
     },
@@ -137,20 +129,20 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Fetch user collect",
+          "text": "Kuaishou Single User Data (V2)",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/one-user-v2"
+        },
+        {
+          "text": "Kuaishou User Favorites",
           "link": "/model-api-reference/platform-apis/kuaishou/web/user-collect"
         },
         {
-          "text": "Fetch user ID",
+          "text": "Kuaishou User ID Lookup",
           "link": "/model-api-reference/platform-apis/kuaishou/web/get-user-id"
         },
         {
-          "text": "Fetch user info",
+          "text": "Kuaishou Web User Info",
           "link": "/model-api-reference/platform-apis/kuaishou/web/user-info"
-        },
-        {
-          "text": "Get single user data V2",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/one-user-v2"
         }
       ]
     },
@@ -159,11 +151,11 @@ export default {
       "label": "Utilities",
       "operations": [
         {
-          "text": "Generate Kuaishou share link",
+          "text": "Kuaishou App Share Link",
           "link": "/model-api-reference/platform-apis/kuaishou/app/generate-share-link"
         },
         {
-          "text": "Generate share short URL",
+          "text": "Kuaishou Web Share Short URL",
           "link": "/model-api-reference/platform-apis/kuaishou/web/generate-share-short-url"
         }
       ]
@@ -173,28 +165,28 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Fetch Kuaishou Hot List V1",
-          "link": "/model-api-reference/platform-apis/kuaishou/web/hot-list-v1"
-        },
-        {
-          "text": "Fetch Kuaishou Hot List V2",
-          "link": "/model-api-reference/platform-apis/kuaishou/web/hot-list-v2"
-        },
-        {
-          "text": "Kuaishou brand top list",
+          "text": "Kuaishou Brand Top List",
           "link": "/model-api-reference/platform-apis/kuaishou/app/brand-top-list"
         },
         {
-          "text": "Kuaishou hot board detail",
-          "link": "/model-api-reference/platform-apis/kuaishou/app/hot-board-detail"
-        },
-        {
-          "text": "Kuaishou hot categories",
+          "text": "Kuaishou Hot Board Categories",
           "link": "/model-api-reference/platform-apis/kuaishou/app/hot-board-categories"
         },
         {
-          "text": "Kuaishou shopping top list",
+          "text": "Kuaishou Hot Board Detail",
+          "link": "/model-api-reference/platform-apis/kuaishou/app/hot-board-detail"
+        },
+        {
+          "text": "Kuaishou Shopping Top List",
           "link": "/model-api-reference/platform-apis/kuaishou/app/shopping-top-list"
+        },
+        {
+          "text": "Kuaishou Web Hot List",
+          "link": "/model-api-reference/platform-apis/kuaishou/web/hot-list-v1"
+        },
+        {
+          "text": "Kuaishou Web Hot List (V2)",
+          "link": "/model-api-reference/platform-apis/kuaishou/web/hot-list-v2"
         }
       ]
     }

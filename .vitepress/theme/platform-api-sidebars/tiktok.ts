@@ -2,59 +2,55 @@
 export default {
   "platform": "TikTok",
   "slug": "tiktok",
-  "operationCount": 160,
+  "operationCount": 144,
   "groups": [
     {
       "key": "ads",
       "label": "Ads",
       "operations": [
         {
-          "text": "Get ad interactive analysis",
-          "link": "/model-api-reference/platform-apis/tiktok/ads/ad-interactive-analysis"
-        },
-        {
-          "text": "Get ad keyframe analysis",
-          "link": "/model-api-reference/platform-apis/tiktok/ads/ad-keyframe-analysis"
-        },
-        {
-          "text": "Get ad percentile data",
-          "link": "/model-api-reference/platform-apis/tiktok/ads/ad-percentile"
-        },
-        {
-          "text": "Get query suggestions",
-          "link": "/model-api-reference/platform-apis/tiktok/ads/query-suggestions"
-        },
-        {
-          "text": "Get recommended ads",
-          "link": "/model-api-reference/platform-apis/tiktok/ads/recommended-ads"
-        },
-        {
-          "text": "Get search modules config",
-          "link": "/model-api-reference/platform-apis/tiktok/ads/configure-safety"
-        },
-        {
-          "text": "Get single ad detail",
+          "text": "TikTok Ad Detail",
           "link": "/model-api-reference/platform-apis/tiktok/ads/ads-detail"
         },
         {
-          "text": "Get supported location list",
+          "text": "TikTok Ad Interactive Analysis",
+          "link": "/model-api-reference/platform-apis/tiktok/ads/ad-interactive-analysis"
+        },
+        {
+          "text": "TikTok Ad Keyframe Analysis",
+          "link": "/model-api-reference/platform-apis/tiktok/ads/ad-keyframe-analysis"
+        },
+        {
+          "text": "TikTok Ad Material Percentile Rankings",
+          "link": "/model-api-reference/platform-apis/tiktok/ads/ad-percentile"
+        },
+        {
+          "text": "TikTok Ad Query Suggestions",
+          "link": "/model-api-reference/platform-apis/tiktok/ads/query-suggestions"
+        },
+        {
+          "text": "TikTok Ads Location List",
           "link": "/model-api-reference/platform-apis/tiktok/ads/location-list"
         },
         {
-          "text": "Get top ads spotlight",
+          "text": "TikTok Creative Center Ad Search",
+          "link": "/model-api-reference/platform-apis/tiktok/ads/search-ads"
+        },
+        {
+          "text": "TikTok Recommended Ads",
+          "link": "/model-api-reference/platform-apis/tiktok/ads/recommended-ads"
+        },
+        {
+          "text": "TikTok Search Module Safety Configuration",
+          "link": "/model-api-reference/platform-apis/tiktok/ads/configure-safety"
+        },
+        {
+          "text": "TikTok Top Ads Spotlight",
           "link": "/model-api-reference/platform-apis/tiktok/ads/top-ads-spotlight"
         },
         {
-          "text": "Get trending hashtag detail",
-          "link": "/model-api-reference/platform-apis/tiktok/ads/trends-hashtag-detail"
-        },
-        {
-          "text": "Get trending hashtag list",
+          "text": "TikTok Trending Hashtags",
           "link": "/model-api-reference/platform-apis/tiktok/ads/trends-hashtag-list"
-        },
-        {
-          "text": "Search ads",
-          "link": "/model-api-reference/platform-apis/tiktok/ads/search-ads"
         }
       ]
     },
@@ -63,59 +59,59 @@ export default {
       "label": "Creator Analytics",
       "operations": [
         {
-          "text": "Get Creator Account Health Status",
+          "text": "TikTok Creator Account Health Status",
           "link": "/model-api-reference/platform-apis/tiktok/creator/account-health-status"
         },
         {
-          "text": "Get Creator Account Info",
+          "text": "TikTok Creator Account Info",
           "link": "/model-api-reference/platform-apis/tiktok/creator/creator-account-info"
         },
         {
-          "text": "Get Creator Account Overview",
+          "text": "TikTok Creator Account Insights Overview",
           "link": "/model-api-reference/platform-apis/tiktok/creator/account-insights-overview"
         },
         {
-          "text": "Get Creator Account Violation Record List",
+          "text": "TikTok Creator Account Violations",
           "link": "/model-api-reference/platform-apis/tiktok/creator/account-violation-list"
         },
         {
-          "text": "Get Creator Live Overview",
-          "link": "/model-api-reference/platform-apis/tiktok/creator/live-analytics-summary"
-        },
-        {
-          "text": "Get Creator Product List Analytics",
+          "text": "TikTok Creator Product Analytics List",
           "link": "/model-api-reference/platform-apis/tiktok/creator/product-analytics-list"
         },
         {
-          "text": "Get Creator Video List Analytics",
-          "link": "/model-api-reference/platform-apis/tiktok/creator/video-list-analytics"
-        },
-        {
-          "text": "Get Creator Video Overview",
-          "link": "/model-api-reference/platform-apis/tiktok/creator/video-analytics-summary"
-        },
-        {
-          "text": "Get Product Related Videos",
-          "link": "/model-api-reference/platform-apis/tiktok/creator/product-related-videos"
-        },
-        {
-          "text": "Get Showcase Product List",
+          "text": "TikTok Creator Showcase Product List",
           "link": "/model-api-reference/platform-apis/tiktok/creator/showcase-product-list"
         },
         {
-          "text": "Get Video Associated Product List",
+          "text": "TikTok Creator Video Analytics Summary",
+          "link": "/model-api-reference/platform-apis/tiktok/creator/video-analytics-summary"
+        },
+        {
+          "text": "TikTok Creator Video List Analytics",
+          "link": "/model-api-reference/platform-apis/tiktok/creator/video-list-analytics"
+        },
+        {
+          "text": "TikTok Product Related Videos",
+          "link": "/model-api-reference/platform-apis/tiktok/creator/product-related-videos"
+        },
+        {
+          "text": "TikTok Stream Analytics Summary",
+          "link": "/model-api-reference/platform-apis/tiktok/creator/live-analytics-summary"
+        },
+        {
+          "text": "TikTok Video Associated Product List",
           "link": "/model-api-reference/platform-apis/tiktok/creator/video-associated-product-list"
         },
         {
-          "text": "Get Video Audience Analysis Data",
+          "text": "TikTok Video Audience Stats",
           "link": "/model-api-reference/platform-apis/tiktok/creator/video-audience-stats"
         },
         {
-          "text": "Get Video Detailed Statistics",
+          "text": "TikTok Video Detailed Statistics",
           "link": "/model-api-reference/platform-apis/tiktok/creator/video-detailed-stats"
         },
         {
-          "text": "Get Video-Product Association Statistics",
+          "text": "TikTok Video Product Association Statistics",
           "link": "/model-api-reference/platform-apis/tiktok/creator/video-to-product-stats"
         }
       ]
@@ -125,140 +121,128 @@ export default {
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Creator Search Insights",
+          "text": "TikTok Creator Search Insights",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/creator-search-insights"
         },
         {
-          "text": "Creator Search Insights Detail",
+          "text": "TikTok Creator Search Insights Detail",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/creator-search-insights-detail"
         },
         {
-          "text": "Creator Search Insights Trend",
+          "text": "TikTok Creator Search Insights Trend",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/creator-search-insights-trend"
         },
         {
-          "text": "Creator Search Insights Videos",
+          "text": "TikTok Creator Search Insights Videos",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/creator-search-insights-videos"
         },
         {
-          "text": "Generate TikTok share link, call TikTok APP, and jump to the specified keyword search result",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/open-app-to-keyword-search"
-        },
-        {
-          "text": "Get available tags for live room homepage recommendation",
-          "link": "/model-api-reference/platform-apis/tiktok/web/live-recommend-tabs"
-        },
-        {
-          "text": "Get comprehensive search results of specified keywords",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/general-search-result"
-        },
-        {
-          "text": "Get daily trending search words",
+          "text": "TikTok Daily Trending Search Words",
           "link": "/model-api-reference/platform-apis/tiktok/web/trending-searchwords"
         },
         {
-          "text": "Get details of specified hashtag",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/hashtag-detail"
-        },
-        {
-          "text": "Get explore video data",
-          "link": "/model-api-reference/platform-apis/tiktok/web/explore-post"
-        },
-        {
-          "text": "Get general search list",
-          "link": "/model-api-reference/platform-apis/tiktok/web/general-search"
-        },
-        {
-          "text": "Get hashtag search results of specified keywords",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/hashtag-search-result"
-        },
-        {
-          "text": "Get home feed(recommend) video data",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/home-feed"
-        },
-        {
-          "text": "Get live room homepage recommendation list",
-          "link": "/model-api-reference/platform-apis/tiktok/web/live-recommend"
-        },
-        {
-          "text": "Get live search results of specified keywords",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/live-search-result"
-        },
-        {
-          "text": "Get location search results",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/location-search"
-        },
-        {
-          "text": "Get music search results of specified keywords",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/music-search-result"
-        },
-        {
-          "text": "Get search keyword suggestions V2 (Mobile)",
-          "link": "/model-api-reference/platform-apis/tiktok/shop-web/search-word-suggestion-v2"
-        },
-        {
-          "text": "Get user search results of specified keywords",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-search-result"
-        },
-        {
-          "text": "Get video list of specified hashtag",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/hashtag-video-list"
-        },
-        {
-          "text": "Get video search results of specified keywords",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/video-search-result"
-        },
-        {
-          "text": "Home Feed",
-          "link": "/model-api-reference/platform-apis/tiktok/web/home-feed"
-        },
-        {
-          "text": "Search follower list",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/search-follower-list"
-        },
-        {
-          "text": "Search following list",
+          "text": "TikTok Following List Search",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/search-following-list"
         },
         {
-          "text": "Search keyword suggest",
-          "link": "/model-api-reference/platform-apis/tiktok/web/search-keyword-suggest"
+          "text": "TikTok Hashtag Detail",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/hashtag-detail"
         },
         {
-          "text": "Search live",
-          "link": "/model-api-reference/platform-apis/tiktok/web/search-live"
+          "text": "TikTok Hashtag Search Results",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/hashtag-search-result"
         },
         {
-          "text": "Search photo",
+          "text": "TikTok Hashtag Video List",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/hashtag-video-list"
+        },
+        {
+          "text": "TikTok Keyword Search Deep Link",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/open-app-to-keyword-search"
+        },
+        {
+          "text": "TikTok Livestream Homepage Recommendations",
+          "link": "/model-api-reference/platform-apis/tiktok/web/live-recommend"
+        },
+        {
+          "text": "TikTok Location Search",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/location-search"
+        },
+        {
+          "text": "TikTok Music Search",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/music-search-result"
+        },
+        {
+          "text": "TikTok Photo Search",
           "link": "/model-api-reference/platform-apis/tiktok/web/search-photo"
         },
         {
-          "text": "Search products list V1",
+          "text": "TikTok Search",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/general-search-result"
+        },
+        {
+          "text": "TikTok Search Keyword Suggestions",
+          "link": "/model-api-reference/platform-apis/tiktok/web/search-keyword-suggest"
+        },
+        {
+          "text": "TikTok Shop Product Search",
           "link": "/model-api-reference/platform-apis/tiktok/shop-web/search-products-list"
         },
         {
-          "text": "Search products list V2 (Mobile)",
+          "text": "TikTok Shop Product Search (V2)",
           "link": "/model-api-reference/platform-apis/tiktok/shop-web/search-products-list-v2"
         },
         {
-          "text": "Search user",
-          "link": "/model-api-reference/platform-apis/tiktok/web/search-user"
+          "text": "TikTok Shop Search Keyword Suggestions (V2)",
+          "link": "/model-api-reference/platform-apis/tiktok/shop-web/search-word-suggestion-v2"
         },
         {
-          "text": "Search video",
-          "link": "/model-api-reference/platform-apis/tiktok/web/search-video"
-        },
-        {
-          "text": "Similar User Recommendations",
+          "text": "TikTok Similar User Recommendations",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/similar-user-recommendations"
         },
         {
-          "text": "Tag Detail",
+          "text": "TikTok Stream Recommendation Tabs",
+          "link": "/model-api-reference/platform-apis/tiktok/web/live-recommend-tabs"
+        },
+        {
+          "text": "TikTok Stream Search Results",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/live-search-result"
+        },
+        {
+          "text": "TikTok Tag Detail",
           "link": "/model-api-reference/platform-apis/tiktok/web/tag-detail"
         },
         {
-          "text": "Tag Post",
+          "text": "TikTok Tag Posts",
           "link": "/model-api-reference/platform-apis/tiktok/web/tag-post"
+        },
+        {
+          "text": "TikTok User Follower Search",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/search-follower-list"
+        },
+        {
+          "text": "TikTok User Search Results",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-search-result"
+        },
+        {
+          "text": "TikTok Video Keyword Search",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/video-search-result"
+        },
+        {
+          "text": "TikTok Web Explore Posts",
+          "link": "/model-api-reference/platform-apis/tiktok/web/explore-post"
+        },
+        {
+          "text": "TikTok Web General Search",
+          "link": "/model-api-reference/platform-apis/tiktok/web/general-search"
+        },
+        {
+          "text": "TikTok Web Home Feed",
+          "link": "/model-api-reference/platform-apis/tiktok/web/home-feed"
+        },
+        {
+          "text": "TikTok Web Stream Search",
+          "link": "/model-api-reference/platform-apis/tiktok/web/search-live"
         }
       ]
     },
@@ -267,31 +251,23 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get comment keywords analysis",
-          "link": "/model-api-reference/platform-apis/tiktok/analytics/comment-keywords"
-        },
-        {
-          "text": "Get comment replies data of specified video",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/video-comment-replies"
-        },
-        {
-          "text": "Get product reviews V1",
-          "link": "/model-api-reference/platform-apis/tiktok/shop-web/product-reviews"
-        },
-        {
-          "text": "Get product reviews V2",
+          "text": "TikTok Shop Product Reviews",
           "link": "/model-api-reference/platform-apis/tiktok/shop-web/product-reviews-v2"
         },
         {
-          "text": "Get single video comments data",
+          "text": "TikTok Video Comment Keywords",
+          "link": "/model-api-reference/platform-apis/tiktok/analytics/comment-keywords"
+        },
+        {
+          "text": "TikTok Video Comment Replies",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/video-comment-replies"
+        },
+        {
+          "text": "TikTok Video Comments (App V3)",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/video-comments"
         },
         {
-          "text": "Get video comment replies",
-          "link": "/model-api-reference/platform-apis/tiktok/web/post-comment-reply"
-        },
-        {
-          "text": "Get video comments",
+          "text": "TikTok Video Comments (Web)",
           "link": "/model-api-reference/platform-apis/tiktok/web/post-comment"
         }
       ]
@@ -301,64 +277,64 @@ export default {
       "label": "Live",
       "operations": [
         {
-          "text": "Batch check if live rooms are online",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/check-live-room-online-batch"
+          "text": "TikTok Broadcast Danmaku",
+          "link": "/model-api-reference/platform-apis/tiktok/web/live-room"
         },
         {
-          "text": "Batch live room start status check",
-          "link": "/model-api-reference/platform-apis/tiktok/web/batch-check-live-alive"
-        },
-        {
-          "text": "Check if live room is online",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/check-live-room-online"
-        },
-        {
-          "text": "Extract live room ID from live room link",
-          "link": "/model-api-reference/platform-apis/tiktok/web/live-room-id"
-        },
-        {
-          "text": "Get data of specified live room",
+          "text": "TikTok Broadcast Room Information",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/live-room-info"
         },
         {
-          "text": "Get information of specified Webcast user",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/webcast-user-info"
-        },
-        {
-          "text": "Get live daily rank data",
+          "text": "TikTok LIVE Ranking",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/live-daily-rank"
         },
         {
-          "text": "Get live room gift list",
-          "link": "/model-api-reference/platform-apis/tiktok/web/live-gift-list"
+          "text": "TikTok LIVE Status",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/check-live-room-online"
         },
         {
-          "text": "Get live room information via live link",
-          "link": "/model-api-reference/platform-apis/tiktok/web/live-data"
-        },
-        {
-          "text": "Get live room product list data",
+          "text": "TikTok Livestream Room Product List",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/live-room-product-list"
         },
         {
-          "text": "Get live room product list data V2",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/live-room-product-list-v2"
+          "text": "TikTok Room Active Status Batch Check",
+          "link": "/model-api-reference/platform-apis/tiktok/web/batch-check-live-alive"
         },
         {
-          "text": "Get live room ranking list",
+          "text": "TikTok Room Danmaku Messages",
+          "link": "/model-api-reference/platform-apis/tiktok/web/live-im-fetch"
+        },
+        {
+          "text": "TikTok Room Gift List",
+          "link": "/model-api-reference/platform-apis/tiktok/web/live-gift-list"
+        },
+        {
+          "text": "TikTok Room ID Resolver",
+          "link": "/model-api-reference/platform-apis/tiktok/web/live-room-id"
+        },
+        {
+          "text": "TikTok Room Online Status Batch",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/check-live-room-online-batch"
+        },
+        {
+          "text": "TikTok Stream Audience Ranking List",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/live-ranking-list"
         },
         {
-          "text": "Get user live details",
-          "link": "/model-api-reference/platform-apis/tiktok/web/user-live-detail"
+          "text": "TikTok Stream Room Information",
+          "link": "/model-api-reference/platform-apis/tiktok/web/live-data"
         },
         {
-          "text": "Live room start status check",
+          "text": "TikTok Stream Status Check",
           "link": "/model-api-reference/platform-apis/tiktok/web/check-live-alive"
         },
         {
-          "text": "tiktok live room danmaku parameters",
-          "link": "/model-api-reference/platform-apis/tiktok/web/live-im-fetch"
+          "text": "TikTok User Stream Detail",
+          "link": "/model-api-reference/platform-apis/tiktok/web/user-live-detail"
+        },
+        {
+          "text": "TikTok Webcast User Information",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/webcast-user-info"
         }
       ]
     },
@@ -367,60 +343,36 @@ export default {
       "label": "Commerce",
       "operations": [
         {
-          "text": "Get hot selling products list",
-          "link": "/model-api-reference/platform-apis/tiktok/shop-web/hot-selling-products-list"
-        },
-        {
-          "text": "Get product category list",
-          "link": "/model-api-reference/platform-apis/tiktok/shop-web/products-category-list"
-        },
-        {
-          "text": "Get product detail V1(Full data)",
-          "link": "/model-api-reference/platform-apis/tiktok/shop-web/product-detail"
-        },
-        {
-          "text": "Get product detail V2 (Less Data)",
-          "link": "/model-api-reference/platform-apis/tiktok/shop-web/product-detail-v2"
-        },
-        {
-          "text": "Get product detail V3 (Full Data)",
-          "link": "/model-api-reference/platform-apis/tiktok/shop-web/product-detail-v3"
-        },
-        {
-          "text": "Get Product ID by Share Link",
-          "link": "/model-api-reference/platform-apis/tiktok/shop-web/product-id-by-share-link"
-        },
-        {
-          "text": "Get products by category ID",
-          "link": "/model-api-reference/platform-apis/tiktok/shop-web/products-by-category-id"
-        },
-        {
-          "text": "Get seller products list V1",
+          "text": "TikTok Seller Products List",
           "link": "/model-api-reference/platform-apis/tiktok/shop-web/seller-products-list"
         },
         {
-          "text": "Get seller products list V2 (Mobile)",
-          "link": "/model-api-reference/platform-apis/tiktok/shop-web/seller-products-list-v2"
-        },
-        {
-          "text": "Get shop home page data",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/shop-home"
-        },
-        {
-          "text": "Get shop home page list data",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/shop-home-page-list"
-        },
-        {
-          "text": "Get Shop ID by Share Link",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/shop-id-by-share-link"
-        },
-        {
-          "text": "Get Shop ID by Share Link",
+          "text": "TikTok Shop ID by Share Link",
           "link": "/model-api-reference/platform-apis/tiktok/shop-web/shop-id-by-share-link"
         },
         {
-          "text": "Get shop information data",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/shop-info"
+          "text": "TikTok Shop Product Category List",
+          "link": "/model-api-reference/platform-apis/tiktok/shop-web/products-category-list"
+        },
+        {
+          "text": "TikTok Shop Product Detail (V3)",
+          "link": "/model-api-reference/platform-apis/tiktok/shop-web/product-detail-v3"
+        },
+        {
+          "text": "TikTok Shop Product Details",
+          "link": "/model-api-reference/platform-apis/tiktok/shop-web/product-detail"
+        },
+        {
+          "text": "TikTok Shop Product Details (V2)",
+          "link": "/model-api-reference/platform-apis/tiktok/shop-web/product-detail-v2"
+        },
+        {
+          "text": "TikTok Shop Product ID by Share Link",
+          "link": "/model-api-reference/platform-apis/tiktok/shop-web/product-id-by-share-link"
+        },
+        {
+          "text": "TikTok Shop Seller Products (V2)",
+          "link": "/model-api-reference/platform-apis/tiktok/shop-web/seller-products-list-v2"
         }
       ]
     },
@@ -429,7 +381,7 @@ export default {
       "label": "Messaging",
       "operations": [
         {
-          "text": "Generate TikTok share link, call TikTok APP, and send private messages to specified users",
+          "text": "TikTok Direct Message Share Link",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/open-app-to-send-private-message"
         }
       ]
@@ -439,92 +391,84 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Batch Get Video Information",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/multi-video"
-        },
-        {
-          "text": "Batch Get Video Information V2",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/multi-video-v2"
-        },
-        {
           "text": "Detect fake views in video",
           "link": "/model-api-reference/platform-apis/tiktok/analytics/detect-fake-views"
         },
         {
-          "text": "Generate TikTok share link, call TikTok APP, and jump to the specified video details page",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/open-app-to-video-detail"
+          "text": "TikTok Batch Video Info (App V3, V2)",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/multi-video-v2"
         },
         {
-          "text": "Get details of specified music",
+          "text": "TikTok Batch Video Info (App V3)",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/multi-video"
+        },
+        {
+          "text": "TikTok Music Chart List",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/music-chart-list"
+        },
+        {
+          "text": "TikTok Music Details",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/music-detail"
         },
         {
-          "text": "Get single video data",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/one-video"
-        },
-        {
-          "text": "Get single video data",
-          "link": "/model-api-reference/platform-apis/tiktok/web/post-detail"
-        },
-        {
-          "text": "Get single video data by sharing link",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/one-video-by-share-url"
-        },
-        {
-          "text": "Get single video data by sharing link",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/one-video-by-share-url-v2"
-        },
-        {
-          "text": "Get single video data V2",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/one-video-v2"
-        },
-        {
-          "text": "Get single video data V2",
-          "link": "/model-api-reference/platform-apis/tiktok/web/post-detail-v2"
-        },
-        {
-          "text": "Get single video data V3 (support country parameter)",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/one-video-v3"
-        },
-        {
-          "text": "Get user homepage video data V1",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-post-videos"
-        },
-        {
-          "text": "Get user homepage video data V2",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-post-videos-v2"
-        },
-        {
-          "text": "Get user homepage video data V3 (simplified data - faster)",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-post-videos-v3"
-        },
-        {
-          "text": "Get user like video data",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-like-videos"
-        },
-        {
-          "text": "Get user music list data",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-music-list"
-        },
-        {
-          "text": "Get user posts",
-          "link": "/model-api-reference/platform-apis/tiktok/web/user-post"
-        },
-        {
-          "text": "Get user repost video data",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-repost-videos"
-        },
-        {
-          "text": "Get video list of specified music",
+          "text": "TikTok Music Video List",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/music-video-list"
         },
         {
-          "text": "Get video metrics",
-          "link": "/model-api-reference/platform-apis/tiktok/analytics/video-metrics"
+          "text": "TikTok Post Details (V2)",
+          "link": "/model-api-reference/platform-apis/tiktok/web/post-detail-v2"
         },
         {
-          "text": "Music Chart List",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/music-chart-list"
+          "text": "TikTok Single Video Details (V2)",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/one-video-v2"
+        },
+        {
+          "text": "TikTok User Homepage Videos (V3)",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-post-videos-v3"
+        },
+        {
+          "text": "TikTok User Liked Videos",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-like-videos"
+        },
+        {
+          "text": "TikTok User Music List",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-music-list"
+        },
+        {
+          "text": "TikTok User Posts",
+          "link": "/model-api-reference/platform-apis/tiktok/web/user-post"
+        },
+        {
+          "text": "TikTok User Repost Videos",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-repost-videos"
+        },
+        {
+          "text": "TikTok User Videos (App V3, V2)",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-post-videos-v2"
+        },
+        {
+          "text": "TikTok User Videos (App V3)",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-post-videos"
+        },
+        {
+          "text": "TikTok Video App Share Link",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/open-app-to-video-detail"
+        },
+        {
+          "text": "TikTok Video Detail",
+          "link": "/model-api-reference/platform-apis/tiktok/web/post-detail"
+        },
+        {
+          "text": "TikTok Video Details",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/one-video"
+        },
+        {
+          "text": "TikTok Video Details (V3)",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/one-video-v3"
+        },
+        {
+          "text": "TikTok Video Metrics",
+          "link": "/model-api-reference/platform-apis/tiktok/analytics/video-metrics"
         }
       ]
     },
@@ -533,76 +477,68 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Extract list user sec_user_id",
-          "link": "/model-api-reference/platform-apis/tiktok/web/all-sec-user-id"
-        },
-        {
-          "text": "Extract user sec_user_id",
-          "link": "/model-api-reference/platform-apis/tiktok/web/sec-user-id"
-        },
-        {
-          "text": "Extract user user_id",
-          "link": "/model-api-reference/platform-apis/tiktok/web/user-id"
-        },
-        {
-          "text": "Generate TikTok share link, call TikTok APP, and jump to the specified user profile",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/open-app-to-user-profile"
-        },
-        {
-          "text": "Get creator info and milestones",
+          "text": "TikTok Creator Info and Milestones",
           "link": "/model-api-reference/platform-apis/tiktok/analytics/creator-info-and-milestones"
         },
         {
-          "text": "Get follower list of specified user",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-follower-list"
+          "text": "TikTok Profile Sec User ID",
+          "link": "/model-api-reference/platform-apis/tiktok/web/sec-user-id"
         },
         {
-          "text": "Get following list of specified user",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-following-list"
-        },
-        {
-          "text": "Get information of specified user",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-profile"
-        },
-        {
-          "text": "Get user account country by username",
+          "text": "TikTok User Country by Username",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-country-by-username"
         },
         {
-          "text": "Get user favorites",
-          "link": "/model-api-reference/platform-apis/tiktok/web/user-collect"
+          "text": "TikTok User Follower List",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-follower-list"
         },
         {
-          "text": "Get user followers",
+          "text": "TikTok User Followers",
           "link": "/model-api-reference/platform-apis/tiktok/web/user-fans"
         },
         {
-          "text": "Get user followings",
-          "link": "/model-api-reference/platform-apis/tiktok/web/user-follow"
+          "text": "TikTok User Following List",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-following-list"
         },
         {
-          "text": "Get user likes",
+          "text": "TikTok User ID by Username",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-id-and-sec-user-id-by-username"
+        },
+        {
+          "text": "TikTok User ID from Profile Link",
+          "link": "/model-api-reference/platform-apis/tiktok/web/user-id"
+        },
+        {
+          "text": "TikTok User Likes",
           "link": "/model-api-reference/platform-apis/tiktok/web/user-like"
         },
         {
-          "text": "Get user mix list",
+          "text": "TikTok User Mix Video List",
           "link": "/model-api-reference/platform-apis/tiktok/web/user-mix"
         },
         {
-          "text": "Get user play list",
+          "text": "TikTok User Playlists",
           "link": "/model-api-reference/platform-apis/tiktok/web/user-play-list"
         },
         {
-          "text": "Get user profile",
+          "text": "TikTok User Profile",
           "link": "/model-api-reference/platform-apis/tiktok/web/user-profile"
         },
         {
-          "text": "Get user reposts",
+          "text": "TikTok User Profile Details",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-profile"
+        },
+        {
+          "text": "TikTok User Profile Share Link",
+          "link": "/model-api-reference/platform-apis/tiktok/app-v3/open-app-to-user-profile"
+        },
+        {
+          "text": "TikTok User Reposts",
           "link": "/model-api-reference/platform-apis/tiktok/web/user-repost"
         },
         {
-          "text": "Get user_id and sec_user_id by Username",
-          "link": "/model-api-reference/platform-apis/tiktok/app-v3/user-id-and-sec-user-id-by-username"
+          "text": "TikTok User Sec User ID Extractor",
+          "link": "/model-api-reference/platform-apis/tiktok/web/all-sec-user-id"
         }
       ]
     },
@@ -611,88 +547,88 @@ export default {
       "label": "Utilities",
       "operations": [
         {
-          "text": "Batch get gift names by gift IDs ($0.025/call, suggest 50)",
-          "link": "/model-api-reference/platform-apis/tiktok/web/gift-names-by-ids"
-        },
-        {
-          "text": "Decrypt strData",
-          "link": "/model-api-reference/platform-apis/tiktok/web/decrypt-str-data"
-        },
-        {
-          "text": "Encrypt strData",
-          "link": "/model-api-reference/platform-apis/tiktok/web/encrypt-str-data"
-        },
-        {
-          "text": "Extract list video id",
-          "link": "/model-api-reference/platform-apis/tiktok/web/all-aweme-id"
-        },
-        {
-          "text": "Extract single video id",
-          "link": "/model-api-reference/platform-apis/tiktok/web/aweme-id"
-        },
-        {
-          "text": "Generate browser fingerprint",
-          "link": "/model-api-reference/platform-apis/tiktok/web/generate-fingerprint"
-        },
-        {
-          "text": "Generate hashed ID",
-          "link": "/model-api-reference/platform-apis/tiktok/web/generate-hashed-id"
-        },
-        {
-          "text": "Generate real msToken",
-          "link": "/model-api-reference/platform-apis/tiktok/web/generate-real-ms-token"
-        },
-        {
-          "text": "Generate TikTok WSS X-Bogus signature",
-          "link": "/model-api-reference/platform-apis/tiktok/web/generate-wss-xb-signature"
-        },
-        {
-          "text": "Generate ttwid",
-          "link": "/model-api-reference/platform-apis/tiktok/web/generate-ttwid"
-        },
-        {
-          "text": "Generate web_id",
-          "link": "/model-api-reference/platform-apis/tiktok/web/generate-webid"
-        },
-        {
-          "text": "Generate X-Mssdk-Info",
-          "link": "/model-api-reference/platform-apis/tiktok/web/generate-x-mssdk-info"
-        },
-        {
-          "text": "Generate XBogus",
-          "link": "/model-api-reference/platform-apis/tiktok/web/generate-xbogus"
-        },
-        {
-          "text": "Generate XGnarly",
-          "link": "/model-api-reference/platform-apis/tiktok/web/generate-xgnarly"
-        },
-        {
-          "text": "Generate XGnarly and XBogus",
-          "link": "/model-api-reference/platform-apis/tiktok/web/generate-xgnarly-and-xbogus"
-        },
-        {
-          "text": "Get gift name by gift ID",
+          "text": "TikTok Gift Name by ID",
           "link": "/model-api-reference/platform-apis/tiktok/web/gift-name-by-id"
         },
         {
-          "text": "Get list unique_id",
+          "text": "TikTok Gift Names by IDs",
+          "link": "/model-api-reference/platform-apis/tiktok/web/gift-names-by-ids"
+        },
+        {
+          "text": "TikTok Profile Unique IDs",
           "link": "/model-api-reference/platform-apis/tiktok/web/all-unique-id"
         },
         {
-          "text": "Get share QR code",
+          "text": "TikTok Real msToken",
+          "link": "/model-api-reference/platform-apis/tiktok/web/generate-real-ms-token"
+        },
+        {
+          "text": "TikTok Share QR Code",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/share-qr-code"
         },
         {
-          "text": "Get the guest Cookie",
-          "link": "/model-api-reference/platform-apis/tiktok/web/web-guest-cookie"
-        },
-        {
-          "text": "Get user unique_id",
+          "text": "TikTok User Unique ID",
           "link": "/model-api-reference/platform-apis/tiktok/web/unique-id"
         },
         {
-          "text": "Register device for TikTok Web",
+          "text": "TikTok Video ID from URL",
+          "link": "/model-api-reference/platform-apis/tiktok/web/aweme-id"
+        },
+        {
+          "text": "TikTok Video IDs from URLs (Batch)",
+          "link": "/model-api-reference/platform-apis/tiktok/web/all-aweme-id"
+        },
+        {
+          "text": "TikTok Web Browser Fingerprint",
+          "link": "/model-api-reference/platform-apis/tiktok/web/generate-fingerprint"
+        },
+        {
+          "text": "TikTok Web Device Registration",
           "link": "/model-api-reference/platform-apis/tiktok/web/device-register"
+        },
+        {
+          "text": "TikTok Web Guest Cookie",
+          "link": "/model-api-reference/platform-apis/tiktok/web/web-guest-cookie"
+        },
+        {
+          "text": "TikTok Web Hashed ID",
+          "link": "/model-api-reference/platform-apis/tiktok/web/generate-hashed-id"
+        },
+        {
+          "text": "TikTok Web ID",
+          "link": "/model-api-reference/platform-apis/tiktok/web/generate-webid"
+        },
+        {
+          "text": "TikTok Web StrData Encryption",
+          "link": "/model-api-reference/platform-apis/tiktok/web/encrypt-str-data"
+        },
+        {
+          "text": "TikTok Web String Data Decryption",
+          "link": "/model-api-reference/platform-apis/tiktok/web/decrypt-str-data"
+        },
+        {
+          "text": "TikTok Web TTWID Identifier",
+          "link": "/model-api-reference/platform-apis/tiktok/web/generate-ttwid"
+        },
+        {
+          "text": "TikTok Web X-Bogus Signature",
+          "link": "/model-api-reference/platform-apis/tiktok/web/generate-xbogus"
+        },
+        {
+          "text": "TikTok Web X-Gnarly and X-Bogus Signatures",
+          "link": "/model-api-reference/platform-apis/tiktok/web/generate-xgnarly-and-xbogus"
+        },
+        {
+          "text": "TikTok Web X-Gnarly Signature",
+          "link": "/model-api-reference/platform-apis/tiktok/web/generate-xgnarly"
+        },
+        {
+          "text": "TikTok Web X-Mssdk-Info Tokens",
+          "link": "/model-api-reference/platform-apis/tiktok/web/generate-x-mssdk-info"
+        },
+        {
+          "text": "TikTok WSS X-Bogus Signature",
+          "link": "/model-api-reference/platform-apis/tiktok/web/generate-wss-xb-signature"
         }
       ]
     },
@@ -701,11 +637,11 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Get content translation data",
+          "text": "TikTok Content Translation",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/content-translate"
         },
         {
-          "text": "Get share short link",
+          "text": "TikTok Share Short Link",
           "link": "/model-api-reference/platform-apis/tiktok/app-v3/share-short-link"
         }
       ]

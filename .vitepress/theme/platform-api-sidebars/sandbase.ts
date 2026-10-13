@@ -9,75 +9,75 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Calendly",
+          "text": "SandBase Calendly Gateway",
           "link": "/model-api-reference/platform-apis/sandbase/calendly"
         },
         {
-          "text": "Discord",
+          "text": "SandBase Discord Gateway",
           "link": "/model-api-reference/platform-apis/sandbase/discord"
         },
         {
-          "text": "GitLab",
+          "text": "SandBase GitLab REST Request",
           "link": "/model-api-reference/platform-apis/sandbase/gitlab"
         },
         {
-          "text": "Gmail",
+          "text": "SandBase Gmail Connector",
           "link": "/model-api-reference/platform-apis/sandbase/gmail"
         },
         {
-          "text": "Google Calendar",
+          "text": "SandBase Google Calendar Gateway",
           "link": "/model-api-reference/platform-apis/sandbase/google-calendar"
         },
         {
-          "text": "Google Sheets",
+          "text": "SandBase Google Sheets Gateway",
           "link": "/model-api-reference/platform-apis/sandbase/google-sheets"
         },
         {
-          "text": "LinkedIn",
+          "text": "SandBase LinkedIn Gateway",
           "link": "/model-api-reference/platform-apis/sandbase/linkedin"
         },
         {
-          "text": "Sentry",
+          "text": "SandBase Sentry Connector",
           "link": "/model-api-reference/platform-apis/sandbase/sentry"
         },
         {
-          "text": "Stripe",
+          "text": "SandBase Stripe Gateway",
           "link": "/model-api-reference/platform-apis/sandbase/stripe"
         },
         {
-          "text": "Supabase",
+          "text": "SandBase Supabase Management Gateway",
           "link": "/model-api-reference/platform-apis/sandbase/supabase"
         },
         {
-          "text": "Vercel",
+          "text": "SandBase Vercel Gateway",
           "link": "/model-api-reference/platform-apis/sandbase/vercel"
         },
         {
-          "text": "X (Twitter)",
+          "text": "SandBase X Gateway",
           "link": "/model-api-reference/platform-apis/sandbase/twitter"
         },
         {
-          "text": "Airtable",
+          "text": "SandBase Airtable Connector",
           "link": "/model-api-reference/platform-apis/sandbase/airtable"
         },
         {
-          "text": "GitHub",
+          "text": "SandBase GitHub REST Proxy",
           "link": "/model-api-reference/platform-apis/sandbase/github"
         },
         {
-          "text": "HubSpot",
+          "text": "SandBase HubSpot Connector",
           "link": "/model-api-reference/platform-apis/sandbase/hubspot"
         },
         {
-          "text": "Linear",
+          "text": "SandBase Linear Integration",
           "link": "/model-api-reference/platform-apis/sandbase/linear"
         },
         {
-          "text": "Notion",
+          "text": "SandBase Notion Integration",
           "link": "/model-api-reference/platform-apis/sandbase/notion"
         },
         {
-          "text": "Slack",
+          "text": "SandBase Slack Gateway",
           "link": "/model-api-reference/platform-apis/sandbase/slack"
         }
       ]

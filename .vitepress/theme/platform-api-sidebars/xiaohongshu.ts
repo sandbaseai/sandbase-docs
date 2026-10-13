@@ -2,50 +2,54 @@
 export default {
   "platform": "Xiaohongshu",
   "slug": "xiaohongshu",
-  "operationCount": 36,
+  "operationCount": 34,
   "groups": [
     {
       "key": "search",
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Fetch homepage feed",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/homefeed"
-        },
-        {
-          "text": "Fetch search suggestions",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/search-suggest"
-        },
-        {
-          "text": "Get creator hot inspiration feed",
+          "text": "Xiaohongshu (RED) Creator Hot Inspiration Feed",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/creator-hot-inspiration-feed"
         },
         {
-          "text": "Get creator inspiration feed",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/creator-inspiration-feed"
-        },
-        {
-          "text": "Get topic feed",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/topic-feed"
-        },
-        {
-          "text": "Search groups",
+          "text": "Xiaohongshu (RED) Group Search",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/search-groups"
         },
         {
-          "text": "Search images",
+          "text": "Xiaohongshu (RED) Homepage Feed",
+          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/homefeed"
+        },
+        {
+          "text": "Xiaohongshu (RED) Image Search",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/search-images"
         },
         {
-          "text": "Search notes",
+          "text": "Xiaohongshu (RED) Inspiration Feed",
+          "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/creator-inspiration-feed"
+        },
+        {
+          "text": "Xiaohongshu (RED) Note Search",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/search-notes"
         },
         {
-          "text": "Search products",
+          "text": "Xiaohongshu (RED) PGY Blogger Search",
+          "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-list"
+        },
+        {
+          "text": "Xiaohongshu (RED) Product Search",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/search-products"
         },
         {
-          "text": "Search users",
+          "text": "Xiaohongshu (RED) Search Suggestions",
+          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/search-suggest"
+        },
+        {
+          "text": "Xiaohongshu (RED) Topic Feed",
+          "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/topic-feed"
+        },
+        {
+          "text": "Xiaohongshu (RED) User Search",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/search-users"
         }
       ]
@@ -55,19 +59,15 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get note comments",
+          "text": "Xiaohongshu (RED) Note Comments",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/note-comments"
         },
         {
-          "text": "Get note sub comments",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/note-sub-comments"
-        },
-        {
-          "text": "Get product review overview",
+          "text": "Xiaohongshu (RED) Product Review Overview",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/product-review-overview"
         },
         {
-          "text": "Get product reviews",
+          "text": "Xiaohongshu (RED) Product Reviews",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/product-reviews"
         }
       ]
@@ -77,11 +77,11 @@ export default {
       "label": "Commerce",
       "operations": [
         {
-          "text": "Get product detail",
+          "text": "Xiaohongshu (RED) Product Detail",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/product-detail"
         },
         {
-          "text": "Get product recommendations",
+          "text": "Xiaohongshu (RED) Product Recommendations",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/product-recommendations"
         }
       ]
@@ -91,7 +91,7 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get video note detail",
+          "text": "Xiaohongshu (RED) Video Note Detail",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/video-note-detail"
         }
       ]
@@ -101,32 +101,32 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Fetch user info",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/user-info"
-        },
-        {
-          "text": "Get PGY blogger fans history",
+          "text": "Xiaohongshu (RED) PGY Blogger Fan History",
           "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-fans-history"
         },
         {
-          "text": "Get PGY blogger fans profile",
+          "text": "Xiaohongshu (RED) PGY Blogger Fan Profile",
           "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-fans-profile"
         },
         {
-          "text": "Get PGY blogger fans summary",
+          "text": "Xiaohongshu (RED) PGY Blogger Fans Summary",
           "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-fans-summary"
         },
         {
-          "text": "Get user faved notes",
+          "text": "Xiaohongshu (RED) User Favorited Notes",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/user-faved-notes"
         },
         {
-          "text": "Get user info",
+          "text": "Xiaohongshu (RED) User Information",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/user-info"
         },
         {
-          "text": "Get user posted notes",
+          "text": "Xiaohongshu (RED) User Posted Notes",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/user-posted-notes"
+        },
+        {
+          "text": "Xiaohongshu (RED) User Profile Information",
+          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/user-info"
         }
       ]
     },
@@ -135,52 +135,44 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Fetch homepage categories",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/homefeed-categories"
-        },
-        {
-          "text": "Fetch note detail",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/note-detail"
-        },
-        {
-          "text": "Fetch Xiaohongshu hot list",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/hot-list"
-        },
-        {
-          "text": "Get image note detail",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/image-note-detail"
-        },
-        {
-          "text": "Get PGY blogger core data",
+          "text": "Xiaohongshu (RED) Blogger Core Data",
           "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-core-data"
         },
         {
-          "text": "Get PGY blogger data summary",
+          "text": "Xiaohongshu (RED) Homepage Categories",
+          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/homefeed-categories"
+        },
+        {
+          "text": "Xiaohongshu (RED) Image Note Details",
+          "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/image-note-detail"
+        },
+        {
+          "text": "Xiaohongshu (RED) PGY Blogger Data Summary",
           "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-data-summary"
         },
         {
-          "text": "Get PGY blogger detail",
+          "text": "Xiaohongshu (RED) PGY Blogger Details",
           "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-detail"
         },
         {
-          "text": "Get PGY blogger list",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-list"
-        },
-        {
-          "text": "Get PGY blogger notes",
-          "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-notes"
-        },
-        {
-          "text": "Get PGY blogger notes rate",
+          "text": "Xiaohongshu (RED) PGY Blogger Note Rates",
           "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-notes-rate"
         },
         {
-          "text": "Get PGY note detail",
+          "text": "Xiaohongshu (RED) PGY Blogger Notes",
+          "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/blogger-notes"
+        },
+        {
+          "text": "Xiaohongshu (RED) PGY Note Detail",
           "link": "/model-api-reference/platform-apis/xiaohongshu/pgy/note-detail"
         },
         {
-          "text": "Get topic info",
+          "text": "Xiaohongshu (RED) Topic Details",
           "link": "/model-api-reference/platform-apis/xiaohongshu/app-v2/topic-info"
+        },
+        {
+          "text": "Xiaohongshu (RED) Web Note Details",
+          "link": "/model-api-reference/platform-apis/xiaohongshu/web-v3/note-detail"
         }
       ]
     }

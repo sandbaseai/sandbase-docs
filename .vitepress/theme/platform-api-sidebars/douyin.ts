@@ -2,271 +2,243 @@
 export default {
   "platform": "Douyin",
   "slug": "douyin",
-  "operationCount": 309,
+  "operationCount": 262,
   "groups": [
     {
       "key": "search",
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Brand search suggest",
-          "link": "/model-api-reference/platform-apis/douyin/index/brand-suggest"
-        },
-        {
-          "text": "Content consume trend",
-          "link": "/model-api-reference/platform-apis/douyin/index/content-consume-trend"
-        },
-        {
-          "text": "Content interact trend",
-          "link": "/model-api-reference/platform-apis/douyin/index/content-interact-trend"
-        },
-        {
-          "text": "Content publish trend",
-          "link": "/model-api-reference/platform-apis/douyin/index/content-publish-trend"
-        },
-        {
-          "text": "Creative keyword related items",
-          "link": "/model-api-reference/platform-apis/douyin/index/content-creative-keyword-items"
-        },
-        {
-          "text": "Delivery analysis trend graph",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/analyse-graph"
-        },
-        {
-          "text": "Fetch account search list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-search-list"
-        },
-        {
-          "text": "Fetch discussion search",
-          "link": "/model-api-reference/platform-apis/douyin/search/discuss-search"
-        },
-        {
-          "text": "Fetch experience search",
-          "link": "/model-api-reference/platform-apis/douyin/search/experience-search"
-        },
-        {
-          "text": "Fetch fan interest search term in the last 3 days 10 search terms",
+          "text": "Douyin Account Fan Interest Search Terms",
           "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-fans-interest-search-list"
         },
         {
-          "text": "Fetch general search V1",
-          "link": "/model-api-reference/platform-apis/douyin/search/general-search-v1"
-        },
-        {
-          "text": "Fetch general search V2",
-          "link": "/model-api-reference/platform-apis/douyin/search/general-search-v2"
-        },
-        {
-          "text": "Fetch hashtag search V1",
-          "link": "/model-api-reference/platform-apis/douyin/search/challenge-search-v1"
-        },
-        {
-          "text": "Fetch hashtag search V2",
-          "link": "/model-api-reference/platform-apis/douyin/search/challenge-search-v2"
-        },
-        {
-          "text": "Fetch hashtag suggestions",
-          "link": "/model-api-reference/platform-apis/douyin/search/challenge-suggest"
-        },
-        {
-          "text": "Fetch image search",
-          "link": "/model-api-reference/platform-apis/douyin/search/image-search"
-        },
-        {
-          "text": "Fetch image-text search V3",
-          "link": "/model-api-reference/platform-apis/douyin/search/image-search-v3"
-        },
-        {
-          "text": "Fetch item search keywords statistics",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-search-keyword"
-        },
-        {
-          "text": "Fetch item watch trend analysis",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-watch-trend"
-        },
-        {
-          "text": "Fetch live search V1",
-          "link": "/model-api-reference/platform-apis/douyin/search/live-search-v1"
-        },
-        {
-          "text": "Fetch multi-type search",
-          "link": "/model-api-reference/platform-apis/douyin/search/multi-search"
-        },
-        {
-          "text": "Fetch music search",
-          "link": "/model-api-reference/platform-apis/douyin/search/music-search"
-        },
-        {
-          "text": "Fetch school search",
-          "link": "/model-api-reference/platform-apis/douyin/search/school-search"
-        },
-        {
-          "text": "Fetch search hot list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-search-list"
-        },
-        {
-          "text": "Fetch search keyword suggestions",
-          "link": "/model-api-reference/platform-apis/douyin/search/search-suggest"
-        },
-        {
-          "text": "Fetch search list with rising popularity",
+          "text": "Douyin Billboard Rising Search List",
           "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-high-search-list"
         },
         {
-          "text": "Fetch user search",
-          "link": "/model-api-reference/platform-apis/douyin/search/user-search"
-        },
-        {
-          "text": "Fetch user search V2",
-          "link": "/model-api-reference/platform-apis/douyin/search/user-search-v2"
-        },
-        {
-          "text": "Fetch vertical content tags",
+          "text": "Douyin Billboard Vertical Content Tags",
           "link": "/model-api-reference/platform-apis/douyin/billboard/content-tag"
         },
         {
-          "text": "Fetch video search V1",
-          "link": "/model-api-reference/platform-apis/douyin/search/video-search-v1"
-        },
-        {
-          "text": "Fetch video search V2",
-          "link": "/model-api-reference/platform-apis/douyin/search/video-search-v2"
-        },
-        {
-          "text": "Fetch vision search (image-based search)",
-          "link": "/model-api-reference/platform-apis/douyin/search/vision-search"
-        },
-        {
-          "text": "Generate Douyin share link, call Douyin APP, and jump to the specified keyword search result",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/open-app-to-keyword-search"
-        },
-        {
-          "text": "Get brand trend lines",
-          "link": "/model-api-reference/platform-apis/douyin/index/brand-lines"
-        },
-        {
-          "text": "Get Content Trend Guide",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/content-trend-guide"
-        },
-        {
-          "text": "Get details of specified hashtag",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/hashtag-detail"
-        },
-        {
-          "text": "Get Douyin brand hot search list data",
+          "text": "Douyin Brand Hot Search List",
           "link": "/model-api-reference/platform-apis/douyin/app-v3/brand-hot-search-list"
         },
         {
-          "text": "Get Douyin brand hot search list detail data",
+          "text": "Douyin Brand Hot Search List Detail",
           "link": "/model-api-reference/platform-apis/douyin/app-v3/brand-hot-search-list-detail"
         },
         {
-          "text": "Get Douyin hot search list data",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/hot-search-list"
+          "text": "Douyin Brand Search Suggestions",
+          "link": "/model-api-reference/platform-apis/douyin/index/brand-suggest"
         },
         {
-          "text": "Get Douyin hot search results",
-          "link": "/model-api-reference/platform-apis/douyin/web/hot-search-result"
+          "text": "Douyin Brand Trend Lines",
+          "link": "/model-api-reference/platform-apis/douyin/index/brand-lines"
         },
         {
-          "text": "Get Douyin live hot search list data",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/live-hot-search-list"
+          "text": "Douyin Category Content Interaction Trend",
+          "link": "/model-api-reference/platform-apis/douyin/index/content-interact-trend"
         },
         {
-          "text": "Get Douyin music hot search list data",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/music-hot-search-list"
+          "text": "Douyin Challenge Search",
+          "link": "/model-api-reference/platform-apis/douyin/search/challenge-search-v1"
         },
         {
-          "text": "Get home feed data",
-          "link": "/model-api-reference/platform-apis/douyin/web/home-feed"
+          "text": "Douyin Content Consumption Trend",
+          "link": "/model-api-reference/platform-apis/douyin/index/content-consume-trend"
         },
         {
-          "text": "Get hot trend words",
-          "link": "/model-api-reference/platform-apis/douyin/index/hot-trend-word"
+          "text": "Douyin Content Volume Trend",
+          "link": "/model-api-reference/platform-apis/douyin/index/content-publish-trend"
         },
         {
-          "text": "Get keyword valid date",
-          "link": "/model-api-reference/platform-apis/douyin/index/keyword-valid-date"
+          "text": "Douyin Creative Keyword Related Videos",
+          "link": "/model-api-reference/platform-apis/douyin/index/content-creative-keyword-items"
         },
         {
-          "text": "Get multi-keyword hot trend",
-          "link": "/model-api-reference/platform-apis/douyin/index/multi-keyword-hot-trend"
+          "text": "Douyin Discussion Search",
+          "link": "/model-api-reference/platform-apis/douyin/search/discuss-search"
         },
         {
-          "text": "Get multi-keyword interpretation",
-          "link": "/model-api-reference/platform-apis/douyin/index/multi-keyword-interpretation"
-        },
-        {
-          "text": "Get Recommend Similar Star Authors",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/recommend-for-star-authors"
-        },
-        {
-          "text": "Get recommended insight reports",
-          "link": "/model-api-reference/platform-apis/douyin/index/insight-recommend"
-        },
-        {
-          "text": "Get similar daren",
-          "link": "/model-api-reference/platform-apis/douyin/index/daren-similar-users"
-        },
-        {
-          "text": "Get video list of specified hashtag",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/hashtag-video-list"
-        },
-        {
-          "text": "Search Anchor",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/search-anchor"
-        },
-        {
-          "text": "Search Creator",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/search-creator"
-        },
-        {
-          "text": "Search DOU+ user",
+          "text": "Douyin DOU+ User Search",
           "link": "/model-api-reference/platform-apis/douyin/douplus/search-user"
         },
         {
-          "text": "Search Kol Advanced V2",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/search-kol-v2"
+          "text": "Douyin Experience Content Search",
+          "link": "/model-api-reference/platform-apis/douyin/search/experience-search"
         },
         {
-          "text": "Search Kol V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/search-kol-v1"
+          "text": "Douyin General Search",
+          "link": "/model-api-reference/platform-apis/douyin/search/general-search-v1"
         },
         {
-          "text": "Search live rooms (by Douyin ID or nickname)",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/search-live-room"
+          "text": "Douyin General Search (V2)",
+          "link": "/model-api-reference/platform-apis/douyin/search/general-search-v2"
         },
         {
-          "text": "Search talents by category",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/talents-by-category"
+          "text": "Douyin Hashtag Challenge Search (V2)",
+          "link": "/model-api-reference/platform-apis/douyin/search/challenge-search-v2"
         },
         {
-          "text": "Search Toutiao Creator",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/search-toutiao-creator"
+          "text": "Douyin Hashtag Details",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/hashtag-detail"
         },
         {
-          "text": "Search trend reports",
-          "link": "/model-api-reference/platform-apis/douyin/index/report-search"
+          "text": "Douyin Hashtag Suggestions",
+          "link": "/model-api-reference/platform-apis/douyin/search/challenge-suggest"
         },
         {
-          "text": "Search user V2",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/search-user-v2"
+          "text": "Douyin Hashtag Video List",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/hashtag-video-list"
         },
         {
-          "text": "Search users",
-          "link": "/model-api-reference/platform-apis/douyin/creator/user-search"
+          "text": "Douyin Hot Account Search",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-search-list"
         },
         {
-          "text": "Search videos (by title)",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/search-video"
+          "text": "Douyin Hot Search Keywords",
+          "link": "/model-api-reference/platform-apis/douyin/index/hot-words"
         },
         {
-          "text": "Topic search results",
+          "text": "Douyin Hot Search List",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/hot-search-list"
+        },
+        {
+          "text": "Douyin Hot Total Search List",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-search-list"
+        },
+        {
+          "text": "Douyin Hot Trend Words",
+          "link": "/model-api-reference/platform-apis/douyin/index/hot-trend-word"
+        },
+        {
+          "text": "Douyin Image Search",
+          "link": "/model-api-reference/platform-apis/douyin/search/image-search"
+        },
+        {
+          "text": "Douyin Image-Text Search",
+          "link": "/model-api-reference/platform-apis/douyin/search/image-search-v3"
+        },
+        {
+          "text": "Douyin Index Keyword Valid Dates",
+          "link": "/model-api-reference/platform-apis/douyin/index/keyword-valid-date"
+        },
+        {
+          "text": "Douyin Keyword Crowd Portrait",
+          "link": "/model-api-reference/platform-apis/douyin/index/portrait"
+        },
+        {
+          "text": "Douyin Keyword Search Share Link",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/open-app-to-keyword-search"
+        },
+        {
+          "text": "Douyin Multi Keyword Hot Trend",
+          "link": "/model-api-reference/platform-apis/douyin/index/multi-keyword-hot-trend"
+        },
+        {
+          "text": "Douyin Multi Search",
+          "link": "/model-api-reference/platform-apis/douyin/search/multi-search"
+        },
+        {
+          "text": "Douyin Multi-Keyword Index Interpretation",
+          "link": "/model-api-reference/platform-apis/douyin/index/multi-keyword-interpretation"
+        },
+        {
+          "text": "Douyin Music Hot Search List",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/music-hot-search-list"
+        },
+        {
+          "text": "Douyin Music Search",
+          "link": "/model-api-reference/platform-apis/douyin/search/music-search"
+        },
+        {
+          "text": "Douyin Recommended Insight Reports",
+          "link": "/model-api-reference/platform-apis/douyin/index/insight-recommend"
+        },
+        {
+          "text": "Douyin Rising Hot Search List",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-rise-list"
+        },
+        {
+          "text": "Douyin School Search",
+          "link": "/model-api-reference/platform-apis/douyin/search/school-search"
+        },
+        {
+          "text": "Douyin Search Suggestions",
+          "link": "/model-api-reference/platform-apis/douyin/search/search-suggest"
+        },
+        {
+          "text": "Douyin Similar Daren Accounts",
+          "link": "/model-api-reference/platform-apis/douyin/index/daren-similar-users"
+        },
+        {
+          "text": "Douyin Topic Search",
           "link": "/model-api-reference/platform-apis/douyin/index/topic-query"
         },
         {
-          "text": "Topic search suggest",
+          "text": "Douyin Topic Search Suggestions",
           "link": "/model-api-reference/platform-apis/douyin/index/topic-suggest"
+        },
+        {
+          "text": "Douyin Toutiao Creator Search",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/search-toutiao-creator"
+        },
+        {
+          "text": "Douyin Trend Report Detail",
+          "link": "/model-api-reference/platform-apis/douyin/index/report-detail"
+        },
+        {
+          "text": "Douyin Trend Report Search",
+          "link": "/model-api-reference/platform-apis/douyin/index/report-search"
+        },
+        {
+          "text": "Douyin User Search (Creator)",
+          "link": "/model-api-reference/platform-apis/douyin/creator/user-search"
+        },
+        {
+          "text": "Douyin User Search (Search)",
+          "link": "/model-api-reference/platform-apis/douyin/search/user-search"
+        },
+        {
+          "text": "Douyin User Search (V2)",
+          "link": "/model-api-reference/platform-apis/douyin/search/user-search-v2"
+        },
+        {
+          "text": "Douyin Video Search",
+          "link": "/model-api-reference/platform-apis/douyin/search/video-search-v2"
+        },
+        {
+          "text": "Douyin Video Search (V1)",
+          "link": "/model-api-reference/platform-apis/douyin/search/video-search-v1"
+        },
+        {
+          "text": "Douyin Web Home Feed",
+          "link": "/model-api-reference/platform-apis/douyin/web/home-feed"
+        },
+        {
+          "text": "Douyin Web Hot Search Results",
+          "link": "/model-api-reference/platform-apis/douyin/web/hot-search-result"
+        },
+        {
+          "text": "Douyin Xingtu Anchor Search",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/search-anchor"
+        },
+        {
+          "text": "Douyin Xingtu Content Trend Guide",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/content-trend-guide"
+        },
+        {
+          "text": "Douyin Xingtu Creator Search",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/search-creator"
+        },
+        {
+          "text": "Douyin Xingtu KOL Search (V2)",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/search-kol-v2"
+        },
+        {
+          "text": "Douyin Xingtu Similar Star Authors",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/recommend-for-star-authors"
         }
       ]
     },
@@ -275,36 +247,36 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Fetch work comment analysis word cloud weight",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-comment-word-list"
-        },
-        {
-          "text": "Get Author Content Hot Comment Keywords V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/author-content-hot-comment-keywords-v1"
-        },
-        {
-          "text": "Get Author Hot Comment Tokens",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-hot-comment-tokens"
-        },
-        {
-          "text": "Get Author Hot Comment Tokens V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/author-hot-comment-tokens-v1"
-        },
-        {
-          "text": "Get comment replies data of specified video",
+          "text": "Douyin Video Comment Replies (App V3)",
           "link": "/model-api-reference/platform-apis/douyin/app-v3/video-comment-replies"
         },
         {
-          "text": "Get comment replies data of specified video",
+          "text": "Douyin Video Comment Replies (Web)",
           "link": "/model-api-reference/platform-apis/douyin/web/video-comment-replies"
         },
         {
-          "text": "Get single video comments data",
+          "text": "Douyin Video Comments",
           "link": "/model-api-reference/platform-apis/douyin/app-v3/video-comments"
         },
         {
-          "text": "Get single video comments data",
+          "text": "Douyin Video Comments (Web)",
           "link": "/model-api-reference/platform-apis/douyin/web/video-comments"
+        },
+        {
+          "text": "Douyin Work Hot Comment Word Cloud",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-comment-word-list"
+        },
+        {
+          "text": "Douyin Xingtu Author Hot Comment Keywords",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/author-content-hot-comment-keywords-v1"
+        },
+        {
+          "text": "Douyin Xingtu Author Hot Comment Tokens (Xingtu V2)",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-hot-comment-tokens"
+        },
+        {
+          "text": "Douyin Xingtu Author Hot Comment Tokens (Xingtu)",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/author-hot-comment-tokens-v1"
         }
       ]
     },
@@ -313,47 +285,39 @@ export default {
       "label": "Live",
       "operations": [
         {
-          "text": "Douyin live room danmaku parameters",
-          "link": "/model-api-reference/platform-apis/douyin/web/live-im-fetch"
-        },
-        {
-          "text": "Douyin live room product information",
-          "link": "/model-api-reference/platform-apis/douyin/web/live-room-product-result"
-        },
-        {
-          "text": "Extract list webcast id",
-          "link": "/model-api-reference/platform-apis/douyin/web/all-webcast-id"
-        },
-        {
-          "text": "Extract webcast id",
-          "link": "/model-api-reference/platform-apis/douyin/web/webcast-id"
-        },
-        {
-          "text": "Fetch live room history list",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/live-room-history-list"
-        },
-        {
-          "text": "Get live room gift user ranking",
+          "text": "Douyin Live Room Gift User Ranking",
           "link": "/model-api-reference/platform-apis/douyin/web/live-gift-ranking"
         },
         {
-          "text": "Get live video data of specified user by sec_uid",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-live-videos-by-sec-uid"
+          "text": "Douyin Room Danmaku Parameters",
+          "link": "/model-api-reference/platform-apis/douyin/web/live-im-fetch"
         },
         {
-          "text": "Get user live information by UID",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-live-info-by-uid"
-        },
-        {
-          "text": "Get user live video data",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-live-videos"
-        },
-        {
-          "text": "Gets the live stream data of the specified user by room_id V2",
+          "text": "Douyin Stream Data by Room ID (V2)",
           "link": "/model-api-reference/platform-apis/douyin/web/user-live-videos-by-room-id-v2"
         },
         {
-          "text": "Webcast id to room id",
+          "text": "Douyin User Broadcast Videos",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-live-videos-by-sec-uid"
+        },
+        {
+          "text": "Douyin User Stream Information by UID",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-live-info-by-uid"
+        },
+        {
+          "text": "Douyin User Webcast Video Records",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-live-videos"
+        },
+        {
+          "text": "Douyin Webcast ID Extraction",
+          "link": "/model-api-reference/platform-apis/douyin/web/all-webcast-id"
+        },
+        {
+          "text": "Douyin Webcast ID Extractor",
+          "link": "/model-api-reference/platform-apis/douyin/web/webcast-id"
+        },
+        {
+          "text": "Douyin Webcast ID to Room ID",
           "link": "/model-api-reference/platform-apis/douyin/web/webcast-id-2-room-id"
         }
       ]
@@ -363,7 +327,7 @@ export default {
       "label": "Commerce",
       "operations": [
         {
-          "text": "Get Author Convert Videos or Products",
+          "text": "Douyin Xingtu Creator Conversion Details",
           "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-convert-videos-or-products"
         }
       ]
@@ -373,7 +337,7 @@ export default {
       "label": "Messaging",
       "operations": [
         {
-          "text": "Generate Douyin share link, call Douyin APP, and send private messages to specified users",
+          "text": "Douyin Direct Message Deep Link",
           "link": "/model-api-reference/platform-apis/douyin/app-v3/open-app-to-send-private-message"
         }
       ]
@@ -383,316 +347,256 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Anime Video",
+          "text": "Douyin Anime Videos",
           "link": "/model-api-reference/platform-apis/douyin/web/cartoon-aweme"
         },
         {
-          "text": "Batch get the highest quality play URL of videos",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/multi-video-high-quality-play-url"
-        },
-        {
-          "text": "Batch get the highest quality play URL of videos",
-          "link": "/model-api-reference/platform-apis/douyin/web/multi-video-high-quality-play-url"
-        },
-        {
-          "text": "Batch Get Video Information",
-          "link": "/model-api-reference/platform-apis/douyin/web/multi-video"
-        },
-        {
-          "text": "Batch Get Video Information V1",
+          "text": "Douyin Batch Video Information (App V3)",
           "link": "/model-api-reference/platform-apis/douyin/app-v3/multi-video"
         },
         {
-          "text": "Batch Get Video Information V2",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/multi-video-v2"
+          "text": "Douyin Batch Video Information (Web)",
+          "link": "/model-api-reference/platform-apis/douyin/web/multi-video"
         },
         {
-          "text": "Brand hot videos time scope",
-          "link": "/model-api-reference/platform-apis/douyin/index/brand-hot-videos-time-scope"
-        },
-        {
-          "text": "Challenge Posts",
-          "link": "/model-api-reference/platform-apis/douyin/web/challenge-posts"
-        },
-        {
-          "text": "Douyin video channel data",
-          "link": "/model-api-reference/platform-apis/douyin/web/video-channel-result"
-        },
-        {
-          "text": "Download item list",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-list-download"
-        },
-        {
-          "text": "Fetch account work analysis - last week",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-item-analysis-list"
-        },
-        {
-          "text": "Fetch item analysis involved vertical",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-analysis-involved-vertical"
-        },
-        {
-          "text": "Fetch item analysis item performance",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-analysis-item-performance"
-        },
-        {
-          "text": "Fetch item analysis overview",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-analysis-overview"
-        },
-        {
-          "text": "Fetch item audience others analysis",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-audience-others"
-        },
-        {
-          "text": "Fetch item audience portrait",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-audience-portrait"
-        },
-        {
-          "text": "Fetch item bullet analysis",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-danmaku-analysis"
-        },
-        {
-          "text": "Fetch item list",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-list"
-        },
-        {
-          "text": "Fetch item overview data",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-overview-data"
-        },
-        {
-          "text": "Fetch item play source statistics",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/item-play-source"
-        },
-        {
-          "text": "Fetch post data trend",
+          "text": "Douyin Billboard Post Trends",
           "link": "/model-api-reference/platform-apis/douyin/billboard/hot-item-trends-list"
         },
         {
-          "text": "Fetch video hot list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-video-list"
+          "text": "Douyin Brand Hot Videos Time Scope",
+          "link": "/model-api-reference/platform-apis/douyin/index/brand-hot-videos-time-scope"
         },
         {
-          "text": "Food Video",
-          "link": "/model-api-reference/platform-apis/douyin/web/food-aweme"
-        },
-        {
-          "text": "Game Video",
-          "link": "/model-api-reference/platform-apis/douyin/web/game-aweme"
-        },
-        {
-          "text": "Generate Douyin share link, call Douyin APP, and jump to the specified video details page",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/open-app-to-video-detail"
-        },
-        {
-          "text": "Generate Douyin video share QR code",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/generate-video-share-qrcode"
-        },
-        {
-          "text": "Get Author Homepage Videos",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-homepage-videos"
-        },
-        {
-          "text": "Get Author Show Items",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-show-items"
-        },
-        {
-          "text": "Get creator hot music billboard",
+          "text": "Douyin Creator Hot Music Billboard",
           "link": "/model-api-reference/platform-apis/douyin/creator/creator-hot-music-billboard"
         },
         {
-          "text": "Get daren core metrics",
-          "link": "/model-api-reference/platform-apis/douyin/index/daren-great-item-mile-info"
-        },
-        {
-          "text": "Get daren top videos",
+          "text": "Douyin Creator Top Videos",
           "link": "/model-api-reference/platform-apis/douyin/index/daren-great-user-top-video"
         },
         {
-          "text": "Get details of specified music",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/music-detail"
-        },
-        {
-          "text": "Get DOU+ video ranking",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/video-ranking"
-        },
-        {
-          "text": "Get Douyin video mix detail data",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/video-mix-detail"
-        },
-        {
-          "text": "Get Douyin video mix post list data",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/video-mix-post-list"
-        },
-        {
-          "text": "Get Item Play Count",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/item-play-count"
-        },
-        {
-          "text": "Get kol Convert Video Display V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-convert-video-display-v1"
-        },
-        {
-          "text": "Get kol Rec Videos V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-rec-videos-v1"
-        },
-        {
-          "text": "Get kol Video Performance V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-video-performance-v1"
-        },
-        {
-          "text": "Get promotable item list (with like & comment counts)",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/promotable-item-list"
-        },
-        {
-          "text": "Get related posts recommendation data",
-          "link": "/model-api-reference/platform-apis/douyin/web/related-posts"
-        },
-        {
-          "text": "Get series video list",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/series-video-list"
-        },
-        {
-          "text": "Get single video danmaku data",
-          "link": "/model-api-reference/platform-apis/douyin/web/one-video-danmaku"
-        },
-        {
-          "text": "Get single video data",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/one-video"
-        },
-        {
-          "text": "Get single video data",
-          "link": "/model-api-reference/platform-apis/douyin/web/one-video"
-        },
-        {
-          "text": "Get single video data by sharing link",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/one-video-by-share-url"
-        },
-        {
-          "text": "Get single video data by sharing link",
-          "link": "/model-api-reference/platform-apis/douyin/web/one-video-by-share-url"
-        },
-        {
-          "text": "Get single video data V2",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/one-video-v2"
-        },
-        {
-          "text": "Get single video data V2",
-          "link": "/model-api-reference/platform-apis/douyin/web/one-video-v2"
-        },
-        {
-          "text": "Get single video data V3 (No copyright restrictions)",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/one-video-v3"
-        },
-        {
-          "text": "Get the highest quality play URL of the video",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/video-high-quality-play-url"
-        },
-        {
-          "text": "Get the highest quality play URL of the video",
-          "link": "/model-api-reference/platform-apis/douyin/web/video-high-quality-play-url"
-        },
-        {
-          "text": "Get the statistical data of the Post according to the video ID (like count, download count, play count, share count)",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/multi-video-statistics"
-        },
-        {
-          "text": "Get the statistical data of the Post according to the video ID (like count, download count, play count, share count)",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/video-statistics"
-        },
-        {
-          "text": "Get user collection data",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-collects-videos"
-        },
-        {
-          "text": "Get user collection video data",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-collection-videos"
-        },
-        {
-          "text": "Get user homepage posts",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/user-posts"
-        },
-        {
-          "text": "Get user homepage video data",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/user-post-videos"
-        },
-        {
-          "text": "Get user homepage video data",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-post-videos"
-        },
-        {
-          "text": "Get user like video data",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/user-like-videos"
-        },
-        {
-          "text": "Get user like video data",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-like-videos"
-        },
-        {
-          "text": "Get user mix video data",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-mix-videos"
-        },
-        {
-          "text": "Get video audience profile",
-          "link": "/model-api-reference/platform-apis/douyin/index/item-user-profile"
-        },
-        {
-          "text": "Get video comparison analysis",
-          "link": "/model-api-reference/platform-apis/douyin/index/item-analysis"
-        },
-        {
-          "text": "Get video danmaku list",
+          "text": "Douyin Creator Video Danmaku List",
           "link": "/model-api-reference/platform-apis/douyin/creator/video-danmaku-list"
         },
         {
-          "text": "Get video detail",
-          "link": "/model-api-reference/platform-apis/douyin/index/item-base"
+          "text": "Douyin Daren Core Metrics",
+          "link": "/model-api-reference/platform-apis/douyin/index/daren-great-item-mile-info"
         },
         {
-          "text": "Get video detail (by id or link)",
+          "text": "Douyin DOU+ Promotable Items",
+          "link": "/model-api-reference/platform-apis/douyin/douplus/promotable-item-list"
+        },
+        {
+          "text": "Douyin DOU+ Video Ranking",
+          "link": "/model-api-reference/platform-apis/douyin/douplus/video-ranking"
+        },
+        {
+          "text": "Douyin Douplus User Posts",
+          "link": "/model-api-reference/platform-apis/douyin/douplus/user-posts"
+        },
+        {
+          "text": "Douyin Douplus Video Detail",
           "link": "/model-api-reference/platform-apis/douyin/douplus/video-detail"
         },
         {
-          "text": "Get video index interpretation",
-          "link": "/model-api-reference/platform-apis/douyin/index/item-index-interpret"
+          "text": "Douyin Food Videos",
+          "link": "/model-api-reference/platform-apis/douyin/web/food-aweme"
         },
         {
-          "text": "Get video index trend",
-          "link": "/model-api-reference/platform-apis/douyin/index/item-index"
+          "text": "Douyin Game Videos",
+          "link": "/model-api-reference/platform-apis/douyin/web/game-aweme"
         },
         {
-          "text": "Get video list of specified music",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/music-video-list"
+          "text": "Douyin High Quality Video Play URL (App V3)",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/video-high-quality-play-url"
         },
         {
-          "text": "Get video search filter options",
-          "link": "/model-api-reference/platform-apis/douyin/index/item-filter-options"
+          "text": "Douyin High Quality Video Play URL (Web)",
+          "link": "/model-api-reference/platform-apis/douyin/web/video-high-quality-play-url"
         },
         {
-          "text": "Increase the number of plays of the work according to the video ID",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/add-video-play-count"
+          "text": "Douyin High-Quality Video Play URLs",
+          "link": "/model-api-reference/platform-apis/douyin/web/multi-video-high-quality-play-url"
         },
         {
-          "text": "Knowledge Video",
-          "link": "/model-api-reference/platform-apis/douyin/web/knowledge-aweme"
+          "text": "Douyin Hot Account Work Analysis",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-item-analysis-list"
         },
         {
-          "text": "Multi Get Item Stats",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/multi-get-item-stats"
+          "text": "Douyin Hot Video Ranking",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-video-list"
         },
         {
-          "text": "Music Video",
-          "link": "/model-api-reference/platform-apis/douyin/web/music-aweme"
-        },
-        {
-          "text": "Series Video",
-          "link": "/model-api-reference/platform-apis/douyin/web/series-aweme"
-        },
-        {
-          "text": "Video search results",
+          "text": "Douyin Index Video Search",
           "link": "/model-api-reference/platform-apis/douyin/index/item-query"
         },
         {
-          "text": "Video search suggest",
+          "text": "Douyin Low Fan Billboard Items",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-low-fan-list"
+        },
+        {
+          "text": "Douyin Multi Video Information (V2)",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/multi-video-v2"
+        },
+        {
+          "text": "Douyin Multi-Video High Quality Play URLs",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/multi-video-high-quality-play-url"
+        },
+        {
+          "text": "Douyin Music Details",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/music-detail"
+        },
+        {
+          "text": "Douyin Music Video List",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/music-video-list"
+        },
+        {
+          "text": "Douyin Related Posts Recommendations",
+          "link": "/model-api-reference/platform-apis/douyin/web/related-posts"
+        },
+        {
+          "text": "Douyin Series Video List",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/series-video-list"
+        },
+        {
+          "text": "Douyin Single Video by Share URL",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/one-video-by-share-url"
+        },
+        {
+          "text": "Douyin Single Video Data (App V3)",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/one-video-v2"
+        },
+        {
+          "text": "Douyin Single Video Data (Web)",
+          "link": "/model-api-reference/platform-apis/douyin/web/one-video-v2"
+        },
+        {
+          "text": "Douyin Single Video Details",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/one-video"
+        },
+        {
+          "text": "Douyin Single Video Details (V1)",
+          "link": "/model-api-reference/platform-apis/douyin/web/one-video"
+        },
+        {
+          "text": "Douyin User Liked Videos (App V3)",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/user-like-videos"
+        },
+        {
+          "text": "Douyin User Liked Videos (Web)",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-like-videos"
+        },
+        {
+          "text": "Douyin User Video Posts",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-post-videos"
+        },
+        {
+          "text": "Douyin User Videos",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/user-post-videos"
+        },
+        {
+          "text": "Douyin Video Audience Profile",
+          "link": "/model-api-reference/platform-apis/douyin/index/item-user-profile"
+        },
+        {
+          "text": "Douyin Video Channel Feed",
+          "link": "/model-api-reference/platform-apis/douyin/web/video-channel-result"
+        },
+        {
+          "text": "Douyin Video Comparison Analysis",
+          "link": "/model-api-reference/platform-apis/douyin/index/item-analysis"
+        },
+        {
+          "text": "Douyin Video Danmaku",
+          "link": "/model-api-reference/platform-apis/douyin/web/one-video-danmaku"
+        },
+        {
+          "text": "Douyin Video Detail",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/one-video-v3"
+        },
+        {
+          "text": "Douyin Video Detail App Link",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/open-app-to-video-detail"
+        },
+        {
+          "text": "Douyin Video Details by Share URL",
+          "link": "/model-api-reference/platform-apis/douyin/web/one-video-by-share-url"
+        },
+        {
+          "text": "Douyin Video Index Interpretation",
+          "link": "/model-api-reference/platform-apis/douyin/index/item-index-interpret"
+        },
+        {
+          "text": "Douyin Video Index Trend",
+          "link": "/model-api-reference/platform-apis/douyin/index/item-index"
+        },
+        {
+          "text": "Douyin Video Mix Detail",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/video-mix-detail"
+        },
+        {
+          "text": "Douyin Video Mix Post List",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/video-mix-post-list"
+        },
+        {
+          "text": "Douyin Video Play Count",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/item-play-count"
+        },
+        {
+          "text": "Douyin Video Search Filter Options",
+          "link": "/model-api-reference/platform-apis/douyin/index/item-filter-options"
+        },
+        {
+          "text": "Douyin Video Search Suggestions",
           "link": "/model-api-reference/platform-apis/douyin/index/item-sug"
+        },
+        {
+          "text": "Douyin Video Share QR Code",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/generate-video-share-qrcode"
+        },
+        {
+          "text": "Douyin Video Statistics",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/video-statistics"
+        },
+        {
+          "text": "Douyin Video Statistics (Batch)",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/multi-video-statistics"
+        },
+        {
+          "text": "Douyin Web Knowledge Videos",
+          "link": "/model-api-reference/platform-apis/douyin/web/knowledge-aweme"
+        },
+        {
+          "text": "Douyin Web Music Videos",
+          "link": "/model-api-reference/platform-apis/douyin/web/music-aweme"
+        },
+        {
+          "text": "Douyin Web Series Videos",
+          "link": "/model-api-reference/platform-apis/douyin/web/series-aweme"
+        },
+        {
+          "text": "Douyin Xingtu Author Homepage Videos",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-homepage-videos"
+        },
+        {
+          "text": "Douyin Xingtu Author Show Items",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-show-items"
+        },
+        {
+          "text": "Douyin Xingtu Batch Video Stats",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/multi-get-item-stats"
+        },
+        {
+          "text": "Douyin Xingtu KOL Conversion Video Display",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-convert-video-display-v1"
+        },
+        {
+          "text": "Douyin Xingtu KOL Recommended Videos",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-rec-videos-v1"
+        },
+        {
+          "text": "Douyin XingTu KOL Video Performance",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-video-performance-v1"
         }
       ]
     },
@@ -701,276 +605,256 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Content author portrait",
-          "link": "/model-api-reference/platform-apis/douyin/index/content-author-portrait"
-        },
-        {
-          "text": "Daren compare users",
-          "link": "/model-api-reference/platform-apis/douyin/index/daren-compare-users-stable"
-        },
-        {
-          "text": "Daren search suggest",
-          "link": "/model-api-reference/platform-apis/douyin/index/daren-sug-great-user-list"
-        },
-        {
-          "text": "Encrypt Douyin uid to user_id",
-          "link": "/model-api-reference/platform-apis/douyin/index/encrypt-user-id"
-        },
-        {
-          "text": "Encrypt user uid to sec_user_id",
-          "link": "/model-api-reference/platform-apis/douyin/web/encrypt-uid-to-sec-user-id"
-        },
-        {
-          "text": "Extract list user id",
-          "link": "/model-api-reference/platform-apis/douyin/web/all-sec-user-id"
-        },
-        {
-          "text": "Extract single user id",
-          "link": "/model-api-reference/platform-apis/douyin/web/sec-user-id"
-        },
-        {
-          "text": "Fetch account fan data trend",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-trends-list"
-        },
-        {
-          "text": "Fetch author diagnosis",
-          "link": "/model-api-reference/platform-apis/douyin/creator-v2/author-diagnosis"
-        },
-        {
-          "text": "Fetch fan interest author 20 users",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-fans-interest-account-list"
-        },
-        {
-          "text": "Fetch fan interest topic in the last 3 days 10 topics",
+          "text": "Douyin Account Fan Interest Topics",
           "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-fans-interest-topic-list"
         },
         {
-          "text": "Fetch fan portrait",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-fans-portrait-list"
+          "text": "Douyin Account Metric Trends",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-trends-list"
         },
         {
-          "text": "Fetch hot account list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-list"
-        },
-        {
-          "text": "Fetch work like audience portrait - hot list only",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-user-portrait-list"
-        },
-        {
-          "text": "Generate Douyin share link, call Douyin APP, and jump to the specified user profile",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/open-app-to-user-profile"
-        },
-        {
-          "text": "Get Author Audience Distribution",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-audience-distribution"
-        },
-        {
-          "text": "Get Author Base Info",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-base-info"
-        },
-        {
-          "text": "Get Author Business Card Info",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-business-card-info"
-        },
-        {
-          "text": "Get Author Content Hot Keywords",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-content-hot-keywords"
-        },
-        {
-          "text": "Get Author Convert Ability",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-convert-ability"
-        },
-        {
-          "text": "Get Author CP Info",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-cp-info"
-        },
-        {
-          "text": "Get Author Daily Fans",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-daily-fans"
-        },
-        {
-          "text": "Get Author Fans Distribution",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-fans-distribution"
-        },
-        {
-          "text": "Get Author Link Info",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-link-info"
-        },
-        {
-          "text": "Get Author Local Info",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-local-info"
-        },
-        {
-          "text": "Get Author Market Fields",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-market-fields"
-        },
-        {
-          "text": "Get Author Spread Info",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-spread-info"
-        },
-        {
-          "text": "Get Author Touch Distribution",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-touch-distribution"
-        },
-        {
-          "text": "Get batch user profile (up to 10)",
-          "link": "/model-api-reference/platform-apis/douyin/web/batch-user-profile-v1"
-        },
-        {
-          "text": "Get batch user profile (up to 50)",
-          "link": "/model-api-reference/platform-apis/douyin/web/batch-user-profile-v2"
-        },
-        {
-          "text": "Get creator activity detail",
-          "link": "/model-api-reference/platform-apis/douyin/creator/creator-activity-detail"
-        },
-        {
-          "text": "Get creator activity list",
+          "text": "Douyin Activity List",
           "link": "/model-api-reference/platform-apis/douyin/creator/creator-activity-list"
         },
         {
-          "text": "Get creator content creation category",
+          "text": "Douyin Author Daily Fan Trend",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-daily-fans"
+        },
+        {
+          "text": "Douyin Author Market Fields",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-market-fields"
+        },
+        {
+          "text": "Douyin Batch User Profile",
+          "link": "/model-api-reference/platform-apis/douyin/web/batch-user-profile-v1"
+        },
+        {
+          "text": "Douyin Batch User Profile (V2)",
+          "link": "/model-api-reference/platform-apis/douyin/web/batch-user-profile-v2"
+        },
+        {
+          "text": "Douyin Content Author Portrait",
+          "link": "/model-api-reference/platform-apis/douyin/index/content-author-portrait"
+        },
+        {
+          "text": "Douyin Content Categories",
           "link": "/model-api-reference/platform-apis/douyin/creator/creator-content-category"
         },
         {
-          "text": "Get creator content creation course",
+          "text": "Douyin Creator Activity Details",
+          "link": "/model-api-reference/platform-apis/douyin/creator/creator-activity-detail"
+        },
+        {
+          "text": "Douyin Creator Comparison Trends",
+          "link": "/model-api-reference/platform-apis/douyin/index/daren-compare-users-stable"
+        },
+        {
+          "text": "Douyin Creator Content Courses",
           "link": "/model-api-reference/platform-apis/douyin/creator/creator-content-course"
         },
         {
-          "text": "Get creator hot challenge billboard",
-          "link": "/model-api-reference/platform-apis/douyin/creator/creator-hot-challenge-billboard"
-        },
-        {
-          "text": "Get creator hot course",
+          "text": "Douyin Creator Hot Courses",
           "link": "/model-api-reference/platform-apis/douyin/creator/creator-hot-course"
         },
         {
-          "text": "Get creator hot props billboard",
+          "text": "Douyin Creator Hot Props Billboard",
           "link": "/model-api-reference/platform-apis/douyin/creator/creator-hot-props-billboard"
         },
         {
-          "text": "Get creator hot spot billboard",
+          "text": "Douyin Creator Hot Spot Billboard",
           "link": "/model-api-reference/platform-apis/douyin/creator/creator-hot-spot-billboard"
         },
         {
-          "text": "Get creator hot topic billboard",
+          "text": "Douyin Creator Hot Topic Billboard",
           "link": "/model-api-reference/platform-apis/douyin/creator/creator-hot-topic-billboard"
         },
         {
-          "text": "Get creator material center billboard",
-          "link": "/model-api-reference/platform-apis/douyin/creator/creator-material-center-billboard"
-        },
-        {
-          "text": "Get creator material center config",
-          "link": "/model-api-reference/platform-apis/douyin/creator/creator-material-center-config"
-        },
-        {
-          "text": "Get daren fans analysis",
-          "link": "/model-api-reference/platform-apis/douyin/index/daren-great-user-fans-info"
-        },
-        {
-          "text": "Get industry category config",
+          "text": "Douyin Creator Industry Category Config",
           "link": "/model-api-reference/platform-apis/douyin/creator/industry-category-config"
         },
         {
-          "text": "Get information of specified user",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/user-profile"
+          "text": "Douyin Creator Material Center Billboard",
+          "link": "/model-api-reference/platform-apis/douyin/creator/creator-material-center-billboard"
         },
         {
-          "text": "Get information of specified user by sec_user_id",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-profile"
-        },
-        {
-          "text": "Get information of specified user by sec_user_id (gender, age, live level、brand)",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-profile-v4"
-        },
-        {
-          "text": "Get information of specified user by uid",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-profile-v3"
-        },
-        {
-          "text": "Get information of specified user by unique_id",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-profile-v2"
-        },
-        {
-          "text": "Get kol Daily Fans V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-daily-fans-v1"
-        },
-        {
-          "text": "Get kol Fans Portrait V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-fans-portrait-v1"
-        },
-        {
-          "text": "Get mission task list",
+          "text": "Douyin Creator Mission Task List",
           "link": "/model-api-reference/platform-apis/douyin/creator/mission-task-list"
         },
         {
-          "text": "Get promoted accounts",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/promoted-accounts"
+          "text": "Douyin Creator Search Suggestions",
+          "link": "/model-api-reference/platform-apis/douyin/index/daren-sug-great-user-list"
         },
         {
-          "text": "Get topic or hot spot related videos",
-          "link": "/model-api-reference/platform-apis/douyin/creator/creator-material-center-related"
+          "text": "Douyin Daren Fan Analysis",
+          "link": "/model-api-reference/platform-apis/douyin/index/daren-great-user-fans-info"
         },
         {
-          "text": "Get user collection",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-collects"
+          "text": "Douyin Fan Interest Account List",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-fans-interest-account-list"
         },
         {
-          "text": "Get user fans list",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/user-fans-list"
+          "text": "Douyin Hot Account Fan Portrait",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-fans-portrait-list"
         },
         {
-          "text": "Get user fans list",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-fans-list"
+          "text": "Douyin Hot Account List",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-account-list"
         },
         {
-          "text": "Get user following list",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-following-list"
+          "text": "Douyin Hot Challenge Billboard",
+          "link": "/model-api-reference/platform-apis/douyin/creator/creator-hot-challenge-billboard"
         },
         {
-          "text": "Get user information by Short ID",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-profile-by-short-id"
+          "text": "Douyin Hot Video Audience Portrait",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-user-portrait-list"
         },
         {
-          "text": "Get user information by UID",
-          "link": "/model-api-reference/platform-apis/douyin/web/user-profile-by-uid"
-        },
-        {
-          "text": "Get User Profile QRCode",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/user-profile-qrcode"
-        },
-        {
-          "text": "Get user series list",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/user-series-list"
-        },
-        {
-          "text": "Get user subscribed keywords",
+          "text": "Douyin Index Subscribed Keywords",
           "link": "/model-api-reference/platform-apis/douyin/index/get-user-sub-word"
         },
         {
-          "text": "Get Xingtu Author ID by Douyin sec_user_id",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/xingtu-kolid-by-sec-user-id"
+          "text": "Douyin Index User ID Encryption",
+          "link": "/model-api-reference/platform-apis/douyin/index/encrypt-user-id"
         },
         {
-          "text": "Get Xingtu Author ID by Douyin UID",
+          "text": "Douyin Material Center Configuration",
+          "link": "/model-api-reference/platform-apis/douyin/creator/creator-material-center-config"
+        },
+        {
+          "text": "Douyin Material Center Related Videos",
+          "link": "/model-api-reference/platform-apis/douyin/creator/creator-material-center-related"
+        },
+        {
+          "text": "Douyin sec_user_id from URL",
+          "link": "/model-api-reference/platform-apis/douyin/web/sec-user-id"
+        },
+        {
+          "text": "Douyin sec_user_ids from URLs (Batch)",
+          "link": "/model-api-reference/platform-apis/douyin/web/all-sec-user-id"
+        },
+        {
+          "text": "Douyin UID to Sec User ID",
+          "link": "/model-api-reference/platform-apis/douyin/web/encrypt-uid-to-sec-user-id"
+        },
+        {
+          "text": "Douyin User Profile (App V3)",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/user-profile"
+        },
+        {
+          "text": "Douyin User Profile (Web)",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-profile"
+        },
+        {
+          "text": "Douyin User Profile by Short ID",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-profile-by-short-id"
+        },
+        {
+          "text": "Douyin User Profile by UID",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-profile-by-uid"
+        },
+        {
+          "text": "Douyin User Profile by Unique ID",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-profile-v2"
+        },
+        {
+          "text": "Douyin User Profile Details",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-profile-v3"
+        },
+        {
+          "text": "Douyin User Profile Share Link",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/open-app-to-user-profile"
+        },
+        {
+          "text": "Douyin User Series List",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/user-series-list"
+        },
+        {
+          "text": "Douyin Web User Fans List",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-fans-list"
+        },
+        {
+          "text": "Douyin Web User Following List",
+          "link": "/model-api-reference/platform-apis/douyin/web/user-following-list"
+        },
+        {
+          "text": "Douyin Web User Information",
+          "link": "/model-api-reference/platform-apis/douyin/web/query-user"
+        },
+        {
+          "text": "Douyin Xingtu Author Audience Distribution",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-audience-distribution"
+        },
+        {
+          "text": "Douyin Xingtu Author Base Info",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-base-info"
+        },
+        {
+          "text": "Douyin Xingtu Author Business Card Info",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-business-card-info"
+        },
+        {
+          "text": "Douyin Xingtu Author Content Hot Keywords",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-content-hot-keywords"
+        },
+        {
+          "text": "Douyin Xingtu Author Conversion Ability",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-convert-ability"
+        },
+        {
+          "text": "Douyin Xingtu Author Cooperation Info",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-cp-info"
+        },
+        {
+          "text": "Douyin Xingtu Author Fan Distribution",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-fans-distribution"
+        },
+        {
+          "text": "Douyin Xingtu Author ID by UID",
           "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/xingtu-kolid-by-uid"
         },
         {
-          "text": "Get XingTu kolid by Douyin sec_user_id",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/xingtu-kolid-by-sec-user-id"
+          "text": "Douyin Xingtu Author Location Info",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-local-info"
         },
         {
-          "text": "Get XingTu kolid by Douyin User ID",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/xingtu-kolid-by-uid"
+          "text": "Douyin Xingtu Author Spread Info",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-spread-info"
         },
         {
-          "text": "Multi Get Author Info",
+          "text": "Douyin Xingtu Batch Author Details",
           "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/multi-get-author-info"
         },
         {
-          "text": "Query Douyin user basic information",
-          "link": "/model-api-reference/platform-apis/douyin/web/query-user"
+          "text": "Douyin Xingtu Creator Link Indices",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/author-link-info"
+        },
+        {
+          "text": "Douyin XingTu KOL Audience",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-fans-portrait-v1"
+        },
+        {
+          "text": "Douyin Xingtu KOL Daily Fans",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-daily-fans-v1"
+        },
+        {
+          "text": "Douyin XingTu KOL ID by User ID",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/xingtu-kolid-by-uid"
+        },
+        {
+          "text": "Douyin XingTu KOL Profile",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-base-info-v1"
+        },
+        {
+          "text": "Douyin XingTu kolId by sec_user_id (V2)",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/xingtu-kolid-by-sec-user-id"
+        },
+        {
+          "text": "Douyin XingTu kolId Lookup",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/xingtu-kolid-by-sec-user-id"
+        },
+        {
+          "text": "Douyin Xingtu User Profile QR Code",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/user-profile-qrcode"
         }
       ]
     },
@@ -979,68 +863,48 @@ export default {
       "label": "Utilities",
       "operations": [
         {
-          "text": "Douyin APP register device",
+          "text": "Douyin App Device Registration",
           "link": "/model-api-reference/platform-apis/douyin/app-v3/register-device"
         },
         {
-          "text": "Extract list video id",
-          "link": "/model-api-reference/platform-apis/douyin/web/all-aweme-id"
-        },
-        {
-          "text": "Extract single video id",
-          "link": "/model-api-reference/platform-apis/douyin/web/aweme-id"
-        },
-        {
-          "text": "Generate A-Bogus parameter using API URL",
-          "link": "/model-api-reference/platform-apis/douyin/web/generate-a-bogus"
-        },
-        {
-          "text": "Generate barrage xb signature",
+          "text": "Douyin Barrage WSS XB Signature",
           "link": "/model-api-reference/platform-apis/douyin/web/generate-wss-xb-signature"
         },
         {
-          "text": "Generate Douyin short link",
+          "text": "Douyin Batch Video ID Extraction",
+          "link": "/model-api-reference/platform-apis/douyin/web/all-aweme-id"
+        },
+        {
+          "text": "Douyin Short Link Generator",
           "link": "/model-api-reference/platform-apis/douyin/app-v3/generate-short-url"
         },
         {
-          "text": "Generate real msToken",
-          "link": "/model-api-reference/platform-apis/douyin/web/generate-real-ms-token"
+          "text": "Douyin URL Shortener",
+          "link": "/model-api-reference/platform-apis/douyin/web/shorten-url"
         },
         {
-          "text": "Generate s_v_web_id",
-          "link": "/model-api-reference/platform-apis/douyin/web/generate-s-v-web-id"
+          "text": "Douyin Video ID Extractor",
+          "link": "/model-api-reference/platform-apis/douyin/web/aweme-id"
         },
         {
-          "text": "Generate ttwid",
-          "link": "/model-api-reference/platform-apis/douyin/web/generate-ttwid"
-        },
-        {
-          "text": "Generate verify_fp",
-          "link": "/model-api-reference/platform-apis/douyin/web/generate-verify-fp"
-        },
-        {
-          "text": "Generate X-Bogus parameter using API URL",
-          "link": "/model-api-reference/platform-apis/douyin/web/generate-x-bogus"
-        },
-        {
-          "text": "Get DOU+ sec_token for POST requests",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/sec-token"
-        },
-        {
-          "text": "Get the guest Cookie of Douyin Web",
+          "text": "Douyin Web Guest Cookie",
           "link": "/model-api-reference/platform-apis/douyin/web/web-guest-cookie"
         },
         {
-          "text": "Get Xingtu Author ID by Douyin unique_id",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/xingtu-kolid-by-unique-id"
+          "text": "Douyin Web TTWID Generator",
+          "link": "/model-api-reference/platform-apis/douyin/web/generate-ttwid"
         },
         {
-          "text": "Get XingTu kolid by Douyin unique_id",
+          "text": "Douyin XingTu KOL ID by Unique ID",
           "link": "/model-api-reference/platform-apis/douyin/xingtu/xingtu-kolid-by-unique-id"
         },
         {
-          "text": "Shorten URL",
-          "link": "/model-api-reference/platform-apis/douyin/web/shorten-url"
+          "text": "Douyin XingTu kolId by Douyin ID",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/xingtu-kolid-by-unique-id"
+        },
+        {
+          "text": "Douyin Xingtu Signed Image URL",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/sign-image"
         }
       ]
     },
@@ -1049,248 +913,196 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Content consumer portrait",
-          "link": "/model-api-reference/platform-apis/douyin/index/content-consumer-portrait"
-        },
-        {
-          "text": "Content creative duration",
-          "link": "/model-api-reference/platform-apis/douyin/index/content-creative-duration"
-        },
-        {
-          "text": "Content creative keywords",
-          "link": "/model-api-reference/platform-apis/douyin/index/content-creative-keywords"
-        },
-        {
-          "text": "Content creative topic",
-          "link": "/model-api-reference/platform-apis/douyin/index/content-creative-topic"
-        },
-        {
-          "text": "Delivery analysis detail",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/analyse-detail"
-        },
-        {
-          "text": "Delivery analysis overview",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/analyse-overview"
-        },
-        {
-          "text": "DOU+ cost estimation",
-          "link": "/model-api-reference/platform-apis/douyin/douplus/calculate-cost"
-        },
-        {
-          "text": "Fetch activity calendar",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-calendar-list"
-        },
-        {
-          "text": "Fetch activity calendar detail",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-calendar-detail"
-        },
-        {
-          "text": "Fetch all hot content words",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-hot-word-list"
-        },
-        {
-          "text": "Fetch Chinese city list",
+          "text": "Douyin Billboard City List",
           "link": "/model-api-reference/platform-apis/douyin/billboard/city-list"
         },
         {
-          "text": "Fetch city hot list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-city-list"
+          "text": "Douyin Billboard Hot Calendar Detail",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-calendar-detail"
         },
         {
-          "text": "Fetch content word details",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-hot-word-detail-list"
+          "text": "Douyin Billboard Hot Calendar List",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-calendar-list"
         },
         {
-          "text": "Fetch high completion rate list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-high-play-list"
-        },
-        {
-          "text": "Fetch high fan rate list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-high-fan-list"
-        },
-        {
-          "text": "Fetch high like rate list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-high-like-list"
-        },
-        {
-          "text": "Fetch hot challenge list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-challenge-list"
-        },
-        {
-          "text": "Fetch hot list category",
+          "text": "Douyin Billboard Hot Category List",
           "link": "/model-api-reference/platform-apis/douyin/billboard/hot-category-list"
         },
         {
-          "text": "Fetch low fan explosion list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-low-fan-list"
+          "text": "Douyin Billboard Hot Word Details",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-hot-word-detail-list"
         },
         {
-          "text": "Fetch rising hot list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-rise-list"
-        },
-        {
-          "text": "Fetch topic hot list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-topic-list"
-        },
-        {
-          "text": "Fetch topic list with rising popularity",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-high-topic-list"
-        },
-        {
-          "text": "Fetch total hot list",
-          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-list"
-        },
-        {
-          "text": "Get all area list",
-          "link": "/model-api-reference/platform-apis/douyin/index/all-area"
-        },
-        {
-          "text": "Get all valid dates",
-          "link": "/model-api-reference/platform-apis/douyin/index/all-valid-date"
-        },
-        {
-          "text": "Get brand cycles",
+          "text": "Douyin Brand Popularity Cycles",
           "link": "/model-api-reference/platform-apis/douyin/index/brand-cycles"
         },
         {
-          "text": "Get brand index",
-          "link": "/model-api-reference/platform-apis/douyin/index/brand-valid-info"
-        },
-        {
-          "text": "Get brand initiative rank weekly",
-          "link": "/model-api-reference/platform-apis/douyin/index/brand-initiative-rank-weekly"
-        },
-        {
-          "text": "Get brand radar chart",
+          "text": "Douyin Brand Radar Chart",
           "link": "/model-api-reference/platform-apis/douyin/index/brand-radar-chart"
         },
         {
-          "text": "Get content valid date",
+          "text": "Douyin Brand Valid Information",
+          "link": "/model-api-reference/platform-apis/douyin/index/brand-valid-info"
+        },
+        {
+          "text": "Douyin City Hot List",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-city-list"
+        },
+        {
+          "text": "Douyin Content Consumer Portrait",
+          "link": "/model-api-reference/platform-apis/douyin/index/content-consumer-portrait"
+        },
+        {
+          "text": "Douyin Content Creative Duration",
+          "link": "/model-api-reference/platform-apis/douyin/index/content-creative-duration"
+        },
+        {
+          "text": "Douyin Content Creative Keywords",
+          "link": "/model-api-reference/platform-apis/douyin/index/content-creative-keywords"
+        },
+        {
+          "text": "Douyin Content Creative Topics",
+          "link": "/model-api-reference/platform-apis/douyin/index/content-creative-topic"
+        },
+        {
+          "text": "Douyin Content Guide Valid Dates",
           "link": "/model-api-reference/platform-apis/douyin/index/content-valid-date"
         },
         {
-          "text": "Get crowd portrait",
-          "link": "/model-api-reference/platform-apis/douyin/index/portrait"
-        },
-        {
-          "text": "Get current hot topics",
+          "text": "Douyin Current Hot Topics Leaderboard",
           "link": "/model-api-reference/platform-apis/douyin/index/current-hot-topic"
         },
         {
-          "text": "Get Demander MCN List",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/demander-mcn-list"
-        },
-        {
-          "text": "Get Excellent Case Category List",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/excellent-case-category-list"
-        },
-        {
-          "text": "Get hot topic detail",
-          "link": "/model-api-reference/platform-apis/douyin/index/hot-detail"
-        },
-        {
-          "text": "Get hot words",
-          "link": "/model-api-reference/platform-apis/douyin/index/hot-words"
-        },
-        {
-          "text": "Get IP Activity Detail",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/ip-activity-detail"
-        },
-        {
-          "text": "Get IP Activity Industry List",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/ip-activity-industry-list"
-        },
-        {
-          "text": "Get IP Activity List",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/ip-activity-list"
-        },
-        {
-          "text": "Get kol Audience Portrait V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-audience-portrait-v1"
-        },
-        {
-          "text": "Get kol Base Info V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-base-info-v1"
-        },
-        {
-          "text": "Get kol Conversion Ability Analysis V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-conversion-ability-analysis-v1"
-        },
-        {
-          "text": "Get kol Cp Info V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-cp-info-v1"
-        },
-        {
-          "text": "Get kol Data Overview V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-data-overview-v1"
-        },
-        {
-          "text": "Get kol Link Struct V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-link-struct-v1"
-        },
-        {
-          "text": "Get kol Service Price V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-service-price-v1"
-        },
-        {
-          "text": "Get kol Touch Distribution V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-touch-distribution-v1"
-        },
-        {
-          "text": "Get kol Xingtu Index V1",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-xingtu-index-v1"
-        },
-        {
-          "text": "Get Playlet Actor Rank Catalog",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/playlet-actor-rank-catalog"
-        },
-        {
-          "text": "Get Playlet Actor Rank List",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/playlet-actor-rank-list"
-        },
-        {
-          "text": "Get Ranking List Catalog",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/ranking-list-catalog"
-        },
-        {
-          "text": "Get Ranking List Data",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/ranking-list-data"
-        },
-        {
-          "text": "Get related insight recommendations",
-          "link": "/model-api-reference/platform-apis/douyin/index/insight-get-rec"
-        },
-        {
-          "text": "Get relation word analysis",
-          "link": "/model-api-reference/platform-apis/douyin/index/relation-word"
-        },
-        {
-          "text": "Get report detail",
-          "link": "/model-api-reference/platform-apis/douyin/index/report-detail"
-        },
-        {
-          "text": "Get Resource List",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/resource-list"
-        },
-        {
-          "text": "Get series detail",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/series-detail"
-        },
-        {
-          "text": "Get share info by share code",
-          "link": "/model-api-reference/platform-apis/douyin/app-v3/share-info-by-share-code"
-        },
-        {
-          "text": "Get Sign Image",
-          "link": "/model-api-reference/platform-apis/douyin/xingtu/sign-image"
-        },
-        {
-          "text": "Get talent categories",
+          "text": "Douyin DOU+ Talent Categories",
           "link": "/model-api-reference/platform-apis/douyin/douplus/talent-categories"
         },
         {
-          "text": "Get valid date for relation",
+          "text": "Douyin DOU+ Talents by Category",
+          "link": "/model-api-reference/platform-apis/douyin/douplus/talents-by-category"
+        },
+        {
+          "text": "Douyin High Completion Rate Billboard",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-high-play-list"
+        },
+        {
+          "text": "Douyin High Fan Rate Billboard",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-high-fan-list"
+        },
+        {
+          "text": "Douyin High Like Rate Billboard",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-high-like-list"
+        },
+        {
+          "text": "Douyin Hot Challenge List",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-challenge-list"
+        },
+        {
+          "text": "Douyin Hot Content Words",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-hot-word-list"
+        },
+        {
+          "text": "Douyin Hot Topic Billboard",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-topic-list"
+        },
+        {
+          "text": "Douyin Hot Topic Detail Analysis",
+          "link": "/model-api-reference/platform-apis/douyin/index/hot-detail"
+        },
+        {
+          "text": "Douyin Index Area List",
+          "link": "/model-api-reference/platform-apis/douyin/index/all-area"
+        },
+        {
+          "text": "Douyin Index Valid Dates",
+          "link": "/model-api-reference/platform-apis/douyin/index/all-valid-date"
+        },
+        {
+          "text": "Douyin KOL Xingtu Index",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-xingtu-index-v1"
+        },
+        {
+          "text": "Douyin Related Insight Recommendations",
+          "link": "/model-api-reference/platform-apis/douyin/index/insight-get-rec"
+        },
+        {
+          "text": "Douyin Relation Analysis Valid Dates",
           "link": "/model-api-reference/platform-apis/douyin/index/valid-date-for-relation"
+        },
+        {
+          "text": "Douyin Relation Word Analysis",
+          "link": "/model-api-reference/platform-apis/douyin/index/relation-word"
+        },
+        {
+          "text": "Douyin Rising Popularity Topic List",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-high-topic-list"
+        },
+        {
+          "text": "Douyin Series Detail",
+          "link": "/model-api-reference/platform-apis/douyin/app-v3/series-detail"
+        },
+        {
+          "text": "Douyin Total Hot Billboard",
+          "link": "/model-api-reference/platform-apis/douyin/billboard/hot-total-list"
+        },
+        {
+          "text": "Douyin Weekly Brand Initiative Ranking",
+          "link": "/model-api-reference/platform-apis/douyin/index/brand-initiative-rank-weekly"
+        },
+        {
+          "text": "Douyin Xingtu Demander MCN List",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/demander-mcn-list"
+        },
+        {
+          "text": "Douyin Xingtu IP Activity Detail",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/ip-activity-detail"
+        },
+        {
+          "text": "Douyin Xingtu IP Activity Industry List",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/ip-activity-industry-list"
+        },
+        {
+          "text": "Douyin Xingtu IP Activity List",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/ip-activity-list"
+        },
+        {
+          "text": "Douyin Xingtu KOL Audience Portrait (V1)",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-audience-portrait-v1"
+        },
+        {
+          "text": "Douyin XingTu KOL Cost Metrics",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-cp-info-v1"
+        },
+        {
+          "text": "Douyin Xingtu KOL Link Structure",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-link-struct-v1"
+        },
+        {
+          "text": "Douyin XingTu KOL Price",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-service-price-v1"
+        },
+        {
+          "text": "Douyin Xingtu KOL Touch Distribution",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu/kol-touch-distribution-v1"
+        },
+        {
+          "text": "Douyin Xingtu Playlet Actor Rank Catalog",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/playlet-actor-rank-catalog"
+        },
+        {
+          "text": "Douyin Xingtu Playlet Actor Ranking List",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/playlet-actor-rank-list"
+        },
+        {
+          "text": "Douyin Xingtu Ranking List Catalog",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/ranking-list-catalog"
+        },
+        {
+          "text": "Douyin XingTu Ranking List Data",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/ranking-list-data"
+        },
+        {
+          "text": "Douyin Xingtu Resource List",
+          "link": "/model-api-reference/platform-apis/douyin/xingtu-v2/resource-list"
         }
       ]
     }

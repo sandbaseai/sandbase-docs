@@ -9,11 +9,11 @@ export default {
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Search posts in a channel",
+          "text": "Telegram Channel Post Search",
           "link": "/model-api-reference/platform-apis/telegram/web/channel-search"
         },
         {
-          "text": "Similar channels",
+          "text": "Telegram Similar Channels",
           "link": "/model-api-reference/platform-apis/telegram/web/similar-channels"
         }
       ]
@@ -23,7 +23,7 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Post comments",
+          "text": "Telegram Post Comments",
           "link": "/model-api-reference/platform-apis/telegram/web/post-comments"
         }
       ]
@@ -33,12 +33,12 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get channel posts (paginated)",
-          "link": "/model-api-reference/platform-apis/telegram/web/channel-posts"
+          "text": "Telegram Channel Post Details",
+          "link": "/model-api-reference/platform-apis/telegram/web/post-detail"
         },
         {
-          "text": "Get single post",
-          "link": "/model-api-reference/platform-apis/telegram/web/post-detail"
+          "text": "Telegram Channel Posts",
+          "link": "/model-api-reference/platform-apis/telegram/web/channel-posts"
         }
       ]
     },
@@ -47,11 +47,11 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Batch channel info",
+          "text": "Telegram Batch Channel Info",
           "link": "/model-api-reference/platform-apis/telegram/web/batch-channel-info"
         },
         {
-          "text": "Get channel info",
+          "text": "Telegram Channel Info",
           "link": "/model-api-reference/platform-apis/telegram/web/channel-info"
         }
       ]
