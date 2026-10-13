@@ -2,18 +2,18 @@
 export default {
   "platform": "WeChat MP",
   "slug": "wechat-mp",
-  "operationCount": 9,
+  "operationCount": 8,
   "groups": [
     {
       "key": "comments",
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get WeChat MP Article Comments",
+          "text": "WeChat MP Article Comments",
           "link": "/model-api-reference/platform-apis/wechat-mp/v2/article-comments"
         },
         {
-          "text": "Get WeChat MP Comment Replies",
+          "text": "WeChat MP Comment Replies",
           "link": "/model-api-reference/platform-apis/wechat-mp/v2/comment-replies"
         }
       ]
@@ -23,19 +23,19 @@ export default {
       "label": "Messaging",
       "operations": [
         {
-          "text": "Get WeChat MP Article Ads",
+          "text": "WeChat MP Article Ads",
           "link": "/model-api-reference/platform-apis/wechat-mp/v2/article-ad"
         },
         {
-          "text": "Get WeChat MP Article Detail",
+          "text": "WeChat MP Article Detail",
           "link": "/model-api-reference/platform-apis/wechat-mp/v2/article-detail"
         },
         {
-          "text": "Get WeChat MP Article Stats",
+          "text": "WeChat MP Article Stats",
           "link": "/model-api-reference/platform-apis/wechat-mp/v2/article-stats"
         },
         {
-          "text": "Get WeChat MP Related Articles",
+          "text": "WeChat MP Related Articles",
           "link": "/model-api-reference/platform-apis/wechat-mp/v2/related-articles"
         }
       ]
@@ -45,16 +45,12 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Get WeChat MP Account Articles",
+          "text": "WeChat MP Account Articles",
           "link": "/model-api-reference/platform-apis/wechat-mp/v2/account-articles"
         },
         {
-          "text": "Get WeChat MP Account Profile",
+          "text": "WeChat MP Account Profile",
           "link": "/model-api-reference/platform-apis/wechat-mp/v2/account-profile"
-        },
-        {
-          "text": "Get WeChat MP Account Services & Custom Menu",
-          "link": "/model-api-reference/platform-apis/wechat-mp/v2/account-services"
         }
       ]
     }

@@ -2,7 +2,7 @@
 export default {
   "platform": "YouTube",
   "slug": "youtube",
-  "operationCount": 38,
+  "operationCount": 33,
   "groups": [
     {
       "key": "search",
@@ -13,44 +13,40 @@ export default {
           "link": "/model-api-reference/platform-apis/youtube/web-v2/general-search"
         },
         {
-          "text": "General search V2",
-          "link": "/model-api-reference/platform-apis/youtube/web-v2/general-search-v2"
-        },
-        {
-          "text": "Get related videos",
-          "link": "/model-api-reference/platform-apis/youtube/web/relate-video"
-        },
-        {
-          "text": "Get related videos",
-          "link": "/model-api-reference/platform-apis/youtube/web-v2/related-videos"
-        },
-        {
-          "text": "Get search suggestions",
-          "link": "/model-api-reference/platform-apis/youtube/web-v2/search-suggestions"
-        },
-        {
-          "text": "Get trending videos",
-          "link": "/model-api-reference/platform-apis/youtube/web/trending-videos"
-        },
-        {
-          "text": "Search channel",
-          "link": "/model-api-reference/platform-apis/youtube/web/search-channel"
-        },
-        {
-          "text": "Search channels",
-          "link": "/model-api-reference/platform-apis/youtube/web-v2/search-channels"
-        },
-        {
-          "text": "Search video",
-          "link": "/model-api-reference/platform-apis/youtube/web/search-video"
-        },
-        {
           "text": "Shorts search (raw data, recommend V2)",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/shorts-search"
         },
         {
-          "text": "Shorts search V2",
+          "text": "YouTube Channel Search",
+          "link": "/model-api-reference/platform-apis/youtube/web-v2/search-channels"
+        },
+        {
+          "text": "YouTube Channel Video Search",
+          "link": "/model-api-reference/platform-apis/youtube/web/search-channel"
+        },
+        {
+          "text": "YouTube General Search (Web V2, V2)",
+          "link": "/model-api-reference/platform-apis/youtube/web-v2/general-search-v2"
+        },
+        {
+          "text": "YouTube Related Videos (Web V2)",
+          "link": "/model-api-reference/platform-apis/youtube/web-v2/related-videos"
+        },
+        {
+          "text": "YouTube Related Videos (Web)",
+          "link": "/model-api-reference/platform-apis/youtube/web/relate-video"
+        },
+        {
+          "text": "YouTube Search Suggestions",
+          "link": "/model-api-reference/platform-apis/youtube/web-v2/search-suggestions"
+        },
+        {
+          "text": "YouTube Shorts Search (V2)",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/shorts-search-v2"
+        },
+        {
+          "text": "YouTube Video Search",
+          "link": "/model-api-reference/platform-apis/youtube/web/search-video"
         }
       ]
     },
@@ -59,24 +55,24 @@ export default {
       "label": "Comments & Community",
       "operations": [
         {
-          "text": "Get channel community posts",
+          "text": "YouTube Channel Community Posts",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/channel-community-posts"
         },
         {
-          "text": "Get post comment replies",
-          "link": "/model-api-reference/platform-apis/youtube/web-v2/post-comment-replies"
-        },
-        {
-          "text": "Get post comments",
+          "text": "YouTube Community Post Comments",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/post-comments"
         },
         {
-          "text": "Get video comments",
-          "link": "/model-api-reference/platform-apis/youtube/web-v2/video-comments"
+          "text": "YouTube Post Comment Replies",
+          "link": "/model-api-reference/platform-apis/youtube/web-v2/post-comment-replies"
         },
         {
-          "text": "Get video sub comments",
+          "text": "YouTube Video Comment Replies",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/video-comment-replies"
+        },
+        {
+          "text": "YouTube Video Comments",
+          "link": "/model-api-reference/platform-apis/youtube/web-v2/video-comments"
         }
       ]
     },
@@ -85,64 +81,48 @@ export default {
       "label": "Videos & Media",
       "operations": [
         {
-          "text": "Get channel short videos",
+          "text": "YouTube Channel Short Videos",
           "link": "/model-api-reference/platform-apis/youtube/web/channel-short-videos"
         },
         {
-          "text": "Get channel shorts",
+          "text": "YouTube Channel Shorts",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/channel-shorts"
         },
         {
-          "text": "Get channel videos",
+          "text": "YouTube Channel Videos",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/channel-videos"
         },
         {
-          "text": "Get channel videos V2",
-          "link": "/model-api-reference/platform-apis/youtube/web/channel-videos-v2"
-        },
-        {
-          "text": "Get post detail",
+          "text": "YouTube Community Post Details",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/post-detail"
         },
         {
-          "text": "Get signed video stream URL",
+          "text": "YouTube Signed Video Stream URL",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/signed-stream-url"
         },
         {
-          "text": "Get video captions",
+          "text": "YouTube Video Captions",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/video-captions"
         },
         {
-          "text": "Get video captions async job result",
+          "text": "YouTube Video Captions Job Result",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/video-captions-result"
         },
         {
-          "text": "Get video information",
+          "text": "YouTube Video Information",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/video-info"
         },
         {
-          "text": "Get video information V1",
-          "link": "/model-api-reference/platform-apis/youtube/web/video-info"
-        },
-        {
-          "text": "Get video information V2",
-          "link": "/model-api-reference/platform-apis/youtube/web/video-info-v2"
-        },
-        {
-          "text": "Get video information V2",
+          "text": "YouTube Video Information (V2)",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/video-info-v2"
         },
         {
-          "text": "Get video streams info",
+          "text": "YouTube Video Streams",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/video-streams"
         },
         {
-          "text": "Get video streams info V2",
+          "text": "YouTube Video Streams (V2)",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/video-streams-v2"
-        },
-        {
-          "text": "Get video subtitles",
-          "link": "/model-api-reference/platform-apis/youtube/web/video-subtitles"
         }
       ]
     },
@@ -151,32 +131,32 @@ export default {
       "label": "Channels & Users",
       "operations": [
         {
-          "text": "Get channel description",
+          "text": "YouTube Channel Description",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/channel-description"
         },
         {
-          "text": "Get channel ID",
-          "link": "/model-api-reference/platform-apis/youtube/web/channel-id"
-        },
-        {
-          "text": "Get channel ID from URL",
+          "text": "YouTube Channel ID from URL",
           "link": "/model-api-reference/platform-apis/youtube/web-v2/channel-id"
         },
         {
-          "text": "Get channel ID from URL V2",
+          "text": "YouTube Channel ID from URL (V2)",
           "link": "/model-api-reference/platform-apis/youtube/web/channel-id-v2"
         },
         {
-          "text": "Get channel information",
+          "text": "YouTube Channel ID Lookup",
+          "link": "/model-api-reference/platform-apis/youtube/web/channel-id"
+        },
+        {
+          "text": "YouTube Channel Information",
           "link": "/model-api-reference/platform-apis/youtube/web/channel-info"
         },
         {
-          "text": "Get channel URL from channel ID",
-          "link": "/model-api-reference/platform-apis/youtube/web/channel-url"
+          "text": "YouTube Channel URL by ID",
+          "link": "/model-api-reference/platform-apis/youtube/web-v2/channel-url"
         },
         {
-          "text": "Get channel URL from channel ID",
-          "link": "/model-api-reference/platform-apis/youtube/web-v2/channel-url"
+          "text": "YouTube Channel URL Lookup",
+          "link": "/model-api-reference/platform-apis/youtube/web/channel-url"
         }
       ]
     }

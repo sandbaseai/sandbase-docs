@@ -9,63 +9,63 @@ export default {
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Get Zhihu AI Search (v2)",
+          "text": "Zhihu AI Search Stream",
           "link": "/model-api-reference/platform-apis/zhihu/web/ai-search-stream"
         },
         {
-          "text": "Get Zhihu Article Search V3",
+          "text": "Zhihu Article Search",
           "link": "/model-api-reference/platform-apis/zhihu/web/article-search-v3"
         },
         {
-          "text": "Get Zhihu Column Search V3",
+          "text": "Zhihu Column Search",
           "link": "/model-api-reference/platform-apis/zhihu/web/column-search-v3"
         },
         {
-          "text": "Get Zhihu Ebook Search V3",
+          "text": "Zhihu Ebook Search",
           "link": "/model-api-reference/platform-apis/zhihu/web/ebook-search-v3"
         },
         {
-          "text": "Get Zhihu Hot Recommend",
+          "text": "Zhihu Hot Recommendations",
           "link": "/model-api-reference/platform-apis/zhihu/web/hot-recommend"
         },
         {
-          "text": "Get Zhihu Preset Search",
+          "text": "Zhihu Preset Search",
           "link": "/model-api-reference/platform-apis/zhihu/web/preset-search"
         },
         {
-          "text": "Get Zhihu Recommend Followees",
+          "text": "Zhihu Recommended Followees",
           "link": "/model-api-reference/platform-apis/zhihu/web/recommend-followees"
         },
         {
-          "text": "Get Zhihu Salt Search V3",
+          "text": "Zhihu Salt Content Search",
           "link": "/model-api-reference/platform-apis/zhihu/web/salt-search-v3"
         },
         {
-          "text": "Get Zhihu Scholar Search V3",
+          "text": "Zhihu Scholar Paper Search",
           "link": "/model-api-reference/platform-apis/zhihu/web/scholar-search-v3"
         },
         {
-          "text": "Get Zhihu Search Recommend",
+          "text": "Zhihu Search Recommendations",
           "link": "/model-api-reference/platform-apis/zhihu/web/search-recommend"
         },
         {
-          "text": "Get Zhihu Search Suggest",
+          "text": "Zhihu Search Suggestions",
           "link": "/model-api-reference/platform-apis/zhihu/web/search-suggest"
         },
         {
-          "text": "Get Zhihu Similar Column Recommend",
+          "text": "Zhihu Similar Column Recommendations",
           "link": "/model-api-reference/platform-apis/zhihu/web/column-recommend"
         },
         {
-          "text": "Get Zhihu Topic Search V3",
+          "text": "Zhihu Topic Search (V3)",
           "link": "/model-api-reference/platform-apis/zhihu/web/topic-search-v3"
         },
         {
-          "text": "Get Zhihu User Search V3",
+          "text": "Zhihu User Search",
           "link": "/model-api-reference/platform-apis/zhihu/web/user-search-v3"
         },
         {
-          "text": "Get Zhihu Video Search V3",
+          "text": "Zhihu Video Search (V3)",
           "link": "/model-api-reference/platform-apis/zhihu/web/video-search-v3"
         }
       ]
@@ -75,19 +75,19 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get Zhihu Column Comment Config",
-          "link": "/model-api-reference/platform-apis/zhihu/web/column-comment-config"
-        },
-        {
-          "text": "Get Zhihu Comment V5",
+          "text": "Zhihu Answer Comments",
           "link": "/model-api-reference/platform-apis/zhihu/web/comment-v5"
         },
         {
-          "text": "Get Zhihu Pin Comments",
+          "text": "Zhihu Column Comment Configuration",
+          "link": "/model-api-reference/platform-apis/zhihu/web/column-comment-config"
+        },
+        {
+          "text": "Zhihu Pin Comments",
           "link": "/model-api-reference/platform-apis/zhihu/web/pin-comments"
         },
         {
-          "text": "Get Zhihu Sub Comment V5",
+          "text": "Zhihu Sub Comments",
           "link": "/model-api-reference/platform-apis/zhihu/web/sub-comment-v5"
         }
       ]
@@ -97,7 +97,7 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get Zhihu Video List",
+          "text": "Zhihu Video List",
           "link": "/model-api-reference/platform-apis/zhihu/web/video-list"
         }
       ]
@@ -107,56 +107,56 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Get Zhihu User Answers",
+          "text": "Zhihu User Answers",
           "link": "/model-api-reference/platform-apis/zhihu/web/user-answers"
         },
         {
-          "text": "Get Zhihu User Articles",
+          "text": "Zhihu User Articles",
           "link": "/model-api-reference/platform-apis/zhihu/web/user-articles"
         },
         {
-          "text": "Get Zhihu User Columns",
-          "link": "/model-api-reference/platform-apis/zhihu/web/user-follow-columns"
-        },
-        {
-          "text": "Get Zhihu User Created Collections",
+          "text": "Zhihu User Collections",
           "link": "/model-api-reference/platform-apis/zhihu/web/user-collections"
         },
         {
-          "text": "Get Zhihu User Follow Collections",
+          "text": "Zhihu User Follow Collections",
           "link": "/model-api-reference/platform-apis/zhihu/web/user-follow-collections"
         },
         {
-          "text": "Get Zhihu User Follow Questions",
+          "text": "Zhihu User Followed Columns",
+          "link": "/model-api-reference/platform-apis/zhihu/web/user-follow-columns"
+        },
+        {
+          "text": "Zhihu User Followed Questions",
           "link": "/model-api-reference/platform-apis/zhihu/web/user-follow-questions"
         },
         {
-          "text": "Get Zhihu User Follow Topics",
+          "text": "Zhihu User Followed Topics",
           "link": "/model-api-reference/platform-apis/zhihu/web/user-follow-topics"
         },
         {
-          "text": "Get Zhihu User Followers",
-          "link": "/model-api-reference/platform-apis/zhihu/web/user-followers"
-        },
-        {
-          "text": "Get Zhihu User Following",
+          "text": "Zhihu User Followees",
           "link": "/model-api-reference/platform-apis/zhihu/web/user-followees"
         },
         {
-          "text": "Get Zhihu User Included Articles",
+          "text": "Zhihu User Followers",
+          "link": "/model-api-reference/platform-apis/zhihu/web/user-followers"
+        },
+        {
+          "text": "Zhihu User Highlighted Segments",
+          "link": "/model-api-reference/platform-apis/zhihu/web/user-segments"
+        },
+        {
+          "text": "Zhihu User Included Articles",
           "link": "/model-api-reference/platform-apis/zhihu/web/user-included-articles"
         },
         {
-          "text": "Get Zhihu User Info",
-          "link": "/model-api-reference/platform-apis/zhihu/web/user-info"
-        },
-        {
-          "text": "Get Zhihu User Pins",
+          "text": "Zhihu User Pins",
           "link": "/model-api-reference/platform-apis/zhihu/web/user-pins"
         },
         {
-          "text": "Get Zhihu User Segments",
-          "link": "/model-api-reference/platform-apis/zhihu/web/user-segments"
+          "text": "Zhihu Web User Profile",
+          "link": "/model-api-reference/platform-apis/zhihu/web/user-info"
         }
       ]
     },
@@ -165,35 +165,35 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Get Zhihu Answer Detail",
+          "text": "Zhihu Answer Details",
           "link": "/model-api-reference/platform-apis/zhihu/web/answer-detail"
         },
         {
-          "text": "Get Zhihu Column Article Detail",
+          "text": "Zhihu Column Article Detail",
           "link": "/model-api-reference/platform-apis/zhihu/web/column-article-detail"
         },
         {
-          "text": "Get Zhihu Column Article Relationship",
+          "text": "Zhihu Column Article Relationship",
           "link": "/model-api-reference/platform-apis/zhihu/web/column-relationship"
         },
         {
-          "text": "Get Zhihu Column Articles",
+          "text": "Zhihu Column Articles",
           "link": "/model-api-reference/platform-apis/zhihu/web/column-articles"
         },
         {
-          "text": "Get Zhihu Hot List",
+          "text": "Zhihu Hot List",
           "link": "/model-api-reference/platform-apis/zhihu/web/hot-list"
         },
         {
-          "text": "Get Zhihu Pin Detail",
+          "text": "Zhihu Pin Detail",
           "link": "/model-api-reference/platform-apis/zhihu/web/pin-detail"
         },
         {
-          "text": "Get Zhihu Question Answers",
+          "text": "Zhihu Question Answers",
           "link": "/model-api-reference/platform-apis/zhihu/web/question-answers"
         },
         {
-          "text": "Get Zhihu Question Detail",
+          "text": "Zhihu Question Detail",
           "link": "/model-api-reference/platform-apis/zhihu/web/question-detail"
         }
       ]

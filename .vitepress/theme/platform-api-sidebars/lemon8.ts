@@ -9,23 +9,23 @@ export default {
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Get banners of discover page",
-          "link": "/model-api-reference/platform-apis/lemon8/app/discover-banners"
-        },
-        {
-          "text": "Get Editor's Picks of discover page",
+          "text": "Lemon8 Discover Editor Picks",
           "link": "/model-api-reference/platform-apis/lemon8/app/discover-tab-information-tabs"
         },
         {
-          "text": "Get hot search keywords",
-          "link": "/model-api-reference/platform-apis/lemon8/app/hot-search-keywords"
+          "text": "Lemon8 Discover Page Banners",
+          "link": "/model-api-reference/platform-apis/lemon8/app/discover-banners"
         },
         {
-          "text": "Get main content of discover page",
+          "text": "Lemon8 Discover Page Content",
           "link": "/model-api-reference/platform-apis/lemon8/app/discover-tab"
         },
         {
-          "text": "Search API",
+          "text": "Lemon8 Hot Search Keywords",
+          "link": "/model-api-reference/platform-apis/lemon8/app/hot-search-keywords"
+        },
+        {
+          "text": "Lemon8 Search",
           "link": "/model-api-reference/platform-apis/lemon8/app/search"
         }
       ]
@@ -35,7 +35,7 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get comments list of specified post",
+          "text": "Lemon8 Post Comments List",
           "link": "/model-api-reference/platform-apis/lemon8/app/post-comment-list"
         }
       ]
@@ -45,19 +45,19 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get information of specified post",
+          "text": "Lemon8 Post Details",
           "link": "/model-api-reference/platform-apis/lemon8/app/post-detail"
         },
         {
-          "text": "Get post ID through sharing link",
+          "text": "Lemon8 Post ID from Share Link",
           "link": "/model-api-reference/platform-apis/lemon8/app/item-id"
         },
         {
-          "text": "Get post IDs in batch through sharing links",
+          "text": "Lemon8 Post IDs from Share Links",
           "link": "/model-api-reference/platform-apis/lemon8/app/item-ids"
         },
         {
-          "text": "Get topic post list",
+          "text": "Lemon8 Topic Post List",
           "link": "/model-api-reference/platform-apis/lemon8/app/topic-post-list"
         }
       ]
@@ -67,24 +67,24 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Get fans list of specified user",
+          "text": "Lemon8 User Followers List",
           "link": "/model-api-reference/platform-apis/lemon8/app/user-follower-list"
         },
         {
-          "text": "Get following list of specified user",
+          "text": "Lemon8 User Following List",
           "link": "/model-api-reference/platform-apis/lemon8/app/user-following-list"
         },
         {
-          "text": "Get information of specified user",
-          "link": "/model-api-reference/platform-apis/lemon8/app/user-profile"
-        },
-        {
-          "text": "Get user ID through sharing link",
+          "text": "Lemon8 User ID from Share Link",
           "link": "/model-api-reference/platform-apis/lemon8/app/user-id"
         },
         {
-          "text": "Get user IDs in batch through sharing links",
+          "text": "Lemon8 User IDs by Share Links",
           "link": "/model-api-reference/platform-apis/lemon8/app/user-ids"
+        },
+        {
+          "text": "Lemon8 User Profile Details",
+          "link": "/model-api-reference/platform-apis/lemon8/app/user-profile"
         }
       ]
     },
@@ -93,7 +93,7 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Get topic information",
+          "text": "Lemon8 Topic Information",
           "link": "/model-api-reference/platform-apis/lemon8/app/topic-info"
         }
       ]

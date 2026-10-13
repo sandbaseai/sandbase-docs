@@ -9,11 +9,11 @@ export default {
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Search",
+          "text": "Twitter (X) Search",
           "link": "/model-api-reference/platform-apis/twitter/web/search-timeline"
         },
         {
-          "text": "Trending",
+          "text": "Twitter (X) Trending Topics",
           "link": "/model-api-reference/platform-apis/twitter/web/trending"
         }
       ]
@@ -23,15 +23,15 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get comments",
-          "link": "/model-api-reference/platform-apis/twitter/web/post-comments"
-        },
-        {
-          "text": "Get the latest tweet comments",
+          "text": "Twitter (X) Latest Tweet Comments",
           "link": "/model-api-reference/platform-apis/twitter/web/latest-post-comments"
         },
         {
-          "text": "Get user tweet replies",
+          "text": "Twitter (X) Tweet Comments",
+          "link": "/model-api-reference/platform-apis/twitter/web/post-comments"
+        },
+        {
+          "text": "Twitter (X) User Tweet Replies",
           "link": "/model-api-reference/platform-apis/twitter/web/user-tweet-replies"
         }
       ]
@@ -41,11 +41,11 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get user media",
+          "text": "Twitter (X) User Media",
           "link": "/model-api-reference/platform-apis/twitter/web/user-media"
         },
         {
-          "text": "Get user post",
+          "text": "Twitter (X) User Posts",
           "link": "/model-api-reference/platform-apis/twitter/web/user-post-tweet"
         }
       ]
@@ -55,20 +55,20 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Get user profile",
-          "link": "/model-api-reference/platform-apis/twitter/web/user-profile"
-        },
-        {
-          "text": "ReTweet User list",
+          "text": "Twitter (X) Retweet User List",
           "link": "/model-api-reference/platform-apis/twitter/web/retweet-user-list"
         },
         {
-          "text": "User Followers",
+          "text": "Twitter (X) User Followers",
           "link": "/model-api-reference/platform-apis/twitter/web/user-followers"
         },
         {
-          "text": "User Followings",
+          "text": "Twitter (X) User Followings",
           "link": "/model-api-reference/platform-apis/twitter/web/user-followings"
+        },
+        {
+          "text": "Twitter (X) User Profile",
+          "link": "/model-api-reference/platform-apis/twitter/web/user-profile"
         }
       ]
     },
@@ -77,7 +77,7 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Get single tweet data",
+          "text": "Twitter Tweet Detail",
           "link": "/model-api-reference/platform-apis/twitter/web/tweet-detail"
         }
       ]

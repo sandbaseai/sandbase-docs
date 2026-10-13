@@ -2,7 +2,7 @@
 export default {
   "platform": "Scholar",
   "slug": "scholar",
-  "operationCount": 4,
+  "operationCount": 3,
   "groups": [
     {
       "key": "search",
@@ -17,18 +17,8 @@ export default {
           "link": "/model-api-reference/platform-apis/scholar/search-web"
         },
         {
-          "text": "Scholar Academic Search",
+          "text": "Scholar Search (Google Scholar)",
           "link": "/model-api-reference/platform-apis/scholar/search-scholar"
-        }
-      ]
-    },
-    {
-      "key": "other",
-      "label": "Other",
-      "operations": [
-        {
-          "text": "Scholar Explain",
-          "link": "/model-api-reference/platform-apis/scholar/explain"
         }
       ]
     }

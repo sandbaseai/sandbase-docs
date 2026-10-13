@@ -2,14 +2,14 @@
 export default {
   "platform": "Xigua",
   "slug": "xigua",
-  "operationCount": 7,
+  "operationCount": 6,
   "groups": [
     {
       "key": "search",
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Search video",
+          "text": "Xigua Video Search",
           "link": "/model-api-reference/platform-apis/xigua/app-v2/search-video"
         }
       ]
@@ -19,7 +19,7 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Video comment list",
+          "text": "Xigua Video Comment List",
           "link": "/model-api-reference/platform-apis/xigua/app-v2/video-comment-list"
         }
       ]
@@ -29,20 +29,16 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get single video data",
+          "text": "Xigua Single Video Information",
           "link": "/model-api-reference/platform-apis/xigua/app-v2/one-video"
         },
         {
-          "text": "Get single video data V2",
-          "link": "/model-api-reference/platform-apis/xigua/app-v2/one-video-v2"
-        },
-        {
-          "text": "Get single video play URL",
-          "link": "/model-api-reference/platform-apis/xigua/app-v2/one-video-play-url"
-        },
-        {
-          "text": "Get user post list",
+          "text": "Xigua User Post List",
           "link": "/model-api-reference/platform-apis/xigua/app-v2/user-post-list"
+        },
+        {
+          "text": "Xigua Video Play URL",
+          "link": "/model-api-reference/platform-apis/xigua/app-v2/one-video-play-url"
         }
       ]
     },
@@ -51,7 +47,7 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Personal information",
+          "text": "Xigua User Profile Details",
           "link": "/model-api-reference/platform-apis/xigua/app-v2/user-info"
         }
       ]

@@ -271,8 +271,20 @@ function isEnabled(model) {
 // Some registry entries remain enabled for runtime compatibility after their
 // upstream operation has been withdrawn. Keep those entries out of public
 // pages and navigation when the registry explicitly marks them unavailable.
+// Mirror the apiserver public catalog filters (sandbase-apiserver
+// internal/service/model.go): models whose name or display name contains the
+// hidden fragment, and models tagged protocol-ingress-only, stay routable at
+// runtime but never appear in the public catalog. The protocol-ingress-only
+// models are documented by hand under official-native-api instead.
+const hiddenPublicModelNameFragment = '0622'
+const protocolIngressOnlyCapability = 'protocol-ingress-only'
+
 function isPubliclyDocumented(model) {
-  return !/no longer available online/i.test(String(model.description ?? ''))
+  if (/no longer available online/i.test(String(model.description ?? ''))) return false
+  const names = [model.name, model.display_name].map((value) => String(value ?? '').toLowerCase())
+  if (names.some((value) => value.includes(hiddenPublicModelNameFragment))) return false
+  const tags = Array.isArray(model.capability_tags) ? model.capability_tags : []
+  return !tags.some((tag) => String(tag).trim().toLowerCase() === protocolIngressOnlyCapability)
 }
 
 function slugPath(model) {
@@ -424,6 +436,20 @@ function endpointFor(model, category) {
   return model.vendor_slug === 'anthropic' ? '/v1/messages' : '/v1/chat/completions'
 }
 
+// Per-call price notes for Platform APIs are maintained in this repository
+// because the registry descriptions no longer carry them. Keep them on the
+// published pages until pricing for these operations is finalized.
+const platformPriceNotes = JSON.parse(
+  fs.readFileSync(path.join(docsRoot, 'scripts', 'platform-api-price-notes.json'), 'utf8'),
+)
+
+function platformDescription(model) {
+  const description = cleanDescription(model)
+  const note = platformPriceNotes[model.name]
+  if (!note || description.includes(note)) return description
+  return `${description.replace(/\s+$/, '')}${/[.!?。]$/.test(description) ? '' : '.'} ${note}`
+}
+
 function seoDescription(model, protocol, category) {
   const endpoint = endpointFor(model, category)
   const modelTitle = cleanTitle(model)
@@ -432,7 +458,11 @@ function seoDescription(model, protocol, category) {
   if (base.length <= 170) return base
   const concise = `SandBase API reference for model ${model.name}. Call ${endpoint}; see request and response examples.`
   if (concise.length <= 170) return concise
-  return `SandBase API reference: ${model.name} via ${endpoint}. See request and response examples.`
+  const compact = `SandBase API reference: ${model.name} via ${endpoint}. See request and response examples.`
+  if (compact.length <= 170) return compact
+  // Platform endpoints repeat the long operation name; drop the endpoint so
+  // the SEO description stays within the 170-character limit.
+  return `SandBase API reference for ${model.name}. See request and response examples.`.slice(0, 170)
 }
 
 function yamlString(value) {
@@ -756,15 +786,19 @@ function exampleValueForField(name, schema = {}) {
 function requestBodyForSchema(model) {
   const schema = requestSchema(model)
   const required = new Set(schema.required ?? [])
-  const orderedNames = Array.isArray(schema['x-order-properties']) ? schema['x-order-properties'] : Object.keys(schema.properties ?? {})
+  // x-order-properties can lag behind the schema; append any property it
+  // omits so required fields are never dropped from the example.
+  const declaredOrder = Array.isArray(schema['x-order-properties']) ? schema['x-order-properties'] : []
+  const orderedNames = [...new Set([...declaredOrder, ...Object.keys(schema.properties ?? {})])]
+  const preferredOptional = ['prompt', 'image', 'image_url', 'video', 'video_url', 'audio', 'audio_url', 'text', 'input', 'voice', 'aspect_ratio', 'duration', 'output_format']
+  const names = orderedNames.filter((name) => schema.properties?.[name] && name !== 'model')
+  // Required fields are always present so the example is accepted as-is;
+  // optional illustrative fields only fill the remaining example slots.
+  const optionalBudget = Math.max(0, 6 - 1 - names.filter((name) => required.has(name)).length)
+  const optional = new Set(names.filter((name) => !required.has(name) && preferredOptional.includes(name)).slice(0, optionalBudget))
   const body = { model: model.name }
-  for (const name of orderedNames) {
-    const fieldSchema = schema.properties?.[name]
-    if (!fieldSchema || name === 'model') continue
-    if (required.has(name) || ['prompt', 'image', 'image_url', 'video', 'video_url', 'audio', 'audio_url', 'text', 'input', 'voice', 'aspect_ratio', 'duration', 'output_format'].includes(name)) {
-      body[name] = exampleValueForField(name, fieldSchema)
-    }
-    if (Object.keys(body).length >= 6) break
+  for (const name of names) {
+    if (required.has(name) || optional.has(name)) body[name] = exampleValueForField(name, schema.properties[name])
   }
   return body
 }
@@ -1153,7 +1187,7 @@ function platformReference(model) {
     operation: `${model.vendor} API Operation`,
     method: 'POST',
     path: apiPath,
-    description: cleanDescription(model),
+    description: platformDescription(model),
     groups: [
       {
         title: 'Request body',
@@ -1589,6 +1623,43 @@ const removedPlatformPages = requestedModelNames.size
   ? 0
   : cleanLegacyPlatformOverview() + cleanManagedPlatformPages(expectedPlatformPages)
 
+// Remove generated model pages whose registry entry is disabled, deleted, or
+// hidden from the public catalog. Only files emitted by this generator (their
+// frontmatter carries an apiReferenceKey for the category) are touched;
+// hand-written pages such as "reference moved" redirects are left alone.
+function cleanManagedModelPages(category, expectedPaths, pagesRoot = path.join(modelApiRoot, category.slug)) {
+  let removed = 0
+  if (!fs.existsSync(pagesRoot)) return removed
+  const keyPrefix = `apiReferenceKey: ${yamlString(`${category.key}/`).slice(0, -1)}`
+  const visit = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const fullPath = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        visit(fullPath)
+        continue
+      }
+      if (!entry.name.endsWith('.md') || expectedPaths.has(path.resolve(fullPath))) continue
+      const content = fs.readFileSync(fullPath, 'utf8')
+      const frontmatter = content.startsWith('---\n') ? content.slice(0, content.indexOf('\n---', 4) + 1) : ''
+      if (!frontmatter.split('\n').some((line) => line.startsWith(keyPrefix))) continue
+      fs.unlinkSync(fullPath)
+      removed += 1
+    }
+    if (dir !== pagesRoot && fs.readdirSync(dir).length === 0) fs.rmdirSync(dir)
+  }
+  visit(pagesRoot)
+  return removed
+}
+
+const removedModelPages = requestedModelNames.size
+  ? 0
+  : categoryData
+    .filter((category) => category.key !== 'api')
+    .reduce((total, category) => total + cleanManagedModelPages(
+      category,
+      new Set(category.models.map((model) => path.resolve(modelApiRoot, category.slug, `${slugPath(model)}.md`))),
+    ), 0)
+
 const seoTitleCounts = new Map()
 for (const category of categoryData) {
   for (const model of category.models) {
@@ -1848,11 +1919,13 @@ const platformInputModels = walk(apiRegistryRoot).map((file) => JSON.parse(fs.re
 const platformDisabledCount = platformInputModels.filter((model) => model.enabled === false).length
 const platformNonApiCount = platformInputModels.filter((model) => model.type !== 'api').length
 console.log(`Platform APIs skipped ${platformInputModels.length - platformData.models.length} entries (disabled: ${platformDisabledCount}, non-api: ${platformNonApiCount}); removed ${removedPlatformPages} managed orphan pages.`)
+console.log(`Model categories removed ${removedModelPages} generated pages that are no longer in the public catalog.`)
 
 export {
   assertExampleMatchesSchema,
   assertUniquePlatformModels,
   cleanLegacyPlatformOverview,
+  cleanManagedModelPages,
   cleanManagedPlatformPages,
   classifyPlatformModel,
   loadModels,
@@ -1860,6 +1933,7 @@ export {
   normalizePlatformClassifierText,
   isPubliclyDocumented,
   platformGeneratedMarker,
+  platformDescription,
   platformFields,
   platformReference,
   publicPlatformResponseBody,

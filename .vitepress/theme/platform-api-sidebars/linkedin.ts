@@ -9,7 +9,7 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get post comments",
+          "text": "LinkedIn Post Comments",
           "link": "/model-api-reference/platform-apis/linkedin/web-v2/post-comments"
         }
       ]
@@ -19,15 +19,15 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get company's posts",
+          "text": "LinkedIn Company Posts",
           "link": "/model-api-reference/platform-apis/linkedin/web-v2/company-posts"
         },
         {
-          "text": "Get post or article detail",
+          "text": "LinkedIn Post or Article Detail",
           "link": "/model-api-reference/platform-apis/linkedin/web-v2/post-detail"
         },
         {
-          "text": "Get user's posts",
+          "text": "LinkedIn User Posts",
           "link": "/model-api-reference/platform-apis/linkedin/web-v2/user-posts"
         }
       ]
@@ -37,11 +37,11 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Get company profile",
+          "text": "LinkedIn Company Profile",
           "link": "/model-api-reference/platform-apis/linkedin/web-v2/company-profile"
         },
         {
-          "text": "Get user profile",
+          "text": "LinkedIn User Profile",
           "link": "/model-api-reference/platform-apis/linkedin/web-v2/user-profile"
         }
       ]
@@ -51,7 +51,7 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Get job detail",
+          "text": "LinkedIn Job Details",
           "link": "/model-api-reference/platform-apis/linkedin/web-v2/job-detail"
         }
       ]

@@ -2,114 +2,94 @@
 export default {
   "platform": "Weibo",
   "slug": "weibo",
-  "operationCount": 64,
+  "operationCount": 52,
   "groups": [
     {
       "key": "search",
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "AI Smart Search",
-          "link": "/model-api-reference/platform-apis/weibo/app/ai-smart-search"
-        },
-        {
-          "text": "Comprehensive search",
-          "link": "/model-api-reference/platform-apis/weibo/app/search-all"
-        },
-        {
-          "text": "Get channel feed by name",
-          "link": "/model-api-reference/platform-apis/weibo/web/channel-feed"
-        },
-        {
-          "text": "Get channel trend top",
-          "link": "/model-api-reference/platform-apis/weibo/web/trend-top"
-        },
-        {
-          "text": "Get home recommend feed",
-          "link": "/model-api-reference/platform-apis/weibo/app/home-recommend-feed"
-        },
-        {
-          "text": "Get hot search",
-          "link": "/model-api-reference/platform-apis/weibo/app/hot-search"
-        },
-        {
-          "text": "Get hot search categories",
-          "link": "/model-api-reference/platform-apis/weibo/app/hot-search-categories"
-        },
-        {
-          "text": "Get hot search ranking",
-          "link": "/model-api-reference/platform-apis/weibo/web/hot-search"
-        },
-        {
-          "text": "Get search page hot topics",
-          "link": "/model-api-reference/platform-apis/weibo/web/search-topics"
-        },
-        {
-          "text": "Get user profile feed",
-          "link": "/model-api-reference/platform-apis/weibo/app/user-profile-feed"
-        },
-        {
-          "text": "Get user recommend timeline",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/user-recommend-timeline"
-        },
-        {
-          "text": "Get video featured feed",
-          "link": "/model-api-reference/platform-apis/weibo/app/video-featured-feed"
-        },
-        {
-          "text": "Get Weibo complete hot search ranking (50 items)",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/hot-search-summary"
-        },
-        {
-          "text": "Get Weibo hot search index (10 items)",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/hot-search-index"
-        },
-        {
-          "text": "Get Weibo hot search ranking",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/hot-search"
-        },
-        {
-          "text": "Get Weibo similar search recommendations",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/similar-search"
-        },
-        {
-          "text": "Search user posts",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/search-user-posts"
-        },
-        {
-          "text": "Search Weibo",
-          "link": "/model-api-reference/platform-apis/weibo/web/search"
-        },
-        {
-          "text": "User search",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/user-search"
-        },
-        {
           "text": "Weibo Advanced Search",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/advanced-search"
+        },
+        {
+          "text": "Weibo AI Related Search Content",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/ai-related-search"
         },
         {
           "text": "Weibo AI Search",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/ai-search"
         },
         {
-          "text": "Weibo AI Search Content Extension",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/ai-related-search"
+          "text": "Weibo App AI Smart Search",
+          "link": "/model-api-reference/platform-apis/weibo/app/ai-smart-search"
         },
         {
-          "text": "Weibo picture search",
+          "text": "Weibo App User Profile Feed",
+          "link": "/model-api-reference/platform-apis/weibo/app/user-profile-feed"
+        },
+        {
+          "text": "Weibo Comprehensive Search",
+          "link": "/model-api-reference/platform-apis/weibo/app/search-all"
+        },
+        {
+          "text": "Weibo Featured Video Feed",
+          "link": "/model-api-reference/platform-apis/weibo/app/video-featured-feed"
+        },
+        {
+          "text": "Weibo Home Recommend Feed",
+          "link": "/model-api-reference/platform-apis/weibo/app/home-recommend-feed"
+        },
+        {
+          "text": "Weibo Hot Search Categories",
+          "link": "/model-api-reference/platform-apis/weibo/app/hot-search-categories"
+        },
+        {
+          "text": "Weibo Hot Search Index",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/hot-search-index"
+        },
+        {
+          "text": "Weibo Hot Search List",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/hot-search-summary"
+        },
+        {
+          "text": "Weibo Hot Search Rankings",
+          "link": "/model-api-reference/platform-apis/weibo/app/hot-search"
+        },
+        {
+          "text": "Weibo Picture Search",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/pic-search"
         },
         {
-          "text": "Weibo Realtime Search",
+          "text": "Weibo Real-Time Hot Search",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/hot-search"
+        },
+        {
+          "text": "Weibo Real-Time Search",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/realtime-search"
         },
         {
-          "text": "Weibo topic search",
+          "text": "Weibo Recommended Homepage Feed",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/user-recommend-timeline"
+        },
+        {
+          "text": "Weibo Similar Search Recommendations",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/similar-search"
+        },
+        {
+          "text": "Weibo Topic Search",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/topic-search"
         },
         {
-          "text": "Weibo video search (hot/all)",
+          "text": "Weibo User Post Search",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/search-user-posts"
+        },
+        {
+          "text": "Weibo User Search",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/user-search"
+        },
+        {
+          "text": "Weibo Video Search",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/video-search"
         }
       ]
@@ -119,27 +99,19 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Check if Weibo allows image comments",
+          "text": "Weibo Image Comment Permission Check",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/check-allow-comment-with-pic"
         },
         {
-          "text": "Get comment replies",
-          "link": "/model-api-reference/platform-apis/weibo/web/comment-replies"
-        },
-        {
-          "text": "Get post comments",
-          "link": "/model-api-reference/platform-apis/weibo/app/status-comments"
-        },
-        {
-          "text": "Get post comments",
-          "link": "/model-api-reference/platform-apis/weibo/web/post-comments"
-        },
-        {
-          "text": "Get Weibo comments",
+          "text": "Weibo Post Comments",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/post-comments"
         },
         {
-          "text": "Get Weibo sub-comments",
+          "text": "Weibo Post Comments (App)",
+          "link": "/model-api-reference/platform-apis/weibo/app/status-comments"
+        },
+        {
+          "text": "Weibo Post Sub-Comments",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/post-sub-comments"
         }
       ]
@@ -149,44 +121,36 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get post detail",
-          "link": "/model-api-reference/platform-apis/weibo/web/post-detail"
-        },
-        {
-          "text": "Get single post data",
+          "text": "Weibo Post Detail",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/post-detail"
         },
         {
-          "text": "Get user all videos",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/user-video-list"
-        },
-        {
-          "text": "Get user posts",
-          "link": "/model-api-reference/platform-apis/weibo/web/user-posts"
-        },
-        {
-          "text": "Get user video collection detail",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/user-video-collection-detail"
-        },
-        {
-          "text": "Get user video collection list",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/user-video-collection-list"
-        },
-        {
-          "text": "Get user videos",
-          "link": "/model-api-reference/platform-apis/weibo/app/user-videos"
-        },
-        {
-          "text": "Get video detail",
-          "link": "/model-api-reference/platform-apis/weibo/app/video-detail"
-        },
-        {
-          "text": "Get Weibo user original posts",
+          "text": "Weibo User Original Posts",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/user-original-posts"
         },
         {
-          "text": "Get Weibo user posts",
+          "text": "Weibo User Posts",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/user-posts"
+        },
+        {
+          "text": "Weibo User Video Collection Detail",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/user-video-collection-detail"
+        },
+        {
+          "text": "Weibo User Video Collection List",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/user-video-collection-list"
+        },
+        {
+          "text": "Weibo User Video List",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/user-video-list"
+        },
+        {
+          "text": "Weibo User Videos",
+          "link": "/model-api-reference/platform-apis/weibo/app/user-videos"
+        },
+        {
+          "text": "Weibo Video Detail",
+          "link": "/model-api-reference/platform-apis/weibo/app/video-detail"
         }
       ]
     },
@@ -195,55 +159,43 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Get channel config list",
-          "link": "/model-api-reference/platform-apis/weibo/web/config-list"
-        },
-        {
-          "text": "Get user album",
+          "text": "Weibo User Album",
           "link": "/model-api-reference/platform-apis/weibo/app/user-album"
         },
         {
-          "text": "Get user articles",
+          "text": "Weibo User Articles",
           "link": "/model-api-reference/platform-apis/weibo/app/user-articles"
         },
         {
-          "text": "Get user audios",
-          "link": "/model-api-reference/platform-apis/weibo/app/user-audios"
-        },
-        {
-          "text": "Get user basic information",
+          "text": "Weibo User Basic Information",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/user-basic-info"
         },
         {
-          "text": "Get user detail information",
-          "link": "/model-api-reference/platform-apis/weibo/app/user-info-detail"
-        },
-        {
-          "text": "Get user fans list",
+          "text": "Weibo User Follower List",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/user-fans"
         },
         {
-          "text": "Get user following list",
+          "text": "Weibo User Following List",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/user-following"
         },
         {
-          "text": "Get user information",
-          "link": "/model-api-reference/platform-apis/weibo/app/user-info"
+          "text": "Weibo User Profile Details (App)",
+          "link": "/model-api-reference/platform-apis/weibo/app/user-info-detail"
         },
         {
-          "text": "Get user information",
-          "link": "/model-api-reference/platform-apis/weibo/web/user-info"
-        },
-        {
-          "text": "Get user information",
+          "text": "Weibo User Profile Details (Web V2)",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/user-info"
         },
         {
-          "text": "Get user super topics",
+          "text": "Weibo User Profile Information",
+          "link": "/model-api-reference/platform-apis/weibo/app/user-info"
+        },
+        {
+          "text": "Weibo User Super Topics",
           "link": "/model-api-reference/platform-apis/weibo/app/user-super-topics"
         },
         {
-          "text": "Get user timeline",
+          "text": "Weibo User Timeline",
           "link": "/model-api-reference/platform-apis/weibo/app/user-timeline"
         }
       ]
@@ -253,15 +205,15 @@ export default {
       "label": "Utilities",
       "operations": [
         {
-          "text": "Get post detail",
+          "text": "Weibo Post Detail (App)",
           "link": "/model-api-reference/platform-apis/weibo/app/status-detail"
         },
         {
-          "text": "Get post likes",
+          "text": "Weibo Post Likes",
           "link": "/model-api-reference/platform-apis/weibo/app/status-likes"
         },
         {
-          "text": "Get post reposts",
+          "text": "Weibo Post Reposts",
           "link": "/model-api-reference/platform-apis/weibo/app/status-reposts"
         }
       ]
@@ -271,28 +223,28 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Get all groups information",
+          "text": "Weibo All Groups Information",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/all-groups"
         },
         {
-          "text": "Get hot ranking timeline",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/hot-ranking-timeline"
-        },
-        {
-          "text": "Get Weibo entertainment ranking",
+          "text": "Weibo Entertainment Ranking",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/entertainment-ranking"
         },
         {
-          "text": "Get Weibo life ranking",
+          "text": "Weibo Hot Ranking Timeline",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/hot-ranking-timeline"
+        },
+        {
+          "text": "Weibo Life Ranking",
           "link": "/model-api-reference/platform-apis/weibo/web-v2/life-ranking"
         },
         {
-          "text": "Get Weibo social ranking",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/social-ranking"
+          "text": "Weibo Region City List",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/city-list"
         },
         {
-          "text": "Region City List",
-          "link": "/model-api-reference/platform-apis/weibo/web-v2/city-list"
+          "text": "Weibo Social Ranking",
+          "link": "/model-api-reference/platform-apis/weibo/web-v2/social-ranking"
         }
       ]
     }

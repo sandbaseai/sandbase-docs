@@ -15,15 +15,21 @@ export default {
       ]
     },
     {
+      "key": "utilities",
+      "label": "Utilities",
+      "operations": [
+        {
+          "text": "Tavily URL Content Extraction",
+          "link": "/model-api-reference/platform-apis/tavily/extract"
+        }
+      ]
+    },
+    {
       "key": "other",
       "label": "Other",
       "operations": [
         {
-          "text": "Tavily Extract",
-          "link": "/model-api-reference/platform-apis/tavily/extract"
-        },
-        {
-          "text": "Tavily Map",
+          "text": "Tavily Site Map",
           "link": "/model-api-reference/platform-apis/tavily/map"
         }
       ]

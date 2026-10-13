@@ -2,91 +2,87 @@
 export default {
   "platform": "Instagram",
   "slug": "instagram",
-  "operationCount": 93,
+  "operationCount": 81,
   "groups": [
     {
       "key": "search",
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "General search",
-          "link": "/model-api-reference/platform-apis/instagram/v2/general-search"
-        },
-        {
-          "text": "General search (with pagination)",
-          "link": "/model-api-reference/platform-apis/instagram/v3/general-search"
-        },
-        {
-          "text": "Get explore feed",
+          "text": "Instagram Explore Feed",
           "link": "/model-api-reference/platform-apis/instagram/v3/explore"
         },
         {
-          "text": "Get explore page sections",
-          "link": "/model-api-reference/platform-apis/instagram/v1/explore-sections"
+          "text": "Instagram General Search (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/general-search"
         },
         {
-          "text": "Get hashtag posts",
-          "link": "/model-api-reference/platform-apis/instagram/v2/hashtag-posts"
+          "text": "Instagram General Search (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/general-search"
         },
         {
-          "text": "Get hashtag posts",
-          "link": "/model-api-reference/platform-apis/instagram/v3/hashtag-posts"
-        },
-        {
-          "text": "Get posts by hashtag",
+          "text": "Instagram Hashtag Posts (V1)",
           "link": "/model-api-reference/platform-apis/instagram/v1/hashtag-posts"
         },
         {
-          "text": "Get recommended Reels feed",
-          "link": "/model-api-reference/platform-apis/instagram/v3/recommended-reels"
+          "text": "Instagram Hashtag Posts (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/hashtag-posts"
         },
         {
-          "text": "Get similar users",
-          "link": "/model-api-reference/platform-apis/instagram/v2/similar-users"
+          "text": "Instagram Hashtag Posts (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/hashtag-posts"
         },
         {
-          "text": "Get similar users",
-          "link": "/model-api-reference/platform-apis/instagram/v3/similar-users"
-        },
-        {
-          "text": "Search hashtags",
+          "text": "Instagram Hashtag Search (V2)",
           "link": "/model-api-reference/platform-apis/instagram/v2/search-hashtags"
         },
         {
-          "text": "Search hashtags",
+          "text": "Instagram Hashtag Search (V3)",
           "link": "/model-api-reference/platform-apis/instagram/v3/search-hashtags"
         },
         {
-          "text": "Search locations",
+          "text": "Instagram Keyword Search",
+          "link": "/model-api-reference/platform-apis/instagram/v1/search"
+        },
+        {
+          "text": "Instagram Location Search",
           "link": "/model-api-reference/platform-apis/instagram/v2/search-locations"
         },
         {
-          "text": "Search locations by coordinates",
+          "text": "Instagram Location Search by Coordinates (V2)",
           "link": "/model-api-reference/platform-apis/instagram/v2/search-by-coordinates"
         },
         {
-          "text": "Search locations by coordinates",
+          "text": "Instagram Location Search by Coordinates (V3)",
           "link": "/model-api-reference/platform-apis/instagram/v3/search-by-coordinates"
         },
         {
-          "text": "Search music",
+          "text": "Instagram Music Search",
           "link": "/model-api-reference/platform-apis/instagram/v2/search-music"
         },
         {
-          "text": "Search reels",
+          "text": "Instagram Recommended Reels Feed",
+          "link": "/model-api-reference/platform-apis/instagram/v3/recommended-reels"
+        },
+        {
+          "text": "Instagram Reels Search",
           "link": "/model-api-reference/platform-apis/instagram/v2/search-reels"
         },
         {
-          "text": "Search users",
+          "text": "Instagram Similar Users (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/similar-users"
+        },
+        {
+          "text": "Instagram Similar Users (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/similar-users"
+        },
+        {
+          "text": "Instagram User Search (V2)",
           "link": "/model-api-reference/platform-apis/instagram/v2/search-users"
         },
         {
-          "text": "Search users",
+          "text": "Instagram User Search (V3)",
           "link": "/model-api-reference/platform-apis/instagram/v3/search-users"
-        },
-        {
-          "text": "Search users/hashtags/places",
-          "link": "/model-api-reference/platform-apis/instagram/v1/search"
         }
       ]
     },
@@ -95,36 +91,24 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Bulk translate comments",
+          "text": "Instagram Comment Bulk Translation",
           "link": "/model-api-reference/platform-apis/instagram/v3/bulk-translate-comments"
         },
         {
-          "text": "Get comment replies",
-          "link": "/model-api-reference/platform-apis/instagram/v1/comment-replies"
-        },
-        {
-          "text": "Get comment replies",
+          "text": "Instagram Comment Replies (V2)",
           "link": "/model-api-reference/platform-apis/instagram/v2/comment-replies"
         },
         {
-          "text": "Get comment replies",
+          "text": "Instagram Comment Replies (V3)",
           "link": "/model-api-reference/platform-apis/instagram/v3/comment-replies"
         },
         {
-          "text": "Get post comments",
+          "text": "Instagram Post Comments (V2)",
           "link": "/model-api-reference/platform-apis/instagram/v2/post-comments"
         },
         {
-          "text": "Get post comments",
+          "text": "Instagram Post Comments (V3)",
           "link": "/model-api-reference/platform-apis/instagram/v3/post-comments"
-        },
-        {
-          "text": "Get post comments V2",
-          "link": "/model-api-reference/platform-apis/instagram/v1/post-comments-v2"
-        },
-        {
-          "text": "Translate comment or caption",
-          "link": "/model-api-reference/platform-apis/instagram/v3/translate-comment"
         }
       ]
     },
@@ -133,119 +117,111 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Convert media ID to shortcode",
-          "link": "/model-api-reference/platform-apis/instagram/v1/media-id-to-shortcode"
-        },
-        {
-          "text": "Convert media ID to shortcode",
-          "link": "/model-api-reference/platform-apis/instagram/v2/media-id-to-shortcode"
-        },
-        {
-          "text": "Convert media ID to shortcode",
-          "link": "/model-api-reference/platform-apis/instagram/v3/media-id-to-shortcode"
-        },
-        {
-          "text": "Convert shortcode to media ID",
-          "link": "/model-api-reference/platform-apis/instagram/v1/shortcode-to-media-id"
-        },
-        {
-          "text": "Convert shortcode to media ID",
-          "link": "/model-api-reference/platform-apis/instagram/v2/shortcode-to-media-id"
-        },
-        {
-          "text": "Convert shortcode to media ID",
-          "link": "/model-api-reference/platform-apis/instagram/v3/shortcode-to-media-id"
-        },
-        {
-          "text": "Get location posts",
-          "link": "/model-api-reference/platform-apis/instagram/v2/location-posts"
-        },
-        {
-          "text": "Get location posts",
-          "link": "/model-api-reference/platform-apis/instagram/v3/location-posts"
-        },
-        {
-          "text": "Get music (audio) posts",
-          "link": "/model-api-reference/platform-apis/instagram/v3/music-posts"
-        },
-        {
-          "text": "Get music posts",
-          "link": "/model-api-reference/platform-apis/instagram/v2/music-posts"
-        },
-        {
-          "text": "Get post by ID",
-          "link": "/model-api-reference/platform-apis/instagram/v1/post-by-id"
-        },
-        {
-          "text": "Get post by URL",
-          "link": "/model-api-reference/platform-apis/instagram/v1/post-by-url"
-        },
-        {
-          "text": "Get post by URL V2",
-          "link": "/model-api-reference/platform-apis/instagram/v1/post-by-url-v2"
-        },
-        {
-          "text": "Get post info",
-          "link": "/model-api-reference/platform-apis/instagram/v2/post-info"
-        },
-        {
-          "text": "Get post info (media_id or URL)",
-          "link": "/model-api-reference/platform-apis/instagram/v3/post-info"
-        },
-        {
-          "text": "Get post info by shortcode",
-          "link": "/model-api-reference/platform-apis/instagram/v3/post-info-by-code"
-        },
-        {
-          "text": "Get post likes",
-          "link": "/model-api-reference/platform-apis/instagram/v2/post-likes"
-        },
-        {
-          "text": "Get post likes",
-          "link": "/model-api-reference/platform-apis/instagram/v3/post-likes"
-        },
-        {
-          "text": "Get post oEmbed info",
-          "link": "/model-api-reference/platform-apis/instagram/v3/post-oembed"
-        },
-        {
-          "text": "Get posts by location",
-          "link": "/model-api-reference/platform-apis/instagram/v1/location-posts"
-        },
-        {
-          "text": "Get posts by section",
+          "text": "Instagram Explore Section Posts",
           "link": "/model-api-reference/platform-apis/instagram/v1/section-posts"
         },
         {
-          "text": "Get posts using specific music",
+          "text": "Instagram Location Posts (V1)",
+          "link": "/model-api-reference/platform-apis/instagram/v1/location-posts"
+        },
+        {
+          "text": "Instagram Location Posts (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/location-posts"
+        },
+        {
+          "text": "Instagram Location Posts (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/location-posts"
+        },
+        {
+          "text": "Instagram Media ID to Shortcode (V1)",
+          "link": "/model-api-reference/platform-apis/instagram/v1/media-id-to-shortcode"
+        },
+        {
+          "text": "Instagram Media ID to Shortcode (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/media-id-to-shortcode"
+        },
+        {
+          "text": "Instagram Media ID to Shortcode (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/media-id-to-shortcode"
+        },
+        {
+          "text": "Instagram Music Posts (V1)",
           "link": "/model-api-reference/platform-apis/instagram/v1/music-posts"
         },
         {
-          "text": "Get user posts",
-          "link": "/model-api-reference/platform-apis/instagram/v2/user-posts"
+          "text": "Instagram Music Posts (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/music-posts"
         },
         {
-          "text": "Get user posts",
-          "link": "/model-api-reference/platform-apis/instagram/v3/user-posts"
+          "text": "Instagram Post Details (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/post-info"
         },
         {
-          "text": "Get user posts list",
-          "link": "/model-api-reference/platform-apis/instagram/v1/user-posts"
+          "text": "Instagram Post Details (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/post-info"
         },
         {
-          "text": "Get user posts list V2",
+          "text": "Instagram Post Details by ID",
+          "link": "/model-api-reference/platform-apis/instagram/v1/post-by-id"
+        },
+        {
+          "text": "Instagram Post Details by URL",
+          "link": "/model-api-reference/platform-apis/instagram/v1/post-by-url"
+        },
+        {
+          "text": "Instagram Post Details by URL (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v1/post-by-url-v2"
+        },
+        {
+          "text": "Instagram Post Info by Shortcode",
+          "link": "/model-api-reference/platform-apis/instagram/v3/post-info-by-code"
+        },
+        {
+          "text": "Instagram Post Likes (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/post-likes"
+        },
+        {
+          "text": "Instagram Post Likes (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/post-likes"
+        },
+        {
+          "text": "Instagram Shortcode to Media ID",
+          "link": "/model-api-reference/platform-apis/instagram/v1/shortcode-to-media-id"
+        },
+        {
+          "text": "Instagram Shortcode to Media ID (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/shortcode-to-media-id"
+        },
+        {
+          "text": "Instagram Shortcode to Media ID (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/shortcode-to-media-id"
+        },
+        {
+          "text": "Instagram User Posts (V1, V2)",
           "link": "/model-api-reference/platform-apis/instagram/v1/user-posts-v2"
         },
         {
-          "text": "Get user tagged posts",
+          "text": "Instagram User Posts (V1)",
+          "link": "/model-api-reference/platform-apis/instagram/v1/user-posts"
+        },
+        {
+          "text": "Instagram User Posts (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/user-posts"
+        },
+        {
+          "text": "Instagram User Posts (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/user-posts"
+        },
+        {
+          "text": "Instagram User Tagged Posts (V1)",
           "link": "/model-api-reference/platform-apis/instagram/v1/user-tagged-posts"
         },
         {
-          "text": "Get user tagged posts",
+          "text": "Instagram User Tagged Posts (V2)",
           "link": "/model-api-reference/platform-apis/instagram/v2/user-tagged-posts"
         },
         {
-          "text": "Get user tagged posts",
+          "text": "Instagram User Tagged Posts (V3)",
           "link": "/model-api-reference/platform-apis/instagram/v3/user-tagged-posts"
         }
       ]
@@ -255,122 +231,96 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Get user about info",
-          "link": "/model-api-reference/platform-apis/instagram/v1/user-about-info"
-        },
-        {
-          "text": "Get user about info",
+          "text": "Instagram User About Details",
           "link": "/model-api-reference/platform-apis/instagram/v3/user-about"
         },
         {
-          "text": "Get user brief info",
+          "text": "Instagram User Brief Info",
           "link": "/model-api-reference/platform-apis/instagram/v3/user-brief"
         },
         {
-          "text": "Get user data by user ID",
-          "link": "/model-api-reference/platform-apis/instagram/v1/user-info-by-id"
-        },
-        {
-          "text": "Get user data by user ID V2",
-          "link": "/model-api-reference/platform-apis/instagram/v1/user-info-by-id-v2"
-        },
-        {
-          "text": "Get user data by username",
-          "link": "/model-api-reference/platform-apis/instagram/v1/user-info-by-username"
-        },
-        {
-          "text": "Get user data by username V2",
+          "text": "Instagram User Data by Username (V2)",
           "link": "/model-api-reference/platform-apis/instagram/v1/user-info-by-username-v2"
         },
         {
-          "text": "Get user data by username V3",
-          "link": "/model-api-reference/platform-apis/instagram/v1/user-info-by-username-v3"
+          "text": "Instagram User Details by ID (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v1/user-info-by-id-v2"
         },
         {
-          "text": "Get user followers",
+          "text": "Instagram User Followers (V2)",
           "link": "/model-api-reference/platform-apis/instagram/v2/user-followers"
         },
         {
-          "text": "Get user followers list",
+          "text": "Instagram User Followers (V3)",
           "link": "/model-api-reference/platform-apis/instagram/v3/user-followers"
         },
         {
-          "text": "Get user following",
+          "text": "Instagram User Following",
           "link": "/model-api-reference/platform-apis/instagram/v2/user-following"
         },
         {
-          "text": "Get user following list",
+          "text": "Instagram User Following List",
           "link": "/model-api-reference/platform-apis/instagram/v3/user-following"
         },
         {
-          "text": "Get user former usernames",
-          "link": "/model-api-reference/platform-apis/instagram/v3/user-former-usernames"
-        },
-        {
-          "text": "Get user highlights",
+          "text": "Instagram User Highlights (V2)",
           "link": "/model-api-reference/platform-apis/instagram/v2/user-highlights"
         },
         {
-          "text": "Get user highlights",
+          "text": "Instagram User Highlights (V3)",
           "link": "/model-api-reference/platform-apis/instagram/v3/user-highlights"
         },
         {
-          "text": "Get user ID by username",
+          "text": "Instagram User ID Lookup",
           "link": "/model-api-reference/platform-apis/instagram/v3/user-id-by-username"
         },
         {
-          "text": "Get user info",
-          "link": "/model-api-reference/platform-apis/instagram/v2/user-info"
-        },
-        {
-          "text": "Get user info by user ID",
-          "link": "/model-api-reference/platform-apis/instagram/v1/user-id-to-username"
-        },
-        {
-          "text": "Get user info by user ID",
-          "link": "/model-api-reference/platform-apis/instagram/v2/user-id-to-username"
-        },
-        {
-          "text": "Get user info by user ID",
+          "text": "Instagram User Info by ID",
           "link": "/model-api-reference/platform-apis/instagram/v3/user-id-to-username"
         },
         {
-          "text": "Get user profile",
+          "text": "Instagram User Info by Username",
+          "link": "/model-api-reference/platform-apis/instagram/v1/user-info-by-username"
+        },
+        {
+          "text": "Instagram User Profile",
+          "link": "/model-api-reference/platform-apis/instagram/v2/user-info"
+        },
+        {
+          "text": "Instagram User Profile (V3)",
           "link": "/model-api-reference/platform-apis/instagram/v3/user-profile"
         },
         {
-          "text": "Get user reels",
-          "link": "/model-api-reference/platform-apis/instagram/v2/user-reels"
+          "text": "Instagram User Profile by ID",
+          "link": "/model-api-reference/platform-apis/instagram/v1/user-info-by-id"
         },
         {
-          "text": "Get user reels",
-          "link": "/model-api-reference/platform-apis/instagram/v3/user-reels"
+          "text": "Instagram User Profile by Username (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v1/user-info-by-username-v3"
         },
         {
-          "text": "Get user Reels list",
+          "text": "Instagram User Reels (V1)",
           "link": "/model-api-reference/platform-apis/instagram/v1/user-reels"
         },
         {
-          "text": "Get user reposts list",
+          "text": "Instagram User Reels (V2)",
+          "link": "/model-api-reference/platform-apis/instagram/v2/user-reels"
+        },
+        {
+          "text": "Instagram User Reels (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/user-reels"
+        },
+        {
+          "text": "Instagram User Reposts",
           "link": "/model-api-reference/platform-apis/instagram/v1/user-reposts"
         },
         {
-          "text": "Get user stories",
+          "text": "Instagram User Stories (V2)",
           "link": "/model-api-reference/platform-apis/instagram/v2/user-stories"
         },
         {
-          "text": "Get user stories",
+          "text": "Instagram User Stories (V3)",
           "link": "/model-api-reference/platform-apis/instagram/v3/user-stories"
-        }
-      ]
-    },
-    {
-      "key": "utilities",
-      "label": "Utilities",
-      "operations": [
-        {
-          "text": "Extract shortcode from URL",
-          "link": "/model-api-reference/platform-apis/instagram/v3/extract-shortcode"
         }
       ]
     },
@@ -379,36 +329,32 @@ export default {
       "label": "Other",
       "operations": [
         {
-          "text": "Get cities by country",
+          "text": "Instagram Cities by Country",
           "link": "/model-api-reference/platform-apis/instagram/v1/cities"
         },
         {
-          "text": "Get highlight stories",
-          "link": "/model-api-reference/platform-apis/instagram/v2/highlight-stories"
-        },
-        {
-          "text": "Get highlight stories",
-          "link": "/model-api-reference/platform-apis/instagram/v3/highlight-stories"
-        },
-        {
-          "text": "Get location info",
-          "link": "/model-api-reference/platform-apis/instagram/v1/location-info"
-        },
-        {
-          "text": "Get location info",
-          "link": "/model-api-reference/platform-apis/instagram/v3/location-info"
-        },
-        {
-          "text": "Get locations by city",
+          "text": "Instagram City Locations",
           "link": "/model-api-reference/platform-apis/instagram/v1/locations"
         },
         {
-          "text": "Get nearby location content",
-          "link": "/model-api-reference/platform-apis/instagram/v3/location-nearby"
+          "text": "Instagram Highlight Stories",
+          "link": "/model-api-reference/platform-apis/instagram/v2/highlight-stories"
         },
         {
-          "text": "Get related profiles",
+          "text": "Instagram Location Details (V1)",
+          "link": "/model-api-reference/platform-apis/instagram/v1/location-info"
+        },
+        {
+          "text": "Instagram Location Details (V3)",
+          "link": "/model-api-reference/platform-apis/instagram/v3/location-info"
+        },
+        {
+          "text": "Instagram Related Profiles",
           "link": "/model-api-reference/platform-apis/instagram/v1/related-profiles"
+        },
+        {
+          "text": "Instagram Shortcode Extractor",
+          "link": "/model-api-reference/platform-apis/instagram/v3/extract-shortcode"
         }
       ]
     }

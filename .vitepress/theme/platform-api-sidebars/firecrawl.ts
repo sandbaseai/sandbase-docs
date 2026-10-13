@@ -19,7 +19,7 @@ export default {
       "label": "Scrape",
       "operations": [
         {
-          "text": "Firecrawl Scrape",
+          "text": "Firecrawl Page Scraper",
           "link": "/model-api-reference/platform-apis/firecrawl/scrape"
         },
         {
@@ -33,7 +33,7 @@ export default {
       "label": "Search",
       "operations": [
         {
-          "text": "Firecrawl Search",
+          "text": "Firecrawl Web Search",
           "link": "/model-api-reference/platform-apis/firecrawl/search"
         }
       ]
@@ -43,7 +43,7 @@ export default {
       "label": "Map",
       "operations": [
         {
-          "text": "Firecrawl Map",
+          "text": "Firecrawl URL Discovery",
           "link": "/model-api-reference/platform-apis/firecrawl/map"
         }
       ]

@@ -2,23 +2,19 @@
 export default {
   "platform": "Threads",
   "slug": "threads",
-  "operationCount": 11,
+  "operationCount": 9,
   "groups": [
     {
       "key": "search",
       "label": "Search & Discovery",
       "operations": [
         {
-          "text": "Search profiles",
+          "text": "Threads Profile Search",
           "link": "/model-api-reference/platform-apis/threads/web/search-profiles"
         },
         {
-          "text": "Search recent content",
+          "text": "Threads Recent Content Search",
           "link": "/model-api-reference/platform-apis/threads/web/search-recent"
-        },
-        {
-          "text": "Search top content",
-          "link": "/model-api-reference/platform-apis/threads/web/search-top"
         }
       ]
     },
@@ -27,11 +23,7 @@ export default {
       "label": "Comments & Engagement",
       "operations": [
         {
-          "text": "Get post comments",
-          "link": "/model-api-reference/platform-apis/threads/web/post-comments"
-        },
-        {
-          "text": "Get user replies",
+          "text": "Threads User Replies",
           "link": "/model-api-reference/platform-apis/threads/web/user-replies"
         }
       ]
@@ -41,15 +33,15 @@ export default {
       "label": "Content & Video",
       "operations": [
         {
-          "text": "Get post detail",
+          "text": "Threads Post Detail",
           "link": "/model-api-reference/platform-apis/threads/web/post-detail"
         },
         {
-          "text": "Get post detail V2(supports URL)",
+          "text": "Threads Post Detail (V2)",
           "link": "/model-api-reference/platform-apis/threads/web/post-detail-v2"
         },
         {
-          "text": "Get user posts",
+          "text": "Threads User Posts",
           "link": "/model-api-reference/platform-apis/threads/web/user-posts"
         }
       ]
@@ -59,15 +51,15 @@ export default {
       "label": "Users & Accounts",
       "operations": [
         {
-          "text": "Get user info",
-          "link": "/model-api-reference/platform-apis/threads/web/user-info"
-        },
-        {
-          "text": "Get user info by ID",
+          "text": "Threads User Info by ID",
           "link": "/model-api-reference/platform-apis/threads/web/user-info-by-id"
         },
         {
-          "text": "Get user reposts",
+          "text": "Threads User Profile",
+          "link": "/model-api-reference/platform-apis/threads/web/user-info"
+        },
+        {
+          "text": "Threads User Reposts",
           "link": "/model-api-reference/platform-apis/threads/web/user-reposts"
         }
       ]
