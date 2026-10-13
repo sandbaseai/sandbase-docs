@@ -14,7 +14,7 @@ specific message string.
 Core `/v1/*` middleware and several model or resource endpoints return a flat error:
 
 ```json
-{"error":"API key rate limit exceeded"}
+{"error":"organization rate limit exceeded"}
 ```
 
 Agents platform resources (`/v1/agents*`, `/v1/services*`, `/v1/schedules*`, `/v1/mcp-connections*`, `/v1/secrets*`,
@@ -47,7 +47,7 @@ Anthropic-compatible envelope:
 | `403` | The credential lacks permission, or a compatibility surface maps a spending failure to 403 | Inspect the documented envelope and use an authorized key. |
 | `404` | Model or resource not found | Verify the current model name or resource ID. |
 | `409` | Resource state conflict | Read the latest resource state before deciding whether a retry is safe. |
-| `429` | Per-key or platform-wide request protection | Retry with bounded exponential backoff and jitter. |
+| `429` | Organization request limit, video concurrency limit, or daily free API allowance | Retry with bounded exponential backoff and jitter. |
 | `500`, `502`, `503`, `504` | SandBase or upstream transient failure | Retry only when the operation is safe to repeat. |
 
 ## Authentication and rate-limit messages
@@ -58,11 +58,13 @@ Documented authentication messages include:
 - `invalid API key`
 - `API key has been revoked`
 - `API key has expired`
-- `insufficient_scope`
 
-Documented rate-limit messages include `API key rate limit exceeded` and `global rate limit exceeded`. A `429`
-response does not currently include `Retry-After` or `X-RateLimit-*` headers, and there is no published universal
-RPM or concurrency default.
+A scoped key used outside its scope returns `403` with a nested body instead: `{"error":{"code":"insufficient_scope","message":"API key is not authorized for this endpoint","request_id":"..."}}`. Agents platform resources return the same `code` in their own envelope.
+
+Documented rate-limit messages are `organization rate limit exceeded` (the organization's assigned requests-per-minute
+limit, shared by all of its API keys) and `daily free API limit exceeded` (the organization's daily allowance for
+currently free API operations, reset at 00:00 UTC). A `429` response does not currently include `Retry-After` or
+`X-RateLimit-*` headers, and there is no published universal RPM or concurrency default.
 
 ## Model and resource lookup
 
@@ -110,6 +112,7 @@ Agents, Sessions, Services, Schedules, Skills, MCP connections, and Secrets retu
 | 409 | `session_input_pending` | Earlier input is still being delivered | Wait; do not resend with a new key |
 | 409 | `session_input_expired` | Input admission expired | Inspect history before sending again |
 | 409 | `session_environment_unavailable` | The execution environment is unavailable | Wait or create a new Session |
+| 413 | `request_too_large` | The request body, or the Session configuration frozen from it, exceeds the size limit | Send a smaller body; do not retry unchanged |
 | 429 | `concurrency_limit` | A Service or Schedule already has a pending Run | Wait for it to finish or cancel it |
 | 429 | `quota_exceeded` | Agents quota exceeded | Retry later |
 | 502 | `executor_rejected`, `executor_contract_error` | The execution layer rejected the request or answered unexpectedly | Check the Agent configuration, then retry |

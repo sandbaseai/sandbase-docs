@@ -218,8 +218,9 @@ const dataForSeoCount = dataForSeoSidebar.match(/"operationCount":\s*(\d+)/)?.[1
 assert.equal(Number(dataForSeoCount), dataForSeoPages, 'DataForSEO sidebar count must match its operation pages')
 
 const nativeReference = readFileSync('model-api-reference/official-native-api/index.md', 'utf8')
-assert.match(nativeReference, /`DELETE`\s*\|\s*`\/api\/v3\/contents\/generations\/tasks\/\{task_id\}`/, 'Official Native API must document task deletion')
-assert.match(nativeReference, /Cancel or remove a task/, 'Official Native API must explain task cancellation semantics')
+// Task listing and deletion were removed from the apiserver; the reference must not advertise them.
+assert.doesNotMatch(nativeReference, /`DELETE`\s*\|\s*`\/api\/v3\/contents\/generations\/tasks/, 'Official Native API must not document the removed task deletion')
+assert.match(nativeReference, /Listing tasks and cancelling or deleting a task are not supported/, 'Official Native API must state that only create and retrieve are available')
 
 const seedanceAssetReference = readFileSync('model-api-reference/official-native-api/bytedance/media-assets.md', 'utf8')
 assert.match(seedanceAssetReference, /`POST \/v1\/assets`/, 'Seedance Asset guide must document Asset registration')

@@ -5,14 +5,13 @@ description: SandBase API rate limiting — how limits are enforced and how to h
 
 # Rate Limits
 
-SandBase enforces rate limits to ensure fair usage and platform stability. Limiting is applied as a 1-minute sliding window using two layers, and a request must pass both to be served:
+SandBase enforces rate limits to ensure fair usage and platform stability. The request limit is set per organization: an optional requests-per-minute cap, counted over a 1-minute sliding window and shared by every API key in the organization.
 
-1. **Per-key limit** — an optional per-minute request cap on an individual API key. When unset, the key is only subject to the global limit.
-2. **Global limit** — a platform-wide per-minute request cap.
+It applies to `POST /v1/run`, `POST /v1/chat/completions`, `POST /v1/responses`, `POST /v1/messages`, `POST /v1/upload`, and the Gemini `generateContent`, `streamGenerateContent`, and `POST /v1beta/interactions` endpoints. Polling endpoints such as `GET /v1/run/{id}` are not counted.
 
 ## How to find your effective limit
 
-SandBase does not publish a single fixed requests-per-minute number because the effective limit can vary by workspace, key, and platform capacity. Your key is governed by the lower of any custom per-key limit and the current platform-wide protection limit.
+SandBase does not publish a single fixed requests-per-minute number because the limit is assigned per organization. Every API key in the organization counts toward the same limit, so creating more keys does not raise it.
 
 If your workload needs a guaranteed or higher limit, contact SandBase support with the organization, application, expected steady rate, and expected burst rate. Do not design a production client around an undocumented numeric default.
 
@@ -22,11 +21,13 @@ When a limit is exceeded, the API aborts the request with HTTP 429. On the `/v1/
 
 ```json
 {
-  "error": "API key rate limit exceeded"
+  "error": "organization rate limit exceeded"
 }
 ```
 
-The message is `"API key rate limit exceeded"` when the per-key limit is hit, or `"global rate limit exceeded"` when the platform-wide limit is hit.
+Protocol-compatible endpoints such as `POST /v1/messages` and the Gemini endpoints return the same `429` in their own error envelope.
+
+API operations that are currently free to call also share a daily call allowance per organization that resets at 00:00 UTC. When it is used up, those calls return `429` with `"daily free API limit exceeded"`; retrying before the reset does not help.
 
 ::: warning
 Platform-generated rate-limit responses do not currently add `Retry-After` or remaining-quota headers. A compatible
@@ -42,11 +43,6 @@ client-side backoff with jitter.
 4. **Add jitter** — randomize retry delays so multiple workers do not retry at the same moment.
 5. **Retry only safe operations** — repeating a generation can add cost, and state-changing requests can duplicate work.
 
-## Per-Key Limit
+## Changing your limit
 
-A per-key request cap can be configured for an individual key. When present, it is enforced independently of and in
-addition to the platform-wide limit.
-
-::: info
-Setting a per-key rate limit is not currently exposed through the public key-management API. Contact support if you need a custom per-key limit configured.
-:::
+The organization limit is not currently exposed through the public API or Console. Contact support if your workload needs a different limit.

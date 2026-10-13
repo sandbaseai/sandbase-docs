@@ -89,8 +89,8 @@ curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
 
 ## Rate Limits
 
-There is no published universal numeric default. Requests are subject to an optional per-key RPM cap and the
-current platform-wide RPM protection. A `429` response does not include quota or `Retry-After` headers; use bounded
+There is no published universal numeric default. Requests are subject to an optional requests-per-minute limit
+assigned to your organization and shared by all of its API keys. A `429` response does not include quota or `Retry-After` headers; use bounded
 exponential backoff with jitter. See the [Error Guide](./errors).
 
 ---

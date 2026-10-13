@@ -62,7 +62,8 @@ option. Pick `2.5-official` when you need 1080p.
 | --- | --- |
 | `POST` | `/api/v3/contents/generations/tasks` |
 | `GET` | `/api/v3/contents/generations/tasks/{task_id}` |
-| `DELETE` | `/api/v3/contents/generations/tasks/{task_id}` |
+
+Listing tasks and cancelling or deleting a task are not supported. Store the returned task `id` to retrieve the result.
 
 Authenticate every request with the same API key used to create the task:
 
@@ -117,18 +118,6 @@ curl https://api.sandbase.ai/api/v3/contents/generations/tasks/158d2649-e01d-45b
 ```
 
 The generated video is available at `content.video_url`.
-
-## Cancel or remove a task
-
-Cancel a queued task, or remove a terminal task from subsequent lookups, with the same API key:
-
-```bash
-curl -X DELETE https://api.sandbase.ai/api/v3/contents/generations/tasks/TASK_ID \
-  -H "Authorization: Bearer $SANDBASE_API_KEY"
-```
-
-The operation returns `204 No Content`. Running and already-cancelled tasks cannot be deleted; the API returns an
-error instead. Deleting a task does not affect other tasks or model availability.
 
 ## Choose an input workflow
 
