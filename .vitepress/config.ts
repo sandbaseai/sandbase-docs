@@ -267,6 +267,23 @@ export default defineConfig({
   // read as the signature dark panels on every background.
   markdown: {
     theme: { light: 'github-dark', dark: 'github-dark' },
+    // Callouts render a mono tone badge (TIP / WARNING ...) via CSS. Mark
+    // titles that are just the default label so the badge isn't repeated as
+    // a title; custom titles (`::: tip Current source of truth`) still show.
+    config(md) {
+      for (const type of ['tip', 'info', 'note', 'important', 'warning', 'danger', 'caution']) {
+        const rule = `container_${type}_open`
+        const render = md.renderer.rules[rule]
+        if (!render) continue
+        md.renderer.rules[rule] = (tokens, idx, options, env, self) => {
+          const html = render(tokens, idx, options, env, self)
+          const hasCustomTitle = tokens[idx].info.trim().slice(type.length).trim() !== ''
+          return hasCustomTitle
+            ? html
+            : html.replace('class="custom-block-title"', 'class="custom-block-title custom-block-title-default"')
+        }
+      }
+    },
   },
   // Frontmatter titles are already curated for SEO; avoid appending a second
   // brand suffix that can push rendered titles beyond search-result limits.
@@ -300,7 +317,7 @@ export default defineConfig({
     ['link', { rel: 'apple-touch-icon', href: '/docs/apple-touch-icon.png' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
-    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;700&display=swap' }],
     ['meta', { property: 'og:title', content: 'SandBase Docs - Connect Your Agent to the Real World' }],
     ['meta', { property: 'og:description', content: 'Learn how to use Setup, call Models and APIs, build Agents, deploy Services, create Schedules, and review Sessions in SandBase.' }],
     ['meta', { property: 'og:type', content: 'website' }],
@@ -345,9 +362,15 @@ export default defineConfig({
     search: {
       provider: 'local',
     },
+    // Pager labels match the design's mono PREVIOUS / NEXT captions.
+    docFooter: {
+      prev: 'Previous',
+      next: 'Next',
+    },
 
     outline: {
-      level: [2, 3],
+      // The design's outline lists section (h2) titles only.
+      level: 2,
       label: 'On this page',
     },
 

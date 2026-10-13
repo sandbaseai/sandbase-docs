@@ -58,7 +58,7 @@
   --vp-code-copy-code-active-text: var(--sb-panel-fg);
 
   --vp-font-family-base: 'Clash Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Roboto, sans-serif;
-  --vp-font-family-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', Consolas, monospace;
+  --vp-font-family-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Aliases matching the sandbase.ai main site so the ported header/footer
      stylesheets work verbatim. These resolve to the --sb-* tokens above and
@@ -97,7 +97,7 @@
   --sb-accent-contrast: #0e0b1a;
   --sb-tint: #8b6fff;
   --sb-tint-fg: #ffffff;
-  --sb-panel: #1e1936;
+  --sb-panel: #3a3070;
   --sb-panel-fg: #f2f0f3;
   --sb-panel-label: #a9a5b8;
 
@@ -795,14 +795,14 @@ html {
   padding-left: 10px;
 }
 
-.vp-doc > h1:first-child {
+.vp-doc > div > h1:first-child {
   margin-top: 0;
   font-size: clamp(34px, 3.3vw, 48px);
   line-height: 1.08;
   letter-spacing: -0.038em;
 }
 
-.vp-doc > h1:first-child + p {
+.vp-doc > div > h1:first-child + p {
   max-width: 760px;
   margin-top: 18px;
   color: var(--vp-c-text-2);
@@ -937,11 +937,11 @@ html {
     overflow-wrap: anywhere;
   }
 
-  .vp-doc > h1:first-child {
+  .vp-doc > div > h1:first-child {
     font-size: 34px;
   }
 
-  .vp-doc > h1:first-child + p {
+  .vp-doc > div > h1:first-child + p {
     font-size: 17px;
   }
 }
@@ -1096,29 +1096,31 @@ html {
   color: var(--vp-c-text-1);
 }
 
-.vp-doc:not(:has(.api-reference-page)) > p,
-.vp-doc:not(:has(.api-reference-page)) > ul,
-.vp-doc:not(:has(.api-reference-page)) > ol,
-.vp-doc:not(:has(.api-reference-page)) > blockquote {
+.vp-doc:not(:has(.api-reference-page)) > div > p,
+.vp-doc:not(:has(.api-reference-page)) > div > ul,
+.vp-doc:not(:has(.api-reference-page)) > div > ol,
+.vp-doc:not(:has(.api-reference-page)) > div > blockquote {
   max-width: 72ch;
 }
 
-.vp-doc:not(:has(.api-reference-page)) > h1:first-child {
-  max-width: 18ch;
-  margin-bottom: 18px;
-  font-size: clamp(30px, 2.5vw, 36px);
-  font-weight: 660;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+/* Design text-h1 / text-lede (ui-design globals.css). */
+.vp-doc:not(:has(.api-reference-page)) > div > h1:first-child {
+  max-width: none;
+  margin-bottom: 16px;
+  font-size: clamp(2rem, 1.2rem + 2.5vw, 2.8125rem);
+  font-weight: 500;
+  line-height: 1.155;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
-.vp-doc:not(:has(.api-reference-page)) > h1:first-child + p {
-  max-width: 64ch;
+.vp-doc:not(:has(.api-reference-page)) > div > h1:first-child + p {
+  max-width: none;
   margin-top: 0;
-  color: var(--vp-c-text-2);
+  color: var(--sb-ink-muted);
   font-size: 17px;
-  line-height: 1.62;
-  letter-spacing: -0.014em;
+  line-height: 26px;
+  letter-spacing: 0.01em;
 }
 
 .vp-doc:not(:has(.api-reference-page)) h2 {
@@ -1228,22 +1230,8 @@ html {
   margin-top: 7px;
 }
 
-@media (max-width: 959px) {
-  .vp-doc:not(:has(.api-reference-page)) > h1:first-child {
-    max-width: none;
-    font-size: 29px;
-  }
-
-  .vp-doc:not(:has(.api-reference-page)) > h1:first-child + p {
-    font-size: 16px;
-  }
-
-  .vp-doc:not(:has(.api-reference-page)) h2 {
-    margin-top: 40px;
-    padding-top: 22px;
-    font-size: 22px;
-  }
-}
+/* Mobile h1/lead/h2 keep the fluid design scale defined above (the design
+   uses the same clamp() and 22px section titles at every width). */
 
 /* ─── Wide-screen layout correction ───────────────────────────────────────
    VitePress centres the whole shell inside `--vp-layout-max-width`, but its
@@ -2014,5 +2002,689 @@ html {
   .sandbox-playground-page .VPDoc > .container > .content {
     padding-left: 0 !important;
     padding-right: 0 !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Design alignment (sandbase-fe ui-design: doc-layout, post-body, code-tabs)
+   Appended last so it wins over the earlier layers. Prose rules are scoped to
+   `.vp-doc:not(:has(.api-reference-page))` so endpoint reference pages keep
+   their own dense layout. VitePress wraps Markdown as `.vp-doc > div > …`.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --sb-tint-blue: #8b6fff;
+  --sb-tint-blue-fg: #ffffff;
+  --sb-tint-cyan: #d9ff43;
+  --sb-tint-yellow: #d9ff43;   /* lime in both modes */
+  --sb-panel-rule: color-mix(in srgb, var(--sb-panel-label) 30%, transparent);
+  --sb-gutter-mobile: clamp(1.25rem, 5.5556vw, 5rem);
+
+  /* Code-group tabs sit on the dark panel in both appearances. */
+  --vp-code-tab-bg: var(--sb-panel);
+  --vp-code-tab-text-color: var(--sb-panel-label);
+  --vp-code-tab-hover-text-color: var(--sb-panel-fg);
+  --vp-code-tab-active-text-color: var(--sb-panel-fg);
+  --vp-code-tab-active-bar-color: var(--sb-tint-cyan);
+  --vp-code-tab-divider: var(--sb-panel-rule);
+  --vp-code-block-divider-color: var(--sb-panel-rule);
+  --vp-code-copy-code-border-color: transparent;
+  --vp-code-copy-code-hover-border-color: transparent;
+  --vp-code-copy-code-bg: transparent;
+  --vp-code-copy-code-hover-bg: var(--sb-panel);
+}
+
+.dark {
+  --sb-tint-blue: #d9ff43;
+  --sb-tint-blue-fg: #0e0b1a;
+  --sb-tint-cyan: #8b6fff;
+  --vp-code-tab-bg: var(--sb-panel);
+  --vp-code-tab-text-color: var(--sb-panel-label);
+  --vp-code-tab-hover-text-color: var(--sb-panel-fg);
+  --vp-code-tab-active-text-color: var(--sb-panel-fg);
+  --vp-code-tab-active-bar-color: var(--sb-tint-cyan);
+  --vp-code-tab-divider: var(--sb-panel-rule);
+  --vp-code-block-divider-color: var(--sb-panel-rule);
+  --vp-code-copy-code-bg: transparent;
+  --vp-code-copy-code-hover-bg: var(--sb-panel);
+}
+
+/* ─── Fenced code: square panel, 44px label strip, monochrome text ──────── */
+/* `:not(.api-language-tabs)`: ApiReferencePage's tab bar class also matches
+   `[class*='language-']`; keep these fence rules off it. */
+.vp-doc div[class*='language-']:not(.api-language-tabs),
+.vp-doc:not(:has(.api-reference-page)) div[class*='language-']:not(.api-language-tabs) {
+  padding-top: 44px;
+  border: 0;
+  border-radius: 0 !important;
+  background: var(--sb-panel);
+  box-shadow: none;
+  overflow: visible;
+}
+
+.vp-doc div[class*='language-']:not(.api-language-tabs)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 44px;
+  border-bottom: 1px solid var(--sb-panel-rule);
+  pointer-events: none;
+}
+
+.vp-doc [class*='language-']:not(.api-language-tabs) > span.lang,
+.vp-doc [class*='language-']:not(.api-language-tabs):hover > button.copy + span.lang,
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:focus + span.lang {
+  top: 0;
+  right: auto;
+  left: 20px;
+  opacity: 1;
+  color: var(--sb-panel-label);
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 44px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy {
+  top: 6px;
+  right: 12px;
+  width: auto;
+  height: 32px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  opacity: 1;
+}
+/* Design CopyButton: a mono text label, COPY then COPIED, no icon. */
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy::after {
+  content: 'Copy';
+  color: var(--sb-panel-label);
+  font: 500 10px/32px var(--vp-font-family-mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:hover::after { color: var(--sb-panel-fg); }
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy.copied::after { content: 'Copied'; color: var(--sb-panel-fg); }
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy.copied::before { display: none; }
+
+.vp-doc [class*='language-']:not(.api-language-tabs):hover > button.copy,
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:focus,
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:hover {
+  opacity: 1;
+}
+
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy.copied,
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:hover.copied {
+  border-radius: 0;
+}
+
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy.copied::before,
+.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:hover.copied::before {
+  height: 32px;
+  border-radius: 0;
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.vp-doc div[class*='language-']:not(.api-language-tabs) pre {
+  padding: 16px 0;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb-panel-label) transparent;
+}
+
+.vp-doc div[class*='language-']:not(.api-language-tabs) code,
+.vp-doc:not(:has(.api-reference-page)) div[class*='language-']:not(.api-language-tabs) code {
+  padding: 0 20px;
+  color: var(--sb-panel-fg);
+  font-family: var(--vp-font-family-mono);
+  font-size: 14.5px;
+  line-height: 24px;
+}
+
+/* The design's code panels are monochrome (text-panel-code). */
+.vp-doc div[class*='language-']:not(.api-language-tabs) code span {
+  color: var(--sb-panel-fg) !important;
+}
+
+/* Code groups: the tabs replace the label strip; copy moves into the tab row. */
+.vp-doc .vp-code-group {
+  margin: 24px 0;
+}
+
+.vp-doc .vp-code-group .tabs {
+  margin: 0;
+  padding: 0 56px 0 0;
+  border-radius: 0;
+}
+
+.vp-doc .vp-code-group .tabs label {
+  padding: 0 16px;
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 44px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.vp-doc .vp-code-group .tabs label:first-of-type {
+  padding-left: 20px;
+}
+
+.vp-doc .vp-code-group .tabs label::after {
+  right: 0;
+  left: 0;
+  border-radius: 0;
+}
+
+.vp-doc .vp-code-group div[class*='language-']:not(.api-language-tabs) {
+  margin: 0;
+  padding-top: 0;
+}
+
+.vp-doc .vp-code-group div[class*='language-']:not(.api-language-tabs)::before,
+.vp-doc .vp-code-group div[class*='language-']:not(.api-language-tabs) > span.lang {
+  display: none;
+}
+
+.vp-doc .vp-code-group div[class*='language-']:not(.api-language-tabs) > button.copy {
+  top: -38px;
+}
+
+/* ─── Prose typography (design post-body Blocks) ────────────────────────── */
+.vp-doc:not(:has(.api-reference-page)) {
+  color: var(--sb-ink);
+}
+
+.vp-doc:not(:has(.api-reference-page)) h2 {
+  margin: 48px 0 20px;
+  padding-top: 32px;
+  border-top: 1px solid var(--sb-line);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: -0.011em;
+  text-wrap: balance;
+}
+
+.vp-doc:not(:has(.api-reference-page)) h3 {
+  margin: 32px 0 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: 0.01em;
+}
+
+.vp-doc:not(:has(.api-reference-page)) p,
+.vp-doc:not(:has(.api-reference-page)) li {
+  color: var(--sb-ink);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.vp-doc:not(:has(.api-reference-page)) > div > h1:first-child + p {
+  color: var(--sb-ink-muted);
+  font-size: 17px;
+  line-height: 26px;
+  letter-spacing: 0.01em;
+}
+
+.vp-doc:not(:has(.api-reference-page)) p {
+  margin: 24px 0;
+}
+
+.vp-doc:not(:has(.api-reference-page)) ul,
+.vp-doc:not(:has(.api-reference-page)) ol {
+  margin: 24px 0;
+}
+
+.vp-doc:not(:has(.api-reference-page)) li + li {
+  margin-top: 10px;
+}
+
+.vp-doc:not(:has(.api-reference-page)) li > p {
+  margin: 0;
+}
+
+.vp-doc:not(:has(.api-reference-page)) strong {
+  font-weight: 500;
+  color: var(--sb-ink);
+}
+
+/* 7px accent squares, 12px from the text (design list block). */
+.vp-doc:not(:has(.api-reference-page)) ul {
+  padding-left: 19px;
+}
+
+.vp-doc:not(:has(.api-reference-page)) ul > li:not(.task-list-item)::before {
+  top: 9px;
+  left: -19px;
+}
+
+/* Ordered lists: two-digit mono accent numbers (generalised from Quickstart). */
+.vp-doc:not(:has(.api-reference-page)) ol:not([start]) {
+  padding-left: 0;
+  list-style: none;
+  counter-reset: sb-ol;
+}
+
+.vp-doc:not(:has(.api-reference-page)) ol:not([start]) > li {
+  position: relative;
+  padding-left: 32px;
+  counter-increment: sb-ol;
+}
+
+.vp-doc:not(:has(.api-reference-page)) ol:not([start]) > li::marker {
+  content: '';
+}
+
+.vp-doc:not(:has(.api-reference-page)) ol:not([start]) > li::before {
+  content: counter(sb-ol, decimal-leading-zero);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--sb-accent);
+  font-family: var(--vp-font-family-mono);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Links: ink text with a hairline underline; accent on hover. */
+.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a) {
+  color: var(--sb-ink);
+  font-weight: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--sb-line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+
+.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a):hover {
+  color: var(--sb-accent);
+  text-decoration-color: var(--sb-accent);
+}
+
+/* Inline code: flat surface-alt chip, square, no border. */
+.vp-doc:not(:has(.api-reference-page)) :not(pre) > code,
+.dark .vp-doc:not(:has(.api-reference-page)) :not(pre) > code {
+  padding: 2px 4px;
+  border: 0;
+  border-radius: 0;
+  background: var(--sb-surface-alt) !important;
+  color: var(--sb-ink) !important;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.875em;
+  font-weight: 400;
+}
+
+/* Tables: ruled, not boxed (design table block). */
+.vp-doc:not(:has(.api-reference-page)) table {
+  border: 0;
+  border-top: 1px solid var(--sb-line);
+  border-collapse: collapse;
+  font-size: 14.5px;
+  line-height: 22px;
+}
+
+.vp-doc:not(:has(.api-reference-page)) tr,
+.vp-doc:not(:has(.api-reference-page)) tr:nth-child(2n) {
+  border: 0;
+  background: transparent;
+}
+
+.vp-doc:not(:has(.api-reference-page)) th,
+.vp-doc:not(:has(.api-reference-page)) td {
+  padding: 12px 24px 12px 0;
+  border: 0;
+  border-bottom: 1px solid var(--sb-line);
+  background: transparent;
+  vertical-align: top;
+  font-size: 14.5px;
+  line-height: 22px;
+}
+
+.vp-doc:not(:has(.api-reference-page)) th {
+  color: var(--sb-ink-muted);
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.vp-doc:not(:has(.api-reference-page)) td {
+  color: var(--sb-ink-muted);
+}
+
+.vp-doc:not(:has(.api-reference-page)) td:first-child {
+  color: var(--sb-ink);
+  font-family: var(--vp-font-family-mono);
+  white-space: nowrap;
+}
+
+/* Callouts: surface card, tone badge, 16px title, 15px text. */
+.vp-doc:not(:has(.api-reference-page)) .custom-block:is(.tip, .info, .note, .important, .warning, .danger, .caution, .details) {
+  max-width: none;
+  margin: 24px 0;
+  padding: 16px 20px;
+  border: 1px solid var(--sb-line);
+  border-radius: 0;
+  background: var(--sb-surface);
+  box-shadow: none;
+  color: var(--sb-ink);
+  font-size: 15px;
+  line-height: 23px;
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block:is(.tip, .info, .note, .important, .warning, .danger, .caution)::before {
+  display: block;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 2px 8px;
+  background: var(--sb-tint-blue);
+  color: var(--sb-tint-blue-fg);
+  font-family: var(--vp-font-family-mono);
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block.tip::before { content: 'Tip'; }
+.vp-doc:not(:has(.api-reference-page)) .custom-block.info::before { content: 'Info'; }
+.vp-doc:not(:has(.api-reference-page)) .custom-block.note::before { content: 'Note'; }
+.vp-doc:not(:has(.api-reference-page)) .custom-block.important::before { content: 'Important'; }
+.vp-doc:not(:has(.api-reference-page)) .custom-block.warning::before { content: 'Warning'; }
+.vp-doc:not(:has(.api-reference-page)) .custom-block.danger::before { content: 'Danger'; }
+.vp-doc:not(:has(.api-reference-page)) .custom-block.caution::before { content: 'Caution'; }
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block:is(.warning, .danger, .caution)::before {
+  background: var(--sb-tint-yellow);
+  color: #0e0b1a;
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block .custom-block-title {
+  margin: 0 0 4px;
+  color: var(--sb-ink);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block .custom-block-title-default {
+  display: none;
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block p,
+.vp-doc:not(:has(.api-reference-page)) .custom-block li {
+  color: var(--sb-ink);
+  font-size: 15px;
+  line-height: 23px;
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block p {
+  margin: 0;
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block p + p {
+  margin-top: 8px;
+}
+
+.vp-doc:not(:has(.api-reference-page)) .custom-block ul,
+.vp-doc:not(:has(.api-reference-page)) .custom-block ol {
+  margin: 8px 0 0;
+}
+
+/* ─── Pager: two surface cards with a mono label ────────────────────────── */
+.VPDocFooter .pager-link {
+  padding: 16px 20px;
+  border: 1px solid var(--sb-line);
+  border-radius: 0;
+  background: var(--sb-surface);
+  transition: border-color 150ms ease;
+}
+
+.VPDocFooter .pager-link:hover {
+  border-color: var(--sb-line-strong);
+}
+
+.VPDocFooter .pager-link .desc {
+  color: var(--sb-ink-subtle);
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.VPDocFooter .pager-link .title {
+  margin-top: 6px;
+  color: var(--sb-ink);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+/* ─── Outline ("On this page") ──────────────────────────────────────────── */
+.VPDocAsideOutline .outline-title {
+  margin-bottom: 16px;
+  color: var(--sb-ink-subtle);
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.VPDocAsideOutline .outline-link {
+  padding: 0;
+  color: var(--sb-ink-muted);
+  font-size: 15px;
+  line-height: 23px;
+  white-space: normal;
+  transition: color 150ms ease;
+}
+
+.VPDocAsideOutline .outline-link:hover {
+  color: var(--sb-ink);
+}
+
+.VPDocAsideOutline li + li,
+.VPDocAsideOutline > nav > ul > li + li {
+  margin-top: 10px;
+}
+
+/* ─── Sidebar rail (design DocNav) ──────────────────────────────────────── */
+.VPSidebarItem.level-0 {
+  padding-bottom: 0 !important;
+}
+
+/* VitePress pads every item .text by 4px 0 (scoped); the design rail is
+   6px link padding around a 23px line, and a 16px label line. */
+.VPSidebarItem > .item .text {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.VPSidebarItem.level-0 > .item {
+  min-height: 0;
+  padding: 0 !important;
+}
+
+.VPSidebarItem.level-0 > .item .text {
+  line-height: 16px !important;
+}
+
+.VPSidebarItem.level-0 > .items {
+  margin-top: 12px;
+}
+
+.VPSidebar .group + .group {
+  margin-top: 28px !important;
+  padding-top: 0 !important;
+}
+
+.VPSidebarItem.level-1 > .item,
+.VPSidebarItem.level-2 > .item,
+.VPSidebarItem.level-3 > .item {
+  min-height: 0;
+  padding: 0;
+}
+
+.VPSidebarItem.level-1 > .item .link,
+.VPSidebarItem.level-2 > .item .link,
+.VPSidebarItem.level-3 > .item .link {
+  min-height: 0;
+  padding: 6px 0 6px 16px;
+}
+
+.VPSidebarItem.level-2 > .item .link {
+  padding-left: 28px;
+}
+
+.VPSidebarItem.level-1 > .item .link > .text,
+.VPSidebarItem.level-2 > .item .link > .text,
+.VPSidebarItem.level-3 > .item .link > .text {
+  font-size: 15px;
+  font-weight: inherit;
+  line-height: 23px;
+}
+
+/* ─── Column grid: sidebar 220 · article ≤720 · outline 180 ─────────────── */
+@media (min-width: 960px) {
+  :root {
+    --vp-sidebar-width: 268px; /* 220px rail + 48px gap (design lg) */
+  }
+
+  .VPSidebar {
+    padding-right: 48px !important;
+  }
+
+  .Layout:not(.sandbox-playground-page) .VPDoc:not(:has(.api-reference-page)):not(:has(.platform-api-landing)) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .Layout:not(.sandbox-playground-page) .VPDoc:not(:has(.api-reference-page)):not(:has(.platform-api-landing)) > .container > .content {
+    padding: 0 0 128px !important;
+  }
+
+  .Layout:not(.sandbox-playground-page) .VPDoc:not(:has(.api-reference-page)):not(:has(.platform-api-landing)) .content-container {
+    max-width: 720px !important;
+    margin: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --vp-sidebar-width: 300px; /* 220px rail + 80px gap (design xl at 1440) */
+  }
+
+  .VPSidebar {
+    padding-right: 80px !important;
+  }
+
+  .Layout:not(.sandbox-playground-page) .VPDoc:not(:has(.api-reference-page)):not(:has(.platform-api-landing)) > .container {
+    justify-content: flex-start;
+    max-width: 980px !important;
+    margin: 0;
+  }
+
+  .Layout:not(.sandbox-playground-page) .VPDoc:not(:has(.api-reference-page)):not(:has(.platform-api-landing)) > .container > .content {
+    flex: 0 1 720px;
+    min-width: 0;
+    max-width: 720px;
+  }
+
+  .Layout:not(.sandbox-playground-page) .VPDoc:not(:has(.api-reference-page)):not(:has(.platform-api-landing)) .aside {
+    flex: 0 0 260px !important;
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    padding-left: 80px;
+  }
+
+  .Layout:not(.sandbox-playground-page) .VPDoc:not(:has(.api-reference-page)):not(:has(.platform-api-landing)) .VPDocAside {
+    width: 180px !important;
+    padding-left: 0;
+  }
+
+  .Layout:not(.sandbox-playground-page) .VPDoc:not(:has(.api-reference-page)):not(:has(.platform-api-landing)) .aside-container {
+    width: 180px !important;
+  }
+}
+
+/* ─── Mobile: clear the fixed SiteHeader, design gutter, mono local nav ── */
+@media (max-width: 959px) {
+  /* VPNav is hidden and SiteHeader is position:fixed, so nothing reserves
+     the header's height in flow. VPLocalNav (sticky, top = nav height)
+     occupies its own height before VPContent, so this offset is enough. */
+  .VPContent {
+    padding-top: var(--vp-nav-height);
+  }
+
+  .VPDoc {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .VPDoc > .container > .content {
+    padding-right: var(--sb-gutter-mobile) !important;
+    padding-left: var(--sb-gutter-mobile) !important;
+  }
+
+  .vp-doc:not(:has(.api-reference-page)) div[class*='language-']:not(.api-language-tabs),
+  .vp-doc:not(:has(.api-reference-page)) .vp-code-group .tabs {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .vp-doc:not(:has(.api-reference-page)) .vp-code-group div[class*='language-']:not(.api-language-tabs) {
+    margin: 0;
+  }
+
+  .VPLocalNav .menu {
+    padding-left: var(--sb-gutter-mobile);
+  }
+
+  .VPLocalNavOutlineDropdown > button {
+    padding-right: var(--sb-gutter-mobile);
+  }
+
+}
+
+/* VPLocalNav only renders below 1280px; its labels follow the design's
+   mono "Docs menu" summary. */
+.VPLocalNav .menu-text,
+.VPLocalNavOutlineDropdown > button .menu-text {
+  color: var(--sb-ink);
+  font-family: var(--vp-font-family-mono);
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Tablet: the stock offset ignores the page gutter, so the fixed sidebar
+   covered the start of the "On this page" toggle. */
+@media (min-width: 960px) and (max-width: 1279px) {
+  .VPLocalNav.has-sidebar {
+    padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
   }
 }
