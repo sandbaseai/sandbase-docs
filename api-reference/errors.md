@@ -12,7 +12,7 @@ SandBase uses standard HTTP status codes, but it does not expose one universal e
 Core middleware and several `/v1/*` endpoints return a flat error:
 
 ```json
-{"error":"API key rate limit exceeded"}
+{"error":"organization rate limit exceeded"}
 ```
 
 Agents platform resources (`/v1/agents*`, `/v1/services*`, `/v1/schedules*`, `/v1/mcp-connections*`, `/v1/secrets*`, `/v1/skills*`) return an OpenAI-style object with a stable `code`. See [Agents platform errors](#agents-platform-errors):
@@ -46,7 +46,7 @@ Use the [OpenAPI specification](/openapi.yaml) for the exact status codes and sc
 | `404` | Model or resource is unavailable to the caller | Verify the current model ID or resource ID. |
 | `409` | Resource state conflict | Read the latest state before deciding whether a retry is safe. |
 | `422` | Semantically invalid resource input | Correct the documented field values. |
-| `429` | Per-key or platform-wide request protection | Retry with bounded backoff and jitter when the operation is safe to repeat. |
+| `429` | Organization request limit, video concurrency limit, or daily free API allowance | Retry with bounded backoff and jitter when the operation is safe to repeat. |
 | `500`, `502`, `503`, `504` | SandBase or upstream failure | Retry only when the operation is safe to repeat. |
 
 Not every endpoint documents every status in this table. The operation's OpenAPI response map is authoritative.
@@ -59,7 +59,8 @@ Documented authentication messages include:
 - `invalid API key`
 - `API key has been revoked`
 - `API key has expired`
-- `insufficient_scope`
+
+A scoped key used outside its scope returns `403` with a nested body instead: `{"error":{"code":"insufficient_scope","message":"API key is not authorized for this endpoint","request_id":"..."}}`. Agents platform resources return the same `code` in their own envelope.
 
 Use `Authorization: Bearer $SANDBASE_API_KEY` for standard endpoints. `POST /v1/messages` also accepts `x-api-key`; protocol-compatible Google endpoints document their own supported key headers.
 
@@ -67,11 +68,13 @@ A revoked key cannot be re-enabled. Create a replacement, update the consuming a
 
 ## Rate limits
 
-Documented flat messages include `API key rate limit exceeded` and `global rate limit exceeded`. SandBase does not publish one universal numeric limit because the effective limit can vary by key and platform capacity.
+`organization rate limit exceeded` (`429`) means your organization reached its assigned requests-per-minute limit, which all of its API keys share. Protocol-compatible endpoints return it in their own envelope. SandBase does not publish one universal numeric limit because the limit is assigned per organization.
+
+`daily free API limit exceeded` (`429`) means your organization used its daily allowance for API operations that are currently free. It resets at 00:00 UTC, so do not retry before then.
 
 If a response includes `Retry-After`, respect it. Otherwise use bounded exponential backoff with jitter. See [Rate limits](/guides/rate-limiting) for request-smoothing patterns.
 
-Video submissions have two additional checks. `organization concurrency limit exceeded` (`429`) means your organization already has as many tasks in progress as its account level allows; it clears when a running task finishes. `insufficient credit for estimated video cost` (`402`) means the estimated cost is more than your balance plus credit line; top up before retrying. See [Concurrency limits](/guides/concurrency-limits).
+Task submissions have two additional checks. `organization concurrency limit exceeded` (`429`) means your organization already has as many tasks in progress as its account level allows; it clears when a running task finishes. It applies to every model type on `POST /v1/run` and `/v1/api/*`, and to video submissions on other endpoints. `insufficient credit for estimated video cost` (`402`) means the estimated cost is more than your balance plus credit line; top up before retrying. See [Concurrency limits](/guides/concurrency-limits).
 
 ## Retry safety
 
@@ -112,6 +115,7 @@ Agents, Sessions, Services, Schedules, Skills, MCP connections, and Secrets retu
 | 409 | `session_input_pending` | Earlier input is still being delivered | Wait; do not resend with a new key |
 | 409 | `session_input_expired` | Input admission expired | Inspect history before sending again |
 | 409 | `session_environment_unavailable` | The execution environment is unavailable | Wait or create a new Session |
+| 413 | `request_too_large` | The request body, or the Session configuration frozen from it, exceeds the size limit | Send a smaller body; do not retry unchanged |
 | 429 | `concurrency_limit` | A Service or Schedule already has a pending Run | Wait for it to finish or cancel it |
 | 429 | `quota_exceeded` | Agents quota exceeded | Retry later |
 | 502 | `executor_rejected`, `executor_contract_error` | The execution layer rejected the request or answered unexpectedly | Check the Agent configuration, then retry |

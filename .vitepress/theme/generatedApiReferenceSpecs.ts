@@ -15,7 +15,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"org_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"balance\": \"42.125000\",\n  \"credit_limit\": \"10.000000\",\n  \"alert_threshold\": \"5.000000\"\n}"
+      "code": "{\n  \"org_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"balance\": \"42.125\",\n  \"credit_limit\": \"10\",\n  \"alert_threshold\": \"5\"\n}"
     }
   },
   "account/history": {
@@ -70,7 +70,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
         "title": "Request body",
         "schema": "ImageEditParams",
         "fields": [
-          { "name": "model", "type": "string", "required": true, "description": "Use gpt-image-2 on this endpoint." },
+          { "name": "model", "type": "string", "required": true, "description": "One of gpt-image-2, gpt-image-2.5-flare, or gpt-image-2.5-sunburst." },
           { "name": "prompt", "type": "string", "required": true, "description": "Text description of the requested edit." },
           { "name": "image", "type": "file | file[]", "required": true, "description": "One or more source image files. Repeat the multipart field for multiple images." },
           { "name": "mask", "type": "file", "required": false, "description": "Optional mask image for inpainting." },
@@ -120,6 +120,15 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
           { "name": "Audio", "type": "string", "required": false, "description": "audio/mpeg, audio/mp4, audio/wav, audio/x-wav, audio/ogg, audio/aac, audio/flac — maximum 50 MB." },
           { "name": "Video", "type": "string", "required": false, "description": "video/mp4, video/quicktime, video/webm — maximum 500 MB." }
         ]
+      },
+      {
+        "title": "Response",
+        "fields": [
+          { "name": "url", "type": "string", "required": true, "description": "Stored media URL to pass to a supported model input." },
+          { "name": "filename · size", "type": "string · integer", "required": true, "description": "Original multipart filename and file size in bytes." },
+          { "name": "type · content_type", "type": "string", "required": true, "description": "Detected MIME type used when storing the file." },
+          { "name": "duration_seconds", "type": "number", "required": false, "description": "Audio and video only: media duration in seconds, when it can be read from the file." }
+        ]
       }
     ],
     "examples": [
@@ -131,7 +140,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     ],
     "response": {
       "status": "200 OK",
-      "code": "{\n  \"url\": \"https://media.sandbase.ai/uploads/2026/08/550e8400-e29b-41d4-a716-446655440000.mp4\",\n  \"filename\": \"reference.mp4\",\n  \"size\": 1048576,\n  \"type\": \"video/mp4\",\n  \"content_type\": \"video/mp4\"\n}"
+      "code": "{\n  \"url\": \"https://media.sandbase.ai/uploads/2026/08/550e8400-e29b-41d4-a716-446655440000.mp4\",\n  \"filename\": \"reference.mp4\",\n  \"size\": 1048576,\n  \"type\": \"video/mp4\",\n  \"content_type\": \"video/mp4\",\n  \"duration_seconds\": 5.04\n}"
     },
     "notes": [
       { "title": "MIME detection", "description": "The server detects the file type from its bytes and filename. The optional type field does not force a MIME type." }
@@ -471,7 +480,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
         "title": "Request body",
         "schema": "ImageGenerateParams",
         "fields": [
-          { "name": "model", "type": "string", "required": true, "description": "Use gpt-image-2 on this endpoint." },
+          { "name": "model", "type": "string", "required": true, "description": "One of gpt-image-2, gpt-image-2.5-flare, or gpt-image-2.5-sunburst." },
           { "name": "prompt", "type": "string", "required": true, "description": "Text description of the image to generate." },
           { "name": "n", "type": "integer", "required": false, "description": "Number of images to generate when supported." },
           { "name": "size", "type": "string", "required": false, "description": "Output dimensions supported by the model." },
@@ -720,6 +729,15 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
             "required": true,
             "description": "Opaque task ID returned by a billable operation, including an x-task-id response header when present."
           }
+        ]
+      },
+      {
+        "title": "Response",
+        "fields": [
+          { "name": "settled", "type": "boolean", "required": true, "description": "Whether final cost settlement has completed. cost is not final until it is true." },
+          { "name": "cost · estimated_cost", "type": "string", "required": true, "description": "USD amounts with six decimal places. estimated_cost is a best-effort reference before settlement." },
+          { "name": "usage", "type": "object", "required": true, "description": "Token counts recorded for the task." },
+          { "name": "pricing", "type": "object", "required": false, "description": "After settlement, when a discount was recorded: original_cost, discount_amount, discount_percent, and optional discount_type. original_cost minus discount_amount equals cost." }
         ]
       }
     ],

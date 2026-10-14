@@ -5,9 +5,9 @@ description: Handle SandBase API rate limits safely with bounded retries, jitter
 
 # Rate limits
 
-SandBase can limit requests per API key and across the platform. Upstream model providers can also return their own
-`429 Too Many Requests` responses. Limits may differ by account, key, endpoint, model, and provider, so do not hardcode
-a quota unless SandBase has assigned one to your workload.
+SandBase can assign your organization a requests-per-minute limit. It is shared by every API key in the organization
+and counted over a one-minute sliding window. Upstream model providers can also return their own
+`429 Too Many Requests` responses. Do not hardcode a quota unless SandBase has assigned one to your workload.
 
 ## Handle a 429 response
 
@@ -17,11 +17,13 @@ Platform-generated `/v1/*` rate-limit responses use a flat error body:
 HTTP/1.1 429 Too Many Requests
 Content-Type: application/json
 
-{"error":"API key rate limit exceeded"}
+{"error":"organization rate limit exceeded"}
 ```
 
-The message can instead report a platform-wide limit. A provider-originated response may use the compatible endpoint's
-error shape and may include provider rate-limit headers.
+The organization limit applies to `POST /v1/run`, `POST /v1/chat/completions`, `POST /v1/responses`, `POST /v1/messages`, `POST /v1/upload`, and the Gemini `generateContent`, `streamGenerateContent`, and `POST /v1beta/interactions` endpoints. Polling endpoints such as
+`GET /v1/run/{id}` are not counted. Protocol-compatible endpoints return the same `429` in their own error envelope,
+such as the Anthropic or Google error shape. A provider-originated response may use the compatible endpoint's error
+shape and may include provider rate-limit headers.
 
 `Retry-After` and remaining-quota headers are not guaranteed. If `Retry-After` is present, honor it. Otherwise, use
 exponential backoff with jitter and a maximum attempt count.
@@ -87,6 +89,21 @@ async def run_one(client, prompt):
 
 Concurrency is not the same as requests per minute. Tune both against observed latency and the capacity assigned to
 your application.
+
+## Daily allowance for free APIs
+
+API operations that are currently free to call share a daily call allowance per organization. The count resets at
+00:00 UTC. When the allowance is used up, further calls to free operations return:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+
+{"error":"daily free API limit exceeded"}
+```
+
+Retrying within the same UTC day does not help. Resume after the reset, or contact SandBase support if your workload
+needs a higher allowance. Paid API operations are not counted.
 
 ::: tip Video tasks
 Video submissions are also limited by how many tasks your organization can run at once, based on its account level.

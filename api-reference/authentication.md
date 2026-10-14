@@ -167,7 +167,12 @@ API keys are scoped to an organization. When you authenticate with a key:
 | 401 | `API key has been revoked` | Key was disabled |
 | 401 | `API key has expired` | Key past expiration date |
 | 402 or protocol-specific 403 | `API key spending limit exceeded` | Key-level spending limit reached; inspect the endpoint's documented error contract |
-| 403 | `insufficient_scope` | Scoped key is not authorized for this endpoint |
+| 403 | `API key is not authorized for this endpoint` | Scoped key used on an endpoint outside its scope |
+
+These messages arrive in the flat `{"error":"<message>"}` body, except `403` scope errors. On model and account
+endpoints those use `{"error":{"code":"insufficient_scope","message":"API key is not authorized for this endpoint","request_id":"..."}}`;
+on Agents platform resources they use the [Agents error envelope](/api-reference/errors#agents-platform-errors) with
+`code` `insufficient_scope`.
 
 ## Security Best Practices
 
@@ -217,8 +222,8 @@ const client = new OpenAI({
 
 ## Rate Limiting by Key
 
-An API key may have an optional per-key RPM cap. Every request is also subject to the current platform-wide RPM
-protection, so creating more keys does not bypass the global limit. The API does not publish a universal numeric
+Request limits are assigned per organization and shared by all of its API keys, so creating more keys does not raise
+the limit. The API does not publish a universal numeric
 default or remaining-quota headers.
 
 See [Rate Limiting](/guides/rate-limiting) for details on limits and handling 429 responses.

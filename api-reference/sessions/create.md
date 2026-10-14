@@ -1,6 +1,6 @@
 ---
 title: Create Session
-description: Create a Session for a saved Agent with POST /v1/agents/sessions.
+description: Create a Session for a saved or inline Agent with POST /v1/agents/sessions, optionally streaming the first turn.
 aside: false
 outline: false
 apiReference:
@@ -8,7 +8,7 @@ apiReference:
   operation: Sessions
   method: POST
   path: /v1/agents/sessions
-  description: "Create a Session for a saved Agent version. The Agent configuration, Skill versions, and MCP connections are frozen for the life of the Session. Sessions always run in SandBase's hosted cloud, so there is no execution environment to choose. Inline Agents and stream=true return 400: create the Session, open the event stream, then send input. Execution admission (balance and organization status) is checked here. The OpenAI SDK requires an environment argument; see OpenAI compatibility (/agents/openai-compatibility)."
+  description: "Create a Session for a saved Agent version, or for an inline Agent defined in the request. The Agent configuration, Skill versions, and MCP connections are frozen for the life of the Session. Sessions always run in SandBase's hosted cloud, so there is no execution environment to choose. With stream=true and an initial input, the response is a 201 Server-Sent Events stream of the first turn instead of a JSON Session. Execution admission (balance and organization status) is checked here. The OpenAI SDK requires an environment argument; see OpenAI compatibility (/agents/openai-compatibility)."
   groups:
     - title: Headers
       fields:
@@ -21,12 +21,16 @@ apiReference:
       fields:
         - name: agent_id
           type: string
-          required: true
-          description: Saved Agent ID (agt_ prefix). The Agent must be active with projection_status ready.
+          required: false
+          description: Saved Agent ID (agt_ prefix). The Agent must be active with projection_status ready. Send agent_id, agent, or both.
+        - name: agent
+          type: object
+          required: false
+          description: "Agent configuration. Accepted fields are model, instructions, runtime_profile (codex, claude, or mcode; default codex), service_tier, tools, text, reasoning, and multi_agent, validated as in Create Agent. Without agent_id it defines an inline Agent and model is required; inline Agents carry no Skills or MCP connections. With agent_id, each field you send replaces that field of the saved version for this Session only. Unknown fields return 400."
         - name: version
           type: integer
           required: false
-          description: Agent version. Defaults to the current version.
+          description: Agent version. Defaults to the current version. Not allowed with an inline Agent.
         - name: title
           type: string
           required: false
@@ -43,6 +47,14 @@ apiReference:
           type: object
           required: false
           description: Up to 16 string pairs.
+        - name: stream
+          type: boolean
+          required: false
+          description: "When true, requires a non-empty input and returns 201 with a text/event-stream body. Events use the Stream events format (event: <type>, data: <json>); the first, agent.session.created, carries the Session snapshot, followed by the turn's item and output events. Validation, admission, and other errors before the stream starts return the normal JSON error. Default false."
+        - name: environment
+          type: object
+          required: false
+          description: 'OpenAI SDK compatibility only. Omit it in direct HTTP calls; {"type":"openai_hosted"} is accepted and any other type returns 400.'
         - name: model_provider
           type: object
           required: false

@@ -620,31 +620,6 @@ paths:
         '404': { description: Model or upstream resource not found, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
         '429': { description: Provider rate limit exceeded, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
         '500': { description: Prediction lifecycle or provider error, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-    get:
-      operationId: listVolcengineContentsGenerationTasks
-      tags: [Official Native API]
-      summary: List content generation tasks
-      description: Lists non-deleted native video tasks created by the same organization and API key, newest first.
-      security:
-        - BearerAuth: []
-      parameters:
-        - { name: page_num, in: query, schema: { type: integer, minimum: 1, maximum: 500, default: 1 } }
-        - { name: page_size, in: query, schema: { type: integer, minimum: 1, maximum: 500, default: 10 } }
-        - name: filter.task_ids
-          in: query
-          description: Task IDs, supplied as repeated parameters or a comma-separated value.
-          schema: { type: array, items: { type: string } }
-          style: form
-          explode: true
-        - { name: filter.model, in: query, schema: { type: string } }
-        - { name: filter.status, in: query, schema: { type: string, enum: [queued, running, cancelled, succeeded, failed, expired] } }
-      responses:
-        '200': { description: Task page, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineTaskList' } } } }
-        '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-        '403': { description: API Key spending limit reached or organization disabled, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-        '500': { description: Task lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-
   /api/v3/contents/generations/tasks/{task_id}:
     parameters:
       - name: task_id
@@ -665,22 +640,6 @@ paths:
         '403': { description: API Key spending limit reached or organization disabled, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
         '404': { description: 'Task is unknown, deleted, not native, or not owned by the current API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
         '500': { description: Task lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-    delete:
-      operationId: deleteVolcengineContentsGenerationTask
-      tags: [Official Native API]
-      summary: Cancel or delete a content generation task
-      description: Cancels a queued task or hides a terminal task. Running and already-cancelled tasks cannot be deleted.
-      security:
-        - BearerAuth: []
-      responses:
-        '204': { description: Task cancelled or deleted }
-        '400': { description: 'Task is running, already cancelled, or otherwise cannot be deleted in its current state', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-        '401': { description: 'Missing, invalid, revoked, or expired API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-        '402': { description: Organization balance and credit are exhausted, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-        '403': { description: API Key spending limit reached or organization disabled, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-        '404': { description: 'Task is unknown, deleted, not native, or not owned by the current API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-        '500': { description: Task update failed, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
-
   # --- Account ----------------------------------------------------
   /v1/account/balance:
     get:
@@ -1664,7 +1623,7 @@ paths:
       operationId: createSession
       tags: [Sessions]
       summary: Create session
-      description: 'Create a Session for a saved Agent. The Agent configuration, Skills, and MCP connections are frozen for the lifetime of the Session. stream=true is rejected: create the Session, open the event stream, then send input. Execution admission (balance and organization status) is checked here.'
+      description: 'Create a Session for a saved Agent, or for an inline Agent defined in the request. The Agent configuration, Skills, and MCP connections are frozen for the lifetime of the Session. With stream=true and an initial input, the 201 response is a Server-Sent Events stream of the first turn instead of a JSON Session. Execution admission (balance and organization status) is checked here.'
       security:
         - BearerAuth: []
         - AgentsApiKey: []
@@ -1678,11 +1637,13 @@ paths:
             schema: { $ref: '#/components/schemas/SessionCreateRequest' }
       responses:
         '201':
-          description: 'Session created'
+          description: 'Session created. With stream=true, a text/event-stream of the first turn whose first event, agent.session.created, carries the Session.'
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Session' }
-        '400': { description: 'invalid_request (malformed JSON, unknown fields, failed validation, or an unsupported option)', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
+            text/event-stream:
+              schema: { type: string, description: 'Server-Sent Events in the Stream events format: an event line with the event type and a data line with its JSON payload.' }
+        '400': { description: 'invalid_request (malformed JSON, unknown fields, failed validation, an unsupported option, or stream=true without input)', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
         '401': { description: 'unauthorized: missing, malformed, or conflicting API key headers', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
         '402': { description: 'spending_limit_exceeded: API key spending limit or organization balance exhausted', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
         '403': { description: 'insufficient_scope (scoped key) or org_disabled', content: { application/json: { schema: { $ref: '#/components/schemas/AgentsError' } } } }
@@ -4231,6 +4192,10 @@ components:
         content_type:
           type: string
           description: Detected MIME type used when storing the file.
+        duration_seconds:
+          type: number
+          exclusiveMinimum: 0
+          description: Media duration in seconds. Returned for audio and video when the duration can be read from the file; omitted otherwise.
 
     CreateAssetRequest:
       type: object
@@ -4308,7 +4273,28 @@ components:
           example: '0.001234'
         usage:
           $ref: '#/components/schemas/TaskCostUsage'
-
+        pricing:
+          $ref: '#/components/schemas/TaskCostPricing'
+    TaskCostPricing:
+      type: object
+      description: Present only after settlement when a discount breakdown was recorded. original_cost minus discount_amount equals cost.
+      required: [original_cost, discount_amount, discount_percent]
+      properties:
+        original_cost:
+          type: string
+          pattern: '^\d+\.\d{6}$'
+          description: USD cost before discounts, with six decimal places.
+        discount_amount:
+          type: string
+          pattern: '^\d+\.\d{6}$'
+          description: USD discount applied, with six decimal places.
+        discount_percent:
+          type: number
+          minimum: 0
+          description: Discount percentage, for example 25 for 25 percent off.
+        discount_type:
+          type: string
+          description: Kind of discount applied. Omitted when not recorded.
     TaskCostUsage:
       type: object
       required: [prompt_tokens, completion_tokens, total_tokens, cached_tokens, cache_creation_tokens, reasoning_tokens]
@@ -5142,13 +5128,6 @@ components:
         code: { type: string }
         message: { type: string }
 
-    VolcengineTaskList:
-      type: object
-      required: [items, total]
-      properties:
-        items: { type: array, items: { $ref: '#/components/schemas/VolcengineTask' } }
-        total: { type: integer, minimum: 0 }
-
     VolcengineError:
       type: object
       required: [error]
@@ -5449,7 +5428,7 @@ components:
             code:
               type: string
               description: Stable machine-readable code. Unknown future codes should be treated by HTTP status.
-              enum: [unauthorized, insufficient_scope, authorization_unavailable, org_disabled, spending_limit_exceeded, quota_exceeded, concurrency_limit, admission_unavailable, invalid_request, not_found, conflict, session_input_pending, session_input_expired, session_environment_unavailable, tenant_provisioning_failed, tenant_unavailable, executor_rejected, executor_unavailable, executor_contract_error, skill_not_found, skill_unavailable, skill_runtime_incompatible, storage_unavailable, internal_error]
+              enum: [unauthorized, insufficient_scope, authorization_unavailable, org_disabled, spending_limit_exceeded, quota_exceeded, concurrency_limit, admission_unavailable, invalid_request, not_found, conflict, session_input_pending, session_input_expired, session_environment_unavailable, tenant_provisioning_failed, tenant_unavailable, executor_rejected, executor_unavailable, executor_contract_error, skill_not_found, skill_unavailable, skill_runtime_incompatible, storage_unavailable, internal_error, request_too_large]
             param: { type: 'null' }
             message: { type: string }
     AgentsCursorList:
@@ -5707,12 +5686,27 @@ components:
     SessionCreateRequest:
       type: object
       additionalProperties: false
-      required: [agent_id]
+      description: Send agent_id, agent, or both.
+      anyOf:
+        - { required: [agent_id] }
+        - { required: [agent] }
       properties:
-        agent_id: { type: string, description: "Saved Agent ID (`agt_` prefix). Inline Agents are not supported." }
-        version: { type: integer, minimum: 1, description: "Agent version. Defaults to the current version." }
-        title: { type: string }
-        agent: { type: object, additionalProperties: false, properties: { model: { type: string } }, description: "OpenAI SDK form of the model override." }
+        agent_id: { type: string, description: "Saved Agent ID (`agt_` prefix)." }
+        version: { type: integer, minimum: 1, description: "Agent version. Defaults to the current version. Not allowed with an inline Agent." }
+        title: { type: string, maxLength: 512 }
+        agent:
+          type: object
+          additionalProperties: false
+          description: "Agent configuration, validated as in Create Agent. Without agent_id it defines an inline Agent and model is required; inline Agents carry no Skills or MCP connections. With agent_id, each field sent replaces that field of the saved version for this Session only."
+          properties:
+            model: { type: string, maxLength: 200 }
+            instructions: { type: [string, 'null'] }
+            runtime_profile: { type: string, enum: [codex, claude, mcode], description: Defaults to codex for an inline Agent. }
+            service_tier: { type: [string, 'null'] }
+            tools: { type: array, items: { type: object } }
+            text: { type: object }
+            reasoning: { type: object }
+            multi_agent: { type: object }
         model: { type: string, maxLength: 200, description: "Model override for this Session. Must equal agent.model when both are sent." }
         environment: { type: object, additionalProperties: false, properties: { type: { type: string, const: openai_hosted } }, description: "OpenAI SDK compatibility only. Sessions always run in the SandBase hosted cloud, so omit this field in direct HTTP calls. The OpenAI SDK requires it; {\"type\":\"openai_hosted\"} is accepted and any other value returns 400." }
         input:
@@ -5724,7 +5718,7 @@ components:
               maxItems: 1
               items: { type: object, required: [role, content], properties: { role: { type: string, const: user }, content: { type: array, items: { type: object, required: [type, text], properties: { type: { type: string, const: input_text }, text: { type: string } } } } } }
         metadata: { type: object, maxProperties: 16, additionalProperties: { type: string, maxLength: 512 } }
-        stream: { type: boolean, const: false, description: "true returns 400." }
+        stream: { type: boolean, default: false, description: "true requires a non-empty input and returns a 201 text/event-stream of the first turn." }
         model_provider: { $ref: '#/components/schemas/ModelProvider' }
     SessionFailure:
       type: object

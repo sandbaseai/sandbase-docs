@@ -1,19 +1,22 @@
 ---
 title: Concurrency limits
-description: How many video tasks your organization can run at once, how the limit scales with your account level, and how to handle 429 and 402 on video submissions.
+description: How many tasks your organization can run at once, how the limit scales with your account level, and how to handle 429 and 402 on video submissions.
 ---
 
 # Concurrency limits
 
-Concurrency limits control how many video tasks your organization can run at the same time. Every organization has an account level, and the level sets its concurrency limit. When you reach the limit, new video submissions are rejected with `429` until one of your running tasks finishes. They are not queued.
+Concurrency limits control how many tasks your organization can have in progress at the same time. Every organization has an account level, and the level sets its concurrency limit. When you reach the limit, new submissions on the checked endpoints below are rejected with `429` until one of your running tasks finishes. They are not queued.
 
-The limit applies to the whole organization, across all API keys and all video models. It only affects video submissions. Chat completions, image, audio, and embedding requests are never rejected by the concurrency limit.
+The limit applies to the whole organization, across all API keys. Which submissions are checked depends on the endpoint:
+
+- `POST /v1/run` and Platform API calls through `/v1/api/{vendor}/...` are checked for every model type, including image, audio, LLM, and data API operations.
+- Other endpoints, such as Chat Completions, Responses, Messages, OpenAI Images, and the protocol-compatible Gemini and Volcengine endpoints, check only video submissions.
 
 ## How it works
 
-When you submit a video task, SandBase counts the tasks your organization currently has in progress, meaning tasks in the `pending` or `running` state. If that count is already at your limit, the submission is rejected immediately with `429`. No task is created and nothing is charged.
+When you submit a checked task, SandBase counts the tasks your organization currently has in progress, meaning tasks in the `pending` or `running` state. If that count is already at your limit, the submission is rejected immediately with `429`. No task is created and nothing is charged.
 
-The count covers every in-progress request in your organization, not just video. A streaming chat completion that is still open when you submit a video uses one slot. If the same organization runs long streaming chats and video jobs, account for both when planning capacity.
+The count covers every in-progress request in your organization, not just video. A streaming chat completion that is still open when you submit a checked task uses one slot. If the same organization runs long streaming chats and video jobs, account for all of them when planning capacity.
 
 A slot frees up as soon as a task reaches a final state (`completed`, `failed`, or `timeout`). There is nothing to release on your side. Because slots free up when tasks finish, not on a timer, this `429` is different from a per-minute [rate limit](/guides/rate-limiting). Waiting a fixed interval doesn't guarantee a slot. Wait for one of your own tasks to finish instead.
 

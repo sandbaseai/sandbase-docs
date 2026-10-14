@@ -308,10 +308,11 @@ assert.match(modelApiOverview, /\/api-reference\/gemini-interactions/, 'Model AP
 const volcengineCollection = openapiDocument.paths['/api/v3/contents/generations/tasks']
 const volcengineTask = openapiDocument.paths['/api/v3/contents/generations/tasks/{task_id}']
 assert.ok(volcengineCollection?.post, 'Public OpenAPI must expose Volcengine task creation')
-assert.ok(volcengineCollection?.get, 'Public OpenAPI must expose Volcengine task listing')
 assert.ok(volcengineTask?.get, 'Public OpenAPI must expose Volcengine task lookup')
-assert.ok(volcengineTask?.delete, 'Public OpenAPI must expose Volcengine task deletion')
-for (const operation of [volcengineCollection.post, volcengineCollection.get, volcengineTask.get, volcengineTask.delete]) {
+// List and delete were removed from the apiserver (sandbase-monorepo 2f8deef1b2); keep them out of the contract.
+assert.ok(!volcengineCollection?.get, 'Public OpenAPI must not expose the removed Volcengine task listing')
+assert.ok(!volcengineTask?.delete, 'Public OpenAPI must not expose the removed Volcengine task deletion')
+for (const operation of [volcengineCollection.post, volcengineTask.get]) {
   assert.deepEqual(operation.security, [{ BearerAuth: [] }], 'Volcengine tasks must remain Bearer-only')
 }
 assert.equal(
@@ -320,8 +321,7 @@ assert.equal(
   'Volcengine task creation must preserve its implemented HTTP 200 response',
 )
 assert.ok(!volcengineCollection.post.responses['201'] && !volcengineCollection.post.responses['202'], 'Volcengine task creation is not a 201 or 202 operation')
-assert.ok(!volcengineTask.delete.responses['204']?.content, 'Volcengine task deletion 204 must not document a body')
-for (const operation of [volcengineCollection.post, volcengineCollection.get, volcengineTask.get, volcengineTask.delete]) {
+for (const operation of [volcengineCollection.post, volcengineTask.get]) {
   for (const [status, response] of Object.entries(operation.responses)) {
     if (Number(status) < 400) continue
     assert.equal(
@@ -332,9 +332,9 @@ for (const operation of [volcengineCollection.post, volcengineCollection.get, vo
   }
 }
 assert.deepEqual(
-  volcengineCollection.get.parameters.find((parameter) => parameter.name === 'filter.status')?.schema?.enum,
+  openapiDocument.components.schemas.VolcengineTask?.properties?.status?.enum,
   ['queued', 'running', 'cancelled', 'succeeded', 'failed', 'expired'],
-  'Volcengine task listing must document every implemented native status',
+  'Volcengine task lookup must document every implemented native status',
 )
 assert.match(officialNativeSidebar, /\/model-api-reference\/official-native-api\//, 'Official Native API sidebar must link to its reference')
 assert.doesNotMatch(sidebar, /\/api-reference\/volcengine-contents-generations/, 'Inference navigation must not duplicate the Official Native API reference')

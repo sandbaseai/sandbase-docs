@@ -226,7 +226,7 @@ SandBase runs every Session in its hosted cloud; there is no environment to choo
 | Area | Status | Details |
 |---|---|---|
 | `beta.agents.create / retrieve / update / list / delete` | Compatible, with extensions | Responses add `status`, `version`, `row_version`, `projection_status`, `runtime_profile`, `skills`, `mcp_connections`, and more. `delete` archives the Agent and returns `agent.deleted`. |
-| `beta.agents.sessions.create / retrieve / update / list / delete` | Compatible, with limits | Requires a saved `agent_id`; `agent` only accepts `{"model": ...}`. `update` only accepts `metadata`. `delete` archives the Session. |
+| `beta.agents.sessions.create / retrieve / update / list / delete` | Compatible, with limits | Accepts a saved `agent_id`, an inline `agent`, or both; `agent` accepts `model`, `instructions`, `runtime_profile`, `service_tier`, `tools`, `text`, `reasoning`, and `multi_agent`. `stream=True` streams the first turn and needs an initial `input`. `update` only accepts `metadata`. `delete` archives the Session. |
 | `sessions.events.stream` | Compatible | Live-only, like OpenAI. `Last-Event-ID` or `?after=` returns `400`. |
 | `sessions.events.create` | Compatible, with limits | Exactly one `agent.session.input.message` or `agent.session.input.cancel` event per request; the message has one user `input_text` part or a plain string. |
 | `sessions.items.list`, `sessions.turns.list / retrieve` | Compatible | Cursor pagination with `limit` 1-100, `after`, `order`. |
@@ -243,9 +243,9 @@ These OpenAI SDK calls fail against SandBase. The message is the actual `error.m
 
 | SDK call | Result |
 |---|---|
-| `sessions.create(...)` with `agent` but no `agent_id` (inline Agent) | `400`: `a saved SandBase agent_id and openai_hosted environment are required; standalone inline agents are unsupported` |
-| `sessions.create(..., stream=True)` (also `with_result_collection()`) | `400`: `creation streaming is not supported; create the session then subscribe to events before sending input` |
-| `sessions.create(..., environment={"type": "self_hosted"})` | `400`, same message as the inline Agent case |
+| `sessions.create(..., stream=True)` without an initial `input` | `400 invalid_request` |
+| `sessions.create(..., environment={"type": "self_hosted"})` | `400`: `only openai_hosted environment is supported` |
+| `sessions.create(..., agent={...})` with a field other than `model`, `instructions`, `runtime_profile`, `service_tier`, `tools`, `text`, `reasoning`, and `multi_agent` | `400 invalid_request` |
 | `sessions.create(..., vault_ids=[...])` | `400 invalid_request` |
 | `sessions.update(..., agent={...})` | `400` (openai-python 3.13.0 has no `agent` parameter and raises `TypeError`) |
 | `agents.create(..., multi_agent={"enabled": True})` | `400`: `multi_agent is not supported` |
