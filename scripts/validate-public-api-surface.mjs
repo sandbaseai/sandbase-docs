@@ -64,7 +64,6 @@ for (const [label, content] of [['Capabilities', capabilitiesPage], ['Vision', v
 assert.match(legacySeedanceReference, /^canonical:\s*\/docs\/model-api-reference\/official-native-api\/$/m, 'Legacy Seedance reference must canonicalize to Official Native API')
 assert.match(legacySeedanceReference, /^robots:\s*noindex,follow$/m, 'Legacy Seedance reference must not compete in search results')
 assert.doesNotMatch(readme, /deepseek\/deepseek-v3\b/i, 'README must not recommend the retired DeepSeek V3 model')
-assert.doesNotMatch(readme, /API Reference[^\n]*webhooks/i, 'README must not advertise the hidden Webhooks page')
 assert.doesNotMatch(readme, /\b\d[\d,]*\+?\s+models and APIs\b/i, 'README must not hard-code time-sensitive catalog counts')
 for (const overview of catalogOverviews) {
   assert.doesNotMatch(overview, /currently publishes API reference pages for \d/i, 'Catalog overviews must not hard-code time-sensitive counts')
@@ -176,6 +175,11 @@ for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
       operation.responses['401']?.content?.['application/json']?.schema,
       `${method.toUpperCase()} ${publicPath} must document its implemented JSON authentication-error envelope`,
     )
+    if (publicPath.startsWith('/events/webhooks')) {
+      // Webhook management authenticates the key only; it never applies spending limits.
+      assert.ok(!operation.responses['402'], `${method.toUpperCase()} ${publicPath} must not claim spending-limit rejection`)
+      continue
+    }
     if (publicPath === '/v1/tasks/{task_id}/cost') {
       assert.ok(!operation.responses['402'], 'Task cost lookup must preserve its implemented spending-limit exception')
       assert.ok(operation.responses['403'], 'Task cost lookup must document scoped-key rejection')
@@ -195,14 +199,14 @@ assert.match(config, /'_archived\/\*\*'/, 'Archived API pages must stay excluded
 for (const archivedSource of ['guides/site-agent-integration.md', 'use-cases', 'api-reference/embeds', 'api-reference/environments', 'api-reference/endpoints/mcp.md', 'api-reference/endpoints/acp.md']) {
   assert.ok(!existsSync(path.join(root, archivedSource)), `${archivedSource} is retired and must live under _archived/`)
 }
-assert.match(config, /'api-reference\/webhooks\.md'/, 'Sandbox event webhook reference must stay excluded from the public build')
+assert.doesNotMatch(config, /'api-reference\/webhooks\.md'/, 'The model webhook reference must be published')
 assert.match(config, /'agents\/endpoint-quickstart\.md'/, 'Retired Service quickstart must stay excluded from the public build')
 assert.match(config, /'admin\/api-keys\.md'/, 'Duplicate API Keys guide must stay excluded from the public build')
 assert.match(config, /'setup\/cli\.md'/, 'Duplicate CLI setup page must stay excluded from the public build')
 assert.match(config, /'setup\/groups\.md'/, 'Retired Platform Groups page must stay excluded from the public build')
 assert.doesNotMatch(platformSidebar, /Service quickstart/, 'Retired Service quickstart must not appear in the docs sidebar')
 assert.doesNotMatch(sidebar, /\/api-reference\/sandboxes?\b/i, 'Sidebar must not link to sandbox API pages')
-assert.doesNotMatch(sidebar, /\/api-reference\/webhooks\b/i, 'Sidebar must not link to Sandbox event webhook APIs')
+assert.match(sidebar, /\/api-reference\/webhooks\b/, 'Sidebar must link to the model webhook reference')
 assert.equal((modelSidebar.match(/text: 'Inference APIs'/g) ?? []).length, 0, 'Model API navigation must keep normalized Inference APIs in the concept/API reference docs')
 assert.doesNotMatch(sidebar, /text: 'Embed Configs'/, 'Platform API sidebar must not expose the unmaintained Embed Config module')
 assert.doesNotMatch(platformSidebar, /text: 'Models'/, 'Platform API sidebar must direct model discovery to the standalone Model API Reference')
@@ -236,7 +240,13 @@ assert.doesNotMatch(openapi, /^  \/v1\/skills\/\{[^}]+\}\/mcp-publications:$/m, 
 assert.doesNotMatch(openapi, /^  \/v1\/skill-mcp-publications(?:\/\{[^}]+\})?:$/m, 'Skill MCP publication management must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/capabilities\/\{[^}]+\}\/mcp:$/m, 'Capability MCP transport must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/skill-mcp\/\{[^}]+\}\/mcp:$/m, 'Published Skill MCP transport must not be public')
-assert.doesNotMatch(openapi, /^  \/events\/webhooks(?:\/\{[^}]+\})?:$/m, 'Sandbox event webhook paths must not be public')
+for (const webhookPath of ['/events/webhooks', '/events/webhooks/{webhook_id}']) {
+  for (const operation of Object.values(openapiDocument.paths[webhookPath] ?? {}).filter((value) => value?.operationId)) {
+    assert.deepEqual(operation.security, [{ BearerAuth: [] }, { WebhookApiKey: [] }], `${webhookPath} must document Bearer and X-API-Key authentication`)
+  }
+}
+assert.ok(openapiDocument.paths['/events/webhooks']?.get && openapiDocument.paths['/events/webhooks']?.post, 'Webhook list and create must be public')
+assert.ok(openapiDocument.paths['/events/webhooks/{webhook_id}']?.patch && openapiDocument.paths['/events/webhooks/{webhook_id}']?.delete, 'Webhook update and delete must be public')
 const geminiGeneratePath = openapiDocument.paths['/v1beta/models/{model}:generateContent']?.post
 const geminiStreamPath = openapiDocument.paths['/v1beta/models/{model}:streamGenerateContent']?.post
 assert.ok(geminiGeneratePath, 'Public OpenAPI must expose the implemented Gemini GenerateContent endpoint')
@@ -667,9 +677,7 @@ assert.match(uploadMediaResponse, /required: \[url, filename, size, type, conten
 assert.match(modelApiOverview, /\/api-reference\/models\/(?:assets|upload)/, 'Model API overview must link to the media asset references')
 assert.doesNotMatch(openapi, /^  \/default\/v1(?:\/|:)/m, 'Internal Console paths must not be public')
 
-const unpublishedFiles = new Set([
-  'api-reference/webhooks.md',
-])
+const unpublishedFiles = new Set([])
 
 function inspectPublishedSources(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -687,7 +695,6 @@ function inspectPublishedSources(directory) {
     assert.doesNotMatch(content, /\/default\/v1(?:\/|\b)/, `${relative} must not expose internal Console API paths`)
     assert.doesNotMatch(content, /\/v1\/generations(?:\/|\b)/, `${relative} must not expose the withdrawn generation path`)
     assert.doesNotMatch(content, /\/v1\/blog\/assets(?:\/|\b)/, `${relative} must not expose the internal Blog publishing storage API`)
-    assert.doesNotMatch(content, /\/events\/webhooks(?:\/|\b)/, `${relative} must not expose Sandbox event webhook paths`)
     assert.doesNotMatch(content, /\brun_abc123\b/, `${relative} must not assume a run ID prefix`)
     assert.doesNotMatch(content, /\btask_abc123\b/, `${relative} must not assume a task ID prefix`)
     assert.doesNotMatch(content, /\bcred_01/, `${relative} must use the implemented sec_ Managed Credential ID prefix`)

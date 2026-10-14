@@ -7,7 +7,6 @@ const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'get
 const excluded = [
   'agents/deployments.md',
   'agents/endpoint-quickstart.md',
-  'api-reference/webhooks.md',
   'setup/cli.md',
   'setup/groups.md',
 ]

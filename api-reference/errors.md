@@ -21,6 +21,8 @@ Agents platform resources (`/v1/agents*`, `/v1/services*`, `/v1/schedules*`, `/v
 {"error":{"type":"invalid_request_error","code":"invalid_request","param":null,"message":"invalid request"}}
 ```
 
+The webhook Events API (`/events/webhooks*`) returns `{"code":<http status>,"message":"..."}`. See [Webhooks](/api-reference/webhooks#authentication-and-errors).
+
 OpenAI-compatible endpoints retain an OpenAI-compatible envelope. `POST /v1/messages` retains an Anthropic-compatible envelope:
 
 ```json

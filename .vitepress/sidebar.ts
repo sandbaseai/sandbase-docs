@@ -112,6 +112,7 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Overview', link: '/api-reference/' },
       { text: 'Authentication', link: '/api-reference/authentication' },
       { text: 'Errors', link: '/api-reference/errors' },
+      { text: 'Webhooks', link: '/api-reference/webhooks' },
       { text: 'OpenAPI Spec', link: '/docs/openapi.yaml' },
     ],
   },

@@ -6,7 +6,6 @@ import YAML from 'yaml'
 const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'setup', 'store', 'model-api-reference']
 const excluded = [
   'agents/endpoint-quickstart.md',
-  'api-reference/webhooks.md',
   'setup/cli.md',
   'setup/groups.md',
 ]

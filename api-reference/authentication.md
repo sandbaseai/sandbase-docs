@@ -44,8 +44,9 @@ Gemini GenerateContent and Interactions operations accept `x-goog-api-key`, `Aut
 ### Extraction Logic
 
 Standard endpoints read `Authorization: Bearer <key>` only. The Anthropic Messages middleware reads `x-api-key`
-first and then falls back to the Bearer header. Agents platform resources are the other exception: they accept
-`Authorization: Bearer` or `X-API-Key` (see below). A missing supported credential returns `401 Unauthorized`.
+first and then falls back to the Bearer header. Agents platform resources accept `Authorization: Bearer` or
+`X-API-Key` (see below). The [webhook Events API](/api-reference/webhooks) (`/events/webhooks*`) also accepts either
+header and uses the Bearer header when both are present. A missing supported credential returns `401 Unauthorized`.
 
 ### Agents platform resources
 
