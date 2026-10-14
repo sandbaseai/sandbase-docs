@@ -86,6 +86,23 @@ curl -X PATCH https://api.sandbase.ai/events/webhooks/wh_01... \
 
 `signatureSecret` cannot be viewed or changed through `PATCH`; a request containing it is rejected. If the secret is lost, delete and recreate the webhook. You can also view, edit, enable or disable, and delete registrations from the [Console Webhooks page](https://www.sandbase.ai/console/webhooks).
 
+`GET` returns a JSON array of webhooks (without `signatureSecret`), `PATCH` returns the updated webhook, and `DELETE`
+returns `204 No Content`.
+
+### Authentication and errors
+
+The Events API accepts the API key as `Authorization: Bearer $SANDBASE_API_KEY` or `X-API-Key: $SANDBASE_API_KEY`. When
+both are sent, the Bearer header is used.
+
+Errors use their own body, with the HTTP status repeated in `code`:
+
+```json
+{"code": 400, "message": "resourceType must be \"model\""}
+```
+
+Branch on the HTTP status. `401` means the key is missing, invalid, or revoked; `400` means the request body or
+subscription is invalid; `404` (`webhook not found`) means the webhook does not exist in your organization.
+
 ## Per-task model callback
 
 For one asynchronous image, video, or audio task, add `webhook_url` to `POST /v1/run` instead of registering a new webhook:

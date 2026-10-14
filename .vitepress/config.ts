@@ -246,7 +246,6 @@ export default defineConfig({
     'DEPLOYMENT.md',
     // Retired Embed, Environment, Endpoint, Deployment, and Site Agent pages live here.
     '_archived/**',
-    'api-reference/webhooks.md',
     'agents/endpoint-quickstart.md',
     'admin/api-keys.md',
     'setup/cli.md',

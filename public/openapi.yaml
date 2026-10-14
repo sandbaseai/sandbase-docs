@@ -65,6 +65,8 @@ tags:
     description: Model catalog
   - name: Tasks
     description: Asynchronous model task status, settlement, and usage
+  - name: Webhooks
+    description: Register organization webhooks for asynchronous model generation events
   - name: Account
     description: Organization balance and API execution history
   - name: Skills
@@ -640,6 +642,72 @@ paths:
         '403': { description: API Key spending limit reached or organization disabled, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
         '404': { description: 'Task is unknown, deleted, not native, or not owned by the current API key', content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
         '500': { description: Task lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/VolcengineError' } } } }
+  # --- Webhooks ---------------------------------------------------
+  /events/webhooks:
+    get:
+      operationId: listWebhooks
+      tags: [Webhooks]
+      summary: List webhooks
+      description: Lists the organization's webhooks. signatureSecret is never returned.
+      security:
+        - BearerAuth: []
+        - WebhookApiKey: []
+      responses:
+        '200': { description: Webhooks, content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/Webhook' } } } } }
+        '401': { description: 'Missing, invalid, or revoked API key', content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+        '500': { description: Webhook lookup failed, content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+    post:
+      operationId: createWebhook
+      tags: [Webhooks]
+      summary: Create a webhook
+      description: Registers a webhook for asynchronous model generation events. The response is the only time signatureSecret is returned.
+      security:
+        - BearerAuth: []
+        - WebhookApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/WebhookCreateRequest' }
+      responses:
+        '200': { description: Webhook created, content: { application/json: { schema: { $ref: '#/components/schemas/WebhookCreated' } } } }
+        '400': { description: 'Invalid body, URL, resourceType, or events', content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+        '401': { description: 'Missing, invalid, or revoked API key', content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+        '500': { description: Webhook creation failed, content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+  /events/webhooks/{webhook_id}:
+    parameters:
+      - { name: webhook_id, in: path, required: true, schema: { type: string }, description: Webhook ID returned by create or list. }
+    patch:
+      operationId: updateWebhook
+      tags: [Webhooks]
+      summary: Update a webhook
+      description: Updates the fields sent; omitted fields remain unchanged. The resulting resourceType and events subscription must be valid. signatureSecret cannot be changed.
+      security:
+        - BearerAuth: []
+        - WebhookApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/WebhookUpdateRequest' }
+      responses:
+        '200': { description: Updated webhook, content: { application/json: { schema: { $ref: '#/components/schemas/Webhook' } } } }
+        '400': { description: 'Invalid body or subscription, or the request includes signatureSecret', content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+        '401': { description: 'Missing, invalid, or revoked API key', content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+        '404': { description: 'webhook not found', content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+        '500': { description: Webhook update failed, content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+    delete:
+      operationId: deleteWebhook
+      tags: [Webhooks]
+      summary: Delete a webhook
+      security:
+        - BearerAuth: []
+        - WebhookApiKey: []
+      responses:
+        '204': { description: Webhook deleted }
+        '401': { description: 'Missing, invalid, or revoked API key', content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+        '404': { description: 'webhook not found', content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
+        '500': { description: Webhook deletion failed, content: { application/json: { schema: { $ref: '#/components/schemas/WebhookError' } } } }
   # --- Account ----------------------------------------------------
   /v1/account/balance:
     get:
@@ -3872,6 +3940,11 @@ components:
       in: query
       name: key
       description: Google SDK compatibility fallback. Prefer x-goog-api-key or Authorization because URLs can be logged.
+    WebhookApiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Accepted by the webhook Events API (/events/webhooks*). Authorization Bearer takes precedence when both are sent.
     AgentsApiKey:
       type: apiKey
       in: header
@@ -4245,6 +4318,51 @@ components:
           description: Provider-returned download URL. It can be empty until the provider makes a URL available.
         created_at: { type: string, format: date-time }
 
+    Webhook:
+      type: object
+      required: [id, name, url, resourceType, events, enabled, createdAt]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        url: { type: string, format: uri }
+        resourceType: { type: string, description: 'model for new registrations. Retired types (session, sandbox, template) can still appear on old registrations.' }
+        events: { type: array, items: { type: string }, description: Empty means all events in the resource type. }
+        enabled: { type: boolean }
+        createdAt: { type: string, format: date-time }
+    WebhookCreated:
+      allOf:
+        - $ref: '#/components/schemas/Webhook'
+        - type: object
+          required: [signatureSecret]
+          properties:
+            signatureSecret: { type: string, description: HMAC signing secret. Returned only in this response. }
+    WebhookCreateRequest:
+      type: object
+      required: [name, url, resourceType]
+      properties:
+        name: { type: string }
+        url: { type: string, format: uri, description: HTTP(S) endpoint. Use HTTPS in production. }
+        resourceType: { type: string, enum: [model] }
+        events:
+          type: array
+          items: { type: string, enum: [model.generation.completed, model.generation.failed, model.generation.timeout, model.generation.cancelled] }
+          description: Empty or omitted means all current and future events in the resource type.
+        enabled: { type: boolean, default: true }
+        signatureSecret: { type: string, description: Optional. Omit to let SandBase generate a high-entropy secret. }
+    WebhookUpdateRequest:
+      type: object
+      properties:
+        name: { type: string }
+        url: { type: string, format: uri }
+        resourceType: { type: string, enum: [model] }
+        events: { type: array, items: { type: string, enum: [model.generation.completed, model.generation.failed, model.generation.timeout, model.generation.cancelled] } }
+        enabled: { type: boolean }
+    WebhookError:
+      type: object
+      required: [code, message]
+      properties:
+        code: { type: integer, description: The HTTP status code. }
+        message: { type: string }
     TaskCostResponse:
       type: object
       required: [id, status, settled, currency, cost, estimated_cost, usage]
