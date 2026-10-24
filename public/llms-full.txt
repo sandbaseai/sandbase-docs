@@ -322,7 +322,6 @@ Error bodies are protocol-specific. Core middleware may return {"error":"message
 | API key has expired | 401 | Key is past expiration |
 | insufficient_scope | 403 | Scoped key not authorized; nested {"error":{"code":"insufficient_scope","message":...}} body |
 | organization rate limit exceeded | 429 | Organization RPM limit exceeded (shared by all keys); back off with jitter |
-| daily free API limit exceeded | 429 | Daily allowance for free API operations used up; resets 00:00 UTC |
 | API key spending limit exceeded | 402 or protocol-specific 403 | Key spending limit reached |
 | HTTP 400 | Invalid or unsupported input; fix the request using the endpoint and model schema |
 | HTTP 404 | Model or resource not found; verify current IDs before retrying |

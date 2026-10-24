@@ -47,7 +47,7 @@ Anthropic-compatible envelope:
 | `403` | The credential lacks permission, or a compatibility surface maps a spending failure to 403 | Inspect the documented envelope and use an authorized key. |
 | `404` | Model or resource not found | Verify the current model name or resource ID. |
 | `409` | Resource state conflict | Read the latest resource state before deciding whether a retry is safe. |
-| `429` | Organization request limit, video concurrency limit, or daily free API allowance | Retry with bounded exponential backoff and jitter. |
+| `429` | Organization request limit or video concurrency limit | Retry with bounded exponential backoff and jitter. |
 | `500`, `502`, `503`, `504` | SandBase or upstream transient failure | Retry only when the operation is safe to repeat. |
 
 ## Authentication and rate-limit messages
@@ -61,9 +61,8 @@ Documented authentication messages include:
 
 A scoped key used outside its scope returns `403` with a nested body instead: `{"error":{"code":"insufficient_scope","message":"API key is not authorized for this endpoint","request_id":"..."}}`. Agents platform resources return the same `code` in their own envelope.
 
-Documented rate-limit messages are `organization rate limit exceeded` (the organization's assigned requests-per-minute
-limit, shared by all of its API keys) and `daily free API limit exceeded` (the organization's daily allowance for
-currently free API operations, reset at 00:00 UTC). A `429` response does not currently include `Retry-After` or
+The documented rate-limit message is `organization rate limit exceeded` (the organization's assigned requests-per-minute
+limit, shared by all of its API keys). A `429` response does not currently include `Retry-After` or
 `X-RateLimit-*` headers, and there is no published universal RPM or concurrency default.
 
 ## Model and resource lookup

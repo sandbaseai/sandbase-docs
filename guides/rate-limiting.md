@@ -90,21 +90,6 @@ async def run_one(client, prompt):
 Concurrency is not the same as requests per minute. Tune both against observed latency and the capacity assigned to
 your application.
 
-## Daily allowance for free APIs
-
-API operations that are currently free to call share a daily call allowance per organization. The count resets at
-00:00 UTC. When the allowance is used up, further calls to free operations return:
-
-```http
-HTTP/1.1 429 Too Many Requests
-Content-Type: application/json
-
-{"error":"daily free API limit exceeded"}
-```
-
-Retrying within the same UTC day does not help. Resume after the reset, or contact SandBase support if your workload
-needs a higher allowance. Paid API operations are not counted.
-
 ::: tip Video tasks
 Video submissions are also limited by how many tasks your organization can run at once, based on its account level.
 That `429` says `organization concurrency limit exceeded` and clears when a running task finishes, not on a timer. See
