@@ -90,6 +90,11 @@ async def run_one(client, prompt):
 Concurrency is not the same as requests per minute. Tune both against observed latency and the capacity assigned to
 your application.
 
+::: info Daily free API calls
+The organization's 100 free data API calls per UTC day are a billing allowance, not a rate limit. Calls beyond it are
+billed per call rather than rejected. See [Daily free API calls](/guides/billing#daily-free-api-calls).
+:::
+
 ::: tip Video tasks
 Video submissions are also limited by how many tasks your organization can run at once, based on its account level.
 That `429` says `organization concurrency limit exceeded` and clears when a running task finishes, not on a timer. See

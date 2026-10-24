@@ -66,6 +66,8 @@ Agents platform resources accept `Authorization: Bearer` or `X-API-Key` and retu
 
 Pricing formulas and billing units differ by model. Use GET /v1/models for discovery and GET /v1/models/{id_or_name} for the current
 model card, capabilities, input schema, and detailed pricing. Use GET /v1/tasks/{id}/cost for recorded task cost.
+Data APIs (search, social, scraping, e-commerce, finance) include 100 free calls per organization per UTC day, shared across eligible
+data APIs; later calls are billed per call. MCP sandbase_account reports the remaining allowance as free_api_quota.
 
 ## Docs
 

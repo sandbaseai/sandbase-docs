@@ -77,6 +77,7 @@ Pay per use. Pricing is model-specific and may change independently of this page
 - **Model pricing**: read the selected model's current formula and units from `model_card`
 - **Token pricing**: can include input, output, cache, or reasoning components when declared by that model
 - **Media and other operations**: can use per-request, duration, resolution, or other model-specific units
+- **Data APIs** (search, social, scraping, e-commerce, finance): each organization gets 100 free calls per UTC day, shared across eligible data APIs; after that, calls are billed per call, not blocked. In MCP, eligible tools show `pricing.free_quota` in `sandbase_inspect`, and `sandbase_account` returns `free_api_quota` (`daily_limit`, `used_today`, `remaining`, `resets_at`). See [Daily free API calls](/guides/billing#daily-free-api-calls).
 
 Discover the current model ID with `GET /v1/models`, then inspect `GET /v1/models/{id_or_name}` before sending a request. Do not assume that pricing or cache discounts are shared across providers.
 

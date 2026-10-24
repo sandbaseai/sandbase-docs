@@ -339,6 +339,8 @@ Do not retry unchanged 400, 401, 402, 403, or 404 requests. Check idempotency be
 - Read each model's current pricing formula and units from its model_card
 - Token-priced models can include input, output, cache, or reasoning components when declared
 - Media and other models can use per-request, duration, resolution, or other model-specific units
+- Data APIs (search, social, scraping, e-commerce, finance): 100 free calls per organization per UTC day, shared across eligible data APIs, reset 00:00 UTC; later calls are billed per call, not rejected; zero-balance organizations can still use the free calls
+- MCP: sandbase_inspect shows pricing.free_quota on eligible tools; sandbase_account returns free_api_quota {daily_limit, used_today, remaining, resets_at}; settled sandbase_run / sandbase_run_get results include free_quota_status (free, overage, degraded)
 - Check cost: GET /v1/tasks/{task_id}/cost
 - API key spending controls: https://www.sandbase.ai/console/keys
 - Usage and cost: https://www.sandbase.ai/console/activities?tab=usage

@@ -515,6 +515,8 @@ Body `{"name", "kind": "mcp_bearer", "server_url", "token"}`; `Idempotency-Key` 
 - Read the selected model's current pricing formula and units from its `model_card`.
 - Token-priced models can include input, output, cache, or reasoning components when declared.
 - Media and other models can use per-request, duration, resolution, or other model-specific units.
+- Data APIs (search, social, scraping, e-commerce, finance) include 100 free calls per organization per UTC day, shared across eligible data APIs and reset at 00:00 UTC. Later calls are billed per call; they are not rejected. Organizations with a zero balance can still use the free calls.
+- MCP: `sandbase_inspect` shows `pricing.free_quota` on eligible tools; `sandbase_account` returns `free_api_quota` (`daily_limit`, `used_today`, `remaining`, `resets_at`); settled `sandbase_run` and `sandbase_run_get` results include `free_quota_status` (`free`, `overage`, or `degraded`).
 - When a billable operation returns a task ID (including an `x-task-id` response header), use `GET /v1/tasks/{task_id}/cost` for settlement and usage.
 - For asynchronous `POST /v1/run` responses, query the generation result with `GET /v1/run/{id}`; a run ID is not a task ID and must not be sent to the cost endpoint.
 
