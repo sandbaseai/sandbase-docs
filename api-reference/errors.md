@@ -48,7 +48,7 @@ Use the [OpenAPI specification](/openapi.yaml) for the exact status codes and sc
 | `404` | Model or resource is unavailable to the caller | Verify the current model ID or resource ID. |
 | `409` | Resource state conflict | Read the latest state before deciding whether a retry is safe. |
 | `422` | Semantically invalid resource input | Correct the documented field values. |
-| `429` | Organization request limit, video concurrency limit, or daily free API allowance | Retry with bounded backoff and jitter when the operation is safe to repeat. |
+| `429` | Organization request limit or video concurrency limit | Retry with bounded backoff and jitter when the operation is safe to repeat. |
 | `500`, `502`, `503`, `504` | SandBase or upstream failure | Retry only when the operation is safe to repeat. |
 
 Not every endpoint documents every status in this table. The operation's OpenAPI response map is authoritative.
@@ -71,8 +71,6 @@ A revoked key cannot be re-enabled. Create a replacement, update the consuming a
 ## Rate limits
 
 `organization rate limit exceeded` (`429`) means your organization reached its assigned requests-per-minute limit, which all of its API keys share. Protocol-compatible endpoints return it in their own envelope. SandBase does not publish one universal numeric limit because the limit is assigned per organization.
-
-`daily free API limit exceeded` (`429`) means your organization used its daily allowance for API operations that are currently free. It resets at 00:00 UTC, so do not retry before then.
 
 If a response includes `Retry-After`, respect it. Otherwise use bounded exponential backoff with jitter. See [Rate limits](/guides/rate-limiting) for request-smoothing patterns.
 

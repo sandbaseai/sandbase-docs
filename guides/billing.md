@@ -9,6 +9,27 @@ SandBase uses pay-as-you-go billing. Model availability, price formulas, cache m
 charges can change independently, so integrations should read live metadata instead of relying on copied price
 tables.
 
+## Daily free API calls
+
+Every organization gets 100 free data API calls (search, social, scraping, e-commerce, finance) per UTC day. The
+allowance is shared by all eligible data APIs and all of the organization's keys, and resets at 00:00 UTC. LLMs and
+media models are not eligible. Some data APIs are not eligible either: pricier or formula-priced ones, such as some
+batch endpoints, crawl endpoints, Xiaohongshu PGY, and the Douyin Xingtu `kol-*` routes, are billed from the first call.
+To check a tool, run `sandbase_inspect`: eligible tools carry `pricing.free_quota`, and tools without it are always
+billed.
+
+- Calls within the allowance are not charged, and an organization with a zero balance can still use them.
+- After the 100th call, eligible calls keep working and are billed per call at the price the tool shows. They are not
+  rejected or rate-limited because the allowance is used up.
+- Unused calls do not carry over to the next day.
+
+In the [SandBase MCP tools](/setup/), `sandbase_inspect` marks eligible tools with `pricing.free_quota`
+(`daily_limit`, `scope`, `resets`). `sandbase_account` returns today's allowance as `free_api_quota` with
+`daily_limit`, `used_today`, `remaining`, and `resets_at`; `used_today` and `remaining` are omitted when the count is
+temporarily unavailable. After a run settles, `sandbase_run` and `sandbase_run_get` report `free_quota_status`:
+`free` (covered by the allowance), `overage` (billed after the allowance was used up), or `degraded` (not charged
+because the allowance count was unavailable).
+
 ## Manage billing in the Console
 
 Use **Console → Billing** to view your balance, add credits, and manage the billing settings available to your

@@ -27,8 +27,6 @@ When a limit is exceeded, the API aborts the request with HTTP 429. On the `/v1/
 
 Protocol-compatible endpoints such as `POST /v1/messages` and the Gemini endpoints return the same `429` in their own error envelope.
 
-API operations that are currently free to call also share a daily call allowance per organization that resets at 00:00 UTC. When it is used up, those calls return `429` with `"daily free API limit exceeded"`; retrying before the reset does not help.
-
 ::: warning
 Platform-generated rate-limit responses do not currently add `Retry-After` or remaining-quota headers. A compatible
 provider response can include provider rate-limit headers. Honor `Retry-After` when present; otherwise use bounded
