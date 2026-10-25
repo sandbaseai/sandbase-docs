@@ -11,6 +11,7 @@ import SiteHeader from './SiteHeader.vue'
 import SiteFooter from './SiteFooter.vue'
 import DocsSearch from './DocsSearch.vue'
 import DocsSectionTabs from './DocsSectionTabs.vue'
+import TutorialCopyAction from './TutorialCopyAction.vue'
 import './custom.css'
 
 export default {
@@ -26,6 +27,7 @@ export default {
       'sidebar-nav-before': () => [h(DocsSearch), h(DocsSectionTabs)],
       'sidebar-nav-after': () => [h(PlatformApiSidebar), h(OfficialNativeApiSidebar)],
       'layout-top': () => h(SiteHeader),
+      'doc-before': () => h(TutorialCopyAction),
       'layout-bottom': () => h(SiteFooter),
     })
   },
