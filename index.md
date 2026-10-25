@@ -76,6 +76,8 @@ Schedules run a pinned Agent version on a cron expression or on demand through `
 
 ## Next steps
 
+- Creating with local Skills: [Skill tutorials](/guides/skills/)
+
 - New to SandBase: [Getting started](/getting-started/)
 - Calling a Model or API: [Model API Reference](/model-api-reference/)
 - Managing Agents and workloads: [Platform API Reference](/api-reference/)

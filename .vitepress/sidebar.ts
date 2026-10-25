@@ -41,6 +41,15 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
+    text: 'Skill tutorials',
+    collapsed: false,
+    items: [
+      { text: 'Overview', link: '/guides/skills/' },
+      { text: 'Use a Skill locally', link: '/guides/skills/local-use' },
+      { text: 'AI City Remix', link: '/guides/skills/ai-city-remix' },
+    ],
+  },
+  {
     text: 'Models & APIs',
     items: [
       { text: 'Store', link: '/store/' },
