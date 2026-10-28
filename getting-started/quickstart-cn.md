@@ -21,7 +21,7 @@ SandBase 使用 GitHub 或 Google 登录，没有单独的邮箱密码注册。
 
 第一次登录会自动创建账号和 **personal workspace**。试用前不必先建组织。
 
-如果出现欢迎额度，可以先不绑卡就开始。当前余额以 [Console Credits](https://www.sandbase.ai/console/billing){target="_blank"} 为准。
+如果出现欢迎额度，可以先不绑卡就开始。当前余额以 Console 首页的 **Balance** 卡片和 [Billing](https://www.sandbase.ai/console/billing){target="_blank"} 为准。
 
 ## 2. 创建组织 {#create-organization}
 
@@ -34,14 +34,14 @@ API Key、用量和账单都属于组织。一个人试用时，留在 personal 
 
 ### 2.1 创建团队 {#create-team}
 
-1. 打开 [Create team](https://www.sandbase.ai/console/members?create=1){target="_blank"}，或在 Console 顶部菜单选择 **Create Team**。
-2. 输入团队名称，创建 workspace。
-3. 确认 Console 顶部已切换到这个团队作为当前组织。
-4. 选择 **Add member**，填入对方已有 SandBase 账号的邮箱。
+1. 打开 [Create team](https://www.sandbase.ai/console/members?create=1){target="_blank"}，或在 Console 右上角的账号菜单选择 **Create Team**。
+2. 填写 **Team name**，点击 **Create team**。
+3. 确认账号菜单里已切换到这个团队作为当前 workspace。
+4. 在 **Developer → Team** 点击 **Add member**，填入对方已有 SandBase 账号的 **Account email**，并选择 **Workspace role**（Member 或 Admin）。
 
 被邀请的人必须先有 SandBase 账号。如果还没有，把 [这个页面](/getting-started/quickstart-cn) 发给他们，让他们先登录，再添加。
 
-如果你属于多个组织，在 Console 顶部切换。Key 和账单跟随 **当前选中的** 组织。角色说明见 [Organizations](/admin/organizations)。
+如果你属于多个组织，在账号菜单里切换。Key 和账单跟随 **当前选中的** 组织。角色说明见 [Organizations](/admin/organizations)。
 
 ## 3. 接入 SandBase {#connect}
 
@@ -51,7 +51,7 @@ API Key、用量和账单都属于组织。一个人试用时，留在 personal 
 
 适合给自己的应用增加一项能力。
 
-1. 在 [Console → API Keys](https://www.sandbase.ai/console/keys){target="_blank"} 创建 [API key](/getting-started/api-keys)。立刻复制，密钥只显示一次。
+1. 在 [Developer → API Keys](https://www.sandbase.ai/console/keys){target="_blank"} 点击 **New key** 创建 [API key](/getting-started/api-keys)。立刻复制，密钥只显示一次。
 2. 在 Store 里筛选能力，打开详情页：
    - [大语言模型](https://www.sandbase.ai/models){target="_blank"} — 按提供商、能力、上下文和价格筛选
    - [图像 / 视频模型](https://www.sandbase.ai/models/image-video){target="_blank"} — 筛选文生图、图生图、文生视频、图生视频等多模态模型
@@ -90,17 +90,22 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 ### 3.3 在 AI 中使用 {#use-in-ai-tool}
 
-适合已经在用 Codex、Claude、Cursor、Kiro 或其他受支持客户端，希望在这个应用里直接使用 Models、APIs 和 Services。
+适合已经在用 Claude Code、Codex、Cursor、Kiro 或其他受支持客户端，希望在这个应用里直接使用 SandBase 的 Models 和 APIs。
 
-1. 打开 [Setup](https://www.sandbase.ai/console/setup){target="_blank"}。
-2. 选择你的 AI 工具，并查看它的前置条件。
-3. 按页面提示运行命令或完成导入。
-4. 完成授权；如有提示，重启或重新加载客户端。
-5. 确认出现 SandBase 条目，并发起一次安全的工具请求。
+1. 打开 Console 的 [Build → AI tools](https://www.sandbase.ai/console/setup){target="_blank"}。
+2. 把这一行粘贴给你的 agent：
 
-要调整已连接工具能发现哪些能力，打开 [Workspace Services](https://www.sandbase.ai/console/setup/installed){target="_blank"}。
+   ```text
+   set up https://www.sandbase.ai/SKILL.md
+   ```
 
-例如，接入网页搜索 API 后，可以这样问：
+3. 在 agent 打开的浏览器页面里批准登录，不需要粘贴 API key。
+4. 新开一个会话或重启应用，让 SandBase 工具加载。
+5. 发起一次安全的工具请求。
+
+更习惯终端？运行 `npx -y @sandbaseai/cli@latest connect`。接入后工具可以搜索整个目录，调用费用记在当前 workspace。
+
+例如，可以这样问：
 
 > 调研这家公司，并给出有来源的客户简报。
 
@@ -110,12 +115,12 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 适合多步骤、需要复用的工作。
 
-1. 打开 [Build Agent](https://www.sandbase.ai/console/agents){target="_blank"}。
-2. 编写 Agent 指令。
-3. 选择 Model。
-4. 添加 Skills 和 MCP 工具。
-5. 在 Session 中测试。
-6. 把测试通过的版本部署为 Service 或 Schedule。
+1. 打开 [Build → Agents](https://www.sandbase.ai/console/agents){target="_blank"}，点击 **Create**。
+2. 填写 **Overview** 和 **Instructions**。
+3. 选择 **Model**。
+4. 在 **Capabilities** 添加 Skills 和 MCP 工具，再设置 **Runtime**。
+5. 点击 **Create & Chat**，在 Session 中测试。
+6. 在 Agent 的 **API** 标签页从应用调用测试通过的版本，或部署为 Service 或 Schedule。
 
 了解更多：[Build Agent](/agents/)。
 
@@ -123,7 +128,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 同时满足下面几点，就可以开始用了：
 
-- Console 顶部显示的是你打算使用的组织。
+- Console 账号菜单显示的是你打算使用的组织。
 - 完成了其中一种接入：API 调用、官网试用、AI 工具，或 Agent。
 - 一次请求成功。
 

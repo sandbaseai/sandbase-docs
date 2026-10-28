@@ -524,8 +524,8 @@ Body `{"name", "kind": "mcp_bearer", "server_url", "token"}`; `Idempotency-Key` 
 ### Budget control
 
 - Set an optional spending limit when creating or editing a standard key under [Developer → API Keys](https://www.sandbase.ai/console/keys).
-- Monitor requests and cost under **Console → Activities → Usage**.
-- Review balance and credit transactions on the [Console Credits](https://www.sandbase.ai/console/billing) page.
+- Monitor requests and cost under **Developer → Activities → Usage**.
+- Review balance and credit transactions under [Developer → Billing](https://www.sandbase.ai/console/billing).
 
 ---
 

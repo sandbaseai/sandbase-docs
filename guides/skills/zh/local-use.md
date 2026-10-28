@@ -39,9 +39,9 @@ my-city-film/
 
 ## 3. 连接 SandBase
 
-打开 [Console Setup](https://www.sandbase.ai/console/setup)，选择正在使用的 Agent，按照页面给出的步骤完成连接和浏览器授权。完成后按提示重新打开 Agent 会话。
+把 `set up https://www.sandbase.ai/SKILL.md` 粘贴给你的 Agent，并在它打开的浏览器页面里批准登录；也可以在终端运行 `npx -y @sandbaseai/cli@latest connect`。完成后新开一个 Agent 会话，让 SandBase 工具加载。Console 的 [Build → AI tools](https://www.sandbase.ai/console/setup) 页面也提供同样的方式。
 
-完整连接流程见 [Setup](/setup/)。
+完整连接流程见 [Connect AI tools](/setup/)。
 
 如果所选 Skill 的脚本要求 `SANDBASE_API_KEY`：
 

@@ -1,6 +1,6 @@
 ---
 title: FAQ
-description: Frequently asked questions about SandBase Setup, Store, Models, APIs, Agents, Services, Schedules, Sessions, and billing.
+description: Frequently asked questions about connecting AI tools, the SandBase Store, Models, APIs, Agents, Services, Schedules, Sessions, and billing.
 ---
 
 # Frequently Asked Questions
@@ -9,7 +9,7 @@ description: Frequently asked questions about SandBase Setup, Store, Models, API
 
 SandBase helps Agents connect to the real world.
 
-You can use ready-made Models and APIs, install them into AI tools with Setup, or build reusable Agents and deploy them as Services or Schedules.
+You can use ready-made Models and APIs, use them from your AI tools after connecting them in AI tools, or build reusable Agents and deploy them as Services or Schedules.
 
 ## Who is SandBase for?
 
@@ -30,11 +30,9 @@ Store is where you browse capabilities:
 
 You can inspect, test, install, call, or clone depending on the kind of capability.
 
-## What is Setup?
+## What is AI tools?
 
-Setup installs capabilities into the AI tool you already use.
-
-It manages Models, APIs, and Services. Skills are used inside Build Agent, not usually installed directly as Setup items.
+**Build → AI tools** in the Console connects SandBase to the AI tool you already use, such as Claude Code, Codex, Cursor, or Kiro. Paste `set up https://www.sandbase.ai/SKILL.md` into your agent, or run `npx -y @sandbaseai/cli@latest connect`. The connected tool can search and run the SandBase catalog of Models and APIs, billed to your workspace. See [Connect AI tools](/setup/).
 
 ## What is Build Agent?
 
@@ -46,7 +44,7 @@ An Agent combines instructions, a Model, Skills, and MCP tools into one reusable
 
 An Agent can be used like an API after you deploy it as a Service.
 
-Before that, it is a configuration you can edit and test in Sessions. A Service pins one tested version, so your app or Setup can call it while you keep editing the Agent.
+Before that, it is a configuration you can edit and test in Sessions. A Service pins one tested version, so your app or a connected AI tool can call it while you keep editing the Agent.
 
 ## What are Services?
 
@@ -72,13 +70,13 @@ Connect the external system as an MCP server and add it to the Agent's MCP conne
 
 Models are listed separately in Store because they are important building blocks.
 
-You can call a Model directly, add it to Setup, or use it inside an Agent.
+You can call a Model directly, use it from a connected AI tool, or use it inside an Agent.
 
 ## Do I need to write code?
 
 Not always.
 
-Use Setup if you want capabilities inside your AI tool without writing code.
+[Connect your AI tool](/setup/) if you want capabilities inside it without writing code.
 
 Use API Reference if you want to call SandBase from your application.
 
@@ -86,7 +84,7 @@ Use Build Agent if you want reusable multi-step work.
 
 ## How do I get an API key?
 
-Open the Console and go to API Keys.
+Open the Console, go to **Developer → API Keys**, and select **New key**.
 
 Use the key as:
 
@@ -104,6 +102,6 @@ Models, APIs, Agents, and runtime work may have different costs. Check the Conso
 
 - [Getting Started](/getting-started/)
 - [Store](/store/)
-- [Setup](/setup/)
+- [Connect AI tools](/setup/)
 - [Build Agent](/agents/)
 - [API Reference](/api-reference/)

@@ -153,8 +153,8 @@ const steps = copy.steps
 <style scoped>
 .onboard {
   --qs-lime: #d9ff43;
-  --qs-ink: #11110f;
-  --qs-paper: #f4f4ef;
+  --qs-ink: #0e0b1a;
+  --qs-paper: #f2f0f3;
   display: grid;
   gap: 64px;
   margin: 8px 0 72px;
@@ -186,7 +186,7 @@ const steps = copy.steps
   gap: 14px;
   margin-bottom: 20px;
   font-size: 12px;
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
@@ -239,9 +239,9 @@ const steps = copy.steps
   align-items: center;
   min-height: 48px;
   padding: 0 22px;
-  border-radius: 2px;
+  border-radius: 0;
   font-size: 14.5px;
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: -0.018em;
   text-decoration: none;
   transition: background 0.16s, border-color 0.16s, color 0.16s;
@@ -281,7 +281,7 @@ const steps = copy.steps
 
 .brief-skip a {
   color: var(--vp-c-text-1);
-  font-weight: 650;
+  font-weight: 500;
   text-decoration: none;
   box-shadow: inset 0 -2px 0 var(--qs-lime);
 }
@@ -344,7 +344,7 @@ const steps = copy.steps
   color: var(--qs-ink);
   font-family: var(--vp-font-family-mono);
   font-size: 40px;
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: -0.08em;
   line-height: 1;
 }
@@ -364,7 +364,7 @@ const steps = copy.steps
   margin-top: 10px;
   color: var(--vp-c-text-1);
   font-size: 20px;
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: -0.038em;
   line-height: 1.25;
 }
@@ -381,7 +381,7 @@ const steps = copy.steps
   margin-top: 10px;
   color: var(--vp-c-text-1);
   font-size: 13.5px;
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 
@@ -398,7 +398,7 @@ const steps = copy.steps
   margin: 0;
   color: var(--vp-c-text-3);
   font-size: 12px;
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -435,7 +435,7 @@ const steps = copy.steps
 
 .route strong {
   font-size: 20px;
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: -0.038em;
   line-height: 1.25;
 }

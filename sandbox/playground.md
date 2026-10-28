@@ -18,7 +18,7 @@ Try the Sandbox API with your own key. Operations connect to **sandbox.sandbase.
 
 - **Page memory only.** This Playground does not save your API key or connection tokens to browser storage or cookies, put them in URLs, or record them in page activity or request examples.
 - **Clear at any time.** Select **Clear key** to remove the key, connection tokens, and displayed activity, even while a request is running. Refreshing or leaving this page also clears them. You will need to enter your key again to reconnect.
-- **Used only for your requests.** Your key is transmitted to SandBase to authenticate the Sandbox operations you request. Clearing this page does not revoke the key; revoke it in [Console → API Keys](https://www.sandbase.ai/console/keys) if needed.
+- **Used only for your requests.** Your key is transmitted to SandBase to authenticate the Sandbox operations you request. Clearing this page does not revoke the key; revoke it in [Developer → API Keys](https://www.sandbase.ai/console/keys) if needed.
 
 These promises cover this Playground’s handling of credentials. They do not mean Sandbox activity or service-side usage records are erased. Avoid entering secrets in commands or files, whose contents can remain in your sandbox.
 

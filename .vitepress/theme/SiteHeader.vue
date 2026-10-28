@@ -4,10 +4,11 @@ import { useRoute } from 'vitepress'
 import BrandMark from './BrandMark.vue'
 
 /**
- * Faithful replica of the sandbase.ai site header (logged-out variant).
+ * Replica of the sandbase.ai site header: Store / Build / Lab ↗ / Docs / Pricing.
  * Markup and behaviour mirror sandbase-fe/src/components/site-header.tsx;
  * styling below is ported from site-header.module.css. Product links point at
- * the main site; "Docs" stays on this docs site.
+ * the main site; "Docs" stays on this docs site. The campaign strip and the
+ * signed-in balance are omitted: both need main-site APIs.
  */
 const SITE = 'https://www.sandbase.ai'
 const loginHref = `${SITE}/login`
@@ -30,27 +31,14 @@ const exploreGroups = [
   },
 ]
 
-const solutionGroups = [
+/** Build menu: from plugging tools into an existing agent to running Agents in production. */
+const buildGroups = [
   {
-    label: '01 · EXPLORE CAPABILITIES',
+    label: 'Connect & build',
     items: [
-      { label: 'Language Models', description: 'Reasoning, coding, chat, and multimodal language intelligence.', href: `${SITE}/solutions/language-models` },
-      { label: 'Image & Video Models', description: 'Generate, understand, and transform visual content.', href: `${SITE}/solutions/image-video-models` },
-      { label: 'APIs & Services', description: 'Connect search, data, SaaS, and specialized capabilities.', href: `${SITE}/solutions/apis-services` },
-    ],
-  },
-  {
-    label: '02 · CONNECT & BUILD',
-    items: [
-      { label: 'Use in Your AI Tools', description: 'Connect SandBase to the tools already in your workflow.', href: `${SITE}/solutions/use-in-ai-tools` },
-      { label: 'Build Agent', description: 'Define an Agent’s job, instructions, and runtime configuration.', href: `${SITE}/solutions/build-agent` },
-    ],
-  },
-  {
-    label: '03 · RUN & IMPROVE',
-    items: [
-      { label: 'Schedule Agent Work', description: 'Run recurring research, monitoring, and reporting work.', href: `${SITE}/solutions/schedule-agent-work` },
-      { label: 'Monitor Agent Runs', description: 'Inspect sessions, activity, and the work your Agents deliver.', href: `${SITE}/solutions/monitor-agent-runs` },
+      { label: 'Use in AI Tools', description: 'Give Claude Code, Codex or Cursor the whole catalog', href: `${SITE}/solutions/use-in-ai-tools` },
+      { label: 'Agents', description: 'Your personal Agent, OpenAI Agents API compatible', href: `${SITE}/agents` },
+      { label: 'Sandbox', description: 'Run code and work with files for each task', href: `${SITE}/landing/sandbox` },
     ],
   },
 ]
@@ -153,18 +141,18 @@ onBeforeUnmount(() => {
 
       <nav class="sh-desktop-nav" aria-label="Primary navigation">
         <div class="sh-explore" @mouseenter="openExplore" @mouseleave="scheduleExploreClose">
-          <a class="sh-nav-link" :href="`${SITE}/models`" target="_self">Explore</a>
+          <a class="sh-nav-link" :href="`${SITE}/models`" target="_self">Store</a>
           <button
             type="button"
             class="sh-explore-trigger"
-            aria-label="Toggle Explore menu"
+            aria-label="Toggle Store menu"
             aria-haspopup="menu"
             :aria-expanded="exploreOpen"
             @click="exploreOpen ? closeMenus() : openExplore()"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
-          <div v-show="exploreOpen" class="sh-explore-menu" role="menu" aria-label="Explore" @mouseenter="openExplore" @mouseleave="scheduleExploreClose">
+          <div v-show="exploreOpen" class="sh-explore-menu" role="menu" aria-label="Store" @mouseenter="openExplore" @mouseleave="scheduleExploreClose">
             <section v-for="group in exploreGroups" :key="group.label">
               <p>{{ group.label }}</p>
               <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" role="menuitem">
@@ -176,8 +164,6 @@ onBeforeUnmount(() => {
           </div>
         </div>
 
-        <a class="sh-nav-link" :href="`${SITE}/agents`" target="_self">Agents</a>
-
         <div class="sh-solution" @mouseenter="openSolution" @mouseleave="scheduleSolutionClose">
           <button
             type="button"
@@ -186,21 +172,23 @@ onBeforeUnmount(() => {
             :aria-expanded="solutionOpen"
             @click="solutionOpen ? closeMenus() : openSolution()"
           >
-            Solutions
+            Build
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
-          <div v-show="solutionOpen" class="sh-solution-menu" role="menu" aria-label="Solutions" @mouseenter="openSolution" @mouseleave="scheduleSolutionClose">
-            <section v-for="group in solutionGroups" :key="group.label">
+          <div v-show="solutionOpen" class="sh-solution-menu" role="menu" aria-label="Build" @mouseenter="openSolution" @mouseleave="scheduleSolutionClose">
+            <section v-for="group in buildGroups" :key="group.label">
               <p>{{ group.label }}</p>
               <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" role="menuitem">
                 <strong>{{ item.label }}</strong>
                 <span>{{ item.description }}</span>
               </a>
             </section>
-            <footer>Composable Models, APIs, and services for any workflow.</footer>
+            <footer>From one tool call to an Agent in production.</footer>
           </div>
         </div>
 
+        <!-- Lab is a separate site: full navigation, marked as leaving the main site. -->
+        <a class="sh-nav-link sh-lab-link" :href="`${SITE}/lab/`" target="_self" aria-label="Lab (separate site)">Lab<span class="sh-external-mark" aria-hidden="true">↗</span></a>
         <a class="sh-nav-link" href="/docs/">Docs</a>
         <a class="sh-nav-link" :href="`${SITE}/pricing`" target="_self">Pricing</a>
       </nav>
@@ -210,7 +198,7 @@ onBeforeUnmount(() => {
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" /></svg>
         </a>
         <template v-if="loggedIn">
-          <a class="sh-start" :href="consoleHref" target="_self">Console</a>
+          <a class="sh-console" :href="consoleHref" target="_self">Console</a>
         </template>
         <template v-else>
           <a class="sh-signin" :href="loginHref" target="_self">Sign in</a>
@@ -234,7 +222,7 @@ onBeforeUnmount(() => {
       <div class="sh-drawer">
         <nav class="sh-mobile-nav" aria-label="Mobile navigation">
           <button type="button" class="sh-mobile-expand" :aria-expanded="mobileExploreOpen" @click="mobileExploreOpen = !mobileExploreOpen">
-            Explore
+            Store
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
           <div v-if="mobileExploreOpen" class="sh-mobile-sublinks">
@@ -243,25 +231,24 @@ onBeforeUnmount(() => {
             </template>
           </div>
 
-          <a class="sh-mobile-link" :href="`${SITE}/agents`" target="_self" @click="drawerOpen = false">Agents</a>
-
           <button type="button" class="sh-mobile-expand" :aria-expanded="mobileSolutionOpen" @click="mobileSolutionOpen = !mobileSolutionOpen">
-            Solutions
+            Build
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
           <div v-if="mobileSolutionOpen" class="sh-mobile-solution">
-            <section v-for="group in solutionGroups" :key="group.label">
+            <section v-for="group in buildGroups" :key="group.label">
               <p>{{ group.label }}</p>
               <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" @click="drawerOpen = false">{{ item.label }}</a>
             </section>
           </div>
 
+          <a class="sh-mobile-link sh-lab-link" :href="`${SITE}/lab/`" target="_self" aria-label="Lab (separate site)" @click="drawerOpen = false">Lab<span class="sh-external-mark" aria-hidden="true">↗</span></a>
           <a class="sh-mobile-link" href="/docs/" @click="drawerOpen = false">Docs</a>
           <a class="sh-mobile-link" :href="`${SITE}/pricing`" target="_self" @click="drawerOpen = false">Pricing</a>
         </nav>
         <div class="sh-drawer-actions">
           <a class="sh-signin" href="https://github.com/sandbaseai" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a v-if="loggedIn" class="sh-start" :href="consoleHref" target="_self" @click="drawerOpen = false">Console</a>
+          <a v-if="loggedIn" class="sh-signin" :href="consoleHref" target="_self" @click="drawerOpen = false">Console</a>
           <template v-else>
             <a class="sh-signin" :href="loginHref" target="_self" @click="drawerOpen = false">Sign in</a>
             <a class="sh-start" :href="loginHref" target="_self" @click="drawerOpen = false">Start building</a>
@@ -404,9 +391,8 @@ onBeforeUnmount(() => {
   display: grid;
   padding: 0.75rem;
   background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: 4px;
-  box-shadow: var(--shadow-lg);
+  border-radius: 0;
+  box-shadow: var(--shadow-float);
 }
 .sh-explore-menu {
   left: -1.25rem;
@@ -415,8 +401,8 @@ onBeforeUnmount(() => {
 }
 .sh-solution-menu {
   left: 50%;
-  width: min(52rem, calc(100vw - 2rem));
-  grid-template-columns: repeat(3, minmax(13rem, 1fr));
+  width: min(24rem, calc(100vw - 2rem));
+  grid-template-columns: minmax(0, 1fr);
   transform: translateX(-50%);
 }
 .sh-explore-menu::before,
@@ -440,8 +426,9 @@ onBeforeUnmount(() => {
   padding: 0.25rem 0.75rem 0.5rem;
   color: var(--color-ink-subtle);
   font-family: var(--font-family-mono);
-  font-size: 0.625rem;
+  font-size: var(--type-mono-xs);
   letter-spacing: 0.09em;
+  line-height: 1.5rem;
   text-transform: uppercase;
 }
 .sh-explore-menu a,
@@ -451,7 +438,7 @@ onBeforeUnmount(() => {
   gap: 0.25rem;
   align-content: center;
   padding: 0.75rem;
-  border-radius: 4px;
+  border-radius: 0;
   color: var(--color-ink);
   text-decoration: none;
   transition: background-color 150ms ease;
@@ -467,6 +454,8 @@ onBeforeUnmount(() => {
 .sh-solution-menu strong {
   font-size: 1rem;
   font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.5rem;
   color: var(--color-ink);
 }
 .sh-explore-menu span,
@@ -486,7 +475,7 @@ onBeforeUnmount(() => {
   border-top: 1px solid var(--color-line);
   color: var(--color-ink-subtle);
   font-family: var(--font-family-mono);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.02em;
 }
 
@@ -532,7 +521,32 @@ onBeforeUnmount(() => {
 }
 .sh-start:hover {
   background: var(--color-tint-cyan);
-  color: var(--color-ink);
+  color: var(--color-tint-fg);
+}
+.sh-console {
+  padding: 0.5rem 0.875rem;
+  background: var(--color-surface-alt);
+  color: var(--color-accent);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4375rem;
+  text-decoration: none;
+  transition: background-color 150ms ease;
+}
+.sh-console:hover {
+  background: var(--color-surface);
+}
+/* Lab is a separate same-origin app; the arrow says the link leaves the main site. */
+.sh-lab-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.sh-external-mark {
+  color: var(--color-ink-muted);
+  font-size: 0.75em;
+  line-height: 1;
+  transform: translateY(-0.1em);
 }
 
 .sh-mobile-button {
@@ -572,8 +586,7 @@ onBeforeUnmount(() => {
   flex-direction: column;
   padding: 0.5rem;
   background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-float);
 }
 .sh-mobile-nav {
   display: flex;
@@ -590,7 +603,8 @@ onBeforeUnmount(() => {
   background: transparent;
   color: var(--color-ink);
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.5rem;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
@@ -617,10 +631,10 @@ onBeforeUnmount(() => {
   min-height: 2.75rem;
   align-items: center;
   padding: 0.5rem 0.75rem;
-  border-left: 1px solid var(--color-line);
   color: var(--color-ink-muted);
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.4375rem;
   text-decoration: none;
 }
 .sh-mobile-solution {
@@ -632,7 +646,7 @@ onBeforeUnmount(() => {
   margin: 0.4rem 0;
   color: var(--color-ink-subtle);
   font-family: var(--font-family-mono);
-  font-size: 0.625rem;
+  font-size: var(--type-mono-xs);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -641,10 +655,10 @@ onBeforeUnmount(() => {
   min-height: 2.75rem;
   align-items: center;
   padding: 0.5rem 0.75rem;
-  border-left: 1px solid var(--color-line);
   color: var(--color-ink-muted);
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.4375rem;
   text-decoration: none;
 }
 .sh-drawer-actions {
@@ -652,7 +666,6 @@ onBeforeUnmount(() => {
   gap: 0.75rem;
   margin-top: auto;
   padding: 1.5rem 1rem;
-  border-top: 1px solid var(--color-line);
 }
 .sh-drawer-actions a {
   display: flex;
@@ -661,9 +674,7 @@ onBeforeUnmount(() => {
   justify-content: center;
 }
 .sh-drawer-actions .sh-signin {
-  border: 1px solid var(--color-line);
   padding: 0.625rem 1rem;
-  color: var(--color-ink);
 }
 
 *:focus-visible {
@@ -685,6 +696,15 @@ onBeforeUnmount(() => {
     display: flex;
     grid-column: 2;
     justify-self: end;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1535px) {
+  .sh-desktop-nav {
+    gap: 1rem;
+  }
+  .sh-bar {
+    gap: 1rem;
+    padding-inline: 1.25rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {

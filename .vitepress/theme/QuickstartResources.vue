@@ -30,7 +30,7 @@ const copyByLocale = {
       { tag: 'Multimodal', title: 'Image and video', body: 'Filter text-to-image, image-to-video, and other visual models.', href: 'https://www.sandbase.ai/models/image-video', external: true },
       { tag: 'APIs', title: 'API resources', body: 'Filter search, social, and data APIs by platform.', href: 'https://www.sandbase.ai/apis', external: true },
       { tag: 'Billing', title: 'Billing and credits', body: 'Check balance, top up, and review billing records.', href: 'https://www.sandbase.ai/console/billing', external: true },
-      { tag: 'Usage', title: 'Usage analytics', body: 'See recent call volume and cost for the active organization.', href: 'https://www.sandbase.ai/console/analytics?tab=overview&range=7d&type=all', external: true },
+      { tag: 'Analysis', title: 'Usage analysis', body: 'See recent call volume, cost, and request health for the active organization.', href: 'https://www.sandbase.ai/console/analytics?tab=overview&range=7d&type=all', external: true },
     ],
   },
   zh: {
@@ -58,7 +58,7 @@ const copy = {
 <style scoped>
 .resources {
   --qs-lime: #d9ff43;
-  --qs-ink: #11110f;
+  --qs-ink: #0e0b1a;
   margin: 24px 0 8px;
 }
 
@@ -103,7 +103,7 @@ const copy = {
   color: var(--vp-c-text-3);
   font-family: var(--vp-font-family-mono);
   font-size: 11px;
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -115,7 +115,7 @@ const copy = {
 
 .resource-card strong {
   font-size: 20px;
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: -0.038em;
   line-height: 1.25;
 }

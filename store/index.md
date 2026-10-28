@@ -1,6 +1,6 @@
 ---
 title: Store
-description: Browse SandBase Models, APIs, Agents, and Skills. Use a capability directly, add it to Setup, or clone it into Build Agent.
+description: Browse SandBase Models, APIs, Agents, and Skills. Use a capability directly, from a connected AI tool, or clone it into Build Agent.
 ---
 
 # Store
@@ -14,7 +14,7 @@ You can start from four kinds of things:
 | Kind | What it is | What you do with it |
 |---|---|---|
 | **Models** | AI models for text, image, audio, and video | Call them directly, or use them inside an Agent |
-| **APIs** | Ready-to-use capabilities like search, scrape, data, media, and SaaS actions | Copy a request or add to Setup |
+| **APIs** | Ready-to-use capabilities like search, scrape, data, media, and SaaS actions | Copy a request or call it from a connected AI tool |
 | **Agents** | Proven Agent examples and best-practice workflows | Clone them, test them, and deploy your copy as a Service or Schedule |
 | **Skills** | Reusable task packages for Agents | Attach them when building an Agent |
 
@@ -30,7 +30,7 @@ If you are building your own Agent and want reusable implementation knowledge, u
 
 | Your goal | Start with | Then |
 |---|---|---|
-| Add one capability to an AI tool | Model or API | Add it to [Setup](/setup/) |
+| Use a capability inside an AI tool | Model or API | [Connect your AI tool](/setup/) once |
 | Call a capability from code | Model or API | Open its detail page, then use the [API Reference](/api-reference/) |
 | Automate a multi-step job | Agent | Clone, test, and deploy it from [Build Agent](/agents/) |
 | Reuse a proven workflow | Skill | Attach it while building an Agent |
@@ -41,7 +41,7 @@ When two entries look similar, compare their input, output, pricing, latency, an
 
 Models are AI engines for text generation and reasoning, image generation or editing, audio, and video.
 
-You can call a Model directly, add it to Setup for a connected AI tool, or select it when building an Agent. The Model determines how an Agent thinks; Skills and MCP tools determine what it can do.
+You can call a Model directly, call it from a connected AI tool, or select it when building an Agent. The Model determines how an Agent thinks; Skills and MCP tools determine what it can do.
 
 Most text Models use the OpenAI-compatible Chat Completions API. See [Supported Models](/models/supported) and the [Model capability matrix](/models/capabilities).
 
@@ -52,7 +52,7 @@ APIs give your application or connected AI tools access to real-world data and a
 Use an API in one of two ways:
 
 1. call it directly from your application
-2. add it to Setup so a connected AI tool can use it
+2. call it from an AI tool connected through [AI tools](/setup/)
 
 Agents reach external systems through [MCP connections](/agents/mcp-tools#mcp-connections).
 
@@ -74,7 +74,7 @@ Use a Skill when an Agent needs consistent expertise, such as company research, 
 
 ### Use it in your AI app
 
-Add Models, APIs, or Services to **Workspace Services**, then follow the client-specific flow in **Setup**. Supported clients and prerequisites are shown in the Console and can change independently of this overview.
+Connect your AI tool once from [AI tools](/setup/) in the Console. The connected tool can then search the whole catalog of Models and APIs and run what it needs, billed to the active workspace. Supported clients are listed on the AI tools page.
 
 ### Call it from your app
 

@@ -38,9 +38,9 @@ Use the specific filenames and output locations required by the Skill.
 
 ## 3. Connect SandBase
 
-Open [Console Setup](https://www.sandbase.ai/console/setup), select your agent, and follow the displayed connection and browser authorization steps. Reopen the agent session when instructed.
+Paste `set up https://www.sandbase.ai/SKILL.md` into your agent and approve the browser sign-in it opens, or run `npx -y @sandbaseai/cli@latest connect` in a terminal. Start a new agent session afterwards so the SandBase tools load. The same options are on [Build → AI tools](https://www.sandbase.ai/console/setup) in the Console.
 
-See [Setup](/setup/) for the full connection workflow.
+See [Connect AI tools](/setup/) for the full connection workflow.
 
 If the Skill's scripts require `SANDBASE_API_KEY`:
 

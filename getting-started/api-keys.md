@@ -10,12 +10,12 @@ API keys authenticate your requests to SandBase. This guide covers how to create
 ## Create an API key
 
 1. Log in to the [SandBase Console](https://www.sandbase.ai/console)
-2. Open **Developer → API Keys** (or go directly to [Console → API Keys](https://www.sandbase.ai/console/keys))
+2. Open **Developer → API Keys** (or go directly to [API Keys](https://www.sandbase.ai/console/keys))
 3. Click **New key**
-4. Enter a descriptive name (e.g., "Production Server", "Local Development")
-5. Optionally set a spending limit and expiration
+4. Enter a descriptive **Name** (e.g., "Production Server", "Local Development")
+5. Optionally set a **Spending limit** (empty means unlimited) and an **Expires** date (empty means no expiry)
 6. Click **Create key**
-7. Copy the key immediately — it will only be displayed once
+7. Copy the key from the **API key created** banner immediately — it will only be displayed once
 
 ::: danger Important
 Your API key is shown only once at creation time. If you lose it, you'll need to create a new one. Store it securely before closing the dialog.
@@ -73,7 +73,9 @@ SandBase API keys are scoped at the **organization level**:
 - A key can have an optional expiration and spending limit
 - SandBase-issued credentials, such as CLI Login keys, can carry a restricted scope and return `403` outside that scope
 
-The Console does not currently expose user-selected scopes for a standard key. CLI Login keys are created by the guided authorization flow, appear separately in the API Keys page, and cannot be edited like standard keys.
+The Console does not currently expose user-selected scopes for a standard key. CLI Login keys are created when you connect an AI tool. The API Keys page groups them in one expandable **CLI Login** row, and they cannot be edited like standard keys. Keys that SandBase creates for you carry an **Auto-created** badge; they have no key-level limit and are bounded by the account balance.
+
+The key list shows **Name**, **Key Prefix**, **Spent**, **Limit**, **Expires**, and **Status** for each key. Use **Edit** to change a standard key's name, spending limit, or expiration.
 
 Treat each key as an application credential rather than a personal password. Use organization membership for human access and API keys for workloads.
 
@@ -102,7 +104,7 @@ Keys without an expiration date remain valid until manually revoked.
 
 To revoke (disable) a key:
 
-1. Go to [Console → API Keys](https://www.sandbase.ai/console/keys)
+1. Go to [Developer → API Keys](https://www.sandbase.ai/console/keys)
 2. Find the key you want to revoke
 3. Click **Revoke**
 4. Confirm the action
@@ -149,7 +151,7 @@ Periodically create new keys and retire old ones. This limits the window of expo
 
 ### Monitor activity
 
-Check **Console → Activities** regularly for unexpected request or usage spikes, which could indicate a compromised key.
+Check **Developer → Activities** regularly for unexpected request or usage spikes, which could indicate a compromised key. **Request History** can filter by API key.
 
 If a key is exposed, revoke it immediately, create a replacement, update the consuming application, and inspect Activities and billing for unexpected usage. Do not wait for a scheduled rotation.
 

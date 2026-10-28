@@ -131,7 +131,7 @@ After a stream starts, an error may arrive in that protocol's stream format inst
 
 Record the endpoint, HTTP status, selected model or resource ID, timestamp, and any safe request identifier returned by the server. Never log authorization headers, API keys, credential values, or sensitive prompt content.
 
-Use [Console → Activities](https://www.sandbase.ai/console/activities) to inspect organization request history. When reporting a persistent failure, include sanitized request metadata and the smallest reproducible request.
+Use [Developer → Activities](https://www.sandbase.ai/console/activities) to inspect organization request history. When reporting a persistent failure, include sanitized request metadata and the smallest reproducible request.
 
 ## See also
 

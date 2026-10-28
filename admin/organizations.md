@@ -24,17 +24,17 @@ Organizations are the billing and access control unit in SandBase. API keys, bal
 
 ## Create a Team Organization
 
-1. Open the workspace menu in the Console header.
-2. Choose **Create Team**, or open **Team** and select **Create team**.
-3. Enter the team name and create the workspace.
-4. Select **Add member** and enter the email of an existing SandBase account.
+1. Open the account menu at the top right of the Console.
+2. Choose **Create Team**, or open **Developer → Team** and select **Create team**.
+3. Enter a **Team name**, then select **Create team**.
+4. Select **Add member**, enter the **Account email** of an existing SandBase account, and choose a **Workspace role**: **Member** or **Admin**.
 
 An added member must already have a SandBase account. Owners can change member roles; owners and admins can remove
 non-owner members.
 
 ## Switch Organizations
 
-If you belong to multiple organizations, switch between them in the Console header dropdown. Your API keys and billing are scoped to the active organization.
+If you belong to multiple organizations, switch between them in the account menu, or use the **Switch workspace** strip on **Developer → Team**. Your API keys and billing are scoped to the active organization.
 
 ## Balance and billing
 

@@ -12,9 +12,11 @@ Bearer token: `Authorization: Bearer sk-YOUR_KEY`
 
 ## Connect AI Tools
 
-Guided Setup: https://www.sandbase.ai/console/setup
+AI tools (Console): https://www.sandbase.ai/console/setup
 
-Choose a client in Setup and follow the exact guidance shown there. For a CLI-supported client such as Codex:
+Paste into your agent: `set up https://www.sandbase.ai/SKILL.md`. The agent reads the SandBase Skill, installs the CLI, and asks the user to approve one browser sign-in; no API key is pasted.
+
+From a terminal: `npx -y @sandbaseai/cli@latest connect` (add `--client codex` to configure one client), or the installer:
 
 `curl -fsSL https://sandbase.ai/install.sh | sh -s -- --client codex`
 

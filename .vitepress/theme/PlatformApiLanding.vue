@@ -53,7 +53,7 @@ const operationCount = computed(() => platformApiReferencePlatforms.reduce((tota
 .eyebrow {
   color: var(--vp-c-text-3);
   font-size: 12px;
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: 0.08em;
   margin: 0 0 10px;
   text-transform: uppercase;
@@ -62,7 +62,7 @@ const operationCount = computed(() => platformApiReferencePlatforms.reduce((tota
 h1 {
   border: 0;
   font-size: clamp(30px, 2.6vw, 38px);
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.04;
   margin: 0 0 20px;
@@ -90,13 +90,13 @@ h1 {
 .landing-counts dt {
   color: var(--vp-c-text-3);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
 .landing-counts dd {
   font-size: 24px;
-  font-weight: 650;
+  font-weight: 500;
   margin: 0;
 }
 

@@ -32,8 +32,8 @@ because the allowance count was unavailable).
 
 ## Manage billing in the Console
 
-Use **Console → Billing** to view your balance, add credits, and manage the billing settings available to your
-organization. Open **Console → Activities → Usage** for organization-level request, token, and cost summaries.
+Use **Developer → Billing** to view your balance, buy credits, set up auto top-up, redeem coupons, and manage the billing settings available to your
+organization. Open **Developer → Activities → Usage** for organization-level request, token, and cost summaries.
 
 ::: info Public API boundary
 Balance, top-up, billing export, and organization-wide usage endpoints are not currently part of the supported
@@ -71,7 +71,7 @@ curl https://api.sandbase.ai/v1/tasks/{task_id}/cost \
 
 The response distinguishes the current `cost` from `estimated_cost` and reports whether settlement is final. Do
 not use `cost` for billing reconciliation until `settled` is `true`. Task records are operational lookup data rather
-than an accounting ledger. Use the billing records and CSV exports available under **Console → Activities → Usage**
+than an accounting ledger. Use the billing records and CSV exports available under **Developer → Activities → Usage**
 for reconciliation and longer-term records.
 
 ## Cost-control practices

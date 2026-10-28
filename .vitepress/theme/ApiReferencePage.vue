@@ -422,9 +422,9 @@ function highlightCode(code: string, language = '') {
 <style scoped>
 .api-reference-page {
   --api-border: var(--vp-c-divider);
-  --api-soft: #f7f8f8;
-  --api-muted: #667085;
-  --api-green: #356451;
+  --api-soft: var(--sb-surface-alt);
+  --api-muted: var(--sb-ink-subtle);
+  --api-green: var(--sb-accent);
   position: relative;
   color: var(--vp-c-text-1);
   min-width: 0;
@@ -445,9 +445,9 @@ function highlightCode(code: string, language = '') {
   display: inline-flex;
   overflow: hidden;
   border: 1px solid var(--api-border);
-  border-radius: 7px;
-  background: #fff;
-  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+  border-radius: 0;
+  border-color: var(--color-line-control);
+  background: var(--sb-surface);
 }
 
 .api-page-copy-primary,
@@ -467,7 +467,7 @@ function highlightCode(code: string, language = '') {
   min-height: 34px;
   padding: 0 12px;
   font-size: 13px;
-  font-weight: 520;
+  font-weight: 500;
 }
 
 .api-page-copy-toggle {
@@ -499,10 +499,9 @@ function highlightCode(code: string, language = '') {
 .api-page-actions-dropdown {
   min-width: 220px;
   padding: 8px;
-  border: 1px solid var(--api-border);
-  border-radius: 9px;
-  background: #fff;
-  box-shadow: 0 16px 36px rgba(16, 24, 40, 0.16);
+  border-radius: 0;
+  background: var(--sb-surface);
+  box-shadow: var(--shadow-float);
 }
 
 .api-page-actions-dropdown button {
@@ -512,7 +511,7 @@ function highlightCode(code: string, language = '') {
   width: 100%;
   min-height: 38px;
   padding: 0 10px;
-  border-radius: 7px;
+  border-radius: 0;
   color: var(--vp-c-text-1);
   font-size: 13px;
   text-align: left;
@@ -527,7 +526,7 @@ function highlightCode(code: string, language = '') {
   margin: 0 0 24px;
   border: 0;
   font-size: clamp(30px, 2.6vw, 38px);
-  font-weight: 650;
+  font-weight: 500;
   letter-spacing: -.025em;
   line-height: 1.04;
 }
@@ -561,17 +560,18 @@ function highlightCode(code: string, language = '') {
   align-items: center;
   height: 28px;
   padding: 0 9px;
-  border-radius: 6px;
-  border: 1px solid #d5ddd9;
-  background: #f1f4f2;
-  color: #35594a;
+  border-radius: 0;
+  border: 0;
+  background: var(--color-tint-cyan);
+  color: var(--color-tint-fg);
+  font-family: var(--vp-font-family-mono);
   font-size: 12px;
-  font-weight: 750;
-  letter-spacing: .04em;
+  font-weight: 700;
+  letter-spacing: .08em;
 }
 
-.api-method.is-post { background: #eef1f4; color: #465466; }
-.api-method.is-delete { background: #f7eeee; color: #9b4141; }
+.api-method.is-post { background: var(--sb-ink); color: var(--sb-canvas); }
+.api-method.is-delete { background: transparent; box-shadow: inset 0 0 0 1px currentColor; color: var(--color-error); }
 
 .api-reference-description {
   margin: 0;
@@ -608,7 +608,7 @@ function highlightCode(code: string, language = '') {
   margin: 0 0 6px;
   border: 0;
   font-size: 18px;
-  font-weight: 620;
+  font-weight: 500;
   letter-spacing: -.015em;
 }
 
@@ -642,7 +642,7 @@ function highlightCode(code: string, language = '') {
   background: transparent;
   color: var(--vp-c-text-1);
   font-size: 12.5px;
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .api-field-list.has-schema {
@@ -670,26 +670,27 @@ function highlightCode(code: string, language = '') {
   background: transparent;
   color: var(--vp-c-text-1);
   font-size: 12.5px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .api-field-type {
-  color: #345d77;
+  color: var(--sb-accent);
   font-family: var(--vp-font-family-mono);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .api-field-required {
   padding: 0;
   border-radius: 0;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
+  font-family: var(--vp-font-family-mono);
   letter-spacing: .03em;
   text-transform: uppercase;
 }
 
-.api-field-required { background: transparent; color: #9b4141; }
+.api-field-required { background: transparent; color: var(--color-error); }
 
 .api-field-row p {
   margin: 0;
@@ -748,9 +749,10 @@ function highlightCode(code: string, language = '') {
 
 .api-example-card {
   overflow: hidden;
-  border: 1px solid var(--api-border);
-  border-radius: 7px;
-  background: #fff;
+  border: 0;
+  border-radius: 0;
+  background: var(--sb-panel);
+  color: var(--sb-panel-fg);
 }
 
 .api-example-toolbar,
@@ -761,7 +763,7 @@ function highlightCode(code: string, language = '') {
   justify-content: space-between;
   gap: 12px;
   padding: 0 12px;
-  border-bottom: 1px solid var(--api-border);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-panel-fg-label) 30%, transparent);
 }
 
 .api-language-tabs {
@@ -775,28 +777,38 @@ function highlightCode(code: string, language = '') {
 .api-copy-button {
   border: 0;
   background: transparent;
-  color: #6b7280;
+  color: var(--color-panel-fg-label);
   cursor: pointer;
   font: inherit;
 }
 
 .api-language-tabs button {
   padding: 8px 10px;
-  border-radius: 7px;
-  font-size: 12px;
-  font-weight: 600;
+  border-radius: 0;
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .api-language-tabs button.active {
-  background: #f0f2f1;
-  color: #3c5148;
+  background: transparent;
+  color: var(--sb-panel-fg);
+  box-shadow: inset 0 -2px 0 var(--color-tint-cyan);
 }
 
 .api-copy-button {
   flex: none;
   padding: 6px 8px;
+  font-family: var(--vp-font-family-mono);
   font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
+
+.api-copy-button:hover { color: var(--sb-panel-fg); }
 
 .api-example-card pre {
   max-height: 460px;
@@ -808,67 +820,40 @@ function highlightCode(code: string, language = '') {
 }
 
 .api-example-card pre code {
-  color: #243046;
-  font-size: 11.5px;
-  line-height: 1.62;
+  color: var(--color-panel-fg);
+  font-size: 13px;
+  line-height: 1.7;
 }
 
-.api-example-card pre code :deep(.syntax-key) {
-  color: #1b6d9b;
-}
-
-.api-example-card pre code :deep(.syntax-string) {
-  color: #0f766e;
-}
-
-.api-example-card pre code :deep(.syntax-number),
-.api-example-card pre code :deep(.syntax-literal) {
-  color: #8a4baf;
-}
-
+.api-example-card pre code :deep(.syntax-key),
 .api-example-card pre code :deep(.syntax-keyword),
 .api-example-card pre code :deep(.syntax-flag) {
-  color: #6d4aff;
-  font-weight: 650;
+  color: var(--color-panel-fg);
 }
 
+.api-example-card pre code :deep(.syntax-string),
 .api-example-card pre code :deep(.syntax-url),
-.api-example-card pre code :deep(.syntax-variable) {
-  color: #075985;
+.api-example-card pre code :deep(.syntax-variable),
+.api-example-card pre code :deep(.syntax-number),
+.api-example-card pre code :deep(.syntax-literal) {
+  color: var(--color-panel-fg-muted);
 }
 
 .api-response-heading {
-  color: var(--vp-c-text-2);
-  font-size: 12px;
-  font-weight: 650;
+  color: var(--color-panel-fg-label);
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
 .api-response-heading code {
   padding: 2px 7px;
-  border: 1px solid #d8ddda;
-  background: #f2f4f3;
-  color: #3c5148;
+  border: 0;
+  background: color-mix(in srgb, var(--color-panel-fg) 12%, transparent);
+  color: var(--color-panel-fg);
 }
-
-:global(.dark) .api-reference-page {
-  --api-soft: #202326;
-}
-
-:global(.dark) .api-page-actions-menu,
-:global(.dark) .api-page-actions-dropdown {
-  background: #16181a;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
-}
-:global(.dark) .api-example-card { background: #16181a; }
-:global(.dark) .api-example-card pre code { color: #d8dee9; }
-:global(.dark) .api-example-card pre code .syntax-key { color: #7dd3fc; }
-:global(.dark) .api-example-card pre code .syntax-string { color: #5eead4; }
-:global(.dark) .api-example-card pre code .syntax-number,
-:global(.dark) .api-example-card pre code .syntax-literal { color: #c4b5fd; }
-:global(.dark) .api-example-card pre code .syntax-keyword,
-:global(.dark) .api-example-card pre code .syntax-flag { color: #a78bfa; }
-:global(.dark) .api-example-card pre code .syntax-url,
-:global(.dark) .api-example-card pre code .syntax-variable { color: #93c5fd; }
 
 @media (max-width: 1180px) {
   .api-reference-layout {
