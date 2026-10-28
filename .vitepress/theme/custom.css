@@ -50,7 +50,7 @@
   --sb-accent-green: var(--sb-accent);   /* legacy alias reused across this file */
 
   --sb-code-text: var(--sb-ink);         /* inline code chips read on surface-alt */
-  --sb-code-bg: var(--sb-surface-alt);   /* inline code chips */
+  --sb-code-bg: transparent;             /* inline code: plain mono text, no chip */
   --sb-code-border: var(--sb-line);
   --sb-code-block-bg: var(--sb-panel);   /* fenced code = dark panel */
   --vp-code-block-bg: var(--sb-panel);
@@ -132,7 +132,7 @@
   --sb-accent-green: var(--sb-accent);
 
   --sb-code-text: var(--sb-ink);
-  --sb-code-bg: var(--sb-surface-alt);
+  --sb-code-bg: transparent;
   --sb-code-border: var(--sb-line);
   --sb-code-block-bg: var(--sb-panel);
   --vp-code-block-bg: var(--sb-panel);
@@ -587,20 +587,14 @@
   --vp-custom-block-danger-text: var(--color-error);
 }
 
-/* ─── Table inline code readability fix ─── */
-/* Make inline code in tables more readable (darker text, subtle bg) */
+/* ─── Table inline code: plain ink mono text, no chip ─── */
 .vp-doc table code {
-  background-color: var(--vp-c-bg-soft);
+  background-color: transparent;
   color: var(--vp-c-text-1);
-  padding: 2px 6px;
+  padding: 0;
   border-radius: 0;
   font-size: 0.85em;
-  font-weight: 500;
-}
-
-.dark .vp-doc table code {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: var(--vp-c-text-1);
+  font-weight: 400;
 }
 
 /* ─── Claude-style typography refinement ─── */
@@ -631,8 +625,8 @@ html {
 .vp-doc li > code,
 .vp-doc td > code,
 .vp-doc dd > code {
-  padding: 2px 5px;
-  border: 1px solid var(--sb-code-border);
+  padding: 0;
+  border: 0;
   border-radius: 0;
   background: var(--sb-code-bg) !important;
   color: var(--sb-code-text) !important;
@@ -2334,13 +2328,14 @@ html {
   text-decoration-color: var(--sb-accent);
 }
 
-/* Inline code: flat surface-alt chip, square, no border. */
+/* Inline code: plain mono text. No chip background or border; the mono face
+   alone marks it as code. */
 .vp-doc:not(:has(.api-reference-page)) :not(pre) > code,
 .dark .vp-doc:not(:has(.api-reference-page)) :not(pre) > code {
-  padding: 2px 4px;
+  padding: 0;
   border: 0;
   border-radius: 0;
-  background: var(--sb-surface-alt) !important;
+  background: transparent !important;
   color: var(--sb-ink) !important;
   font-family: var(--vp-font-family-mono);
   font-size: 0.875em;
