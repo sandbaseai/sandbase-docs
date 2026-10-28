@@ -199,7 +199,7 @@ watch(
 .category-row { padding-left: 14px; }
 
 .sidebar-link {
-  border-radius: 6px;
+  border-radius: 0;
   color: var(--vp-c-text-2);
   display: block;
   font-size: 14px;
@@ -214,14 +214,14 @@ watch(
 
 .category-link {
   flex: 1 1 auto;
-  font-weight: 600;
+  font-weight: 500;
   padding: 4px 6px 4px 0;
 }
 
 .disclosure {
   background: transparent;
   border: 0;
-  border-radius: 6px;
+  border-radius: 0;
   color: var(--vp-c-text-2);
   cursor: pointer;
   font: inherit;

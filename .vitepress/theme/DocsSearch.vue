@@ -73,7 +73,7 @@ function openSearch() {
   background: none;
   color: var(--color-ink-subtle);
   font-family: var(--font-family-mono);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   line-height: 1;
 }
 </style>

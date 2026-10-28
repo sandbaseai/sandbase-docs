@@ -39,13 +39,18 @@ export default {
     app.component('QuickstartOnboard', QuickstartOnboard)
     app.component('QuickstartResources', QuickstartResources)
 
-    // Sync theme with main site: read localStorage 'theme' key set by SandBase-dashboard
+    // Sync theme with the main site. sandbase-fe stores 'system' | 'light' | 'dark'
+    // under localStorage 'theme' (src/theme/theme.ts); 'system' or no value follows the OS.
     if (typeof window !== 'undefined') {
-      const siteTheme = localStorage.getItem('theme')
-      if (siteTheme === 'dark') {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
+      try {
+        const stored = localStorage.getItem('theme')
+        const preference = stored === 'light' || stored === 'dark' ? stored : 'system'
+        const dark = preference === 'dark' || (preference === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.classList.toggle('dark', dark)
+        // Keep VitePress's pre-paint script in agreement on the next load.
+        localStorage.setItem('vitepress-theme-appearance', preference === 'system' ? 'auto' : preference)
+      } catch {
+        /* privacy mode */
       }
     }
   }

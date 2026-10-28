@@ -21,7 +21,7 @@ For browser-based creation and observation, sign in to the [Sandbox Console](htt
 
 | Environment variable | Value |
 |---|---|
-| `E2B_API_KEY` | Your SandBase API key from [Console → API Keys](https://www.sandbase.ai/console/keys) |
+| `E2B_API_KEY` | Your SandBase API key from [Developer → API Keys](https://www.sandbase.ai/console/keys) |
 | `E2B_API_URL` | `https://sandbox.sandbase.ai` |
 | `E2B_DOMAIN` | `sandbox.sandbase.ai` |
 | `E2B_DEBUG` | `false` |

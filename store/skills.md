@@ -21,11 +21,7 @@ Use a Skill when an Agent needs repeatable expertise, such as:
 
 ## Skills are for Build Agent
 
-Skills are not usually installed directly into Setup as top-level tools.
-
-Setup is for Models, APIs, and Services.
-
-Skills are attached while building an Agent.
+Skills are attached while building an Agent rather than installed as standalone tools. Connected AI tools load the SandBase Skill itself when you [connect them](/setup/).
 
 ## Public and private Skills
 

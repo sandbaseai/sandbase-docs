@@ -12,35 +12,40 @@ import SocialIcon from './SocialIcon.vue'
  */
 const SITE = 'https://www.sandbase.ai'
 const statusPageUrl = 'https://status.sandbase.ai/'
+const contactSalesHref = `${SITE}/contact-sales?source=footer`
 const tagline =
-  'Build your Agent, give it real-world tools, and run it inside your AI app, product, or schedule.'
+  'Models, APIs and Runtimes on one account. Build your personal Agent and call it through the OpenAI Agents API.'
 
-const footerSections = [
+type FooterLink = { href: string; label: string; external?: boolean; separate?: boolean }
+
+/* Mirrors the header: Store and Build menus, the Solutions landing pages, then Docs/Pricing/Lab. */
+const footerSections: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Store',
     links: [
-      { href: `${SITE}/agents`, label: 'Agents' },
-      { href: `${SITE}/models`, label: 'Models' },
+      { href: `${SITE}/models`, label: 'Language Models' },
+      { href: `${SITE}/models/image-video`, label: 'Image & Video Models' },
       { href: `${SITE}/apis`, label: 'APIs' },
       { href: `${SITE}/skills`, label: 'Skills' },
     ],
   },
   {
-    title: 'Solutions',
+    title: 'Build',
     links: [
-      { href: `${SITE}/solutions`, label: 'All Solutions' },
-      { href: `${SITE}/solutions/language-models`, label: 'Language Models' },
-      { href: `${SITE}/solutions/build-agent`, label: 'Build Agent' },
-      { href: `${SITE}/solutions/schedule-agent-work`, label: 'Schedule Agent Work' },
+      { href: `${SITE}/solutions/use-in-ai-tools`, label: 'Use in AI Tools' },
+      { href: `${SITE}/agents`, label: 'Agents' },
+      { href: `${SITE}/landing/sandbox`, label: 'Sandbox' },
+      { href: `${SITE}/console`, label: 'Console' },
     ],
   },
   {
-    title: 'Build',
+    title: 'Solutions',
     links: [
-      { href: `${SITE}/console/agents`, label: 'Build Agent' },
-      { href: `${SITE}/console/endpoints`, label: 'Services' },
-      { href: `${SITE}/console/deployments`, label: 'Schedules' },
-      { href: `${SITE}/console/sessions`, label: 'Sessions' },
+      { href: `${SITE}/solutions/language-models`, label: 'Language Models' },
+      { href: `${SITE}/solutions/image-video-models`, label: 'Image & Video Models' },
+      { href: `${SITE}/solutions/apis-services`, label: 'APIs & Services' },
+      { href: `${SITE}/solutions/build-agent`, label: 'Build Agent' },
+      { href: `${SITE}/solutions/monitor-agent-runs`, label: 'Monitor Agent Runs' },
     ],
   },
   {
@@ -48,7 +53,9 @@ const footerSections = [
     links: [
       { href: '/docs/', label: 'Docs' },
       { href: `${SITE}/pricing`, label: 'Pricing' },
-      { href: `${SITE}/blog/`, label: 'Blog' },
+      { href: `${SITE}/models/compare`, label: 'Compare Models' },
+      { href: `${SITE}/lab/`, label: 'Lab', separate: true },
+      { href: 'https://blog.sandbase.ai/', label: 'Blog', external: true },
     ],
   },
 ]
@@ -74,12 +81,12 @@ let systemTheme: MediaQueryList | undefined
 
 function applyTheme(next: Theme) {
   theme.value = next
-  if (next === 'system') {
-    localStorage.removeItem('theme')
-    isDark.value = systemTheme?.matches ?? false
-  } else {
+  isDark.value = next === 'system' ? (systemTheme?.matches ?? false) : next === 'dark'
+  try {
     localStorage.setItem('theme', next)
-    isDark.value = next === 'dark'
+    localStorage.setItem('vitepress-theme-appearance', next === 'system' ? 'auto' : next)
+  } catch {
+    /* privacy mode */
   }
 }
 
@@ -121,20 +128,21 @@ function chooseTheme(next: Theme) {
               </a>
             </li>
           </ul>
+          <a :href="contactSalesHref" target="_self" class="sf-link sf-contact-sales">Contact Sales<span aria-hidden="true"> →</span></a>
         </div>
 
         <nav aria-label="Footer" class="sf-nav">
           <div class="sf-nav-grid">
             <div v-for="section in footerSections" :key="section.title" class="sf-group">
-              <h2>{{ section.title }}</h2>
+              <p class="sf-group-title">{{ section.title }}</p>
               <ul>
-                <li v-for="item in section.links" :key="item.href">
+                <li v-for="item in section.links" :key="item.href + item.label">
                   <a
                     :href="item.href"
-                    :target="item.href.startsWith('http') ? '_blank' : undefined"
-                    :rel="item.href.startsWith('http') ? 'noopener noreferrer' : undefined"
+                    :target="item.external ? '_blank' : item.href.startsWith('http') ? '_self' : undefined"
+                    :rel="item.external ? 'noopener noreferrer' : undefined"
                     class="sf-link"
-                  >{{ item.label }}</a>
+                  >{{ item.label }}<span v-if="item.external || item.separate" aria-hidden="true"> ↗</span></a>
                 </li>
               </ul>
             </div>
@@ -143,7 +151,11 @@ function chooseTheme(next: Theme) {
       </div>
 
       <div class="sf-bottom">
-        <p>© 2026 SandBase</p>
+        <div class="sf-legal">
+          <p>© 2026 SandBase</p>
+          <a :href="`${SITE}/terms`" target="_self">Terms</a>
+          <a :href="`${SITE}/privacy`" target="_self">Privacy</a>
+        </div>
         <div class="sf-status">
           <a :href="statusPageUrl" target="_blank" rel="noopener noreferrer" aria-label="View SandBase uptime status" class="sf-status-link">
             <span aria-hidden="true" class="sf-status-dot" />
@@ -178,6 +190,7 @@ function chooseTheme(next: Theme) {
      sidebar drawer (60) and its backdrop (50). */
   z-index: 45;
   width: 100%;
+  border-top: 1px solid var(--color-line);
   background: var(--color-canvas);
   color: var(--color-ink);
   line-height: 1.5rem;
@@ -242,7 +255,18 @@ function chooseTheme(next: Theme) {
 .sf-social-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4375rem;
+}
+.sf-social-link :deep(svg) {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+.sf-contact-sales {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
 }
 .sf-link {
   color: var(--color-ink);
@@ -268,7 +292,7 @@ function chooseTheme(next: Theme) {
   flex-direction: column;
   gap: 0.75rem;
 }
-.sf-group h2 {
+.sf-group .sf-group-title {
   margin: 0;
   border: 0;
   padding: 0;
@@ -288,6 +312,8 @@ function chooseTheme(next: Theme) {
 .sf-bottom {
   display: flex;
   margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-line);
   flex-direction: column;
   gap: 1rem;
   color: var(--color-ink-muted);
@@ -296,6 +322,20 @@ function chooseTheme(next: Theme) {
 }
 .sf-bottom p {
   margin: 0;
+}
+.sf-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.sf-legal a {
+  color: var(--color-ink-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.sf-legal a:hover {
+  color: var(--color-accent);
 }
 .sf-status {
   display: flex;
@@ -317,7 +357,7 @@ function chooseTheme(next: Theme) {
 .sf-status-dot {
   width: 7px;
   height: 7px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--color-positive);
 }
 .sf-theme {

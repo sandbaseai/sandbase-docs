@@ -219,7 +219,7 @@ watch(
 }
 
 .category-link {
-  border-radius: 6px;
+  border-radius: 0;
   color: var(--vp-c-text-2);
   flex: 1 1 auto;
   font-size: 14px;
@@ -232,7 +232,7 @@ watch(
 .category-disclosure {
   background: transparent;
   border: 0;
-  border-radius: 6px;
+  border-radius: 0;
   color: var(--vp-c-text-2);
   cursor: pointer;
   font: inherit;
@@ -271,7 +271,7 @@ watch(
   align-items: center;
   background: transparent;
   border: 0;
-  border-radius: 6px;
+  border-radius: 0;
   color: var(--vp-c-text-2);
   cursor: pointer;
   display: flex;
@@ -304,7 +304,7 @@ watch(
 
 .platform-button {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 24px;
   padding: 4px 0;
 }
@@ -360,7 +360,7 @@ watch(
 
 .operation-list a.active::before {
   background-color: var(--vp-c-brand-1);
-  border-radius: 2px;
+  border-radius: 0;
   bottom: 6px;
   content: '';
   left: -17px;
@@ -379,13 +379,13 @@ watch(
 }
 
 .operation-list a.active {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .category-link.active {
   background: var(--sb-sidebar-active-bg);
   color: var(--sb-sidebar-active-text);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .disclosure:focus-visible,

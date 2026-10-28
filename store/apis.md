@@ -21,7 +21,7 @@ Use APIs for things like:
 You can use an API in two ways:
 
 1. **Call it directly** from your application.
-2. **Add it to Workspace Services** so a connected AI tool can discover it.
+2. **Use it from a connected AI tool.** After you [connect your AI tool](/setup/), the tool can search the catalog and call the API, billed to your workspace.
 
 Store APIs are not attached to Agents as tools. An Agent reaches external systems through [MCP connections](/agents/mcp-tools#mcp-connections) and reusable [Skills](/agents/mcp-tools).
 

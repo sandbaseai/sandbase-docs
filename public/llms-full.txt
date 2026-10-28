@@ -21,11 +21,23 @@ Some billable operations return an x-task-id response header. Not every API oper
 
 Source: https://github.com/sandbaseai/cli
 
-Use the guided Console flow to select an AI tool and see its current prerequisites, installation method, and verification steps:
+The Console AI tools page lists supported clients and the current connection options:
 
 https://www.sandbase.ai/console/setup
 
-For a CLI-supported client such as Codex:
+Fastest path: paste this into the agent. It reads the SandBase Skill, installs the CLI, and asks the user to approve one browser sign-in; no API key is pasted:
+
+```text
+set up https://www.sandbase.ai/SKILL.md
+```
+
+From a terminal, `connect` configures every installed client, or one client with `--client`:
+
+```sh
+npx -y @sandbaseai/cli@latest connect --client codex
+```
+
+The installer script runs the same `connect` command:
 
 ```sh
 curl -fsSL https://sandbase.ai/install.sh | sh -s -- --client codex

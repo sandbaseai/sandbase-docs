@@ -14,14 +14,14 @@
   margin: 24px 0;
   padding: 12px 16px;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 6px;
+  border-radius: 0;
   background: var(--vp-c-bg-soft);
   color: var(--vp-c-text-1);
 }
 .promo-label {
   color: var(--vp-c-text-2);
   font-family: var(--vp-font-family-mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   line-height: 1.6;
   letter-spacing: 0.08em;

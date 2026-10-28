@@ -18,7 +18,7 @@ Earlier versions of SandBase stored workspace-, Agent-, or Service-scoped creden
 
 ## With the API
 
-Create, rotate, and revoke Secrets with the Secrets API. This guide documents the API contract; the Console's **Developer → Credentials** page is not the reference for Secret behavior.
+Create, rotate, and revoke Secrets with the Secrets API. This guide documents the API contract; the Console's Credentials page, opened from the Agent editor, is not the reference for Secret behavior.
 
 Create a Secret. `Idempotency-Key` is required for every Secret write.
 

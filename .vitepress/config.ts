@@ -250,6 +250,8 @@ export default defineConfig({
     'admin/api-keys.md',
     'setup/cli.md',
     'setup/groups.md',
+    // Console Workspace Services was folded into AI tools (/console/setup).
+    'setup/installed.md',
     // These provider operations explicitly state that the upstream service is
     // unavailable; do not publish dead model pages or index them.
     'model-api-reference/platform-apis/douyin/web/live-room.md',

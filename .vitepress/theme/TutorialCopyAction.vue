@@ -42,7 +42,7 @@ const label = computed(() => state.value === 'copied'
 
 <style scoped>
 .tutorial-actions { display: flex; justify-content: flex-end; margin-bottom: 16px; }
-button { display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 0 12px; border: 1px solid var(--vp-c-divider); border-radius: 7px; background: var(--vp-c-bg); color: var(--vp-c-text-1); cursor: pointer; font-size: 13px; font-weight: 520; }
+button { display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 0 12px; border: 1px solid var(--vp-c-divider); border-radius: 0; background: var(--vp-c-bg); color: var(--vp-c-text-1); cursor: pointer; font-size: 13px; font-weight: 500; }
 button:hover { background: var(--vp-c-bg-soft); }
 button:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 3px; }
 svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; }

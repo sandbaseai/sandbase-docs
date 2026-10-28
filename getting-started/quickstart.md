@@ -19,7 +19,7 @@ SandBase uses GitHub or Google. There is no separate email-and-password signup.
 
 First login creates your account and a **personal workspace**. You do not need to create an organization before you can try SandBase.
 
-If a welcome credit appears, you can start without adding a payment method. Treat [Console Credits](https://www.sandbase.ai/console/billing){target="_blank"} as the source of truth for the current balance.
+If a welcome credit appears, you can start without adding a payment method. The **Balance** card on the Console Dashboard and [Billing](https://www.sandbase.ai/console/billing){target="_blank"} show the current balance.
 
 ## 2. Create an organization {#create-organization}
 
@@ -32,14 +32,14 @@ API keys, usage, and billing belong to an organization. Stay in the personal wor
 
 ### 2.1 Create a team {#create-team}
 
-1. Open [Create team](https://www.sandbase.ai/console/members?create=1){target="_blank"}, or use **Create Team** in the Console header menu.
-2. Enter a team name, then create the workspace.
-3. Confirm the Console header now shows that team as the active organization.
-4. Select **Add member** and enter the email of an existing SandBase account.
+1. Open [Create team](https://www.sandbase.ai/console/members?create=1){target="_blank"}, or choose **Create Team** in the account menu at the top right of the Console.
+2. Enter a **Team name**, then select **Create team**.
+3. Confirm the account menu now shows that team as the active workspace.
+4. On **Developer → Team**, select **Add member**, enter the **Account email** of an existing SandBase account, and choose the **Workspace role** (Member or Admin).
 
 An invited person must already have a SandBase account. If they do not, send them [this page](/getting-started/quickstart) so they can sign in first, then add them.
 
-If you belong to more than one organization, switch in the Console header. Keys and billing follow the **active** organization. See [Organizations](/admin/organizations) for roles.
+If you belong to more than one organization, switch in the account menu. Keys and billing follow the **active** organization. See [Organizations](/admin/organizations) for roles.
 
 ## 3. Connect SandBase {#connect}
 
@@ -49,7 +49,7 @@ Pick the path that matches the work you need to do now. You can add the others l
 
 Choose this if you are adding one capability to your app.
 
-1. Create an [API key](/getting-started/api-keys) in [Console → API Keys](https://www.sandbase.ai/console/keys){target="_blank"}. Copy it immediately; it is shown only once.
+1. Create an [API key](/getting-started/api-keys) in [Developer → API Keys](https://www.sandbase.ai/console/keys){target="_blank"} with **New key**. Copy it immediately; it is shown only once.
 2. Filter the Store and open a detail page:
    - [Language models](https://www.sandbase.ai/models){target="_blank"} — filter by provider, capabilities, context, and price
    - [Image and video models](https://www.sandbase.ai/models/image-video){target="_blank"} — filter multimodal models such as text-to-image, image-to-image, text-to-video, and image-to-video
@@ -88,17 +88,22 @@ Learn more: [Store](/store/).
 
 ### 3.3 Use SandBase in your AI tool {#use-in-ai-tool}
 
-Choose this if you use Codex, Claude, Cursor, Kiro, or another supported client and want Models, APIs, and Services inside that app.
+Choose this if you use Claude Code, Codex, Cursor, Kiro, or another supported client and want SandBase Models and APIs inside that app.
 
-1. Open [Setup](https://www.sandbase.ai/console/setup){target="_blank"}.
-2. Choose your AI tool and review its prerequisites.
-3. Run the command or import steps shown for that client.
-4. Complete authorization, then restart or reload the client if instructed.
-5. Verify the SandBase entry and make one safe tool request.
+1. Open [Build → AI tools](https://www.sandbase.ai/console/setup){target="_blank"} in the Console.
+2. Paste this line into your agent:
 
-To change what the connected tool can discover, open [Workspace Services](https://www.sandbase.ai/console/setup/installed){target="_blank"}.
+   ```text
+   set up https://www.sandbase.ai/SKILL.md
+   ```
 
-For example, after adding a web search API, you can ask:
+3. Approve the browser sign-in the agent opens. There is no API key to paste.
+4. Start a new session or restart the app so the SandBase tools load.
+5. Make one safe tool request.
+
+Prefer a terminal? Run `npx -y @sandbaseai/cli@latest connect`. The connected tool can search the whole catalog and runs are billed to the active workspace.
+
+For example, you can ask:
 
 > Research this company and give me a sourced customer brief.
 
@@ -108,12 +113,12 @@ Learn more: [Connect AI tools](/setup/).
 
 Choose this if the work has multiple steps or should be reused.
 
-1. Open [Build Agent](https://www.sandbase.ai/console/agents){target="_blank"}.
-2. Define the Agent instructions.
-3. Pick a Model.
-4. Add Skills and MCP tools.
-5. Test it in a Session.
-6. Deploy the tested version as a Service or Schedule.
+1. Open [Build → Agents](https://www.sandbase.ai/console/agents){target="_blank"} and select **Create**.
+2. Fill in **Overview** and **Instructions**.
+3. Pick a **Model**.
+4. Add Skills and MCP tools under **Capabilities**, then set **Runtime**.
+5. Select **Create & Chat** to test it in a Session.
+6. Call the tested version from your app on the Agent's **API** tab, or deploy it as a Service or Schedule.
 
 Learn more: [Build Agent](/agents/). To do the same from code with the official OpenAI SDK, see [OpenAI compatibility](/agents/openai-compatibility).
 
@@ -121,11 +126,11 @@ Learn more: [Build Agent](/agents/). To do the same from code with the official 
 
 You are ready when all of the following are true:
 
-- The Console header shows the organization you intend to use.
+- The Console account menu shows the organization you intend to use.
 - You completed one path: an API call, a run on the website, a connected AI tool, or an Agent.
 - One request succeeds.
 
-If the request fails, check the active organization, the key, and [Errors](/guides/error-handling). Add credits in [Billing](https://www.sandbase.ai/console/billing){target="_blank"} when the workspace has no remaining balance.
+If the request fails, check the active organization, the key, and [Errors](/guides/error-handling). Top up in [Billing](https://www.sandbase.ai/console/billing){target="_blank"} when the workspace has no remaining balance.
 
 ## 5. Billing and usage {#billing-and-usage}
 
@@ -139,6 +144,6 @@ After you sign in, review spend for the active organization:
 
 - [API keys](/getting-started/api-keys) — create and rotate organization keys
 - [Store](/store/) — try Models, APIs, and Agents on the website
-- [Setup](/setup/) — install capabilities into AI tools
+- [Connect AI tools](/setup/) — give your AI tool the SandBase catalog
 - [Build Agent](/agents/) — create reusable Agents
 - [API Reference](/api-reference/) — integrate with code

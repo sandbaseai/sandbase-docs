@@ -29,7 +29,7 @@ All requests require a Bearer token:
 Authorization: Bearer sk-YOUR_KEY
 ```
 
-Get your key at [Console → API Keys](https://www.sandbase.ai/console/keys).
+Get your key at [Developer → API Keys](https://www.sandbase.ai/console/keys).
 
 ## Quick Example
 
