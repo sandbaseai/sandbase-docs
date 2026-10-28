@@ -80,6 +80,8 @@
   --font-family-heading: var(--vp-font-family-base);
   --font-family-body: var(--vp-font-family-base);
   --font-family-mono: var(--vp-font-family-mono);
+  /* Small body text (below 16px) reads better in the OS face than in Clash. */
+  --font-family-text: system-ui, sans-serif;
   --color-line-control: #0e0b1a;
   --color-panel-fg-muted: #a29ea9;
   --color-panel-fg-label: #8a8698;
@@ -2699,4 +2701,31 @@ html {
   .VPLocalNav.has-sidebar {
     padding-left: calc(var(--vp-sidebar-width) + var(--sb-layout-gutter)) !important;
   }
+}
+
+/* ─── Small body text: system face ─────────────────────────────────────────
+   Clash Grotesk stays on headings, nav and prose at 16px and up. Text below
+   16px uses the OS face. Add `.sb-text` in components; the :where() list
+   covers the existing small-text surfaces. :where() has zero specificity, so
+   it only replaces the inherited Clash and never overrides an explicit
+   Geist Mono label, code span or mono table column. */
+.sb-text,
+:where(
+  .VPSidebar .link > .text,
+  .VPDocAsideOutline .outline-link,
+  .vp-doc td,
+  .vp-doc .custom-block p,
+  .vp-doc .custom-block li,
+  .api-reference-description,
+  .api-section-heading p,
+  .api-field-row p,
+  .api-notes p,
+  .api-error-row p,
+  .sh-explore-menu span,
+  .sh-solution-menu span,
+  .sf-brand p,
+  .sf-link,
+  .sf-bottom
+) {
+  font-family: var(--font-family-text);
 }
