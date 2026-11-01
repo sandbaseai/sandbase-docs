@@ -49,10 +49,11 @@ const tabs = [
   justify-content: center;
   padding: 0 8px;
   color: var(--color-ink-muted);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 1.15;
   text-align: center;
+  white-space: nowrap;
   text-decoration: none;
   transition: background-color 150ms ease, color 150ms ease;
 }

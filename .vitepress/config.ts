@@ -152,6 +152,9 @@ export default defineConfig({
   },
 
   themeConfig: {
+    // The site header already has a "Menu" button on mobile; name the docs
+    // sidebar toggle differently so the two are not confused.
+    sidebarMenuLabel: 'Contents',
     logo: {
       light: '/logo-mark-light.svg',
       dark: '/logo-mark-dark.svg',

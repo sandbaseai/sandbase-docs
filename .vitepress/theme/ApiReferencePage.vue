@@ -851,6 +851,8 @@ function highlightCode(code: string, language = '') {
 }
 
 .api-response-heading code {
+  /* Match the 11px panel label; inherited code sizing shrank it below 10px. */
+  font-size: 11px;
   padding: 2px 7px;
   border: 0;
   background: color-mix(in srgb, var(--color-panel-fg) 12%, transparent);
