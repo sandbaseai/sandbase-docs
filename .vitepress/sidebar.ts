@@ -57,8 +57,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
     text: 'Production',
     items: [
       { text: 'Errors and retries', link: '/guides/error-handling' },
-      { text: 'Rate limits', link: '/admin/rate-limits' },
-      { text: 'Handling 429 responses', link: '/guides/rate-limiting' },
+      { text: 'Rate limits', link: '/guides/rate-limiting' },
       { text: 'Concurrency limits', link: '/guides/concurrency-limits' },
     ],
   },

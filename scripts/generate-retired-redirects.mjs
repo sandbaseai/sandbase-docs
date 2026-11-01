@@ -125,6 +125,8 @@ Object.assign(map, {
 for (const key of ['/docs/api-reference/secrets', '/docs/api-reference/secrets/', '/docs/api-reference/secrets/*', '/docs/api-reference/secrets/index']) {
   map[key] = `${SITE}/docs/agents/api-credentials#with-the-api`
 }
+// Duplicate Rate Limits page (merged 2026-11-01 into guides/rate-limiting).
+map['/docs/admin/rate-limits'] = `${SITE}/docs/guides/rate-limiting`
 const sorted = Object.fromEntries(Object.entries(map).sort(([a], [b]) => a.localeCompare(b)))
 writeFileSync('worker/retired-redirects.json', `${JSON.stringify(sorted, null, 1)}\n`)
 console.log(`${Object.keys(sorted).length} redirects (${fallbacks.length} to a hub because the item left the catalog)`)

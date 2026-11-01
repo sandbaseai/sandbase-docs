@@ -1,11 +1,11 @@
 ---
-title: Workspace
+title: Account and billing
 description: Manage your SandBase organization, API keys, billing, usage, and limits.
 ---
 
-# Workspace
+# Account and billing
 
-Workspace settings control who owns usage, how applications authenticate, and how spending is monitored.
+Your organization settings control who owns usage, how applications authenticate, and how spending is monitored.
 
 ## What you manage
 
@@ -14,7 +14,8 @@ Workspace settings control who owns usage, how applications authenticate, and ho
 | [Organizations](/admin/organizations) | Manage the workspace boundary, members, and ownership |
 | [API Keys](/getting-started/api-keys) | Create, rotate, and revoke application credentials |
 | [Billing and credits](/admin/billing) | Review balance, buy credits, set up auto top-up, and review usage in Activities and Analysis |
-| [Rate Limits](/admin/rate-limits) | Understand request limits and safe retry behavior |
+| [Pricing and usage](/guides/billing) | Find model pricing, daily free API calls, and the cost of one task |
+| [Rate limits](/guides/rate-limiting) | Understand request limits and safe retry behavior |
 
 ## Recommended setup
 
