@@ -200,18 +200,6 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
-    text: 'Secrets',
-    collapsed: true,
-    items: [
-      { text: 'Overview', link: '/api-reference/secrets/' },
-      { text: 'Create Secret', link: '/api-reference/secrets/#create-a-secret' },
-      { text: 'List Secrets', link: '/api-reference/secrets/#list-secrets' },
-      { text: 'Get Secret', link: '/api-reference/secrets/#get-a-secret' },
-      { text: 'Rotate Secret', link: '/api-reference/secrets/#rotate-a-secret' },
-      { text: 'Revoke Secret', link: '/api-reference/secrets/#revoke-a-secret' },
-    ],
-  },
-  {
     text: 'Account',
     collapsed: true,
     items: [

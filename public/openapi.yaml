@@ -5012,7 +5012,7 @@ components:
         last_active_at: { type: integer }
         updated_at: { type: integer }
         archived_at: { type: [integer, 'null'] }
-        source: { type: [string, 'null'], enum: [direct, service, schedule, null] }
+        source: { type: [string, 'null'], enum: [direct, null], description: "direct for Sessions created with POST /v1/agents/sessions; null when the origin is unavailable (see source_failure_code)." }
         source_id: { type: [string, 'null'], description: "Null for Sessions created directly with POST /v1/agents/sessions." }
         source_failure_code: { type: string }
     SessionList:

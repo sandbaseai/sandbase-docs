@@ -39,7 +39,7 @@ for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYME
 // Removed pages are answered by Worker 301s; none may reappear in the sitemap.
 const retiredSitemapPrefix = /<loc>https:\/\/www\.sandbase\.ai\/docs\/(?:store|models|agents\/(?:services|schedules|deployments)|api-reference\/(?:services|schedules|deployments|endpoints|credentials)|model-api-reference)(?:[/.<])/
 assert.doesNotMatch(sitemap, retiredSitemapPrefix, 'Removed docs pages must not be in the sitemap')
-for (const keptUrl of ['/docs/api-reference/volcengine-contents-generations', '/docs/api-reference/images/generations', '/docs/api-reference/secrets/', '/docs/api-reference/mcp-connections/', '/docs/agents/sessions']) {
+for (const keptUrl of ['/docs/api-reference/volcengine-contents-generations', '/docs/api-reference/images/generations', '/docs/agents/api-credentials', '/docs/api-reference/mcp-connections/', '/docs/agents/sessions']) {
   assert.ok(sitemap.includes(`<loc>https://www.sandbase.ai${keptUrl}</loc>`), `${keptUrl} must be indexed in the sitemap`)
 }
 for (const archived of ['guides/site-agent-integration.html', 'use-cases', 'api-reference/embeds', 'api-reference/environments', 'api-reference/endpoints/mcp.html', 'api-reference/endpoints/acp.html', 'api-reference/deployments/create.html', 'api-reference/sessions/list-events.html']) {
