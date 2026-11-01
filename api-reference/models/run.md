@@ -8,7 +8,7 @@ apiReference:
   operation: Models
   method: POST
   path: /v1/run
-  description: Execute an enabled SandBase model or API capability. The request fields are capability-specific; use the model detail page or Store for the selected capability schema.
+  description: Execute an enabled SandBase model or API capability. The request fields are capability-specific; use the model or API reference page on the SandBase website for the selected capability schema.
   groups:
     - title: Request body
       fields:

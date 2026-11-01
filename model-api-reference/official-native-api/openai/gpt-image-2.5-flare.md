@@ -76,7 +76,7 @@ curl https://api.sandbase.ai/v1/images/edits \
   -F "quality=high"
 ```
 
-See the shared [image editing reference](/api-reference/images/edits) for the multipart request and response schema. To use the general asynchronous `/v1/run` contract instead, see [`openai/gpt-image-2.5-flare/edit`](https://www.sandbase.ai/model/openai/gpt-image-2.5-flare/edit).
+See the shared [image editing reference](/api-reference/images/edits) for the multipart request and response schema. To use the general asynchronous `/v1/run` contract instead, see [`openai/gpt-image-2.5-flare/edit`](https://www.sandbase.ai/models/openai/gpt-image-2.5-flare/edit).
 
 ## Official OpenAI resources
 

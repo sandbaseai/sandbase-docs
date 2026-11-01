@@ -51,18 +51,11 @@ Agents platform resources accept `Authorization: Bearer` or `X-API-Key` and retu
 - GET /v1/agents/sessions/{session_id}/events - Live-only event stream (SSE); open it before sending input
 - POST /v1/agents/sessions/{session_id}/events - Send one agent.session.input.message or agent.session.input.cancel event (202)
 - GET /v1/agents/sessions/{session_id}/items - Read Session history
-- POST /v1/services - Create a Service (svc_) pinned to an Agent version; Idempotency-Key required
-- POST /v1/services/{service_id}/invoke - Start a Run (run_); returns 202 with status pending
-- POST /v1/schedules - Create a cron Schedule (sch_); Idempotency-Key required
-- POST /v1/schedules/{schedule_id}/runs - Trigger a manual Schedule Run
 - POST /v1/skills - Upload a Skill ZIP (skl_)
 - POST /v1/mcp-connections - Register a remote HTTPS MCP server (mcp_)
 - POST /v1/secrets - Store a write-only MCP Bearer token (sec_)
-## Session and Run Contract
-- A Session runs one saved Agent version and freezes its Skills and MCP connections when it starts.
-- Each Service invocation and each Schedule firing or manual trigger creates one Run, and each Run creates its own Session reported in session_id.
-- Run status is pending, succeeded, failed, cancelled, or (Schedules only) skipped. Failed and skipped Runs carry error_code.
-- Only one Run per Service or Schedule can be pending; another invocation returns 429 concurrency_limit.
+## Session Contract
+- A Session is created directly with POST /v1/agents/sessions. It runs one saved Agent version and freezes its Skills and MCP connections when it starts.
 - Internal Runtime Session identities are never exposed.
 ## Pricing
 

@@ -17,42 +17,46 @@ for (const retiredPage of [
   'admin/api-keys.html',
   'setup/cli.html',
   'setup/groups.html',
-  'model-api-reference/platform-apis/douyin/web/live-room.html',
-  'model-api-reference/platform-apis/tiktok/web/live-room.html',
+  'agents/services.html',
+  'agents/schedules.html',
+  'agents/deployments.html',
+  'store',
+  'models',
+  'model-api-reference/platform-apis',
+  'model-api-reference/platform-apis.html',
+  'model-api-reference/llm-models',
+  'model-api-reference/llm-models.html',
+  'model-api-reference/image-generation',
+  'model-api-reference/image-generation.html',
+  'model-api-reference/video-generation',
+  'model-api-reference/video-generation.html',
+  'model-api-reference/audio-generation',
+  'model-api-reference/audio-generation.html',
+  'api-reference/services',
+  'api-reference/schedules',
+  'api-reference/deployments',
+  'api-reference/endpoints',
+  'api-reference/credentials',
 ]) {
   assert.ok(!existsSync(path.join(dist, retiredPage)), `${retiredPage} must not be included in the public docs build`)
 }
 
 const sitemap = readFileSync(path.join(dist, 'sitemap.xml'), 'utf8')
-for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/admin/api-keys', '/docs/setup/cli', '/docs/setup/groups', '/docs/agents/deployments', '/docs/store/models', '/docs/api-reference/volcengine-contents-generations']) {
+for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/admin/api-keys', '/docs/setup/cli', '/docs/setup/groups', '/docs/api-reference/volcengine-contents-generations']) {
   assert.ok(!sitemap.includes(`<loc>https://www.sandbase.ai${excludedUrl}</loc>`), `${excludedUrl} must not be indexed in the sitemap`)
 }
-
-const deploymentAlias = readFileSync(path.join(dist, 'agents', 'deployments.html'), 'utf8')
-assert.match(deploymentAlias, /<meta name="robots" content="noindex,follow">/, 'Legacy deployment guide must be noindex')
-for (const retiredResource of ['endpoints', 'deployments', 'credentials']) {
-  const page = readFileSync(path.join(dist, 'api-reference', retiredResource, 'index.html'), 'utf8')
-  assert.match(page, /<meta name="robots" content="noindex,follow">/, `Retired ${retiredResource} notice must be noindex`)
-  assert.ok(!sitemap.includes(`/docs/api-reference/${retiredResource}/</loc>`), `Retired ${retiredResource} notice must not be in the sitemap`)
+// Removed pages are answered by Worker 301s; none may reappear in the sitemap.
+const retiredSitemapPrefix = /<loc>https:\/\/www\.sandbase\.ai\/docs\/(?:store|models|agents\/(?:services|schedules|deployments)|api-reference\/(?:services|schedules|deployments|endpoints|credentials)|model-api-reference\/(?:platform-apis|llm-models|image-generation|video-generation|audio-generation))(?:[/.<])/
+assert.doesNotMatch(sitemap, retiredSitemapPrefix, 'Removed docs pages must not be in the sitemap')
+for (const keptUrl of ['/docs/model-api-reference/', '/docs/model-api-reference/official-native-api/', '/docs/api-reference/secrets/', '/docs/api-reference/mcp-connections/', '/docs/agents/sessions']) {
+  assert.ok(sitemap.includes(`<loc>https://www.sandbase.ai${keptUrl}</loc>`), `${keptUrl} must be indexed in the sitemap`)
 }
 for (const archived of ['guides/site-agent-integration.html', 'use-cases', 'api-reference/embeds', 'api-reference/environments', 'api-reference/endpoints/mcp.html', 'api-reference/endpoints/acp.html', 'api-reference/deployments/create.html', 'api-reference/sessions/list-events.html']) {
   assert.ok(!existsSync(path.join(dist, archived)), `${archived} must not be published`)
 }
 
-const storeModelsAlias = readFileSync(path.join(dist, 'store', 'models.html'), 'utf8')
-assert.match(storeModelsAlias, /<meta name="robots" content="noindex,follow">/, 'Legacy Store Models alias must be noindex')
-assert.match(storeModelsAlias, /<link rel="canonical" href="https:\/\/www\.sandbase\.ai\/docs\/models\/">/, 'Legacy Store Models alias must canonicalize to the Models page')
-
 const legacySeedance = readFileSync(path.join(dist, 'api-reference', 'volcengine-contents-generations.html'), 'utf8')
 assert.match(legacySeedance, /<meta name="robots" content="noindex,follow">/, 'Legacy Seedance page must remain noindex')
-// Video models formerly listed under Image Generation keep their old URLs as
-// noindex aliases that canonicalize to the Video Generation reference.
-const movedVideoAlias = readFileSync(path.join(dist, 'model-api-reference', 'image-generation', 'kwaivgi', 'kling-video', 'v3', 'pro', 'motion-control.html'), 'utf8')
-assert.match(movedVideoAlias, /<meta name="robots" content="noindex,follow">/, 'Moved video model alias must be noindex')
-assert.match(movedVideoAlias, /<link rel="canonical" href="https:\/\/www\.sandbase\.ai\/docs\/model-api-reference\/video-generation\/kwaivgi\/kling-video\/v3\/pro\/motion-control">/, 'Moved video model alias must canonicalize to Video Generation')
-assert.ok(!sitemap.includes('/docs/model-api-reference/image-generation/kwaivgi/kling-video/v3/pro/motion-control</loc>'), 'Moved video model alias must not be in the sitemap')
-assert.ok(sitemap.includes('/docs/model-api-reference/video-generation/kwaivgi/kling-video/v3/pro/motion-control</loc>'), 'Moved video model reference must be in the sitemap')
-
 const forbidden = [
   [/\/v1\/generations(?:\/|\b)/i, 'withdrawn generation API'],
   [/\/v1\/blog\/assets(?:\/|\b)/i, 'internal Blog publishing storage API'],
@@ -66,6 +70,8 @@ const forbidden = [
   [/\/v1\/skill-mcp-publications(?:\/|\b)/i, 'Skill MCP publication management'],
   [/\/v1\/capabilities\/[A-Za-z0-9_{}%.-]+\/mcp\b/i, 'Capability MCP transport'],
   [/\/v1\/skill-mcp\/[A-Za-z0-9_{}%.-]+\/mcp\b/i, 'published Skill MCP transport'],
+  [/\/v1\/(?:services|schedules)(?:\/|\b)/i, 'retired Services or Schedules API'],
+  [/href="\/docs\/(?:agents\/(?:services|schedules|deployments)|api-reference\/(?:services|schedules|deployments|endpoints|credentials)\/|store\/|models\/|model-api-reference\/(?:platform-apis|llm-models|image-generation|video-generation|audio-generation)\b)/, 'link to a removed docs page'],
 ]
 
 let inspected = 0

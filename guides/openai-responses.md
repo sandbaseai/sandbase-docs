@@ -27,11 +27,11 @@ uses `input` and `output`. The parameter envelopes are not interchangeable;
 choose the endpoint that matches your SDK.
 
 See [Chat Completions](./chat-completions) for the compatible request format
-and [GPT model references](/model-api-reference/llm-models#openai) for
+and [GPT model references](https://www.sandbase.ai/models) for
 model-specific fields and limits.
 
 ## Next steps
 
 - [Responses API reference](/api-reference/responses)
 - [Chat Completions API reference](/api-reference/llm-gateway)
-- [Supported Models](/models/supported)
+- [Models catalog](https://www.sandbase.ai/models)

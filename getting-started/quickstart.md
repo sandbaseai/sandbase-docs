@@ -50,7 +50,7 @@ Pick the path that matches the work you need to do now. You can add the others l
 Choose this if you are adding one capability to your app.
 
 1. Create an [API key](/getting-started/api-keys) in [Developer → API Keys](https://www.sandbase.ai/console/keys){target="_blank"} with **New key**. Copy it immediately; it is shown only once.
-2. Filter the Store and open a detail page:
+2. Filter the catalog and open a detail page:
    - [Language models](https://www.sandbase.ai/models){target="_blank"} — filter by provider, capabilities, context, and price
    - [Image and video models](https://www.sandbase.ai/models/image-video){target="_blank"} — filter multimodal models such as text-to-image, image-to-image, text-to-video, and image-to-video
    - [APIs](https://www.sandbase.ai/apis){target="_blank"} — filter API resources by platform and data source
@@ -76,15 +76,13 @@ Learn more: [First API Call](/getting-started/first-call).
 
 Choose this if you want to try a Model, API, or Agent in the browser first — no client install and no code.
 
-1. Sign in, then open the Store:
+1. Sign in, then open the catalog:
    - [Language models](https://www.sandbase.ai/models){target="_blank"}
    - [Image and video models](https://www.sandbase.ai/models/image-video){target="_blank"}
    - [APIs](https://www.sandbase.ai/apis){target="_blank"}
    - [Agents](https://www.sandbase.ai/agents){target="_blank"}
 2. Filter and open a detail page.
 3. Run one request on that page and confirm a result comes back.
-
-Learn more: [Store](/store/).
 
 ### 3.3 Use SandBase in your AI tool {#use-in-ai-tool}
 
@@ -118,7 +116,7 @@ Choose this if the work has multiple steps or should be reused.
 3. Pick a **Model**.
 4. Add Skills and MCP tools under **Capabilities**, then set **Runtime**.
 5. Select **Create & Chat** to test it in a Session.
-6. Call the tested version from your app on the Agent's **API** tab, or deploy it as a Service or Schedule.
+6. Call the tested version from your app on the Agent's **API** tab.
 
 Learn more: [Build Agent](/agents/). To do the same from code with the official OpenAI SDK, see [OpenAI compatibility](/agents/openai-compatibility).
 
@@ -143,7 +141,7 @@ After you sign in, review spend for the active organization:
 <QuickstartResources group="catalog" />
 
 - [API keys](/getting-started/api-keys) — create and rotate organization keys
-- [Store](/store/) — try Models, APIs, and Agents on the website
+- [Models and APIs catalog](https://www.sandbase.ai/models) — try Models, APIs, and Agents on the website
 - [Connect AI tools](/setup/) — give your AI tool the SandBase catalog
 - [Build Agent](/agents/) — create reusable Agents
 - [API Reference](/api-reference/) — integrate with code

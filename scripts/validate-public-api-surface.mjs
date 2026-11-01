@@ -10,26 +10,15 @@ const openapiDocument = parse(openapi)
 const config = readFileSync(new URL('../.vitepress/config.ts', import.meta.url), 'utf8')
 const sidebar = readFileSync(new URL('../.vitepress/sidebar.ts', import.meta.url), 'utf8')
 const modelSidebar = sidebar.slice(0, sidebar.indexOf('export const docsSidebar'))
-const generatedModelSidebar = readFileSync(new URL('../.vitepress/modelApiReferenceSidebar.generated.ts', import.meta.url), 'utf8')
 const platformSidebar = sidebar.slice(sidebar.indexOf('export const apiReferenceSidebar'))
 const generatedReferenceSpecs = readFileSync(new URL('../.vitepress/theme/generatedApiReferenceSpecs.ts', import.meta.url), 'utf8')
 const apiKeyGuide = readFileSync(new URL('../getting-started/api-keys.md', import.meta.url), 'utf8')
 const authenticationReference = readFileSync(new URL('../api-reference/authentication.md', import.meta.url), 'utf8')
-const supportedModelsPage = readFileSync(new URL('../models/supported.md', import.meta.url), 'utf8')
-const capabilitiesPage = readFileSync(new URL('../models/capabilities.md', import.meta.url), 'utf8')
-const visionPage = readFileSync(new URL('../models/vision.md', import.meta.url), 'utf8')
 const modelApiOverview = readFileSync(new URL('../model-api-reference/index.md', import.meta.url), 'utf8')
 const homePage = readFileSync(new URL('../.vitepress/theme/HomePage.vue', import.meta.url), 'utf8')
 const officialNativeSidebar = readFileSync(new URL('../.vitepress/theme/OfficialNativeApiSidebar.vue', import.meta.url), 'utf8')
 const legacySeedanceReference = readFileSync(new URL('../api-reference/volcengine-contents-generations.md', import.meta.url), 'utf8')
 const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8')
-const catalogOverviews = [
-  readFileSync(new URL('../model-api-reference/llm-models.md', import.meta.url), 'utf8'),
-  readFileSync(new URL('../model-api-reference/image-generation.md', import.meta.url), 'utf8'),
-  readFileSync(new URL('../model-api-reference/video-generation.md', import.meta.url), 'utf8'),
-  readFileSync(new URL('../model-api-reference/audio-generation.md', import.meta.url), 'utf8'),
-  readFileSync(new URL('../model-api-reference/platform-apis/index.md', import.meta.url), 'utf8'),
-]
 const root = fileURLToPath(new URL('..', import.meta.url))
 
 const declaredOpenApiTags = new Set((openapiDocument.tags ?? []).map((tag) => tag.name))
@@ -49,40 +38,50 @@ assert.deepEqual(
   'The public OpenAPI document must not declare empty navigation groups',
 )
 
-assert.match(supportedModelsPage, /https:\/\/www\.sandbase\.ai\/models/, 'Supported Models must point to the live catalog')
-assert.match(supportedModelsPage, /GET \/v1\/models/, 'Supported Models must identify the runtime catalog API')
-for (const category of ['llm-models', 'image-generation', 'video-generation', 'audio-generation']) {
-  assert.match(supportedModelsPage, new RegExp(`/model-api-reference/${category}`), `Supported Models must link the generated ${category} reference`)
-}
-assert.doesNotMatch(supportedModelsPage, /^\| `[^`]+` \|/m, 'Supported Models must not maintain a hand-written model snapshot')
-assert.doesNotMatch(supportedModelsPage, /Model Comparison Table|Typical Cost per 1K requests/, 'Supported Models must not publish static comparison pricing')
-for (const [label, content] of [['Capabilities', capabilitiesPage], ['Vision', visionPage]]) {
-  assert.match(content, /GET \/v1\/models/, `${label} must point integrations to live model discovery`)
-  assert.doesNotMatch(content, /^\| `[^`]+` \|/m, `${label} must not maintain a hand-written model snapshot`)
-  assert.doesNotMatch(content, /gpt-4o|gemini-2\.5|deepseek-v3/i, `${label} must not publish stale model recommendations`)
+// Per-model catalog pages moved to the main site; the docs keep only removed-tree guards.
+for (const removedSource of [
+  'models',
+  'store',
+  'model-api-reference/llm-models',
+  'model-api-reference/llm-models.md',
+  'model-api-reference/image-generation',
+  'model-api-reference/image-generation.md',
+  'model-api-reference/video-generation',
+  'model-api-reference/video-generation.md',
+  'model-api-reference/audio-generation',
+  'model-api-reference/audio-generation.md',
+  'model-api-reference/platform-apis',
+  '.vitepress/modelApiReferenceSidebar.generated.ts',
+  'agents/services.md',
+  'agents/schedules.md',
+  'agents/deployments.md',
+  'api-reference/services',
+  'api-reference/schedules',
+  'api-reference/deployments',
+  'api-reference/endpoints',
+  'api-reference/credentials',
+]) {
+  assert.ok(!existsSync(path.join(root, removedSource)), `${removedSource} was removed and must not be restored`)
 }
 assert.match(legacySeedanceReference, /^canonical:\s*\/docs\/model-api-reference\/official-native-api\/$/m, 'Legacy Seedance reference must canonicalize to Official Native API')
 assert.match(legacySeedanceReference, /^robots:\s*noindex,follow$/m, 'Legacy Seedance reference must not compete in search results')
 assert.doesNotMatch(readme, /deepseek\/deepseek-v3\b/i, 'README must not recommend the retired DeepSeek V3 model')
 assert.doesNotMatch(readme, /\b\d[\d,]*\+?\s+models and APIs\b/i, 'README must not hard-code time-sensitive catalog counts')
-for (const overview of catalogOverviews) {
-  assert.doesNotMatch(overview, /currently publishes API reference pages for \d/i, 'Catalog overviews must not hard-code time-sensitive counts')
-  assert.doesNotMatch(overview, /Browse \d[\d,]* SandBase API operations across \d+ platforms/i, 'Catalog overviews must not hard-code platform operation counts')
-}
+assert.doesNotMatch(modelApiOverview, /currently publishes API reference pages for \d/i, 'Model API overview must not hard-code time-sensitive counts')
+assert.doesNotMatch(modelApiOverview, /Browse \d[\d,]* SandBase API operations across \d+ platforms/i, 'Model API overview must not hard-code platform operation counts')
 assert.doesNotMatch(modelSidebar, /text: 'Models'[\s\S]*?List Models[\s\S]*?Get Model/, 'Model API navigation must not duplicate the Models API module')
 assert.doesNotMatch(modelSidebar, /text: 'Inference APIs'/, 'Model API navigation must not duplicate the normalized Inference API module')
-for (const modelPath of [
-  'video-generation/bytedance/seedance/2.0/mini/text-to-video',
-  'video-generation/bytedance/seedance/2.0/mini/image-to-video',
-  'video-generation/bytedance/seedance/2.0/mini/reference-to-video',
-]) {
-  assert.match(generatedModelSidebar, new RegExp(`/model-api-reference/${modelPath.replaceAll('/', '\\/')}`), `Model API navigation must expose current model ${modelPath}`)
-}
+assert.match(modelSidebar, /export const nativeApiReferenceSidebar/, 'Model API navigation must use the native API reference sidebar')
+assert.doesNotMatch(sidebar, /fullModelApiReferenceSidebar|platformApiReferenceFallbackSidebar|modelApiReferenceSidebar\.generated/, 'Sidebar must not reference the removed generated model API navigation')
+assert.match(modelSidebar, /link: '\/model-api-reference\/official-native-api\/'/, 'Model API navigation must link the Official Native API reference')
+assert.match(modelApiOverview, /\]\(https:\/\/www\.sandbase\.ai\/models\)/, 'Model API overview must link the main-site Models catalog')
+assert.match(modelApiOverview, /\]\(https:\/\/www\.sandbase\.ai\/apis\)/, 'Model API overview must link the main-site APIs catalog')
+assert.match(modelApiOverview, /\]\(\/model-api-reference\/official-native-api\/\)/, 'Model API overview must link the Official Native API reference')
 assert.match(modelApiOverview, /\[Models API\]\(\/api-reference\/models\//, 'Model API overview must link to the Models API contract')
 assert.match(modelApiOverview, /\[Chat Completions\]\(\/api-reference\/llm-gateway\)/, 'Model API overview must link to the normalized inference contracts')
-assert.match(homePage, /Services API/, 'Home page must use the Services product name')
 assert.doesNotMatch(homePage, /Endpoint API|Published Agent API/, 'Home page must not expose retired Endpoint product labels')
-assert.doesNotMatch(homePage, />Published Agents</, 'Home page must use the current Services product label')
+assert.doesNotMatch(homePage, />Published Agents</, 'Home page must not expose the retired Published Agents label')
+assert.doesNotMatch(homePage, /Services API|Schedules API|\bas a Service or Schedule\b|\/agents\/(?:services|schedules|deployments)\b|\/api-reference\/(?:services|schedules)\//, 'Home page must not promote the retired Services and Schedules products')
 assert.match(homePage, /href="\/docs\/getting-started\/api-keys"/, 'Home page must link to the published API key guide')
 assert.doesNotMatch(homePage, /href="\/docs\/admin\/api-keys"/, 'Home page must not link to the hidden legacy API key page')
 assert.match(homePage, /href="\/docs\/guides\/chat-completions"/, 'Home page must link to the published SDK-compatible chat guide')
@@ -134,11 +133,6 @@ const requiredPublicPaths = [
   '/v1/agents/catalog:',
   '/v1/agents/sessions:',
   '/v1/agents/sessions/{session_id}/events:',
-  '/v1/services:',
-  '/v1/services/{service_id}/invoke:',
-  '/v1/schedules:',
-  '/v1/schedules/{schedule_id}/runs:',
-  '/v1/schedules/{schedule_id}/timing:',
   '/v1/secrets:',
   '/v1/secrets/{secret_id}/rotate:',
   '/v1/mcp-connections:',
@@ -200,11 +194,12 @@ for (const archivedSource of ['guides/site-agent-integration.md', 'use-cases', '
   assert.ok(!existsSync(path.join(root, archivedSource)), `${archivedSource} is retired and must live under _archived/`)
 }
 assert.doesNotMatch(config, /'api-reference\/webhooks\.md'/, 'The model webhook reference must be published')
-assert.match(config, /'agents\/endpoint-quickstart\.md'/, 'Retired Service quickstart must stay excluded from the public build')
+assert.match(config, /'agents\/endpoint-quickstart\.md'/, 'Retired Endpoint quickstart must stay excluded from the public build')
 assert.match(config, /'admin\/api-keys\.md'/, 'Duplicate API Keys guide must stay excluded from the public build')
 assert.match(config, /'setup\/cli\.md'/, 'Duplicate CLI setup page must stay excluded from the public build')
 assert.match(config, /'setup\/groups\.md'/, 'Retired Platform Groups page must stay excluded from the public build')
 assert.doesNotMatch(platformSidebar, /Service quickstart/, 'Retired Service quickstart must not appear in the docs sidebar')
+assert.doesNotMatch(sidebar, /\/agents\/(?:services|schedules|deployments)\b|\/api-reference\/(?:services|schedules)\/|link: '\/(?:store|models)\/|\/model-api-reference\/(?:platform-apis|llm-models|image-generation|video-generation|audio-generation)\b/, 'Sidebar must not link removed Services, Schedules, catalog, or per-model reference pages')
 assert.doesNotMatch(sidebar, /\/api-reference\/sandboxes?\b/i, 'Sidebar must not link to sandbox API pages')
 assert.match(sidebar, /\/api-reference\/webhooks\b/, 'Sidebar must link to the model webhook reference')
 assert.equal((modelSidebar.match(/text: 'Inference APIs'/g) ?? []).length, 0, 'Model API navigation must keep normalized Inference APIs in the concept/API reference docs')
@@ -212,9 +207,9 @@ assert.doesNotMatch(sidebar, /text: 'Embed Configs'/, 'Platform API sidebar must
 assert.doesNotMatch(platformSidebar, /text: 'Models'/, 'Platform API sidebar must direct model discovery to the standalone Model API Reference')
 assert.doesNotMatch(platformSidebar, /text: 'Agent APIs'/, 'Platform API sidebar must use resource names without redundant API suffixes')
 assert.equal((platformSidebar.match(/text: 'Sessions'/g) ?? []).length, 1, 'Sessions must be one top-level Platform API resource group')
-assert.match(platformSidebar, /text: 'Services'/, 'Platform API sidebar must use the Services product name')
+assert.doesNotMatch(platformSidebar, /text: 'Services'/, 'Platform API sidebar must not expose the retired Services product')
 assert.doesNotMatch(platformSidebar, /text: 'Endpoints'/, 'Platform API sidebar must not expose the legacy Endpoints product name')
-assert.match(platformSidebar, /text: 'Schedules'/, 'Platform API sidebar must use the Schedules product name')
+assert.doesNotMatch(platformSidebar, /text: 'Schedules'/, 'Platform API sidebar must not expose the retired Schedules product')
 assert.doesNotMatch(platformSidebar, /text: 'Deployments'/, 'Platform API sidebar must not expose the compatibility Deployment resource as the product name')
 for (const [resource, anchors] of [
   ['mcp-connections', ['create-a-connection', 'list-connections', 'get-a-connection', 'replace-a-connection', 'enable-a-connection', 'disable-a-connection']],
@@ -228,6 +223,13 @@ for (const [resource, anchors] of [
 }
 assert.doesNotMatch(platformSidebar, /text: 'Credentials'|\/api-reference\/(?:credentials|endpoints|deployments)\//, 'Platform API sidebar must not link retired resources')
 assert.doesNotMatch(openapi, /^  \/v1\/(?:endpoints|deployments|deployment_runs|sessions|credentials|skills\/files)(?:[/{:]|$)/m, 'Retired Agents resources must not be public')
+assert.doesNotMatch(openapi, /^  \/v1\/(?:services|schedules)(?:[/{:]|$)/m, 'Retired Services and Schedules paths must not be public')
+assert.ok(!Object.keys(openapiDocument.paths).some((publicPath) => /^\/v1\/(?:services|schedules)(?:\/|$)/.test(publicPath)), 'Public OpenAPI must not declare retired Services or Schedules paths')
+assert.ok(![...declaredOpenApiTags].some((tag) => /^(?:Services|Schedules|Deployments|Endpoints)$/.test(tag)), 'Public OpenAPI must not declare retired Services, Schedules, Deployments, or Endpoints tags')
+for (const retiredSchema of ['AgentRun', 'ServiceCreateRequest', 'ScheduleCreateRequest']) {
+  assert.ok(!openapiDocument.components?.schemas?.[retiredSchema], `Public OpenAPI must not keep the retired ${retiredSchema} schema`)
+}
+assert.doesNotMatch(openapi, /^    (?:Service|Schedule)[A-Za-z]*:$/m, 'Public OpenAPI must not keep retired Service or Schedule schemas')
 assert.doesNotMatch(openapi, /^  \/v1\/endpoint_runtime_profiles:$/m, 'Endpoint runtime profiles that reveal MCP transport must not be public')
 assert.doesNotMatch(openapi, /^\s+mcp_url:$/m, 'Endpoint MCP transport URL must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/generations(?:\/\{[^}]+\})?:$/m, 'Withdrawn generation paths must not be public')
@@ -348,7 +350,6 @@ assert.deepEqual(
 )
 assert.match(officialNativeSidebar, /\/model-api-reference\/official-native-api\//, 'Official Native API sidebar must link to its reference')
 assert.doesNotMatch(sidebar, /\/api-reference\/volcengine-contents-generations/, 'Inference navigation must not duplicate the Official Native API reference')
-assert.doesNotMatch(sidebar, /platform-apis\/(?:douyin|tiktok)\/web\/live-room/, 'Provider sidebars must not link operations that are unavailable online')
 assert.doesNotMatch(openapi, /pattern:\s*['"]?\\?\^run_/, 'Run IDs must remain opaque')
 const getRunPath = openapi.match(/^  \/v1\/run\/\{id\}:\n[\s\S]*?(?=^  \/)/m)?.[0] ?? ''
 assert.doesNotMatch(getRunPath, /pattern:/, 'Run result lookup IDs must not inherit another resource prefix')
@@ -493,7 +494,7 @@ for (const content of [apiKeyGuide, authenticationReference]) {
 }
 // --- Agents platform (sandbase-agents) contract -------------------------------
 const resolveSchema = (schema) => schema?.$ref ? schema.$ref.replace(/^#\//, '').split('/').reduce((current, segment) => current?.[segment], openapiDocument) : schema
-const agentsPlatformPrefix = /^\/v1\/(?:agents|services|schedules|secrets|mcp-connections|skills)(?:\/|$)/
+const agentsPlatformPrefix = /^\/v1\/(?:agents|secrets|mcp-connections|skills)(?:\/|$)/
 const agentsSchema = (name) => openapi.match(new RegExp(`^    ${name}:\\n[\\s\\S]*?(?=^    [A-Za-z#])`, 'm'))?.[0] ?? ''
 let agentsOperationCount = 0
 for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
@@ -513,7 +514,7 @@ for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
     }
   }
 }
-assert.ok(agentsOperationCount >= 90, `Agents platform OpenAPI must cover every public route (found ${agentsOperationCount})`)
+assert.ok(agentsOperationCount >= 63, `Agents platform OpenAPI must cover every public route (found ${agentsOperationCount})`)
 assert.match(openapi, /AgentsApiKey:\n\s+type: apiKey\n\s+in: header\n\s+name: X-API-Key/, 'AgentsApiKey must describe the X-API-Key header')
 for (const [method, publicPath] of [
   ['get', '/v1/agents'], ['get', '/v1/agents/sessions'], ['get', '/v1/agents/sessions/{session_id}/items'],
@@ -522,7 +523,7 @@ for (const [method, publicPath] of [
   const schema = resolveSchema(jsonSuccessSchema(method, publicPath))
   assert.ok(schema?.allOf?.some((part) => part.$ref === '#/components/schemas/AgentsCursorList') || schema === openapiDocument.components.schemas.AgentsCursorList, `GET ${publicPath} must use the cursor list envelope`)
 }
-for (const publicPath of ['/v1/services', '/v1/schedules', '/v1/services/{service_id}/runs', '/v1/schedules/{schedule_id}/runs', '/v1/secrets', '/v1/mcp-connections', '/v1/agents/{agent_id}/versions']) {
+for (const publicPath of ['/v1/secrets', '/v1/mcp-connections', '/v1/agents/{agent_id}/versions']) {
   const schema = resolveSchema(jsonSuccessSchema('get', publicPath))
   assert.ok(schema?.allOf?.some((part) => part.$ref === '#/components/schemas/AgentsOffsetList'), `GET ${publicPath} must use the offset list envelope`)
 }
@@ -533,9 +534,6 @@ assert.match(agentsSchema('Agent'), /runtime_profile: \{ type: string, enum: \[c
 assert.match(agentsSchema('Session'), /status: \{ type: string, enum: \[idle, in_progress, requires_action, failed\]/, 'Session status must match the implementation')
 assert.match(agentsSchema('Session'), /lifecycle_status: \{ type: string, enum: \[active, archived\] \}/, 'Session lifecycle must match the implementation')
 assert.doesNotMatch(agentsSchema('SessionCreateRequest'), /initial_events|environment_id/, 'Session creation must not expose retired fields')
-assert.match(agentsSchema('AgentRun'), /enum: \[pending, succeeded, failed, cancelled, skipped\]/, 'Run status must match the implementation')
-assert.doesNotMatch(agentsSchema('ServiceCreateRequest'), /^        (?:schedule|model_provider):/m, 'Service creation rejects schedule and model_provider')
-assert.match(agentsSchema('ScheduleCreateRequest'), /required: \[name, agent_id, input, schedule\]/, 'Schedule creation must require input and timing')
 assert.match(agentsSchema('SecretCreateRequest'), /kind: \{ type: string, const: mcp_bearer \}/, 'Secrets only support MCP Bearer tokens')
 assert.doesNotMatch(agentsSchema('Secret'), /^        token:/m, 'Secret responses must never expose the token')
 for (const [method, publicPath] of [['delete', '/v1/secrets/{secret_id}'], ['delete', '/v1/mcp-connections/{connection_id}']]) {
@@ -547,18 +545,12 @@ for (const publicPath of ['/v1/agents/sessions/{session_id}/events', '/v1/agents
   assert.ok(openapiDocument.paths[publicPath]?.get?.responses?.['200']?.content?.['text/event-stream'], `GET ${publicPath} must document SSE output`)
 }
 for (const [method, publicPath] of [
-  ['post', '/v1/services'], ['post', '/v1/schedules'], ['post', '/v1/services/{service_id}/invoke'], ['post', '/v1/schedules/{schedule_id}/runs'],
   ['post', '/v1/secrets'], ['post', '/v1/mcp-connections'], ['post', '/v1/agents/sessions/{session_id}/cancel'], ['post', '/v1/agents/sessions/{session_id}/files'],
 ]) {
   assert.ok(
     (openapiDocument.paths[publicPath]?.[method]?.parameters ?? []).some((parameter) => parameter.$ref === '#/components/parameters/IdempotencyKeyRequired'),
     `${method.toUpperCase()} ${publicPath} must require Idempotency-Key`,
   )
-}
-for (const status of ['429']) {
-  for (const publicPath of ['/v1/services/{service_id}/invoke', '/v1/schedules/{schedule_id}/runs']) {
-    assert.ok(openapiDocument.paths[publicPath].post.responses[status], `POST ${publicPath} must document ${status} concurrency_limit`)
-  }
 }
 assert.doesNotMatch(openapi, /environment_id|environment_binding/, 'Public OpenAPI must not expose internal Environment bindings')
 const agentReferenceText = ['create', 'get', 'list', 'update', 'replace', 'get-version', 'versions']
@@ -706,9 +698,7 @@ function inspectPublishedSources(directory) {
     if (relative.startsWith('model-api-reference/') && content.includes('"path":"/v1/run"')) {
       assert.doesNotMatch(content, /Error message if the task failed\. Empty on success\./, `${relative} must use the structured public run error`)
       assert.doesNotMatch(content, /Array of generated content\. Empty when status is not completed\./, `${relative} must omit outputs from non-terminal run responses`)
-      if (!relative.startsWith('model-api-reference/platform-apis/')) {
-        assert.doesNotMatch(content, /Contains exactly one item whose only field is data\./, `${relative} must not apply the Platform API data envelope to media outputs`)
-      }
+      assert.doesNotMatch(content, /Contains exactly one item whose only field is data\./, `${relative} must not apply the Platform API data envelope to media outputs`)
     }
     // Only the explicitly published experimental Sandbox guide/playground may link this section.
     if (!['sandbox/index.md', 'sandbox/playground.md'].includes(relative)) {
@@ -718,6 +708,9 @@ function inspectPublishedSources(directory) {
     if (relative !== 'scripts/validate-public-api-surface.mjs') {
       assert.doesNotMatch(content, /(?:GET|POST|PUT|PATCH|DELETE) \/v1\/(?:sessions|endpoints|deployments|deployment_runs|credentials|skills\/files)\b/, `${relative} must not document retired Agents routes as current`)
     }
+    assert.doesNotMatch(content, /(?:GET|POST|PUT|PATCH|DELETE) \/v1\/(?:services|schedules)\b/, `${relative} must not document the retired Services or Schedules APIs`)
+    assert.doesNotMatch(content, /\]\((?:\/docs)?\/(?:agents\/(?:services|schedules|deployments)|api-reference\/(?:services|schedules|deployments|endpoints|credentials)\/|store\/|models\/|model-api-reference\/(?:platform-apis|llm-models|image-generation|video-generation|audio-generation)\b)/, `${relative} must not link removed docs pages`)
+    assert.doesNotMatch(content, /href="(?:\/docs)?\/(?:agents\/(?:services|schedules|deployments)|api-reference\/(?:services|schedules|deployments|endpoints|credentials)\/|store\/|models\/|model-api-reference\/(?:platform-apis|llm-models|image-generation|video-generation|audio-generation)\b)/, `${relative} must not link removed docs pages`)
     assert.doesNotMatch(content, /\/v1\/endpoint_runtime_profiles\b/i, `${relative} must not expose Endpoint runtime profiles that reveal MCP transport`)
     assert.doesNotMatch(content, /\/v1\/mcp(?!-connections)(?:\/|\b)/i, `${relative} must not expose the generic MCP transport or its discovery routes`)
     assert.doesNotMatch(content, /\/v1\/mcp\/(?:servers|[^\s/]+\/config)\b/i, `${relative} must not expose MCP discovery or runtime config routes`)
@@ -730,25 +723,5 @@ function inspectPublishedSources(directory) {
 }
 
 inspectPublishedSources(root)
-
-const h3Models = ['text-to-video', 'image-to-video', 'reference-to-video']
-for (const modelSlug of h3Models) {
-  const relative = `model-api-reference/video-generation/minimax/h3/${modelSlug}.md`
-  const content = readFileSync(path.join(root, relative), 'utf8')
-  const encoded = content.match(/^apiReferenceJson: (.+)$/m)?.[1]
-  assert.ok(encoded, `${relative} must contain its generated API reference`)
-  const reference = JSON.parse(JSON.parse(encoded))
-  const responseFields = reference.groups.find((group) => group.title === 'Response Schema')?.fields ?? []
-  assert.deepEqual(
-    responseFields.filter((field) => field.name.startsWith('usage.')).map((field) => field.name).sort(),
-    ['usage.input_image_count', 'usage.input_seconds', 'usage.output_seconds', 'usage.total_seconds'],
-    `${relative} must document the exact public MiniMax H3 official usage allowlist`,
-  )
-  assert.doesNotMatch(
-    JSON.stringify(responseFields),
-    /billing_breakdown|provider_cost|upstream_cost|credential|endpoint|task_id/,
-    `${relative} must not expose internal MiniMax H3 settlement or routing fields`,
-  )
-}
 
 console.log('public API surface: ok')

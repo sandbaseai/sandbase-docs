@@ -18,13 +18,14 @@ const tagline =
 
 type FooterLink = { href: string; label: string; external?: boolean; separate?: boolean }
 
-/* Mirrors the header: Store and Build menus, the Solutions landing pages, then Docs/Pricing/Lab. */
+/* Mirrors sandbase-fe site-footer.tsx: Store and Build use the header's labels,
+   order and destinations (src/content/site-navigation.ts), then Resources. */
 const footerSections: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Store',
     links: [
       { href: `${SITE}/models`, label: 'Language Models' },
-      { href: `${SITE}/models/image-video`, label: 'Image & Video Models' },
+      { href: `${SITE}/models/image-video`, label: 'Image/Video Models' },
       { href: `${SITE}/apis`, label: 'APIs' },
       { href: `${SITE}/skills`, label: 'Skills' },
     ],
@@ -34,32 +35,20 @@ const footerSections: { title: string; links: FooterLink[] }[] = [
     links: [
       { href: `${SITE}/solutions/use-in-ai-tools`, label: 'Use in AI Tools' },
       { href: `${SITE}/agents`, label: 'Agents' },
-      { href: `${SITE}/landing/sandbox`, label: 'Sandbox' },
-      { href: `${SITE}/console`, label: 'Console' },
+      { href: `${SITE}/sandbox`, label: 'Sandbox' },
     ],
   },
   {
-    title: 'Solutions',
+    title: 'Resources',
     links: [
-      { href: `${SITE}/solutions/language-models`, label: 'Language Models' },
-      { href: `${SITE}/solutions/image-video-models`, label: 'Image & Video Models' },
-      { href: `${SITE}/solutions/apis-services`, label: 'APIs & Services' },
-      { href: `${SITE}/solutions/build-agent`, label: 'Build Agent' },
-      { href: `${SITE}/solutions/monitor-agent-runs`, label: 'Monitor Agent Runs' },
-    ],
-  },
-  {
-    title: 'Learn',
-    links: [
+      { href: `${SITE}/lab/`, label: 'Lab', separate: true },
       { href: '/docs/', label: 'Docs' },
       { href: `${SITE}/pricing`, label: 'Pricing' },
-      { href: `${SITE}/models/compare`, label: 'Compare Models' },
-      { href: `${SITE}/lab/`, label: 'Lab', separate: true },
       { href: 'https://blog.sandbase.ai/', label: 'Blog', external: true },
+      { href: `${SITE}/models/compare`, label: 'Compare Models' },
     ],
   },
 ]
-
 const socialLinks = [
   { href: 'https://github.com/sandbaseai', label: 'GitHub', icon: 'github' },
   { href: 'https://discord.com/invite/4hXv2f5Q9f', label: 'Discord', icon: 'discord' },
@@ -153,8 +142,10 @@ function chooseTheme(next: Theme) {
       <div class="sf-bottom">
         <div class="sf-legal">
           <p>© 2026 SandBase</p>
+          <a :href="`${SITE}/console`" target="_self">Console</a>
           <a :href="`${SITE}/terms`" target="_self">Terms</a>
           <a :href="`${SITE}/privacy`" target="_self">Privacy</a>
+          <a :href="`${SITE}/privacy#advertising-preferences`" target="_self">Ad preferences</a>
         </div>
         <div class="sf-status">
           <a :href="statusPageUrl" target="_blank" rel="noopener noreferrer" aria-label="View SandBase uptime status" class="sf-status-link">
@@ -234,7 +225,7 @@ function chooseTheme(next: Theme) {
   height: 100%;
 }
 .sf-wordmark {
-  font-family: var(--font-family-heading);
+  font-family: var(--font-family-brand);
   font-size: 1.4rem;
   font-weight: 550;
   letter-spacing: -0.018em;

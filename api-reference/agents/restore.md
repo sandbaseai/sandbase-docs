@@ -8,7 +8,7 @@ apiReference:
   operation: Agents
   method: POST
   path: /v1/agents/{agent_id}/restore
-  description: Copy the configuration of source_version into a new current version. History is never rewritten. Services and Schedules stay pinned to the version they were created with until you update them.
+  description: Copy the configuration of source_version into a new current version. History is never rewritten.
   groups:
     - title: Path parameters
       fields:

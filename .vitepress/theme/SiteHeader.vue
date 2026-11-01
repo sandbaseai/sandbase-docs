@@ -38,7 +38,7 @@ const buildGroups = [
     items: [
       { label: 'Use in AI Tools', description: 'Give Claude Code, Codex or Cursor the whole catalog', href: `${SITE}/solutions/use-in-ai-tools` },
       { label: 'Agents', description: 'Your personal Agent, OpenAI Agents API compatible', href: `${SITE}/agents` },
-      { label: 'Sandbox', description: 'Run code and work with files for each task', href: `${SITE}/landing/sandbox` },
+      { label: 'Sandbox', description: 'Run code and work with files for each task', href: `${SITE}/sandbox` },
     ],
   },
 ]
@@ -299,7 +299,7 @@ onBeforeUnmount(() => {
   height: 100%;
 }
 .sh-wordmark {
-  font-family: var(--font-family-heading);
+  font-family: var(--font-family-brand);
   font-size: 1.5rem;
   font-weight: 550;
   letter-spacing: -0.018em;
@@ -316,7 +316,7 @@ onBeforeUnmount(() => {
 .sh-nav-link,
 .sh-solution-trigger {
   color: var(--color-ink);
-  font-family: var(--font-family-body);
+  font-family: var(--font-family-brand);
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.01em;

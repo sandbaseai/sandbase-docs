@@ -9,9 +9,7 @@ A **Session** runs one saved Agent version in SandBase's hosted cloud; you do no
 
 ## How Sessions start
 
-- Create one directly with `POST /v1/agents/sessions`. The Session reports `source: "direct"`.
-- Invoke a [Service](/agents/services). Each Run creates its own Session with `source: "service"` and `source_id` set to the `svc_` ID.
-- Let a [Schedule](/agents/schedules) fire or trigger it manually. Each Run creates its own Session with `source: "schedule"`.
+Create a Session with `POST /v1/agents/sessions`. The Session reports `source: "direct"`.
 
 ## Run a Session
 
@@ -119,9 +117,6 @@ A Session calls models with the API key that created it unless you send `model_p
 |---|---|
 | `agt_` | Agent |
 | `ses_` | Session |
-| `svc_` | Service |
-| `sch_` | Schedule |
-| `run_` | Service or Schedule Run |
 | `skl_` | Skill |
 | `mcp_` | MCP connection |
 | `sec_` | Secret |
@@ -133,8 +128,6 @@ Treat IDs as opaque strings.
 
 - [Sessions API reference](/api-reference/sessions/)
 - [OpenAI compatibility](/agents/openai-compatibility)
-- [Services](/agents/services)
-- [Schedules](/agents/schedules)
 
 ## Workspace files and generated artifacts
 

@@ -50,8 +50,8 @@ header and uses the Bearer header when both are present. A missing supported cre
 
 ### Agents platform resources
 
-`/v1/agents*` (including `/v1/agents/sessions*`), `/v1/services*`, `/v1/schedules*`, `/v1/mcp-connections*`,
-`/v1/secrets*`, and `/v1/skills*` accept the key in either header:
+`/v1/agents*` (including `/v1/agents/sessions*`), `/v1/mcp-connections*`, `/v1/secrets*`,
+and `/v1/skills*` accept the key in either header:
 
 ```bash
 curl https://api.sandbase.ai/v1/agents \
@@ -147,7 +147,7 @@ Keys can optionally have an expiration date. Expired keys return `401 Unauthoriz
 | `POST /v1/messages` | API Key (Bearer or x-api-key) | Anthropic Messages |
 | `/v1beta/models/*` | API Key (x-goog-api-key, Bearer, or query key) | Gemini GenerateContent |
 | `/v1beta/interactions*` | API Key (x-goog-api-key, Bearer, or query key) | Gemini Interactions |
-| `/v1/agents*`, `/v1/services*`, `/v1/schedules*`, `/v1/mcp-connections*`, `/v1/secrets*`, `/v1/skills*` | API Key (Bearer or X-API-Key) | Agents platform resources |
+| `/v1/agents*`, `/v1/mcp-connections*`, `/v1/secrets*`, `/v1/skills*` | API Key (Bearer or X-API-Key) | Agents platform resources |
 
 The SandBase Console uses a separate browser authentication flow. Its internal requests are not supported public
 endpoints and must not be used by integrations.

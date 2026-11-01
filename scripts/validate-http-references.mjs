@@ -21,7 +21,7 @@ for (const [routePath, definition] of Object.entries(spec.paths ?? {})) {
   }
 }
 
-const roots = ['agents', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'public']
+const roots = ['agents', 'api-reference', 'for-agents', 'getting-started', 'guides', 'model-api-reference', 'public']
 const references = []
 
 function walk(directory) {

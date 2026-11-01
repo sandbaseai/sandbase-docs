@@ -8,7 +8,7 @@ apiReference:
   operation: Agents
   method: POST
   path: /v1/agents/{agent_id}/archive
-  description: Archive an Agent with compare-and-set. Archived Agents cannot start new Sessions, Services, or Schedules.
+  description: Archive an Agent with compare-and-set. Archived Agents cannot start new Sessions.
   groups:
     - title: Path parameters
       fields:

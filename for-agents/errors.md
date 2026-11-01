@@ -17,7 +17,7 @@ Core `/v1/*` middleware and several model or resource endpoints return a flat er
 {"error":"organization rate limit exceeded"}
 ```
 
-Agents platform resources (`/v1/agents*`, `/v1/services*`, `/v1/schedules*`, `/v1/mcp-connections*`, `/v1/secrets*`,
+Agents platform resources (`/v1/agents*`, `/v1/mcp-connections*`, `/v1/secrets*`,
 `/v1/skills*`) return an OpenAI-style object with a stable `code`. See [Agents platform errors](#agents-platform-errors):
 
 ```json
@@ -90,7 +90,7 @@ Apply these rules:
 
 ## Agents platform errors
 
-Agents, Sessions, Services, Schedules, Skills, MCP connections, and Secrets return one envelope. For most codes, `message` is a fixed, safe sentence; `invalid_request` may carry a short explanation, such as which input shape or option is not supported. Branch on `code`, not on `message`.
+Agents, Sessions, Skills, MCP connections, and Secrets return one envelope. For most codes, `message` is a fixed, safe sentence; `invalid_request` may carry a short explanation, such as which input shape or option is not supported. Branch on `code`, not on `message`.
 
 ```json
 {"error":{"type":"invalid_request_error","code":"conflict","param":null,"message":"conflicting request"}}
@@ -112,7 +112,6 @@ Agents, Sessions, Services, Schedules, Skills, MCP connections, and Secrets retu
 | 409 | `session_input_expired` | Input admission expired | Inspect history before sending again |
 | 409 | `session_environment_unavailable` | The execution environment is unavailable | Wait or create a new Session |
 | 413 | `request_too_large` | The request body, or the Session configuration frozen from it, exceeds the size limit | Send a smaller body; do not retry unchanged |
-| 429 | `concurrency_limit` | A Service or Schedule already has a pending Run | Wait for it to finish or cancel it |
 | 429 | `quota_exceeded` | Agents quota exceeded | Retry later |
 | 502 | `executor_rejected`, `executor_contract_error` | The execution layer rejected the request or answered unexpectedly | Check the Agent configuration, then retry |
 | 503 | `executor_unavailable`, `storage_unavailable`, `skill_unavailable`, `tenant_unavailable`, `tenant_provisioning_failed`, `authorization_unavailable`, `admission_unavailable`, `internal_error` | A dependency is temporarily unavailable | Retry with backoff and the same `Idempotency-Key` |

@@ -145,7 +145,9 @@ const modelIdentifier = computed(() => spec.value.groups
 const modelDetailUrl = computed(() => {
   if (!modelIdentifier.value?.includes('/')) return 'https://www.sandbase.ai/models'
   const [vendor, ...modelSlugParts] = modelIdentifier.value.split('/')
-  return `https://www.sandbase.ai/model/${encodeURIComponent(vendor)}/${modelSlugParts.map(encodeURIComponent).join('/')}`
+  // Remaining API reference pages document models (native protocols, inference
+  // contracts); model pages live at /models/{vendor}/{model} on the main site.
+  return `https://www.sandbase.ai/models/${encodeURIComponent(vendor)}/${modelSlugParts.map(encodeURIComponent).join('/')}`
 })
 const pageMarkdown = computed(() => apiReferenceMarkdown(spec.value, examples.value))
 

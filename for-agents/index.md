@@ -5,8 +5,8 @@ description: Everything an AI agent needs to discover and use SandBase API — o
 
 # AI-Friendly API Overview
 
-::: info Session and Run contract
-A Session (`ses_*`) runs one saved Agent version; create it with `POST /v1/agents/sessions`. Invoking a Service or firing a Schedule creates a Run (`run_*`), and each Run creates its own Session reported in `session_id`. Runtime instances remain internal and are never returned.
+::: info Session contract
+A Session (`ses_*`) runs one saved Agent version; create it directly with `POST /v1/agents/sessions`. Runtime instances remain internal and are never returned.
 :::
 
 > A concise reference for both humans and AI agents. For plain-text versions optimized for LLM ingestion, see [`llms.txt`](https://www.sandbase.ai/docs/llms.txt).
@@ -63,8 +63,6 @@ Beyond the core generation APIs, SandBase provides APIs for agent lifecycle mana
 |-------|---------------|---------|
 | **Agents** | `POST /v1/agents`, `GET /v1/agents`, `POST /v1/agents/{agent_id}` | Create and version saved Agent definitions |
 | **Sessions** | `POST /v1/agents/sessions`, `POST /v1/agents/sessions/{session_id}/events`, `GET /v1/agents/sessions/{session_id}/events` | Run an Agent, send input, and stream live events |
-| **Services** | `POST /v1/services`, `POST /v1/services/{service_id}/invoke` | Invoke a pinned Agent version; each call returns a Run |
-| **Schedules** | `POST /v1/schedules`, `POST /v1/schedules/{schedule_id}/runs` | Run a pinned Agent version on cron or on demand |
 | **Skills** | `POST /v1/skills`, `GET /v1/skills` | Versioned instruction bundles that Agents mount |
 | **MCP Connections and Secrets** | `POST /v1/mcp-connections`, `POST /v1/secrets` | Remote HTTPS MCP tools and their write-only Bearer tokens |
 

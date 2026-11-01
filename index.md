@@ -14,57 +14,46 @@ SandBase provides two complementary ways to build AI applications. Start with th
 | | Models and APIs | Managed Agents |
 |---|---|---|
 | **What it is** | Direct access to language, image, video, audio, and third-party APIs | Reusable, versioned Agent configurations executed by SandBase |
-| **Best for** | Custom application loops and fine-grained request control | Multi-step, asynchronous, scheduled, or repeatable work |
+| **Best for** | Custom application loops and fine-grained request control | Multi-step, asynchronous, or repeatable work |
 | **You manage** | Prompts, orchestration, retries, and application state | Agent definition, enabled capabilities, inputs, and delivery behavior |
-| **Start here** | [Models and APIs](/models/) | [Build Agent](/agents/) |
+| **Start here** | [Models and APIs](https://www.sandbase.ai/models) | [Build Agent](/agents/) |
 
 ::: tip One SandBase API key
-The same API key can call Models, APIs, Agents, Services, and scheduled workloads. Keep keys on the server and never expose them in browser code.
+The same API key can call Models, APIs, and Agents. Keep keys on the server and never expose them in browser code.
 :::
 
 ## Core concepts
 
 ### Models and APIs
 
-Use Models for language, image, video, and audio workloads. Use APIs when the application needs external data or actions. The Store shows available capabilities, pricing, input schemas, and working examples.
+Use Models for language, image, video, and audio workloads. Use APIs when the application needs external data or actions. The catalog on the SandBase website shows available capabilities, pricing, input schemas, and working examples.
 
-- [Browse the Store](/store/)
-- [Supported Models](/models/supported)
+- [Browse Models](https://www.sandbase.ai/models)
+- [Browse APIs](https://www.sandbase.ai/apis)
 - [Make your first API call](/getting-started/first-call)
 - [Open the Model API Reference](/model-api-reference/)
 
 ### Agents
 
-An Agent is a reusable, versioned configuration containing a Model, instructions, Skills, and MCP connections. Define it once, test it in a Session, and then choose how it should run.
+An Agent is a reusable, versioned configuration containing a Model, instructions, Skills, and MCP connections. Define it once, then run it in Sessions.
 
 - [Understand Agents](/agents/)
 - [Define an Agent](/agents/agent-api)
 - [Add Skills and MCP tools](/agents/mcp-tools)
 
-### Services and Sessions
+### Sessions
+A Session runs one Agent version. Create it with `POST /v1/agents/sessions`, send input, stream events, and read the full conversation afterwards.
 
-A Service makes a pinned, tested Agent version callable by applications and AI tools. Each invocation through `/v1/services` creates a Run, and each Run creates its own Session with the full conversation.
-
-- [Services guide](/agents/services)
-- [Services API](/api-reference/services/)
-- [Sessions API](/api-reference/sessions/)
-
-### Schedules and run history
-
-Schedules run a pinned Agent version on a cron expression or on demand through `/v1/schedules`. Every firing or manual trigger creates a Run with its own `ses_*` Session, so you can review each result.
-
-- [Schedules guide](/agents/schedules)
-- [Schedules API](/api-reference/schedules/)
 - [Sessions guide](/agents/sessions)
+- [Sessions API](/api-reference/sessions/)
 
 ## First steps
 
 1. Create an organization and [API key](/getting-started/api-keys).
-2. Choose a Model, API, or Agent from the [Store](/store/).
+2. Choose a Model, API, or Agent from the [catalog](https://www.sandbase.ai/models).
 3. Make a direct request or define and test an Agent.
-4. Deploy the tested Agent version as a Service when an application needs to invoke it.
-5. Add a Schedule when the work should run automatically.
-6. Review Sessions, errors, latency, and cost in the Console.
+4. Run the tested Agent in Sessions from your application.
+5. Review Sessions, errors, latency, and cost in the Console.
 
 ## Operational guidance
 

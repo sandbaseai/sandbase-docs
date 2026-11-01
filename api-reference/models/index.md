@@ -15,10 +15,9 @@ Use the Models API to discover models before choosing an inference endpoint. The
 | Run a model or API capability | `POST /v1/run` | [Run Capability](./run) |
 | Get an asynchronous result | `GET /v1/run/{id}` | [Get Run Result](./run-get) |
 | Receive an asynchronous callback | `webhook_url` on `POST /v1/run` | [Webhook callbacks](./run#webhook-callbacks) |
-| Browse supported models | — | [Supported Models](/models/supported) |
-| Compare capabilities | — | [Capabilities](/models/capabilities) |
+| Browse supported models | — | [Models catalog](https://www.sandbase.ai/models) |
 
-To run a model, use the [Model API Reference](/model-api-reference/) for normalized Chat Completions, Anthropic Messages, image, video, and audio contracts. This page documents discovery, the unified capability runner, API passthrough, assets, and task-cost lookup.
+To run a model, open its reference page from the [Models catalog](https://www.sandbase.ai/models); see [Model API Reference](/model-api-reference/) for how those pages and the normalized contracts fit together. This page documents discovery, the unified capability runner, API passthrough, assets, and task-cost lookup.
 
 `GET /v1/models` supports `q`, `vendor`, `type`, and `order`; it is not paginated. Omitting `type` defaults to `llm`, while an explicitly empty `type=` lists all public model types. The `vendor` filter is exact and case-sensitive; `q` is a case-insensitive substring search. Each list item contains `id`, `object`, `created`, and `owned_by`, where `id` is the logical model name used in requests.
 

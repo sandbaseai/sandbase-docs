@@ -6,8 +6,7 @@ import sandboxDev from './sandbox-dev.mjs'
 import {
   apiReferenceSidebar,
   docsSidebar,
-  fullModelApiReferenceSidebar,
-  platformApiReferenceFallbackSidebar,
+  nativeApiReferenceSidebar,
 } from './sidebar'
 
 const siteOrigin = 'https://www.sandbase.ai'
@@ -46,9 +45,6 @@ function seoTitle(title: string, maxLength = 60) {
 }
 
 function cleanPagePath(relativePath: string) {
-  if (relativePath === 'model-api-reference/platform-apis/index.md') {
-    return `${docsBase}model-api-reference/platform-apis`
-  }
   const withoutIndex = relativePath.replace(/(^|\/)index\.md$/, '$1')
   const withoutExtension = withoutIndex.replace(/\.md$/, '')
   return `${docsBase}${withoutExtension}`.replace(/\/+/g, '/')
@@ -56,144 +52,6 @@ function cleanPagePath(relativePath: string) {
 
 function absoluteDocsUrl(relativePath: string) {
   return `${siteOrigin}${cleanPagePath(relativePath)}`
-}
-
-function modelPageHead(pageData: any) {
-  const seo = pageData.frontmatter?.seo
-  const relativePath = String(pageData.relativePath ?? '')
-  const isLlmModel = relativePath.startsWith('model-api-reference/llm-models/')
-  const isPlatformOperation = relativePath.startsWith('model-api-reference/platform-apis/')
-    && relativePath !== 'model-api-reference/platform-apis/index.md'
-  if (!seo?.modelId || (!isLlmModel && !isPlatformOperation)) return []
-
-  const canonicalUrl = absoluteDocsUrl(relativePath)
-  const modelDetailUrl = `${siteOrigin}/model/${seo.vendorSlug}/${seo.modelSlug}`
-  const title = seoTitle(`${seo.modelName} API Reference | SandBase`)
-  const description = pageData.description
-  const categoryName = isPlatformOperation ? 'APIs' : 'LLM Models'
-  const categoryPath = isPlatformOperation ? 'platform-apis' : 'llm-models'
-  const categoryUrl = `${siteOrigin}${docsBase}model-api-reference/${categoryPath}`
-  const keywords = [
-    `${seo.modelName} API`,
-    `${seo.modelId} API`,
-    `${seo.vendor} API`,
-    `${categoryName} reference`,
-    'SandBase model API',
-    seo.endpoint,
-    ...(seo.capabilities ?? []).map((capability: string) => `${capability} model`),
-  ].join(', ')
-  const publishedAt = seo.publishedAt || undefined
-
-  const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Docs',
-        item: `${siteOrigin}${docsBase}`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Model API Reference',
-        item: `${siteOrigin}${docsBase}model-api-reference/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: categoryName,
-        item: categoryUrl,
-      },
-      {
-        '@type': 'ListItem',
-        position: 4,
-        name: String(seo.vendor),
-        item: isLlmModel ? `${categoryUrl}/${seo.vendorSlug}` : canonicalUrl,
-      },
-      {
-        '@type': 'ListItem',
-        position: 5,
-        name: String(seo.modelName),
-        item: canonicalUrl,
-      },
-    ],
-  }
-
-  const techArticleJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    headline: title,
-    name: title,
-    description,
-    url: canonicalUrl,
-    sameAs: modelDetailUrl,
-    datePublished: publishedAt,
-    dateModified: publishedAt,
-    isPartOf: {
-      '@type': 'WebSite',
-      name: 'SandBase',
-      url: siteOrigin,
-    },
-    about: [
-      {
-        '@type': 'SoftwareApplication',
-        name: String(seo.modelName),
-        applicationCategory: isPlatformOperation ? 'API operation' : 'AI model',
-        operatingSystem: 'API',
-        provider: {
-          '@type': 'Organization',
-          name: String(seo.vendor),
-        },
-      },
-      {
-        '@type': 'WebAPI',
-        name: `${seo.modelName} ${seo.protocol}`,
-        url: `${siteOrigin}${docsBase}api-reference/`,
-        documentation: canonicalUrl,
-        endpointUrl: `https://api.sandbase.ai${seo.endpoint}`,
-      },
-    ],
-    mainEntity: {
-      '@type': 'WebAPI',
-      name: `${seo.modelName} API`,
-      url: canonicalUrl,
-      endpointUrl: `https://api.sandbase.ai${seo.endpoint}`,
-      documentation: canonicalUrl,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'SandBase',
-      url: siteOrigin,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${siteOrigin}${docsBase}logo-light.png`,
-      },
-    },
-  }
-
-  return [
-    ['link', { rel: 'canonical', href: canonicalUrl }],
-    ['link', { rel: 'alternate', hreflang: 'en', href: canonicalUrl }],
-    ['link', { rel: 'alternate', hreflang: 'x-default', href: canonicalUrl }],
-    ['meta', { name: 'robots', content: 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1' }],
-    ['meta', { name: 'keywords', content: keywords }],
-    ['meta', { property: 'og:title', content: title }],
-    ['meta', { property: 'og:description', content: description }],
-    ['meta', { property: 'og:url', content: canonicalUrl }],
-    ['meta', { property: 'og:type', content: 'article' }],
-    ['meta', { property: 'og:site_name', content: 'SandBase' }],
-    ...(publishedAt ? [
-      ['meta', { property: 'article:published_time', content: publishedAt }],
-      ['meta', { property: 'article:modified_time', content: publishedAt }],
-    ] : []),
-    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:title', content: title }],
-    ['meta', { name: 'twitter:description', content: description }],
-    ['script', { type: 'application/ld+json' }, JSON.stringify(breadcrumbJsonLd)],
-    ['script', { type: 'application/ld+json' }, JSON.stringify(techArticleJsonLd)],
-  ]
 }
 
 function genericPageHead(pageData: any) {
@@ -205,7 +63,7 @@ function genericPageHead(pageData: any) {
   const robots = pageData.frontmatter?.robots
     || 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1'
   const title = seoTitle(pageData.title ? `${pageData.title} | SandBase Docs` : 'SandBase Docs')
-  const description = pageData.description || 'SandBase documentation for Models, APIs, Agents, Setup, Services, Schedules, and Sessions.'
+  const description = pageData.description || 'SandBase documentation for Models, APIs, Agents, Setup, and Sessions.'
   const techArticleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
@@ -252,13 +110,10 @@ export default defineConfig({
     'setup/groups.md',
     // Console Workspace Services was folded into AI tools (/console/setup).
     'setup/installed.md',
-    // These provider operations explicitly state that the upstream service is
-    // unavailable; do not publish dead model pages or index them.
-    'model-api-reference/platform-apis/douyin/web/live-room.md',
-    'model-api-reference/platform-apis/tiktok/web/live-room.md',
   ],
+  lang: 'en',
   title: 'SandBase Docs',
-  description: 'SandBase docs for connecting Agents to models, APIs, tools, Setup, Services, Schedules, and Sessions.',
+  description: 'SandBase docs for connecting Agents to models, APIs, tools, Setup, and Sessions.',
   ignoreDeadLinks: true,
   appearance: true,
   cleanUrls: true,
@@ -296,14 +151,7 @@ export default defineConfig({
       // Do not advertise compatibility redirects or withdrawn pages to crawlers.
       // The legacy Seedance page remains reachable for existing links but is
       // canonicalized/noindexed in favor of Official Native API.
-      .filter((item) => ![
-        'agents/deployments',
-        'api-reference/endpoints/',
-        'api-reference/deployments/',
-        'api-reference/credentials/',
-        'store/models',
-        'api-reference/volcengine-contents-generations',
-      ].includes(item.url.replace(/^\//, '')))
+      .filter((item) => !['api-reference/volcengine-contents-generations'].includes(item.url.replace(/^\//, '')))
       .filter((item) => !noindexModelReferences.has(item.url.replace(/^\//, '')))
       .map((item) => ({
         ...item,
@@ -320,19 +168,18 @@ export default defineConfig({
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;700&display=swap' }],
     ['meta', { property: 'og:title', content: 'SandBase Docs - Connect Your Agent to the Real World' }],
-    ['meta', { property: 'og:description', content: 'Learn how to use Setup, call Models and APIs, build Agents, deploy Services, create Schedules, and review Sessions in SandBase.' }],
+    ['meta', { property: 'og:description', content: 'Learn how to use Setup, call Models and APIs, build Agents, and run and review Sessions in SandBase.' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'SandBase' }],
     ['meta', { property: 'og:image', content: 'https://www.sandbase.ai/og-default.png' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'SandBase Docs' }],
-    ['meta', { name: 'twitter:description', content: 'Docs for Setup, Models, APIs, Agents, Services, Schedules, and Sessions.' }],
-    ['meta', { name: 'keywords', content: 'SandBase docs, AI agent docs, Setup docs, AI tool setup, model API docs, API catalog, agent services, agent schedules, agent sessions' }],
+    ['meta', { name: 'twitter:description', content: 'Docs for Setup, Models, APIs, Agents, and Sessions.' }],
+    ['meta', { name: 'keywords', content: 'SandBase docs, AI agent docs, Setup docs, AI tool setup, model API docs, API catalog, agent sessions' }],
   ],
 
   transformHead({ pageData }) {
-    const modelHead = modelPageHead(pageData)
-    return modelHead.length ? modelHead : genericPageHead(pageData)
+    return genericPageHead(pageData)
   },
 
   themeConfig: {
@@ -354,8 +201,7 @@ export default defineConfig({
     ],
 
     sidebar: {
-      '/model-api-reference/platform-apis/': platformApiReferenceFallbackSidebar,
-      '/model-api-reference/': fullModelApiReferenceSidebar,
+      '/model-api-reference/': nativeApiReferenceSidebar,
       '/api-reference/': apiReferenceSidebar,
       '/': docsSidebar,
     },

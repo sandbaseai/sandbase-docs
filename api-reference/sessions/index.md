@@ -9,7 +9,7 @@ A Session runs one saved [Agent](/api-reference/agents/) version in SandBase's h
 The standard operations follow the OpenAI Agents protocol (`client.beta.agents.sessions`); see [OpenAI compatibility](/agents/openai-compatibility) for what the official SDK can and cannot do. SandBase extensions add renaming, archive state, cancellation, attachments, workspace file metadata, immutable artifacts, and a reconnectable product stream.
 
 ::: info Where Sessions come from
-You create a Session directly with `POST /v1/agents/sessions`, or a [Service](/api-reference/services/) invocation or [Schedule](/api-reference/schedules/) Run creates one for you. The Session reports `source` (`direct`, `service`, or `schedule`) and `source_id`, and the Run reports the Session in `session_id`.
+You create a Session directly with `POST /v1/agents/sessions`. The Session reports `source: "direct"` and `source_id: null`.
 :::
 
 ## Recommended flow

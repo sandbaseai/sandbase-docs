@@ -14,15 +14,14 @@ After that, you can use SandBase in four ways:
 | Path | Best for | What you get |
 |---|---|---|
 | **Call Models and APIs** | Developers and builders | A working request you can call from your application |
-| **Use on the website** | Trying a capability in the browser | A Store detail page you can run without writing code |
-| **Setup** | People using Codex, Claude, Cursor, or Kiro | Useful Models, APIs, and Services inside your AI app |
-| **Build Agent** | FDEs and teams building reusable workflows | An Agent you can test, deploy as a Service, or schedule |
+| **Use on the website** | Trying a capability in the browser | A catalog detail page you can run without writing code |
+| **Setup** | People using Codex, Claude, Cursor, or Kiro | Useful Models and APIs inside your AI app |
+| **Build Agent** | FDEs and teams building reusable workflows | An Agent you can test and run in Sessions |
 
 ## Core ideas
 
-### Store
-
-Store is where you find capabilities:
+### Catalog
+The catalog on the SandBase website is where you find capabilities:
 
 - **Models** for reasoning, text, image, audio, and video
 - **APIs** for search, scrape, data, media, SaaS, and connectors
@@ -43,17 +42,16 @@ An Agent combines a Model, instructions, Skills, and MCP tools into one reusable
 
 After it works, you can:
 
-- deploy a tested version as a callable Service
-- schedule it to run later or on a recurring cadence
-- review each Run and its Session in the Console
+- run it in Sessions from your application
+- review each Session in the Console
 
 ## Where should I start?
 
 If you do not have an account yet, start with [Quickstart](/getting-started/quickstart).
 
-If you want to call one capability from code, browse the live [Model Store](https://www.sandbase.ai/models) or [API Store](https://www.sandbase.ai/apis), then use the matching documentation and request example.
+If you want to call one capability from code, browse the live [Models catalog](https://www.sandbase.ai/models) or [APIs catalog](https://www.sandbase.ai/apis), then use the matching documentation and request example.
 
-If you want to try a capability in the browser first, open a Store detail page on [sandbase.ai](https://www.sandbase.ai/models).
+If you want to try a capability in the browser first, open a catalog detail page on [sandbase.ai](https://www.sandbase.ai/models).
 
 If you want tools in your AI app, start with [Setup](/setup/).
 
@@ -62,7 +60,7 @@ If you want a repeatable workflow, start with [Build Agent](/agents/).
 ## Next steps
 
 - [Quickstart](/getting-started/quickstart)
-- [Store](/store/)
+- [Models and APIs catalog](https://www.sandbase.ai/models)
 - [Setup](/setup/)
 - [Build Agent](/agents/)
 - [API Reference](/api-reference/)

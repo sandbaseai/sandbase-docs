@@ -52,7 +52,7 @@ API Key、用量和账单都属于组织。一个人试用时，留在 personal 
 适合给自己的应用增加一项能力。
 
 1. 在 [Developer → API Keys](https://www.sandbase.ai/console/keys){target="_blank"} 点击 **New key** 创建 [API key](/getting-started/api-keys)。立刻复制，密钥只显示一次。
-2. 在 Store 里筛选能力，打开详情页：
+2. 在能力目录里筛选能力，打开详情页：
    - [大语言模型](https://www.sandbase.ai/models){target="_blank"} — 按提供商、能力、上下文和价格筛选
    - [图像 / 视频模型](https://www.sandbase.ai/models/image-video){target="_blank"} — 筛选文生图、图生图、文生视频、图生视频等多模态模型
    - [APIs](https://www.sandbase.ai/apis){target="_blank"} — 按平台和数据源筛选 API 资源
@@ -78,15 +78,13 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 适合先在网站上试用，还不写代码、也不接 AI 客户端。
 
-1. 登录后打开 Store：
+1. 登录后打开能力目录：
    - [大语言模型](https://www.sandbase.ai/models){target="_blank"}
    - [图像 / 视频模型](https://www.sandbase.ai/models/image-video){target="_blank"}
    - [APIs](https://www.sandbase.ai/apis){target="_blank"}
    - [Agents](https://www.sandbase.ai/agents){target="_blank"}
 2. 筛选并打开详情页。
 3. 在页面上发起一次请求，确认返回结果。
-
-了解更多：[Store](/store/)。
 
 ### 3.3 在 AI 中使用 {#use-in-ai-tool}
 
@@ -120,7 +118,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 3. 选择 **Model**。
 4. 在 **Capabilities** 添加 Skills 和 MCP 工具，再设置 **Runtime**。
 5. 点击 **Create & Chat**，在 Session 中测试。
-6. 在 Agent 的 **API** 标签页从应用调用测试通过的版本，或部署为 Service 或 Schedule。
+6. 在 Agent 的 **API** 标签页从应用调用测试通过的版本。
 
 了解更多：[Build Agent](/agents/)。
 
@@ -145,7 +143,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 <QuickstartResources locale="zh" group="catalog" />
 
 - [API keys](/getting-started/api-keys) — 创建和轮换组织 Key
-- [Store](/store/) — 在官网试用 Models、APIs 和 Agents
+- [Models 和 APIs 目录](https://www.sandbase.ai/models) — 在官网试用 Models、APIs 和 Agents
 - [Setup](/setup/) — 把能力装进 AI 工具
 - [Build Agent](/agents/) — 创建可复用的 Agent
 - [API Reference](/api-reference/) — 用代码接入

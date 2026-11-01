@@ -5,8 +5,8 @@ description: Expanded SandBase API guide for AI agents, with core workflows, req
 
 # AI API Guide
 
-::: info Session and Run contract
-A Session (`ses_*`) runs one saved Agent version and is created with `POST /v1/agents/sessions`. Invoking a Service or firing a Schedule creates a Run (`run_*`) that creates its own Session, reported in `session_id`. Internal Runtime Session IDs are not exposed.
+::: info Session contract
+A Session (`ses_*`) runs one saved Agent version and is created directly with `POST /v1/agents/sessions`. Internal Runtime Session IDs are not exposed.
 :::
 
 > A single-page guide to the most common API workflows. For the complete machine-readable contract, use the [OpenAPI specification](https://www.sandbase.ai/docs/openapi.yaml). Plain-text version: [`llms-full.txt`](https://www.sandbase.ai/docs/llms-full.txt).
@@ -30,9 +30,7 @@ Base URL: `https://api.sandbase.ai/v1`
 | **Task** | A billable execution record for operations such as model inference. Not every API operation creates one. |
 | **Run** | A media generation request via `POST /v1/run`. May be sync or async. Poll with `GET /v1/run/{id}`. |
 | **Session** | An Agent execution via `POST /v1/agents/sessions`, holding the conversation, tool activity, and output. Query with `GET /v1/agents/sessions/{session_id}`. |
-| **Service or Schedule Run** | One invocation of a Service or firing of a Schedule (`run_*`). Query with `GET /v1/services/{service_id}/runs/{run_id}` or `GET /v1/schedules/{schedule_id}/runs/{run_id}`; it links to one Session. |
-
-> **run vs session**: A model "run" (`/v1/run`) is a model generation task. A "Session" (`/v1/agents/sessions`) is an Agent execution. A Service or Schedule Run (`run_*`) is a separate resource that creates one Session. All IDs are opaque and must not be parsed.
+> **run vs session**: A model "run" (`/v1/run`) is a model generation task. A "Session" (`/v1/agents/sessions`) is an Agent execution. All IDs are opaque and must not be parsed.
 >
 > **task vs run**: A "run" or "session" is the request you make; a "task" is a billable execution record. Use
 > `GET /v1/tasks/{task_id}/cost` when an operation returns a task ID. Not every API operation creates a task.
@@ -327,13 +325,13 @@ curl https://api.sandbase.ai/v1/tasks/f3d2e8a1-7c4b-4a12-9d2e-123456789abc/cost 
 
 - Errors: `{"error":{"type":"invalid_request_error","code":"conflict","param":null,"message":"conflicting request"}}`. Branch on `code`; see the [Error Guide](./errors#agents-platform-errors).
 
-- `row_version` is the compare-and-set token for PATCH, archive, restore, pause, timing, and rotate. On 409, read again.
+- `row_version` is the compare-and-set token for PATCH, archive, restore, and rotate. On 409, read again.
 
 - Cursor lists (Agents, Sessions, items, turns, Skills): `limit` 1-100, `after`, `order`; response `{object:"list", data, has_more, first_id, last_id}`.
 
-- Offset lists (Agent versions, Services, Schedules, Runs, attachments, MCP connections, Secrets): `limit`, `offset`; response `{data, total, limit, offset}`.
+- Offset lists (Agent versions, attachments, MCP connections, Secrets): `limit`, `offset`; response `{data, total, limit, offset}`.
 
-- IDs: Agent `agt_`, Session `ses_`, Service `svc_`, Schedule `sch_`, Run `run_`, Skill `skl_`, MCP connection `mcp_`, Secret `sec_`, attachment `fil_`. Treat them as opaque.
+- IDs: Agent `agt_`, Session `ses_`, Skill `skl_`, MCP connection `mcp_`, Secret `sec_`, attachment `fil_`. Treat them as opaque.
 
 ---
 
@@ -436,54 +434,6 @@ Exactly one event per request: `agent.session.input.message` or `agent.session.i
 - `GET /v1/agents/sessions/{session_id}/artifacts` lists immutable outputs captured under `/workspace/outputs/`. Query `limit` (default 20), `order` (`desc` default), and `after` (use `last_id` when `has_more` is true).
 - `GET /v1/agents/sessions/{session_id}/artifacts/{artifact_id}/content` downloads a complete artifact using its returned opaque `art_` ID. Downloads have a 200 MiB limit; `Range` is unsupported (`416`). Workspace metadata, uploaded attachments, and captured artifacts are separate resources.
 
-## Services
-
-A Service pins an Agent version. Each invocation creates a Run (`run_`) that creates its own Session.
-
-### POST /v1/services — Create Service
-
-```bash
-curl -X POST https://api.sandbase.ai/v1/services \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
-  -H "Idempotency-Key: weekly-brief-service" \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Weekly brief", "agent_id": "agt_...", "input": "Summarize this week in AI agents."}'
-```
-
-`Idempotency-Key` is required. Omitted `agent_version` pins the current version. `schedule` and `model_provider` are rejected.
-
-### POST /v1/services/{service_id}/invoke — Invoke Service
-
-```bash
-curl -X POST https://api.sandbase.ai/v1/services/svc_.../invoke \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
-  -H "Idempotency-Key: weekly-brief-2026-w41" \
-  -H "Content-Type: application/json" \
-  -d '{}'
-```
-
-Returns `202` with a Run: `id`, `status` (`pending`, `succeeded`, `failed`, `cancelled`), `session_id` (null until the Session exists), `error_code`, `trigger_source`. Optional body fields `input`, `model`, `model_provider` apply to this Run. Same key and body return the same Run; a different body returns 409. A second pending Run returns `429 concurrency_limit`. Poll `GET /v1/services/{service_id}/runs/{run_id}`, then read `GET /v1/agents/sessions/{session_id}/items`. Cancel with `POST /v1/services/{service_id}/runs/{run_id}/cancel`.
-
----
-
-## Schedules
-
-### POST /v1/schedules — Create Schedule
-
-```bash
-curl -X POST https://api.sandbase.ai/v1/schedules \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
-  -H "Idempotency-Key: daily-digest-schedule" \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Daily digest", "agent_id": "agt_...", "input": "Summarize yesterday in AI agents.", "schedule": {"cron": "0 9 * * 1-5", "timezone": "Asia/Shanghai"}}'
-```
-
-`Idempotency-Key` and non-empty `input` are required. `cron` has five fields; `timezone` is IANA and defaults to `UTC`. The model credential (`model_provider` or your calling key) is stored encrypted for scheduled Runs.
-
-### POST /v1/schedules/{schedule_id}/runs — Trigger a Run
-
-Returns `202` with a manual Run. Scheduled firings create Runs with `trigger_source: "scheduled"`; a firing that finds a pending Run records `status: "skipped"` with `error_code: "concurrency_limit"`. List with `GET /v1/schedules/{schedule_id}/runs`. Change timing with `PUT /v1/schedules/{schedule_id}/timing`.
-
 ---
 
 ## Skills, MCP Connections, and Secrets
@@ -539,7 +489,3 @@ Body `{"name", "kind": "mcp_bearer", "server_url", "token"}`; `Idempotency-Key` 
 ## Agent Skill version bindings
 
 Saving an Agent pins each new Skill reference to an explicit version. For a new binding, `version: null` selects the current default at save time. For an existing binding, `version: null` retains its pinned version. Changing a Skill default does not upgrade saved Agents or existing Sessions; save an explicit version on the Agent to upgrade future Sessions.
-
-## Updating Service and Schedule models
-
-`PATCH /v1/services/{service_id}` and `PATCH /v1/schedules/{schedule_id}` accept `model` with the required current `row_version`. Omit `model` to keep the saved override, send an empty string to clear it and use the pinned Agent model, or send a model ID to replace it. Explicit null is rejected.

@@ -1,25 +1,22 @@
 import type { DefaultTheme } from 'vitepress'
-import {
-  modelApiReferenceSidebarItems,
-  platformApiReferenceFallbackSidebarItems,
-} from './modelApiReferenceSidebar.generated'
-
-// ─── Model API Reference ─────────────────────────────────────
-
-function modelApiReferenceSidebar(items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] {
-  return [
-    { text: 'Status', link: 'https://status.sandbase.ai' },
-    { text: 'Community', link: 'https://www.sandbase.ai/community' },
-    { text: 'Blog', link: 'https://www.sandbase.ai/blog' },
-    {
-      text: 'Model API Reference',
-      items: [...items],
-    },
-  ]
-}
-
-export const fullModelApiReferenceSidebar = modelApiReferenceSidebar(modelApiReferenceSidebarItems)
-export const platformApiReferenceFallbackSidebar = modelApiReferenceSidebar(platformApiReferenceFallbackSidebarItems)
+// ─── Native API Reference ────────────────────────────────────
+// Per-model API references live on the main site (/models/{id}/docs and
+// /apis/{id}/docs). The Docs site keeps only the official native protocols.
+export const nativeApiReferenceSidebar: DefaultTheme.SidebarItem[] = [
+  { text: 'Status', link: 'https://status.sandbase.ai' },
+  { text: 'Community', link: 'https://www.sandbase.ai/community' },
+  { text: 'Blog', link: 'https://blog.sandbase.ai' },
+  {
+    text: 'Model API references',
+    items: [
+      { text: 'Overview', link: '/model-api-reference/' },
+      { text: 'Language models', link: 'https://www.sandbase.ai/models' },
+      { text: 'Image & video models', link: 'https://www.sandbase.ai/models/image-video' },
+      { text: 'APIs', link: 'https://www.sandbase.ai/apis' },
+      { text: 'Official native APIs', link: '/model-api-reference/official-native-api/' },
+    ],
+  },
+]
 
 export const docsSidebar: DefaultTheme.SidebarItem[] = [
   {
@@ -52,12 +49,11 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
   {
     text: 'Models & APIs',
     items: [
-      { text: 'Store', link: '/store/' },
-      { text: 'APIs', link: '/store/apis' },
-      { text: 'Models', link: '/models/' },
-      { text: 'Supported Models', link: '/models/supported' },
-      { text: 'Capabilities', link: '/models/capabilities' },
-      { text: 'Vision', link: '/models/vision' },
+      // The catalog lives on the main site; Docs keeps usage guides only.
+      { text: 'Language models', link: 'https://www.sandbase.ai/models' },
+      { text: 'Image & video models', link: 'https://www.sandbase.ai/models/image-video' },
+      { text: 'APIs', link: 'https://www.sandbase.ai/apis' },
+      { text: 'Skills', link: 'https://www.sandbase.ai/skills' },
     ],
   },
   {
@@ -96,8 +92,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
   {
     text: 'Agent operations',
     items: [
-      { text: 'Services', link: '/agents/services' },
-      { text: 'Schedules', link: '/agents/schedules' },
       { text: 'Sessions', link: '/agents/sessions' },
     ],
   },
@@ -172,36 +166,6 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Download Artifact', link: '/api-reference/sessions/download-artifact' },
       { text: 'Download File', link: '/api-reference/sessions/download-file' },
       { text: 'Delete File', link: '/api-reference/sessions/delete-file' },
-    ],
-  },
-  {
-    text: 'Services',
-    collapsed: true,
-    items: [
-      { text: 'Overview', link: '/api-reference/services/' },
-      { text: 'Create Service', link: '/api-reference/services/create' },
-      { text: 'List Services', link: '/api-reference/services/list' },
-      { text: 'Get Service', link: '/api-reference/services/get' },
-      { text: 'Update Service', link: '/api-reference/services/update' },
-      { text: 'Pause, Resume, Archive', link: '/api-reference/services/lifecycle' },
-      { text: 'Invoke Service', link: '/api-reference/services/invoke' },
-      { text: 'Runs', link: '/api-reference/services/runs' },
-      { text: 'Notifications', link: '/api-reference/services/#notifications' },
-    ],
-  },
-  {
-    text: 'Schedules',
-    collapsed: true,
-    items: [
-      { text: 'Overview', link: '/api-reference/schedules/' },
-      { text: 'Create Schedule', link: '/api-reference/schedules/create' },
-      { text: 'List Schedules', link: '/api-reference/schedules/list' },
-      { text: 'Get Schedule', link: '/api-reference/schedules/get' },
-      { text: 'Update Schedule', link: '/api-reference/schedules/update' },
-      { text: 'Update Timing', link: '/api-reference/schedules/timing' },
-      { text: 'Pause, Resume, Archive', link: '/api-reference/schedules/lifecycle' },
-      { text: 'Trigger Run', link: '/api-reference/schedules/run' },
-      { text: 'Runs', link: '/api-reference/schedules/runs' },
     ],
   },
   {
