@@ -3,7 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import YAML from 'yaml'
 
-const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'setup', 'model-api-reference']
+const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'setup']
 const excluded = [
   'agents/endpoint-quickstart.md',
   'setup/cli.md',
@@ -12,8 +12,6 @@ const excluded = [
 let inspected = 0
 const publicTitles = new Map()
 const publicDescriptions = new Map()
-const generatedTitles = new Map()
-const generatedDescriptions = new Map()
 
 function registerUnique(map, value, filename, label) {
   const previous = map.get(value)
@@ -47,27 +45,14 @@ function inspect(directory) {
     assert.ok(!/\bAPI API\b/i.test(String(frontmatter.description)), `${filename} description must not repeat API`)
     const titleBase = String(frontmatter.title).split(' — ', 1)[0]
     assert.ok(!/\b([A-Za-z][A-Za-z0-9'-]*)\s+\1\b/i.test(titleBase), `${filename} title must not repeat adjacent words`)
-    if (filename.startsWith('model-api-reference/')) {
-      assert.ok(!/(?:\.\.\.|…)\s*$/.test(String(frontmatter.title)), `${filename} title must not end with a truncation ellipsis`)
-      assert.ok(!/(?:\.\.\.|…)\s*$/.test(String(frontmatter.description)), `${filename} description must not end with a truncation ellipsis`)
-    }
     const robots = String(frontmatter.robots ?? 'index,follow')
     if (robots.startsWith('noindex')) {
       if (frontmatter.canonical != null) {
         assert.ok(String(frontmatter.canonical).startsWith('/docs/'), `${filename} canonical URL must start with /docs/`)
       }
     } else {
-      // Model API reference pages (overview and Official Native API) keep their own
-      // uniqueness namespace so duplicate model pages do not collapse into
-      // indistinguishable search results.
-      const titleMap = filename.startsWith('model-api-reference/') ? generatedTitles : publicTitles
-      const descriptionMap = filename.startsWith('model-api-reference/') ? generatedDescriptions : publicDescriptions
-      if (filename.startsWith('model-api-reference/')) {
-        registerUnique(titleMap, String(frontmatter.title).trim(), filename, 'an indexable model API reference title')
-      } else {
-        registerUnique(titleMap, String(frontmatter.title).trim(), filename, 'an indexable title')
-      }
-      registerUnique(descriptionMap, String(frontmatter.description).trim(), filename, 'an indexable description')
+      registerUnique(publicTitles, String(frontmatter.title).trim(), filename, 'an indexable title')
+      registerUnique(publicDescriptions, String(frontmatter.description).trim(), filename, 'an indexable description')
     }
     inspected += 1
   }

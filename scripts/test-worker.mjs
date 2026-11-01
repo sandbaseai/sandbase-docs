@@ -31,8 +31,13 @@ assert.deepEqual(await retired('/docs/models/supported'), [301, 'https://www.san
 assert.deepEqual(await retired('/docs/agents/schedules'), [301, 'https://www.sandbase.ai/docs/agents/'])
 assert.deepEqual(await retired('/docs/api-reference/services/create'), [301, 'https://www.sandbase.ai/docs/api-reference/agents/'])
 assert.deepEqual(await retired('/docs/api-reference/deployments/create.html'), [301, 'https://www.sandbase.ai/docs/api-reference/agents/'])
-// Kept pages are served, including the official native API references and Secrets.
-assert.deepEqual(await retired('/docs/model-api-reference/official-native-api/openai/gpt-image-2'), [200, null])
+// Kept pages are served, including the Seedance protocol reference and Secrets.
+assert.deepEqual(await retired('/docs/model-api-reference/official-native-api/openai/gpt-image-2'), [301, 'https://www.sandbase.ai/docs/api-reference/images/generations'])
+assert.deepEqual(await retired('/docs/model-api-reference/official-native-api/bytedance/seedance-2.5-official.html'), [301, 'https://www.sandbase.ai/docs/api-reference/volcengine-contents-generations'])
+assert.deepEqual(await retired('/docs/model-api-reference/'), [301, 'https://www.sandbase.ai/docs/api-reference/'])
+assert.deepEqual(await retired('/docs/model-api-reference'), [301, 'https://www.sandbase.ai/docs/api-reference/'])
+assert.deepEqual(await retired('/docs/model-api-reference/official-native-api/google/unknown-page'), [301, 'https://www.sandbase.ai/docs/api-reference/'])
+assert.deepEqual(await retired('/docs/api-reference/volcengine-contents-generations'), [200, null])
 assert.deepEqual(await retired('/docs/api-reference/secrets/'), [200, null])
 assert.deepEqual(await retired('/docs/guides/streaming'), [200, null])
 console.log('Worker routing: ok (docs mount preserved, clean URLs permanent, retired pages redirect once)')

@@ -8,7 +8,7 @@ description: Manage SandBase Agents, Sessions, Skills, MCP connections, Secrets,
 Use the Platform API to define reusable Agents, run them in Sessions, and connect them to Skills and MCP tools.
 
 ::: tip Looking for model inference?
-Chat, image, video, audio, and model-specific request schemas live in the [Model API Reference](/model-api-reference/). The Platform API covers managed Agent resources and operations.
+The inference contracts (Chat Completions, Responses, Anthropic Messages, Gemini, Images, and Seedance video) are in the **Model inference** section of this reference. Each model's own fields and pricing are on its page in the [Models catalog](https://www.sandbase.ai/models).
 :::
 
 ## Choose a starting point
@@ -61,9 +61,9 @@ Platform resources belong to the organization associated with the API key. Use t
 
 - Browse operations from the sidebar for examples and response details.
 - Download the machine-readable [OpenAPI specification](/openapi.yaml).
-- Use the [Model API Reference](/model-api-reference/) for inference endpoints and model-specific schemas.
+- Open a model's page in the [Models catalog](https://www.sandbase.ai/models) or an API's page in the [APIs catalog](https://www.sandbase.ai/apis) for its exact request fields.
 
 ## Next steps
 
 - New to managed Agents: [Build Agent](/agents/)
-- Call a model directly: [Model API Reference](/model-api-reference/)
+- Call a model directly: [Chat Completions](/api-reference/llm-gateway) or the [Models catalog](https://www.sandbase.ai/models)

@@ -5,15 +5,13 @@ import { useRoute, withBase } from 'vitepress'
 const route = useRoute()
 
 const activeSection = computed(() => {
-  if (route.path.includes('/model-api-reference/')) return 'models'
   if (route.path.includes('/api-reference/')) return 'platform'
   return 'docs'
 })
 
 const tabs = [
   { id: 'docs', label: 'Docs', href: '/' },
-  { id: 'models', label: 'Model API', href: '/model-api-reference/' },
-  { id: 'platform', label: 'Platform API', href: '/api-reference/' },
+  { id: 'platform', label: 'API Reference', href: '/api-reference/' },
 ]
 </script>
 
@@ -35,7 +33,7 @@ const tabs = [
 <style scoped>
 .docs-section-tabs {
   display: grid;
-  grid-template-columns: 0.72fr 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 2px;
   margin: 0 0 2rem;
   padding: 3px;

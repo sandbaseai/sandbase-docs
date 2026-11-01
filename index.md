@@ -31,7 +31,7 @@ Use Models for language, image, video, and audio workloads. Use APIs when the ap
 - [Browse Models](https://www.sandbase.ai/models)
 - [Browse APIs](https://www.sandbase.ai/apis)
 - [Make your first API call](/getting-started/first-call)
-- [Open the Model API Reference](/model-api-reference/)
+- [Open the API Reference](/api-reference/)
 
 ### Agents
 
@@ -68,7 +68,7 @@ A Session runs one Agent version. Create it with `POST /v1/agents/sessions`, sen
 - Creating with local Skills: [Skill tutorials](/guides/skills/)
 
 - New to SandBase: [Getting started](/getting-started/)
-- Calling a Model or API: [Model API Reference](/model-api-reference/)
-- Managing Agents and workloads: [Platform API Reference](/api-reference/)
+- Calling a Model or API: [Models catalog](https://www.sandbase.ai/models) and [APIs catalog](https://www.sandbase.ai/apis)
+- Inference and Agent APIs: [API Reference](/api-reference/)
 - Building reusable work: [Build Agent](/agents/)
 - Connecting an AI tool: [Setup](/setup/)

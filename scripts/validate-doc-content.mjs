@@ -1,9 +1,8 @@
 import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
-import { parse as parseYaml } from 'yaml'
 
-const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'setup', 'model-api-reference']
+const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'setup']
 const excluded = [
   'agents/endpoint-quickstart.md',
   'setup/cli.md',
@@ -42,7 +41,7 @@ const forbidden = [
   [/\]\((?:\/docs)?\/agents\/(?:services|schedules|deployments)\b/, 'link to a removed Services, Schedules, or Deployments guide'],
   [/\]\((?:\/docs)?\/api-reference\/(?:services|schedules|deployments|endpoints|credentials)\//, 'link to a removed Agents API reference'],
   [/\]\((?:\/docs)?\/(?:store|models)\//, 'link to a removed docs catalog page; use the main-site catalog'],
-  [/\]\((?:\/docs)?\/model-api-reference\/(?:platform-apis|llm-models|image-generation|video-generation|audio-generation)\b/, 'link to a removed per-model reference; use the main-site model or API page'],
+  [/\]\((?:\/docs)?\/model-api-reference\b/, 'link to the removed Model API Reference; use the API reference or the main-site model or API page'],
   [/\bSeedance Native API\b/, 'legacy provider-native API label; use Official Native API'],
   [/openai\/gpt-4o\b/, 'stale hand-written example model'],
   [/openai\/gpt-5\.4\b/, 'stale hand-written example model'],
@@ -69,27 +68,6 @@ for (const filename of files) {
     assert.ok(!pattern.test(source), `${filename} exposes ${label}: ${pattern}`)
   }
   inspected += 1
-}
-
-// Official Native API pages embed API reference JSON; each request field must
-// appear exactly once so the page cannot publish contradictory request forms.
-function collectModelPages(directory) {
-  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    const filename = path.join(directory, entry.name)
-    return entry.isDirectory() ? collectModelPages(filename) : entry.name.endsWith('.md') ? [filename] : []
-  })
-}
-for (const filename of collectModelPages('model-api-reference')) {
-  const source = readFileSync(filename, 'utf8')
-  assert.doesNotMatch(source, /Range: −∞ to|Range: [0-9.]+ to ∞/, `${filename} contains an unbounded constraint rendered as a fake range`)
-  const frontmatter = source.split(/^---$/m)[1] ?? ''
-  const metadata = parseYaml(frontmatter)
-  if (!metadata?.apiReferenceJson) continue
-  const reference = JSON.parse(metadata.apiReferenceJson)
-  for (const group of reference.groups ?? []) {
-    const names = (group.fields ?? []).map((field) => field.name)
-    assert.equal(new Set(names).size, names.length, `${filename} repeats a field in ${group.title}`)
-  }
 }
 
 for (const filename of [
@@ -149,71 +127,46 @@ const firstCallGuide = readFileSync('getting-started/first-call.md', 'utf8')
 assert.doesNotMatch(firstCallGuide, /Every request to SandBase's LLM Gateway follows/, 'First call must not generalize one route to every LLM request')
 assert.doesNotMatch(firstCallGuide, /The first chunk contains `delta\.role`/, 'Streaming guide must not require a provider-dependent first chunk')
 
-const modelReference = readFileSync('model-api-reference/index.md', 'utf8')
-assert.doesNotMatch(modelReference, /\b(?:All|Every) LLM models? uses? /i, 'Model reference must not claim every LLM uses one protocol')
-assert.match(modelReference, /https:\/\/www\.sandbase\.ai\/models\/\{vendor\}\/\{model\}\/docs/, 'Model reference must explain where per-model references live')
-assert.match(modelReference, /https:\/\/www\.sandbase\.ai\/apis\/\{vendor\}\/\{endpoint\}\/docs/, 'Model reference must explain where per-API references live')
-assert.match(modelReference, /\[Anthropic Messages\]\(\/api-reference\/anthropic-compat\)/, 'Model reference must identify the Anthropic protocol')
-
-const geminiOmniReference = readFileSync('model-api-reference/official-native-api/google/gemini-omni-flash-preview.md', 'utf8')
-assert.match(geminiOmniReference, /path\\?\":\\?\"\/v1beta\/interactions/, 'Gemini Omni must use the native Interactions endpoint')
-assert.doesNotMatch(geminiOmniReference, /path\\?\":\\?\"\/v1\/chat\/completions/, 'Gemini Omni must not advertise Chat Completions')
-
 const geminiInteractionsReference = readFileSync('api-reference/gemini-interactions.md', 'utf8')
+assert.match(geminiInteractionsReference, /path: \/v1beta\/interactions|"path":"\/v1beta\/interactions"|\/v1beta\/interactions/, 'Gemini Interactions must document the native Interactions endpoint')
+assert.match(geminiInteractionsReference, /google\/gemini-omni-flash-preview/, 'Gemini Interactions must list Gemini Omni')
 assert.match(geminiInteractionsReference, /not a generic route for every model/, 'Gemini Interactions must not imply support for every Google model')
-assert.match(geminiInteractionsReference, /Nano Banana Pro and Nano Banana 2 use\s+`\/v1beta\/models\/\{model\}:generateContent`/, 'Gemini Interactions must direct image models to GenerateContent')
-
-for (const filename of ['gemini-3-pro-image.md', 'gemini-3.1-flash-image.md']) {
-  const geminiImageReference = readFileSync(`model-api-reference/official-native-api/google/${filename}`, 'utf8')
-  assert.match(geminiImageReference, /path:\s*\/v1beta\/models\//, `${filename} must use the native GenerateContent endpoint`)
-  assert.match(geminiImageReference, /:generateContent/, `${filename} must document the GenerateContent action`)
-  assert.doesNotMatch(geminiImageReference, /path:\s*\/v1\/chat\/completions/, `${filename} must not advertise Chat Completions`)
+assert.match(geminiInteractionsReference, /Nano Banana Pro and Nano Banana 2 use\s+\[?`\/v1beta\/models\/\{model\}:generateContent`/, 'Gemini Interactions must direct image models to GenerateContent')
+const geminiGenerateContentReference = readFileSync('api-reference/gemini-generate-content.md', 'utf8')
+for (const model of ['gemini-3-pro-image', 'gemini-3.1-flash-image', 'gemini-nano-banana-2.1']) {
+  assert.match(geminiGenerateContentReference, new RegExp(`\`${model.replace(/\./g, '\\.')}\``), `GenerateContent must list the native ${model} mapping`)
 }
-
-for (const variant of ['flare', 'sunburst']) {
-  const gptImage25Reference = readFileSync(`model-api-reference/official-native-api/openai/gpt-image-2.5-${variant}.md`, 'utf8')
-  assert.match(gptImage25Reference, /path:\s*\/v1\/images\/generations/, `GPT Image 2.5 ${variant} must document native generation`)
-  assert.match(gptImage25Reference, /POST \/v1\/images\/edits/, `GPT Image 2.5 ${variant} must document native editing`)
-  assert.match(gptImage25Reference, new RegExp(`gpt-image-2\\.5-${variant}`), `GPT Image 2.5 ${variant} must use its exact public alias`)
-  assert.doesNotMatch(gptImage25Reference, /model=?(?:"|')?openai\/gpt-image-2\.5/, `GPT Image 2.5 ${variant} must not send an internal model name to the native endpoint`)
+assert.match(geminiGenerateContentReference, /inlineData/, 'GenerateContent must show how to edit an image with inlineData')
+for (const filename of ['generations', 'edits']) {
+  const imagesReference = readFileSync(`api-reference/images/${filename}.md`, 'utf8')
+  for (const model of ['gpt-image-2.5-flare', 'gpt-image-2.5-sunburst', 'gpt-image-2']) {
+    assert.match(imagesReference, new RegExp(`\`${model.replace(/\./g, '\\.')}\``), `Images ${filename} must list ${model}`)
+  }
+  assert.doesNotMatch(imagesReference, /model=?(?:"|')?openai\/gpt-image-2/, `Images ${filename} must not send an internal model name to the native endpoint`)
 }
-
+assert.match(readFileSync('api-reference/images/edits.md', 'utf8'), /images\/edits[\s\S]*-F "image=@/, 'Images edits must show a multipart edit request')
 const runReference = readFileSync('api-reference/models/run.md', 'utf8')
 assert.doesNotMatch(runReference, /webhook_url[^\n]*API tasks/i, 'Run reference must not promise callbacks for API capabilities')
 assert.match(runReference, /webhook_url[^\n]*image, video, or audio tasks/i, 'Run reference must match webhook capability scope')
 const openApiReference = readFileSync('public/openapi.yaml', 'utf8')
 assert.doesNotMatch(openApiReference, /webhook_url:\n[\s\S]{0,180}?description:[^\n]*API tasks/i, 'OpenAPI must not promise callbacks for API capabilities')
 assert.match(openApiReference, /webhook_url:\n[\s\S]{0,180}?description:[^\n]*image, video, or audio tasks/i, 'OpenAPI must match webhook capability scope')
-
-// Official Native API has one dedicated navigation entry in the native API sidebar.
 const sidebarSource = readFileSync('.vitepress/sidebar.ts', 'utf8')
-const nativeSidebarStart = sidebarSource.indexOf('export const nativeApiReferenceSidebar')
-assert.ok(nativeSidebarStart >= 0, 'Sidebar must export nativeApiReferenceSidebar')
-const nativeSidebarSource = sidebarSource.slice(nativeSidebarStart, sidebarSource.indexOf('export const docsSidebar'))
-assert.equal((nativeSidebarSource.match(/\/model-api-reference\/official-native-api\//g) ?? []).length, 1, 'Official Native API must have exactly one native sidebar entry')
+assert.doesNotMatch(sidebarSource, /model-api-reference|nativeApiReferenceSidebar/, 'Sidebar must not link the retired Model API Reference')
 assert.doesNotMatch(sidebarSource, /seedance-native-api/i, 'Sidebar must not link the legacy Seedance native API page')
-
-const nativeReference = readFileSync('model-api-reference/official-native-api/index.md', 'utf8')
-// Task listing and deletion were removed from the apiserver; the reference must not advertise them.
-assert.doesNotMatch(nativeReference, /`DELETE`\s*\|\s*`\/api\/v3\/contents\/generations\/tasks/, 'Official Native API must not document the removed task deletion')
-assert.match(nativeReference, /Listing tasks and cancelling or deleting a task are not supported/, 'Official Native API must state that only create and retrieve are available')
-
-const seedanceAssetReference = readFileSync('model-api-reference/official-native-api/bytedance/media-assets.md', 'utf8')
-assert.match(seedanceAssetReference, /`POST \/v1\/assets`/, 'Seedance Asset guide must document Asset registration')
-assert.match(seedanceAssetReference, /`GET \/v1\/assets\/\{external_id\}`/, 'Seedance Asset guide must document Asset readiness lookup')
-assert.match(seedanceAssetReference, /asset:\/\/asset-/, 'Seedance Asset guide must use the persistent Asset reference in a generation request')
-assert.match(seedanceAssetReference, /reference_image[\s\S]*reference_video[\s\S]*reference_audio/, 'Seedance Asset guide must map image, video, and audio roles')
-assert.match(seedanceAssetReference, /official-compatible Asset protocol/, 'Seedance Asset guide must describe the official-compatible protocol boundary')
-assert.match(seedanceAssetReference, /passed through unchanged/, 'Seedance Asset guide must state that asset references pass through unchanged')
-assert.doesNotMatch(seedanceAssetReference, /\/v1\/upload/, 'Seedance official Asset guide must not mix in the generic upload endpoint')
-assert.doesNotMatch(seedanceAssetReference, /SandBase Asset library/, 'Seedance Asset guide must not describe the compatible Asset protocol as a separate SandBase library')
-assert.doesNotMatch(seedanceAssetReference, /POST \/api\/v3\/assets/, 'Seedance Asset guide must not expose the internal Asset gateway')
-
-for (const filename of ['seedance-2.5-official.md', 'seedance-2.0-official.md']) {
-  const seedanceModelReference = readFileSync(`model-api-reference/official-native-api/bytedance/${filename}`, 'utf8')
-  assert.match(seedanceModelReference, /Media Assets for Seedance/, `${filename} must link the Asset workflow`)
-  assert.match(seedanceModelReference, /asset:\/\/asset-/, `${filename} must show how to use a reusable Asset`)
-}
-
+assert.match(sidebarSource, /link: '\/api-reference\/volcengine-contents-generations'/, 'API sidebar must link the Seedance protocol reference')
+// Seedance: the protocol reference carries the full guide and the Asset workflow.
+const seedanceReference = readFileSync('api-reference/volcengine-contents-generations.md', 'utf8')
+assert.doesNotMatch(seedanceReference, /^robots:\s*noindex/m, 'Seedance reference must be indexable now that it is the only Seedance page')
+assert.doesNotMatch(seedanceReference, /`DELETE`\s*\|\s*`\/api\/v3\/contents\/generations\/tasks/, 'Seedance reference must not document the removed task deletion')
+assert.match(seedanceReference, /Listing tasks and cancelling or deleting a task are not supported/, 'Seedance reference must state that only create and retrieve are available')
+assert.match(seedanceReference, /bytedance\/seedance\/2\.5-official[\s\S]*bytedance\/seedance\/2\.0-official/, 'Seedance reference must list both models')
+assert.match(seedanceReference, /`POST \/v1\/assets`/, 'Seedance Asset workflow must document Asset registration')
+assert.match(seedanceReference, /`GET \/v1\/assets\/\{external_id\}`/, 'Seedance Asset workflow must document Asset readiness lookup')
+assert.match(seedanceReference, /asset:\/\/asset-/, 'Seedance Asset workflow must use the persistent Asset reference in a generation request')
+assert.match(seedanceReference, /official-compatible Asset protocol/, 'Seedance Asset workflow must describe the official-compatible protocol boundary')
+assert.match(seedanceReference, /passed through unchanged/, 'Seedance Asset workflow must state that asset references pass through unchanged')
+assert.doesNotMatch(seedanceReference, /\/v1\/upload/, 'Seedance Asset workflow must not mix in the generic upload endpoint')
+assert.doesNotMatch(seedanceReference, /POST \/api\/v3\/assets/, 'Seedance Asset workflow must not expose the internal Asset gateway')
 assert.ok(inspected > 0, 'content validation did not inspect any public hand-written pages')
 console.log(`public hand-written content: ok (${inspected} pages)`)

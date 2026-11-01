@@ -101,6 +101,26 @@ Object.assign(map, {
   '/docs/api-reference/tasks/': `${SITE}/docs/api-reference/`,
 })
 
+// Model API Reference section (retired 2026-11-01). The official native API
+// pages were folded into the Platform API protocol references.
+const NATIVE = '/docs/model-api-reference/official-native-api'
+const API = `${SITE}/docs/api-reference`
+Object.assign(map, {
+  '/docs/model-api-reference': `${API}/`, '/docs/model-api-reference/': `${API}/`,
+  '/docs/model-api-reference/*': `${API}/`,
+  [NATIVE]: `${API}/`, [`${NATIVE}/`]: `${API}/`,
+  [`${NATIVE}/openai/gpt-image-2`]: `${API}/images/generations`,
+  [`${NATIVE}/openai/gpt-image-2.5-flare`]: `${API}/images/generations`,
+  [`${NATIVE}/openai/gpt-image-2.5-sunburst`]: `${API}/images/generations`,
+  [`${NATIVE}/bytedance/seedance-2.0-official`]: `${API}/volcengine-contents-generations`,
+  [`${NATIVE}/bytedance/seedance-2.5-official`]: `${API}/volcengine-contents-generations`,
+  [`${NATIVE}/bytedance/media-assets`]: `${API}/volcengine-contents-generations#use-registered-media-assets`,
+  [`${NATIVE}/google/gemini-omni-flash-preview`]: `${API}/gemini-interactions`,
+  [`${NATIVE}/google/gemini-omni-1.1-flash-preview`]: `${API}/gemini-interactions`,
+  [`${NATIVE}/google/gemini-3-pro-image`]: `${SITE}/models/google/gemini-3-pro-image/docs`,
+  [`${NATIVE}/google/gemini-3.1-flash-image`]: `${SITE}/models/google/gemini-3.1-flash-image/docs`,
+  [`${NATIVE}/google/gemini-nano-banana-2.1`]: `${SITE}/models/google/gemini-nano-banana-2.1/docs`,
+})
 const sorted = Object.fromEntries(Object.entries(map).sort(([a], [b]) => a.localeCompare(b)))
 writeFileSync('worker/retired-redirects.json', `${JSON.stringify(sorted, null, 1)}\n`)
 console.log(`${Object.keys(sorted).length} redirects (${fallbacks.length} to a hub because the item left the catalog)`)

@@ -9,7 +9,7 @@ Use the official-compatible Asset protocol exposed at `/v1/assets` to register m
 native video generation requests.
 
 For an end-to-end example that registers media and uses the returned `asset://` reference with Seedance, see
-[Media Assets for Seedance](/model-api-reference/official-native-api/bytedance/media-assets).
+[Use registered media Assets](/api-reference/volcengine-contents-generations#use-registered-media-assets) in the Seedance reference.
 
 ## Overview
 

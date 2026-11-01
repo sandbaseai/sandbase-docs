@@ -1,24 +1,8 @@
 import type { DefaultTheme } from 'vitepress'
-// ─── Native API Reference ────────────────────────────────────
-// Per-model API references live on the main site (/models/{id}/docs and
-// /apis/{id}/docs). The Docs site keeps only the official native protocols.
-export const nativeApiReferenceSidebar: DefaultTheme.SidebarItem[] = [
+export const docsSidebar: DefaultTheme.SidebarItem[] = [
   { text: 'Status', link: 'https://status.sandbase.ai' },
   { text: 'Community', link: 'https://www.sandbase.ai/community' },
   { text: 'Blog', link: 'https://blog.sandbase.ai' },
-  {
-    text: 'Model API references',
-    items: [
-      { text: 'Overview', link: '/model-api-reference/' },
-      { text: 'Language models', link: 'https://www.sandbase.ai/models' },
-      { text: 'Image & video models', link: 'https://www.sandbase.ai/models/image-video' },
-      { text: 'APIs', link: 'https://www.sandbase.ai/apis' },
-      { text: 'Official native APIs', link: '/model-api-reference/official-native-api/' },
-    ],
-  },
-]
-
-export const docsSidebar: DefaultTheme.SidebarItem[] = [
   {
     text: 'AI-Friendly Docs',
     items: [
@@ -117,6 +101,26 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Errors', link: '/api-reference/errors' },
       { text: 'Webhooks', link: '/api-reference/webhooks' },
       { text: 'OpenAPI Spec', link: '/docs/openapi.yaml' },
+    ],
+  },
+  {
+    text: 'Model inference',
+    collapsed: true,
+    items: [
+      { text: 'Models API', link: '/api-reference/models/' },
+      { text: 'List Models', link: '/api-reference/models/list' },
+      { text: 'Get Model', link: '/api-reference/models/get' },
+      { text: 'Run a Model', link: '/api-reference/models/run' },
+      { text: 'Get a Run', link: '/api-reference/models/run-get' },
+      { text: 'Chat Completions', link: '/api-reference/llm-gateway' },
+      { text: 'Responses', link: '/api-reference/responses' },
+      { text: 'Anthropic Messages', link: '/api-reference/anthropic-compat' },
+      { text: 'Gemini GenerateContent', link: '/api-reference/gemini-generate-content' },
+      { text: 'Gemini Interactions', link: '/api-reference/gemini-interactions' },
+      { text: 'Generate Image', link: '/api-reference/images/generations' },
+      { text: 'Edit Image', link: '/api-reference/images/edits' },
+      { text: 'Seedance Video', link: '/api-reference/volcengine-contents-generations' },
+      { text: 'Media Assets', link: '/api-reference/models/assets' },
     ],
   },
   {

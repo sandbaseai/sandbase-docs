@@ -1,39 +1,13 @@
-import fs from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 import sandboxDev from './sandbox-dev.mjs'
 import {
   apiReferenceSidebar,
   docsSidebar,
-  nativeApiReferenceSidebar,
 } from './sidebar'
 
 const siteOrigin = 'https://www.sandbase.ai'
 const docsBase = '/docs/'
 
-// Compatibility pages for moved model references declare `robots: noindex`.
-// Collect them once so the sitemap never advertises a moved URL.
-function noindexModelReferenceUrls() {
-  const docsRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-  const root = path.join(docsRoot, 'model-api-reference')
-  const urls = new Set<string>()
-  const walk = (directory: string) => {
-    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-      const filename = path.join(directory, entry.name)
-      if (entry.isDirectory()) walk(filename)
-      else if (entry.name.endsWith('.md')) {
-        const frontmatter = fs.readFileSync(filename, 'utf8').match(/^---\n([\s\S]*?)\n---/)?.[1] ?? ''
-        if (/^robots:\s*["']?noindex/m.test(frontmatter)) {
-          urls.add(path.relative(docsRoot, filename).split(path.sep).join('/').replace(/\.md$/, ''))
-        }
-      }
-    }
-  }
-  walk(root)
-  return urls
-}
-const noindexModelReferences = noindexModelReferenceUrls()
 
 // Keep rendered document titles within a search-friendly length even when a
 // generated page title is long. Frontmatter titles remain descriptive; the
@@ -148,11 +122,6 @@ export default defineConfig({
   sitemap: {
     hostname: siteOrigin,
     transformItems: (items) => items
-      // Do not advertise compatibility redirects or withdrawn pages to crawlers.
-      // The legacy Seedance page remains reachable for existing links but is
-      // canonicalized/noindexed in favor of Official Native API.
-      .filter((item) => !['api-reference/volcengine-contents-generations'].includes(item.url.replace(/^\//, '')))
-      .filter((item) => !noindexModelReferences.has(item.url.replace(/^\//, '')))
       .map((item) => ({
         ...item,
         url: `${docsBase}${item.url.replace(/^\//, '')}`,
@@ -192,16 +161,14 @@ export default defineConfig({
     logoLink: { link: 'https://www.sandbase.ai', target: '_blank', rel: 'noopener noreferrer' },
 
     nav: [
-      { text: 'Docs', link: '/', activeMatch: '^/(?!api-reference/|model-api-reference/)' },
-      { text: 'Model API Reference', link: '/model-api-reference/', activeMatch: '^/model-api-reference/' },
-      { text: 'Platform API', link: '/api-reference/', activeMatch: '^/api-reference/' },
+      { text: 'Docs', link: '/', activeMatch: '^/(?!api-reference/)' },
+      { text: 'API Reference', link: '/api-reference/', activeMatch: '^/api-reference/' },
       { text: 'Pricing', link: 'https://www.sandbase.ai/pricing', target: '_blank', rel: 'noopener noreferrer' },
       // Rendered as the primary "Start building" CTA button (see custom.css).
       { text: 'Start building', link: 'https://www.sandbase.ai/console', target: '_blank', rel: 'noopener noreferrer' },
     ],
 
     sidebar: {
-      '/model-api-reference/': nativeApiReferenceSidebar,
       '/api-reference/': apiReferenceSidebar,
       '/': docsSidebar,
     },

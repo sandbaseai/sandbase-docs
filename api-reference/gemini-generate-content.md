@@ -75,13 +75,66 @@ curl -N -X POST \
 
 These image models have dedicated native GenerateContent mappings:
 
-- [Gemini 3 Pro Image（Nano Banana Pro）](/model-api-reference/official-native-api/google/gemini-3-pro-image)
-- [Gemini 3.1 Flash Image（Nano Banana 2）](/model-api-reference/official-native-api/google/gemini-3.1-flash-image)
-- [Gemini Nano Banana 2.1（Nano Banana 2.1）](/model-api-reference/official-native-api/google/gemini-nano-banana-2.1)
+- [Gemini 3 Pro Image（Nano Banana Pro）](https://www.sandbase.ai/models/google/gemini-3-pro-image/docs): `gemini-3-pro-image`
+- [Gemini 3.1 Flash Image（Nano Banana 2）](https://www.sandbase.ai/models/google/gemini-3.1-flash-image/docs): `gemini-3.1-flash-image`
+- [Gemini Nano Banana 2.1（Nano Banana 2.1）](https://www.sandbase.ai/models/google/gemini-nano-banana-2.1/docs): `gemini-nano-banana-2.1`
+
+Each model page lists its token prices and per-image cost.
 
 For these mappings, SandBase forwards the request and response payloads without converting them through Chat
 Completions. This preserves image parts, response modalities, and provider-defined fields. Use the bare model name in
 the URL; for example, `google/gemini-3.1-flash-image` becomes `gemini-3.1-flash-image` in the path.
+### Edit an image
+
+Add the source image as an `inlineData` part next to the text instruction. Use the MIME type of the bytes you send:
+
+```json
+{
+  "contents": [{
+    "role": "user",
+    "parts": [
+      {"text": "Keep the subject unchanged and turn the background into a paper-cut landscape."},
+      {"inlineData": {"mimeType": "image/png", "data": "<base64-input-image>"}}
+    ]
+  }],
+  "generationConfig": {"responseModalities": ["IMAGE"], "imageConfig": {"imageSize": "1K"}}
+}
+```
+
+### Use the Google Gen AI SDK
+
+Point the official SDK at SandBase and use your SandBase API key:
+
+```python
+from google import genai
+from google.genai import types
+
+client = genai.Client(
+    api_key="YOUR_SANDBASE_API_KEY",
+    http_options=types.HttpOptions(base_url="https://api.sandbase.ai"),
+)
+
+response = client.models.generate_content(
+    model="gemini-nano-banana-2.1",
+    contents="Create a wide editorial illustration of a solar-powered city at sunrise.",
+    config=types.GenerateContentConfig(
+        response_modalities=["IMAGE"],
+        image_config=types.ImageConfig(aspect_ratio="16:9", image_size="1K"),
+    ),
+)
+
+for part in response.candidates[0].content.parts:
+    if part.inline_data:
+        with open("output.jpg", "wb") as f:
+            f.write(part.inline_data.data)
+```
+
+For streaming, call `:streamGenerateContent?alt=sse` (SDK: `generate_content_stream`) with the same body.
+
+### Response handling
+Read generated media from the returned candidate parts. Because these models use native passthrough, provider-defined
+field casing and MIME metadata are returned as received. Decode the base64 payload and verify the actual media bytes
+before choosing a file extension.
 
 ## Routing and translation boundaries
 
