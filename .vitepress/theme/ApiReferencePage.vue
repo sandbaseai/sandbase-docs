@@ -578,7 +578,7 @@ function highlightCode(code: string, language = '') {
 }
 
 .api-method.is-post { background: var(--sb-ink); color: var(--sb-canvas); }
-.api-method.is-delete { background: transparent; box-shadow: inset 0 0 0 1px currentColor; color: var(--color-error); }
+.api-method.is-delete { background: transparent; box-shadow: inset 0 0 0 1px currentColor; color: var(--sb-error-text, var(--color-error)); }
 
 .api-reference-description {
   margin: 0;
@@ -697,7 +697,7 @@ function highlightCode(code: string, language = '') {
   text-transform: uppercase;
 }
 
-.api-field-required { background: transparent; color: var(--color-error); }
+.api-field-required { background: transparent; color: var(--sb-error-text, var(--color-error)); }
 
 .api-field-row p {
   margin: 0;

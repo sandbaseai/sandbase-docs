@@ -935,7 +935,12 @@ html {
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
-    white-space: nowrap;
+  }
+  /* Let prose cells wrap; a minimum width keeps narrow columns readable and
+     code-heavy tables still scroll inside the column. */
+  .vp-doc td,
+  .vp-doc th {
+    min-width: 7.5rem;
   }
 
   .vp-doc div[class*='language-'],
@@ -1660,7 +1665,7 @@ html {
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--sb-ink-subtle);
+  color: var(--sb-ink-muted);
 }
 
 /* ─── Focus ring uses the accent, matching the reference design ─────────── */
@@ -2331,7 +2336,15 @@ html {
 .vp-doc:not(:has(.api-reference-page)) td:first-child {
   color: var(--sb-ink);
   font-family: var(--vp-font-family-mono);
-  white-space: nowrap;
+  /* Keep short keys on one line, but let long code labels wrap at spaces
+     instead of pushing the table past the content column. */
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+/* When the first cell mixes prose and code, keep the prose in the body face;
+   the code spans stay monospace. */
+.vp-doc:not(:has(.api-reference-page)) td:first-child:has(code) {
+  font-family: var(--vp-font-family-base);
 }
 
 /* Callouts: surface card, tone badge, 16px title, 15px text. */
@@ -2672,3 +2685,31 @@ html {
 ) {
   font-family: var(--font-family-text);
 }
+
+/* ─── Readability floors (full-page audit, 2026-11) ───────────────────────── */
+/* Inline code is sized relative to its parent; inside 11-12px labels and table
+   headers that fell below 10px. Never render it smaller than 11px. */
+.vp-doc th code {
+  font-size: inherit !important;
+}
+.vp-doc :not(pre) > code {
+  font-size: max(11px, 0.88em);
+}
+/* Wide tables scroll inside the column on small screens instead of clipping. */
+@media (max-width: 767px) {
+  .vp-doc table,
+  .quickstart-page .vp-doc table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+/* The shared error red (#d43f2a) is 4.3:1 on the light canvas; small labels
+   such as REQUIRED and DELETE need a slightly darker shade to reach 4.5:1. */
+:root:not(.dark) {
+  --sb-error-text: #b8321f;
+}
+.dark {
+  --sb-error-text: var(--color-error);
+}
+

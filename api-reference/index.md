@@ -1,11 +1,11 @@
 ---
-title: Platform API Reference
-description: Manage SandBase Agents, Sessions, Skills, MCP connections, Secrets, and account resources.
+title: API Reference
+description: Call SandBase models and manage Agents, Sessions, Skills, MCP connections, Secrets, and account resources.
 ---
 
-# Platform API Reference
+# API Reference
 
-Use the Platform API to define reusable Agents, run them in Sessions, and connect them to Skills and MCP tools.
+Use the API to call models directly, or to define reusable Agents, run them in Sessions, and connect them to Skills and MCP tools.
 
 ::: tip Looking for model inference?
 The inference contracts (Chat Completions, Responses, Anthropic Messages, Gemini, Images, and Seedance video) are in the **Model inference** section of this reference. Each model's own fields and pricing are on its page in the [Models catalog](https://www.sandbase.ai/models).

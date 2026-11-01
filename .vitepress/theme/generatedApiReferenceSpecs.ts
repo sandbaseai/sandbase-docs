@@ -65,26 +65,7 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "method": "POST",
     "path": "/v1/run",
     "description": "Run a text-to-speech or speech-to-text model. Asynchronous audio models may include webhook_url for a task callback.",
-    "groups": [
-      {
-        "title": "Request body",
-        "schema": "ImageEditParams",
-        "fields": [
-          { "name": "model", "type": "string", "required": true, "description": "One of gpt-image-2, gpt-image-2.5-flare, or gpt-image-2.5-sunburst." },
-          { "name": "prompt", "type": "string", "required": true, "description": "Text description of the requested edit." },
-          { "name": "image", "type": "file | file[]", "required": true, "description": "One or more source image files. Repeat the multipart field for multiple images." },
-          { "name": "mask", "type": "file", "required": false, "description": "Optional mask image for inpainting." },
-          { "name": "n", "type": "integer", "required": false, "description": "Number of edited images to return when supported." },
-          { "name": "size", "type": "string", "required": false, "description": "Output dimensions supported by the model." },
-          { "name": "quality", "type": "string", "required": false, "description": "Output quality supported by the model." },
-          { "name": "background", "type": "string", "required": false, "description": "Output background setting." },
-          { "name": "input_fidelity", "type": "string", "required": false, "description": "How closely supported models should preserve source-image details." },
-          { "name": "output_format", "type": "string", "required": false, "description": "Output encoding such as png, webp, or jpeg." },
-          { "name": "output_compression", "type": "integer", "required": false, "description": "Output compression level from 0 to 100." },
-          { "name": "user", "type": "string", "required": false, "description": "Provider-compatible end-user identifier." }
-        ]
-      }
-    ],
+    "groups": [],
     "examples": [
       {
         "label": "cURL",
@@ -521,7 +502,26 @@ export const generatedApiReferenceSpecs: Record<string, any> = {
     "path": "/v1/images/edits",
     "description": "Edit one or more uploaded images through SandBase's synchronous OpenAI Images-compatible multipart endpoint.",
     "signature": "client.images.edit(params)",
-    "groups": [],
+    "groups": [
+      {
+        "title": "Request body",
+        "schema": "ImageEditParams",
+        "fields": [
+          { "name": "model", "type": "string", "required": true, "description": "One of gpt-image-2, gpt-image-2.5-flare, or gpt-image-2.5-sunburst." },
+          { "name": "prompt", "type": "string", "required": true, "description": "Text description of the requested edit." },
+          { "name": "image", "type": "file | file[]", "required": true, "description": "One or more source image files. Repeat the multipart field for multiple images." },
+          { "name": "mask", "type": "file", "required": false, "description": "Optional mask image for inpainting." },
+          { "name": "n", "type": "integer", "required": false, "description": "Number of edited images to return when supported." },
+          { "name": "size", "type": "string", "required": false, "description": "Output dimensions supported by the model." },
+          { "name": "quality", "type": "string", "required": false, "description": "Output quality supported by the model." },
+          { "name": "background", "type": "string", "required": false, "description": "Output background setting." },
+          { "name": "input_fidelity", "type": "string", "required": false, "description": "How closely supported models should preserve source-image details." },
+          { "name": "output_format", "type": "string", "required": false, "description": "Output encoding such as png, webp, or jpeg." },
+          { "name": "output_compression", "type": "integer", "required": false, "description": "Output compression level from 0 to 100." },
+          { "name": "user", "type": "string", "required": false, "description": "Provider-compatible end-user identifier." }
+        ]
+      }
+    ],
     "examples": [
       { "label": "cURL", "language": "bash", "code": "curl https://api.sandbase.ai/v1/images/edits \\\n  -H \"Authorization: Bearer $SANDBASE_API_KEY\" \\\n  -F model=gpt-image-2 \\\n  -F 'prompt=Turn the daytime sky into a starry night' \\\n  -F image=@landscape.png" },
       { "label": "Python", "language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-...\", base_url=\"https://api.sandbase.ai/v1\")\nwith open(\"landscape.png\", \"rb\") as image:\n    result = client.images.edit(\n        model=\"gpt-image-2\",\n        image=image,\n        prompt=\"Turn the daytime sky into a starry night\",\n    )\nprint(result.data[0].b64_json or result.data[0].url)" }
