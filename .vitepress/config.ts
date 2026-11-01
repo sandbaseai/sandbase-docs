@@ -141,7 +141,7 @@ export default defineConfig({
     ['meta', { property: 'og:description', content: 'Learn how to use Setup, call Models and APIs, build Agents, and run and review Sessions in SandBase.' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'SandBase' }],
-    ['meta', { property: 'og:image', content: 'https://www.sandbase.ai/og-default.png' }],
+    ['meta', { property: 'og:image', content: 'https://www.sandbase.ai/images/og/sandbase-og-image.png' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'SandBase Docs' }],
     ['meta', { name: 'twitter:description', content: 'Docs for Setup, Models, APIs, Agents, and Sessions.' }],
