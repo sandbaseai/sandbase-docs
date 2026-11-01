@@ -2127,10 +2127,8 @@ html {
   line-height: 24px;
 }
 
-/* The design's code panels are monochrome (text-panel-code). */
-.vp-doc div[class*='language-'] code span {
-  color: var(--sb-panel-fg) !important;
-}
+/* Syntax colours come from the SandBase Shiki theme (.vitepress/syntaxTheme.ts),
+   so fenced code and the API example panels share one palette. */
 
 /* Code groups: the tabs replace the label strip; copy moves into the tab row. */
 .vp-doc .vp-code-group {
@@ -2711,5 +2709,18 @@ html {
 }
 .dark {
   --sb-error-text: var(--color-error);
+}
+
+/* ─── Syntax palette for dark code panels (both site themes) ──────────────── */
+/* Brand violet for keywords, softened lime for strings, amber for values.
+   All reach at least 4.5:1 on the #18181b panel. */
+:root {
+  --sb-syntax-fg: #e4e4e7;
+  --sb-syntax-key: #e4e4e7;
+  --sb-syntax-keyword: #b8abff;
+  --sb-syntax-string: #d4f27a;
+  --sb-syntax-constant: #ffc078;
+  --sb-syntax-comment: #8e8e99;
+  --sb-syntax-punctuation: #a1a1aa;
 }
 

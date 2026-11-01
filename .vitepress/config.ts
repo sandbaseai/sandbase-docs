@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import sandboxDev from './sandbox-dev.mjs'
+import { sandbaseSyntaxTheme } from './syntaxTheme'
 import {
   apiReferenceSidebar,
   docsSidebar,
@@ -96,7 +97,7 @@ export default defineConfig({
   // and dark appearance. Pin the syntax theme to a dark palette so code blocks
   // read as the signature dark panels on every background.
   markdown: {
-    theme: { light: 'github-dark', dark: 'github-dark' },
+    theme: { light: sandbaseSyntaxTheme, dark: sandbaseSyntaxTheme },
     // Callouts render a mono tone badge (TIP / WARNING ...) via CSS. Mark
     // titles that are just the default label so the badge isn't repeated as
     // a title; custom titles (`::: tip Current source of truth`) still show.
