@@ -4,7 +4,7 @@ description: Generate Seedance 2.0 and 2.5 videos through the Volcengine Ark Con
 aside: false
 outline: false
 apiReference:
-  title: Volcengine Ark Contents Generations
+  title: Seedance Video
   operation: Video
   method: POST
   path: /api/v3/contents/generations/tasks
