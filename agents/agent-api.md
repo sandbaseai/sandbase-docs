@@ -63,7 +63,7 @@ The body is strict JSON (up to 1 MiB). Unknown fields return 400.
 
 ## Current limits
 
-- `web_search` must use `"mode": "disabled"` for Sessions, Services, and Schedules to start.
+- `web_search` must use `"mode": "disabled"` for Sessions to start.
 - `function` tools can be saved, but Runs that need the client to return a tool result (`requires_action`) are not supported yet. A Session in that state returns `502 executor_contract_error`. Give the Agent external capabilities through [MCP connections](/agents/mcp-tools#mcp-connections) instead.
 - `multi_agent` must be omitted or `null`.
 
@@ -85,7 +85,7 @@ curl -X PATCH https://api.sandbase.ai/v1/agents/agt_8c1f2b9e-3d4a-4f6b-9c2e-1a7d
 
 - `GET /v1/agents/{agent_id}/versions` lists immutable snapshots; `GET /v1/agents/{agent_id}/versions/{version}` reads one.
 - `POST /v1/agents/{agent_id}/restore` with `{"source_version": 1, "row_version": 3}` copies an earlier configuration into a new current version.
-- `POST /v1/agents/{agent_id}/archive` and `/unarchive` take `{"row_version": …}`. Archived Agents cannot start new Sessions, Services, or Schedules.
+- `POST /v1/agents/{agent_id}/archive` and `/unarchive` take `{"row_version": …}`. Archived Agents cannot start new Sessions.
 - `DELETE /v1/agents/{agent_id}` archives the Agent. Agents are never hard-deleted.
 
 ## Next steps

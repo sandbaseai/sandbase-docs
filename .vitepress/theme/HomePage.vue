@@ -8,7 +8,7 @@
         <p class="hero-desc">Start with the path you need: add tools to your AI app, call Models and APIs directly, or build an Agent for repeatable work.</p>
         <div class="hero-actions">
           <a href="https://www.sandbase.ai/console/setup" target="_self" class="btn-primary">Start with Setup</a>
-          <a href="https://www.sandbase.ai/apis" target="_self" class="btn-secondary">Browse Store</a>
+          <a href="https://www.sandbase.ai/apis" target="_self" class="btn-secondary">Browse APIs</a>
           <a href="/docs/api-reference/" class="btn-secondary">API Reference</a>
         </div>
       </div>
@@ -17,7 +17,7 @@
           <span class="map-index">01</span>
           <div>
             <strong>Use in my AI tool</strong>
-            <p>Choose Models, APIs, or Agent Services. Run setup once. Use them in Codex, Claude, Cursor, or Kiro.</p>
+            <p>Choose Models, APIs, or Skills. Run setup once. Use them in Codex, Claude, Cursor, or Kiro.</p>
           </div>
         </div>
         <div class="map-row">
@@ -31,18 +31,18 @@
           <span class="map-index">03</span>
           <div>
             <strong>Build an Agent</strong>
-            <p>Define the Agent, test it in a Session, then deploy it as a Service or Schedule.</p>
+            <p>Define the Agent, test it in a Session, then run it from your app with Sessions.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Store -->
+    <!-- Catalog -->
     <section class="catalog-api-section" aria-labelledby="catalog-api-title">
       <div class="catalog-api-copy">
-        <p class="section-label">STORE</p>
+        <p class="section-label">CATALOG</p>
         <h2 id="catalog-api-title">Find the building block you need.</h2>
-        <p>Store is where you browse ready-made capabilities: Models, APIs, Agents, and Skills. Inspect first, then install, call, or clone.</p>
+        <p>The SandBase catalog lists ready-made capabilities: Models, APIs, Agents, and Skills. Inspect first, then install, call, or clone.</p>
       </div>
       <div class="catalog-api-links">
         <a href="https://www.sandbase.ai/models" target="_self" class="catalog-api-link">
@@ -86,14 +86,14 @@
         <a href="https://www.sandbase.ai/console/setup" target="_self" class="choose-card featured">
           <div class="choose-card-icon">01</div>
           <h3>Setup</h3>
-          <p>Add Models, APIs, and Agent Services to the AI app you already use.</p>
+          <p>Add Models, APIs, and Skills to the AI app you already use.</p>
           <ul class="choose-card-links">
             <li>Choose tools</li>
             <li>Run one setup command</li>
             <li>Use them in your AI app</li>
           </ul>
         </a>
-        <a href="/docs/models/" class="choose-card">
+        <a href="https://www.sandbase.ai/models" class="choose-card">
           <div class="choose-card-icon">02</div>
           <h3>Call Models and APIs</h3>
           <p>Use a Model or API directly from your application with a working request.</p>
@@ -109,8 +109,8 @@
           <p>Turn instructions, Models, Skills, and MCP tools into repeatable work.</p>
           <ul class="choose-card-links">
             <li>Define and test</li>
-            <li>Deploy as a Service</li>
-            <li>Schedule recurring runs</li>
+            <li>Run it with Sessions</li>
+            <li>Review every Session</li>
           </ul>
         </a>
       </div>
@@ -120,7 +120,7 @@
     <section class="journey-section">
       <p class="section-label">CONSOLE FLOW</p>
       <h2 class="section-title">Build the Agent first. Connect it when it is ready.</h2>
-      <p class="section-desc">Agents are where you define and test the work. Services and Schedules run a pinned Agent version outside the builder, and every Run is recorded as a Session.</p>
+      <p class="section-desc">Agents are where you define and test the work. Run a tested Agent from your app by creating Sessions, and review every Session afterwards.</p>
 
       <div class="journey-steps">
         <div class="journey-step">
@@ -132,18 +132,17 @@
           </div>
         </div>
         <div class="journey-step">
-          <div><span class="step-num">2</span><h4>Deploy as a Service</h4></div>
+          <div><span class="step-num">2</span><h4>Run in Sessions</h4></div>
           <div class="step-links">
-            <a href="https://www.sandbase.ai/console/endpoints" target="_self">Services</a>
-            <a href="/docs/api-reference/services/">Services API</a>
+            <a href="https://www.sandbase.ai/console/sessions" target="_self">Sessions</a>
+            <a href="/docs/api-reference/sessions/">Sessions API</a>
           </div>
         </div>
         <div class="journey-step">
-          <div><span class="step-num">3</span><h4>Schedule Agent</h4></div>
+          <div><span class="step-num">3</span><h4>Run code in a Sandbox</h4></div>
           <div class="step-links">
-            <a href="https://www.sandbase.ai/console/deployments" target="_self">Schedules</a>
-            <a href="/docs/api-reference/schedules/">Schedules API</a>
-            <a href="https://www.sandbase.ai/console/runs" target="_self">Runs</a>
+            <a href="https://www.sandbase.ai/console/sandboxes" target="_self">Sandboxes</a>
+            <a href="/docs/sandbox/">Sandbox docs</a>
           </div>
         </div>
         <div class="journey-step">
@@ -169,17 +168,17 @@
           <code>/v1/models · /v1/chat/completions</code>
           <p>List models, inspect pricing and capabilities, and call them directly.</p>
         </a>
-        <a href="/docs/api-reference/services/" class="model-card">
-          <span class="model-badge">SERVICES</span>
-          <h3>Services</h3>
-          <code>/v1/services</code>
-          <p>Deploy a tested Agent version so apps and API clients can invoke it and track each Run.</p>
+        <a href="/docs/api-reference/agents/" class="model-card">
+          <span class="model-badge">AGENTS</span>
+          <h3>Agents</h3>
+          <code>/v1/agents</code>
+          <p>Define a versioned Agent with a model, instructions, Skills, and MCP tools.</p>
         </a>
-        <a href="/docs/api-reference/schedules/" class="model-card">
-          <span class="model-badge">SCHEDULES</span>
-          <h3>Schedules</h3>
-          <code>/v1/schedules</code>
-          <p>Run an existing Agent on a recurring schedule and review each result.</p>
+        <a href="/docs/api-reference/sessions/" class="model-card">
+          <span class="model-badge">SESSIONS</span>
+          <h3>Sessions</h3>
+          <code>/v1/agents/sessions</code>
+          <p>Run an Agent version, send input, stream events, and read the results.</p>
         </a>
       </div>
     </section>

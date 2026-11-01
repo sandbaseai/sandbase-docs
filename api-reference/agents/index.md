@@ -4,7 +4,7 @@ description: Create, version, archive, and clone saved Agent configurations.
 ---
 # Agents API
 
-An Agent is a saved, versioned configuration: a model, instructions, a runtime profile, Skills, MCP connections, and output settings. Creating or updating an Agent does not run it. Run it in a [Session](/api-reference/sessions/), deploy a pinned version as a [Service](/api-reference/services/) for on-demand Runs, or as a [Schedule](/api-reference/schedules/) for recurring Runs.
+An Agent is a saved, versioned configuration: a model, instructions, a runtime profile, Skills, MCP connections, and output settings. Creating or updating an Agent does not run it. Run it in a [Session](/api-reference/sessions/).
 
 The Agents API follows the OpenAI Agents protocol (`client.beta.agents` in the OpenAI Python SDK). The `OpenAI-Beta` header is optional; when you send it, it must be `agents=v1`. SandBase adds versions, compare-and-set updates, archive and restore, and a public catalog.
 
@@ -33,12 +33,11 @@ Agent IDs use the `agt_` prefix. Request bodies are strict JSON up to 1 MiB; unk
 - Every effective write (create, update, replace, restore) produces an immutable version. `version` is the current version number.
 - `POST /v1/agents/{agent_id}` is the OpenAI SDK update. It needs no `row_version`, so the last writer wins.
 - `PATCH /v1/agents/{agent_id}` requires the `row_version` you last read and returns 409 when someone else changed the Agent first. Use it from editors and automation that can run concurrently.
-- Services and Schedules pin an Agent version when they are created. New Agent versions do not change them until you update their `agent_version`.
 - Each Session freezes the Agent version, Skill versions, and MCP connection configuration it started with.
 
 ## Readiness
 
-A newly written version reports `projection_status` while it is prepared for execution. Sessions, Services, and Schedules need an active Agent whose `projection_status` is `ready`; otherwise they return 409. Archived Agents also return 409 for new executions.
+A newly written version reports `projection_status` while it is prepared for execution. Sessions need an active Agent whose `projection_status` is `ready`; otherwise they return 409. Archived Agents also return 409 for new executions.
 
 ## Current limits
 

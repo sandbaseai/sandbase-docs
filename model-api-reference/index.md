@@ -1,38 +1,23 @@
 ---
 title: Model API Reference
-description: Browse SandBase model APIs by capability, provider, and model identifier.
+description: Find each SandBase model's and API's reference on its main-site page, plus the official native API references kept here.
 ---
-
 # Model API Reference
+Each model and API now has its reference on its own page on the SandBase website. That page shows the exact identifier, the request schema, pricing, and a working example.
+## Where to find a reference
+- Models: `https://www.sandbase.ai/models/{vendor}/{model}/docs`
+- APIs: `https://www.sandbase.ai/apis/{vendor}/{endpoint}/docs`
 
-Browse the models available through SandBase, find the exact model identifier to use, and copy a working API request.
+Browse the catalogs to find a model or API:
+- [Language models](https://www.sandbase.ai/models)
+- [Image and video models](https://www.sandbase.ai/models/image-video)
+- [APIs](https://www.sandbase.ai/apis)
+## Official native APIs
+This section keeps the references for provider-native protocols, so you can use an existing integration without rewriting it. ByteDance Seedance uses the Volcengine Ark Contents Generations task protocol, and Google models use the Gemini-compatible GenerateContent or Interactions protocols.
 
-## Models by category
-
-### [LLM Models](/model-api-reference/llm-models)
-
-Use language and reasoning models for chat, tool calling, structured output, vision, and long-context tasks. Browse models by provider, including OpenAI, Anthropic, Google, DeepSeek, Alibaba, Meta, and ByteDance.
-
-### [Image Generation](/model-api-reference/image-generation)
-
-Generate, edit, transform, and upscale images through SandBase. Browse image models by provider, including OpenAI, Google, Ideogram, ByteDance, Recraft, Luma, and more.
-
-### [Video Generation](/model-api-reference/video-generation)
-
-Generate, edit, animate, upscale, and transform videos through SandBase. Browse video models by provider, including OpenAI, ByteDance, Kling, Google, Luma, Runway, Veed, and more.
-
-### [Audio Generation](/model-api-reference/audio-generation)
-
-Generate, transform, clone, transcribe, and synthesize audio through SandBase. Browse audio models by provider and copy the exact async request format for each model.
-
-### [Official Native API](/model-api-reference/official-native-api)
-
-Use provider-native protocols without rewriting an existing integration. Browse by provider and model; ByteDance Seedance uses the Volcengine Ark Contents Generations task protocol, while Google models use the Gemini-compatible GenerateContent or Interactions protocols.
-
+See [Official Native API](/model-api-reference/official-native-api/).
 ## Inference API contracts
-
-The normalized request contracts are maintained in the linked API reference pages, while this section stays focused on choosing a model and its provider-specific schema:
-
+The normalized request contracts are in the API reference:
 - [Models API](/api-reference/models/) — discover enabled model IDs, capabilities, and pricing
 - [Chat Completions](/api-reference/llm-gateway) — OpenAI-compatible text and vision requests
 - [Responses](/api-reference/responses) — OpenAI Responses-compatible requests
@@ -40,32 +25,3 @@ The normalized request contracts are maintained in the linked API reference page
 - [Google Gemini](/api-reference/gemini-generate-content) — Gemini-compatible requests
 - [Gemini Interactions](/api-reference/gemini-interactions) — asynchronous Gemini interactions
 - [Media assets](/api-reference/models/assets) — upload and retrieve media used by model requests
-
-## Get started
-
-Most LLM models use the OpenAI-compatible [Chat Completions API](/api-reference/llm-gateway). Anthropic models use the [Anthropic Messages API](/api-reference/anthropic-compat); choose the protocol shown on the selected model page when both options are available.
-
-```bash
-curl https://api.sandbase.ai/v1/chat/completions \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"model":"deepseek/deepseek-v4-flash","messages":[{"role":"user","content":"Hello"}]}'
-```
-
-Image, video, and audio generation models use the unified `/v1/run` endpoint. The selected model's
-`execution_mode` determines whether the response is synchronous or returns `202 Accepted` for polling:
-
-```bash
-curl -X POST https://api.sandbase.ai/v1/run \
-  -H "Authorization: Bearer sk-YOUR_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"model":"openai/gpt-image-2","prompt":"A studio product photo on a clean white background"}'
-```
-
-When the response is `202 Accepted`, poll the returned opaque run ID until the result is ready. Use the ID exactly as
-returned; do not add a task prefix or construct a provider-specific status path:
-
-```bash
-curl https://api.sandbase.ai/v1/run/f3d2e8a1-7c4b-4a12-9d2e-123456789abc \
-  -H "Authorization: Bearer sk-YOUR_KEY"
-```

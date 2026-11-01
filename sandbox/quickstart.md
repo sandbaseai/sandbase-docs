@@ -13,7 +13,7 @@ import SandboxPromo from '../.vitepress/theme/SandboxPromo.vue'
 
 Use the official E2B SDK with your SandBase API key to create an isolated sandbox, run a command, and read and write files. This guide targets **E2B JavaScript and Python SDK 2.51.0**.
 
-For browser-based creation and observation, sign in to the [Sandbox Console](https://www.sandbase.ai/console/sandboxes) to create an instance and view its status, logs, and metrics. Continue with the SDK steps below for application integration, or read the [Sandbox product overview](https://www.sandbase.ai/landing/sandbox).
+For browser-based creation and observation, sign in to the [Sandbox Console](https://www.sandbase.ai/console/sandboxes) to create an instance and view its status, logs, and metrics. Continue with the SDK steps below for application integration, or read the [Sandbox product overview](https://www.sandbase.ai/sandbox).
 
 ## 1. Configure the official SDK
 

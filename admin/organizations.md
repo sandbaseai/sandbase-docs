@@ -38,4 +38,4 @@ If you belong to multiple organizations, switch between them in the account menu
 
 ## Balance and billing
 
-Each organization has its own balance. Model calls, API calls, Service calls, Schedule-triggered work, and runtime work are charged against this balance. See [Billing](/admin/billing) for details.
+Each organization has its own balance. Model calls, API calls, Agent Sessions, and runtime work are charged against this balance. See [Billing](/admin/billing) for details.

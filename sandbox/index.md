@@ -9,7 +9,7 @@ Sandbox provides isolated environments for running commands, executing code, and
 
 [Quickstart / E2B SDK](./quickstart) · [Open Playground (Experimental)](./playground)
 
-Use the [official E2B SDK](./quickstart) to integrate Sandbox into your application. Sign in to the [Sandbox Console](https://www.sandbase.ai/console/sandboxes) to create sandboxes and view instance status, logs, and metrics. See the [Sandbox product overview](https://www.sandbase.ai/landing/sandbox) for an introduction. The walkthrough and support table below describe the separate Experimental Playground.
+Use the [official E2B SDK](./quickstart) to integrate Sandbox into your application. Sign in to the [Sandbox Console](https://www.sandbase.ai/console/sandboxes) to create sandboxes and view instance status, logs, and metrics. See the [Sandbox product overview](https://www.sandbase.ai/sandbox) for an introduction. The walkthrough and support table below describe the separate Experimental Playground.
 
 ## A five-minute Playground walkthrough
 

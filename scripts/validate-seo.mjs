@@ -3,7 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import YAML from 'yaml'
 
-const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'setup', 'store', 'model-api-reference']
+const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'setup', 'model-api-reference']
 const excluded = [
   'agents/endpoint-quickstart.md',
   'setup/cli.md',
@@ -57,16 +57,13 @@ function inspect(directory) {
         assert.ok(String(frontmatter.canonical).startsWith('/docs/'), `${filename} canonical URL must start with /docs/`)
       }
     } else {
-      // Generated model pages intentionally use compact, model-specific descriptions;
-      // require those to remain unique as well so duplicate operation pages do not
-      // collapse into indistinguishable search results.
+      // Model API reference pages (overview and Official Native API) keep their own
+      // uniqueness namespace so duplicate model pages do not collapse into
+      // indistinguishable search results.
       const titleMap = filename.startsWith('model-api-reference/') ? generatedTitles : publicTitles
       const descriptionMap = filename.startsWith('model-api-reference/') ? generatedDescriptions : publicDescriptions
-      // Keep generated model pages distinct from one another, while allowing a
-      // category landing page to share its concise heading with the hand-written
-      // API guide (for example, "Image Generation").
       if (filename.startsWith('model-api-reference/')) {
-        registerUnique(titleMap, String(frontmatter.title).trim(), filename, 'an indexable generated title')
+        registerUnique(titleMap, String(frontmatter.title).trim(), filename, 'an indexable model API reference title')
       } else {
         registerUnique(titleMap, String(frontmatter.title).trim(), filename, 'an indexable title')
       }

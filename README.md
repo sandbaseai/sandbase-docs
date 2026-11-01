@@ -5,7 +5,8 @@
   </p>
   <p align="center">
     <a href="https://www.sandbase.ai/docs/">Docs</a> ·
-    <a href="https://www.sandbase.ai/docs/store/">Store</a> ·
+    <a href="https://www.sandbase.ai/models">Models</a> ·
+    <a href="https://www.sandbase.ai/apis">APIs</a> ·
     <a href="https://www.sandbase.ai/console">Console</a> ·
     <a href="https://github.com/sandbaseai/cli">CLI / MCP</a> ·
     <a href="https://blog.sandbase.ai/">Blog</a>
@@ -30,11 +31,11 @@ Use the smallest surface that fits the job:
 |---|---|
 | OpenAI-compatible LLM and vision calls | [Chat Completions API](https://www.sandbase.ai/docs/api-reference/llm-gateway) |
 | Image, video, or audio jobs | [Model API Reference](https://www.sandbase.ai/docs/model-api-reference/) |
-| Search, scrape, social, business, or other external data | [Store](https://www.sandbase.ai/docs/store/) |
+| Search, scrape, social, business, or other external data | [APIs catalog](https://www.sandbase.ai/apis) |
 | Reusable, versioned Agent workflows | [Agents](https://www.sandbase.ai/docs/agents/) |
 | Codex, Claude Code, Cursor, and other AI clients | [Connect AI tools](https://www.sandbase.ai/docs/setup/) |
 
-The catalog, schemas, prices, and availability can change. Use the live Store and API reference as the source of truth instead of guessing model or API identifiers.
+The catalog, schemas, prices, and availability can change. Use the live [Models](https://www.sandbase.ai/models) and [APIs](https://www.sandbase.ai/apis) catalogs and the API reference as the source of truth instead of guessing model or API identifiers.
 
 ## Open-source companion projects
 
@@ -95,7 +96,7 @@ The health check remains available at `https://www.sandbase.ai/docs/health`.
 
 ## First LLM call
 
-Create an API key in the [Console](https://www.sandbase.ai/console/keys), export it, and select a current model ID from [Supported Models](https://www.sandbase.ai/docs/models/supported).
+Create an API key in the [Console](https://www.sandbase.ai/console/keys), export it, and select a current model ID from the [Models catalog](https://www.sandbase.ai/models).
 
 ```bash
 export SANDBASE_API_KEY="sk-YOUR_API_KEY"
@@ -134,7 +135,7 @@ Compatibility reduces migration work; it does not make every model, parameter, s
 
 ## Run a model or external API
 
-Image, video, audio, and external API operations use the public run contract documented on each Store detail page. The model/API identifier and input fields are operation-specific.
+Image, video, audio, and external API operations use the public run contract documented on each model or API page in the [catalog](https://www.sandbase.ai/models). The model/API identifier and input fields are operation-specific.
 
 ```bash
 curl -X POST https://api.sandbase.ai/v1/run \
@@ -163,10 +164,9 @@ Skills and execution remain separate:
 | Section | What it covers |
 |---|---|
 | [Getting Started](https://www.sandbase.ai/docs/getting-started/) | API keys, quickstart, and first call |
-| [Store](https://www.sandbase.ai/docs/store/) | Models, APIs, Agents, and Skills |
-| [Models](https://www.sandbase.ai/docs/models/) | Supported interfaces and capability guidance |
-| [API Reference](https://www.sandbase.ai/docs/api-reference/) | Authentication, Services, Schedules, Sessions, schemas, and errors |
-| [Agents](https://www.sandbase.ai/docs/agents/) | Reusable Agent definitions, Services, Sessions, and Schedules |
+| [Models and APIs catalog](https://www.sandbase.ai/models) | Models, [APIs](https://www.sandbase.ai/apis), [Agents](https://www.sandbase.ai/agents), and [Skills](https://www.sandbase.ai/skills), each with its own reference page |
+| [API Reference](https://www.sandbase.ai/docs/api-reference/) | Authentication, Agents, Sessions, schemas, and errors |
+| [Agents](https://www.sandbase.ai/docs/agents/) | Reusable Agent definitions and Sessions |
 | [Setup](https://www.sandbase.ai/docs/setup/) | Connect AI clients and install capabilities |
 | [For AI Tools](https://www.sandbase.ai/docs/for-agents/) | Machine-readable integration guidance |
 | [Guides](https://www.sandbase.ai/docs/guides/) | Streaming, errors, rate limits, and billing |
@@ -175,11 +175,9 @@ Skills and execution remain separate:
 
 ```text
 getting-started/       # first-call onboarding
-store/                 # catalog concepts
-models/                # model interfaces and capabilities
-model-api-reference/   # generated model and external API references
+model-api-reference/   # official native API references
 api-reference/         # REST API contracts
-agents/                # reusable Agent workflows and services
+agents/                # reusable Agent workflows and Sessions
 setup/                 # CLI and client setup
 for-agents/            # concise machine-readable guidance
 guides/                # operational practices

@@ -3,9 +3,8 @@ import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { parse as parseYaml } from 'yaml'
 
-const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'models', 'setup', 'store']
+const roots = ['admin', 'agents', 'sandbox', 'api-reference', 'for-agents', 'getting-started', 'guides', 'setup', 'model-api-reference']
 const excluded = [
-  'agents/deployments.md',
   'agents/endpoint-quickstart.md',
   'setup/cli.md',
   'setup/groups.md',
@@ -34,9 +33,16 @@ const forbidden = [
   [/\bdrun_|\bdepl_|\binitial_events\b|"user\.message"/, 'retired Deployment or Session contract'],
   [/https:\/\/api\.sandbase\.ai\/sandboxes\b/, 'non-public Sandbox API'],
   [/\bEmbed Configs?\b/i, 'retired Embed Config product'],
-  [/\bEndpoints API\b/, 'legacy product label; use Services API'],
-  [/\bDeployments API\b/, 'legacy product label; use Schedules API'],
-  [/\bPublished Agents?\b/, 'legacy product label; use Services'],
+  [/\bEndpoints API\b/, 'retired Endpoint API product label'],
+  [/\bDeployments API\b/, 'retired Deployment API product label'],
+  [/\bPublished Agents?\b/, 'retired Published Agent product label'],
+  [/\b(?:Services|Schedules) API\b/, 'retired Services or Schedules API product label'],
+  [/\b(?:GET|POST|PUT|PATCH|DELETE) \/v1\/(?:services|schedules)\b/, 'retired Services or Schedules route'],
+  [/https:\/\/api\.sandbase\.ai\/v1\/(?:services|schedules)\b/, 'retired Services or Schedules route'],
+  [/\]\((?:\/docs)?\/agents\/(?:services|schedules|deployments)\b/, 'link to a removed Services, Schedules, or Deployments guide'],
+  [/\]\((?:\/docs)?\/api-reference\/(?:services|schedules|deployments|endpoints|credentials)\//, 'link to a removed Agents API reference'],
+  [/\]\((?:\/docs)?\/(?:store|models)\//, 'link to a removed docs catalog page; use the main-site catalog'],
+  [/\]\((?:\/docs)?\/model-api-reference\/(?:platform-apis|llm-models|image-generation|video-generation|audio-generation)\b/, 'link to a removed per-model reference; use the main-site model or API page'],
   [/\bSeedance Native API\b/, 'legacy provider-native API label; use Official Native API'],
   [/openai\/gpt-4o\b/, 'stale hand-written example model'],
   [/openai\/gpt-5\.4\b/, 'stale hand-written example model'],
@@ -50,7 +56,6 @@ const forbidden = [
   [/sandbaseai-cli-\d+\.\d+\.\d+\.tgz/, 'version-pinned CLI archive; use the guided installer'],
   [/\bPlatform Groups?\b/, 'retired Platform Groups product label'],
   [/^## What are Environments\?$/m, 'internal Environment product navigation'],
-  [/\]\(\/store\/models\/?(?:[)#])/, 'duplicate Models page link; use /models/'],
   [/\bNew accounts receive\b[^\n]*\bfree credits\b/i, 'time-sensitive signup credit claim'],
   [/\$\d+(?:\.\d+)?\s+minimum/i, 'time-sensitive minimum payment claim'],
   [/\b(?:Apple Pay|Google Pay)\b/, 'time-sensitive payment-method claim'],
@@ -66,10 +71,8 @@ for (const filename of files) {
   inspected += 1
 }
 
-// Generated model pages must present each request field exactly once. Some
-// provider schemas repeat the canonical `model` selector; the generator
-// normalizes that field, and this check prevents regressions from publishing
-// contradictory request forms.
+// Official Native API pages embed API reference JSON; each request field must
+// appear exactly once so the page cannot publish contradictory request forms.
 function collectModelPages(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const filename = path.join(directory, entry.name)
@@ -125,8 +128,7 @@ assert.match(billingAdmin, /Auto Top-up[\s\S]+Stripe/, 'Billing docs must descri
 assert.doesNotMatch(billingAdmin, /Console Credits|Console → Billing|Add Credits|Continue with Airwallex, then/, 'Billing docs must not use retired Console labels')
 
 const agentOverview = readFileSync('agents/index.md', 'utf8')
-assert.doesNotMatch(agentOverview, /published endpoint/i, 'Agent guide must use the Services product name')
-assert.match(agentOverview, /pinned to that version/, 'Agent guide must explain that Services pin an Agent version')
+assert.doesNotMatch(agentOverview, /published endpoint/i, 'Agent guide must not use the retired published endpoint label')
 
 const credentialGuide = readFileSync('agents/api-credentials.md', 'utf8')
 assert.match(credentialGuide, /Credentials page, opened from the Agent editor/, 'Credentials is reached from the Agent editor, not the sidebar')
@@ -135,15 +137,6 @@ assert.doesNotMatch(credentialGuide, /Agents → \[Your Agent\] → Credentials/
 assert.match(credentialGuide, /mcp_bearer/, 'Credential guide must describe MCP Bearer Secrets')
 assert.match(credentialGuide, /not environment variables/, 'Credential guide must not imply runtime environment injection')
 
-const servicesGuide = readFileSync('agents/services.md', 'utf8')
-assert.match(servicesGuide, /202 Accepted/, 'Services guide must document asynchronous invocation')
-assert.match(servicesGuide, /Idempotency-Key/, 'Services guide must document idempotent invocation')
-assert.doesNotMatch(servicesGuide, /session_id`? to continue|continue (?:a|the) Session/i, 'Services no longer continue Sessions')
-
-const schedulesGuide = readFileSync('agents/schedules.md', 'utf8')
-assert.match(schedulesGuide, /`cron`/, 'Schedules guide must document cron timing')
-assert.match(schedulesGuide, /`timezone`/, 'Schedules guide must document the timezone')
-assert.match(schedulesGuide, /skipped/, 'Schedules guide must document skipped Runs')
 const sessionsGuide = readFileSync('agents/sessions.md', 'utf8')
 assert.match(sessionsGuide, /\/v1\/agents\/sessions/, 'Sessions guide must use the current Session path')
 assert.match(sessionsGuide, /live-only/, 'Sessions guide must explain that the native stream is live-only')
@@ -156,14 +149,11 @@ const firstCallGuide = readFileSync('getting-started/first-call.md', 'utf8')
 assert.doesNotMatch(firstCallGuide, /Every request to SandBase's LLM Gateway follows/, 'First call must not generalize one route to every LLM request')
 assert.doesNotMatch(firstCallGuide, /The first chunk contains `delta\.role`/, 'Streaming guide must not require a provider-dependent first chunk')
 
-const storeGuide = readFileSync('store/index.md', 'utf8')
-for (const catalog of ['models', 'apis', 'agents', 'skills']) {
-  assert.ok(storeGuide.includes(`https://www.sandbase.ai/${catalog}`), `Store guide must link to the live ${catalog} catalog`)
-}
-
 const modelReference = readFileSync('model-api-reference/index.md', 'utf8')
-assert.match(modelReference, /Most LLM models use the OpenAI-compatible/, 'Model reference must not claim every LLM uses one protocol')
-assert.match(modelReference, /Anthropic models use the .*Anthropic Messages API/, 'Model reference must identify the Anthropic protocol')
+assert.doesNotMatch(modelReference, /\b(?:All|Every) LLM models? uses? /i, 'Model reference must not claim every LLM uses one protocol')
+assert.match(modelReference, /https:\/\/www\.sandbase\.ai\/models\/\{vendor\}\/\{model\}\/docs/, 'Model reference must explain where per-model references live')
+assert.match(modelReference, /https:\/\/www\.sandbase\.ai\/apis\/\{vendor\}\/\{endpoint\}\/docs/, 'Model reference must explain where per-API references live')
+assert.match(modelReference, /\[Anthropic Messages\]\(\/api-reference\/anthropic-compat\)/, 'Model reference must identify the Anthropic protocol')
 
 const geminiOmniReference = readFileSync('model-api-reference/official-native-api/google/gemini-omni-flash-preview.md', 'utf8')
 assert.match(geminiOmniReference, /path\\?\":\\?\"\/v1beta\/interactions/, 'Gemini Omni must use the native Interactions endpoint')
@@ -195,28 +185,13 @@ const openApiReference = readFileSync('public/openapi.yaml', 'utf8')
 assert.doesNotMatch(openApiReference, /webhook_url:\n[\s\S]{0,180}?description:[^\n]*API tasks/i, 'OpenAPI must not promise callbacks for API capabilities')
 assert.match(openApiReference, /webhook_url:\n[\s\S]{0,180}?description:[^\n]*image, video, or audio tasks/i, 'OpenAPI must match webhook capability scope')
 
-// Official Native API has one dedicated, bottom-of-sidebar navigation block.
-// Keep the generated model catalog free of a second top-level copy.
-const generatedModelSidebar = readFileSync('.vitepress/modelApiReferenceSidebar.generated.ts', 'utf8')
-assert.doesNotMatch(generatedModelSidebar, /Official Native API|seedance-native-api/i, 'Official Native API must stay in its dedicated sidebar block')
-
-// Platform operation counts are displayed in the dynamic sidebar. Keep the
-// generated count aligned with the operation pages so a newly added page does
-// not silently disappear from the navigation summary.
-function countMarkdownPages(directory) {
-  let count = 0
-  for (const entry of readdirSync(directory, { withFileTypes: true })) {
-    const filename = path.join(directory, entry.name)
-    if (entry.isDirectory()) count += countMarkdownPages(filename)
-    else if (entry.name.endsWith('.md') && entry.name !== 'index.md') count += 1
-  }
-  return count
-}
-
-const dataForSeoPages = countMarkdownPages('model-api-reference/platform-apis/dataforseo')
-const dataForSeoSidebar = readFileSync('.vitepress/theme/platform-api-sidebars/dataforseo.ts', 'utf8')
-const dataForSeoCount = dataForSeoSidebar.match(/"operationCount":\s*(\d+)/)?.[1]
-assert.equal(Number(dataForSeoCount), dataForSeoPages, 'DataForSEO sidebar count must match its operation pages')
+// Official Native API has one dedicated navigation entry in the native API sidebar.
+const sidebarSource = readFileSync('.vitepress/sidebar.ts', 'utf8')
+const nativeSidebarStart = sidebarSource.indexOf('export const nativeApiReferenceSidebar')
+assert.ok(nativeSidebarStart >= 0, 'Sidebar must export nativeApiReferenceSidebar')
+const nativeSidebarSource = sidebarSource.slice(nativeSidebarStart, sidebarSource.indexOf('export const docsSidebar'))
+assert.equal((nativeSidebarSource.match(/\/model-api-reference\/official-native-api\//g) ?? []).length, 1, 'Official Native API must have exactly one native sidebar entry')
+assert.doesNotMatch(sidebarSource, /seedance-native-api/i, 'Sidebar must not link the legacy Seedance native API page')
 
 const nativeReference = readFileSync('model-api-reference/official-native-api/index.md', 'utf8')
 // Task listing and deletion were removed from the apiserver; the reference must not advertise them.

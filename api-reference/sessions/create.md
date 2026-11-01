@@ -89,7 +89,7 @@ apiReference:
         - name: source · source_id
           type: string · null
           required: false
-          description: direct, service, or schedule, plus the Service or Schedule ID.
+          description: Origin of the Session. Sessions created with POST /v1/agents/sessions report direct and a null source_id.
         - name: row_version
           type: integer
           required: true

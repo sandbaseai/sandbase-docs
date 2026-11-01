@@ -97,7 +97,7 @@ apiReference:
         - name: projection_status
           type: string
           required: true
-          description: Execution readiness of the current version. Sessions, Services, and Schedules need ready; a new Agent can briefly report pending.
+          description: Execution readiness of the current version. Sessions need ready; a new Agent can briefly report pending.
         - name: runtime_profile
           type: string
           required: true

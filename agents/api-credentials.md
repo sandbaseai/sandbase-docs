@@ -14,7 +14,7 @@ When an MCP server requires authentication, store its Bearer token as a **Secret
 - The token is write-only. The API returns the Secret's name, URL, status, and `row_version`, never the token.
 - Secrets are not environment variables. They are not injected into the Agent runtime, and Agents cannot read them.
 
-Earlier versions of SandBase stored workspace-, Agent-, or Service-scoped credentials and injected them as environment variables such as `GITHUB_TOKEN`. That model has been retired and its records are not migrated. Recreate the values you still need as Secrets on MCP connections.
+Earlier versions of SandBase stored workspace- or Agent-scoped credentials and injected them as environment variables such as `GITHUB_TOKEN`. That model has been retired and its records are not migrated. Recreate the values you still need as Secrets on MCP connections.
 
 ## With the API
 

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 
 // These are published product pages, not API endpoints. Match the complete href
 // in Markdown, HTML or a compiled href property; never strip URL prefixes.
-const approvedPage = String.raw`https:\/\/www\.sandbase\.ai\/(?:console\/sandboxes|landing\/sandbox)`
+const approvedPage = String.raw`https:\/\/www\.sandbase\.ai\/(?:console\/sandboxes|sandbox)`
 const markdownHref = new RegExp(String.raw`(\]\()${approvedPage}(\))`, 'g')
 const renderedHref = new RegExp(String.raw`(\bhref["']?\s*[:=]\s*)(\\?["'])${approvedPage}\2`, 'g')
 
@@ -18,7 +18,7 @@ export function maskApprovedSandboxPageHrefs(content) {
 // in the existing CI commands without a separate test script.
 for (const url of [
   'https://www.sandbase.ai/console/sandboxes',
-  'https://www.sandbase.ai/landing/sandbox',
+  'https://www.sandbase.ai/sandbox',
 ]) {
   for (const wrap of [
     value => `[Product](${value})`,

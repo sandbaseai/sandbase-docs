@@ -4,9 +4,7 @@ import HomePage from './HomePage.vue'
 import ApiReferencePage from './ApiReferencePage.vue'
 import QuickstartOnboard from './QuickstartOnboard.vue'
 import QuickstartResources from './QuickstartResources.vue'
-import PlatformApiSidebar from './PlatformApiSidebar.vue'
 import OfficialNativeApiSidebar from './OfficialNativeApiSidebar.vue'
-import PlatformApiLanding from './PlatformApiLanding.vue'
 import SiteHeader from './SiteHeader.vue'
 import SiteFooter from './SiteFooter.vue'
 import DocsSearch from './DocsSearch.vue'
@@ -25,7 +23,7 @@ export default {
       // The docs sidebar leads with a "Search docs" button (matching the
       // reference design) that triggers VitePress's local search.
       'sidebar-nav-before': () => [h(DocsSearch), h(DocsSectionTabs)],
-      'sidebar-nav-after': () => [h(PlatformApiSidebar), h(OfficialNativeApiSidebar)],
+      'sidebar-nav-after': () => [h(OfficialNativeApiSidebar)],
       'layout-top': () => h(SiteHeader),
       'doc-before': () => h(TutorialCopyAction),
       'layout-bottom': () => h(SiteFooter),
@@ -35,7 +33,6 @@ export default {
     app.component('SandboxPlayground', defineAsyncComponent(() => import('./SandboxPlayground.vue')))
     app.component('HomePage', HomePage)
     app.component('ApiReferencePage', ApiReferencePage)
-    app.component('PlatformApiLanding', PlatformApiLanding)
     app.component('QuickstartOnboard', QuickstartOnboard)
     app.component('QuickstartResources', QuickstartResources)
 

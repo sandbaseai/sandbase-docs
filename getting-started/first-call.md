@@ -9,7 +9,7 @@ This guide walks through the anatomy of a SandBase API request and response in d
 
 ## Before you start
 
-You need an active SandBase organization, an [API key](/getting-started/api-keys), and a model ID from [Supported Models](/models/supported). Export the key so examples do not place secrets in source code:
+You need an active SandBase organization, an [API key](/getting-started/api-keys), and a model ID from [Models catalog](https://www.sandbase.ai/models). Export the key so examples do not place secrets in source code:
 
 ```bash
 export SANDBASE_API_KEY="sk-YOUR_API_KEY"
@@ -380,7 +380,7 @@ print()
 
 When selecting a model, check its live model card for availability, pricing, context length, supported inputs, and capabilities. These values change independently, so do not rely on a copied model comparison.
 
-- Browse the current [Supported Models](/models/supported).
+- Browse the current [Models catalog](https://www.sandbase.ai/models).
 - Open the [Model API Reference](/model-api-reference/) for model-specific request fields.
 - Query `GET /v1/models` when an integration needs current model metadata programmatically.
 
@@ -392,5 +392,5 @@ Before production, set request timeouts, retry only transient failures with boun
 
 - [**Model API Reference**](/model-api-reference/) — Model endpoints, parameters, and model-specific references
 - [**Streaming Guide**](/guides/streaming) — Advanced streaming patterns and error handling
-- [**Models**](/models/) — Model discovery, capabilities, and current pricing guidance
+- [**Models**](https://www.sandbase.ai/models) — Model discovery, capabilities, and current pricing
 - [**Errors**](/guides/error-handling) — Handle failures and retries

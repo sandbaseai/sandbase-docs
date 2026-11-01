@@ -1,6 +1,6 @@
 ---
 title: FAQ
-description: Frequently asked questions about connecting AI tools, the SandBase Store, Models, APIs, Agents, Services, Schedules, Sessions, and billing.
+description: Frequently asked questions about connecting AI tools, the SandBase catalog, Models, APIs, Agents, Sessions, and billing.
 ---
 
 # Frequently Asked Questions
@@ -9,7 +9,7 @@ description: Frequently asked questions about connecting AI tools, the SandBase 
 
 SandBase helps Agents connect to the real world.
 
-You can use ready-made Models and APIs, use them from your AI tools after connecting them in AI tools, or build reusable Agents and deploy them as Services or Schedules.
+You can use ready-made Models and APIs, use them from your AI tools after connecting them in AI tools, or build reusable Agents and run them in Sessions.
 
 ## Who is SandBase for?
 
@@ -19,15 +19,13 @@ SandBase is mainly for three groups:
 - **builders** who want to call Models and APIs directly
 - **FDEs and teams** who build reusable Agents for customers or internal workflows
 
-## What is Store?
+## Where do I browse capabilities?
+The SandBase website lists the catalog of capabilities:
 
-Store is where you browse capabilities:
-
-- Models
-- APIs
-- Agents
-- Skills
-
+- [Models](https://www.sandbase.ai/models) and [image and video models](https://www.sandbase.ai/models/image-video)
+- [APIs](https://www.sandbase.ai/apis)
+- [Agents](https://www.sandbase.ai/agents)
+- [Skills](https://www.sandbase.ai/skills)
 You can inspect, test, install, call, or clone depending on the kind of capability.
 
 ## What is AI tools?
@@ -41,26 +39,10 @@ Build Agent is where you define and test an Agent.
 An Agent combines instructions, a Model, Skills, and MCP tools into one reusable, versioned workflow.
 
 ## Is an Agent different from an API?
+Yes. An Agent is a versioned configuration that you edit and test, and you run it by creating a Session. Your app can create Sessions with the [Sessions API](/api-reference/sessions/) while you keep editing the Agent.
 
-An Agent can be used like an API after you deploy it as a Service.
-
-Before that, it is a configuration you can edit and test in Sessions. A Service pins one tested version, so your app or a connected AI tool can call it while you keep editing the Agent.
-
-## What are Services?
-
-Services make a tested Agent version callable outside Build Agent through `/v1/services`. Each invocation returns a Run.
-
-Use them when your app, your users, or your AI tools need to call an Agent.
-
-## What are Schedules?
-
-Schedules run an existing Agent later or repeatedly.
-
-They do not create Agents from scratch. Build and test the Agent first, then schedule it.
-
-## What are Sessions and Runs?
-
-A Session is one Agent execution with its conversation, tool activity, and output. A Run (`run_*`) is one Service invocation or Schedule firing; each Run creates its own Session and reports it in `session_id`.
+## What are Sessions?
+A Session is one Agent execution with its conversation, tool activity, and output.
 
 ## How do I give an Agent access to external APIs?
 
@@ -68,7 +50,7 @@ Connect the external system as an MCP server and add it to the Agent's MCP conne
 
 ## Where do Models live?
 
-Models are listed separately in Store because they are important building blocks.
+Models have their own [catalog](https://www.sandbase.ai/models) because they are important building blocks.
 
 You can call a Model directly, use it from a connected AI tool, or use it inside an Agent.
 
@@ -101,7 +83,7 @@ Models, APIs, Agents, and runtime work may have different costs. Check the Conso
 ## Next steps
 
 - [Getting Started](/getting-started/)
-- [Store](/store/)
+- [Models and APIs catalog](https://www.sandbase.ai/models)
 - [Connect AI tools](/setup/)
 - [Build Agent](/agents/)
 - [API Reference](/api-reference/)

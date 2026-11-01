@@ -11,7 +11,7 @@ terminal status.
 
 ## Submit a task
 
-Use the exact model ID from [Supported Models](/models/supported). The remaining
+Use the exact model ID from [Image and video models](https://www.sandbase.ai/models/image-video). The remaining
 request fields are model-specific; open the model's API reference for its
 required inputs and limits.
 
@@ -49,9 +49,10 @@ callback contract.
 
 ## API capabilities use a URL-derived path
 
-The shared Run API is for model generation. API Store capabilities use a
+The shared Run API is for model generation. API capabilities from the
+[APIs catalog](https://www.sandbase.ai/apis) use a
 different URL-derived route: `GET` or `POST /v1/api/{vendor}/{upstream_path}`.
-The vendor-qualified capability name comes from the Models API or Store, so the
+The vendor-qualified capability name comes from the Models API or the APIs catalog, so the
 `model` field can be omitted from a POST body:
 
 ```bash
@@ -67,9 +68,7 @@ poll the returned run ID with `GET /v1/run/{id}`.
 
 ## Next steps
 
-- [Supported Models](/models/supported)
-- [Image Generation API reference](/model-api-reference/image-generation)
-- [Video Generation API reference](/model-api-reference/video-generation)
+- [Image and video models](https://www.sandbase.ai/models/image-video)
 - [Run a capability](/api-reference/models/run)
 - [Get a run result](/api-reference/models/run-get)
 - [API Passthrough](/api-reference/models/api-passthrough)

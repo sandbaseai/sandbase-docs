@@ -7,7 +7,7 @@ description: Use the official OpenAI SDK with SandBase Agents, Sessions, and Ski
 
 SandBase Agents implement the [OpenAI Agents API](https://developers.openai.com/api/docs/guides/agents-api/overview) protocol for Agents, Sessions, session events, items, turns, and Skills. For those resources you can use the official OpenAI SDK directly: point `base_url` at `https://api.sandbase.ai/v1` and pass a SandBase API key.
 
-Services, Schedules, MCP connections, Secrets, and the catalogs are SandBase-only resources. The SDK has no methods for them, so call them over HTTP (or with the SDK's generic `client.post` / `client.get`).
+MCP connections, Secrets, and the catalogs are SandBase-only resources. The SDK has no methods for them, so call them over HTTP (or with the SDK's generic `client.post` / `client.get`).
 
 Verified SDK versions:
 
@@ -233,7 +233,7 @@ SandBase runs every Session in its hosted cloud; there is no environment to choo
 | `client.skills` and `skills.versions` | Compatible, except version delete | `skills.versions.delete` returns `404`. |
 | Error envelope | Compatible | `{"error": {"type", "code", "param", "message"}}`; SDK exceptions expose it as `exc.body`. |
 | Agent versions, restore, archive, catalog, Session rename/archive/reconnect/files/workspace-files/artifacts | SandBase only | See the [Agents](/api-reference/agents/) and [Sessions](/api-reference/sessions/) API reference. |
-| Services, Schedules, MCP connections, Secrets | SandBase only | Use HTTP or `client.post` / `client.get`. |
+| MCP connections, Secrets | SandBase only | Use HTTP or `client.post` / `client.get`. |
 
 SandBase exposes [artifact listing](/api-reference/sessions/list-artifacts) and [content downloads](/api-reference/sessions/download-artifact) over HTTP. Artifact IDs are opaque and Session-scoped. This does not imply support for every SDK artifact method; a separate artifact metadata endpoint is not exposed.
 
@@ -260,7 +260,7 @@ These OpenAI SDK calls fail against SandBase. The message is the actual `error.m
 
 - Sessions report failures in `failure` (`{code, message, action, retryable?}`), not OpenAI's `error`. With the SDK, `session.error` is `None`; read `session.failure` instead.
 - `required_actions` and `vault_ids` are always empty arrays.
-- Agent and Session timestamps are Unix seconds. Agent version `created_at`, MCP connections, Secrets, and Runs use ISO 8601 strings.
+- Agent and Session timestamps are Unix seconds. Agent version `created_at`, MCP connections, and Secrets use ISO 8601 strings.
 - `402 spending_limit_exceeded` has no dedicated SDK exception class; it surfaces as a generic `APIStatusError`.
 - An unsupported method on a known path (for example `PUT` on `/v1/agents`) returns `404` with the JSON error envelope, not `405`.
 

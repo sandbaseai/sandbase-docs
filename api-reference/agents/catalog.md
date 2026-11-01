@@ -44,4 +44,4 @@ curl -X POST https://api.sandbase.ai/v1/agents/catalog/agt_8c1f2b9e-3d4a-4f6b-9c
 
 The body accepts optional `version` (positive integer, defaults to the current public version) and `name` (up to 128 characters). The response is `201 Created` with a full [Agent object](./create) that has a new `agt_` ID in your organization. `Idempotency-Key` is optional; send a stable key so a retry does not create a second copy.
 
-After cloning, [create a Session](/api-reference/sessions/create) to test it, then deploy it as a [Service](/api-reference/services/) or [Schedule](/api-reference/schedules/).
+After cloning, [create a Session](/api-reference/sessions/create) to test it.

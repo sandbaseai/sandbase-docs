@@ -100,6 +100,6 @@ The command removes only configuration whose SandBase ownership it can verify an
 
 ## Next steps
 
-- [Store](/store/)
+- [Models and APIs catalog](https://www.sandbase.ai/models)
 - [Skill tutorials](/guides/skills/)
 - [Build Agent](/agents/)
