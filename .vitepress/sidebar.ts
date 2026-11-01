@@ -1,83 +1,84 @@
 import type { DefaultTheme } from 'vitepress'
+// Ordered by the reader's path: start, call models, build Agents, then
+// production and account topics. URLs are unchanged; only grouping changed.
 export const docsSidebar: DefaultTheme.SidebarItem[] = [
   { text: 'Status', link: 'https://status.sandbase.ai' },
   { text: 'Community', link: 'https://www.sandbase.ai/community' },
   { text: 'Blog', link: 'https://blog.sandbase.ai' },
   {
-    text: 'AI-Friendly Docs',
-    items: [
-      { text: 'AI-Readable Overview', link: '/for-agents/' },
-      { text: 'AI API Guide', link: '/for-agents/full' },
-      { text: 'Models & Pricing', link: '/for-agents/models' },
-      { text: 'Error Guide', link: '/for-agents/errors' },
-    ],
-  },
-  {
-    text: 'First steps',
+    text: 'Get started',
     items: [
       { text: 'Overview', link: '/getting-started/' },
       { text: 'Quickstart', link: '/getting-started/quickstart' },
       { text: 'First API call', link: '/getting-started/first-call' },
+      { text: 'API keys', link: '/getting-started/api-keys' },
       { text: 'Connect AI tools', link: '/setup/' },
     ],
   },
   {
-    text: 'Skill tutorials',
-    collapsed: false,
-    items: [
-      { text: 'Overview', link: '/guides/skills/' },
-      { text: 'Use a Skill locally', link: '/guides/skills/local-use' },
-      { text: 'AI City Remix', link: '/guides/skills/ai-city-remix' },
-    ],
-  },
-  {
-    text: 'Guides',
+    text: 'Call models',
     items: [
       { text: 'Overview', link: '/guides/' },
       { text: 'Chat Completions', link: '/guides/chat-completions' },
       { text: 'OpenAI Responses', link: '/guides/openai-responses' },
       { text: 'Anthropic Messages', link: '/guides/anthropic-messages' },
-      { text: 'Image and Video Models', link: '/guides/image-video' },
+      { text: 'Image and video', link: '/guides/image-video' },
       { text: 'Streaming', link: '/guides/streaming' },
-      { text: 'Errors', link: '/guides/error-handling' },
-      { text: 'Rate limits', link: '/guides/rate-limiting' },
-      { text: 'Concurrency limits', link: '/guides/concurrency-limits' },
-      { text: 'Pricing', link: '/guides/billing' },
-    ],
-  },
-  {
-    text: 'Sandbox',
-    items: [
-      { text: 'Overview & capabilities', link: '/sandbox/' },
-      { text: 'Quickstart / E2B SDK', link: '/sandbox/quickstart' },
-      { text: 'Playground (Experimental)', link: '/sandbox/playground' },
     ],
   },
   {
     text: 'Build agents',
     items: [
       { text: 'Overview', link: '/agents/' },
-      { text: 'Define agent', link: '/agents/agent-api' },
-      { text: 'Skills & MCP tools', link: '/agents/mcp-tools' },
+      { text: 'Define an Agent', link: '/agents/agent-api' },
+      { text: 'Skills and MCP tools', link: '/agents/mcp-tools' },
       { text: 'MCP credentials', link: '/agents/api-credentials' },
+      { text: 'Run Sessions', link: '/agents/sessions' },
       { text: 'OpenAI compatibility', link: '/agents/openai-compatibility' },
     ],
   },
   {
-    text: 'Agent operations',
+    text: 'Skills',
     items: [
-      { text: 'Sessions', link: '/agents/sessions' },
+      { text: 'Overview', link: '/guides/skills/' },
+      { text: 'Use a Skill locally', link: '/guides/skills/local-use' },
+      { text: 'Tutorial: AI City Remix', link: '/guides/skills/ai-city-remix' },
     ],
   },
   {
-    text: 'Workspace',
+    text: 'Sandbox',
+    items: [
+      { text: 'Overview', link: '/sandbox/' },
+      { text: 'Quickstart (E2B SDK)', link: '/sandbox/quickstart' },
+      { text: 'Playground (Experimental)', link: '/sandbox/playground' },
+    ],
+  },
+  {
+    text: 'Production',
+    items: [
+      { text: 'Errors and retries', link: '/guides/error-handling' },
+      { text: 'Rate limits', link: '/guides/rate-limiting' },
+      { text: 'Concurrency limits', link: '/guides/concurrency-limits' },
+    ],
+  },
+  {
+    text: 'Account and billing',
     items: [
       { text: 'Overview', link: '/admin/' },
-      { text: 'API Keys', link: '/getting-started/api-keys' },
       { text: 'Organizations', link: '/admin/organizations' },
-      { text: 'Billing & credits', link: '/admin/billing' },
-      { text: 'Rate Limits', link: '/admin/rate-limits' },
+      { text: 'Billing and credits', link: '/admin/billing' },
+      { text: 'Pricing and usage', link: '/guides/billing' },
       { text: 'FAQ', link: '/faq' },
+    ],
+  },
+  {
+    text: 'For AI agents',
+    collapsed: true,
+    items: [
+      { text: 'AI-readable overview', link: '/for-agents/' },
+      { text: 'AI API guide', link: '/for-agents/full' },
+      { text: 'Models and pricing', link: '/for-agents/models' },
+      { text: 'Error guide', link: '/for-agents/errors' },
     ],
   },
 ]
@@ -190,18 +191,12 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
-    text: 'Account',
+    text: 'Account and usage',
     collapsed: true,
     items: [
       { text: 'Overview', link: '/api-reference/account/' },
       { text: 'Get Account Balance', link: '/api-reference/account/balance' },
       { text: 'List Account History', link: '/api-reference/account/history' },
-    ],
-  },
-  {
-    text: 'Usage',
-    collapsed: true,
-    items: [
       { text: 'Get Task Cost', link: '/api-reference/tasks/cost' },
     ],
   },

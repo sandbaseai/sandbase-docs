@@ -9,6 +9,14 @@ SandBase can assign your organization a requests-per-minute limit. It is shared 
 and counted over a one-minute sliding window. Upstream model providers can also return their own
 `429 Too Many Requests` responses. Do not hardcode a quota unless SandBase has assigned one to your workload.
 
+## Your organization's limit
+SandBase does not publish one fixed requests-per-minute number, because the limit is assigned per organization. Every
+API key in the organization counts toward the same limit, so creating more keys does not raise it. The limit is not
+currently shown in the public API or the Console.
+
+If your workload needs a guaranteed or higher limit, contact SandBase support with the organization, application,
+expected steady rate, and expected burst rate. Do not design a production client around an undocumented numeric default.
+
 ## Handle a 429 response
 
 Platform-generated `/v1/*` rate-limit responses use a flat error body:

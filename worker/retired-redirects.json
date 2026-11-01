@@ -1,4 +1,5 @@
 {
+ "/docs/admin/rate-limits": "https://www.sandbase.ai/docs/guides/rate-limiting",
  "/docs/agents/deployments": "https://www.sandbase.ai/docs/agents/",
  "/docs/agents/sandbox-env-vars": "https://www.sandbase.ai/docs/sandbox/",
  "/docs/agents/sandbox-events": "https://www.sandbase.ai/docs/sandbox/",
