@@ -31,16 +31,6 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
-    text: 'Models & APIs',
-    items: [
-      // The catalog lives on the main site; Docs keeps usage guides only.
-      { text: 'Language models', link: 'https://www.sandbase.ai/models' },
-      { text: 'Image & video models', link: 'https://www.sandbase.ai/models/image-video' },
-      { text: 'APIs', link: 'https://www.sandbase.ai/apis' },
-      { text: 'Skills', link: 'https://www.sandbase.ai/skills' },
-    ],
-  },
-  {
     text: 'Guides',
     items: [
       { text: 'Overview', link: '/guides/' },
