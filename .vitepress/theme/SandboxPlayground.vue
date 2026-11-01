@@ -253,7 +253,7 @@ onBeforeUnmount(() => { window.removeEventListener('pagehide', forget); forget()
 .sp.sp p { font-size: 12px; line-height: 1.65; }
 .sp-hero { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px; background: var(--vp-c-bg-soft); }
 .sp-hero p, .sp-muted, .sp-auth small { color: var(--vp-c-text-2); }
-.sp-kicker { font: 10px var(--vp-font-family-mono); letter-spacing: 1.5px; color: var(--accent); }
+.sp-kicker { font: 11px var(--vp-font-family-mono); letter-spacing: 1.5px; color: var(--accent); }
 .sp-badge { flex-shrink: 0; border: 1px solid var(--vp-c-divider); border-radius: 0; padding: 3px 10px; font-size: 11px; }
 .sp-auth { padding: 20px 24px; display: grid; gap: 10px; }
 .sp-auth-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 20px; flex-wrap: wrap; }

@@ -394,7 +394,6 @@ Common recovery steps:
 | `503 ServiceUnavailable` | Retry the same request after a short delay |
 
 ## Use registered media Assets
-# Media Assets for Seedance
 
 SandBase exposes the official-compatible Asset protocol at `/v1/assets`. The Asset request and the returned `asset://`
 reference follow the official protocol, and the reference is passed through unchanged in the native ByteDance Contents

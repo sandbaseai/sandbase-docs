@@ -135,6 +135,11 @@ const examples = computed<ApiExample[]>(() => {
   return result
 })
 
+// Two Python examples are common (OpenAI SDK and plain requests); name the SDK
+// one by the SDK so the tab row fits the narrow code panel.
+function tabLabel(label: string) {
+  return label === 'Python (OpenAI SDK)' ? 'OpenAI SDK' : label
+}
 const activeExample = computed(() => examples.value[activeLanguage.value] ?? examples.value[0])
 const highlightedExampleCode = computed(() => highlightCode(activeExample.value?.code ?? '', activeExample.value?.language))
 const highlightedResponseCode = computed(() => highlightCode(spec.value.response?.code ?? '', 'json'))
@@ -387,7 +392,7 @@ function highlightCode(code: string, language = '') {
         <div class="api-examples-sticky">
           <div class="api-example-card">
             <div class="api-example-toolbar">
-              <div class="api-language-tabs" role="tablist" aria-label="Example language">
+              <div class="api-example-tabs" role="tablist" aria-label="Example language">
                 <button
                   v-for="(example, index) in examples"
                   :key="example.label"
@@ -397,7 +402,7 @@ function highlightCode(code: string, language = '') {
                   :aria-selected="activeLanguage === index"
                   @click="activeLanguage = index"
                 >
-                  {{ example.label }}
+                  {{ tabLabel(example.label) }}
                 </button>
               </div>
               <button class="api-copy-button" type="button" @click="copyCode">
@@ -573,7 +578,7 @@ function highlightCode(code: string, language = '') {
 }
 
 .api-method.is-post { background: var(--sb-ink); color: var(--sb-canvas); }
-.api-method.is-delete { background: transparent; box-shadow: inset 0 0 0 1px currentColor; color: var(--color-error); }
+.api-method.is-delete { background: transparent; box-shadow: inset 0 0 0 1px currentColor; color: var(--sb-error-text, var(--color-error)); }
 
 .api-reference-description {
   margin: 0;
@@ -692,7 +697,7 @@ function highlightCode(code: string, language = '') {
   text-transform: uppercase;
 }
 
-.api-field-required { background: transparent; color: var(--color-error); }
+.api-field-required { background: transparent; color: var(--sb-error-text, var(--color-error)); }
 
 .api-field-row p {
   margin: 0;
@@ -768,14 +773,18 @@ function highlightCode(code: string, language = '') {
   border-bottom: 1px solid color-mix(in srgb, var(--color-panel-fg-label) 30%, transparent);
 }
 
-.api-language-tabs {
+.api-example-tabs {
   display: flex;
-  gap: 2px;
+  align-self: stretch;
+  gap: 0;
   min-width: 0;
   overflow-x: auto;
+  scrollbar-width: none;
 }
 
-.api-language-tabs button,
+.api-example-tabs::-webkit-scrollbar { display: none; }
+
+.api-example-tabs button,
 .api-copy-button {
   border: 0;
   background: transparent;
@@ -784,18 +793,20 @@ function highlightCode(code: string, language = '') {
   font: inherit;
 }
 
-.api-language-tabs button {
-  padding: 8px 10px;
+.api-example-tabs button {
+  padding: 0 8px;
   border-radius: 0;
   font-family: var(--vp-font-family-mono);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: .08em;
+  letter-spacing: .04em;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-.api-language-tabs button.active {
+.api-example-tabs button:hover { color: var(--sb-panel-fg); }
+
+.api-example-tabs button.active {
   background: transparent;
   color: var(--sb-panel-fg);
   box-shadow: inset 0 -2px 0 var(--color-tint-cyan);
@@ -811,6 +822,12 @@ function highlightCode(code: string, language = '') {
 }
 
 .api-copy-button:hover { color: var(--sb-panel-fg); }
+
+@media (max-width: 480px) {
+  .api-example-toolbar { gap: 4px; padding: 0 8px; }
+  .api-example-tabs button { padding: 0 6px; letter-spacing: .02em; }
+  .api-copy-button { padding: 6px 4px; letter-spacing: .02em; }
+}
 
 .api-example-card pre {
   max-height: 460px;
