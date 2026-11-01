@@ -381,7 +381,7 @@ print()
 When selecting a model, check its live model card for availability, pricing, context length, supported inputs, and capabilities. These values change independently, so do not rely on a copied model comparison.
 
 - Browse the current [Models catalog](https://www.sandbase.ai/models).
-- Open the [Model API Reference](/model-api-reference/) for model-specific request fields.
+- Open a model's page in the catalog for its model-specific request fields.
 - Query `GET /v1/models` when an integration needs current model metadata programmatically.
 
 For models that share the same compatible interface, switching usually starts with the `model` parameter. Recheck the selected model's capabilities and schema before carrying over optional fields, tools, media inputs, or structured-output settings.
@@ -390,7 +390,7 @@ For models that share the same compatible interface, switching usually starts wi
 
 Before production, set request timeouts, retry only transient failures with bounded exponential backoff, log request IDs when available, and monitor usage without logging prompts or API keys.
 
-- [**Model API Reference**](/model-api-reference/) — Model endpoints, parameters, and model-specific references
+- [**API Reference**](/api-reference/) — Inference endpoints and Platform API contracts
 - [**Streaming Guide**](/guides/streaming) — Advanced streaming patterns and error handling
 - [**Models**](https://www.sandbase.ai/models) — Model discovery, capabilities, and current pricing
 - [**Errors**](/guides/error-handling) — Handle failures and retries

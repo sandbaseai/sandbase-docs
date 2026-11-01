@@ -1052,23 +1052,6 @@ html {
   background: var(--sb-accent-green);
 }
 
-/* Model API Reference: the LLM category overview is a sibling of provider
-   groups (OpenAI, Anthropic, Google...). VitePress renders it as a nested
-   link, so pull only this one row back to the provider gutter instead of
-   making it look like a model entry. */
-.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/llm-models"],
-.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/llm-models/"],
-.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/image-generation"],
-.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/image-generation/"],
-.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/video-generation"],
-.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/video-generation/"],
-.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/audio-generation"],
-.VPSidebarItem.level-2 > .item .link[href$="/model-api-reference/audio-generation/"] {
-  margin-left: -18px;
-  width: calc(100% + 18px);
-  padding-left: 14px;
-}
-
 /* Reading rhythm. Limit prose rather than shrinking the entire content
    column, so tables and code samples still have useful working width. */
 .vp-doc:not(:has(.api-reference-page)) {

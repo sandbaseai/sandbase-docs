@@ -22,16 +22,7 @@ for (const retiredPage of [
   'agents/deployments.html',
   'store',
   'models',
-  'model-api-reference/platform-apis',
-  'model-api-reference/platform-apis.html',
-  'model-api-reference/llm-models',
-  'model-api-reference/llm-models.html',
-  'model-api-reference/image-generation',
-  'model-api-reference/image-generation.html',
-  'model-api-reference/video-generation',
-  'model-api-reference/video-generation.html',
-  'model-api-reference/audio-generation',
-  'model-api-reference/audio-generation.html',
+  'model-api-reference',
   'api-reference/services',
   'api-reference/schedules',
   'api-reference/deployments',
@@ -42,21 +33,21 @@ for (const retiredPage of [
 }
 
 const sitemap = readFileSync(path.join(dist, 'sitemap.xml'), 'utf8')
-for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/admin/api-keys', '/docs/setup/cli', '/docs/setup/groups', '/docs/api-reference/volcengine-contents-generations']) {
+for (const excludedUrl of ['/docs/README', '/docs/CONTRIBUTING', '/docs/DEPLOYMENT', '/docs/admin/api-keys', '/docs/setup/cli', '/docs/setup/groups']) {
   assert.ok(!sitemap.includes(`<loc>https://www.sandbase.ai${excludedUrl}</loc>`), `${excludedUrl} must not be indexed in the sitemap`)
 }
 // Removed pages are answered by Worker 301s; none may reappear in the sitemap.
-const retiredSitemapPrefix = /<loc>https:\/\/www\.sandbase\.ai\/docs\/(?:store|models|agents\/(?:services|schedules|deployments)|api-reference\/(?:services|schedules|deployments|endpoints|credentials)|model-api-reference\/(?:platform-apis|llm-models|image-generation|video-generation|audio-generation))(?:[/.<])/
+const retiredSitemapPrefix = /<loc>https:\/\/www\.sandbase\.ai\/docs\/(?:store|models|agents\/(?:services|schedules|deployments)|api-reference\/(?:services|schedules|deployments|endpoints|credentials)|model-api-reference)(?:[/.<])/
 assert.doesNotMatch(sitemap, retiredSitemapPrefix, 'Removed docs pages must not be in the sitemap')
-for (const keptUrl of ['/docs/model-api-reference/', '/docs/model-api-reference/official-native-api/', '/docs/api-reference/secrets/', '/docs/api-reference/mcp-connections/', '/docs/agents/sessions']) {
+for (const keptUrl of ['/docs/api-reference/volcengine-contents-generations', '/docs/api-reference/images/generations', '/docs/api-reference/secrets/', '/docs/api-reference/mcp-connections/', '/docs/agents/sessions']) {
   assert.ok(sitemap.includes(`<loc>https://www.sandbase.ai${keptUrl}</loc>`), `${keptUrl} must be indexed in the sitemap`)
 }
 for (const archived of ['guides/site-agent-integration.html', 'use-cases', 'api-reference/embeds', 'api-reference/environments', 'api-reference/endpoints/mcp.html', 'api-reference/endpoints/acp.html', 'api-reference/deployments/create.html', 'api-reference/sessions/list-events.html']) {
   assert.ok(!existsSync(path.join(dist, archived)), `${archived} must not be published`)
 }
 
-const legacySeedance = readFileSync(path.join(dist, 'api-reference', 'volcengine-contents-generations.html'), 'utf8')
-assert.match(legacySeedance, /<meta name="robots" content="noindex,follow">/, 'Legacy Seedance page must remain noindex')
+const seedancePage = readFileSync(path.join(dist, 'api-reference', 'volcengine-contents-generations.html'), 'utf8')
+assert.doesNotMatch(seedancePage, /<meta name="robots" content="noindex/, 'The Seedance protocol reference must be indexable')
 const forbidden = [
   [/\/v1\/generations(?:\/|\b)/i, 'withdrawn generation API'],
   [/\/v1\/blog\/assets(?:\/|\b)/i, 'internal Blog publishing storage API'],
@@ -71,7 +62,7 @@ const forbidden = [
   [/\/v1\/capabilities\/[A-Za-z0-9_{}%.-]+\/mcp\b/i, 'Capability MCP transport'],
   [/\/v1\/skill-mcp\/[A-Za-z0-9_{}%.-]+\/mcp\b/i, 'published Skill MCP transport'],
   [/\/v1\/(?:services|schedules)(?:\/|\b)/i, 'retired Services or Schedules API'],
-  [/href="\/docs\/(?:agents\/(?:services|schedules|deployments)|api-reference\/(?:services|schedules|deployments|endpoints|credentials)\/|store\/|models\/|model-api-reference\/(?:platform-apis|llm-models|image-generation|video-generation|audio-generation)\b)/, 'link to a removed docs page'],
+  [/href="\/docs\/(?:agents\/(?:services|schedules|deployments)|api-reference\/(?:services|schedules|deployments|endpoints|credentials)\/|store\/|models\/|model-api-reference\b)/, 'link to a removed docs page'],
 ]
 
 let inspected = 0
