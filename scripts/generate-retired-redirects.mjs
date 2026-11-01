@@ -72,7 +72,6 @@ Object.assign(map, {
 })
 
 // Retired product areas: Services, Schedules, Deployments, Endpoints, Credentials.
-// (Secrets stays: MCP connections reference it through secret_id.)
 const retired = {
   'agents/services': '/docs/agents/', 'agents/schedules': '/docs/agents/', 'agents/deployments': '/docs/agents/',
   'api-reference/services': '/docs/api-reference/agents/', 'api-reference/schedules': '/docs/api-reference/agents/',
@@ -121,6 +120,11 @@ Object.assign(map, {
   [`${NATIVE}/google/gemini-3.1-flash-image`]: `${SITE}/models/google/gemini-3.1-flash-image/docs`,
   [`${NATIVE}/google/gemini-nano-banana-2.1`]: `${SITE}/models/google/gemini-nano-banana-2.1/docs`,
 })
+// Secrets API page (retired 2026-11-01): the contract moved into the MCP
+// credentials guide.
+for (const key of ['/docs/api-reference/secrets', '/docs/api-reference/secrets/', '/docs/api-reference/secrets/*', '/docs/api-reference/secrets/index']) {
+  map[key] = `${SITE}/docs/agents/api-credentials#with-the-api`
+}
 const sorted = Object.fromEntries(Object.entries(map).sort(([a], [b]) => a.localeCompare(b)))
 writeFileSync('worker/retired-redirects.json', `${JSON.stringify(sorted, null, 1)}\n`)
 console.log(`${Object.keys(sorted).length} redirects (${fallbacks.length} to a hub because the item left the catalog)`)

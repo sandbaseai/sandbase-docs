@@ -38,6 +38,6 @@ assert.deepEqual(await retired('/docs/model-api-reference/'), [301, 'https://www
 assert.deepEqual(await retired('/docs/model-api-reference'), [301, 'https://www.sandbase.ai/docs/api-reference/'])
 assert.deepEqual(await retired('/docs/model-api-reference/official-native-api/google/unknown-page'), [301, 'https://www.sandbase.ai/docs/api-reference/'])
 assert.deepEqual(await retired('/docs/api-reference/volcengine-contents-generations'), [200, null])
-assert.deepEqual(await retired('/docs/api-reference/secrets/'), [200, null])
+assert.deepEqual(await retired('/docs/api-reference/secrets/'), [301, 'https://www.sandbase.ai/docs/agents/api-credentials#with-the-api'])
 assert.deepEqual(await retired('/docs/guides/streaming'), [200, null])
 console.log('Worker routing: ok (docs mount preserved, clean URLs permanent, retired pages redirect once)')

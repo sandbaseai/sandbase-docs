@@ -59,6 +59,7 @@ for (const removedSource of [
   'api-reference/credentials',
   'model-api-reference',
   '.vitepress/theme/OfficialNativeApiSidebar.vue',
+  'api-reference/secrets',
 ]) {
   assert.ok(!existsSync(path.join(root, removedSource)), `${removedSource} was removed and must not be restored`)
 }
@@ -205,7 +206,6 @@ assert.doesNotMatch(platformSidebar, /text: 'Schedules'/, 'Platform API sidebar 
 assert.doesNotMatch(platformSidebar, /text: 'Deployments'/, 'Platform API sidebar must not expose the compatibility Deployment resource as the product name')
 for (const [resource, anchors] of [
   ['mcp-connections', ['create-a-connection', 'list-connections', 'get-a-connection', 'replace-a-connection', 'enable-a-connection', 'disable-a-connection']],
-  ['secrets', ['create-a-secret', 'list-secrets', 'get-a-secret', 'rotate-a-secret', 'revoke-a-secret']],
 ]) {
   const overview = readFileSync(new URL(`../api-reference/${resource}/index.md`, import.meta.url), 'utf8')
   for (const anchor of anchors) {
@@ -213,6 +213,12 @@ for (const [resource, anchors] of [
     assert.match(overview, new RegExp(`^## ${anchor.replace(/-/g, ' ')}$`, 'mi'), `${resource} overview must keep the ${anchor} anchor`)
   }
 }
+assert.doesNotMatch(platformSidebar, /text: 'Secrets'|\/api-reference\/secrets\//, 'Secrets are documented in the MCP credentials guide, not a separate API page')
+const credentialsGuide = readFileSync(new URL('../agents/api-credentials.md', import.meta.url), 'utf8')
+for (const anchor of ['create-a-secret', 'list-secrets', 'get-a-secret', 'rotate-a-secret', 'revoke-a-secret']) {
+  assert.match(credentialsGuide, new RegExp(`^### ${anchor.replace(/-/g, ' ')}$`, 'mi'), `Credentials guide must document ${anchor}`)
+}
+assert.match(openapi, /source: \{ type: \[string, 'null'\], enum: \[direct, null\]/, 'Session source must not advertise the retired service or schedule origins')
 assert.doesNotMatch(platformSidebar, /text: 'Credentials'|\/api-reference\/(?:credentials|endpoints|deployments)\//, 'Platform API sidebar must not link retired resources')
 assert.doesNotMatch(openapi, /^  \/v1\/(?:endpoints|deployments|deployment_runs|sessions|credentials|skills\/files)(?:[/{:]|$)/m, 'Retired Agents resources must not be public')
 assert.doesNotMatch(openapi, /^  \/v1\/(?:services|schedules)(?:[/{:]|$)/m, 'Retired Services and Schedules paths must not be public')

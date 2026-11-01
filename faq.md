@@ -46,7 +46,7 @@ A Session is one Agent execution with its conversation, tool activity, and outpu
 
 ## How do I give an Agent access to external APIs?
 
-Connect the external system as an MCP server and add it to the Agent's MCP connections. If the server needs a Bearer token, store it with the [Secrets API](/api-reference/secrets/) as a write-only Secret bound to that server URL. Tokens are sent only to that server and never appear in prompts or the Agent runtime. See [Credentials for MCP tools](/agents/api-credentials).
+Connect the external system as an MCP server and add it to the Agent's MCP connections. If the server needs a Bearer token, store it with the [Secrets API](/agents/api-credentials#with-the-api) as a write-only Secret bound to that server URL. Tokens are sent only to that server and never appear in prompts or the Agent runtime. See [Credentials for MCP tools](/agents/api-credentials).
 
 ## Where do Models live?
 

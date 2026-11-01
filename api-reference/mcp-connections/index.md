@@ -4,7 +4,7 @@ description: Register remote HTTPS MCP servers that Agents can call.
 ---
 # MCP Connections API
 
-An MCP connection registers a remote MCP server reachable over HTTPS. Agents reference connections in `mcp_connections`; each Session freezes the connection configuration when it starts. Connection IDs use the `mcp_` prefix. To authenticate to the server with a Bearer token, first create a [Secret](/api-reference/secrets/) for the same URL.
+An MCP connection registers a remote MCP server reachable over HTTPS. Agents reference connections in `mcp_connections`; each Session freezes the connection configuration when it starts. Connection IDs use the `mcp_` prefix. To authenticate to the server with a Bearer token, first create a [Secret](/agents/api-credentials#with-the-api) for the same URL.
 
 | Method | Path | Purpose |
 |---|---|---|

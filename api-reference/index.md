@@ -19,7 +19,7 @@ The inference contracts (Chat Completions, Responses, Anthropic Messages, Gemini
 | Run an Agent directly | [Sessions](/api-reference/sessions/) | Send input, stream events, and read history |
 | Reuse instruction bundles | [Skills](/api-reference/skills/) | Upload versioned ZIP bundles and attach them to Agents |
 | Call external tools | [MCP Connections](/api-reference/mcp-connections/) | Register remote HTTPS MCP servers for Agents |
-| Authenticate external tools | [Secrets](/api-reference/secrets/) | Store write-only Bearer tokens for MCP connections |
+| Authenticate external tools | [Secrets](/agents/api-credentials#with-the-api) | Store write-only Bearer tokens for MCP connections |
 
 ## Resource lifecycle
 
