@@ -2,7 +2,7 @@
 //
 // The per-model API reference moved to the main site (/models/{id}/docs and
 // /apis/{id}/docs), and the Store/Models catalog pages, Services, Schedules,
-// Deployments, Endpoints, Credentials and Secrets pages were retired. This maps
+// Deployments, Endpoints and Credentials pages were retired. This maps
 // every removed /docs URL to its final destination so the Worker answers with a
 // single 301. Run it before deleting the pages; it reads their frontmatter.
 //
