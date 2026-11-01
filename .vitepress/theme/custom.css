@@ -10,27 +10,27 @@
 /* ─── SandBase design system ───────────────────────────────────────────────
    Ported from the sandbase /docs reference design and the sandbase.ai main
    site. Values track sandbase-fe src/app/globals.css (light = .light-mode,
-   dark = :root / html[data-theme='dark']). The whole theme is token-driven: change these values and the palette
+   dark = html[data-theme='dark']); docs dark mode is VitePress's .dark class. The whole theme is token-driven: change these values and the palette
    cascades through VitePress's own `--vp-c-*` variables. The look is an
    editorial "pixel poster": near-zero radius, hairline borders, a violet
    (light) / lime (dark) accent, and monospace uppercase micro-labels. */
 :root {
-  --sb-canvas: #f2f0f3;
+  --sb-canvas: #f7f7f8;
   --sb-surface: #ffffff;
-  --sb-surface-alt: #e7e4ea;
-  --sb-line: #dbd8df;
-  --sb-line-strong: #0e0b1a;
-  --sb-ink: #0e0b1a;
-  --sb-ink-muted: #5d5969;
-  --sb-ink-subtle: #757183;
+  --sb-surface-alt: #f0f0f2;
+  --sb-line: #e4e4e7;
+  --sb-line-strong: #18181b;
+  --sb-ink: #18181b;
+  --sb-ink-muted: #52525b;
+  --sb-ink-subtle: #71717a;
   --sb-accent: #5e3fff;
   --sb-accent-hover: #4a2fe0;
   --sb-accent-contrast: #ffffff;
   --sb-tint: #d9ff43;            /* pixel accent / corner marks / CTA hover */
   --sb-tint-fg: #0e0b1a;
-  --sb-panel: #0e0b1a;           /* dark code panel */
-  --sb-panel-fg: #f2f0f3;
-  --sb-panel-label: #8a8698;
+  --sb-panel: #18181b;           /* dark code panel */
+  --sb-panel-fg: #f4f4f5;
+  --sb-panel-label: #a1a1aa;
 
   /* Map onto VitePress core tokens so the palette propagates everywhere. */
   --vp-c-bg: var(--sb-canvas);
@@ -58,7 +58,7 @@
   --vp-code-copy-code-hover-bg: rgba(255, 255, 255, 0.18);
   --vp-code-copy-code-active-text: var(--sb-panel-fg);
 
-  --vp-font-family-base: 'Clash Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Roboto, sans-serif;
+  --vp-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --vp-font-family-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Aliases matching the sandbase.ai main site so the ported header/footer
@@ -80,11 +80,12 @@
   --font-family-heading: var(--vp-font-family-base);
   --font-family-body: var(--vp-font-family-base);
   --font-family-mono: var(--vp-font-family-mono);
-  /* Small body text (below 16px) reads better in the OS face than in Clash. */
-  --font-family-text: system-ui, sans-serif;
-  --color-line-control: #0e0b1a;
-  --color-panel-fg-muted: #a29ea9;
-  --color-panel-fg-label: #8a8698;
+  /* Clash Grotesk is reserved for the brand lockup and primary nav, as on the main site. */
+  --font-family-brand: 'Clash Grotesk', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+  --font-family-text: var(--font-family-body);
+  --color-line-control: #a1a1aa;
+  --color-panel-fg-muted: #b4b4bc;
+  --color-panel-fg-label: #a1a1aa;
   --color-tint-fg: #0e0b1a;
   --color-tint-yellow: #d9ff43;
   --color-tint-yellow-fg: #0e0b1a;
@@ -100,22 +101,22 @@
 }
 
 .dark {
-  --sb-canvas: #0e0b1a;
-  --sb-surface: #24212f;
-  --sb-surface-alt: #2c2939;
-  --sb-line: #332d4f;
-  --sb-line-strong: #f2f0f3;
-  --sb-ink: #f2f0f3;
-  --sb-ink-muted: #a29ea9;
-  --sb-ink-subtle: #8a8698;
+  --sb-canvas: #111113;
+  --sb-surface: #1c1c1f;
+  --sb-surface-alt: #262629;
+  --sb-line: #36363a;
+  --sb-line-strong: #f4f4f5;
+  --sb-ink: #f4f4f5;
+  --sb-ink-muted: #b4b4bc;
+  --sb-ink-subtle: #9898a2;
   --sb-accent: #d9ff43;
   --sb-accent-hover: #e6ff70;
   --sb-accent-contrast: #0e0b1a;
   --sb-tint: #8b6fff;
   --sb-tint-fg: #0e0b1a;
-  --sb-panel: #322f3e;
-  --sb-panel-fg: #f2f0f3;
-  --sb-panel-label: #a9a5b8;
+  --sb-panel: #18181b;
+  --sb-panel-fg: #f4f4f5;
+  --sb-panel-label: #a1a1aa;
 
   --vp-c-bg: var(--sb-canvas);
   --vp-c-bg-alt: var(--sb-canvas);
@@ -141,11 +142,11 @@
 
   --color-positive: #d9ff43;
   --color-tint-blue: #d9ff43;
-  --color-line-control: #332d4f;
-  --color-panel-fg-muted: #b3afc1;
-  --color-panel-fg-label: #a9a5b8;
+  --color-line-control: #48484e;
+  --color-panel-fg-muted: #b4b4bc;
+  --color-panel-fg-label: #a1a1aa;
   --color-tint-fg: #0e0b1a;
-  --color-sheet: #1e1b2a;
+  --color-sheet: #1c1c1f;
   --color-error: #f87171;
   --color-warning: #f5a623;
   --color-info: #3b82f6;
@@ -1519,7 +1520,7 @@ html {
 .VPNavBarTitle .title {
   gap: 0.6rem !important;
   color: var(--sb-ink) !important;
-  font-family: var(--vp-font-family-base);
+  font-family: var(--font-family-brand);
   font-size: 1.5rem !important;
   font-weight: 550 !important;
   letter-spacing: -0.018em !important;
@@ -1540,7 +1541,7 @@ html {
 .VPNavBarMenuLink,
 .VPNavBarMenuGroup .text {
   color: var(--sb-ink) !important;
-  font-family: var(--vp-font-family-base);
+  font-family: var(--font-family-brand);
   font-size: 15px !important;
   font-weight: 400 !important;
   letter-spacing: 0.005em;
@@ -1760,7 +1761,7 @@ html {
 }
 
 .sb-contact-wordmark {
-  font-family: var(--vp-font-family-base);
+  font-family: var(--font-family-brand);
   font-size: 1.4rem;
   font-weight: 550;
   letter-spacing: -0.018em;
@@ -2704,11 +2705,9 @@ html {
 }
 
 /* ─── Small body text: system face ─────────────────────────────────────────
-   Clash Grotesk stays on headings, nav and prose at 16px and up. Text below
-   16px uses the OS face. Add `.sb-text` in components; the :where() list
-   covers the existing small-text surfaces. :where() has zero specificity, so
-   it only replaces the inherited Clash and never overrides an explicit
-   Geist Mono label, code span or mono table column. */
+   Body and headings already use the system stack (as on the main site).
+   `.sb-text` and this :where() list keep small-text surfaces explicit so a
+   component that sets the brand face does not leak it into body copy. */
 .sb-text,
 :where(
   .VPSidebar .link > .text,
