@@ -899,5 +899,4 @@ function highlightCode(code: string, language = '') {
   .api-error-row p { grid-column: 2; }
   .api-notes article { grid-template-columns: 1fr; gap: 4px; }
 }
-:global(.dark) .api-example-card { border-color: var(--color-line); }
 </style>

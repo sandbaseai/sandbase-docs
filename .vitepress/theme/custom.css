@@ -2724,6 +2724,7 @@ html {
   --sb-syntax-property: #c9c2ff;
 }
 /* Dark mode: a hairline keeps code panels distinct from the near-black page. */
-.dark .vp-doc div[class*='language-'] {
+.dark .vp-doc div[class*='language-'],
+.dark .api-example-card {
   border-color: var(--color-line);
 }
