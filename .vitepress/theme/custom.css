@@ -2712,15 +2712,18 @@ html {
 }
 
 /* ─── Syntax palette for dark code panels (both site themes) ──────────────── */
-/* Brand violet for keywords, softened lime for strings, amber for values.
-   All reach at least 4.5:1 on the #18181b panel. */
+/* Same values as the Blog and .vitepress/syntaxTheme.ts. */
 :root {
   --sb-syntax-fg: #e4e4e7;
-  --sb-syntax-key: #e4e4e7;
-  --sb-syntax-keyword: #b8abff;
-  --sb-syntax-string: #d4f27a;
-  --sb-syntax-constant: #ffc078;
-  --sb-syntax-comment: #8e8e99;
+  --sb-syntax-comment: #8e8e98;
   --sb-syntax-punctuation: #a1a1aa;
+  --sb-syntax-keyword: #b4a2ff;
+  --sb-syntax-string: #d9ff43;
+  --sb-syntax-number: #ffb877;
+  --sb-syntax-function: #8fd3ff;
+  --sb-syntax-property: #c9c2ff;
 }
-
+/* Dark mode: a hairline keeps code panels distinct from the near-black page. */
+.dark .vp-doc div[class*='language-'] {
+  border-color: var(--color-line);
+}

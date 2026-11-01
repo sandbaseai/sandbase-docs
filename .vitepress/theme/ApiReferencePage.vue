@@ -261,23 +261,19 @@ function highlightJson(code: string) {
 function highlightScript(code: string) {
   const escaped = escapeHtml(code)
   return escaped.replace(
-    /(https?:\/\/[^\s'"\\]+)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)|((?:^|(?<=\s))(?:#|\/\/)[^\n]*)|(\$\{?[A-Za-z0-9_]+\}?|process\.env\.[A-Z0-9_]+|os\.environ)|\b(curl|const|let|await|async|fetch|if|else|throw|new|return|import|from|as|with|def|for|in|print|True|False|None|true|false|null)\b|(\s-{1,2}[A-Za-z][A-Za-z0-9-]*)|(\b\d+(?:\.\d+)?\b)/gm,
-    (token, url, stringValue, comment, variable, keyword, flag, number) => {
-      const tokenClass = url
-        ? 'syntax-url'
-        : stringValue
-          ? 'syntax-string'
-          : comment
-            ? 'syntax-comment'
-            : variable
-              ? 'syntax-variable'
-              : keyword
-                ? 'syntax-keyword'
-                : flag
-                  ? 'syntax-flag'
-                  : number
-                    ? 'syntax-number'
-                    : ''
+    /(https?:\/\/[^\s'"\\]+)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)|((?:^|(?<=\s))(?:#|\/\/)[^\n]*)|\b(curl|const|let|await|async|if|else|throw|new|return|import|from|as|with|def|for|in|not|and|or)\b|\b(True|False|None|true|false|null|\d+(?:\.\d+)?)\b|(\s-{1,2}[A-Za-z][A-Za-z0-9-]*)|\b([A-Za-z_][A-Za-z0-9_]*)(?=\()/gm,
+    (token, url, stringValue, comment, keyword, literal, flag, fn) => {
+      const tokenClass = url || stringValue
+        ? 'syntax-string'
+        : comment
+          ? 'syntax-comment'
+          : keyword || flag
+            ? 'syntax-keyword'
+            : literal
+              ? 'syntax-number'
+              : fn
+                ? 'syntax-function'
+                : ''
       return tokenClass ? `<span class="${tokenClass}">${token}</span>` : token
     },
   )
@@ -761,7 +757,7 @@ function highlightCode(code: string, language = '') {
 
 .api-example-card {
   overflow: hidden;
-  border: 0;
+  border: 1px solid var(--sb-panel);
   border-radius: 0;
   background: var(--sb-panel);
   color: var(--sb-panel-fg);
@@ -850,15 +846,13 @@ function highlightCode(code: string, language = '') {
   line-height: 1.7;
 }
 
-.api-example-card pre code :deep(.syntax-key) { color: var(--sb-syntax-key); }
-.api-example-card pre code :deep(.syntax-keyword),
-.api-example-card pre code :deep(.syntax-flag) { color: var(--sb-syntax-keyword); }
-.api-example-card pre code :deep(.syntax-string),
-.api-example-card pre code :deep(.syntax-url) { color: var(--sb-syntax-string); }
-.api-example-card pre code :deep(.syntax-variable),
+.api-example-card pre code :deep(.syntax-key) { color: var(--sb-syntax-property); }
+.api-example-card pre code :deep(.syntax-keyword) { color: var(--sb-syntax-keyword); }
+.api-example-card pre code :deep(.syntax-string) { color: var(--sb-syntax-string); }
 .api-example-card pre code :deep(.syntax-number),
-.api-example-card pre code :deep(.syntax-literal) { color: var(--sb-syntax-constant); }
-.api-example-card pre code :deep(.syntax-comment) { color: var(--sb-syntax-comment); }
+.api-example-card pre code :deep(.syntax-literal) { color: var(--sb-syntax-number); }
+.api-example-card pre code :deep(.syntax-function) { color: var(--sb-syntax-function); }
+.api-example-card pre code :deep(.syntax-comment) { color: var(--sb-syntax-comment); font-style: italic; }
 
 .api-response-heading {
   color: var(--color-panel-fg-label);
@@ -905,4 +899,5 @@ function highlightCode(code: string, language = '') {
   .api-error-row p { grid-column: 2; }
   .api-notes article { grid-template-columns: 1fr; gap: 4px; }
 }
+:global(.dark) .api-example-card { border-color: var(--color-line); }
 </style>
