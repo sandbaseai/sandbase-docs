@@ -96,7 +96,9 @@ const pageActionsOpen = ref(false)
 const pageCopied = ref(false)
 
 function curlRequestParts(reference: ApiReference) {
-  const curl = reference.examples?.find((example) => /curl/i.test(example.label))?.code ?? ''
+  // Match by content, not label: some cURL tabs are named after the scenario
+  // (for example "Background request").
+  const curl = reference.examples?.find((example) => /^\s*curl\b/.test(example.code))?.code ?? ''
   const url = curl.match(/https:\/\/[^\s"'\\]+/)?.[0] ?? `https://api.sandbase.ai${reference.path}`
   const body = curl.match(/-d\s+'([\s\S]*?)'\s*$/)?.[1]
   return { method: reference.method.toUpperCase(), url, body }
@@ -259,24 +261,23 @@ function highlightJson(code: string) {
 function highlightScript(code: string) {
   const escaped = escapeHtml(code)
   return escaped.replace(
-    /(https?:\/\/[^\s'"\\]+)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)|(\$[A-Z0-9_]+|process\.env\.[A-Z0-9_]+)|\b(curl|const|await|fetch|method|headers|body|JSON|stringify|if|throw|new|Error|console|log|import|from|print|response|requests|request|raise_for_status|os|json)\b|(-{1,2}[A-Za-z0-9-]+)/g,
-    (token, url, stringValue, variable, keyword, flag) => {
-      const tokenClass = url
-        ? 'syntax-url'
-        : stringValue
-          ? 'syntax-string'
-          : variable
-            ? 'syntax-variable'
-            : keyword
-              ? 'syntax-keyword'
-              : flag
-                ? 'syntax-flag'
+    /(https?:\/\/[^\s'"\\]+)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)|((?:^|(?<=\s))(?:#|\/\/)[^\n]*)|\b(curl|const|let|await|async|if|else|throw|new|return|import|from|as|with|def|for|in|not|and|or)\b|\b(True|False|None|true|false|null|\d+(?:\.\d+)?)\b|(\s-{1,2}[A-Za-z][A-Za-z0-9-]*)|\b([A-Za-z_][A-Za-z0-9_]*)(?=\()/gm,
+    (token, url, stringValue, comment, keyword, literal, flag, fn) => {
+      const tokenClass = url || stringValue
+        ? 'syntax-string'
+        : comment
+          ? 'syntax-comment'
+          : keyword || flag
+            ? 'syntax-keyword'
+            : literal
+              ? 'syntax-number'
+              : fn
+                ? 'syntax-function'
                 : ''
       return tokenClass ? `<span class="${tokenClass}">${token}</span>` : token
     },
   )
 }
-
 function highlightCode(code: string, language = '') {
   if (language === 'json') return highlightJson(code)
   return highlightScript(code)
@@ -756,7 +757,7 @@ function highlightCode(code: string, language = '') {
 
 .api-example-card {
   overflow: hidden;
-  border: 0;
+  border: 1px solid var(--sb-panel);
   border-radius: 0;
   background: var(--sb-panel);
   color: var(--sb-panel-fg);
@@ -830,7 +831,8 @@ function highlightCode(code: string, language = '') {
 }
 
 .api-example-card pre {
-  max-height: 460px;
+  /* Room for a full request on a laptop screen; the response panel sits below. */
+  max-height: clamp(360px, calc(100vh - 360px), 640px);
   margin: 0;
   padding: 18px 20px;
   border-radius: 0;
@@ -844,19 +846,13 @@ function highlightCode(code: string, language = '') {
   line-height: 1.7;
 }
 
-.api-example-card pre code :deep(.syntax-key),
-.api-example-card pre code :deep(.syntax-keyword),
-.api-example-card pre code :deep(.syntax-flag) {
-  color: var(--color-panel-fg);
-}
-
-.api-example-card pre code :deep(.syntax-string),
-.api-example-card pre code :deep(.syntax-url),
-.api-example-card pre code :deep(.syntax-variable),
+.api-example-card pre code :deep(.syntax-key) { color: var(--sb-syntax-property); }
+.api-example-card pre code :deep(.syntax-keyword) { color: var(--sb-syntax-keyword); }
+.api-example-card pre code :deep(.syntax-string) { color: var(--sb-syntax-string); }
 .api-example-card pre code :deep(.syntax-number),
-.api-example-card pre code :deep(.syntax-literal) {
-  color: var(--color-panel-fg-muted);
-}
+.api-example-card pre code :deep(.syntax-literal) { color: var(--sb-syntax-number); }
+.api-example-card pre code :deep(.syntax-function) { color: var(--sb-syntax-function); }
+.api-example-card pre code :deep(.syntax-comment) { color: var(--sb-syntax-comment); font-style: italic; }
 
 .api-response-heading {
   color: var(--color-panel-fg-label);
@@ -903,4 +899,5 @@ function highlightCode(code: string, language = '') {
   .api-error-row p { grid-column: 2; }
   .api-notes article { grid-template-columns: 1fr; gap: 4px; }
 }
+:global(.dark) .api-example-card { border-color: var(--color-line); }
 </style>
