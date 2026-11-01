@@ -7,6 +7,7 @@ import QuickstartResources from './QuickstartResources.vue'
 import SiteHeader from './SiteHeader.vue'
 import SiteFooter from './SiteFooter.vue'
 import DocsSearch from './DocsSearch.vue'
+import ChatwootWidget from './ChatwootWidget.vue'
 import DocsSectionTabs from './DocsSectionTabs.vue'
 import TutorialCopyAction from './TutorialCopyAction.vue'
 import './custom.css'
@@ -24,7 +25,7 @@ export default {
       'sidebar-nav-before': () => [h(DocsSearch), h(DocsSectionTabs)],
       'layout-top': () => h(SiteHeader),
       'doc-before': () => h(TutorialCopyAction),
-      'layout-bottom': () => h(SiteFooter),
+      'layout-bottom': () => [h(SiteFooter), h(ChatwootWidget)],
     })
   },
   enhanceApp({ app }) {
