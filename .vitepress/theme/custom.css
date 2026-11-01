@@ -1394,32 +1394,10 @@ html {
 
 .quickstart-page .vp-doc ol {
   margin: 20px 0;
-  padding-left: 0;
-  list-style: none;
-  counter-reset: qs-step;
 }
 
 .quickstart-page .vp-doc ol > li {
-  position: relative;
   margin-top: 12px;
-  padding-left: 2.6rem;
-  counter-increment: qs-step;
-}
-
-.quickstart-page .vp-doc ol > li::marker {
-  content: '';
-}
-
-.quickstart-page .vp-doc ol > li::before {
-  content: counter(qs-step, decimal-leading-zero);
-  position: absolute;
-  left: 0;
-  top: 0.28em;
-  color: var(--vp-c-text-3);
-  font-family: var(--vp-font-family-mono);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
 }
 
 .quickstart-page .vp-doc ol > li > ul {
@@ -2046,10 +2024,8 @@ html {
 }
 
 /* ─── Fenced code: square panel, 44px label strip, monochrome text ──────── */
-/* `:not(.api-language-tabs)`: ApiReferencePage's tab bar class also matches
-   `[class*='language-']`; keep these fence rules off it. */
-.vp-doc div[class*='language-']:not(.api-language-tabs),
-.vp-doc:not(:has(.api-reference-page)) div[class*='language-']:not(.api-language-tabs) {
+.vp-doc div[class*='language-'],
+.vp-doc:not(:has(.api-reference-page)) div[class*='language-'] {
   padding-top: 44px;
   border: 0;
   border-radius: 0 !important;
@@ -2058,7 +2034,7 @@ html {
   overflow: visible;
 }
 
-.vp-doc div[class*='language-']:not(.api-language-tabs)::before {
+.vp-doc div[class*='language-']::before {
   content: '';
   position: absolute;
   top: 0;
@@ -2069,9 +2045,9 @@ html {
   pointer-events: none;
 }
 
-.vp-doc [class*='language-']:not(.api-language-tabs) > span.lang,
-.vp-doc [class*='language-']:not(.api-language-tabs):hover > button.copy + span.lang,
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:focus + span.lang {
+.vp-doc [class*='language-'] > span.lang,
+.vp-doc [class*='language-']:hover > button.copy + span.lang,
+.vp-doc [class*='language-'] > button.copy:focus + span.lang {
   top: 0;
   right: auto;
   left: 20px;
@@ -2085,7 +2061,7 @@ html {
   text-transform: uppercase;
 }
 
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy {
+.vp-doc [class*='language-'] > button.copy {
   top: 6px;
   right: 12px;
   width: auto;
@@ -2097,30 +2073,30 @@ html {
   opacity: 1;
 }
 /* Design CopyButton: a mono text label, COPY then COPIED, no icon. */
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy::after {
+.vp-doc [class*='language-'] > button.copy::after {
   content: 'Copy';
   color: var(--sb-panel-label);
   font: 500 10px/32px var(--vp-font-family-mono);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:hover::after { color: var(--sb-panel-fg); }
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy.copied::after { content: 'Copied'; color: var(--sb-panel-fg); }
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy.copied::before { display: none; }
+.vp-doc [class*='language-'] > button.copy:hover::after { color: var(--sb-panel-fg); }
+.vp-doc [class*='language-'] > button.copy.copied::after { content: 'Copied'; color: var(--sb-panel-fg); }
+.vp-doc [class*='language-'] > button.copy.copied::before { display: none; }
 
-.vp-doc [class*='language-']:not(.api-language-tabs):hover > button.copy,
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:focus,
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:hover {
+.vp-doc [class*='language-']:hover > button.copy,
+.vp-doc [class*='language-'] > button.copy:focus,
+.vp-doc [class*='language-'] > button.copy:hover {
   opacity: 1;
 }
 
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy.copied,
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:hover.copied {
+.vp-doc [class*='language-'] > button.copy.copied,
+.vp-doc [class*='language-'] > button.copy:hover.copied {
   border-radius: 0;
 }
 
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy.copied::before,
-.vp-doc [class*='language-']:not(.api-language-tabs) > button.copy:hover.copied::before {
+.vp-doc [class*='language-'] > button.copy.copied::before,
+.vp-doc [class*='language-'] > button.copy:hover.copied::before {
   height: 32px;
   border-radius: 0;
   font-family: var(--vp-font-family-mono);
@@ -2129,7 +2105,7 @@ html {
   text-transform: uppercase;
 }
 
-.vp-doc div[class*='language-']:not(.api-language-tabs) pre {
+.vp-doc div[class*='language-'] pre {
   padding: 16px 0;
   max-width: 100%;
   overflow-x: auto;
@@ -2137,8 +2113,8 @@ html {
   scrollbar-color: var(--sb-panel-label) transparent;
 }
 
-.vp-doc div[class*='language-']:not(.api-language-tabs) code,
-.vp-doc:not(:has(.api-reference-page)) div[class*='language-']:not(.api-language-tabs) code {
+.vp-doc div[class*='language-'] code,
+.vp-doc:not(:has(.api-reference-page)) div[class*='language-'] code {
   padding: 0 20px;
   color: var(--sb-panel-fg);
   font-family: var(--vp-font-family-mono);
@@ -2147,7 +2123,7 @@ html {
 }
 
 /* The design's code panels are monochrome (text-panel-code). */
-.vp-doc div[class*='language-']:not(.api-language-tabs) code span {
+.vp-doc div[class*='language-'] code span {
   color: var(--sb-panel-fg) !important;
 }
 
@@ -2182,17 +2158,17 @@ html {
   border-radius: 0;
 }
 
-.vp-doc .vp-code-group div[class*='language-']:not(.api-language-tabs) {
+.vp-doc .vp-code-group div[class*='language-'] {
   margin: 0;
   padding-top: 0;
 }
 
-.vp-doc .vp-code-group div[class*='language-']:not(.api-language-tabs)::before,
-.vp-doc .vp-code-group div[class*='language-']:not(.api-language-tabs) > span.lang {
+.vp-doc .vp-code-group div[class*='language-']::before,
+.vp-doc .vp-code-group div[class*='language-'] > span.lang {
   display: none;
 }
 
-.vp-doc .vp-code-group div[class*='language-']:not(.api-language-tabs) > button.copy {
+.vp-doc .vp-code-group div[class*='language-'] > button.copy {
   top: -38px;
 }
 
@@ -2267,34 +2243,19 @@ html {
   left: -19px;
 }
 
-/* Ordered lists: two-digit mono accent numbers (generalised from Quickstart). */
-.vp-doc:not(:has(.api-reference-page)) ol:not([start]) {
-  padding-left: 0;
-  list-style: none;
-  counter-reset: sb-ol;
+/* Ordered lists: plain "1." numbering in the body face, muted so the step text
+   leads. Native markers keep `start` and nested lists numbered correctly. */
+.vp-doc:not(:has(.api-reference-page)) ol {
+  padding-left: 1.6em;
+  list-style: decimal;
 }
 
-.vp-doc:not(:has(.api-reference-page)) ol:not([start]) > li {
-  position: relative;
-  padding-left: 32px;
-  counter-increment: sb-ol;
+.vp-doc:not(:has(.api-reference-page)) ol > li {
+  padding-left: 0.25em;
 }
 
-.vp-doc:not(:has(.api-reference-page)) ol:not([start]) > li::marker {
-  content: '';
-}
-
-.vp-doc:not(:has(.api-reference-page)) ol:not([start]) > li::before {
-  content: counter(sb-ol, decimal-leading-zero);
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: var(--sb-accent);
-  font-family: var(--vp-font-family-mono);
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0;
+.vp-doc:not(:has(.api-reference-page)) ol > li::marker {
+  color: var(--sb-ink-subtle);
   font-variant-numeric: tabular-nums;
 }
 
@@ -2647,13 +2608,13 @@ html {
     padding-left: var(--sb-gutter-mobile) !important;
   }
 
-  .vp-doc:not(:has(.api-reference-page)) div[class*='language-']:not(.api-language-tabs),
+  .vp-doc:not(:has(.api-reference-page)) div[class*='language-'],
   .vp-doc:not(:has(.api-reference-page)) .vp-code-group .tabs {
     margin-right: 0;
     margin-left: 0;
   }
 
-  .vp-doc:not(:has(.api-reference-page)) .vp-code-group div[class*='language-']:not(.api-language-tabs) {
+  .vp-doc:not(:has(.api-reference-page)) .vp-code-group div[class*='language-'] {
     margin: 0;
   }
 
