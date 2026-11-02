@@ -33,6 +33,28 @@ Most useful Agents combine both: an MCP server fetches data or takes actions, an
 
 You can also browse public Skills in the [Skills catalog](/api-reference/skills/catalog). See the [Skills API](/api-reference/skills/) for the full walkthrough.
 
+## Built-in SandBase tools
+
+Every new Agent can use SandBase's own tools, with no setup. With `sandbase_discover`, `sandbase_inspect` and `sandbase_run`, the Agent finds a model or API in the catalog, reads its schema and price, and calls it with your key. When you omit `mcp_connections` on create, the Agent gets this default:
+
+```json
+{
+  "mcp_connections": [
+    {
+      "connection_id": "builtin:sandbase",
+      "server_label": "sandbase_builtin",
+      "allowed_tools": null,
+      "required": true
+    }
+  ]
+}
+```
+
+- **The list you send replaces the default.** To add your own MCP server and keep the SandBase tools, include the built-in entry in your list.
+- **`builtin:sandbase` requires `server_label: "sandbase_builtin"`.** Any other label, or that label on another connection, returns `400`.
+- **To create an Agent without tools,** send `"mcp_connections": []`.
+- **The built-in tools are free.** You pay only for the models and APIs the Agent calls through them.
+
 ## MCP connections
 
 1. If the MCP server needs a Bearer token, [create a Secret](/agents/api-credentials) for its exact URL.
