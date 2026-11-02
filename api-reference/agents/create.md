@@ -42,7 +42,7 @@ apiReference:
         - name: mcp_connections
           type: array
           required: false
-          description: "MCP references: {connection_id, server_label, allowed_tools, required}. Up to 32; server_label must be unique in the Agent."
+          description: 'MCP references: {connection_id, server_label, allowed_tools, required}. Up to 32; server_label must be unique in the Agent. Omit to get the built-in SandBase tools ({"connection_id": "builtin:sandbase", "server_label": "sandbase_builtin"}); a list you send replaces that default, and [] creates an Agent without tools. See Built-in SandBase tools (/agents/mcp-tools#built-in-sandbase-tools).'
         - name: tools
           type: array
           required: false
@@ -224,7 +224,9 @@ apiReference:
         "metadata": {
           "team": "research"
         },
-        "mcp_connections": [],
+        "mcp_connections": [
+          {"connection_id": "builtin:sandbase", "server_label": "sandbase_builtin", "allowed_tools": null, "required": true}
+        ],
         "skills": [],
         "created_at": 1791273600,
         "updated_at": 1791273600,
