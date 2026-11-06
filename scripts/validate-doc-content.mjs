@@ -85,7 +85,7 @@ const streamingLines = readFileSync('guides/streaming.md', 'utf8').split('\n').l
 assert.ok(streamingLines < 250, 'Streaming guide must stay focused; move protocol detail to the API reference')
 
 const guidesIndex = readFileSync('guides/index.md', 'utf8')
-for (const link of ['./chat-completions', './anthropic-messages', './streaming', './error-handling', './rate-limiting', './billing']) {
+for (const link of ['./chat-completions', './anthropic-messages', '../api-reference/gemini-generate-content', './streaming', './error-handling', './rate-limiting', './billing']) {
   assert.ok(guidesIndex.includes(`](${link})`), `Guides index must link to ${link}`)
 }
 
