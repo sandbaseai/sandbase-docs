@@ -6,6 +6,20 @@ pageClass: quickstart-page
 
 # Quickstart
 
+## Let your AI assistant help you build {#start-with-your-agent}
+
+Paste this into **your AI assistant's chat**, then describe what you want to build or share the SandBase API page you are using. This is an instruction for your assistant, not a terminal command.
+
+```text
+set up https://www.sandbase.ai/SKILL.md
+```
+
+The [setup Skill](https://www.sandbase.ai/SKILL.md) guides your agent through your current situation: no account yet, an existing API key, an already-connected tool, an existing project, or a new feature. It checks the endpoint's inputs and price, helps implement the integration, and distinguishes setup from a verified call and working feature. Tell it your goal and any spending limit; do not paste your key into chat.
+
+Already have a key or a project? Say so; you do not need to start over. For example: “I have a SandBase key. Add a Similarweb traffic lookup to this project; inspect the API and show the live-test cost first.” An assistant that cannot execute commands or load tools needs the [client-specific setup path](/setup/).
+
+[Give your agent the Markdown Quickstart](https://www.sandbase.ai/quickstart.md), or follow the account, website, direct API, and hosted Agent paths below. Installing the setup Skill does not itself create a hosted Agent.
+
 <QuickstartOnboard />
 
 ## 1. Create your account {#create-account}
@@ -89,7 +103,7 @@ Choose this if you want to try a Model, API, or Agent in the browser first — n
 Choose this if you use Claude Code, Codex, Cursor, Kiro, or another supported client and want SandBase Models and APIs inside that app.
 
 1. Open [Build → AI tools](https://www.sandbase.ai/console/setup){target="_blank"} in the Console.
-2. Paste this line into your agent:
+2. Paste this line into your AI assistant's chat, then tell it what you want to build:
 
    ```text
    set up https://www.sandbase.ai/SKILL.md
@@ -97,7 +111,7 @@ Choose this if you use Claude Code, Codex, Cursor, Kiro, or another supported cl
 
 3. Approve the browser sign-in the agent opens. There is no API key to paste.
 4. Start a new session or restart the app so the SandBase tools load.
-5. Make one safe tool request.
+5. Ask the agent to discover and inspect the relevant tool, then make one bounded request within your authorization and budget. For development, have it integrate the response into your project and provide the run command and actual test results. Discovery alone does not verify a business API call.
 
 Prefer a terminal? Run `npx -y @sandbaseai/cli@latest connect`. The connected tool can search the whole catalog and runs are billed to the active workspace.
 
