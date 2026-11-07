@@ -8,6 +8,20 @@ next: false
 
 # 快速上手
 
+## 让 AI 帮你接入并开发 {#start-with-your-agent}
+
+把下面这句话粘贴到 **你自己的 AI 助手聊天框**，再告诉它要开发什么，或者附上正在看的 SandBase API 页面。这是给助手的指令，不是终端命令。
+
+```text
+set up https://www.sandbase.ai/SKILL.md
+```
+
+[Setup Skill](https://www.sandbase.ai/SKILL.md) 会引导 Agent 根据你的现状继续：还没账号、已有 API Key、工具已经连接、已有项目，或准备从零做一个功能。Agent 会检查接口参数和价格，帮助实现接入，并分别说明配置、真实调用和功能验证的完成情况。告诉它开发目标和费用限制，不要把 Key 发到聊天里。
+
+已经有 Key 或项目就直接说明，不必重新开始。例如：“我已经有 SandBase Key，请在这个项目中加入 Similarweb 网站流量查询，先检查接口并说明付费实测的费用。”如果助手不能执行命令或加载工具，请按[对应客户端的接入说明](/setup/)操作。
+
+可以把 [Markdown Quickstart](https://www.sandbase.ai/quickstart.md) 直接交给 Agent，也可以按下方步骤注册、在网页试用、直接调用 API 或搭建托管 Agent。安装 setup Skill 本身不会创建托管 Agent。
+
 <QuickstartOnboard locale="zh" />
 
 ## 1. 注册账号 {#create-account}
@@ -91,7 +105,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 适合已经在用 Claude Code、Codex、Cursor、Kiro 或其他受支持客户端，希望在这个应用里直接使用 SandBase 的 Models 和 APIs。
 
 1. 打开 Console 的 [Build → AI tools](https://www.sandbase.ai/console/setup){target="_blank"}。
-2. 把这一行粘贴给你的 agent：
+2. 把这一行粘贴到你的 AI 助手聊天框，再告诉它要开发什么：
 
    ```text
    set up https://www.sandbase.ai/SKILL.md
@@ -99,7 +113,7 @@ curl https://api.sandbase.ai/v1/chat/completions \
 
 3. 在 agent 打开的浏览器页面里批准登录，不需要粘贴 API key。
 4. 新开一个会话或重启应用，让 SandBase 工具加载。
-5. 发起一次安全的工具请求。
+5. 让 Agent 先发现并检查相关接口，再在你的授权和预算内完成一次小规模请求。如果是开发任务，让它把返回结果接入项目，并提供启动命令和实际测试结果；仅完成接口发现不代表业务调用成功。
 
 更习惯终端？运行 `npx -y @sandbaseai/cli@latest connect`。接入后工具可以搜索整个目录，调用费用记在当前 workspace。
 
