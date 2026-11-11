@@ -29,7 +29,7 @@ Every new organization starts at **Bronze**, with a limit of 2 concurrent tasks.
 | Bronze | Default | 2 |
 | Silver | $10 or more | 10 |
 | Gold | $100 or more | 100 |
-| Ultra | $500 or more | 500 |
+| Platinum | $500 or more | 500 |
 | Diamond | Contact sales | Unlimited |
 
 - **Single top-up, not a running total.** Two $60 top-ups keep you at Silver. One $100 top-up moves you to Gold.
