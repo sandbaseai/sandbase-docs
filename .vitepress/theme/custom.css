@@ -15,7 +15,7 @@
    editorial "pixel poster": near-zero radius, hairline borders, a violet
    (light) / lime (dark) accent, and monospace uppercase micro-labels. */
 :root {
-  --sb-canvas: #f7f7f8;
+  --sb-canvas: #ffffff;          /* = sandbase-fe light --color-canvas */
   --sb-surface: #ffffff;
   --sb-surface-alt: #f0f0f2;
   --sb-line: #e4e4e7;
