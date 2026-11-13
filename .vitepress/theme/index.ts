@@ -10,6 +10,7 @@ import DocsSearch from './DocsSearch.vue'
 import ChatwootWidget from './ChatwootWidget.vue'
 import DocsSectionTabs from './DocsSectionTabs.vue'
 import TutorialCopyAction from './TutorialCopyAction.vue'
+import { pageView, startAnalytics } from './analytics'
 import './custom.css'
 
 export default {
@@ -28,7 +29,17 @@ export default {
       'layout-bottom': () => [h(SiteFooter), h(ChatwootWidget)],
     })
   },
-  enhanceApp({ app }) {
+  enhanceApp({ app, router }) {
+    // K02 analytics: same GA4 property, PostHog project, consent and
+    // first-touch attribution as the main site. Route views after start.
+    if (typeof window !== 'undefined') {
+      const previous = router.onAfterRouteChange
+      router.onAfterRouteChange = (to) => {
+        void previous?.(to)
+        pageView()
+      }
+      startAnalytics()
+    }
     app.component('SandboxPlayground', defineAsyncComponent(() => import('./SandboxPlayground.vue')))
     app.component('HomePage', HomePage)
     app.component('ApiReferencePage', ApiReferencePage)
