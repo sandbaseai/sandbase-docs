@@ -4,85 +4,102 @@ import { useRoute } from 'vitepress'
 import BrandMark from './BrandMark.vue'
 
 /**
- * Replica of the sandbase.ai site header: Store / Build / Lab ↗ / Docs / Pricing.
- * Markup and behaviour mirror sandbase-fe/src/components/site-header.tsx;
- * styling below is ported from site-header.module.css. Product links point at
- * the main site; "Docs" stays on this docs site. The campaign strip and the
- * signed-in balance are omitted: both need main-site APIs.
+ * Replica of the sandbase.ai site header:
+ * Models ▾ / APIs / Skills / Agents / Docs / Pricing / Resources ▾.
+ * Markup, menu content and behaviour mirror sandbase-fe
+ * src/components/site-header.tsx and src/content/site-navigation.ts; styling
+ * below is ported from site-header.module.css. Keep the three in sync when the
+ * main-site navigation changes. Product links point at the main site; "Docs"
+ * stays on this docs site. The first-top-up strip and the signed-in balance and
+ * account menu are omitted because they need main-site APIs; signed-in visitors
+ * get a Console link instead.
  */
 const SITE = 'https://www.sandbase.ai'
 const loginHref = `${SITE}/login`
 const consoleHref = `${SITE}/console`
 
-const exploreGroups = [
+/** Header Models menu: the two kinds of model side by side. */
+const modelMenu = [
   {
-    label: 'Models',
-    items: [
-      { label: 'Language Models', description: 'Explore text, reasoning and coding models', href: `${SITE}/models` },
-      { label: 'Image/Video Models', description: 'Discover visual generation and vision models', href: `${SITE}/models/image-video` },
-    ],
+    key: 'llm',
+    eyebrow: 'Language models',
+    label: 'LLMs',
+    href: `${SITE}/models`,
+    cta: 'Browse LLMs',
+    description: 'Chat, reasoning and coding. Claude, GPT, Gemini, DeepSeek and Qwen on one OpenAI-compatible API.',
+    logos: ['openai.svg', 'anthropic.svg', 'google.svg', 'deepseek.svg', 'qwen.svg', 'moonshotai.ico'].map(
+      (file) => `${SITE}/images/provider-logos/${file}`,
+    ),
+    thumbs: [] as string[],
   },
   {
-    label: 'Building Blocks',
-    items: [
-      { label: 'APIs', description: 'Connect search, data and SaaS capabilities', href: `${SITE}/apis` },
-      { label: 'Skills', description: 'Add reusable instructions to your Agents', href: `${SITE}/skills` },
-    ],
+    key: 'media',
+    eyebrow: 'Generative media',
+    label: 'Image & video',
+    href: `${SITE}/models/image-video`,
+    cta: 'Browse image & video',
+    description: 'Text to image, image editing, text and image to video. Seedance, Kling, Wan, GPT Image and Nano Banana.',
+    logos: [] as string[],
+    thumbs: ['thumb-lanterns.webp', 'poster-golden-tree.webp', 'poster-fox.webp'].map(
+      (file) => `${SITE}/images/home/${file}`,
+    ),
   },
 ]
 
-/** Build menu: from plugging tools into an existing agent to running Agents in production. */
-const buildGroups = [
-  {
-    label: 'Connect & build',
-    items: [
-      { label: 'Use in AI Tools', description: 'Give Claude Code, Codex or Cursor the whole catalog', href: `${SITE}/solutions/use-in-ai-tools` },
-      { label: 'Agents', description: 'Your personal Agent, OpenAI Agents API compatible', href: `${SITE}/agents` },
-      { label: 'Sandbox', description: 'Run code and work with files for each task', href: `${SITE}/sandbox` },
-    ],
-  },
+/** Top-level links between Models and Docs. */
+const productLinks = [
+  { label: 'APIs', href: `${SITE}/apis` },
+  { label: 'Skills', href: `${SITE}/skills` },
+  { label: 'Agents', href: `${SITE}/agents` },
+]
+
+const resourceLinks = [
+  { label: 'Use in AI Tools', description: 'Give Claude Code, Codex or Cursor the whole catalog', href: `${SITE}/solutions/use-in-ai-tools`, external: false },
+  { label: 'Open source', description: 'SDKs, CLI and working examples', href: `${SITE}/open-source`, external: false },
+  { label: 'Influence', description: 'Creator and partner program', href: `${SITE}/affiliate`, external: false },
+  // Lab is a separate app on this origin; the arrow says it leaves the main site.
+  { label: 'Lab', description: 'Trending AI use cases, ready to run', href: `${SITE}/lab/`, external: true },
 ]
 
 const route = useRoute()
-
-const exploreOpen = ref(false)
-const solutionOpen = ref(false)
+const modelsOpen = ref(false)
+const resourcesOpen = ref(false)
 const drawerOpen = ref(false)
-const mobileExploreOpen = ref(false)
-const mobileSolutionOpen = ref(false)
+const mobileModelsOpen = ref(false)
+const mobileResourcesOpen = ref(false)
 const loggedIn = ref(false)
+let modelsTimer: ReturnType<typeof setTimeout> | null = null
 
-let exploreTimer: ReturnType<typeof setTimeout> | null = null
-let solutionTimer: ReturnType<typeof setTimeout> | null = null
-
-function openExplore() {
-  if (exploreTimer) clearTimeout(exploreTimer)
-  solutionOpen.value = false
-  exploreOpen.value = true
+function openModels() {
+  if (modelsTimer) clearTimeout(modelsTimer)
+  resourcesOpen.value = false
+  modelsOpen.value = true
 }
-function scheduleExploreClose() {
-  if (exploreTimer) clearTimeout(exploreTimer)
-  exploreTimer = setTimeout(() => (exploreOpen.value = false), 200)
+function scheduleModelsClose() {
+  if (modelsTimer) clearTimeout(modelsTimer)
+  modelsTimer = setTimeout(() => (modelsOpen.value = false), 240)
 }
-function openSolution() {
-  if (solutionTimer) clearTimeout(solutionTimer)
-  exploreOpen.value = false
-  solutionOpen.value = true
-}
-function scheduleSolutionClose() {
-  if (solutionTimer) clearTimeout(solutionTimer)
-  solutionTimer = setTimeout(() => (solutionOpen.value = false), 200)
+function toggleResources() {
+  modelsOpen.value = false
+  resourcesOpen.value = !resourcesOpen.value
 }
 function closeMenus() {
-  exploreOpen.value = false
-  solutionOpen.value = false
+  modelsOpen.value = false
+  resourcesOpen.value = false
+}
+function closeDrawer() {
+  drawerOpen.value = false
 }
 
 function onKeydown(event: KeyboardEvent) {
   if (event.key === 'Escape') {
     closeMenus()
-    drawerOpen.value = false
+    closeDrawer()
   }
+}
+function onPointerDown(event: PointerEvent) {
+  const target = event.target as Element | null
+  if (!target?.closest('.sh-explore, .sh-solution')) closeMenus()
 }
 
 function syncAuthState() {
@@ -95,7 +112,6 @@ function syncAuthState() {
     loggedIn.value = false
   }
 }
-
 function onVisibilityChange() {
   if (document.visibilityState === 'visible') syncAuthState()
 }
@@ -104,10 +120,9 @@ watch(
   () => route.path,
   () => {
     closeMenus()
-    drawerOpen.value = false
+    closeDrawer()
   },
 )
-
 watch(drawerOpen, (open) => {
   if (typeof document === 'undefined') return
   document.body.style.overflow = open ? 'hidden' : ''
@@ -116,6 +131,7 @@ watch(drawerOpen, (open) => {
 onMounted(() => {
   syncAuthState()
   document.addEventListener('keydown', onKeydown)
+  document.addEventListener('pointerdown', onPointerDown)
   document.addEventListener('visibilitychange', onVisibilityChange)
   window.addEventListener('focus', syncAuthState)
   window.addEventListener('pageshow', syncAuthState)
@@ -123,10 +139,12 @@ onMounted(() => {
 })
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', onKeydown)
+  document.removeEventListener('pointerdown', onPointerDown)
   document.removeEventListener('visibilitychange', onVisibilityChange)
   window.removeEventListener('focus', syncAuthState)
   window.removeEventListener('pageshow', syncAuthState)
   window.removeEventListener('storage', syncAuthState)
+  if (modelsTimer) clearTimeout(modelsTimer)
   if (typeof document !== 'undefined') document.body.style.overflow = ''
 })
 </script>
@@ -140,70 +158,60 @@ onBeforeUnmount(() => {
       </a>
 
       <nav class="sh-desktop-nav" aria-label="Primary navigation">
-        <div class="sh-explore" @mouseenter="openExplore" @mouseleave="scheduleExploreClose">
-          <a class="sh-nav-link" :href="`${SITE}/models`" target="_self">Store</a>
+        <div class="sh-explore" @mouseenter="openModels" @mouseleave="scheduleModelsClose">
+          <a class="sh-nav-link" :href="`${SITE}/models`" target="_self">Models</a>
           <button
             type="button"
             class="sh-explore-trigger"
-            aria-label="Toggle Store menu"
+            aria-label="Toggle Models menu"
             aria-haspopup="menu"
-            :aria-expanded="exploreOpen"
-            @click="exploreOpen ? closeMenus() : openExplore()"
+            aria-controls="sh-models-menu"
+            :aria-expanded="modelsOpen"
+            @click="modelsOpen ? closeMenus() : openModels()"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
-          <div v-show="exploreOpen" class="sh-explore-menu" role="menu" aria-label="Store" @mouseenter="openExplore" @mouseleave="scheduleExploreClose">
-            <section v-for="group in exploreGroups" :key="group.label">
-              <p>{{ group.label }}</p>
-              <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" role="menuitem">
-                <strong>{{ item.label }}</strong>
-                <span>{{ item.description }}</span>
-              </a>
-            </section>
-            <footer>Everything your Agent needs, in one place.</footer>
+          <div v-show="modelsOpen" id="sh-models-menu" class="sh-models-menu" role="menu" aria-label="Models">
+            <a v-for="card in modelMenu" :key="card.key" class="sh-model-card" :href="card.href" target="_self" role="menuitem">
+              <span class="sh-model-eyebrow">{{ card.eyebrow }}</span>
+              <strong>{{ card.label }}</strong>
+              <span class="sh-model-description">{{ card.description }}</span>
+              <span v-if="card.logos.length" class="sh-model-logos" aria-hidden="true">
+                <img v-for="src in card.logos" :key="src" :src="src" alt="" width="18" height="18" decoding="async" />
+              </span>
+              <span v-else class="sh-model-thumbs" aria-hidden="true">
+                <img v-for="src in card.thumbs" :key="src" :src="src" alt="" decoding="async" />
+              </span>
+              <span class="sh-model-cta">{{ card.cta }} <span aria-hidden="true">→</span></span>
+            </a>
           </div>
         </div>
-
-        <div class="sh-solution" @mouseenter="openSolution" @mouseleave="scheduleSolutionClose">
+        <a v-for="link in productLinks" :key="link.href" class="sh-nav-link" :href="link.href" target="_self">{{ link.label }}</a>
+        <a class="sh-nav-link" href="/docs/" data-active>Docs</a>
+        <a class="sh-nav-link" :href="`${SITE}/pricing`" target="_self">Pricing</a>
+        <div class="sh-solution">
           <button
             type="button"
             class="sh-solution-trigger"
-            aria-haspopup="menu"
-            :aria-expanded="solutionOpen"
-            @click="solutionOpen ? closeMenus() : openSolution()"
+            aria-controls="sh-resources-menu"
+            :aria-expanded="resourcesOpen"
+            @click="toggleResources"
           >
-            Build
+            Resources
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
-          <div v-show="solutionOpen" class="sh-solution-menu" role="menu" aria-label="Build" @mouseenter="openSolution" @mouseleave="scheduleSolutionClose">
-            <section v-for="group in buildGroups" :key="group.label">
-              <p>{{ group.label }}</p>
-              <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" role="menuitem">
-                <strong>{{ item.label }}</strong>
-                <span>{{ item.description }}</span>
-              </a>
-            </section>
-            <footer>From one tool call to an Agent in production.</footer>
+          <div v-show="resourcesOpen" id="sh-resources-menu" class="sh-resources-menu">
+            <a v-for="item in resourceLinks" :key="item.href" :href="item.href" target="_self" @click="closeMenus">
+              <strong>{{ item.label }}<span v-if="item.external" aria-hidden="true"> ↗</span></strong>
+              <span>{{ item.description }}</span>
+            </a>
           </div>
         </div>
-
-        <!-- Lab is a separate site: full navigation, marked as leaving the main site. -->
-        <a class="sh-nav-link sh-lab-link" :href="`${SITE}/lab/`" target="_self" aria-label="Lab (separate site)">Lab<span class="sh-external-mark" aria-hidden="true">↗</span></a>
-        <a class="sh-nav-link" href="/docs/">Docs</a>
-        <a class="sh-nav-link" :href="`${SITE}/pricing`" target="_self">Pricing</a>
       </nav>
 
       <div class="sh-actions">
-        <a class="sh-github" :href="`https://github.com/sandbaseai`" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" /></svg>
-        </a>
-        <template v-if="loggedIn">
-          <a class="sh-console" :href="consoleHref" target="_self">Console</a>
-        </template>
-        <template v-else>
-          <a class="sh-signin" :href="loginHref" target="_self">Sign in</a>
-          <a class="sh-start" :href="loginHref" target="_self">Start building</a>
-        </template>
+        <a v-if="loggedIn" class="sh-console" :href="consoleHref" target="_self">Console</a>
+        <a v-else class="sh-start" :href="loginHref" target="_self">Start building</a>
       </div>
 
       <button
@@ -218,41 +226,35 @@ onBeforeUnmount(() => {
     </div>
 
     <div v-if="drawerOpen" class="sh-drawer-root" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-      <button type="button" class="sh-backdrop" aria-label="Close menu" @click="drawerOpen = false" />
+      <button type="button" class="sh-backdrop" aria-label="Dismiss navigation" tabindex="-1" @click="closeDrawer" />
       <div class="sh-drawer">
+        <div class="sh-drawer-close-row">
+          <button type="button" class="sh-drawer-close" aria-label="Close navigation panel" @click="closeDrawer">×</button>
+        </div>
         <nav class="sh-mobile-nav" aria-label="Mobile navigation">
-          <button type="button" class="sh-mobile-expand" :aria-expanded="mobileExploreOpen" @click="mobileExploreOpen = !mobileExploreOpen">
-            Store
+          <button type="button" class="sh-mobile-expand" :aria-expanded="mobileModelsOpen" @click="mobileModelsOpen = !mobileModelsOpen">
+            Models
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
-          <div v-if="mobileExploreOpen" class="sh-mobile-sublinks">
-            <template v-for="group in exploreGroups" :key="group.label">
-              <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" @click="drawerOpen = false">{{ item.label }}</a>
-            </template>
+          <div v-if="mobileModelsOpen" class="sh-mobile-sublinks">
+            <a v-for="card in modelMenu" :key="card.key" :href="card.href" target="_self" @click="closeDrawer">{{ card.label }}</a>
           </div>
-
-          <button type="button" class="sh-mobile-expand" :aria-expanded="mobileSolutionOpen" @click="mobileSolutionOpen = !mobileSolutionOpen">
-            Build
+          <a v-for="link in productLinks" :key="link.href" class="sh-mobile-link" :href="link.href" target="_self" @click="closeDrawer">{{ link.label }}</a>
+          <a class="sh-mobile-link" href="/docs/" data-active @click="closeDrawer">Docs</a>
+          <a class="sh-mobile-link" :href="`${SITE}/pricing`" target="_self" @click="closeDrawer">Pricing</a>
+          <button type="button" class="sh-mobile-expand" :aria-expanded="mobileResourcesOpen" @click="mobileResourcesOpen = !mobileResourcesOpen">
+            Resources
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
-          <div v-if="mobileSolutionOpen" class="sh-mobile-solution">
-            <section v-for="group in buildGroups" :key="group.label">
-              <p>{{ group.label }}</p>
-              <a v-for="item in group.items" :key="item.href" :href="item.href" target="_self" @click="drawerOpen = false">{{ item.label }}</a>
-            </section>
+          <div v-if="mobileResourcesOpen" class="sh-mobile-sublinks">
+            <a v-for="item in resourceLinks" :key="item.href" :href="item.href" target="_self" @click="closeDrawer">
+              {{ item.label }}<span v-if="item.external" aria-hidden="true">&nbsp;↗</span>
+            </a>
           </div>
-
-          <a class="sh-mobile-link sh-lab-link" :href="`${SITE}/lab/`" target="_self" aria-label="Lab (separate site)" @click="drawerOpen = false">Lab<span class="sh-external-mark" aria-hidden="true">↗</span></a>
-          <a class="sh-mobile-link" href="/docs/" @click="drawerOpen = false">Docs</a>
-          <a class="sh-mobile-link" :href="`${SITE}/pricing`" target="_self" @click="drawerOpen = false">Pricing</a>
         </nav>
         <div class="sh-drawer-actions">
-          <a class="sh-signin" href="https://github.com/sandbaseai" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a v-if="loggedIn" class="sh-signin" :href="consoleHref" target="_self" @click="drawerOpen = false">Console</a>
-          <template v-else>
-            <a class="sh-signin" :href="loginHref" target="_self" @click="drawerOpen = false">Sign in</a>
-            <a class="sh-start" :href="loginHref" target="_self" @click="drawerOpen = false">Start building</a>
-          </template>
+          <a v-if="loggedIn" class="sh-console" :href="consoleHref" target="_self" @click="closeDrawer">Console</a>
+          <a v-else class="sh-start" :href="loginHref" target="_self" @click="closeDrawer">Start building</a>
         </div>
       </div>
     </div>
@@ -267,7 +269,6 @@ onBeforeUnmount(() => {
   width: 100%;
   background: var(--color-canvas);
 }
-
 .sh-bar {
   position: relative;
   display: grid;
@@ -279,6 +280,7 @@ onBeforeUnmount(() => {
   padding: 0 1.25rem;
 }
 
+/* Logo. */
 .sh-logo {
   display: inline-flex;
   grid-column: 1;
@@ -306,13 +308,14 @@ onBeforeUnmount(() => {
   line-height: 1.1;
 }
 
+/* Primary navigation. */
 .sh-desktop-nav {
   display: flex;
   grid-column: 2;
   align-items: center;
   gap: 1.75rem;
+  font-family: var(--font-family-brand);
 }
-
 .sh-nav-link,
 .sh-solution-trigger {
   color: var(--color-ink);
@@ -325,16 +328,19 @@ onBeforeUnmount(() => {
   transition: color 150ms ease;
 }
 .sh-nav-link:hover,
+.sh-nav-link[data-active],
 .sh-solution-trigger:hover,
 .sh-solution-trigger[aria-expanded='true'] {
   color: var(--color-accent);
 }
-
 .sh-explore {
   position: relative;
   display: flex;
   align-items: center;
   gap: 0.25rem;
+}
+.sh-explore:has(.sh-explore-trigger[aria-expanded='true']) > .sh-nav-link {
+  color: var(--color-accent);
 }
 .sh-solution {
   position: relative;
@@ -379,34 +385,36 @@ onBeforeUnmount(() => {
   stroke-width: 2;
   transition: transform 150ms ease;
 }
+.sh-solution-trigger svg {
+  color: var(--color-ink-muted);
+  transition: transform 150ms ease, color 150ms ease;
+}
+.sh-solution-trigger:hover svg,
+.sh-solution-trigger[aria-expanded='true'] svg {
+  color: var(--color-accent);
+}
 .sh-explore-trigger[aria-expanded='true'] svg,
 .sh-solution-trigger[aria-expanded='true'] svg {
   transform: rotate(180deg);
 }
 
-.sh-explore-menu,
-.sh-solution-menu {
+/* Models menu: LLMs and image & video side by side. */
+.sh-models-menu {
   position: absolute;
   top: calc(100% + 0.75rem);
+  left: -1.5rem;
+  z-index: 40;
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  width: min(40rem, calc(100vw - 2rem));
   padding: 0.75rem;
-  background: var(--color-surface);
-  border-radius: 0;
+  border: 1px solid var(--color-line);
+  background: var(--color-sheet);
   box-shadow: var(--shadow-float);
 }
-.sh-explore-menu {
-  left: -1.25rem;
-  width: min(38rem, calc(100vw - 2rem));
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.sh-solution-menu {
-  left: 50%;
-  width: min(24rem, calc(100vw - 2rem));
-  grid-template-columns: minmax(0, 1fr);
-  transform: translateX(-50%);
-}
-.sh-explore-menu::before,
-.sh-solution-menu::before {
+/* An invisible bridge so the pointer can cross the gap to the panel. */
+.sh-models-menu::before {
   position: absolute;
   right: 0;
   bottom: 100%;
@@ -414,95 +422,129 @@ onBeforeUnmount(() => {
   height: 0.75rem;
   content: '';
 }
-.sh-explore-menu section + section,
-.sh-solution-menu section + section {
-  padding-left: 0.75rem;
-  margin-left: 0.75rem;
-  border-left: 1px solid var(--color-line);
-}
-.sh-explore-menu section > p,
-.sh-solution-menu section > p {
-  margin: 0 0 0.25rem;
-  padding: 0.25rem 0.75rem 0.5rem;
-  color: var(--color-ink-subtle);
-  font-family: var(--font-family-mono);
-  font-size: var(--type-mono-xs);
-  letter-spacing: 0.09em;
-  line-height: 1.5rem;
-  text-transform: uppercase;
-}
-.sh-explore-menu a,
-.sh-solution-menu a {
-  display: grid;
+.sh-model-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
   min-width: 0;
-  gap: 0.25rem;
-  align-content: center;
-  padding: 0.75rem;
-  border-radius: 0;
+  padding: 1rem;
   color: var(--color-ink);
+  font-family: var(--font-family-body);
   text-decoration: none;
   transition: background-color 150ms ease;
 }
-.sh-explore-menu a:hover,
-.sh-explore-menu a:focus-visible,
-.sh-solution-menu a:hover,
-.sh-solution-menu a:focus-visible {
+.sh-model-card:hover,
+.sh-model-card:focus-visible {
   outline: none;
   background: var(--color-canvas);
 }
-.sh-explore-menu strong,
-.sh-solution-menu strong {
-  font-size: 1rem;
+.sh-model-card:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--color-accent);
+}
+.sh-model-eyebrow {
+  color: var(--color-accent);
+  font: 500 0.6875rem/1.4 var(--font-family-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sh-model-card strong {
+  font-family: var(--font-family-brand);
+  font-size: 1.25rem;
   font-weight: 500;
-  letter-spacing: 0.01em;
-  line-height: 1.5rem;
-  color: var(--color-ink);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
 }
-.sh-explore-menu span,
-.sh-solution-menu span {
-  min-width: 0;
+.sh-model-description {
   color: var(--color-ink-muted);
-  font-size: 0.90625rem;
-  line-height: 1.375rem;
-  white-space: normal;
-  overflow-wrap: anywhere;
+  font-size: 0.84375rem;
+  line-height: 1.45;
 }
-.sh-explore-menu footer,
-.sh-solution-menu footer {
-  grid-column: 1 / -1;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--color-line);
-  color: var(--color-ink-subtle);
-  font-family: var(--font-family-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.02em;
+.sh-model-logos {
+  display: flex;
+  gap: 0.375rem;
+  margin-top: 0.375rem;
+}
+.sh-model-logos img {
+  box-sizing: content-box;
+  width: 18px;
+  height: 18px;
+  padding: 6px;
+  border: 1px solid var(--color-line);
+  background: #fff;
+  object-fit: contain;
+}
+.sh-model-thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.3125rem;
+  margin-top: 0.375rem;
+}
+.sh-model-thumbs img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.sh-model-cta {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  color: var(--color-ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.sh-model-card:hover .sh-model-cta {
+  color: var(--color-accent);
 }
 
+/* Resources menu. */
+.sh-resources-menu {
+  position: absolute;
+  top: calc(100% + 18px);
+  right: 0;
+  z-index: 40;
+  width: 290px;
+  padding: 10px;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  background: var(--color-sheet);
+  box-shadow: 0 14px 36px #00000012;
+}
+.sh-resources-menu a {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 6px;
+  color: var(--color-ink);
+  font-family: var(--font-family-body);
+  text-decoration: none;
+}
+.sh-resources-menu a:hover,
+.sh-resources-menu a:focus-visible {
+  background: var(--color-canvas);
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+.sh-resources-menu strong {
+  font-size: 16px;
+  font-weight: 500;
+}
+.sh-resources-menu span {
+  color: var(--color-ink-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.sh-resources-menu strong span {
+  color: inherit;
+  font-size: inherit;
+}
+
+/* Right-hand actions. */
 .sh-actions {
   display: flex;
   grid-column: 3;
   align-items: center;
   gap: 1.25rem;
   justify-self: end;
-}
-.sh-github {
-  display: flex;
-  align-items: center;
-  color: var(--color-ink);
-  transition: color 150ms ease;
-}
-.sh-github:hover {
-  color: var(--color-accent);
-}
-.sh-signin {
-  color: var(--color-ink-muted);
-  font-size: 1rem;
-  text-decoration: none;
-  transition: color 150ms ease;
-}
-.sh-signin:hover {
-  color: var(--color-ink);
 }
 .sh-start {
   display: inline-flex;
@@ -511,6 +553,7 @@ onBeforeUnmount(() => {
   padding: 0.625rem 1.125rem 0.625rem 1.25rem;
   background: var(--color-ink);
   color: var(--color-canvas);
+  font-family: var(--font-family-body);
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -536,60 +579,77 @@ onBeforeUnmount(() => {
 .sh-console:hover {
   background: var(--color-surface);
 }
-/* Lab is a separate same-origin app; the arrow says the link leaves the main site. */
-.sh-lab-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.2rem;
-}
-.sh-external-mark {
-  color: var(--color-ink-muted);
-  font-size: 0.75em;
-  line-height: 1;
-  transform: translateY(-0.1em);
-}
 
+/* Mobile trigger + drawer. */
 .sh-mobile-button {
   display: none;
   grid-column: 3;
-  height: 2.5rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
   align-items: center;
+  justify-content: center;
   justify-self: end;
   padding: 0;
   border: 0;
   background: transparent;
   color: var(--color-ink);
   font-family: var(--font-family-mono);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
 }
-
 .sh-drawer-root {
-  position: absolute;
+  position: fixed;
   z-index: 60;
-  top: var(--vp-nav-height);
-  right: 1rem;
-  left: 1rem;
+  inset: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom));
 }
 .sh-backdrop {
-  position: fixed;
+  position: absolute;
   inset: 0;
   border: 0;
-  background: transparent;
+  background: rgb(0 0 0 / 0.35);
 }
 .sh-drawer {
   position: relative;
   display: flex;
   width: 100%;
+  max-width: 28rem;
+  max-height: calc(100dvh - max(1rem, env(safe-area-inset-top)) - max(1rem, env(safe-area-inset-bottom)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
   flex-direction: column;
   padding: 0.5rem;
   background: var(--color-surface);
   box-shadow: var(--shadow-float);
 }
+.sh-drawer-close-row {
+  position: sticky;
+  top: -0.5rem;
+  z-index: 1;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  background: var(--color-surface);
+}
+.sh-drawer-close {
+  display: grid;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 1.75rem;
+  cursor: pointer;
+}
 .sh-mobile-nav {
   display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
 }
 .sh-mobile-link,
@@ -608,6 +668,9 @@ onBeforeUnmount(() => {
   text-align: left;
   text-decoration: none;
   cursor: pointer;
+}
+.sh-mobile-link[data-active] {
+  color: var(--color-accent);
 }
 .sh-mobile-expand {
   justify-content: space-between;
@@ -637,31 +700,8 @@ onBeforeUnmount(() => {
   line-height: 1.4375rem;
   text-decoration: none;
 }
-.sh-mobile-solution {
-  display: grid;
-  gap: 0.75rem;
-  padding: 0.25rem 1.25rem 0.75rem 1.75rem;
-}
-.sh-mobile-solution section > p {
-  margin: 0.4rem 0;
-  color: var(--color-ink-subtle);
-  font-family: var(--font-family-mono);
-  font-size: var(--type-mono-xs);
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-.sh-mobile-solution a {
-  display: flex;
-  min-height: 2.75rem;
-  align-items: center;
-  padding: 0.5rem 0.75rem;
-  color: var(--color-ink-muted);
-  font-size: 0.9375rem;
-  font-weight: 400;
-  line-height: 1.4375rem;
-  text-decoration: none;
-}
 .sh-drawer-actions {
+  flex: 0 0 auto;
   display: grid;
   gap: 0.75rem;
   margin-top: auto;
@@ -672,9 +712,6 @@ onBeforeUnmount(() => {
   min-height: 2.75rem;
   align-items: center;
   justify-content: center;
-}
-.sh-drawer-actions .sh-signin {
-  padding: 0.625rem 1rem;
 }
 
 *:focus-visible {
@@ -694,8 +731,6 @@ onBeforeUnmount(() => {
   }
   .sh-mobile-button {
     display: flex;
-    grid-column: 2;
-    justify-self: end;
   }
 }
 @media (min-width: 1024px) and (max-width: 1535px) {
