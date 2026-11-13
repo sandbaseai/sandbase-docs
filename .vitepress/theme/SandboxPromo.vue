@@ -15,7 +15,7 @@
   padding: 12px 16px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 0;
-  background: var(--vp-c-bg-soft);
+  background: var(--vp-c-bg);
   color: var(--vp-c-text-1);
 }
 .promo-label {
