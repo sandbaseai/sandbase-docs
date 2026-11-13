@@ -872,8 +872,18 @@ html {
   font-size: 14px;
 }
 
-.vp-doc tr:nth-child(2n) {
-  background: color-mix(in srgb, var(--vp-c-bg-soft) 58%, transparent);
+/* No gray fills: tables are ruled, not striped, and header cells sit on the
+   page canvas (API reference included). */
+.vp-doc tr:nth-child(2n),
+.vp-doc th {
+  background: transparent;
+}
+/* API reference inline code: plain mono text like the rest of the docs,
+   without VitePress's gray chip. */
+.vp-doc:has(.api-reference-page) :not(pre) > code {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .vp-doc th,

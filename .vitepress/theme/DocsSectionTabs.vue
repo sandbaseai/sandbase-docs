@@ -38,7 +38,7 @@ const tabs = [
   margin: 0 0 2rem;
   padding: 3px;
   border: 1px solid var(--color-line);
-  background: color-mix(in srgb, var(--vp-c-bg-soft) 72%, transparent);
+  background: var(--vp-c-bg);
 }
 
 .docs-section-tab {
