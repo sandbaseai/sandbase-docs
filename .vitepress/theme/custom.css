@@ -2262,20 +2262,22 @@ html {
   font-variant-numeric: tabular-nums;
 }
 
-/* Links: ink text with a hairline underline; accent on hover. */
+/* Links: accent text with an accent underline, like the main site's .prose a
+   (sandbase-fe globals.css). Ink text with a hairline gray underline was too
+   hard to tell apart from body copy, especially in table key columns. */
 .vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a) {
-  color: var(--sb-ink);
+  color: var(--sb-accent);
   font-weight: inherit;
   text-decoration-line: underline;
-  text-decoration-color: var(--sb-line);
+  text-decoration-color: color-mix(in srgb, var(--sb-accent) 45%, transparent);
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
   transition: color 150ms ease, text-decoration-color 150ms ease;
 }
 
 .vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a):hover {
-  color: var(--sb-accent);
-  text-decoration-color: var(--sb-accent);
+  color: var(--sb-accent-hover);
+  text-decoration-color: currentColor;
 }
 
 /* Inline code: plain mono text. No chip background or border; the mono face
@@ -2290,6 +2292,11 @@ html {
   font-family: var(--vp-font-family-mono);
   font-size: 0.875em;
   font-weight: 400;
+}
+/* Code inside a link takes the link color so linked identifiers read as links. */
+.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a) > code,
+.dark .vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a) > code {
+  color: inherit !important;
 }
 
 /* Tables: ruled, not boxed (design table block). */
