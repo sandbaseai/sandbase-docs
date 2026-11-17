@@ -74,23 +74,25 @@ Workers Static Assets. The Worker owns only `www.sandbase.ai/docs` and
 use the existing main-site origin.
 
 ```bash
-npm ci
-npm run build:cloudflare
-npx --yes wrangler@4.126.0 deploy
+npm run release:merge -- <validated-PR-number>
+# Recovery: publish an exact commit that is already on main.
+npm run deploy -- <40-character-main-SHA>
 ```
 
 The VitePress build keeps `/docs/` as its public base URL. A small Worker strips
 that prefix before reading the generated files from `.vitepress/dist`, while
-the configured routes ensure it never receives non-docs traffic. GitHub Actions
-deploys from tags matching `docs-v*` or a manual dispatch from `main`, using the
-protected `production` environment and these secrets:
+the configured routes ensure it never receives non-docs traffic. Source Actions
+validate main, pull requests and `docs-v*` tags without deployment credentials.
+Publishing is performed by `docs.yml` in the private
+`sandbase-lab/lab-production` repository. The commands above use the publisher's
+own `gh` identity, which must have write access to that controller. No controller
+write token is stored here. A tag or main push alone does not publish.
 
-- `CLOUDFLARE_API_TOKEN`, scoped to deploy the Worker and manage its routes in
-  the `sandbase.ai` zone
-
-The non-secret Cloudflare account ID is kept in the workflow so contributors
-do not need organization dashboard access merely to identify the deployment
-account.
+The controller builds and bundles on a runner without Cloudflare credentials,
+then verifies and publishes the passive Worker/assets package on a fresh runner.
+Its token is restricted to Editor on the existing `sandbase-docs` Worker. Routine
+releases upload and promote versions; they do not alter routes, DNS, or bindings
+to other products. See [DEPLOYMENT.md](DEPLOYMENT.md) for verification and rollback.
 
 The health check remains available at `https://www.sandbase.ai/docs/health`.
 
@@ -199,7 +201,7 @@ does not require the sibling checkout; if you are changing generated references,
 prepare the matching registry checkout first and run the generator before
 committing its outputs.
 
-The site is built with [VitePress](https://vitepress.dev). Production deployment is owned by this repository; see [DEPLOYMENT.md](DEPLOYMENT.md).
+The site is built with [VitePress](https://vitepress.dev). Production deployment is owned by the private `sandbase-lab/lab-production` controller; see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Contributing
 
