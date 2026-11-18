@@ -59,6 +59,10 @@ apiReference:
           type: object
           required: false
           description: Model credential. Omit to use your calling API key. {"type":"custom","base_url":"https://…","api_key":"…"} calls your own OpenAI-compatible endpoint. Write-only.
+        - name: github_workspace
+          type: object
+          required: false
+          description: 'GitHub repository to clone into /workspace for this Session: {"repository_id":"1195090324","ref":"main","connection_id":"plc_…"}. Only repository_id is required; ref defaults to the default branch. Omitted or null uses the Agent''s workspace repository, if any, and otherwise clones nothing. The repository must be within the Agent''s GitHub connection scope. See GitHub repository workspace (/agents/github-workspace).'
     - title: Session object
       description: Returned by create, get, update, rename, archive, and unarchive.
       fields:

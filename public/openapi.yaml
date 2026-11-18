@@ -4972,6 +4972,15 @@ components:
         metadata: { type: object, maxProperties: 16, additionalProperties: { type: string, maxLength: 512 } }
         stream: { type: boolean, default: false, description: "true requires a non-empty input and returns a 201 text/event-stream of the first turn." }
         model_provider: { $ref: '#/components/schemas/ModelProvider' }
+        github_workspace:
+          type: [object, 'null']
+          additionalProperties: false
+          required: [repository_id]
+          description: "GitHub repository to clone into /workspace for this Session. Omitted or null uses the Agent's workspace repository, if any, and otherwise clones nothing. The repository must be within the Agent's GitHub connection scope."
+          properties:
+            repository_id: { type: string, pattern: '^[0-9]+$', description: "GitHub numeric repository ID as a decimal string." }
+            ref: { type: string, maxLength: 200, description: "Branch to check out. Defaults to the repository's default branch." }
+            connection_id: { type: string, maxLength: 64, description: "GitHub connection to use. Defaults to the assignment with a workspace repository, or the Agent's only GitHub connection." }
     SessionFailure:
       type: object
       required: [code, message, action]

@@ -34,6 +34,7 @@ export const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Skills and MCP tools', link: '/agents/mcp-tools' },
       { text: 'MCP credentials', link: '/agents/api-credentials' },
       { text: 'Run Sessions', link: '/agents/sessions' },
+      { text: 'GitHub repository workspace', link: '/agents/github-workspace' },
       { text: 'OpenAI compatibility', link: '/agents/openai-compatibility' },
     ],
   },

@@ -107,6 +107,10 @@ curl -X POST https://api.sandbase.ai/v1/agents/sessions/ses_5b0e7c3a-91d2-5f4e-8
 
 Browser-style clients that need a consistent view after a dropped connection can call `POST /v1/agents/sessions/{session_id}/reconnect`. It returns the Session and a `stream_url` for `GET /v1/agents/sessions/{session_id}/events/stream`, which sends a `session.snapshot` first and then live events and `heartbeat`. If that stream emits `stream.interrupted`, reconnect again instead of resending input.
 
+## GitHub repository
+
+Send `github_workspace` on create to clone a GitHub repository into `/workspace` and let the Agent push to its own Session branches. See [GitHub repository workspace](/agents/github-workspace).
+
 ## Model credentials
 
 A Session calls models with the API key that created it unless you send `model_provider`. Use `{"type": "custom", "base_url": "https://…", "api_key": "…"}` to run against your own OpenAI-compatible HTTPS endpoint. `model_provider` is write-only.
