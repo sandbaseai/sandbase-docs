@@ -19,7 +19,7 @@ const tagline =
 type FooterLink = { href: string; label: string; external?: boolean; separate?: boolean }
 
 /* Mirrors sandbase-fe site-footer.tsx: Store and Build use the header's labels,
-   order and destinations (src/content/site-navigation.ts), then Resources. */
+   order and destinations (src/content/site-navigation.ts), then Resources and Company. */
 const footerSections: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Store',
@@ -35,19 +35,65 @@ const footerSections: { title: string; links: FooterLink[] }[] = [
     links: [
       { href: `${SITE}/solutions/use-in-ai-tools`, label: 'Use in AI Tools' },
       { href: `${SITE}/agents`, label: 'Agents' },
-      { href: `${SITE}/sandbox`, label: 'Sandbox' },
+      { href: '/docs/', label: 'Docs' },
+      { href: `${SITE}/open-source`, label: 'Open source' },
     ],
   },
   {
     title: 'Resources',
     links: [
-      { href: `${SITE}/lab/`, label: 'Lab', separate: true },
-      { href: '/docs/', label: 'Docs' },
       { href: `${SITE}/pricing`, label: 'Pricing' },
-      { href: 'https://blog.sandbase.ai/', label: 'Blog', external: true },
       { href: `${SITE}/models/compare`, label: 'Compare Models' },
+      { href: `${SITE}/free-tools`, label: 'Free Tools' },
+      { href: `${SITE}/agent-ecosystem`, label: 'Agent ecosystem' },
+      { href: `${SITE}/cli`, label: 'CLI' },
+      { href: `${SITE}/resources/hackathon-support`, label: 'Hackathon support' },
+      { href: 'https://blog.sandbase.ai/', label: 'Blog', external: true },
+      { href: `${SITE}/lab/`, label: 'Lab', separate: true },
     ],
   },
+  {
+    title: 'Company',
+    links: [
+      { href: contactSalesHref, label: 'Contact Sales' },
+      { href: `${SITE}/contact-sales?source=footer-provider`, label: 'Become a provider' },
+      { href: `${SITE}/affiliate`, label: 'Influence program' },
+    ],
+  },
+]
+/* Sitewide links to the collection landing pages; mirrors sandbase-fe directorySections.
+   Keep every target a published page: a footer link to a 404 is sitewide. */
+const m = (slug: string, label: string): FooterLink => ({ href: `${SITE}/models/${slug}`, label })
+const a = (slug: string, label: string): FooterLink => ({ href: `${SITE}/apis/${slug}`, label })
+const directorySections: { title: string; all: FooterLink; links: FooterLink[] }[] = [
+  { title: 'Data APIs', all: { href: `${SITE}/apis`, label: 'All APIs' }, links: [
+    a('social-media', 'Social Media APIs'), a('twitter', 'X (Twitter) API'), a('tiktok', 'TikTok API'),
+    a('chinese-social-media', 'Chinese Social Media APIs'), a('serp', 'SERP API'), a('seo', 'SEO & GEO APIs'),
+    a('keyword-research', 'Keyword Research APIs'), a('ecommerce', 'E-commerce APIs'), a('web-scraping', 'Web Scraping APIs'),
+    a('prediction-markets', 'Prediction Market APIs'),
+  ] },
+  { title: 'LLMs', all: { href: `${SITE}/models`, label: 'All language models' }, links: [
+    m('claude', 'Claude API'), m('gpt', 'GPT API'), m('gemini', 'Gemini API'), m('deepseek', 'DeepSeek API'), m('qwen', 'Qwen API'),
+    m('moonshotai', 'Kimi API'), m('z-ai', 'GLM API'), m('best-llms', 'Best LLMs'), m('coding-llms', 'LLMs for Coding'),
+    m('cheap-llms', 'Cheap & Fast LLMs'), m('chinese-llms', 'Chinese LLMs'), m('open-source-llms', 'Open-Source LLMs'),
+  ] },
+  { title: 'Video models', all: { href: `${SITE}/models/image-video`, label: 'All image & video models' }, links: [
+    m('kling-4-0', 'Kling 4.0 API'), m('kling-3-0', 'Kling 3.0 API'), m('kling', 'Kling API'),
+    m('seedance-2-5', 'Seedance 2.5 API'), m('seedance-2-0', 'Seedance 2.0 API'), m('seedance', 'Seedance API'),
+    m('veo-3-1', 'Veo 3.1 API'), m('veo', 'Veo API'), m('wan-3-0', 'Wan 3.0 API'), m('wan', 'Wan API'),
+    m('minimax-h3', 'MiniMax H3 API'), m('gemini-omni', 'Gemini Omni Flash API'), m('best-video-models', 'Best Video Models'),
+  ] },
+  { title: 'Image & 3D models', all: { href: `${SITE}/models/3d`, label: 'All 3D models' }, links: [
+    m('gpt-image-2-6', 'GPT Image 2.6 API'), m('gpt-image-2-5', 'GPT Image 2.5 API'), m('gpt-image', 'GPT Image API'),
+    m('nano-banana-2', 'Nano Banana 2 API'), m('nano-banana', 'Nano Banana API'), m('seedream', 'Seedream API'),
+    m('best-image-models', 'Best Image Models'), m('tripo', 'Tripo API'), m('meshy-3d', 'Meshy API'),
+  ] },
+  { title: 'AI tools', all: { href: `${SITE}/models/tasks`, label: 'Browse by task' }, links: [
+    m('text-to-video', 'Text to Video'), m('image-to-video', 'Image to Video'), m('reference-to-video', 'Reference to Video'),
+    m('video-to-video', 'Video Editing'), m('motion-control', 'Motion Control'), m('lip-sync', 'Lip Sync & Avatars'),
+    m('text-to-image', 'Text to Image'), m('image-editing', 'Image Editing'), m('upscaling', 'Image & Video Upscaling'),
+    m('text-to-speech', 'Text to Speech'), m('text-to-music', 'Music Generation'), m('3d', '3D Generation'),
+  ] },
 ]
 const socialLinks = [
   { href: 'https://github.com/sandbaseai', label: 'GitHub', icon: 'github' },
@@ -117,7 +163,6 @@ function chooseTheme(next: Theme) {
               </a>
             </li>
           </ul>
-          <a :href="contactSalesHref" target="_self" class="sf-link sf-contact-sales">Contact Sales<span aria-hidden="true"> →</span></a>
         </div>
 
         <nav aria-label="Footer" class="sf-nav">
@@ -139,6 +184,19 @@ function chooseTheme(next: Theme) {
         </nav>
       </div>
 
+      <nav aria-label="Popular pages" class="sf-directory">
+        <div v-for="section in directorySections" :key="section.title" class="sf-group">
+          <p class="sf-group-title">{{ section.title }}</p>
+          <ul>
+            <li v-for="item in section.links" :key="item.href">
+              <a :href="item.href" target="_self" class="sf-link">{{ item.label }}</a>
+            </li>
+            <li>
+              <a :href="section.all.href" target="_self" class="sf-link sf-all-link">{{ section.all.label }} <span aria-hidden="true">→</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <div class="sf-bottom">
         <div class="sf-legal">
           <p>© 2026 SandBase</p>
@@ -254,11 +312,6 @@ function chooseTheme(next: Theme) {
   flex: 0 0 auto;
   fill: currentColor;
 }
-.sf-contact-sales {
-  display: inline-flex;
-  align-items: center;
-  font-weight: 500;
-}
 .sf-link {
   color: var(--color-ink);
   font-size: 0.9375rem;
@@ -299,6 +352,29 @@ function chooseTheme(next: Theme) {
   margin-top: 3px;
   flex-direction: column;
   gap: 0.75rem;
+}
+.sf-directory {
+  display: grid;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-line);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2rem;
+  row-gap: 2rem;
+}
+.sf-directory .sf-group {
+  width: auto;
+}
+.sf-directory ul {
+  gap: 0.5rem;
+}
+.sf-directory .sf-link {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+}
+.sf-all-link {
+  color: var(--color-ink);
+  font-weight: 500;
 }
 .sf-bottom {
   display: flex;
@@ -390,6 +466,9 @@ function chooseTheme(next: Theme) {
   .sf-nav-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+  .sf-directory {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   .sf-bottom {
     flex-direction: row;
     align-items: center;
@@ -411,6 +490,9 @@ function chooseTheme(next: Theme) {
   }
   .sf-nav {
     justify-self: end;
+  }
+  .sf-directory {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 @media (prefers-reduced-motion: reduce) {
