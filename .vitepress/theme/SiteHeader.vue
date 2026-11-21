@@ -53,12 +53,36 @@ const productLinks = [
   { label: 'Agents', href: `${SITE}/agents` },
 ]
 
-const resourceLinks = [
-  { label: 'Use in AI Tools', description: 'Give Claude Code, Codex or Cursor the whole catalog', href: `${SITE}/solutions/use-in-ai-tools`, external: false },
-  { label: 'Open source', description: 'SDKs, CLI and working examples', href: `${SITE}/open-source`, external: false },
-  { label: 'Influence', description: 'Creator and partner program', href: `${SITE}/affiliate`, external: false },
-  // Lab is a separate app on this origin; the arrow says it leaves the main site.
-  { label: 'Lab', description: 'Trending AI use cases, ready to run', href: `${SITE}/lab/`, external: true },
+/**
+ * Header Resources menu, in four groups (sandbase-fe RESOURCE_GROUPS). `external`
+ * marks the Lab app and other sites (↗). Every link uses target="_self" so VitePress
+ * does a full page load (scripts/test-site-header.mjs).
+ */
+type ResourceLink = { label: string; description: string; href: string; external?: boolean; hot?: boolean }
+const resourceGroups: { label: string; items: ResourceLink[] }[] = [
+  { label: 'Products', items: [
+    { label: 'Use in AI Tools', description: 'Give Claude Code, Codex or Cursor the whole catalog', href: `${SITE}/solutions/use-in-ai-tools` },
+    { label: 'Free Tools', description: 'Background remover, headshots, logos, image and GIF tools, transcripts', href: `${SITE}/free-tools`, hot: true },
+    { label: 'Tools', description: 'Free tools plus live data lookups for social, commerce and finance', href: `${SITE}/tools` },
+    { label: 'Compare models', description: 'Prices and benchmarks, head to head', href: `${SITE}/models/compare` },
+    { label: 'Lab', description: 'Trending AI use cases, ready to run', href: `${SITE}/lab/`, external: true },
+  ] },
+  { label: 'Developers', items: [
+    { label: 'CLI / MCP', description: 'Connect 25 AI clients in one command', href: `${SITE}/cli` },
+    { label: 'MCP servers', description: 'Tool servers to attach to an Agent', href: `${SITE}/mcp-servers` },
+    { label: 'Open source', description: 'SDKs, CLI and working examples', href: `${SITE}/open-source` },
+    { label: 'Blog', description: 'Guides and engineering updates', href: 'https://blog.sandbase.ai/', external: true },
+  ] },
+  { label: 'Community', items: [
+    { label: 'Agent ecosystem', description: 'Runtimes, sandboxes, memory and more', href: `${SITE}/agent-ecosystem` },
+    { label: 'Hackathon support', description: 'Credits and help for AI Agent events', href: `${SITE}/resources/hackathon-support` },
+    { label: 'Discord', description: 'Ask questions and share what you build', href: 'https://discord.com/invite/4hXv2f5Q9f', external: true },
+  ] },
+  { label: 'Company', items: [
+    { label: 'Contact Sales', description: 'Volume pricing and enterprise needs', href: `${SITE}/contact-sales?source=resources-menu` },
+    { label: 'Become a provider', description: 'List your models or APIs on SandBase', href: `${SITE}/contact-sales?source=resources-provider` },
+    { label: 'Influence', description: 'Creator and partner program', href: `${SITE}/affiliate` },
+  ] },
 ]
 
 const route = useRoute()
@@ -201,10 +225,19 @@ onBeforeUnmount(() => {
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
           <div v-show="resourcesOpen" id="sh-resources-menu" class="sh-resources-menu">
-            <a v-for="item in resourceLinks" :key="item.href" :href="item.href" target="_self" @click="closeMenus">
-              <strong>{{ item.label }}<span v-if="item.external" aria-hidden="true"> ↗</span></strong>
-              <span>{{ item.description }}</span>
-            </a>
+            <div v-for="group in resourceGroups" :key="group.label" class="sh-resources-group" role="group" :aria-label="group.label">
+              <p class="sh-resources-group-label">{{ group.label }}</p>
+              <a
+                v-for="item in group.items"
+                :key="item.href"
+                :href="item.href"
+                target="_self"
+                @click="closeMenus"
+              >
+                <strong>{{ item.label }}<span v-if="item.hot" class="sh-hot">Hot</span><span v-if="item.external" aria-hidden="true"> ↗</span></strong>
+                <span>{{ item.description }}</span>
+              </a>
+            </div>
           </div>
         </div>
       </nav>
@@ -247,9 +280,18 @@ onBeforeUnmount(() => {
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
           <div v-if="mobileResourcesOpen" class="sh-mobile-sublinks">
-            <a v-for="item in resourceLinks" :key="item.href" :href="item.href" target="_self" @click="closeDrawer">
-              {{ item.label }}<span v-if="item.external" aria-hidden="true">&nbsp;↗</span>
-            </a>
+            <template v-for="group in resourceGroups" :key="group.label">
+              <p class="sh-mobile-group-label">{{ group.label }}</p>
+              <a
+                v-for="item in group.items"
+                :key="item.href"
+                :href="item.href"
+                target="_self"
+                @click="closeDrawer"
+              >
+                {{ item.label }}<span v-if="item.hot" class="sh-hot">Hot</span><span v-if="item.external" aria-hidden="true">&nbsp;↗</span>
+              </a>
+            </template>
           </div>
         </nav>
         <div class="sh-drawer-actions">
@@ -501,18 +543,52 @@ onBeforeUnmount(() => {
   top: calc(100% + 18px);
   right: 0;
   z-index: 40;
-  width: 290px;
-  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 18px;
+  width: 600px;
+  max-width: calc(100vw - 32px);
+  padding: 18px;
   border: 1px solid var(--color-line);
   border-radius: 10px;
   background: var(--color-sheet);
   box-shadow: 0 14px 36px #00000012;
 }
+.sh-resources-group {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+}
+.sh-resources-group-label,
+.sh-mobile-group-label {
+  margin: 0 0 4px;
+  padding: 0 12px;
+  color: var(--color-ink-muted);
+  font: 600 11px/1.6 var(--font-family-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sh-mobile-group-label {
+  margin: 12px 0 2px;
+  padding: 0;
+}
+.sh-hot {
+  display: inline-block;
+  margin-left: 0.45rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: #ff4d2e;
+  color: #fff !important;
+  font: 600 0.6875rem/1.2 var(--font-family-mono) !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: 0.15em;
+}
 .sh-resources-menu a {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 16px;
+  gap: 2px;
+  padding: 9px 12px;
   border-radius: 6px;
   color: var(--color-ink);
   font-family: var(--font-family-body);
@@ -525,13 +601,13 @@ onBeforeUnmount(() => {
   outline-offset: -2px;
 }
 .sh-resources-menu strong {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
 }
 .sh-resources-menu span {
   color: var(--color-ink-muted);
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.45;
 }
 .sh-resources-menu strong span {
   color: inherit;
