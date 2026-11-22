@@ -87,13 +87,15 @@ const copy = {
 }
 
 .resource-card:hover {
-  border-top-color: var(--qs-lime);
+  border-top-color: var(--vp-c-brand-1);
   background: transparent;
 }
 
 .dark .resource-card:hover {
   border-color: var(--qs-lime);
 }
+
+.resource-card:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 4px; }
 
 .resource-tag {
   width: fit-content;

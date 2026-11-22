@@ -1076,7 +1076,7 @@ html {
 /* Product documentation is editorial, not promotional. Use typography and
    underlines for hierarchy; reserve brand green for navigation state and
    genuine actions instead of painting every reference in the accent color. */
-.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor) {
+.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.quickstart-paths a) {
   color: color-mix(in srgb, var(--vp-c-text-1) 88%, transparent);
   font-weight: 500;
   text-decoration-line: underline;
@@ -1085,7 +1085,7 @@ html {
   text-underline-offset: 3px;
 }
 
-.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):hover {
+.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.quickstart-paths a):hover {
   color: var(--vp-c-text-1);
   text-decoration-color: var(--vp-c-text-1);
 }
@@ -1431,7 +1431,7 @@ html {
   margin: 24px 0 32px;
   border-collapse: separate;
   border-spacing: 0;
-  overflow: hidden;
+  overflow-x: auto;
   border: none;
   border-top: 2px solid var(--vp-c-divider);
   border-bottom: 1px solid var(--vp-c-divider);
@@ -2275,7 +2275,7 @@ html {
 /* Links: accent text with an accent underline, like the main site's .prose a
    (sandbase-fe globals.css). Ink text with a hairline gray underline was too
    hard to tell apart from body copy, especially in table key columns. */
-.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a) {
+.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a):not(.quickstart-paths a) {
   color: var(--sb-accent);
   font-weight: inherit;
   text-decoration-line: underline;
@@ -2285,7 +2285,7 @@ html {
   transition: color 150ms ease, text-decoration-color 150ms ease;
 }
 
-.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a):hover {
+.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a):not(.quickstart-paths a):hover {
   color: var(--sb-accent-hover);
   text-decoration-color: currentColor;
 }
@@ -2304,8 +2304,8 @@ html {
   font-weight: 400;
 }
 /* Code inside a link takes the link color so linked identifiers read as links. */
-.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a) > code,
-.dark .vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a) > code {
+.vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a):not(.quickstart-paths a) > code,
+.dark .vp-doc:not(:has(.api-reference-page)) a:not(.header-anchor):not(.onboard a):not(.resources a):not(.quickstart-paths a) > code {
   color: inherit !important;
 }
 
@@ -2744,4 +2744,24 @@ html {
 .dark .vp-doc div[class*='language-'],
 .dark .api-example-card {
   border-color: var(--color-line);
+}
+
+/* Quick Start: readable sections and contained tables on narrow screens. */
+.quickstart-page .vp-doc { overflow-wrap: anywhere; }
+.quickstart-page .vp-doc h2::before { background: var(--vp-c-brand-1); }
+.quickstart-page .vp-doc blockquote { border-left-color: var(--vp-c-brand-1); }
+.quickstart-page .vp-doc th,
+.quickstart-page .vp-doc td { padding-right: 20px; vertical-align: top; }
+.quickstart-page .vp-doc th:last-child,
+.quickstart-page .vp-doc td:last-child { padding-right: 4px; }
+.quickstart-page .vp-doc a:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 3px; }
+@media (max-width: 640px) {
+  .quickstart-page .vp-doc { font-size: 16px; line-height: 1.7; }
+  .quickstart-page .vp-doc h1 { font-size: 38px; letter-spacing: -.035em; }
+  .quickstart-page .vp-doc h2 { margin-top: 48px; padding-top: 20px; font-size: 24px; }
+  .quickstart-page .vp-doc h3 { margin-top: 32px; font-size: 20px; }
+  .quickstart-page .vp-doc table { display: block; max-width: 100%; overflow-x: auto; }
+  .quickstart-page .vp-doc th, .quickstart-page .vp-doc td { min-width: 112px; padding: 12px 16px 12px 0; font-size: 14px; }
+  .quickstart-page .vp-doc table td:last-child { min-width: 144px; }
+  .quickstart-page .vp-doc div[class*='language-'] { margin-inline: 0; }
 }
