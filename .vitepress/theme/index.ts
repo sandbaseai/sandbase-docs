@@ -4,6 +4,7 @@ import HomePage from './HomePage.vue'
 import ApiReferencePage from './ApiReferencePage.vue'
 import QuickstartOnboard from './QuickstartOnboard.vue'
 import QuickstartResources from './QuickstartResources.vue'
+import QuickstartPaths from './QuickstartPaths.vue'
 import SiteHeader from './SiteHeader.vue'
 import SiteFooter from './SiteFooter.vue'
 import DocsSearch from './DocsSearch.vue'
@@ -45,6 +46,7 @@ export default {
     app.component('ApiReferencePage', ApiReferencePage)
     app.component('QuickstartOnboard', QuickstartOnboard)
     app.component('QuickstartResources', QuickstartResources)
+    app.component('QuickstartPaths', QuickstartPaths)
 
     // Sync theme with the main site. sandbase-fe stores 'system' | 'light' | 'dark'
     // under localStorage 'theme' (src/theme/theme.ts); 'system' or no value follows the OS.

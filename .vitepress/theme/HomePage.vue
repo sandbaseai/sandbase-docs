@@ -7,7 +7,7 @@
         <h1 class="hero-title">Connect your Agent<br/>to the real world.</h1>
         <p class="hero-desc">Start with the path you need: add tools to your AI app, call Models and APIs directly, or build an Agent for repeatable work.</p>
         <div class="hero-actions">
-          <a href="https://www.sandbase.ai/console/setup" target="_self" class="btn-primary">Start with Setup</a>
+          <a href="/docs/getting-started/quickstart" class="btn-primary">Quick Start</a>
           <a href="https://www.sandbase.ai/apis" target="_self" class="btn-secondary">Browse APIs</a>
           <a href="/docs/api-reference/" class="btn-secondary">API Reference</a>
         </div>

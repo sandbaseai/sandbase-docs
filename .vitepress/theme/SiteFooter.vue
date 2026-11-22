@@ -42,6 +42,7 @@ const footerSections: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Resources',
     links: [
+      { href: '/docs/getting-started/quickstart', label: 'Quick Start' },
       { href: `${SITE}/pricing`, label: 'Pricing' },
       { href: `${SITE}/models/compare`, label: 'Compare Models' },
       { href: `${SITE}/free-tools`, label: 'Free Tools' },

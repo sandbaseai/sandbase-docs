@@ -61,6 +61,7 @@ const productLinks = [
 type ResourceLink = { label: string; description: string; href: string; external?: boolean; hot?: boolean }
 const resourceGroups: { label: string; items: ResourceLink[] }[] = [
   { label: 'Products', items: [
+    { label: 'Quick Start', description: 'Use the platform, call an API, or connect your Agent', href: `${SITE}/docs/getting-started/quickstart` },
     { label: 'Use in AI Tools', description: 'Give Claude Code, Codex or Cursor the whole catalog', href: `${SITE}/solutions/use-in-ai-tools` },
     { label: 'Free Tools', description: 'Background remover, headshots, logos, image and GIF tools, transcripts', href: `${SITE}/free-tools`, hot: true },
     { label: 'Tools', description: 'Free tools plus live data lookups for social, commerce and finance', href: `${SITE}/tools` },
