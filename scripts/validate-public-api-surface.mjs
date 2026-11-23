@@ -168,6 +168,12 @@ for (const [publicPath, pathItem] of Object.entries(openapiDocument.paths)) {
       assert.ok(!operation.responses['402'], `${method.toUpperCase()} ${publicPath} must not claim spending-limit rejection`)
       continue
     }
+    if (publicPath.startsWith('/tripo/v3/')) {
+      // The Tripo protocol reports balance and spending-limit rejections as 403 code 2010, never 402.
+      assert.ok(!operation.responses['402'], `${method.toUpperCase()} ${publicPath} must not claim a 402 response`)
+      assert.ok(operation.responses['403'], `${method.toUpperCase()} ${publicPath} must document spending-limit and scoped-key rejection`)
+      continue
+    }
     if (publicPath === '/v1/tasks/{task_id}/cost') {
       assert.ok(!operation.responses['402'], 'Task cost lookup must preserve its implemented spending-limit exception')
       assert.ok(operation.responses['403'], 'Task cost lookup must document scoped-key rejection')
