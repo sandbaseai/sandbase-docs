@@ -25,6 +25,8 @@ assert.deepEqual(await retired('/docs/model-api-reference/platform-apis/tiktok/a
 assert.deepEqual(await retired('/docs/model-api-reference/platform-apis/tiktok/analytics/detect-fake-views.html'), [301, 'https://www.sandbase.ai/apis/tiktok/analytics/detect-fake-views/docs'])
 assert.deepEqual(await retired('/docs/model-api-reference/llm-models/openai/gpt-5.5'), [301, 'https://www.sandbase.ai/models/openai/gpt-5.5/docs'])
 assert.deepEqual(await retired('/docs/model-api-reference/platform-apis'), [301, 'https://www.sandbase.ai/apis'])
+// A model page that still exists wins over the generic list (GSC-listed URLs, 2026-11-24).
+assert.deepEqual(await retired('/docs/model-api-reference/llm-models/google/gemma-4-31b-it'), [301, 'https://www.sandbase.ai/models/google/gemma-4-31b-it'])
 // Retired catalog and product pages.
 assert.deepEqual(await retired('/docs/store/'), [301, 'https://www.sandbase.ai/models'])
 assert.deepEqual(await retired('/docs/models/supported'), [301, 'https://www.sandbase.ai/models'])
