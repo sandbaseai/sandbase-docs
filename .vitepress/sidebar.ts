@@ -112,7 +112,6 @@ export const apiReferenceSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Generate Image', link: '/api-reference/images/generations' },
       { text: 'Edit Image', link: '/api-reference/images/edits' },
       { text: 'Seedance Video', link: '/api-reference/volcengine-contents-generations' },
-      { text: 'Tripo 3D', link: '/api-reference/tripo-v3' },
       { text: 'Media Assets', link: '/api-reference/models/assets' },
     ],
   },
