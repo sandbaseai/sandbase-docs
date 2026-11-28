@@ -5,17 +5,27 @@ description: Handle SandBase API rate limits safely with bounded retries, jitter
 
 # Rate limits
 
-SandBase can assign your organization a requests-per-minute limit. It is shared by every API key in the organization
-and counted over a one-minute sliding window. Upstream model providers can also return their own
-`429 Too Many Requests` responses. Do not hardcode a quota unless SandBase has assigned one to your workload.
+Your organization has requests-per-minute limits set by its [account level](/guides/concurrency-limits#default-limits).
+They are shared by every API key in the organization and counted over a one-minute sliding window. Upstream model
+providers can also return their own `429 Too Many Requests` responses.
 
-## Your organization's limit
-SandBase does not publish one fixed requests-per-minute number, because the limit is assigned per organization. Every
-API key in the organization counts toward the same limit, so creating more keys does not raise it. The limit is not
-currently shown in the public API or the Console.
+## Default limits by account level
 
-If your workload needs a guaranteed or higher limit, contact SandBase support with the organization, application,
-expected steady rate, and expected burst rate. Do not design a production client around an undocumented numeric default.
+Your level is set by your largest single paid top-up, as described in [Concurrency limits](/guides/concurrency-limits#default-limits).
+
+| Level | Single top-up | LLM requests / min | Image requests / min | Free models / min |
+|-------|---------------|--------------------|----------------------|-------------------|
+| Bronze | Default | 120 | 20 | 30 |
+| Silver | $10 or more | 600 | 60 | 60 |
+| Gold | $100 or more | 2,000 | 300 | 200 |
+| Platinum | $500 or more | 5,000 | 1,000 | 500 |
+| Diamond | Contact sales | No limit | No limit | No limit |
+
+- **LLM requests** count `POST /v1/chat/completions`, `POST /v1/responses`, `POST /v1/messages`, and the Gemini `generateContent` and `streamGenerateContent` endpoints, including image models called through Gemini `generateContent`.
+- **Image requests** count image models submitted through `POST /v1/run` and the OpenAI Images endpoints (`/v1/images/generations`, `/v1/images/edits`).
+- **Free models** are models whose ID ends in `:free`, such as `deepseek/deepseek-v4.1-flash:free`. They are counted separately from the LLM limit, and both apply. The paid model with the same ID minus `:free` has no free-model limit.
+- A limit SandBase has set for your organization replaces the default LLM limit. If your workload needs a higher limit, contact SandBase support with the organization, application, expected steady rate, and expected burst rate.
+- Polling endpoints such as `GET /v1/run/{id}` are not counted.
 
 ## Handle a 429 response
 
@@ -28,8 +38,8 @@ Content-Type: application/json
 {"error":"organization rate limit exceeded"}
 ```
 
-The organization limit applies to `POST /v1/run`, `POST /v1/chat/completions`, `POST /v1/responses`, `POST /v1/messages`, `POST /v1/upload`, and the Gemini `generateContent`, `streamGenerateContent`, and `POST /v1beta/interactions` endpoints. Polling endpoints such as
-`GET /v1/run/{id}` are not counted. Protocol-compatible endpoints return the same `429` in their own error envelope,
+Image and free-model limits return a message that names the limit, the top-up that raises it, and (for free models)
+the paid model to switch to. Protocol-compatible endpoints return the same `429` in their own error envelope,
 such as the Anthropic or Google error shape. A provider-originated response may use the compatible endpoint's error
 shape and may include provider rate-limit headers.
 

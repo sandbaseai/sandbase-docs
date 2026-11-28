@@ -9,7 +9,7 @@ Concurrency limits control how many tasks your organization can have in progress
 
 The limit applies to the whole organization, across all API keys. Which submissions are checked depends on the endpoint:
 
-- `POST /v1/run` and Platform API calls through `/v1/api/{vendor}/...` are checked for every model type, including image, audio, LLM, and data API operations.
+- `POST /v1/run` and Platform API calls through `/v1/api/{vendor}/...` are checked for every model type, including image, audio, LLM, and data API operations, at Bronze and Silver. At Gold and Platinum only video tasks are counted.
 - Other endpoints, such as Chat Completions, Responses, Messages, OpenAI Images, and the protocol-compatible Gemini and Volcengine endpoints, check only video submissions.
 
 ## How it works
@@ -28,20 +28,21 @@ Every new organization starts at **Bronze**, with a limit of 2 concurrent tasks.
 |-------|---------------|------------------|
 | Bronze | Default | 2 |
 | Silver | $10 or more | 10 |
-| Gold | $100 or more | 100 |
-| Platinum | $500 or more | 500 |
+| Gold | $100 or more | 20 videos |
+| Platinum | $500 or more | 100 videos |
 | Diamond | Contact sales | Unlimited |
 
 - **Single top-up, not a running total.** Two $60 top-ups keep you at Silver. One $100 top-up moves you to Gold.
 - **Upgrades only.** A later, smaller top-up never lowers your level.
 - **Paid top-ups only.** Promotional credits, sign-up credits, and coupons don't change your level.
 - **Takes effect right away.** The new limit applies to your next video submission once the payment succeeds.
+- **Gold and Platinum count videos only.** Other running tasks don't use their slots. Per-minute limits for LLM and image requests are listed in [Rate limits](/guides/rate-limiting#default-limits-by-account-level).
 
 ## Increasing your limit
 
 The most direct way to raise your limit is a single top-up that reaches the next threshold in the table above.
 
-For more than 500 concurrent tasks, or for a monthly credit line, contact [contact@sandbase.ai](mailto:contact@sandbase.ai) about the **Diamond** level. Diamond has no concurrency limit. It is set up by the SandBase team and is never changed by top-ups.
+For more than 100 concurrent videos, or for a monthly credit line, contact [contact@sandbase.ai](mailto:contact@sandbase.ai) about the **Diamond** level. Diamond has no concurrency limit. It is set up by the SandBase team and is never changed by top-ups.
 
 ## Credit check on video submissions
 
