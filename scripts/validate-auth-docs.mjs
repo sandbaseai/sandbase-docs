@@ -6,7 +6,8 @@ const authentication = readFileSync('api-reference/authentication.md', 'utf8')
 const errors = readFileSync('api-reference/errors.md', 'utf8')
 const firstCall = readFileSync('getting-started/first-call.md', 'utf8')
 const sidebar = readFileSync('.vitepress/sidebar.ts', 'utf8')
-const config = readFileSync('.vitepress/config.ts', 'utf8')
+// srcExclude lives in .vitepress/i18n/pages.mjs and is shared with the locale routes.
+const config = readFileSync('.vitepress/config.ts', 'utf8') + readFileSync('.vitepress/i18n/pages.mjs', 'utf8')
 const openapi = readFileSync('public/openapi.yaml', 'utf8')
 const publicAuth = `${keyGuide}\n${authentication}\n${errors}\n${firstCall}`
 

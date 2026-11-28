@@ -15,7 +15,8 @@ for (const [anchor] of mainSiteAnchors) {
 // The menu mirrors sandbase-fe site-header.tsx: Models ▾ / APIs / Skills /
 // Agents / Docs / Pricing / Resources ▾. Update both sites together.
 const desktopNav = header.match(/<nav class="sh-desktop-nav"[\s\S]*?<\/nav>/)?.[0] ?? ''
-const order = ['>Models<', "label: 'APIs'", "label: 'Skills'", "label: 'Agents'", '>Docs<', '>Pricing<', 'Resources']
+// Labels are rendered through tx() so they follow the docs language.
+const order = ["tx('Models')", "label: 'APIs'", "label: 'Skills'", "label: 'Agents'", "tx('Docs')", "tx('Pricing')", "tx('Resources')"]
 let cursor = -1
 for (const marker of order) {
   const source = marker.startsWith('label:') ? header : desktopNav
@@ -34,8 +35,12 @@ for (const label of ['Use in AI Tools', 'Open source', 'Influence', "label: 'Lab
 }
 
 assert.match(header, /localStorage\.getItem\('token'\)/, 'header should read the shared dashboard session')
-assert.match(header, /v-if="loggedIn"[^>]*[\s\S]*?>Console<\/a>/, 'authenticated users should see Console')
+assert.match(header, /v-if="loggedIn"[^>]*[\s\S]*?>\{\{ tx\('Console'\) \}\}<\/a>/, 'authenticated users should see Console')
 assert.match(header, /window\.addEventListener\('storage', syncAuthState\)/, 'header should follow session changes from other tabs')
 assert.match(header, /window\.addEventListener\('focus', syncAuthState\)/, 'header should refresh session state when users return')
 
+// The docs link and language menu stay on the docs site in the reader's language.
+assert.match(desktopNav, /:href="localeHref\('\/'\)" data-active/, 'Docs link should follow the current language')
+assert.match(header, /<LanguageSwitcher \/>/, 'desktop header should offer the language menu')
+assert.match(header, /<LanguageSwitcher variant="list"/, 'mobile navigation should offer the language menu')
 console.log('Site header navigation and auth bridge: ok')

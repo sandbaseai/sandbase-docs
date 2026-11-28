@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { useI18n } from './i18n'
 const visible = ref(false)
+const { tx, current } = useI18n()
+// Chatwoot reads the locale once at boot; follow later language switches too.
+watch(() => current.value.chatwoot, (code) => {
+  if (typeof window !== 'undefined') window.$chatwoot?.setLocale(code)
+})
 const baseUrl = import.meta.env.VITE_CHATWOOT_BASE_URL || ''
 const websiteToken = import.meta.env.VITE_CHATWOOT_WEBSITE_TOKEN || ''
 function openChat() { visible.value = false; window.$chatwoot?.toggle('open') }
-function onReady() { window.$chatwoot?.setLocale('en'); visible.value = true }
+function onReady() { window.$chatwoot?.setLocale(current.value.chatwoot); visible.value = true }
 function onOpened() { visible.value = false }
 function onClosed() { visible.value = true }
 onMounted(() => {
@@ -17,7 +23,7 @@ onMounted(() => {
   if (!websiteToken) return
   window.addEventListener('chatwoot:ready', onReady); window.addEventListener('chatwoot:opened', onOpened); window.addEventListener('chatwoot:closed', onClosed)
   if (document.getElementById('chatwoot-sdk')) return
-  window.chatwootSettings = { position: 'right', type: 'standard', darkMode: 'auto', locale: 'en', useBrowserLanguage: false, hideMessageBubble: true }
+  window.chatwootSettings = { position: 'right', type: 'standard', darkMode: 'auto', locale: current.value.chatwoot, useBrowserLanguage: false, hideMessageBubble: true }
   const script = document.createElement('script')
   script.id = 'chatwoot-sdk'; script.src = `${origin}/packs/js/sdk.js`; script.async = true; script.defer = true
   script.onload = () => window.chatwootSDK?.run({ websiteToken, baseUrl: origin }); document.body.appendChild(script)
@@ -27,7 +33,7 @@ onUnmounted(() => {
 })
 </script>
 <template>
-  <button v-if="visible" class="chatwoot-launcher" type="button" aria-label="Chat with SandBase support" title="Chat with us" @click="openChat">
+  <button v-if="visible" class="chatwoot-launcher" type="button" :aria-label="tx('Chat with SandBase support')" :title="tx('Chat with us')" @click="openChat">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" /></svg>
   </button>
 </template>

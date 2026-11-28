@@ -2,6 +2,8 @@
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vitepress'
 import BrandMark from './BrandMark.vue'
+import LanguageSwitcher from './LanguageSwitcher.vue'
+import { useI18n } from './i18n'
 
 /**
  * Replica of the sandbase.ai site header:
@@ -87,6 +89,7 @@ const resourceGroups: { label: string; items: ResourceLink[] }[] = [
 ]
 
 const route = useRoute()
+const { tx, localeHref } = useI18n()
 const modelsOpen = ref(false)
 const resourcesOpen = ref(false)
 const drawerOpen = ref(false)
@@ -177,18 +180,18 @@ onBeforeUnmount(() => {
 <template>
   <header class="sh-header">
     <div class="sh-bar">
-      <a class="sh-logo" :href="SITE" target="_self" aria-label="SandBase home">
+      <a class="sh-logo" :href="SITE" target="_self" :aria-label="tx('SandBase home')">
         <span class="sh-logo-mark" aria-hidden="true"><BrandMark /></span>
         <span class="sh-wordmark">SandBase</span>
       </a>
 
-      <nav class="sh-desktop-nav" aria-label="Primary navigation">
+      <nav class="sh-desktop-nav" :aria-label="tx('Primary navigation')">
         <div class="sh-explore" @mouseenter="openModels" @mouseleave="scheduleModelsClose">
-          <a class="sh-nav-link" :href="`${SITE}/models`" target="_self">Models</a>
+          <a class="sh-nav-link" :href="`${SITE}/models`" target="_self">{{ tx('Models') }}</a>
           <button
             type="button"
             class="sh-explore-trigger"
-            aria-label="Toggle Models menu"
+            :aria-label="tx('Toggle Models menu')"
             aria-haspopup="menu"
             aria-controls="sh-models-menu"
             :aria-expanded="modelsOpen"
@@ -196,24 +199,24 @@ onBeforeUnmount(() => {
           >
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
-          <div v-show="modelsOpen" id="sh-models-menu" class="sh-models-menu" role="menu" aria-label="Models">
+          <div v-show="modelsOpen" id="sh-models-menu" class="sh-models-menu" role="menu" :aria-label="tx('Models')">
             <a v-for="card in modelMenu" :key="card.key" class="sh-model-card" :href="card.href" target="_self" role="menuitem">
-              <span class="sh-model-eyebrow">{{ card.eyebrow }}</span>
-              <strong>{{ card.label }}</strong>
-              <span class="sh-model-description">{{ card.description }}</span>
+              <span class="sh-model-eyebrow">{{ tx(card.eyebrow) }}</span>
+              <strong>{{ tx(card.label) }}</strong>
+              <span class="sh-model-description">{{ tx(card.description) }}</span>
               <span v-if="card.logos.length" class="sh-model-logos" aria-hidden="true">
                 <img v-for="src in card.logos" :key="src" :src="src" alt="" width="18" height="18" decoding="async" />
               </span>
               <span v-else class="sh-model-thumbs" aria-hidden="true">
                 <img v-for="src in card.thumbs" :key="src" :src="src" alt="" decoding="async" />
               </span>
-              <span class="sh-model-cta">{{ card.cta }} <span aria-hidden="true">→</span></span>
+              <span class="sh-model-cta">{{ tx(card.cta) }} <span aria-hidden="true">→</span></span>
             </a>
           </div>
         </div>
-        <a v-for="link in productLinks" :key="link.href" class="sh-nav-link" :href="link.href" target="_self">{{ link.label }}</a>
-        <a class="sh-nav-link" href="/docs/" data-active>Docs</a>
-        <a class="sh-nav-link" :href="`${SITE}/pricing`" target="_self">Pricing</a>
+        <a v-for="link in productLinks" :key="link.href" class="sh-nav-link" :href="link.href" target="_self">{{ tx(link.label) }}</a>
+        <a class="sh-nav-link" :href="localeHref('/')" data-active>{{ tx('Docs') }}</a>
+        <a class="sh-nav-link" :href="`${SITE}/pricing`" target="_self">{{ tx('Pricing') }}</a>
         <div class="sh-solution">
           <button
             type="button"
@@ -222,12 +225,12 @@ onBeforeUnmount(() => {
             :aria-expanded="resourcesOpen"
             @click="toggleResources"
           >
-            Resources
+            {{ tx('Resources') }}
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
           <div v-show="resourcesOpen" id="sh-resources-menu" class="sh-resources-menu">
-            <div v-for="group in resourceGroups" :key="group.label" class="sh-resources-group" role="group" :aria-label="group.label">
-              <p class="sh-resources-group-label">{{ group.label }}</p>
+            <div v-for="group in resourceGroups" :key="group.label" class="sh-resources-group" role="group" :aria-label="tx(group.label)">
+              <p class="sh-resources-group-label">{{ tx(group.label) }}</p>
               <a
                 v-for="item in group.items"
                 :key="item.href"
@@ -235,8 +238,8 @@ onBeforeUnmount(() => {
                 target="_self"
                 @click="closeMenus"
               >
-                <strong>{{ item.label }}<span v-if="item.hot" class="sh-hot">Hot</span><span v-if="item.external" aria-hidden="true"> ↗</span></strong>
-                <span>{{ item.description }}</span>
+                <strong>{{ tx(item.label) }}<span v-if="item.hot" class="sh-hot">{{ tx('Hot') }}</span><span v-if="item.external" aria-hidden="true"> ↗</span></strong>
+                <span>{{ tx(item.description) }}</span>
               </a>
             </div>
           </div>
@@ -244,45 +247,46 @@ onBeforeUnmount(() => {
       </nav>
 
       <div class="sh-actions">
-        <a v-if="loggedIn" class="sh-console" :href="consoleHref" target="_self">Console</a>
-        <a v-else class="sh-start" :href="loginHref" target="_self">Start building</a>
+        <LanguageSwitcher />
+        <a v-if="loggedIn" class="sh-console" :href="consoleHref" target="_self">{{ tx('Console') }}</a>
+        <a v-else class="sh-start" :href="loginHref" target="_self">{{ tx('Start building') }}</a>
       </div>
 
       <button
         type="button"
         class="sh-mobile-button"
-        :aria-label="drawerOpen ? 'Close menu' : 'Open menu'"
+        :aria-label="drawerOpen ? tx('Close menu') : tx('Open menu')"
         :aria-expanded="drawerOpen"
         @click="drawerOpen = !drawerOpen"
       >
-        {{ drawerOpen ? 'Close' : 'Menu' }}
+        {{ drawerOpen ? tx('Close') : tx('Menu') }}
       </button>
     </div>
 
-    <div v-if="drawerOpen" class="sh-drawer-root" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-      <button type="button" class="sh-backdrop" aria-label="Dismiss navigation" tabindex="-1" @click="closeDrawer" />
+    <div v-if="drawerOpen" class="sh-drawer-root" role="dialog" aria-modal="true" :aria-label="tx('Mobile navigation')">
+      <button type="button" class="sh-backdrop" :aria-label="tx('Dismiss navigation')" tabindex="-1" @click="closeDrawer" />
       <div class="sh-drawer">
         <div class="sh-drawer-close-row">
-          <button type="button" class="sh-drawer-close" aria-label="Close navigation panel" @click="closeDrawer">×</button>
+          <button type="button" class="sh-drawer-close" :aria-label="tx('Close navigation panel')" @click="closeDrawer">×</button>
         </div>
-        <nav class="sh-mobile-nav" aria-label="Mobile navigation">
+        <nav class="sh-mobile-nav" :aria-label="tx('Mobile navigation')">
           <button type="button" class="sh-mobile-expand" :aria-expanded="mobileModelsOpen" @click="mobileModelsOpen = !mobileModelsOpen">
-            Models
+            {{ tx('Models') }}
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
           <div v-if="mobileModelsOpen" class="sh-mobile-sublinks">
-            <a v-for="card in modelMenu" :key="card.key" :href="card.href" target="_self" @click="closeDrawer">{{ card.label }}</a>
+            <a v-for="card in modelMenu" :key="card.key" :href="card.href" target="_self" @click="closeDrawer">{{ tx(card.label) }}</a>
           </div>
-          <a v-for="link in productLinks" :key="link.href" class="sh-mobile-link" :href="link.href" target="_self" @click="closeDrawer">{{ link.label }}</a>
-          <a class="sh-mobile-link" href="/docs/" data-active @click="closeDrawer">Docs</a>
-          <a class="sh-mobile-link" :href="`${SITE}/pricing`" target="_self" @click="closeDrawer">Pricing</a>
+          <a v-for="link in productLinks" :key="link.href" class="sh-mobile-link" :href="link.href" target="_self" @click="closeDrawer">{{ tx(link.label) }}</a>
+          <a class="sh-mobile-link" :href="localeHref('/')" data-active @click="closeDrawer">{{ tx('Docs') }}</a>
+          <a class="sh-mobile-link" :href="`${SITE}/pricing`" target="_self" @click="closeDrawer">{{ tx('Pricing') }}</a>
           <button type="button" class="sh-mobile-expand" :aria-expanded="mobileResourcesOpen" @click="mobileResourcesOpen = !mobileResourcesOpen">
-            Resources
+            {{ tx('Resources') }}
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </button>
           <div v-if="mobileResourcesOpen" class="sh-mobile-sublinks">
             <template v-for="group in resourceGroups" :key="group.label">
-              <p class="sh-mobile-group-label">{{ group.label }}</p>
+              <p class="sh-mobile-group-label">{{ tx(group.label) }}</p>
               <a
                 v-for="item in group.items"
                 :key="item.href"
@@ -290,14 +294,15 @@ onBeforeUnmount(() => {
                 target="_self"
                 @click="closeDrawer"
               >
-                {{ item.label }}<span v-if="item.hot" class="sh-hot">Hot</span><span v-if="item.external" aria-hidden="true">&nbsp;↗</span>
+                {{ tx(item.label) }}<span v-if="item.hot" class="sh-hot">{{ tx('Hot') }}</span><span v-if="item.external" aria-hidden="true">&nbsp;↗</span>
               </a>
             </template>
           </div>
+          <LanguageSwitcher variant="list" @navigate="closeDrawer" />
         </nav>
         <div class="sh-drawer-actions">
-          <a v-if="loggedIn" class="sh-console" :href="consoleHref" target="_self" @click="closeDrawer">Console</a>
-          <a v-else class="sh-start" :href="loginHref" target="_self" @click="closeDrawer">Start building</a>
+          <a v-if="loggedIn" class="sh-console" :href="consoleHref" target="_self" @click="closeDrawer">{{ tx('Console') }}</a>
+          <a v-else class="sh-start" :href="loginHref" target="_self" @click="closeDrawer">{{ tx('Start building') }}</a>
         </div>
       </div>
     </div>

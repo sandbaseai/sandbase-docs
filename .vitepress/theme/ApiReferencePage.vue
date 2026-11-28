@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useData } from 'vitepress'
 import { generatedApiReferenceSpecs } from './generatedApiReferenceSpecs'
+import { useI18n } from './i18n'
 
 type ApiField = {
   name: string
@@ -85,6 +86,7 @@ function sanitizePublicReference(reference: ApiReference): ApiReference {
 }
 
 const { frontmatter } = useData()
+const { tx } = useI18n()
 const spec = computed<ApiReference>(() => {
   if (frontmatter.value.apiReference) return sanitizePublicReference(frontmatter.value.apiReference)
   if (frontmatter.value.apiReferenceJson) return sanitizePublicReference(JSON.parse(frontmatter.value.apiReferenceJson))
@@ -201,29 +203,29 @@ function apiReferenceMarkdown(reference: ApiReference, apiExamples: ApiExample[]
   reference.groups?.forEach((group) => {
     parts.push(`## ${group.title}`, '')
     if (group.description) parts.push(group.description, '')
-    if (group.schema) parts.push(`Schema: \`${group.schema}\``, '')
+    if (group.schema) parts.push(`${tx('Schema:')} \`${group.schema}\``, '')
     group.fields.forEach((field) => {
-      const required = field.required ? 'required' : 'optional'
+      const required = field.required ? tx('required') : tx('optional')
       parts.push(`- \`${field.name}\` (${field.type}, ${required}): ${field.description}`)
       if (field.constraints) parts.push(`  ${field.constraints}`)
-      if (field.default !== undefined) parts.push(`  Default: \`${field.default}\``)
+      if (field.default !== undefined) parts.push(`  ${tx('Default:')} \`${field.default}\``)
     })
     parts.push('')
   })
 
   if (apiExamples.length) {
-    parts.push('## Examples', '')
+    parts.push(`## ${tx('Examples')}`, '')
     apiExamples.forEach((example) => {
       parts.push(`### ${example.label}`, '', `\`\`\`${example.language}`, example.code, '```', '')
     })
   }
 
   if (reference.response) {
-    parts.push('## Response', '', `Status: \`${reference.response.status}\``, '', '```json', reference.response.code, '```', '')
+    parts.push(`## ${tx('Response')}`, '', `${tx('Status:')} \`${reference.response.status}\``, '', '```json', reference.response.code, '```', '')
   }
 
   if (reference.notes?.length) {
-    parts.push('## Response states', '')
+    parts.push(`## ${tx('Response states')}`, '')
     reference.notes.forEach((note) => {
       parts.push(`### ${note.title}`, '')
       try {
@@ -293,13 +295,13 @@ function highlightCode(code: string, language = '') {
             <path d="M8 8h10v12H8z" />
             <path d="M6 16H4V4h12v2" />
           </svg>
-          {{ pageCopied ? 'Copied' : 'Copy page' }}
+          {{ pageCopied ? tx('Copied') : tx('Copy page') }}
         </button>
         <button
           class="api-page-copy-toggle"
           type="button"
           :aria-expanded="pageActionsOpen"
-          aria-label="Open page actions"
+          :aria-label="tx('Open page actions')"
           @click="pageActionsOpen = !pageActionsOpen"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -314,21 +316,21 @@ function highlightCode(code: string, language = '') {
             <path d="M8 8h10v12H8z" />
             <path d="M6 16H4V4h12v2" />
           </svg>
-          Copy page as Markdown
+          {{ tx('Copy page as Markdown') }}
         </button>
         <button type="button" @click="openMarkdownSource">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M7 17 17 7" />
             <path d="M8 7h9v9" />
           </svg>
-          Open Markdown
+          {{ tx('Open Markdown') }}
         </button>
         <button type="button" @click="openModelDetail">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M7 17 17 7" />
             <path d="M8 7h9v9" />
           </svg>
-          View model details
+          {{ tx('View model details') }}
         </button>
       </div>
     </div>
@@ -360,14 +362,14 @@ function highlightCode(code: string, language = '') {
             <article v-for="field in group.fields" :key="field.name" class="api-field-row">
               <div class="api-field-meta">
                 <span class="api-field-type">
-                  <template v-if="!field.required">Optional&lt;</template>{{ field.type }}<template v-if="!field.required">&gt;</template>
+                  <template v-if="!field.required">{{ tx('Optional') }}&lt;</template>{{ field.type }}<template v-if="!field.required">&gt;</template>
                 </span>
                 <code class="api-field-name">{{ field.name }}</code>
-                <span v-if="field.required" class="api-field-required">required</span>
+                <span v-if="field.required" class="api-field-required">{{ tx('required') }}</span>
               </div>
               <p>{{ field.description }}</p>
               <p v-if="field.constraints" class="api-field-constraints">{{ field.constraints }}</p>
-              <p v-if="field.default !== undefined" class="api-field-default">Default: <code>{{ field.default }}</code></p>
+              <p v-if="field.default !== undefined" class="api-field-default">{{ tx('Default:') }} <code>{{ field.default }}</code></p>
             </article>
           </div>
         </section>
@@ -380,7 +382,7 @@ function highlightCode(code: string, language = '') {
         </section>
 
         <section v-if="spec.errors?.length" class="api-errors">
-          <h2>Errors</h2>
+          <h2>{{ tx('Errors') }}</h2>
           <div v-for="error in spec.errors" :key="`${error.status}-${error.type}`" class="api-error-row">
             <span>{{ error.status }}</span>
             <code>{{ error.type }}</code>
@@ -389,11 +391,11 @@ function highlightCode(code: string, language = '') {
         </section>
       </main>
 
-      <aside class="api-reference-examples" aria-label="Code examples">
+      <aside class="api-reference-examples" :aria-label="tx('Code examples')">
         <div class="api-examples-sticky">
           <div class="api-example-card">
             <div class="api-example-toolbar">
-              <div class="api-example-tabs" role="tablist" aria-label="Example language">
+              <div class="api-example-tabs" role="tablist" :aria-label="tx('Example language')">
                 <button
                   v-for="(example, index) in examples"
                   :key="example.label"
@@ -407,7 +409,7 @@ function highlightCode(code: string, language = '') {
                 </button>
               </div>
               <button class="api-copy-button" type="button" @click="copyCode">
-                {{ copied ? 'Copied' : 'Copy' }}
+                {{ copied ? tx('Copied') : tx('Copy') }}
               </button>
             </div>
             <pre><code :class="`language-${activeExample?.language ?? 'text'}`" v-html="highlightedExampleCode"></code></pre>
@@ -415,7 +417,7 @@ function highlightCode(code: string, language = '') {
 
           <div v-if="spec.response" class="api-example-card api-response-card">
             <div class="api-response-heading">
-              <span>Response</span>
+              <span>{{ tx('Response') }}</span>
               <code>{{ spec.response.status }}</code>
             </div>
             <pre><code class="language-json" v-html="highlightedResponseCode"></code></pre>

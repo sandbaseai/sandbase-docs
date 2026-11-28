@@ -7,7 +7,9 @@ import { parse } from 'yaml'
 
 const openapi = readFileSync(new URL('../public/openapi.yaml', import.meta.url), 'utf8')
 const openapiDocument = parse(openapi)
+// srcExclude lives in .vitepress/i18n/pages.mjs and is shared with the locale routes.
 const config = readFileSync(new URL('../.vitepress/config.ts', import.meta.url), 'utf8')
+  + readFileSync(new URL('../.vitepress/i18n/pages.mjs', import.meta.url), 'utf8')
 const sidebar = readFileSync(new URL('../.vitepress/sidebar.ts', import.meta.url), 'utf8')
 const platformSidebar = sidebar.slice(sidebar.indexOf('export const apiReferenceSidebar'))
 const generatedReferenceSpecs = readFileSync(new URL('../.vitepress/theme/generatedApiReferenceSpecs.ts', import.meta.url), 'utf8')

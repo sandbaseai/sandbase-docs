@@ -1,13 +1,15 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { templateLabel, redact, readCommandStream } from './sandbox-client.mjs'
+import { useI18n } from './i18n'
+const { tx } = useI18n()
 const key = ref(''), connected = ref(false), busy = ref(false), accepted = ref(false)
 const catalogLoaded = ref(false)
 const templates = ref([]), template = ref(''), instances = ref([]), selected = ref(null)
 const tab = ref('command'), command = ref('uname -a'), output = ref(''), events = ref([]), notice = ref('')
 const filePath = ref('/tmp/sandbase-playground.txt'), content = ref('Hello from Sandbox Playground'), fileStatus = ref('')
-const evidence = ref('Not loaded'), observation = ref('metrics'), ttl = ref(120), requestExample = ref('Connect to view a request example.')
-const eventNotice = ref('Refresh to load lifecycle events for the selected instance.')
+const evidence = ref(tx('Not loaded')), observation = ref('metrics'), ttl = ref(120), requestExample = ref(tx('Connect to view a request example.'))
+const eventNotice = ref(tx('Refresh to load lifecycle events for the selected instance.'))
 const pendingCreate = ref(''), observedPause = new Set(), restored = new Set(), saved = new Map(), tokens = new Map()
 const connectionID = ref(''); let controller
 const responseSignals = new WeakMap()
@@ -22,7 +24,7 @@ const idOf = x => x?.sandboxID || x?.sandboxId || x?.id
 const id = computed(() => idOf(selected.value))
 const owned = computed(() => selected.value?.metadata?.docsPlayground === connectionID.value)
 const runnable = computed(() => owned.value && selected.value?.state === 'running' && tokens.has(id.value))
-const counts = computed(() => !catalogLoaded.value ? 'Not loaded' : `${templates.value.filter(t => t.public === true).length} public · ${templates.value.filter(t => t.public === false).length} private`)
+const counts = computed(() => !catalogLoaded.value ? tx('Not loaded') : tx('{public} public · {private} private', { public: templates.value.filter(t => t.public === true).length, private: templates.value.filter(t => t.public === false).length }))
 const secrets = () => [key.value, ...tokens.values()]
 const safe = value => redact(value, secrets())
 function record(type, source, data) { events.value.unshift({ id: crypto.randomUUID(), type, source, time: new Date().toLocaleTimeString(), data: safe(data) }); events.value = events.value.slice(0, 100) }
@@ -39,15 +41,16 @@ async function api(path, method = 'GET', body, dataToken) {
   return response
 }
 async function control(path, method = 'GET', body) {
-  requestExample.value = path.startsWith('/sandbox-gateway/') ? 'Usage details are shown in the Observe tab.' : `${method} https://sandbox.sandbase.ai${path}\nX-API-Key: <YOUR_API_KEY>${body ? '\n\n' + JSON.stringify(body, null, 2) : ''}`
+  requestExample.value = path.startsWith('/sandbox-gateway/') ? tx('Usage details are shown in the Observe tab.') : `${method} https://sandbox.sandbase.ai${path}\nX-API-Key: <YOUR_API_KEY>${body ? '\n\n' + JSON.stringify(body, null, 2) : ''}`
   const response = await api('/control' + path, method, body)
   return response.status === 204 ? null : readResponse(response)
 }
+const pending = label => tx('{action}…', { action: tx(label) })
 async function act(label, fn) {
   if (busy.value) return
-  busy.value = true; const active = new AbortController(); controller = active; notice.value = label + '…'
-  try { await fn(); if (active.signal.aborted) return; if (notice.value === label + '…') notice.value = label + ' completed.' }
-  catch (e) { if (active.signal.aborted) return; notice.value = `Not completed: ${safe(e.message)}. The result may be unknown. Refresh to reconcile before retrying.`; record('request.failed', 'Playground', { action: label, code: e.message }) }
+  busy.value = true; const active = new AbortController(); controller = active; notice.value = pending(label)
+  try { await fn(); if (active.signal.aborted) return; if (notice.value === pending(label)) notice.value = tx('{action} completed.', { action: tx(label) }) }
+  catch (e) { if (active.signal.aborted) return; notice.value = tx('Not completed: {error}. The result may be unknown. Refresh to reconcile before retrying.', { error: safe(e.message) }); record('request.failed', 'Playground', { action: label, code: e.message }) }
   finally { if (controller === active) { busy.value = false; controller = null } }
 }
 async function list() {
@@ -59,7 +62,7 @@ async function list() {
     rows.push(...page); next = response.headers.get('X-Next-Token') || ''
   } while (next && ++pages < 10)
   instances.value = rows
-  if (next) notice.value = 'Showing the first 1,000 instances. An instance missing from this list may still exist.'
+  if (next) notice.value = tx('Showing the first 1,000 instances. An instance missing from this list may still exist.')
   if (pendingCreate.value && rows.some(x => x.metadata?.docsCreate === pendingCreate.value && x.metadata?.docsPlayground === connectionID.value)) pendingCreate.value = ''
   if (selected.value) selected.value = rows.find(x => idOf(x) === id.value) || null
 }
@@ -75,7 +78,7 @@ async function connect() { await act('Load templates and instances', async () =>
     if (!Array.isArray(rows)) throw new Error('invalid_templates')
     catalog.push(...rows); next = page.headers.get('X-Next-Token')
   }
-  if (next) notice.value = 'Showing the first 1,000 templates, not the full organization total.'
+  if (next) notice.value = tx('Showing the first 1,000 templates, not the full organization total.')
   templates.value = catalog.map(t => ({ ...t, label: templateLabel(t), runnable: t.buildStatus === 'ready' }))
   catalogLoaded.value = true
   template.value = templates.value.find(t => t.runnable)?.templateID || ''
@@ -83,16 +86,16 @@ async function connect() { await act('Load templates and instances', async () =>
 }) }
 function forget() {
   controller?.abort(); controller = null; busy.value = false
-  eventNotice.value = ''; template.value = ''; connectionID.value = ''; accepted.value = false; command.value = 'uname -a'; content.value = ''; filePath.value = '/tmp/sandbase-playground.txt'; fileStatus.value = ''; requestExample.value = 'Connect to view a request example.'
-  tokens.clear(); catalogLoaded.value = false; key.value = ''; connected.value = false; selected.value = null; instances.value = []; templates.value = []; events.value = []; output.value = ''; evidence.value = ''; saved.clear(); observedPause.clear(); restored.clear(); pendingCreate.value = ''; notice.value = 'Key, connection tokens, and page activity cleared. Requests already sent may still complete. Your sandboxes have not been deleted.'
+  eventNotice.value = ''; template.value = ''; connectionID.value = ''; accepted.value = false; command.value = 'uname -a'; content.value = ''; filePath.value = '/tmp/sandbase-playground.txt'; fileStatus.value = ''; requestExample.value = tx('Connect to view a request example.')
+  tokens.clear(); catalogLoaded.value = false; key.value = ''; connected.value = false; selected.value = null; instances.value = []; templates.value = []; events.value = []; output.value = ''; evidence.value = ''; saved.clear(); observedPause.clear(); restored.clear(); pendingCreate.value = ''; notice.value = tx('Key, connection tokens, and page activity cleared. Requests already sent may still complete. Your sandboxes have not been deleted.')
 }
 function select(value) {
   if (busy.value || idOf(value) === id.value) return
   selected.value = value
-  output.value = ''; content.value = ''; fileStatus.value = ''; evidence.value = 'Not loaded'; events.value = []
-  requestExample.value = 'Choose an operation to view its request example.'
-  eventNotice.value = 'Refresh to load lifecycle events for this instance.'
-  notice.value = `Selected ${idOf(value)}. ${owned.value ? 'Ready for this instance’s available operations.' : 'Read-only instance. Only instances created in this page session can be changed.'}`
+  output.value = ''; content.value = ''; fileStatus.value = ''; evidence.value = tx('Not loaded'); events.value = []
+  requestExample.value = tx('Choose an operation to view its request example.')
+  eventNotice.value = tx('Refresh to load lifecycle events for this instance.')
+  notice.value = `${tx('Selected {id}.', { id: idOf(value) })} ${owned.value ? tx('Ready for this instance’s available operations.') : tx('Read-only instance. Only instances created in this page session can be changed.')}`
 }
 async function create() { if (!accepted.value || pendingCreate.value) return
   await act('Create sandbox', async () => {
@@ -103,10 +106,11 @@ async function create() { if (!accepted.value || pendingCreate.value) return
     selected.value = result; pendingCreate.value = ''; await list(); await loadEvents(); record('create.completed', 'Playground', { sandboxId: currentID })
   })
 }
+const lifecycleLabels = { pause: 'Pause', connect: 'Resume / Connect', timeout: 'Extend timeout', delete: 'Delete' }
 async function lifecycle(action) {
   if (!owned.value) return
-  if (action === 'delete' && !window.confirm(`Delete ${id.value}? Files in this instance will be permanently lost.`)) return
-  await act(action, async () => {
+  if (action === 'delete' && !window.confirm(tx('Delete {id}? Files in this instance will be permanently lost.', { id: id.value }))) return
+  await act(lifecycleLabels[action], async () => {
     const currentID = id.value
     if (action === 'delete') { await control(`/sandboxes/${currentID}`, 'DELETE'); tokens.delete(currentID); selected.value = null }
     else if (action === 'connect') {
@@ -144,7 +148,7 @@ async function run() { if (!runnable.value) return
     })
     signal.throwIfAborted()
     output.value = safe(stdout + (stderr ? '\n[stderr]\n' + stderr : '') + `\n[exit ${exit}]`)
-    record('command.completed', 'Playground', { exitCode: exit }); notice.value = `Command finished with exit code ${exit}.`
+    record('command.completed', 'Playground', { exitCode: exit }); notice.value = tx('Command finished with exit code {code}.', { code: exit })
   })
 }
 async function file(write) { if (!runnable.value) return
@@ -159,32 +163,32 @@ async function file(write) { if (!runnable.value) return
     const result = await api(path, 'GET', undefined, tokens.get(id.value)); const text = await readResponse(result, 'text')
     if (text.length > 65536) throw new Error('file_too_large')
     if (write && text !== content.value) throw new Error('readback_mismatch')
-    if (write) { saved.set(slot, text); restored.delete(id.value); fileStatus.value = 'Write and readback match ✓' }
-    else fileStatus.value = restored.has(id.value) && saved.has(slot) ? (saved.get(slot) === text ? 'File preserved after pause → resume ✓' : 'Content changed after resume') : 'Read complete; pause/resume verification is not yet complete'
+    if (write) { saved.set(slot, text); restored.delete(id.value); fileStatus.value = tx('Write and readback match ✓') }
+    else fileStatus.value = restored.has(id.value) && saved.has(slot) ? (saved.get(slot) === text ? tx('File preserved after pause → resume ✓') : tx('Content changed after resume')) : tx('Read complete; pause/resume verification is not yet complete')
     content.value = safe(text); record(write ? 'file.verified' : 'file.read', 'Playground', { path: filePath.value })
   })
 }
 async function loadEvents() {
   const signal = controller?.signal
-  eventNotice.value = 'Loading lifecycle events…'
+  eventNotice.value = tx('Loading lifecycle events…')
   try {
     const rows = await control(`/events/sandboxes/${id.value}?limit=100`)
     if (!Array.isArray(rows)) throw new Error('invalid_events')
     for (const event of rows) if (!events.value.some(x => x.id === event.id && x.source === 'Sandbox lifecycle')) events.value.unshift({ id: event.id, type: event.type, source: 'Sandbox lifecycle', time: event.timestamp, data: safe(event) })
     events.value = events.value.slice(0, 100)
-    eventNotice.value = rows.length ? '' : 'No lifecycle events returned yet.'
+    eventNotice.value = rows.length ? '' : tx('No lifecycle events returned yet.')
   } catch (e) {
     if (signal?.aborted) throw e
-    eventNotice.value = `Lifecycle events unavailable (${safe(e.message)}). Your selection and completed operations are unchanged.`
-    if (notice.value === 'Refresh events…') notice.value = 'Events could not be loaded. Your instance selection is unchanged.'
+    eventNotice.value = tx('Lifecycle events unavailable ({error}). Your selection and completed operations are unchanged.', { error: safe(e.message) })
+    if (notice.value === pending('Refresh events')) notice.value = tx('Events could not be loaded. Your instance selection is unchanged.')
   }
 }
 async function observe() { if (!id.value) return
   await act('Load observations', async () => {
     const signal = controller.signal
     const paths = { metrics: `/sandboxes/${id.value}/metrics`, logs: `/v2/sandboxes/${id.value}/logs?limit=100`, usage: `/sandbox-gateway/sandboxes/${id.value}/usage` }
-    evidence.value = 'Loading…'
-    try { evidence.value = safe(await control(paths[observation.value])) } catch (e) { if (signal.aborted) throw e; evidence.value = 'Unavailable · No observation evidence received'; throw e }
+    evidence.value = tx('Loading…')
+    try { evidence.value = safe(await control(paths[observation.value])) } catch (e) { if (signal.aborted) throw e; evidence.value = tx('Unavailable · No observation evidence received'); throw e }
   })
 }
 onMounted(() => window.addEventListener('pagehide', forget))
@@ -193,45 +197,45 @@ onBeforeUnmount(() => { window.removeEventListener('pagehide', forget); forget()
 
 <template>
   <div class="sp">
-    <header class="sp-hero"><div><span class="sp-kicker">SANDBOX / DEVELOPER LAB</span><h2>Run once. See every step.</h2><p>Create, execute, pause, and resume. See the results as you go.</p></div><span class="sp-badge">Experimental</span></header>
+    <header class="sp-hero"><div><span class="sp-kicker">{{ tx('SANDBOX / DEVELOPER LAB') }}</span><h2>{{ tx('Run once. See every step.') }}</h2><p>{{ tx('Create, execute, pause, and resume. See the results as you go.') }}</p></div><span class="sp-badge">{{ tx('Experimental') }}</span></header>
     <div class="sp-auth">
       <div class="sp-auth-heading">
-        <label for="sandbox-api-key">Your API key</label>
-        <span>No API key? <a href="https://www.sandbase.ai/console/keys" target="_blank" rel="noopener noreferrer">Developer → API Keys ↗</a></span>
+        <label for="sandbox-api-key">{{ tx('Your API key') }}</label>
+        <span>{{ tx('No API key?') }} <a href="https://www.sandbase.ai/console/keys" target="_blank" rel="noopener noreferrer">{{ tx('Developer → API Keys') }} ↗</a></span>
       </div>
       <div class="sp-auth-row">
-        <input id="sandbox-api-key" v-model="key" :disabled="connected || busy" type="password" autocomplete="off" placeholder="API key with Sandbox access" />
-        <button :disabled="!key.trim() || busy || connected" @click="connect">Connect</button>
-        <button :disabled="!key && !connected && !busy" @click="forget">Clear key</button>
+        <input id="sandbox-api-key" v-model="key" :disabled="connected || busy" type="password" autocomplete="off" :placeholder="tx('API key with Sandbox access')" />
+        <button :disabled="!key.trim() || busy || connected" @click="connect">{{ tx('Connect') }}</button>
+        <button :disabled="!key && !connected && !busy" @click="forget">{{ tx('Clear key') }}</button>
       </div>
-      <small>Sign in or sign up in the Console, then create an API key to try the Playground.</small>
-      <small>Your key stays in this page’s memory only. This Playground does not save it in browser storage, add it to URLs, or record it in page activity. Clear it at any time with “Clear key”; refreshing or leaving this page also clears it.</small>
+      <small>{{ tx('Sign in or sign up in the Console, then create an API key to try the Playground.') }}</small>
+      <small>{{ tx('Your key stays in this page’s memory only. This Playground does not save it in browser storage, add it to URLs, or record it in page activity. Clear it at any time with “Clear key”; refreshing or leaving this page also clears it.') }}</small>
     </div>
-    <p class="sp-notice" role="status">{{ notice || 'Connect your organization to begin. Operations use real resources and your own API key.' }}</p>
+    <p class="sp-notice" role="status">{{ notice || tx('Connect your organization to begin. Operations use real resources and your own API key.') }}</p>
     <div class="sp-layout">
       <aside class="sp-resources">
-        <h3>Environment <small>{{ counts }}</small></h3>
-        <label>Template<select v-model="template" :disabled="busy || !connected"><option value="">Choose a template</option><option v-for="t in templates" :key="t.templateID" :value="t.templateID" :disabled="!t.runnable">{{ t.public ? 'Public' : 'Private' }} · {{ t.label }}{{ t.runnable ? '' : ` (${t.buildStatus || 'unavailable'})` }}</option></select></label>
-        <label>Timeout (30–600 seconds)<input v-model="ttl" type="number" min="30" max="600" :disabled="busy" /></label>
-        <label class="sp-check"><input v-model="accepted" type="checkbox" /> I understand that real resources may incur charges. I will delete them after use.</label>
-        <button class="sp-primary" :disabled="busy || !connected || !template || !accepted || !!pendingCreate || Number(ttl) < 30 || Number(ttl) > 600" @click="create">＋ Create sandbox</button>
-        <p v-if="pendingCreate" class="sp-warn">Creation result is unknown. Refresh and reconcile this marker before creating again: {{ pendingCreate }}</p>
-        <h3>Instances <button :disabled="busy || !connected" @click="act('Refresh', list)">Refresh</button></h3>
-        <p class="sp-muted">{{ busy ? 'An operation is in progress. Selection unlocks when it finishes.' : 'Click an instance to select it. Refresh to update its status.' }}</p><p v-if="!instances.length" class="sp-muted">No instances loaded</p>
-        <button v-for="s in instances" :key="idOf(s)" class="sp-instance" :class="{ chosen: idOf(s) === id }" :aria-pressed="idOf(s) === id" :title="busy ? 'Wait for the current operation to finish' : 'Select ' + idOf(s)" :disabled="busy" @click="select(s)"><span class="sp-instance-id">{{ idOf(s) }}</span><span v-if="idOf(s) === id" class="sp-selected">✓ Selected</span><small>{{ s.state }} · {{ s.metadata?.docsPlayground === connectionID ? 'Created here' : 'Read-only' }}</small></button>
+        <h3>{{ tx('Environment') }} <small>{{ counts }}</small></h3>
+        <label>{{ tx('Template') }}<select v-model="template" :disabled="busy || !connected"><option value="">{{ tx('Choose a template') }}</option><option v-for="t in templates" :key="t.templateID" :value="t.templateID" :disabled="!t.runnable">{{ t.public ? tx('Public') : tx('Private') }} · {{ t.label }}{{ t.runnable ? '' : ` (${t.buildStatus || tx('unavailable')})` }}</option></select></label>
+        <label>{{ tx('Timeout (30–600 seconds)') }}<input v-model="ttl" type="number" min="30" max="600" :disabled="busy" /></label>
+        <label class="sp-check"><input v-model="accepted" type="checkbox" /> {{ tx('I understand that real resources may incur charges. I will delete them after use.') }}</label>
+        <button class="sp-primary" :disabled="busy || !connected || !template || !accepted || !!pendingCreate || Number(ttl) < 30 || Number(ttl) > 600" @click="create">＋ {{ tx('Create sandbox') }}</button>
+        <p v-if="pendingCreate" class="sp-warn">{{ tx('Creation result is unknown. Refresh and reconcile this marker before creating again:') }} {{ pendingCreate }}</p>
+        <h3>{{ tx('Instances') }} <button :disabled="busy || !connected" @click="act('Refresh', list)">{{ tx('Refresh') }}</button></h3>
+        <p class="sp-muted">{{ busy ? tx('An operation is in progress. Selection unlocks when it finishes.') : tx('Click an instance to select it. Refresh to update its status.') }}</p><p v-if="!instances.length" class="sp-muted">{{ tx('No instances loaded') }}</p>
+        <button v-for="s in instances" :key="idOf(s)" class="sp-instance" :class="{ chosen: idOf(s) === id }" :aria-pressed="idOf(s) === id" :title="busy ? tx('Wait for the current operation to finish') : tx('Select {id}', { id: idOf(s) })" :disabled="busy" @click="select(s)"><span class="sp-instance-id">{{ idOf(s) }}</span><span v-if="idOf(s) === id" class="sp-selected">✓ {{ tx('Selected') }}</span><small>{{ s.state }} · {{ s.metadata?.docsPlayground === connectionID ? tx('Created here') : tx('Read-only') }}</small></button>
       </aside>
       <section class="sp-work">
-        <div class="sp-current"><strong>{{ id || 'Select an instance' }}</strong><span>{{ selected?.state || 'Disconnected' }}</span></div>
-        <div class="sp-actions"><button :disabled="busy || !owned || selected?.state !== 'running'" @click="lifecycle('pause')">Pause</button><button :disabled="busy || !owned" @click="lifecycle('connect')">Resume / Connect</button><button :disabled="busy || !owned" @click="lifecycle('timeout')">Extend timeout</button><button :disabled="busy || !owned" @click="lifecycle('delete')">Delete</button></div>
-        <nav class="sp-tabs" aria-label="Playground tools"><button v-for="[value,label] in [['command','Commands'],['files','Files'],['observe','Observe']]" :key="value" :class="{ active: tab === value }" @click="tab = value">{{ label }}</button></nav>
-        <div v-if="tab === 'command'"><p class="sp-muted">Shell commands, not AI chat. Each command can run for up to 25 seconds.</p><div class="sp-actions"><button :disabled="busy" @click="command = 'uname -a'">System info</button><button :disabled="busy" @click="command = `python3 -c 'print(2 ** 20)'`">Try Python</button><button :disabled="busy" @click="command = 'cat /tmp/sandbase-playground.txt'">Verify file</button></div><label>Command<textarea v-model="command" :disabled="busy" rows="3" spellcheck="false" /></label><button class="sp-primary" :disabled="busy || !runnable || !command.trim()" @click="run">Run command ↗</button><pre aria-live="polite">{{ output || 'stdout / stderr will appear here.' }}</pre></div>
-        <div v-if="tab === 'files'"><p class="sp-muted">Write → pause → resume → read back to verify file persistence.</p><label>Text file path under /tmp/<input v-model="filePath" :disabled="busy" /></label><label>Contents<textarea v-model="content" :disabled="busy" rows="6" /></label><div class="sp-actions"><button :disabled="busy || !runnable" @click="file(true)">Write & verify</button><button :disabled="busy || !runnable" @click="file(false)">Read back file</button></div><p role="status">{{ fileStatus }}</p></div>
-        <div v-if="tab === 'observe'"><p class="sp-muted">Missing evidence does not mean zero usage. Machine-time records are not final billing.</p><label>Observation type<select v-model="observation" :disabled="busy"><option value="metrics">CPU / memory metrics</option><option value="logs">Instance logs</option><option value="usage">Machine-time evidence</option></select></label><button :disabled="busy || !id" @click="observe">Load</button><pre>{{ evidence }}</pre></div>
-        <details class="sp-request"><summary>Request example (credentials omitted)</summary><pre>{{ requestExample }}</pre></details>
+        <div class="sp-current"><strong>{{ id || tx('Select an instance') }}</strong><span>{{ selected?.state || tx('Disconnected') }}</span></div>
+        <div class="sp-actions"><button :disabled="busy || !owned || selected?.state !== 'running'" @click="lifecycle('pause')">{{ tx('Pause') }}</button><button :disabled="busy || !owned" @click="lifecycle('connect')">{{ tx('Resume / Connect') }}</button><button :disabled="busy || !owned" @click="lifecycle('timeout')">{{ tx('Extend timeout') }}</button><button :disabled="busy || !owned" @click="lifecycle('delete')">{{ tx('Delete') }}</button></div>
+        <nav class="sp-tabs" :aria-label="tx('Playground tools')"><button v-for="[value,label] in [['command','Commands'],['files','Files'],['observe','Observe']]" :key="value" :class="{ active: tab === value }" @click="tab = value">{{ tx(label) }}</button></nav>
+        <div v-if="tab === 'command'"><p class="sp-muted">{{ tx('Shell commands, not AI chat. Each command can run for up to 25 seconds.') }}</p><div class="sp-actions"><button :disabled="busy" @click="command = 'uname -a'">{{ tx('System info') }}</button><button :disabled="busy" @click="command = `python3 -c 'print(2 ** 20)'`">{{ tx('Try Python') }}</button><button :disabled="busy" @click="command = 'cat /tmp/sandbase-playground.txt'">{{ tx('Verify file') }}</button></div><label>{{ tx('Command') }}<textarea v-model="command" :disabled="busy" rows="3" spellcheck="false" /></label><button class="sp-primary" :disabled="busy || !runnable || !command.trim()" @click="run">{{ tx('Run command') }} ↗</button><pre aria-live="polite">{{ output || tx('stdout / stderr will appear here.') }}</pre></div>
+        <div v-if="tab === 'files'"><p class="sp-muted">{{ tx('Write → pause → resume → read back to verify file persistence.') }}</p><label>{{ tx('Text file path under /tmp/') }}<input v-model="filePath" :disabled="busy" /></label><label>{{ tx('Contents') }}<textarea v-model="content" :disabled="busy" rows="6" /></label><div class="sp-actions"><button :disabled="busy || !runnable" @click="file(true)">{{ tx('Write & verify') }}</button><button :disabled="busy || !runnable" @click="file(false)">{{ tx('Read back file') }}</button></div><p role="status">{{ fileStatus }}</p></div>
+        <div v-if="tab === 'observe'"><p class="sp-muted">{{ tx('Missing evidence does not mean zero usage. Machine-time records are not final billing.') }}</p><label>{{ tx('Observation type') }}<select v-model="observation" :disabled="busy"><option value="metrics">{{ tx('CPU / memory metrics') }}</option><option value="logs">{{ tx('Instance logs') }}</option><option value="usage">{{ tx('Machine-time evidence') }}</option></select></label><button :disabled="busy || !id" @click="observe">{{ tx('Load') }}</button><pre>{{ evidence }}</pre></div>
+        <details class="sp-request"><summary>{{ tx('Request example (credentials omitted)') }}</summary><pre>{{ requestExample }}</pre></details>
       </section>
-      <aside class="sp-events"><h3>Events <button :disabled="busy || !id" @click="act('Refresh events', loadEvents)">Refresh</button></h3><p class="sp-muted">Refresh lifecycle events manually. Process output arrives as a live stream. Each event is labeled by source.</p><p v-if="eventNotice" class="sp-muted" role="status">{{ eventNotice }}</p><article v-for="event in events" :key="event.source + event.id"><small>{{ event.source }} · {{ event.time }}</small><strong>{{ event.type }}</strong><details><summary>Event data</summary><pre>{{ event.data }}</pre></details></article></aside>
+      <aside class="sp-events"><h3>{{ tx('Events') }} <button :disabled="busy || !id" @click="act('Refresh events', loadEvents)">{{ tx('Refresh') }}</button></h3><p class="sp-muted">{{ tx('Refresh lifecycle events manually. Process output arrives as a live stream. Each event is labeled by source.') }}</p><p v-if="eventNotice" class="sp-muted" role="status">{{ eventNotice }}</p><article v-for="event in events" :key="event.source + event.id"><small>{{ event.source }} · {{ event.time }}</small><strong>{{ event.type }}</strong><details><summary>{{ tx('Event data') }}</summary><pre>{{ event.data }}</pre></details></article></aside>
     </div>
-    <p class="sp-foot">Leaving this page does not delete sandboxes. Delete instances created here, including paused ones. After a refresh, use your organization tools to clean up.</p>
+    <p class="sp-foot">{{ tx('Leaving this page does not delete sandboxes. Delete instances created here, including paused ones. After a refresh, use your organization tools to clean up.') }}</p>
   </div>
 </template>
 

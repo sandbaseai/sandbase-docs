@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url';
 const SOURCE = 'sandbaseai/sandbase-docs';
 const CONTROLLER = 'sandbase-lab/lab-production';
 const SHA = /^[a-f0-9]{40}$/;
-const output = (args) => execFileSync('gh', args, { encoding: 'utf8' }).trim();
+// Compare responses list every changed file; large PRs exceed the 1 MiB default buffer.
+const output = (args) => execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 }).trim();
 const json = (args) => JSON.parse(output(args));
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

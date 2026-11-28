@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { useData } from 'vitepress'
+import { useI18n } from './i18n'
 import localEn from './tutorial-prompts/local-use-agent-en.md?raw'
 import localZh from './tutorial-prompts/local-use-agent-zh.md?raw'
 import contestEn from './tutorial-prompts/ai-city-remix-agent-en.md?raw'
 import contestZh from './tutorial-prompts/ai-city-remix-agent-zh.md?raw'
 
 const { frontmatter } = useData()
+const { tx } = useI18n()
 const prompts: Record<string, string> = {
   'local-use-agent-en': localEn, 'local-use-agent-zh': localZh,
   'ai-city-remix-agent-en': contestEn, 'ai-city-remix-agent-zh': contestZh,
@@ -24,11 +26,12 @@ async function copy() {
     state.value = 'failed'
   }
 }
+// Chinese tutorial pages carry their own labels; other pages follow the site locale.
 const label = computed(() => state.value === 'copied'
-  ? (chinese.value ? '已复制' : 'Copied')
+  ? (chinese.value ? '已复制' : tx('Copied'))
   : state.value === 'failed'
-    ? (chinese.value ? '复制失败，点击重试' : 'Copy failed — retry')
-    : (chinese.value ? '复制给 Agent' : 'Copy for Agent'))
+    ? (chinese.value ? '复制失败，点击重试' : tx('Copy failed — retry'))
+    : (chinese.value ? '复制给 Agent' : tx('Copy for Agent')))
 </script>
 
 <template>

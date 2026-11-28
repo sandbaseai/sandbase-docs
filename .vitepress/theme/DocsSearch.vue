@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useI18n } from './i18n'
+
+const { tx } = useI18n()
 /**
  * "Search docs" button at the top of the sidebar, matching the sandbase /docs
  * reference design. VitePress's local-search hotkey listener stays mounted
@@ -23,12 +26,12 @@ function openSearch() {
 </script>
 
 <template>
-  <button type="button" class="docs-search" aria-label="Search docs" aria-keyshortcuts="Meta+K Control+K" @click="openSearch">
+  <button type="button" class="docs-search" :aria-label="tx('Search docs')" aria-keyshortcuts="Meta+K Control+K" @click="openSearch">
     <svg class="docs-search-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
       <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
       <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </svg>
-    <span class="docs-search-label">Search docs</span>
+    <span class="docs-search-label">{{ tx('Search docs') }}</span>
     <kbd class="docs-search-kbd">⌘K</kbd>
   </button>
 </template>
