@@ -3,6 +3,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useData } from 'vitepress'
 import BrandMark from './BrandMark.vue'
 import SocialIcon from './SocialIcon.vue'
+import { useI18n } from './i18n'
 
 /**
  * Faithful replica of the sandbase.ai site footer. Markup and styling mirror
@@ -16,7 +17,8 @@ const contactSalesHref = `${SITE}/contact-sales?source=footer`
 const tagline =
   'Models, APIs and Runtimes on one account. Build your personal Agent and call it through the OpenAI Agents API.'
 
-type FooterLink = { href: string; label: string; external?: boolean; separate?: boolean }
+/** `docs` links are docs-site paths and follow the reader's language. */
+type FooterLink = { href: string; label: string; external?: boolean; separate?: boolean; docs?: boolean }
 
 /* Mirrors sandbase-fe site-footer.tsx: Store and Build use the header's labels,
    order and destinations (src/content/site-navigation.ts), then Resources and Company. */
@@ -35,14 +37,14 @@ const footerSections: { title: string; links: FooterLink[] }[] = [
     links: [
       { href: `${SITE}/solutions/use-in-ai-tools`, label: 'Use in AI Tools' },
       { href: `${SITE}/agents`, label: 'Agents' },
-      { href: '/docs/', label: 'Docs' },
+      { href: '/', label: 'Docs', docs: true },
       { href: `${SITE}/open-source`, label: 'Open source' },
     ],
   },
   {
     title: 'Resources',
     links: [
-      { href: '/docs/getting-started/quickstart', label: 'Quick Start' },
+      { href: '/getting-started/quickstart', label: 'Quick Start', docs: true },
       { href: `${SITE}/pricing`, label: 'Pricing' },
       { href: `${SITE}/models/compare`, label: 'Compare Models' },
       { href: `${SITE}/free-tools`, label: 'Free Tools' },
@@ -112,6 +114,7 @@ const themeOptions: readonly { value: Theme; label: string }[] = [
 ]
 
 const { isDark } = useData()
+const { tx, localeHref } = useI18n()
 const theme = ref<Theme>('system')
 let systemTheme: MediaQueryList | undefined
 
@@ -151,11 +154,11 @@ function chooseTheme(next: Theme) {
     <div class="sf-container">
       <div class="sf-main">
         <div class="sf-brand">
-          <a class="sf-logo" :href="SITE" aria-label="SandBase home">
+          <a class="sf-logo" :href="SITE" :aria-label="tx('SandBase home')">
             <span class="sf-logo-mark" aria-hidden="true"><BrandMark /></span>
             <span class="sf-wordmark">SandBase</span>
           </a>
-          <p>{{ tagline }}</p>
+          <p>{{ tx(tagline) }}</p>
           <ul class="sf-socials">
             <li v-for="item in socialLinks" :key="item.href">
               <a :href="item.href" target="_blank" rel="noopener noreferrer" class="sf-link sf-social-link">
@@ -166,18 +169,18 @@ function chooseTheme(next: Theme) {
           </ul>
         </div>
 
-        <nav aria-label="Footer" class="sf-nav">
+        <nav :aria-label="tx('Footer')" class="sf-nav">
           <div class="sf-nav-grid">
             <div v-for="section in footerSections" :key="section.title" class="sf-group">
-              <p class="sf-group-title">{{ section.title }}</p>
+              <p class="sf-group-title">{{ tx(section.title) }}</p>
               <ul>
                 <li v-for="item in section.links" :key="item.href + item.label">
                   <a
-                    :href="item.href"
+                    :href="item.docs ? localeHref(item.href) : item.href"
                     :target="item.external ? '_blank' : item.href.startsWith('http') ? '_self' : undefined"
                     :rel="item.external ? 'noopener noreferrer' : undefined"
                     class="sf-link"
-                  >{{ item.label }}<span v-if="item.external || item.separate" aria-hidden="true"> ↗</span></a>
+                  >{{ tx(item.label) }}<span v-if="item.external || item.separate" aria-hidden="true"> ↗</span></a>
                 </li>
               </ul>
             </div>
@@ -185,15 +188,15 @@ function chooseTheme(next: Theme) {
         </nav>
       </div>
 
-      <nav aria-label="Popular pages" class="sf-directory">
+      <nav :aria-label="tx('Popular pages')" class="sf-directory">
         <div v-for="section in directorySections" :key="section.title" class="sf-group">
-          <p class="sf-group-title">{{ section.title }}</p>
+          <p class="sf-group-title">{{ tx(section.title) }}</p>
           <ul>
             <li v-for="item in section.links" :key="item.href">
-              <a :href="item.href" target="_self" class="sf-link">{{ item.label }}</a>
+              <a :href="item.href" target="_self" class="sf-link">{{ tx(item.label) }}</a>
             </li>
             <li>
-              <a :href="section.all.href" target="_self" class="sf-link sf-all-link">{{ section.all.label }} <span aria-hidden="true">→</span></a>
+              <a :href="section.all.href" target="_self" class="sf-link sf-all-link">{{ tx(section.all.label) }} <span aria-hidden="true">→</span></a>
             </li>
           </ul>
         </div>
@@ -201,17 +204,17 @@ function chooseTheme(next: Theme) {
       <div class="sf-bottom">
         <div class="sf-legal">
           <p>© 2026 SandBase</p>
-          <a :href="`${SITE}/console`" target="_self">Console</a>
-          <a :href="`${SITE}/terms`" target="_self">Terms</a>
-          <a :href="`${SITE}/privacy`" target="_self">Privacy</a>
-          <a :href="`${SITE}/privacy#advertising-preferences`" target="_self">Ad preferences</a>
+          <a :href="`${SITE}/console`" target="_self">{{ tx('Console') }}</a>
+          <a :href="`${SITE}/terms`" target="_self">{{ tx('Terms') }}</a>
+          <a :href="`${SITE}/privacy`" target="_self">{{ tx('Privacy') }}</a>
+          <a :href="`${SITE}/privacy#advertising-preferences`" target="_self">{{ tx('Ad preferences') }}</a>
         </div>
         <div class="sf-status">
-          <a :href="statusPageUrl" target="_blank" rel="noopener noreferrer" aria-label="View SandBase uptime status" class="sf-status-link">
+          <a :href="statusPageUrl" target="_blank" rel="noopener noreferrer" :aria-label="tx('View SandBase uptime status')" class="sf-status-link">
             <span aria-hidden="true" class="sf-status-dot" />
-            All systems operational
+            {{ tx('All systems operational') }}
           </a>
-          <div class="sf-theme" role="radiogroup" aria-label="Colour theme">
+          <div class="sf-theme" role="radiogroup" :aria-label="tx('Colour theme')">
             <button
               v-for="option in themeOptions"
               :key="option.value"
@@ -222,7 +225,7 @@ function chooseTheme(next: Theme) {
               @click="chooseTheme(option.value)"
             >
               <span class="sf-theme-marker" aria-hidden="true" />
-              {{ option.label }}
+              {{ tx(option.label) }}
             </button>
           </div>
         </div>

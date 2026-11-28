@@ -5,7 +5,8 @@ const setup = readFileSync('setup/index.md', 'utf8')
 const quickstart = readFileSync('getting-started/quickstart.md', 'utf8')
 const llms = `${readFileSync('public/llms.txt', 'utf8')}\n${readFileSync('public/llms-full.txt', 'utf8')}`
 const sidebar = readFileSync('.vitepress/sidebar.ts', 'utf8')
-const config = readFileSync('.vitepress/config.ts', 'utf8')
+// srcExclude lives in .vitepress/i18n/pages.mjs and is shared with the locale routes.
+const config = readFileSync('.vitepress/config.ts', 'utf8') + readFileSync('.vitepress/i18n/pages.mjs', 'utf8')
 const publicSetup = `${setup}\n${quickstart}\n${llms}`
 
 assert.ok(!existsSync('setup/cli.md'), 'duplicate CLI setup page must stay removed')

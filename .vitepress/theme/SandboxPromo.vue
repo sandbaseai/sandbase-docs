@@ -1,7 +1,13 @@
+<script setup lang="ts">
+import { useI18n } from './i18n'
+
+const { tx } = useI18n()
+</script>
+
 <template>
-  <aside class="sandbox-promo" aria-label="Sandbox offer">
-    <span class="promo-label">LIMITED OFFER</span>
-    <span class="promo-message">Free for a limited time</span>
+  <aside class="sandbox-promo" :aria-label="tx('Sandbox offer')">
+    <span class="promo-label">{{ tx('LIMITED OFFER') }}</span>
+    <span class="promo-message">{{ tx('Free for a limited time') }}</span>
   </aside>
 </template>
 

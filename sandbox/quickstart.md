@@ -4,7 +4,7 @@ description: Connect the official E2B JavaScript and Python SDKs to SandBase, ru
 ---
 
 <script setup>
-import SandboxPromo from '../.vitepress/theme/SandboxPromo.vue'
+import SandboxPromo from '@theme/SandboxPromo.vue'
 </script>
 
 # Sandbox quickstart with the E2B SDK

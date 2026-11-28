@@ -3,3 +3,4 @@ node_modules
 .vitepress/cache/
 .vitepress/.temp/
 .wrangler/
+.i18n-work/

@@ -1,13 +1,16 @@
 <template>
-  <nav class="quickstart-paths" aria-label="Choose a Quick Start path">
+  <nav class="quickstart-paths" :aria-label="tx('Choose a Quick Start path')">
     <a v-for="path in paths" :key="path.href" :href="path.href">
-      <span class="path-heading"><strong>{{ path.title }}</strong><span aria-hidden="true">→</span></span>
-      <span class="path-description">{{ path.description }}</span>
+      <span class="path-heading"><strong>{{ tx(path.title) }}</strong><span aria-hidden="true">→</span></span>
+      <span class="path-description">{{ tx(path.description) }}</span>
     </a>
   </nav>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from './i18n'
+
+const { tx } = useI18n()
 const paths = [
   { title: 'On the platform', description: 'Try a model or API in your browser. No code required.', href: '#use-on-website' },
   { title: 'Through the API', description: 'Use your workspace key to call an endpoint from your app.', href: '#call-api' },

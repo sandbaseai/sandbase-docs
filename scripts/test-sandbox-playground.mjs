@@ -94,9 +94,11 @@ async function playgroundHarness(fetcher) {
   const { ref, computed } = await import('vue')
   const source = readFileSync(new URL('../.vitepress/theme/SandboxPlayground.vue', import.meta.url), 'utf8')
     .split('<script setup>')[1].split('</script>')[0].replace(/^import .*$/gm, '')
-  return new Function('ref', 'computed', 'onMounted', 'onBeforeUnmount', 'window', 'templateLabel', 'redact', 'readCommandStream', 'fetch',
+  // English interface strings, as rendered on the source-language page.
+  const useI18n = () => ({ tx: (text, params) => text.replace(/\{(\w+)\}/g, (match, name) => (params && name in params ? String(params[name]) : match)) })
+  return new Function('ref', 'computed', 'onMounted', 'onBeforeUnmount', 'window', 'templateLabel', 'redact', 'readCommandStream', 'fetch', 'useI18n',
     source + '\nreturn { key, connected, accepted, busy, create, forget, act, selected, tokens, events, output, content, requestExample, notice, connect, templates, template, catalogLoaded, select, instances, loadEvents, eventNotice, connectionID, pageWindow: window };')(
-    ref, computed, fn => fn(), () => {}, new EventTarget(), templateLabel, redact, readCommandStream, fetcher)
+    ref, computed, fn => fn(), () => {}, new EventTarget(), templateLabel, redact, readCommandStream, fetcher, useI18n)
 }
 
 test('Clear key clears an unconnected key and all editable page content', async () => {

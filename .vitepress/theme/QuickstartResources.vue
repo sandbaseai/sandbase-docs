@@ -9,15 +9,17 @@
         :target="item.external ? '_blank' : undefined"
         :rel="item.external ? 'noopener noreferrer' : undefined"
       >
-        <span class="resource-tag">{{ item.tag }}</span>
-        <strong>{{ item.title }}</strong>
-        <p>{{ item.body }}</p>
+        <span class="resource-tag">{{ text(item.tag) }}</span>
+        <strong>{{ text(item.title) }}</strong>
+        <p>{{ text(item.body) }}</p>
       </a>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from './i18n'
+
 const props = withDefaults(defineProps<{ locale?: 'en' | 'zh'; group?: 'all' | 'catalog' | 'ops' }>(), {
   locale: 'en',
   group: 'all',
@@ -45,6 +47,9 @@ const copyByLocale = {
 } as const
 
 const allItems = copyByLocale[props.locale].items
+// The explicit `zh` copy is already written in Chinese; English copy follows the site locale.
+const { tx } = useI18n()
+const text = (value: string) => (props.locale === 'zh' ? value : tx(value))
 const copy = {
   items:
     props.group === 'catalog'

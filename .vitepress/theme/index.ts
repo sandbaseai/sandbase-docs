@@ -11,6 +11,7 @@ import DocsSearch from './DocsSearch.vue'
 import ChatwootWidget from './ChatwootWidget.vue'
 import DocsSectionTabs from './DocsSectionTabs.vue'
 import TutorialCopyAction from './TutorialCopyAction.vue'
+import TranslationFallbackNotice from './TranslationFallbackNotice.vue'
 import { pageView, startAnalytics } from './analytics'
 import './custom.css'
 
@@ -26,7 +27,7 @@ export default {
       // reference design) that triggers VitePress's local search.
       'sidebar-nav-before': () => [h(DocsSearch), h(DocsSectionTabs)],
       'layout-top': () => h(SiteHeader),
-      'doc-before': () => h(TutorialCopyAction),
+      'doc-before': () => [h(TranslationFallbackNotice), h(TutorialCopyAction)],
       'layout-bottom': () => [h(SiteFooter), h(ChatwootWidget)],
     })
   },

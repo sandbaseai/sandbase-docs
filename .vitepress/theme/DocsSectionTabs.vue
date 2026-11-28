@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useRoute, withBase } from 'vitepress'
+import { useRoute } from 'vitepress'
+import { useI18n } from './i18n'
 
 const route = useRoute()
+const { tx, localeHref } = useI18n()
 
 const activeSection = computed(() => {
   if (route.path.includes('/api-reference/')) return 'platform'
@@ -16,16 +18,16 @@ const tabs = [
 </script>
 
 <template>
-  <nav class="docs-section-tabs" aria-label="Documentation sections">
+  <nav class="docs-section-tabs" :aria-label="tx('Documentation sections')">
     <a
       v-for="tab in tabs"
       :key="tab.id"
       class="docs-section-tab"
       :class="{ active: activeSection === tab.id }"
-      :href="withBase(tab.href)"
+      :href="localeHref(tab.href)"
       :aria-current="activeSection === tab.id ? 'page' : undefined"
     >
-      {{ tab.label }}
+      {{ tx(tab.label) }}
     </a>
   </nav>
 </template>
