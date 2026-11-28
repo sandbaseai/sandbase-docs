@@ -1,7 +1,8 @@
 # Translation instructions for SandBase docs work files
 
-You translate English work files into one target language. Root directory:
-`/Users/joeliu/Project/sandbase/sandbase-docs/.i18n-work`.
+You translate English work files into one target language. Paths below are
+relative to `.i18n-work/` in the repository root; create the work files with
+`node scripts/i18n/workfiles.mjs export`.
 
 ## Inputs and outputs
 
@@ -34,7 +35,7 @@ Write each output file with the file-writing tool. Do not modify anything outsid
 
 ## Finish
 
-After writing all files of your batch, run the checker from `/Users/joeliu/Project/sandbase/sandbase-docs`:
+After writing all files of your batch, run the checker from the repository root:
 
 ```bash
 node scripts/i18n/workfiles.mjs check --locales <LOCALE> --batch <your batch file>

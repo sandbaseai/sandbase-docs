@@ -26,6 +26,8 @@ export const SRC_EXCLUDE = [
   'setup/groups.md',
   // Console Workspace Services was folded into AI tools (/console/setup).
   'setup/installed.md',
+  // Tooling notes, not documentation.
+  'scripts/**',
   // Translation sources are rendered through the [locale] dynamic route.
   `${TRANSLATIONS_DIR}/**`,
 ]
