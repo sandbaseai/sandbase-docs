@@ -221,6 +221,10 @@ export default defineConfig({
     },
   ])),
   ignoreDeadLinks: true,
+  // Site data (17 locales' sidebars) and the page hash map are shared by
+  // every page. Ship them once as a cached chunk instead of inlining them
+  // into each of the ~1,900 HTML files.
+  metaChunk: true,
   appearance: true,
   cleanUrls: true,
 
